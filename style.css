@@ -1,5 +1,33 @@
-body { font-family: sans-serif; line-height: 1.6; padding: 20px; background-color: #f4f4f4; }
-nav { display: flex; gap: 20px; background: #2c3e50; padding: 15px; color: white; border-radius: 5px; }
-nav a { color: white; text-decoration: none; font-weight: bold; }
-.section { padding: 20px; background: white; border: 1px solid #ddd; border-radius: 8px; margin-top: 20px; }
+/* Estilização Geral */
+body { 
+    font-family: sans-serif; 
+    line-height: 1.6; 
+    padding: 20px; 
+    background-color: #f4f4f4; 
+}
+
+/* Barra de Navegação */
+nav { 
+    display: flex; 
+    gap: 20px; 
+    background: #2c3e50; 
+    padding: 15px; 
+    border-radius: 5px; 
+}
+
+nav a { 
+    color: white; 
+    text-decoration: none; 
+    font-weight: bold; 
+}
+
+/* Seções de Conteúdo */
+.section { 
+    padding: 20px; 
+    background: white; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    margin-top: 20px; 
+}
+
 h1 { color: #2c3e50; }
