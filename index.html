@@ -3,21 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenEdu.com - Portal de Estudos</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Página de Login</title>
+    <style>
+        /* Define que o corpo ocupará toda a tela e terá fundo branco */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff; 
+            font-family: Arial, sans-serif;
+        }
+
+        /* Estilização do quadrado de login */
+        .login-box {
+            background-color: #f4f4f4;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 { margin-bottom: 20px; color: #333; }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Garante que o padding não aumente o tamanho */
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>OpenEdu.com</h1>
-    <nav>
-        <a href="index.html">Início</a>
-        <a href="ensino-medio.html">Ensino Médio</a>
-        <a href="vestibulares.html">Vestibulares</a>
-    </nav>
-
-    <div class="section">
-        <h2>Bem-vindo ao seu portal de estudos</h2>
-        <p>Esta é a sua plataforma de aprendizado organizada.</p>
+    <div class="login-box">
+        <h2>Login</h2>
+        <form>
+            <input type="text" placeholder="Usuário" required>
+            <input type="password" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+        </form>
     </div>
 
 </body>
