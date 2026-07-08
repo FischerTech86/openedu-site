@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduCore - Login</title>
     <style>
+        /* Fundo da página */
         body {
             margin: 0;
             display: flex;
@@ -12,11 +13,12 @@
             align-items: center;
             height: 100vh;
             background-color: #f9f9f9;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        /* Container do formulário (Cinza bem forte) */
         .login-box {
-            background-color: #202020; /* Cinza bem forte */
+            background-color: #202020;
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -27,17 +29,19 @@
 
         /* Nome do site */
         .brand {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
-            color: #007bff; /* Azul para destaque */
+            color: #007bff;
             margin-bottom: 10px;
         }
 
         h2 { 
             margin-bottom: 25px; 
             font-weight: 600;
+            color: #ffffff;
         }
 
+        /* Campos de texto */
         input {
             width: 100%;
             padding: 12px;
@@ -45,10 +49,12 @@
             border: none;
             border-radius: 6px;
             box-sizing: border-box;
-            background-color: #333333; /* Fundo do input */
+            background-color: #333333;
             color: white;
+            font-size: 14px;
         }
 
+        /* Botão de Acesso */
         button {
             width: 100%;
             padding: 12px;
@@ -66,6 +72,7 @@
             background-color: #0056b3;
         }
 
+        /* Links inferiores */
         .links {
             margin-top: 20px;
             font-size: 13px;
@@ -81,13 +88,14 @@
 
         .links a:hover {
             color: #ffffff;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
     <div class="login-box">
-        <div class="brand">EduCore</div> <!-- Nome do seu site -->
+        <div class="brand">EduCore</div>
         <h2>Login</h2>
         <form>
             <input type="text" placeholder="Usuário" required>
