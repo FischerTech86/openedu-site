@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Login</title>
+    <title>Login Acolhedor</title>
     <style>
-        /* Define que o corpo ocupará toda a tela e terá fundo branco */
+        /* Fundo da página com um tom suave */
         body {
             margin: 0;
             padding: 0;
@@ -13,51 +13,58 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #ffffff; 
-            font-family: Arial, sans-serif;
+            background-color: #F5F7F6; /* Cor de fundo da página */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Estilização do quadrado de login */
+        /* O Quadrado de Login */
         .login-box {
-            background-color: #f4f4f4;
+            background-color: #E0F2F1; /* Verde menta suave */
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Sombra mais leve e elegante */
+            width: 320px;
             text-align: center;
         }
 
-        h2 { margin-bottom: 20px; color: #333; }
+        h2 { 
+            margin-bottom: 25px; 
+            color: #264653; /* Cor do título em tom de azul-esverdeado escuro */
+        }
 
         input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box; /* Garante que o padding não aumente o tamanho */
+            border: 1px solid #B2DFDB; /* Borda combinando com o fundo */
+            border-radius: 8px;
+            box-sizing: border-box;
+            background-color: #ffffff;
         }
 
         button {
             width: 100%;
-            padding: 10px;
-            background-color: #007bff;
+            padding: 12px;
+            background-color: #2A9D8F; /* Verde mais vibrante para o botão */
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #21867a; /* Escurece um pouco ao passar o mouse */
         }
     </style>
 </head>
 <body>
 
     <div class="login-box">
-        <h2>Login</h2>
+        <h2>Bem-vindo</h2>
         <form>
             <input type="text" placeholder="Usuário" required>
             <input type="password" placeholder="Senha" required>
