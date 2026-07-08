@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Dark Mode</title>
+    <title>EduCore - Login</title>
     <style>
         body {
             margin: 0;
@@ -25,6 +25,14 @@
             color: white;
         }
 
+        /* Nome do site */
+        .brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff; /* Azul para destaque */
+            margin-bottom: 10px;
+        }
+
         h2 { 
             margin-bottom: 25px; 
             font-weight: 600;
@@ -37,7 +45,7 @@
             border: none;
             border-radius: 6px;
             box-sizing: border-box;
-            background-color: #333333; /* Fundo do input levemente mais claro */
+            background-color: #333333; /* Fundo do input */
             color: white;
         }
 
@@ -58,14 +66,13 @@
             background-color: #0056b3;
         }
 
-        /* Estilo dos links recuperados */
         .links {
             margin-top: 20px;
             font-size: 13px;
         }
 
         .links a {
-            color: #aaaaaa; /* Cinza claro para os links */
+            color: #aaaaaa;
             text-decoration: none;
             display: block;
             margin-top: 8px;
@@ -73,14 +80,15 @@
         }
 
         .links a:hover {
-            color: #ffffff; /* Fica branco ao passar o mouse */
+            color: #ffffff;
         }
     </style>
 </head>
 <body>
 
     <div class="login-box">
-        <h2>Entrar</h2>
+        <div class="brand">EduCore</div> <!-- Nome do seu site -->
+        <h2>Login</h2>
         <form>
             <input type="text" placeholder="Usuário" required>
             <input type="password" placeholder="Senha" required>
