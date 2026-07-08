@@ -3,75 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Cinza Super Forte</title>
+    <title>Login Moderno</title>
     <style>
         body {
             margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0; /* Fundo claro para destacar o cinza escuro */
+            background-color: #f0f2f5;
             font-family: 'Segoe UI', sans-serif;
         }
 
         .login-box {
-            background-color: #2D2D2D; /* Cinza super forte/grafite */
+            background-color: #ffffff;
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             width: 320px;
             text-align: center;
         }
 
-        h2 { 
-            margin-bottom: 25px; 
-            color: #FFFFFF; /* Título em branco */
+        /* Estilo do Logo */
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 20px;
         }
 
         input {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
-            border: none;
+            border: 1px solid #ccc;
             border-radius: 8px;
             box-sizing: border-box;
-            background-color: #4A4A4A; /* Input com um cinza um pouco mais claro */
-            color: white; /* Texto digitado em branco */
-        }
-
-        /* Cor do placeholder (o texto dentro da caixa) */
-        input::placeholder {
-            color: #CCCCCC;
         }
 
         button {
             width: 100%;
             padding: 12px;
-            background-color: #007bff; /* Azul para contraste */
+            background-color: #007bff;
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            margin-top: 15px;
             font-weight: bold;
+            transition: transform 0.2s, background-color 0.2s; /* Efeito de transição */
         }
 
         button:hover {
             background-color: #0056b3;
+            transform: scale(1.02); /* Botão cresce levemente ao passar o mouse */
+        }
+
+        /* Estilo dos links extras */
+        .links {
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .links a {
+            color: #007bff;
+            text-decoration: none;
+            display: block;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
 
     <div class="login-box">
+        <div class="logo">MeuProjeto</div> <!-- Logo/Nome da marca -->
         <h2>Login</h2>
         <form>
             <input type="text" placeholder="Usuário" required>
             <input type="password" placeholder="Senha" required>
             <button type="submit">Entrar</button>
         </form>
+
+        <!-- Links úteis -->
+        <div class="links">
+            <a href="#">Esqueceu sua senha?</a>
+            <a href="#">Não tem uma conta? Cadastre-se</a>
+        </div>
     </div>
 
 </body>
