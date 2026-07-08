@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Estilo Cinza Forte</title>
+    <title>Login - Cinza Super Forte</title>
     <style>
-        /* Fundo da página levemente acinzentado para destacar o quadrado */
         body {
             margin: 0;
             padding: 0;
@@ -13,51 +12,54 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #E5E5E5; 
+            background-color: #f0f0f0; /* Fundo claro para destacar o cinza escuro */
             font-family: 'Segoe UI', sans-serif;
         }
 
-        /* O Quadrado de Login em cinza forte */
         .login-box {
-            background-color: #4A4A4A; /* Cinza forte */
+            background-color: #2D2D2D; /* Cinza super forte/grafite */
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             width: 320px;
             text-align: center;
         }
 
         h2 { 
             margin-bottom: 25px; 
-            color: #FFFFFF; /* Texto branco para dar contraste no fundo cinza */
+            color: #FFFFFF; /* Título em branco */
         }
 
         input {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
-            border: none; /* Sem borda para um visual mais limpo */
+            border: none;
             border-radius: 8px;
             box-sizing: border-box;
-            background-color: #F8F8F8; /* Inputs claros para destacar no fundo escuro */
+            background-color: #4A4A4A; /* Input com um cinza um pouco mais claro */
+            color: white; /* Texto digitado em branco */
+        }
+
+        /* Cor do placeholder (o texto dentro da caixa) */
+        input::placeholder {
+            color: #CCCCCC;
         }
 
         button {
             width: 100%;
             padding: 12px;
-            background-color: #333333; /* Cor do botão quase preta */
+            background-color: #007bff; /* Azul para contraste */
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             margin-top: 15px;
             font-weight: bold;
-            font-size: 16px;
-            transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #1A1A1A; /* Escurece ainda mais ao passar o mouse */
+            background-color: #0056b3;
         }
     </style>
 </head>
