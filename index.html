@@ -14,17 +14,20 @@
 
         /* Animação do Título */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        .brand-title { font-size: 50px; font-weight: 800; color: #202020; margin-top: 40px; margin-bottom: 20px; animation: fadeIn 1.2s ease-out; }
+        .brand-title { font-size: 60px; font-weight: 800; color: #202020; margin-top: 50px; margin-bottom: 30px; animation: fadeIn 1.2s ease-out; }
 
         /* Conteúdo das Abas */
-        .page-content { display: none; width: 90%; max-width: 320px; margin-top: 20px; text-align: center; }
+        .page-content { display: none; width: 90%; max-width: 320px; text-align: center; }
         .active { display: block; }
 
-        /* Estilo do Login (Restaurado) */
+        /* Estilo do Login (Cinza Forte) */
         .login-box { background-color: #202020; padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); color: #ffffff; }
         input { width: 100%; padding: 14px; margin-bottom: 15px; border: none; border-radius: 8px; box-sizing: border-box; background-color: #333333; color: white; }
         button.login-btn { width: 100%; padding: 14px; background: #007bff; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .links a { color: #aaaaaa; text-decoration: none; display: block; margin-top: 10px; font-size: 13px; }
+        
+        /* Links adicionados */
+        .links { margin-top: 20px; font-size: 13px; }
+        .links a { color: #aaaaaa; text-decoration: none; display: block; margin-top: 10px; transition: 0.3s; }
         .links a:hover { color: #ffffff; }
 
         /* Estilo básico para outras páginas */
@@ -47,7 +50,7 @@
     <!-- Login -->
     <div id="login" class="page-content active">
         <div class="login-box">
-            <h2>Login</h2>
+            <h2 style="margin-top: 0;">Login</h2>
             <input type="text" placeholder="Usuário">
             <input type="password" placeholder="Senha">
             <button class="login-btn">Acessar</button>
@@ -58,11 +61,11 @@
         </div>
     </div>
 
-    <!-- Páginas Informativas -->
-    <div id="sobre" class="page-content"><div class="info-box"><h2>Sobre</h2><p>Plataforma focada em organizar seus estudos e projetos.</p></div></div>
-    <div id="objetivo" class="page-content"><div class="info-box"><h2>Objetivo</h2><p>Centralizar ferramentas para o seu crescimento acadêmico.</p></div></div>
+    <!-- Outras páginas -->
+    <div id="sobre" class="page-content"><div class="info-box"><h2>Sobre</h2><p>Plataforma focada em organizar seus estudos.</p></div></div>
+    <div id="objetivo" class="page-content"><div class="info-box"><h2>Objetivo</h2><p>Centralizar ferramentas de aprendizado.</p></div></div>
     <div id="politica" class="page-content"><div class="info-box"><h2>Política</h2><p>Privacidade e segurança em primeiro lugar.</p></div></div>
-    <div id="config" class="page-content"><div class="info-box"><h2>Configurações</h2><p>Gerencie suas preferências aqui.</p></div></div>
+    <div id="config" class="page-content"><div class="info-box"><h2>Configurações</h2><p>Personalize sua experiência.</p></div></div>
 
     <script>
         function showPage(pageId) {
