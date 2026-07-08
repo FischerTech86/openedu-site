@@ -5,18 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduCore - Login</title>
     <style>
-        /* Fundo da página */
         body {
             margin: 0;
             display: flex;
+            flex-direction: column; /* Organiza os elementos um abaixo do outro */
             justify-content: center;
             align-items: center;
             height: 100vh;
             background-color: #f9f9f9;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        /* Container do formulário (Cinza bem forte) */
+        /* Animação de surgimento */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Título Principal acima do quadrado */
+        .title-brand {
+            font-size: 48px;
+            font-weight: bold;
+            color: #202020;
+            margin-bottom: 20px;
+            animation: fadeIn 1.5s ease; /* Aplica a animação */
+        }
+
         .login-box {
             background-color: #202020;
             padding: 40px;
@@ -27,34 +41,18 @@
             color: white;
         }
 
-        /* Nome do site */
-        .brand {
-            font-size: 26px;
-            font-weight: bold;
-            color: #007bff;
-            margin-bottom: 10px;
-        }
+        h2 { margin-bottom: 25px; font-weight: 600; color: #ffffff; }
 
-        h2 { 
-            margin-bottom: 25px; 
-            font-weight: 600;
-            color: #ffffff;
-        }
-
-        /* Campos de texto */
         input {
             width: 100%;
             padding: 12px;
             margin-bottom: 15px;
             border: none;
             border-radius: 6px;
-            box-sizing: border-box;
             background-color: #333333;
             color: white;
-            font-size: 14px;
         }
 
-        /* Botão de Acesso */
         button {
             width: 100%;
             padding: 12px;
@@ -64,45 +62,29 @@
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 15px;
             transition: background 0.3s;
         }
 
-        button:hover {
-            background-color: #0056b3;
-        }
+        button:hover { background-color: #0056b3; }
 
-        /* Links inferiores */
-        .links {
-            margin-top: 20px;
-            font-size: 13px;
-        }
-
-        .links a {
-            color: #aaaaaa;
-            text-decoration: none;
-            display: block;
-            margin-top: 8px;
-            transition: color 0.3s;
-        }
-
-        .links a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
+        .links { margin-top: 20px; font-size: 13px; }
+        .links a { color: #aaaaaa; text-decoration: none; display: block; margin-top: 8px; }
+        .links a:hover { color: #ffffff; }
     </style>
 </head>
 <body>
 
+    <!-- Nome com animação -->
+    <div class="title-brand">EduCore</div>
+
+    <!-- Quadrado de Login -->
     <div class="login-box">
-        <div class="brand">EduCore</div>
         <h2>Login</h2>
         <form>
             <input type="text" placeholder="Usuário" required>
             <input type="password" placeholder="Senha" required>
             <button type="submit">Acessar</button>
         </form>
-
         <div class="links">
             <a href="#">Esqueceu sua senha?</a>
             <a href="#">Não tem uma conta? Cadastre-se</a>
