@@ -3,24 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduCore - Central</title>
+    <title>EduCore - Central de Estudos</title>
     <style>
+        /* Estilos Gerais */
         body { margin: 0; font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         
+        /* Menu */
         nav { background: #202020; width: 100%; padding: 20px 0; display: flex; justify-content: center; gap: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
         nav button { background: none; border: none; color: white; cursor: pointer; font-size: 16px; transition: 0.3s; }
         nav button:hover { color: #007bff; }
 
+        /* Título Animado */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         .brand-title { font-size: 50px; font-weight: 800; color: #202020; margin: 30px 0; animation: fadeIn 1s ease; }
 
+        /* Conteúdo das Abas */
         .page-content { display: none; width: 90%; max-width: 500px; margin-bottom: 50px; }
         .active { display: block; }
         .box { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         
         h2 { color: #202020; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
         .config-item { margin: 15px 0; text-align: left; }
-        input[type="text"], input[type="email"], input[type="password"], select { width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
+        input[type="text"], input[type="email"], input[type="password"], select { width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
         .danger { color: red; font-weight: bold; cursor: pointer; margin-top: 20px; display: block; }
     </style>
 </head>
@@ -28,7 +32,6 @@
 
     <nav>
         <button onclick="showPage('login')">Login</button>
-        <button onclick="showPage('sobre')">Sobre</button>
         <button onclick="showPage('config')">Configurações</button>
     </nav>
 
@@ -36,15 +39,19 @@
 
     <!-- Login -->
     <div id="login" class="page-content active">
-        <div class="box" style="background: #202020; color: white; text-align: center;">
+        <div style="background: #202020; padding: 40px; border-radius: 20px; color: white; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.4);">
             <h2>Login</h2>
-            <input type="text" placeholder="Usuário" style="padding:10px; margin:10px 0; width:100%;">
-            <input type="password" placeholder="Senha" style="padding:10px; margin:10px 0; width:100%;">
-            <button style="width:100%; padding:10px; background:#007bff; color:white; border:none; border-radius:5px;">Acessar</button>
+            <input type="text" placeholder="Usuário">
+            <input type="password" placeholder="Senha">
+            <button style="width:100%; padding:12px; background:#007bff; color:white; border:none; border-radius:8px; cursor:pointer;">Acessar</button>
+            <div style="margin-top:20px; font-size:13px;">
+                <a href="#" style="color:#aaa; display:block; margin-bottom:10px;">Esqueceu sua senha?</a>
+                <a href="#" style="color:#aaa;">Não tem uma conta? Cadastre-se</a>
+            </div>
         </div>
     </div>
 
-    <!-- Configurações (Completa) -->
+    <!-- Configurações -->
     <div id="config" class="page-content">
         <div class="box">
             <h2>Configurações</h2>
@@ -66,19 +73,19 @@
             <div class="config-item">
                 <h3>3. Notificações</h3>
                 <label><input type="checkbox" checked> Receber resumos de estudos</label><br>
-                <input type="time" label="Lembrete de estudo">
+                <label>Lembrete de estudo: <input type="time"></label>
             </div>
 
             <div class="config-item">
                 <h3>4. Preferências de Estudo</h3>
                 <input type="text" placeholder="Meta diária (ex: 2h de Python)">
                 <select>
-                    <option>Português</option>
-                    <option>Inglês</option>
+                    <option>Idioma: Português</option>
+                    <option>Idioma: Inglês</option>
                 </select>
             </div>
             
-            <button style="width:100%; padding:10px; background:#28a745; color:white; border:none; margin-top:10px;">Salvar Alterações</button>
+            <button style="width:100%; padding:12px; background:#28a745; color:white; border:none; border-radius:8px; cursor:pointer;">Salvar Alterações</button>
         </div>
     </div>
 
