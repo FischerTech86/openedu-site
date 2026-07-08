@@ -3,35 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduCore - Central de Estudos</title>
+    <title>EduCore - Central</title>
     <style>
-        /* Estilos Gerais */
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); display: flex; flex-direction: column; align-items: center; min-height: 100vh; transition: 0.5s; }
         
         /* Menu */
-        nav { background: #202020; width: 100%; padding: 20px 0; display: flex; justify-content: center; gap: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-        nav button { background: none; border: none; color: white; cursor: pointer; font-size: 16px; transition: 0.3s; }
+        nav { background: #202020; width: 100%; padding: 20px 0; display: flex; justify-content: center; gap: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        nav button { background: none; border: none; color: white; cursor: pointer; font-size: 16px; font-weight: 500; transition: 0.3s; }
         nav button:hover { color: #007bff; }
 
-        /* Título Animado */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        .brand-title { font-size: 50px; font-weight: 800; color: #202020; margin: 30px 0; animation: fadeIn 1s ease; }
+        /* Animação Título */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        .brand-title { font-size: 60px; font-weight: 800; color: #202020; margin-top: 40px; margin-bottom: 20px; animation: fadeIn 1.2s ease-out; }
 
-        /* Conteúdo das Abas */
-        .page-content { display: none; width: 90%; max-width: 500px; margin-bottom: 50px; }
+        /* Conteúdo */
+        .page-content { display: none; width: 90%; max-width: 400px; margin-bottom: 50px; }
         .active { display: block; }
-        .box { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .box { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+
+        /* Login */
+        .login-box { background-color: #202020; padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); color: white; text-align: center; }
+        input { width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 8px; background-color: #333; color: white; }
+        button.login-btn { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .links a { color: #aaa; text-decoration: none; display: block; margin-top: 10px; font-size: 13px; }
         
-        h2 { color: #202020; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
-        .config-item { margin: 15px 0; text-align: left; }
-        input[type="text"], input[type="email"], input[type="password"], select { width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
-        .danger { color: red; font-weight: bold; cursor: pointer; margin-top: 20px; display: block; }
+        /* Config */
+        .config-item { margin: 20px 0; text-align: left; }
     </style>
 </head>
 <body>
 
     <nav>
         <button onclick="showPage('login')">Login</button>
+        <button onclick="showPage('sobre')">Sobre</button>
         <button onclick="showPage('config')">Configurações</button>
     </nav>
 
@@ -39,60 +43,50 @@
 
     <!-- Login -->
     <div id="login" class="page-content active">
-        <div style="background: #202020; padding: 40px; border-radius: 20px; color: white; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.4);">
+        <div class="login-box">
             <h2>Login</h2>
             <input type="text" placeholder="Usuário">
             <input type="password" placeholder="Senha">
-            <button style="width:100%; padding:12px; background:#007bff; color:white; border:none; border-radius:8px; cursor:pointer;">Acessar</button>
-            <div style="margin-top:20px; font-size:13px;">
-                <a href="#" style="color:#aaa; display:block; margin-bottom:10px;">Esqueceu sua senha?</a>
-                <a href="#" style="color:#aaa;">Não tem uma conta? Cadastre-se</a>
+            <button class="login-btn">Acessar</button>
+            <div class="links">
+                <a href="#">Esqueceu sua senha?</a>
+                <a href="#">Não tem uma conta? Cadastre-se</a>
             </div>
         </div>
     </div>
 
-    <!-- Configurações -->
+    <!-- Sobre -->
+    <div id="sobre" class="page-content"><div class="box"><h2>Sobre</h2><p>Plataforma para estudantes do Ensino Médio.</p></div></div>
+
+    <!-- Configurações Funcionais -->
     <div id="config" class="page-content">
         <div class="box">
             <h2>Configurações</h2>
-            
             <div class="config-item">
-                <h3>1. Preferências de Conta</h3>
-                <input type="text" placeholder="Alterar Nome">
-                <input type="email" placeholder="Novo E-mail">
-                <input type="password" placeholder="Nova Senha">
-                <span class="danger">Excluir Conta permanentemente</span>
+                <label><input type="checkbox" onchange="toggleDarkMode(this)"> <b>Ativar Modo Escuro</b></label>
             </div>
-
             <div class="config-item">
-                <h3>2. Aparência (UI)</h3>
-                <label><input type="checkbox"> Ativar Modo Escuro</label><br>
-                <label>Tamanho da Fonte: <input type="range" min="10" max="20"></label>
+                <label>Tamanho da Fonte: <input type="range" min="12" max="24" oninput="changeFontSize(this.value)"></label>
             </div>
-
-            <div class="config-item">
-                <h3>3. Notificações</h3>
-                <label><input type="checkbox" checked> Receber resumos de estudos</label><br>
-                <label>Lembrete de estudo: <input type="time"></label>
-            </div>
-
-            <div class="config-item">
-                <h3>4. Preferências de Estudo</h3>
-                <input type="text" placeholder="Meta diária (ex: 2h de Python)">
-                <select>
-                    <option>Idioma: Português</option>
-                    <option>Idioma: Inglês</option>
-                </select>
-            </div>
-            
-            <button style="width:100%; padding:12px; background:#28a745; color:white; border:none; border-radius:8px; cursor:pointer;">Salvar Alterações</button>
+            <button onclick="alert('Configurações salvas com sucesso!')" style="width:100%; padding:10px; background:#28a745; color:white; border:none; border-radius:5px;">Salvar Preferências</button>
         </div>
     </div>
 
     <script>
-        function showPage(pageId) {
+        function showPage(id) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
+            document.getElementById(id).classList.add('active');
+        }
+
+        // Função do Modo Escuro
+        function toggleDarkMode(checkbox) {
+            document.body.style.background = checkbox.checked ? "#121212" : "linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%)";
+            document.body.style.color = checkbox.checked ? "white" : "black";
+        }
+
+        // Função Tamanho de Fonte
+        function changeFontSize(size) {
+            document.body.style.fontSize = size + "px";
         }
     </script>
 </body>
