@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Acolhedor</title>
+    <title>Login - Estilo Cinza Forte</title>
     <style>
-        /* Fundo da página com um tom suave */
+        /* Fundo da página levemente acinzentado para destacar o quadrado */
         body {
             margin: 0;
             padding: 0;
@@ -13,39 +13,39 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #F5F7F6; /* Cor de fundo da página */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #E5E5E5; 
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        /* O Quadrado de Login */
+        /* O Quadrado de Login em cinza forte */
         .login-box {
-            background-color: #E0F2F1; /* Verde menta suave */
+            background-color: #4A4A4A; /* Cinza forte */
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Sombra mais leve e elegante */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             width: 320px;
             text-align: center;
         }
 
         h2 { 
             margin-bottom: 25px; 
-            color: #264653; /* Cor do título em tom de azul-esverdeado escuro */
+            color: #FFFFFF; /* Texto branco para dar contraste no fundo cinza */
         }
 
         input {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
-            border: 1px solid #B2DFDB; /* Borda combinando com o fundo */
+            border: none; /* Sem borda para um visual mais limpo */
             border-radius: 8px;
             box-sizing: border-box;
-            background-color: #ffffff;
+            background-color: #F8F8F8; /* Inputs claros para destacar no fundo escuro */
         }
 
         button {
             width: 100%;
             padding: 12px;
-            background-color: #2A9D8F; /* Verde mais vibrante para o botão */
+            background-color: #333333; /* Cor do botão quase preta */
             color: white;
             border: none;
             border-radius: 8px;
@@ -57,14 +57,14 @@
         }
 
         button:hover {
-            background-color: #21867a; /* Escurece um pouco ao passar o mouse */
+            background-color: #1A1A1A; /* Escurece ainda mais ao passar o mouse */
         }
     </style>
 </head>
 <body>
 
     <div class="login-box">
-        <h2>Bem-vindo</h2>
+        <h2>Login</h2>
         <form>
             <input type="text" placeholder="Usuário" required>
             <input type="password" placeholder="Senha" required>
