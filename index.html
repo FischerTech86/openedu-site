@@ -5,30 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduCore - Central</title>
     <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); display: flex; flex-direction: column; align-items: center; min-height: 100vh; transition: 0.5s; }
+        /* Estrutura e Fundo */
+        body { 
+            margin: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh;
+        }
         
-        /* Menu */
-        nav { background: #202020; width: 100%; padding: 20px 0; display: flex; justify-content: center; gap: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-        nav button { background: none; border: none; color: white; cursor: pointer; font-size: 16px; font-weight: 500; transition: 0.3s; }
+        /* Menu de Navegação */
+        nav { 
+            background: #202020; 
+            width: 100%; 
+            padding: 20px 0; 
+            display: flex; 
+            justify-content: center; 
+            gap: 25px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2); 
+        }
+        nav button { 
+            background: none; 
+            border: none; 
+            color: #ffffff; 
+            cursor: pointer; 
+            font-size: 16px; 
+            font-weight: 500; 
+            transition: 0.3s; 
+        }
         nav button:hover { color: #007bff; }
 
-        /* Animação Título */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        .brand-title { font-size: 60px; font-weight: 800; color: #202020; margin-top: 40px; margin-bottom: 20px; animation: fadeIn 1.2s ease-out; }
+        /* Animação do Título */
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(-30px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        .brand-title { 
+            font-size: 60px; 
+            font-weight: 800; 
+            color: #202020; 
+            margin-top: 50px; 
+            margin-bottom: 30px; 
+            animation: fadeIn 1.2s ease-out; 
+        }
 
-        /* Conteúdo */
-        .page-content { display: none; width: 90%; max-width: 400px; margin-bottom: 50px; }
+        /* Área de conteúdo das abas */
+        .page-content { display: none; width: 90%; max-width: 320px; text-align: center; }
         .active { display: block; }
-        .box { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
 
-        /* Login */
-        .login-box { background-color: #202020; padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); color: white; text-align: center; }
-        input { width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 8px; background-color: #333; color: white; }
-        button.login-btn { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .links a { color: #aaa; text-decoration: none; display: block; margin-top: 10px; font-size: 13px; }
-        
-        /* Config */
-        .config-item { margin: 20px 0; text-align: left; }
+        /* Estilo do Login (Cinza Forte) */
+        .login-box { 
+            background-color: #202020; 
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4); 
+            color: #ffffff; 
+        }
+        input { 
+            width: 100%; 
+            padding: 14px; 
+            margin-bottom: 15px; 
+            border: none; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            background-color: #333333; 
+            color: white; 
+        }
+        button.login-btn { 
+            width: 100%; 
+            padding: 14px; 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold; 
+        }
+        .links { margin-top: 20px; font-size: 13px; }
+        .links a { 
+            color: #aaaaaa; 
+            text-decoration: none; 
+            display: block; 
+            margin-top: 10px; 
+            transition: 0.3s; 
+        }
+        .links a:hover { color: #ffffff; }
+
+        /* Estilo para as outras páginas informativas */
+        .info-box { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+            color: #333; 
+        }
     </style>
 </head>
 <body>
@@ -36,6 +108,8 @@
     <nav>
         <button onclick="showPage('login')">Login</button>
         <button onclick="showPage('sobre')">Sobre</button>
+        <button onclick="showPage('objetivo')">Objetivo</button>
+        <button onclick="showPage('politica')">Política</button>
         <button onclick="showPage('config')">Configurações</button>
     </nav>
 
@@ -44,7 +118,7 @@
     <!-- Login -->
     <div id="login" class="page-content active">
         <div class="login-box">
-            <h2>Login</h2>
+            <h2 style="margin-top: 0;">Login</h2>
             <input type="text" placeholder="Usuário">
             <input type="password" placeholder="Senha">
             <button class="login-btn">Acessar</button>
@@ -55,38 +129,16 @@
         </div>
     </div>
 
-    <!-- Sobre -->
-    <div id="sobre" class="page-content"><div class="box"><h2>Sobre</h2><p>Plataforma para estudantes do Ensino Médio.</p></div></div>
-
-    <!-- Configurações Funcionais -->
-    <div id="config" class="page-content">
-        <div class="box">
-            <h2>Configurações</h2>
-            <div class="config-item">
-                <label><input type="checkbox" onchange="toggleDarkMode(this)"> <b>Ativar Modo Escuro</b></label>
-            </div>
-            <div class="config-item">
-                <label>Tamanho da Fonte: <input type="range" min="12" max="24" oninput="changeFontSize(this.value)"></label>
-            </div>
-            <button onclick="alert('Configurações salvas com sucesso!')" style="width:100%; padding:10px; background:#28a745; color:white; border:none; border-radius:5px;">Salvar Preferências</button>
-        </div>
-    </div>
+    <!-- Páginas Informativas -->
+    <div id="sobre" class="page-content"><div class="info-box"><h2>Sobre</h2><p>Plataforma focada em organizar seus estudos.</p></div></div>
+    <div id="objetivo" class="page-content"><div class="info-box"><h2>Objetivo</h2><p>Centralizar ferramentas de aprendizado.</p></div></div>
+    <div id="politica" class="page-content"><div class="info-box"><h2>Política</h2><p>Privacidade e segurança em primeiro lugar.</p></div></div>
+    <div id="config" class="page-content"><div class="info-box"><h2>Configurações</h2><p>Gerencie suas preferências aqui.</p></div></div>
 
     <script>
-        function showPage(id) {
-            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-        }
-
-        // Função do Modo Escuro
-        function toggleDarkMode(checkbox) {
-            document.body.style.background = checkbox.checked ? "#121212" : "linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%)";
-            document.body.style.color = checkbox.checked ? "white" : "black";
-        }
-
-        // Função Tamanho de Fonte
-        function changeFontSize(size) {
-            document.body.style.fontSize = size + "px";
+        function showPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
         }
     </script>
 </body>
