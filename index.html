@@ -127,13 +127,25 @@
         .links a { color: #aaa; text-decoration: none; display: block; margin-top: 12px; font-size: 13px; cursor: pointer; }
         .links a:hover { color: #fff; }
         
+        /* Caixa de Feedback Interna (Reta e Organizada) */
+        .system-message {
+            margin-top: 15px;
+            padding: 12px;
+            font-size: 13px;
+            text-align: left;
+            display: none;
+            border-left: 4px solid #007bff;
+            background-color: #2a2a2a;
+            color: #fff;
+        }
+
         .config-section { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px dashed var(--input-border); }
         .danger-text { color: #dc3545; font-weight: bold; cursor: pointer; display: inline-block; margin-top: 5px; }
         .danger-text:hover { text-decoration: underline; }
         .checkbox-label { display: flex; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 15px; }
     </style>
 </head>
-<body class="dark-mode-variables"> <!-- Iniciando em modo escuro conforme imagem_d0e461.png -->
+<body class="dark-mode-variables"> <!-- Escuro padrão da imagem_d0e461.png -->
 
     <!-- Menu de Navegação -->
     <nav>
@@ -156,14 +168,18 @@
             <input type="text" id="login-user" placeholder="Usuário">
             <input type="password" id="login-pass" placeholder="Senha">
             <button class="btn-blue" onclick="handleLogin()">Acessar</button>
+            
+            <!-- Caixa de resposta para alertas do sistema -->
+            <div id="login-feedback" class="system-message"></div>
+
             <div class="links">
-                <a href="#" id="link-forgot" onclick="alert('Função de recuperação enviada para o e-mail cadastrado!')">Esqueceu sua senha?</a>
+                <a href="#" id="link-forgot" onclick="handleForgotPassword()">Esqueceu sua senha?</a>
                 <a href="#" id="link-register" onclick="showPage('cadastro')">Não tem uma conta? Cadastre-se</a>
             </div>
         </div>
     </div>
 
-    <!-- 1B. ABA CADASTRO (NOVA - TOTALMENTE FUNCIONAL) -->
+    <!-- 1B. ABA CADASTRO -->
     <div id="cadastro" class="page-content">
         <div class="login-box">
             <h2 style="color: white; border-bottom: none;" id="register-title">Criar Conta</h2>
@@ -200,7 +216,6 @@
         <div class="box">
             <h2 id="config-title-page">Configurações</h2>
             
-            <!-- Seção 1: Conta -->
             <div class="config-section">
                 <h3 id="sub-account">1. Preferências de Conta</h3>
                 <label id="lbl-name">Alterar Nome de Perfil:</label>
@@ -215,7 +230,6 @@
                 <span class="danger-text" id="lbl-delete" onclick="deleteAccount()">Excluir Conta Permanentemente</span>
             </div>
 
-            <!-- Seção 2: Aparência -->
             <div class="config-section">
                 <h3 id="sub-ui">2. Preferências de Aparência (UI)</h3>
                 <label class="checkbox-label">
@@ -227,7 +241,6 @@
                 <input type="range" id="config-font" min="14" max="22" value="16" oninput="applyFontSize(this.value)" style="width: 100%; margin-top: 5px;">
             </div>
 
-            <!-- Seção 3: Notificações -->
             <div class="config-section">
                 <h3 id="sub-notify">3. Notificações e Alertas</h3>
                 <label class="checkbox-label">
@@ -237,7 +250,6 @@
                 <input type="time" id="config-time" value="05:02">
             </div>
 
-            <!-- Seção 4: Metas e Idioma -->
             <div class="config-section">
                 <h3 id="sub-studies">4. Preferências de Estudo e Sistema</h3>
                 <label id="lbl-goal">Meta de Estudo Diária:</label>
@@ -255,21 +267,52 @@
     </div>
 
     <script>
-        // Banco de dados simulado no localStorage para manter as contas salvas
+        // Inicializa o banco local com o usuário admin padrão
         if (!localStorage.getItem('usuariosEduCore')) {
-            // Conta padrão inicial caso o banco esteja vazio
             const usuariosIniciais = [{ usuario: "admin", email: "admin@educore.com", senha: "123" }];
             localStorage.setItem('usuariosEduCore', JSON.stringify(usuariosIniciais));
         }
 
-        // Troca de abas simples
         function showPage(id) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
             document.getElementById(id).classList.add('active');
+            document.getElementById('login-feedback').style.display = "none";
         }
 
         // ==========================================
-        // SISTEMA REAL DE CADASTRO
+        // NOVO CORREÇÃO: ENCONTRA E PREENCHE AUTOMATICAMENTE
+        // ==========================================
+        function handleForgotPassword() {
+            const userField = document.getElementById('login-user').value.trim();
+            const feedbackBox = document.getElementById('login-feedback');
+            
+            feedbackBox.style.display = "block";
+
+            if (!userField) {
+                feedbackBox.style.borderLeftColor = "#dc3545";
+                feedbackBox.innerHTML = "<strong>Erro:</strong> Digite seu nome de usuário no campo acima para puxar os dados!";
+                return;
+            }
+
+            let listaUsuarios = JSON.parse(localStorage.getItem('usuariosEduCore'));
+            // Procura a conta pelo nome digitado
+            const contaEncontrada = listaUsuarios.find(u => u.usuario.toLowerCase() === userField.toLowerCase());
+
+            if (contaEncontrada) {
+                // Preenche os inputs automaticamente!
+                document.getElementById('login-user').value = contaEncontrada.usuario;
+                document.getElementById('login-pass').value = contaEncontrada.senha;
+
+                feedbackBox.style.borderLeftColor = "#28a745";
+                feedbackBox.innerHTML = `<strong>Sucesso!</strong> Conta localizada.<br>Os campos foram preenchidos automaticamente com seus dados salvos!`;
+            } else {
+                feedbackBox.style.borderLeftColor = "#dc3545";
+                feedbackBox.innerHTML = `<strong>Erro:</strong> O usuário "<strong>${userField}</strong>" não existe. Crie uma conta na aba Cadastre-se.`;
+            }
+        }
+
+        // ==========================================
+        // CADASTRO REAL
         // ==========================================
         function handleRegister() {
             const userText = document.getElementById('reg-user').value.trim();
@@ -281,71 +324,65 @@
                 return;
             }
 
-            // Pega a lista atual de usuários salvos
             let listaUsuarios = JSON.parse(localStorage.getItem('usuariosEduCore'));
-
-            // Verifica se o nome de usuário já existe
             const usuarioExiste = listaUsuarios.some(u => u.usuario.toLowerCase() === userText.toLowerCase());
+            
             if (usuarioExiste) {
                 alert("Este nome de usuário já está sendo usado. Escolha outro!");
                 return;
             }
 
-            // Adiciona o novo usuário na lista
             listaUsuarios.push({ usuario: userText, email: emailText, senha: passText });
             localStorage.setItem('usuariosEduCore', JSON.stringify(listaUsuarios));
 
-            alert(`Conta criada com sucesso para: ${userText}!\nAgora faça login.`);
+            alert(`Conta criada com sucesso para: ${userText}!`);
             
-            // Limpa os campos de cadastro
             document.getElementById('reg-user').value = "";
             document.getElementById('reg-email').value = "";
             document.getElementById('reg-pass').value = "";
 
-            // Redireciona para a tela de login
             showPage('login');
+            // Deixa o nome pronto na tela de login
+            document.getElementById('login-user').value = userText;
         }
 
         // ==========================================
-        // SISTEMA REAL DE LOGIN
+        // LOGIN REAL
         // ==========================================
         function handleLogin() {
             const userLogin = document.getElementById('login-user').value.trim();
             const passLogin = document.getElementById('login-pass').value.trim();
+            const feedbackBox = document.getElementById('login-feedback');
 
             if (!userLogin || !passLogin) {
-                alert("Preencha o usuário e a senha!");
+                feedbackBox.style.display = "block";
+                feedbackBox.style.borderLeftColor = "#dc3545";
+                feedbackBox.innerHTML = "<strong>Erro:</strong> Preencha o usuário e a senha!";
                 return;
             }
 
-            // Busca os dados salvos no localStorage
             let listaUsuarios = JSON.parse(localStorage.getItem('usuariosEduCore'));
-
-            // Procura o usuário correspondente
             const usuarioValidado = listaUsuarios.find(u => u.usuario.toLowerCase() === userLogin.toLowerCase() && u.senha === passLogin);
 
             if (usuarioValidado) {
                 alert(`Bem-vindo de volta, ${usuarioValidado.usuario}!`);
                 
-                // Altera dinamicamente o painel do topo com o nome logado
                 document.getElementById('user-display').innerText = `Perfil: ${usuarioValidado.usuario} | Meta: Nenhuma definida | Lembrete: 05:02`;
-                
-                // Preenche automaticamente o campo de nome das configurações para conveniência
                 document.getElementById('config-name').value = usuarioValidado.usuario;
                 document.getElementById('config-email').value = usuarioValidado.email;
                 
-                // Limpa o formulário de login
                 document.getElementById('login-user').value = "";
                 document.getElementById('login-pass').value = "";
+                feedbackBox.style.display = "none";
                 
-                // Manda o usuário para a tela Sobre ou Configurações após logar
                 showPage('sobre');
             } else {
-                alert("Usuário ou senha incorretos! Se não tiver conta, clique em 'Cadastre-se'.");
+                feedbackBox.style.display = "block";
+                feedbackBox.style.borderLeftColor = "#dc3545";
+                feedbackBox.innerHTML = "<strong>Erro:</strong> Usuário ou senha incorretos! Tente novamente.";
             }
         }
 
-        // Controle do Modo Escuro
         function applyDarkMode(isDark) {
             if(isDark) {
                 document.body.classList.add('dark-mode-variables');
@@ -354,13 +391,11 @@
             }
         }
 
-        // Controle do tamanho da fonte
         function applyFontSize(size) {
             document.body.style.fontSize = size + "px";
             document.getElementById('font-val').innerText = size + "px";
         }
 
-        // Salvar dados manuais na aba Configurações
         function saveAllSettings() {
             const nameInput = document.getElementById('config-name').value || "Estudante Padrão";
             const goalInput = document.getElementById('config-goal').value || "Nenhuma definida";
@@ -369,7 +404,6 @@
 
             document.getElementById('user-display').innerText = `Perfil: ${nameInput} | Meta: ${goalInput} | Lembrete: ${timeInput}`;
 
-            // Traduções dinâmicas de Idioma
             if(langInput === "en") {
                 document.getElementById('nav-login').innerText = "Login";
                 document.getElementById('nav-sobre').innerText = "About";
@@ -407,7 +441,6 @@
             }
         }
 
-        // Deletar dados salvos
         function deleteAccount() {
             const confirmacao = confirm("Tem certeza que deseja limpar as contas registradas neste navegador?");
             if(confirmacao) {
