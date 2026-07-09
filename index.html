@@ -14,7 +14,7 @@
             --input-border: #ccc;
         }
 
-        /* Classe de Modo Escuro (Ativa por padrão conforme imagem_d0e461.png) */
+        /* Classe de Modo Escuro (Ativa por padrão conforme imagem_d1547b.png) */
         .dark-mode-variables {
             --bg-background: #121212;
             --text-color: #ffffff;
@@ -95,7 +95,7 @@
         h2 { margin-top: 0; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
         h3 { margin-top: 20px; margin-bottom: 10px; color: #007bff; font-size: 16px; }
 
-        /* Inputs Retos e Organizados */
+        /* Inputs Retos */
         input[type="text"], input[type="email"], input[type="password"], input[type="time"], select { 
             width: 100%; 
             padding: 12px; 
@@ -107,7 +107,7 @@
             color: var(--box-text); 
         }
         
-        /* Caixa de Login e Cadastro (Estilo Cinza Forte da Imagem) */
+        /* Caixa de Login e Cadastro (Estilo Cinza Forte) */
         .login-box { 
             background-color: #202020; 
             padding: 40px; 
@@ -159,7 +159,7 @@
     <div class="brand-title">EduCore</div>
     
     <!-- Barra de Status Dinâmica -->
-    <div class="user-badge" id="user-display">Perfil: Estudante Padrão | Meta: Nenhuma definida | Lembrete: 05:02</div>
+    <div class="user-badge" id="user-display">Perfil: Nenhum usuário ativo | Meta: Nenhuma definida | Lembrete: 05:02</div>
 
     <!-- 1. ABA LOGIN -->
     <div id="login" class="page-content active">
@@ -220,7 +220,7 @@
             <div class="config-section">
                 <h3 id="sub-account">1. Preferências de Conta</h3>
                 <label id="lbl-name">Alterar Nome de Perfil:</label>
-                <input type="text" id="config-name" placeholder="Ex: Estudante de Python">
+                <input type="text" id="config-name" placeholder="Ex: gustavo">
                 
                 <label id="lbl-email">Novo E-mail:</label>
                 <input type="email" id="config-email" placeholder="seuemail@escola.com">
@@ -271,9 +271,16 @@
     </div>
 
     <script>
-        // Criação da conta padrão inicial 'admin' caso o banco esteja vazio
+        // Variável global para monitorar quem está logado no momento
+        let usuarioLogadoAtivo = null;
+
+        // Criação de contas base para testes iniciais
         if (!localStorage.getItem('usuariosEduCore')) {
-            const usuariosIniciais = [{ usuario: "admin", email: "admin@educore.com", senha: "123" }];
+            const usuariosIniciais = [
+                { usuario: "admin", email: "admin@educore.com", senha: "123" },
+                { usuario: "gustavo", email: "gustavo@educore.com", senha: "senha123" },
+                { usuario: "sofia", email: "sofia@educore.com", senha: "456" }
+            ];
             localStorage.setItem('usuariosEduCore', JSON.stringify(usuariosIniciais));
         }
 
@@ -285,7 +292,7 @@
         }
 
         // ==========================================
-        // FUNÇÃO: ESQUECEU SENHA (AUTOPREENCHIMENTO SEGURO COLETANDO DADOS DO LOCALSTORAGE)
+        // CORREÇÃO: ENCONTRA SENHA PELO NOME ATUALIZADO
         // ==========================================
         function handleForgotPassword() {
             const userField = document.getElementById('login-user').value.trim();
@@ -303,7 +310,7 @@
             const contaEncontrada = listaUsuarios.find(u => u.usuario.toLowerCase() === userField.toLowerCase());
 
             if (contaEncontrada) {
-                // Preenche os campos automaticamente com os dados da conta localizada
+                // Preenche os campos automaticamente com os dados atualizados do banco
                 document.getElementById('login-user').value = contaEncontrada.usuario;
                 document.getElementById('login-pass').value = contaEncontrada.senha;
 
@@ -316,7 +323,7 @@
         }
 
         // ==========================================
-        // FUNÇÃO: CADASTRO DE NOVAS CONTAS REAL
+        // REGRAS DE CADASTRO: IMPEDE REPETIÇÕES (SOFIA/GUSTAVO)
         // ==========================================
         function handleRegister() {
             const userText = document.getElementById('reg-user').value.trim();
@@ -329,10 +336,12 @@
             }
 
             let listaUsuarios = JSON.parse(localStorage.getItem('usuariosEduCore'));
+            
+            // VERIFICAÇÃO INTEGRAL SE JÁ EXISTE NO SISTEMA
             const usuarioExiste = listaUsuarios.some(u => u.usuario.toLowerCase() === userText.toLowerCase());
             
             if (usuarioExiste) {
-                alert("Este nome de usuário já está sendo usado. Escolha outro!");
+                alert(`Erro: O nome de usuário "${userText}" já está sendo usado por outra pessoa. Escolha outro nome!`);
                 return;
             }
 
@@ -350,7 +359,7 @@
         }
 
         // ==========================================
-        // FUNÇÃO: LOGIN DE USUÁRIOS
+        // LOGIN DE USUÁRIOS E CARREGAMENTO DE DADOS
         // ==========================================
         function handleLogin() {
             const userLogin = document.getElementById('login-user').value.trim();
@@ -370,19 +379,88 @@
             if (usuarioValidado) {
                 alert(`Bem-vindo de volta, ${usuarioValidado.usuario}!`);
                 
+                // Grava quem está ativo no sistema
+                usuarioLogadoAtivo = usuarioValidado.usuario;
+                
                 document.getElementById('user-display').innerText = `Perfil: ${usuarioValidado.usuario} | Meta: Nenhuma definida | Lembrete: 05:02`;
+                
+                // Alimenta os inputs da aba de configurações com os dados atuais dele
                 document.getElementById('config-name').value = usuarioValidado.usuario;
                 document.getElementById('config-email').value = usuarioValidado.email;
+                document.getElementById('config-pass').value = usuarioValidado.senha;
                 
                 document.getElementById('login-user').value = "";
                 document.getElementById('login-pass').value = "";
                 feedbackBox.style.display = "none";
                 
-                showPage('sobre');
+                showPage('config');
             } else {
                 feedbackBox.style.display = "block";
                 feedbackBox.style.borderLeftColor = "#dc3545";
                 feedbackBox.innerHTML = "<strong>Erro:</strong> Usuário ou senha incorretos! Tente novamente.";
+            }
+        }
+
+        // ==========================================
+        // SALVAR ALTERAÇÕES: CRIA VALIDAÇÃO DE TROCA DE NOME
+        // ==========================================
+        function saveAllSettings() {
+            if (!usuarioLogadoAtivo) {
+                alert("Por favor, faça login na sua conta antes de alterar as configurações!");
+                showPage('login');
+                return;
+            }
+
+            let listaUsuarios = JSON.parse(localStorage.getItem('usuariosEduCore'));
+            const novoNome = document.getElementById('config-name').value.trim();
+            const novoEmail = document.getElementById('config-email').value.trim();
+            const novaSenha = document.getElementById('config-pass').value.trim();
+
+            // Localiza o cadastro antigo do usuário logado
+            const minhaConta = listaUsuarios.find(u => u.usuario.toLowerCase() === usuarioLogadoAtivo.toLowerCase());
+
+            if (minhaConta) {
+                // VERIFICAÇÃO SE ELE ESTÁ TENTANDO MUDAR PARA UM NOME QUE JÁ PERTENCE A OUTRO
+                if (novoNome.toLowerCase() !== usuarioLogadoAtivo.toLowerCase()) {
+                    const nomeJaExisteParaOutro = listaUsuarios.some(u => u.usuario.toLowerCase() === novoNome.toLowerCase());
+                    
+                    if (nomeJaExisteParaOutro) {
+                        alert(`Bloqueado: O nome "${novoNome}" já pertence a outra conta cadastrada! Escolha um nome diferente.`);
+                        // Reseta o input para o nome antigo para evitar falhas visuais
+                        document.getElementById('config-name').value = usuarioLogadoAtivo;
+                        return; 
+                    }
+                }
+
+                // Salva as alterações no banco se passar no teste
+                minhaConta.usuario = novoNome;
+                minhaConta.email = novoEmail;
+                minhaConta.senha = novaSenha;
+
+                // Atualiza o ponteiro de quem está logado para o nome novo
+                usuarioLogadoAtivo = novoNome;
+
+                localStorage.setItem('usuariosEduCore', JSON.stringify(listaUsuarios));
+            }
+
+            const goalInput = document.getElementById('config-goal').value || "Nenhuma definida";
+            const langInput = document.getElementById('config-lang').value;
+            const timeInput = document.getElementById('config-time').value;
+
+            document.getElementById('user-display').innerText = `Perfil: ${novoNome} | Meta: ${goalInput} | Lembrete: ${timeInput}`;
+
+            if(langInput === "en") {
+                document.getElementById('nav-login').innerText = "Login";
+                document.getElementById('nav-sobre').innerText = "About";
+                document.getElementById('nav-politica').innerText = "Policy";
+                document.getElementById('nav-config').innerText = "Settings";
+                alert("Settings saved successfully!");
+            } else {
+                document.getElementById('nav-login').innerText = "Login";
+                document.getElementById('nav-sobre').innerText = "Sobre";
+                document.getElementById('nav-politica').innerText = "Política";
+                document.getElementById('nav-config').innerText = "Configurações";
+                alert("Configurações salvas com sucesso!");
             }
         }
 
@@ -401,57 +479,12 @@
             document.getElementById('font-val').innerText = size + "px";
         }
 
-        // Gravação e Tradução da Interface de Configurações
-        function saveAllSettings() {
-            const nameInput = document.getElementById('config-name').value || "Estudante Padrão";
-            const goalInput = document.getElementById('config-goal').value || "Nenhuma definida";
-            const langInput = document.getElementById('config-lang').value;
-            const timeInput = document.getElementById('config-time').value;
-
-            document.getElementById('user-display').innerText = `Perfil: ${nameInput} | Meta: ${goalInput} | Lembrete: ${timeInput}`;
-
-            if(langInput === "en") {
-                document.getElementById('nav-login').innerText = "Login";
-                document.getElementById('nav-sobre').innerText = "About";
-                document.getElementById('nav-politica').innerText = "Policy";
-                document.getElementById('nav-config').innerText = "Settings";
-                document.getElementById('login-title').innerText = "Sign In";
-                document.getElementById('register-title').innerText = "Create Account";
-                document.getElementById('btn-do-register').innerText = "Register Account";
-                document.getElementById('link-back-login').innerText = "Already have an account? Sign In";
-                document.getElementById('link-forgot').innerText = "Forgot your password?";
-                document.getElementById('link-register').innerText = "Don't have an account? Sign up";
-                document.getElementById('sobre-title').innerText = "About EduCore";
-                document.getElementById('sobre-text').innerText = "EduCore is an intelligent study platform built to organize schedules, review code, and boost your daily learning in a clean and direct way.";
-                document.getElementById('politica-title').innerText = "Site Policy";
-                document.getElementById('config-title-page').innerText = "Settings";
-                document.getElementById('btn-save').innerText = "Save Changes";
-                alert("Settings saved successfully!");
-            } else {
-                document.getElementById('nav-login').innerText = "Login";
-                document.getElementById('nav-sobre').innerText = "Sobre";
-                document.getElementById('nav-politica').innerText = "Política";
-                document.getElementById('nav-config').innerText = "Configurações";
-                document.getElementById('login-title').innerText = "Acessar Conta";
-                document.getElementById('register-title').innerText = "Criar Conta";
-                document.getElementById('btn-do-register').innerText = "Cadastrar Conta";
-                document.getElementById('link-back-login').innerText = "Já tem uma conta? Faça Login";
-                document.getElementById('link-forgot').innerText = "Esqueceu sua senha?";
-                document.getElementById('link-register').innerText = "Não tem uma conta? Cadastre-se";
-                document.getElementById('sobre-title').innerText = "Sobre o EduCore";
-                document.getElementById('sobre-text').innerText = "O EduCore é uma plataforma de estudos inteligente feita para organizar cronogramas, revisar códigos e potencializar seu aprendizado diário de forma limpa e direta.";
-                document.getElementById('politica-title').innerText = "Política do Site";
-                document.getElementById('config-title-page').innerText = "Configurações";
-                document.getElementById('btn-save').innerText = "Salvar Alterações";
-                alert("Configurações salvas com sucesso!");
-            }
-        }
-
         // Limpeza Completa de Dados Locais
         function deleteAccount() {
             const confirmacao = confirm("Tem certeza que deseja limpar as contas registradas neste navegador?");
             if(confirmacao) {
                 localStorage.removeItem('usuariosEduCore');
+                usuarioLogadoAtivo = null;
                 alert("Memória local resetada!");
                 location.reload();
             }
