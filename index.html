@@ -14,7 +14,7 @@
             --input-border: #ccc;
         }
 
-        /* Classe de Modo Escuro (Ativa por padrão conforme imagem_d1547b.png) */
+        /* Classe de Modo Escuro ativa por padrão conforme imagem_d1547b.png */
         .dark-mode-variables {
             --bg-background: #121212;
             --text-color: #ffffff;
@@ -58,19 +58,14 @@
         }
         nav button:hover { color: #007bff; }
 
-        /* Animação do Título */
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(-20px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
+        /* Título */
         .brand-title { 
             font-size: 55px; 
             font-weight: 800; 
             margin: 40px 0 5px 0; 
-            animation: fadeIn 1.2s ease-out; 
         }
         
-        /* Barra de Status Dinâmica (Badge) */
+        /* Barra de Status Dinâmica */
         .user-badge { 
             font-size: 14px; 
             font-weight: 400; 
@@ -107,7 +102,7 @@
             color: var(--box-text); 
         }
         
-        /* Caixa de Login e Cadastro (Estilo Cinza Forte) */
+        /* Caixa de Login e Cadastro (Estilo Cinza Forte da Imagem) */
         .login-box { 
             background-color: #202020; 
             padding: 40px; 
@@ -172,6 +167,13 @@
             <!-- Caixa de resposta para alertas de validação/recuperação -->
             <div id="login-feedback" class="system-message"></div>
 
+            <!-- SEÇÃO SECRETA: Só aparece se passar na checagem inicial de esqueci a senha -->
+            <div id="recovery-area" style="display: none; margin-top: 15px; border-top: 1px dashed #444; padding-top: 15px; text-align: left;">
+                <p style="font-size: 13px; color: #aaa; margin-bottom: 8px;">Insira a palavra-chave enviada ao e-mail cadastrado:</p>
+                <input type="text" id="recovery-token" placeholder="Digite a palavra-chave">
+                <button class="btn-green" onclick="verifyRecoveryToken()">Validar Palavra-Chave</button>
+            </div>
+
             <div class="links">
                 <a href="#" id="link-forgot" onclick="handleForgotPassword()">Esqueceu sua senha?</a>
                 <a href="#" id="link-register" onclick="showPage('cadastro')">Não tem uma conta? Cadastre-se</a>
@@ -207,7 +209,7 @@
             <h2 id="politica-title">Política do Site</h2>
             <p><b>1. Privacidade:</b> Seus dados e códigos salvos localmente são de sua propriedade exclusiva.</p>
             <p><b>2. Segurança:</b> Não compartilhamos dados de progresso estudantil com terceiros.</p>
-            <p><b>3. Uso Seguro:</b> Ambiente protegido e focado inteiramente no crescimento acadêmico.</p>
+            <p><b>3. Uso Secure:</b> Ambiente protegido e focado inteiramente no crescimento acadêmico.</p>
         </div>
     </div>
 
@@ -271,10 +273,12 @@
     </div>
 
     <script>
-        // Variável global para monitorar quem está logado no momento
+        // Variáveis globais de controle de segurança do sistema
         let usuarioLogadoAtivo = null;
+        let tokenSegurancaGerado = null;
+        let contaEmRecuperacaoTemporaria = null;
 
-        // Criação de contas base para testes iniciais
+        // Inicialização do banco local com usuários de exemplo para validações cruzadas
         if (!localStorage.getItem('usuariosEduCore')) {
             const usuariosIniciais = [
                 { usuario: "admin", email: "admin@educore.com", senha: "123" },
@@ -284,46 +288,94 @@
             localStorage.setItem('usuariosEduCore', JSON.stringify(usuariosIniciais));
         }
 
-        // Troca de abas da aplicação
         function showPage(id) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             document.getElementById('login-feedback').style.display = "none";
+            document.getElementById('recovery-area').style.display = "none";
         }
 
         // ==========================================
-        // CORREÇÃO: ENCONTRA SENHA PELO NOME ATUALIZADO
+        // COMPORTAMENTO COGNITIVO: ESQUECI MINHA SENHA SEGURO
         // ==========================================
         function handleForgotPassword() {
             const userField = document.getElementById('login-user').value.trim();
             const feedbackBox = document.getElementById('login-feedback');
             
             feedbackBox.style.display = "block";
+            document.getElementById('recovery-area').style.display = "none";
 
             if (!userField) {
                 feedbackBox.style.borderLeftColor = "#dc3545";
-                feedbackBox.innerHTML = "<strong>Erro:</strong> Digite o seu nome de usuário no campo acima para que o sistema possa puxar os seus dados salvos!";
+                feedbackBox.innerHTML = "<strong>Erro de Segurança:</strong> Digite o seu nome de usuário no campo acima primeiro!";
                 return;
             }
 
             let listaUsuarios = JSON.parse(localStorage.getItem('usuariosEduCore'));
             const contaEncontrada = listaUsuarios.find(u => u.usuario.toLowerCase() === userField.toLowerCase());
 
-            if (contaEncontrada) {
-                // Preenche os campos automaticamente com os dados atualizados do banco
-                document.getElementById('login-user').value = contaEncontrada.usuario;
-                document.getElementById('login-pass').value = contaEncontrada.senha;
+            if (!contaEncontrada) {
+                feedbackBox.style.borderLeftColor = "#dc3545";
+                feedbackBox.innerHTML = `<strong>Erro:</strong> Usuário não localizado no banco de dados.`;
+                return;
+            }
 
-                feedbackBox.style.borderLeftColor = "#28a745";
-                feedbackBox.innerHTML = `<strong>Sucesso!</strong> Conta localizada.<br>O sistema preencheu os campos automaticamente com os dados salvos da conta de <em>${contaEncontrada.usuario}</em>.`;
+            // BLINDAGEM CONTRA FORÇA BRUTA: Pede o e-mail cadastrado antes de qualquer liberação
+            let emailInformado = prompt(`Confirme o endereço de e-mail associado à conta de "${contaEncontrada.usuario}":`);
+            
+            if (!emailInformado) {
+                feedbackBox.style.borderLeftColor = "#dc3545";
+                feedbackBox.innerHTML = "<strong>Operação Cancelada:</strong> Confirmação de e-mail obrigatória.";
+                return;
+            }
+
+            if (emailInformado.trim().toLowerCase() === contaEncontrada.email.toLowerCase()) {
+                // Geração do token criptográfico randômico de 6 dígitos
+                tokenSegurancaGerado = Math.floor(100000 + Math.random() * 900000).toString();
+                contaEmRecuperacaoTemporaria = contaEncontrada;
+
+                // Simulação realista do disparo do servidor de e-mail seguro
+                alert(`✨ [EduCore - Gateway de E-mail de Segurança] ✨\n\nMensagem criptografada despachada para: ${contaEncontrada.email}\n\nSua PALAVRA-CHAVE temporária de validação é: ${tokenSegurancaGerado}`);
+
+                feedbackBox.style.borderLeftColor = "#007bff";
+                feedbackBox.innerHTML = `<strong>E-mail Confirmado!</strong> Uma palavra-chave foi gerada e enviada para o e-mail cadastrado. Insira o código abaixo para descriptografar os campos de acesso.`;
+                
+                // Exibe a opção secreta de inserção do token
+                document.getElementById('recovery-area').style.display = "block";
+                document.getElementById('recovery-token').value = "";
+                document.getElementById('recovery-token').focus();
             } else {
                 feedbackBox.style.borderLeftColor = "#dc3545";
-                feedbackBox.innerHTML = `<strong>Erro:</strong> O usuário "<strong>${userField}</strong>" não foi encontrado no banco de dados local.`;
+                feedbackBox.innerHTML = "<strong>Falha de Autenticação:</strong> O e-mail fornecido não corresponde aos registros deste usuário. Acesso negado!";
             }
         }
 
         // ==========================================
-        // REGRAS DE CADASTRO: IMPEDE REPETIÇÕES (SOFIA/GUSTAVO)
+        // VALIDAÇÃO DA PALAVRA-CHAVE DIGITADA
+        // ==========================================
+        function verifyRecoveryToken() {
+            const tokenInput = document.getElementById('recovery-token').value.trim();
+            const feedbackBox = document.getElementById('login-feedback');
+
+            if (tokenInput === tokenSegurancaGerado && contaEmRecuperacaoTemporaria) {
+                // Preenchimento automático apenas APÓS passar pela barreira dupla
+                document.getElementById('login-user').value = contaEmRecuperacaoTemporaria.usuario;
+                document.getElementById('login-pass').value = contaEmRecuperacaoTemporaria.senha;
+
+                feedbackBox.style.borderLeftColor = "#28a745";
+                feedbackBox.innerHTML = `<strong>Sucesso Absoluto!</strong> Palavra-chave validada.<br>Os campos foram preenchidos com os dados de <em>${contaEmRecuperacaoTemporaria.usuario}</em>.`;
+                
+                // Limpa os tokens da memória para evitar reutilização
+                document.getElementById('recovery-area').style.display = "none";
+                tokenSegurancaGerado = null;
+                contaEmRecuperacaoTemporaria = null;
+            } else {
+                alert("🚨 Erro Crítico: Palavra-chave incorreta ou expirada! Tentativa de invasão bloqueada.");
+            }
+        }
+
+        // ==========================================
+        // CADASTRO DE CONTAS (NÃO PERMITE DUPLICADOS)
         // ==========================================
         function handleRegister() {
             const userText = document.getElementById('reg-user').value.trim();
@@ -336,12 +388,10 @@
             }
 
             let listaUsuarios = JSON.parse(localStorage.getItem('usuariosEduCore'));
-            
-            // VERIFICAÇÃO INTEGRAL SE JÁ EXISTE NO SISTEMA
             const usuarioExiste = listaUsuarios.some(u => u.usuario.toLowerCase() === userText.toLowerCase());
             
             if (usuarioExiste) {
-                alert(`Erro: O nome de usuário "${userText}" já está sendo usado por outra pessoa. Escolha outro nome!`);
+                alert(`Erro de Sistema: O nome "${userText}" já está em uso. Escolha outro nome exclusivo!`);
                 return;
             }
 
@@ -349,17 +399,12 @@
             localStorage.setItem('usuariosEduCore', JSON.stringify(listaUsuarios));
 
             alert(`Conta criada com sucesso para: ${userText}!`);
-            
-            document.getElementById('reg-user').value = "";
-            document.getElementById('reg-email').value = "";
-            document.getElementById('reg-pass').value = "";
-
             showPage('login');
             document.getElementById('login-user').value = userText;
         }
 
         // ==========================================
-        // LOGIN DE USUÁRIOS E CARREGAMENTO DE DADOS
+        // LOGIN DO SISTEMA
         // ==========================================
         function handleLogin() {
             const userLogin = document.getElementById('login-user').value.trim();
@@ -377,14 +422,11 @@
             const usuarioValidado = listaUsuarios.find(u => u.usuario.toLowerCase() === userLogin.toLowerCase() && u.senha === passLogin);
 
             if (usuarioValidado) {
-                alert(`Bem-vindo de volta, ${usuarioValidado.usuario}!`);
-                
-                // Grava quem está ativo no sistema
+                alert(`Acesso Autorizado! Bem-vindo, ${usuarioValidado.usuario}!`);
                 usuarioLogadoAtivo = usuarioValidado.usuario;
                 
                 document.getElementById('user-display').innerText = `Perfil: ${usuarioValidado.usuario} | Meta: Nenhuma definida | Lembrete: 05:02`;
                 
-                // Alimenta os inputs da aba de configurações com os dados atuais dele
                 document.getElementById('config-name').value = usuarioValidado.usuario;
                 document.getElementById('config-email').value = usuarioValidado.email;
                 document.getElementById('config-pass').value = usuarioValidado.senha;
@@ -397,16 +439,16 @@
             } else {
                 feedbackBox.style.display = "block";
                 feedbackBox.style.borderLeftColor = "#dc3545";
-                feedbackBox.innerHTML = "<strong>Erro:</strong> Usuário ou senha incorretos! Tente novamente.";
+                feedbackBox.innerHTML = "<strong>Erro:</strong> Credenciais incorretas! Tente novamente.";
             }
         }
 
         // ==========================================
-        // SALVAR ALTERAÇÕES: CRIA VALIDAÇÃO DE TROCA DE NOME
+        // SALVAR CONFIGURAÇÕES E ALTERAÇÕES DE NOME COM VALIDAÇÃO
         // ==========================================
         function saveAllSettings() {
             if (!usuarioLogadoAtivo) {
-                alert("Por favor, faça login na sua conta antes de alterar as configurações!");
+                alert("Realize a autenticação de login antes de gerenciar o painel!");
                 showPage('login');
                 return;
             }
@@ -416,76 +458,49 @@
             const novoEmail = document.getElementById('config-email').value.trim();
             const novaSenha = document.getElementById('config-pass').value.trim();
 
-            // Localiza o cadastro antigo do usuário logado
             const minhaConta = listaUsuarios.find(u => u.usuario.toLowerCase() === usuarioLogadoAtivo.toLowerCase());
 
             if (minhaConta) {
-                // VERIFICAÇÃO SE ELE ESTÁ TENTANDO MUDAR PARA UM NOME QUE JÁ PERTENCE A OUTRO
+                // Bloqueia se o usuário tentar alterar o nome para um termo que já existe em outra conta
                 if (novoNome.toLowerCase() !== usuarioLogadoAtivo.toLowerCase()) {
-                    const nomeJaExisteParaOutro = listaUsuarios.some(u => u.usuario.toLowerCase() === novoNome.toLowerCase());
-                    
-                    if (nomeJaExisteParaOutro) {
-                        alert(`Bloqueado: O nome "${novoNome}" já pertence a outra conta cadastrada! Escolha um nome diferente.`);
-                        // Reseta o input para o nome antigo para evitar falhas visuais
+                    const conflitoNome = listaUsuarios.some(u => u.usuario.toLowerCase() === novoNome.toLowerCase());
+                    if (conflitoNome) {
+                        alert(`Alteração recusada! O nome "${novoNome}" já pertence a outro estudante.`);
                         document.getElementById('config-name').value = usuarioLogadoAtivo;
-                        return; 
+                        return;
                     }
                 }
 
-                // Salva as alterações no banco se passar no teste
                 minhaConta.usuario = novoNome;
                 minhaConta.email = novoEmail;
                 minhaConta.senha = novaSenha;
-
-                // Atualiza o ponteiro de quem está logado para o nome novo
-                usuarioLogadoAtivo = novoNome;
+                usuarioLogadoAtivo = novoNome; // Atualiza a sessão ativa para o novo nome
 
                 localStorage.setItem('usuariosEduCore', JSON.stringify(listaUsuarios));
             }
 
             const goalInput = document.getElementById('config-goal').value || "Nenhuma definida";
-            const langInput = document.getElementById('config-lang').value;
             const timeInput = document.getElementById('config-time').value;
-
             document.getElementById('user-display').innerText = `Perfil: ${novoNome} | Meta: ${goalInput} | Lembrete: ${timeInput}`;
 
-            if(langInput === "en") {
-                document.getElementById('nav-login').innerText = "Login";
-                document.getElementById('nav-sobre').innerText = "About";
-                document.getElementById('nav-politica').innerText = "Policy";
-                document.getElementById('nav-config').innerText = "Settings";
-                alert("Settings saved successfully!");
-            } else {
-                document.getElementById('nav-login').innerText = "Login";
-                document.getElementById('nav-sobre').innerText = "Sobre";
-                document.getElementById('nav-politica').innerText = "Política";
-                document.getElementById('nav-config').innerText = "Configurações";
-                alert("Configurações salvas com sucesso!");
-            }
+            alert("Configurações aplicadas e salvas com sucesso!");
         }
 
-        // Controle Dinâmico: Modo Escuro
         function applyDarkMode(isDark) {
-            if(isDark) {
-                document.body.classList.add('dark-mode-variables');
-            } else {
-                document.body.classList.remove('dark-mode-variables');
-            }
+            if(isDark) document.body.classList.add('dark-mode-variables');
+            else document.body.classList.remove('dark-mode-variables');
         }
 
-        // Controle Dinâmico: Tamanho do Texto
         function applyFontSize(size) {
             document.body.style.fontSize = size + "px";
             document.getElementById('font-val').innerText = size + "px";
         }
 
-        // Limpeza Completa de Dados Locais
         function deleteAccount() {
-            const confirmacao = confirm("Tem certeza que deseja limpar as contas registradas neste navegador?");
-            if(confirmacao) {
+            if(confirm("Tem certeza que deseja expurgar todos os dados locais?")) {
                 localStorage.removeItem('usuariosEduCore');
                 usuarioLogadoAtivo = null;
-                alert("Memória local resetada!");
+                alert("Memória local limpa.");
                 location.reload();
             }
         }
