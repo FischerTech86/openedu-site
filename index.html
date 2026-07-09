@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduCore - Central</title>
+    <title>EduCore - Central de Estudos</title>
     <style>
-        /* Variáveis para controlar o Tema (Claro/Escuro) via CSS */
+        /* Variáveis de cores para controle dinâmico do Tema */
         :root {
             --bg-background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
             --text-color: #202020;
@@ -14,7 +14,7 @@
             --input-border: #ccc;
         }
 
-        /* Classe que o JavaScript vai aplicar para ativar o Modo Escuro */
+        /* Classe aplicada pelo JavaScript ao ativar o Modo Escuro */
         .dark-mode-variables {
             --bg-background: #121212;
             --text-color: #ffffff;
@@ -25,7 +25,7 @@
 
         body { 
             margin: 0; 
-            font-family: 'Segoe UI', sans-serif; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             background: var(--bg-background); 
             color: var(--text-color);
             display: flex; 
@@ -33,32 +33,69 @@
             align-items: center; 
             min-height: 100vh; 
             transition: background 0.3s, color 0.3s;
-            font-size: 16px; /* Tamanho base inicial */
+            font-size: 16px;
         }
         
-        /* Menu */
-        nav { background: #202020; width: 100%; padding: 20px 0; display: flex; justify-content: center; gap: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-        nav button { background: none; border: none; color: white; cursor: pointer; font-size: 16px; font-weight: 500; transition: 0.3s; }
+        /* Menu Superior */
+        nav { 
+            background: #202020; 
+            width: 100%; 
+            padding: 20px 0; 
+            display: flex; 
+            justify-content: center; 
+            gap: 25px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2); 
+        }
+        nav button { 
+            background: none; 
+            border: none; 
+            color: white; 
+            cursor: pointer; 
+            font-size: 16px; 
+            font-weight: 500; 
+            border-radius: 0;
+            transition: 0.3s; 
+        }
         nav button:hover { color: #007bff; }
 
-        /* Animação Título */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        .brand-title { font-size: 50px; font-weight: 800; margin: 30px 0 5px 0; animation: fadeIn 1s ease; }
+        /* Animação do Título */
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(-20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        .brand-title { 
+            font-size: 55px; 
+            font-weight: 800; 
+            margin: 40px 0 5px 0; 
+            animation: fadeIn 1.2s ease-out; 
+        }
         
-        /* Subtítulo dinâmico que muda com o nome do perfil configurado */
-        .user-badge { font-size: 14px; font-weight: 400; margin-bottom: 25px; opacity: 0.8; }
+        /* Painel do Usuário (Badge) */
+        .user-badge { 
+            font-size: 14px; 
+            font-weight: 400; 
+            margin-bottom: 30px; 
+            opacity: 0.8; 
+        }
 
-        /* Conteúdo das Abas */
-        .page-content { display: none; width: 90%; max-width: 450px; margin-bottom: 50px; }
+        /* Alternância de Abas */
+        .page-content { display: none; width: 90%; max-width: 460px; margin-bottom: 50px; }
         .active { display: block; }
         
-        /* Caixas de conteúdo (Retas e organizadas) */
-        .box { background: var(--box-bg); color: var(--box-text); padding: 30px; border-radius: 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 1px solid var(--input-border); }
+        /* Caixas de Conteúdo Totalmente Retas */
+        .box { 
+            background: var(--box-bg); 
+            color: var(--box-text); 
+            padding: 30px; 
+            border-radius: 0; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+            border: 1px solid var(--input-border); 
+        }
         
         h2 { margin-top: 0; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
-        h3 { margin-bottom: 5px; color: #007bff; font-size: 16px; }
+        h3 { margin-top: 20px; margin-bottom: 10px; color: #007bff; font-size: 16px; }
 
-        /* Inputs e Teclados retos e organizados */
+        /* Inputs e Teclados Retos e Organizados */
         input[type="text"], input[type="email"], input[type="password"], input[type="time"], select { 
             width: 100%; 
             padding: 12px; 
@@ -70,27 +107,35 @@
             color: var(--box-text); 
         }
         
-        /* Caixa de Login Original (Mantida em Cinza Forte) */
-        .login-box { background-color: #202020; padding: 40px; border-radius: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.3); color: white; text-align: center; }
+        /* Caixa de Login Original (Cinza Forte) */
+        .login-box { 
+            background-color: #202020; 
+            padding: 40px; 
+            border-radius: 0; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
+            color: white; 
+            text-align: center; 
+        }
         .login-box input { background-color: #333; color: white; border: 1px solid #444; }
         
         /* Botões Retos */
-        button.btn-blue { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 0; cursor: pointer; font-weight: bold; }
+        button.btn-blue { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 0; cursor: pointer; font-weight: bold; font-size: 15px; }
         button.btn-blue:hover { background: #0056b3; }
-        button.btn-green { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 0; cursor: pointer; font-weight: bold; }
+        button.btn-green { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 0; cursor: pointer; font-weight: bold; font-size: 15px; }
         button.btn-green:hover { background: #1e7e34; }
         
-        .links a { color: #aaa; text-decoration: none; display: block; margin-top: 10px; font-size: 13px; }
+        .links a { color: #aaa; text-decoration: none; display: block; margin-top: 12px; font-size: 13px; }
         .links a:hover { color: #fff; }
         
         .config-section { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px dashed var(--input-border); }
         .danger-text { color: #dc3545; font-weight: bold; cursor: pointer; display: inline-block; margin-top: 5px; }
         .danger-text:hover { text-decoration: underline; }
+        .checkbox-label { display: flex; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
-    <!-- Menu Superior -->
+    <!-- Menu de Navegação -->
     <nav>
         <button onclick="showPage('login')" id="nav-login">Login</button>
         <button onclick="showPage('sobre')" id="nav-sobre">Sobre</button>
@@ -100,7 +145,8 @@
 
     <!-- Título Principal -->
     <div class="brand-title">EduCore</div>
-    <!-- Exibe dinamicamente o status/nome salvo nas configurações -->
+    
+    <!-- Barra de Status Dinâmica -->
     <div class="user-badge" id="user-display">Perfil: Estudante Padrão | Meta: Nenhuma definida</div>
 
     <!-- 1. ABA LOGIN -->
@@ -138,73 +184,70 @@
     <!-- 4. ABA CONFIGURAÇÕES (TOTALMENTE FUNCIONAL) -->
     <div id="config" class="page-content">
         <div class="box">
-            <h2>Configurações</h2>
+            <h2 id="config-title-page">Configurações</h2>
             
-            <!-- 1. Conta -->
+            <!-- Seção 1: Conta -->
             <div class="config-section">
-                <h3>1. Preferências de Conta</h3>
-                <label>Alterar Nome de Perfil:</label>
+                <h3 id="sub-account">1. Preferências de Conta</h3>
+                <label id="lbl-name">Alterar Nome de Perfil:</label>
                 <input type="text" id="config-name" placeholder="Ex: Estudante de Python">
                 
-                <label>Novo E-mail:</label>
+                <label id="lbl-email">Novo E-mail:</label>
                 <input type="email" id="config-email" placeholder="seuemail@escola.com">
                 
-                <label>Nova Senha:</label>
+                <label id="lbl-pass">Nova Senha:</label>
                 <input type="password" id="config-pass" placeholder="••••••••">
                 
-                <span class="danger-text" onclick="deleteAccount()">Excluir Conta Permanentemente</span>
+                <span class="danger-text" id="lbl-delete" onclick="deleteAccount()">Excluir Conta Permanentemente</span>
             </div>
 
-            <!-- 2. Aparência -->
+            <!-- Seção 2: Aparência (Funcionamento Instantâneo) -->
             <div class="config-section">
-                <h3>2. Preferências de Aparência (UI)</h3>
-                <!-- onchange ativa o modo escuro instantaneamente -->
-                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 15px;">
+                <h3 id="sub-ui">2. Preferências de Aparência (UI)</h3>
+                <label class="checkbox-label">
                     <input type="checkbox" id="config-dark" onchange="applyDarkMode(this.checked)" style="transform: scale(1.2);"> 
-                    <b>Ativar Modo Escuro (Dark Mode)</b>
+                    <b id="lbl-dark">Ativar Modo Escuro (Dark Mode)</b>
                 </label>
                 
-                <!-- oninput altera o tamanho das fontes em tempo real -->
-                <label>Tamanho da Fonte: <span id="font-val">16px</span></label>
+                <label><span id="lbl-font-text">Tamanho da Fonte:</span> <span id="font-val">16px</span></label>
                 <input type="range" id="config-font" min="14" max="22" value="16" oninput="applyFontSize(this.value)" style="width: 100%; margin-top: 5px;">
             </div>
 
-            <!-- 3. Notificações -->
+            <!-- Seção 3: Notificações -->
             <div class="config-section">
-                <h3>3. Notificações e Alertas</h3>
-                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 10px;">
-                    <input type="checkbox" id="config-notify" checked> Receber resumos de estudos por e-mail
+                <h3 id="sub-notify">3. Notificações e Alertas</h3>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="config-notify" checked> <span id="lbl-notify-mail">Receber resumos de estudos por e-mail</span>
                 </label>
-                <label>Definir Horário do Lembrete de Estudos:</label>
+                <label id="lbl-time">Definir Horário do Lembrete de Estudos:</label>
                 <input type="time" id="config-time" value="14:00">
             </div>
 
-            <!-- 4. Metas de Estudo e Idioma -->
+            <!-- Seção 4: Metas e Idioma -->
             <div class="config-section">
-                <h3>4. Preferências de Estudo e Sistema</h3>
-                <label>Meta de Estudo Diária:</label>
-                <input type="text" id="config-goal" placeholder="Ex: Estudar 2 horas de Python">
+                <h3 id="sub-studies">4. Preferências de Estudo e Sistema</h3>
+                <label id="lbl-goal">Meta de Estudo Diária:</label>
+                <input type="text" id="config-goal" placeholder="Ex: Estudar para o Enem">
                 
-                <label>Idioma da Interface:</label>
+                <label id="lbl-lang">Idioma da Interface:</label>
                 <select id="config-lang">
                     <option value="pt">Português (BR)</option>
                     <option value="en">English (US)</option>
                 </select>
             </div>
             
-            <!-- Dispara a função que salva e muda tudo de uma vez -->
-            <button class="btn-green" onclick="saveAllSettings()">Salvar Alterações</button>
+            <button class="btn-green" id="btn-save" onclick="saveAllSettings()">Salvar Alterações</button>
         </div>
     </div>
 
     <script>
-        // Função basica para mudar de aba
+        // Transição entre páginas (SPA)
         function showPage(id) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
             document.getElementById(id).classList.add('active');
         }
 
-        // 1. FUNCIONAMENTO INSTANTÂNEO: Alternar Modo Escuro
+        // Aplicação em tempo real do Modo Escuro
         function applyDarkMode(isDark) {
             if(isDark) {
                 document.body.classList.add('dark-mode-variables');
@@ -213,60 +256,101 @@
             }
         }
 
-        // 2. FUNCIONAMENTO INSTANTÂNEO: Mudar o tamanho das fontes da página inteira
+        // Aplicação em tempo real do tamanho da fonte
         function applyFontSize(size) {
             document.body.style.fontSize = size + "px";
             document.getElementById('font-val').innerText = size + "px";
         }
 
-        // 3. AÇÃO DE SALVAMENTO: Coleta tudo e altera os dados e textos reais do sistema
+        // Gravação e processamento das configurações
         function saveAllSettings() {
-            // Pegando os valores digitados pelo usuário
             const nameInput = document.getElementById('config-name').value || "Estudante Padrão";
             const goalInput = document.getElementById('config-goal').value || "Nenhuma definida";
             const langInput = document.getElementById('config-lang').value;
             const timeInput = document.getElementById('config-time').value;
 
-            // MUDANÇA REAL 1: Atualiza o painel de informações abaixo do título
+            // Atualiza a barra superior com os novos dados reais
             document.getElementById('user-display').innerText = `Perfil: ${nameInput} | Meta: ${goalInput} | Lembrete: ${timeInput}`;
 
-            // MUDANÇA REAL 2: Mudar idioma dos textos caso selecione Inglês
+            // Sistema de Tradução Dinâmica integrado ao salvamento
             if(langInput === "en") {
-                // Traduz o Menu
                 document.getElementById('nav-login').innerText = "Login";
                 document.getElementById('nav-sobre').innerText = "About";
                 document.getElementById('nav-politica').innerText = "Policy";
                 document.getElementById('nav-config').innerText = "Settings";
-                // Traduz títulos das abas
+                
                 document.getElementById('login-title').innerText = "Sign In";
-                document.getElementById('sobre-title').innerText = "About EduCore";
-                document.getElementById('politica-title').innerText = "Site Policy";
-                document.getElementById('sobre-text').innerText = "EduCore is an intelligent study platform built to organize schedules, review code, and boost your daily learning in a clean and direct way.";
                 document.getElementById('link-forgot').innerText = "Forgot your password?";
                 document.getElementById('link-register').innerText = "Don't have an account? Sign up";
+                
+                document.getElementById('sobre-title').innerText = "About EduCore";
+                document.getElementById('sobre-text').innerText = "EduCore is an intelligent study platform built to organize schedules, review code, and boost your daily learning in a clean and direct way.";
+                
+                document.getElementById('politica-title').innerText = "Site Policy";
+                document.getElementById('config-title-page').innerText = "Settings";
+                document.getElementById('sub-account').innerText = "1. Account Preferences";
+                document.getElementById('lbl-name').innerText = "Change Profile Name:";
+                document.getElementById('lbl-email').innerText = "New Email:";
+                document.getElementById('lbl-pass').innerText = "New Password:";
+                document.getElementById('lbl-delete').innerText = "Delete Account Permanently";
+                
+                document.getElementById('sub-ui').innerText = "2. Appearance Preferences (UI)";
+                document.getElementById('lbl-dark').innerText = "Enable Dark Mode";
+                document.getElementById('lbl-font-text').innerText = "Font Size:";
+                
+                document.getElementById('sub-notify').innerText = "3. Notifications & Alerts";
+                document.getElementById('lbl-notify-mail').innerText = "Receive study summaries by email";
+                document.getElementById('lbl-time').innerText = "Set Study Reminder Time:";
+                
+                document.getElementById('sub-studies').innerText = "4. Study & System Preferences";
+                document.getElementById('lbl-goal').innerText = "Daily Study Goal:";
+                document.getElementById('lbl-lang').innerText = "Interface Language:";
+                document.getElementById('btn-save').innerText = "Save Changes";
+                
+                alert("Settings saved successfully!");
             } else {
-                // Retorna para o Português
                 document.getElementById('nav-login').innerText = "Login";
                 document.getElementById('nav-sobre').innerText = "Sobre";
                 document.getElementById('nav-politica').innerText = "Política";
                 document.getElementById('nav-config').innerText = "Configurações";
+                
                 document.getElementById('login-title').innerText = "Acessar Conta";
-                document.getElementById('sobre-title').innerText = "Sobre o EduCore";
-                document.getElementById('politica-title').innerText = "Política do Site";
-                document.getElementById('sobre-text').innerText = "O EduCore é uma plataforma de estudos inteligente feita para organizar cronogramas, revisar códigos e potencializar seu aprendizado diário de forma limpa e direta.";
                 document.getElementById('link-forgot').innerText = "Esqueceu sua senha?";
                 document.getElementById('link-register').innerText = "Não tem uma conta? Cadastre-se";
+                
+                document.getElementById('sobre-title').innerText = "Sobre o EduCore";
+                document.getElementById('sobre-text').innerText = "O EduCore é uma plataforma de estudos inteligente feita para organizar cronogramas, revisar códigos e potencializar seu aprendizado diário de forma limpa e direta.";
+                
+                document.getElementById('politica-title').innerText = "Política do Site";
+                document.getElementById('config-title-page').innerText = "Configurações";
+                document.getElementById('sub-account').innerText = "1. Preferências de Conta";
+                document.getElementById('lbl-name').innerText = "Alterar Nome de Perfil:";
+                document.getElementById('lbl-email').innerText = "Novo E-mail:";
+                document.getElementById('lbl-pass').innerText = "Nova Senha:";
+                document.getElementById('lbl-delete').innerText = "Excluir Conta Permanentemente";
+                
+                document.getElementById('sub-ui').innerText = "2. Preferências de Aparência (UI)";
+                document.getElementById('lbl-dark').innerText = "Ativar Modo Escuro (Dark Mode)";
+                document.getElementById('lbl-font-text').innerText = "Tamanho da Fonte:";
+                
+                document.getElementById('sub-notify').innerText = "3. Notificações e Alertas";
+                document.getElementById('lbl-notify-mail').innerText = "Receber resumos de estudos por e-mail";
+                document.getElementById('lbl-time').innerText = "Definir Horário do Lembrete de Estudos:";
+                
+                document.getElementById('sub-studies').innerText = "4. Preferências de Estudo e Sistema";
+                document.getElementById('lbl-goal').innerText = "Meta de Estudo Diária:";
+                document.getElementById('lbl-lang').innerText = "Idioma da Interface:";
+                document.getElementById('btn-save').innerText = "Salvar Alterações";
+                
+                alert("Configurações salvas com sucesso!");
             }
-
-            // Confirmação visual para o usuário
-            alert(`Alterações gravadas com sucesso!\nNome: ${nameInput}\nIdioma alterado.`);
         }
 
-        // Função extra para simular a exclusão
+        // Simulação de remoção de dados
         function deleteAccount() {
             const confirmacao = confirm("Tem certeza absoluta que deseja excluir seus dados do EduCore?");
             if(confirmacao) {
-                alert("Simulação de exclusão concluída. Todos os dados locais foram limpos.");
+                alert("Todos os dados locais foram limpos.");
                 document.getElementById('config-name').value = "";
                 document.getElementById('config-goal').value = "";
                 document.getElementById('user-display').innerText = "Perfil: Excluído | Meta: Nenhuma";
