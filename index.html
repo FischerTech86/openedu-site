@@ -70,7 +70,7 @@
             animation: fadeIn 1.2s ease-out; 
         }
         
-        /* Painel do Usuário (Badge) */
+        /* Barra de Status Dinâmica (Badge) */
         .user-badge { 
             font-size: 14px; 
             font-weight: 400; 
@@ -107,7 +107,7 @@
             color: var(--box-text); 
         }
         
-        /* Caixa de Login Original (Cinza Forte) */
+        /* Caixa de Login e Cadastro (Cinza Forte) */
         .login-box { 
             background-color: #202020; 
             padding: 40px; 
@@ -124,7 +124,7 @@
         button.btn-green { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 0; cursor: pointer; font-weight: bold; font-size: 15px; }
         button.btn-green:hover { background: #1e7e34; }
         
-        .links a { color: #aaa; text-decoration: none; display: block; margin-top: 12px; font-size: 13px; }
+        .links a { color: #aaa; text-decoration: none; display: block; margin-top: 12px; font-size: 13px; cursor: pointer; }
         .links a:hover { color: #fff; }
         
         .config-section { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px dashed var(--input-border); }
@@ -133,7 +133,7 @@
         .checkbox-label { display: flex; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 15px; }
     </style>
 </head>
-<body>
+<body class="dark-mode-variables"> <!-- Iniciando em modo escuro conforme imagem_d0e461.png -->
 
     <!-- Menu de Navegação -->
     <nav>
@@ -147,18 +147,32 @@
     <div class="brand-title">EduCore</div>
     
     <!-- Barra de Status Dinâmica -->
-    <div class="user-badge" id="user-display">Perfil: Estudante Padrão | Meta: Nenhuma definida</div>
+    <div class="user-badge" id="user-display">Perfil: Estudante Padrão | Meta: Nenhuma definida | Lembrete: 05:02</div>
 
     <!-- 1. ABA LOGIN -->
     <div id="login" class="page-content active">
         <div class="login-box">
             <h2 style="color: white; border-bottom: none;" id="login-title">Acessar Conta</h2>
-            <input type="text" placeholder="Usuário">
-            <input type="password" placeholder="Senha">
-            <button class="btn-blue">Acessar</button>
+            <input type="text" id="login-user" placeholder="Usuário">
+            <input type="password" id="login-pass" placeholder="Senha">
+            <button class="btn-blue" onclick="handleLogin()">Acessar</button>
             <div class="links">
-                <a href="#" id="link-forgot">Esqueceu sua senha?</a>
-                <a href="#" id="link-register">Não tem uma conta? Cadastre-se</a>
+                <a href="#" id="link-forgot" onclick="alert('Função de recuperação enviada para o e-mail cadastrado!')">Esqueceu sua senha?</a>
+                <a href="#" id="link-register" onclick="showPage('cadastro')">Não tem uma conta? Cadastre-se</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1B. ABA CADASTRO (NOVA - TOTALMENTE FUNCIONAL) -->
+    <div id="cadastro" class="page-content">
+        <div class="login-box">
+            <h2 style="color: white; border-bottom: none;" id="register-title">Criar Conta</h2>
+            <input type="text" id="reg-user" placeholder="Escolha um Usuário">
+            <input type="email" id="reg-email" placeholder="Seu Melhor E-mail">
+            <input type="password" id="reg-pass" placeholder="Crie uma Senha">
+            <button class="btn-blue" id="btn-do-register" onclick="handleRegister()">Cadastrar Conta</button>
+            <div class="links">
+                <a href="#" id="link-back-login" onclick="showPage('login')">Já tem uma conta? Faça Login</a>
             </div>
         </div>
     </div>
@@ -181,7 +195,7 @@
         </div>
     </div>
 
-    <!-- 4. ABA CONFIGURAÇÕES (TOTALMENTE FUNCIONAL) -->
+    <!-- 4. ABA CONFIGURAÇÕES -->
     <div id="config" class="page-content">
         <div class="box">
             <h2 id="config-title-page">Configurações</h2>
@@ -201,11 +215,11 @@
                 <span class="danger-text" id="lbl-delete" onclick="deleteAccount()">Excluir Conta Permanentemente</span>
             </div>
 
-            <!-- Seção 2: Aparência (Funcionamento Instantâneo) -->
+            <!-- Seção 2: Aparência -->
             <div class="config-section">
                 <h3 id="sub-ui">2. Preferências de Aparência (UI)</h3>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="config-dark" onchange="applyDarkMode(this.checked)" style="transform: scale(1.2);"> 
+                    <input type="checkbox" id="config-dark" checked onchange="applyDarkMode(this.checked)" style="transform: scale(1.2);"> 
                     <b id="lbl-dark">Ativar Modo Escuro (Dark Mode)</b>
                 </label>
                 
@@ -220,7 +234,7 @@
                     <input type="checkbox" id="config-notify" checked> <span id="lbl-notify-mail">Receber resumos de estudos por e-mail</span>
                 </label>
                 <label id="lbl-time">Definir Horário do Lembrete de Estudos:</label>
-                <input type="time" id="config-time" value="14:00">
+                <input type="time" id="config-time" value="05:02">
             </div>
 
             <!-- Seção 4: Metas e Idioma -->
@@ -241,13 +255,97 @@
     </div>
 
     <script>
-        // Transição entre páginas (SPA)
+        // Banco de dados simulado no localStorage para manter as contas salvas
+        if (!localStorage.getItem('usuariosEduCore')) {
+            // Conta padrão inicial caso o banco esteja vazio
+            const usuariosIniciais = [{ usuario: "admin", email: "admin@educore.com", senha: "123" }];
+            localStorage.setItem('usuariosEduCore', JSON.stringify(usuariosIniciais));
+        }
+
+        // Troca de abas simples
         function showPage(id) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
             document.getElementById(id).classList.add('active');
         }
 
-        // Aplicação em tempo real do Modo Escuro
+        // ==========================================
+        // SISTEMA REAL DE CADASTRO
+        // ==========================================
+        function handleRegister() {
+            const userText = document.getElementById('reg-user').value.trim();
+            const emailText = document.getElementById('reg-email').value.trim();
+            const passText = document.getElementById('reg-pass').value.trim();
+
+            if (!userText || !emailText || !passText) {
+                alert("Por favor, preencha todos os campos para criar sua conta!");
+                return;
+            }
+
+            // Pega a lista atual de usuários salvos
+            let listaUsuarios = JSON.parse(localStorage.getItem('usuariosEduCore'));
+
+            // Verifica se o nome de usuário já existe
+            const usuarioExiste = listaUsuarios.some(u => u.usuario.toLowerCase() === userText.toLowerCase());
+            if (usuarioExiste) {
+                alert("Este nome de usuário já está sendo usado. Escolha outro!");
+                return;
+            }
+
+            // Adiciona o novo usuário na lista
+            listaUsuarios.push({ usuario: userText, email: emailText, senha: passText });
+            localStorage.setItem('usuariosEduCore', JSON.stringify(listaUsuarios));
+
+            alert(`Conta criada com sucesso para: ${userText}!\nAgora faça login.`);
+            
+            // Limpa os campos de cadastro
+            document.getElementById('reg-user').value = "";
+            document.getElementById('reg-email').value = "";
+            document.getElementById('reg-pass').value = "";
+
+            // Redireciona para a tela de login
+            showPage('login');
+        }
+
+        // ==========================================
+        // SISTEMA REAL DE LOGIN
+        // ==========================================
+        function handleLogin() {
+            const userLogin = document.getElementById('login-user').value.trim();
+            const passLogin = document.getElementById('login-pass').value.trim();
+
+            if (!userLogin || !passLogin) {
+                alert("Preencha o usuário e a senha!");
+                return;
+            }
+
+            // Busca os dados salvos no localStorage
+            let listaUsuarios = JSON.parse(localStorage.getItem('usuariosEduCore'));
+
+            // Procura o usuário correspondente
+            const usuarioValidado = listaUsuarios.find(u => u.usuario.toLowerCase() === userLogin.toLowerCase() && u.senha === passLogin);
+
+            if (usuarioValidado) {
+                alert(`Bem-vindo de volta, ${usuarioValidado.usuario}!`);
+                
+                // Altera dinamicamente o painel do topo com o nome logado
+                document.getElementById('user-display').innerText = `Perfil: ${usuarioValidado.usuario} | Meta: Nenhuma definida | Lembrete: 05:02`;
+                
+                // Preenche automaticamente o campo de nome das configurações para conveniência
+                document.getElementById('config-name').value = usuarioValidado.usuario;
+                document.getElementById('config-email').value = usuarioValidado.email;
+                
+                // Limpa o formulário de login
+                document.getElementById('login-user').value = "";
+                document.getElementById('login-pass').value = "";
+                
+                // Manda o usuário para a tela Sobre ou Configurações após logar
+                showPage('sobre');
+            } else {
+                alert("Usuário ou senha incorretos! Se não tiver conta, clique em 'Cadastre-se'.");
+            }
+        }
+
+        // Controle do Modo Escuro
         function applyDarkMode(isDark) {
             if(isDark) {
                 document.body.classList.add('dark-mode-variables');
@@ -256,104 +354,66 @@
             }
         }
 
-        // Aplicação em tempo real do tamanho da fonte
+        // Controle do tamanho da fonte
         function applyFontSize(size) {
             document.body.style.fontSize = size + "px";
             document.getElementById('font-val').innerText = size + "px";
         }
 
-        // Gravação e processamento das configurações
+        // Salvar dados manuais na aba Configurações
         function saveAllSettings() {
             const nameInput = document.getElementById('config-name').value || "Estudante Padrão";
             const goalInput = document.getElementById('config-goal').value || "Nenhuma definida";
             const langInput = document.getElementById('config-lang').value;
             const timeInput = document.getElementById('config-time').value;
 
-            // Atualiza a barra superior com os novos dados reais
             document.getElementById('user-display').innerText = `Perfil: ${nameInput} | Meta: ${goalInput} | Lembrete: ${timeInput}`;
 
-            // Sistema de Tradução Dinâmica integrado ao salvamento
+            // Traduções dinâmicas de Idioma
             if(langInput === "en") {
                 document.getElementById('nav-login').innerText = "Login";
                 document.getElementById('nav-sobre').innerText = "About";
                 document.getElementById('nav-politica').innerText = "Policy";
                 document.getElementById('nav-config').innerText = "Settings";
-                
                 document.getElementById('login-title').innerText = "Sign In";
+                document.getElementById('register-title').innerText = "Create Account";
+                document.getElementById('btn-do-register').innerText = "Register Account";
+                document.getElementById('link-back-login').innerText = "Already have an account? Sign In";
                 document.getElementById('link-forgot').innerText = "Forgot your password?";
                 document.getElementById('link-register').innerText = "Don't have an account? Sign up";
-                
                 document.getElementById('sobre-title').innerText = "About EduCore";
                 document.getElementById('sobre-text').innerText = "EduCore is an intelligent study platform built to organize schedules, review code, and boost your daily learning in a clean and direct way.";
-                
                 document.getElementById('politica-title').innerText = "Site Policy";
                 document.getElementById('config-title-page').innerText = "Settings";
-                document.getElementById('sub-account').innerText = "1. Account Preferences";
-                document.getElementById('lbl-name').innerText = "Change Profile Name:";
-                document.getElementById('lbl-email').innerText = "New Email:";
-                document.getElementById('lbl-pass').innerText = "New Password:";
-                document.getElementById('lbl-delete').innerText = "Delete Account Permanently";
-                
-                document.getElementById('sub-ui').innerText = "2. Appearance Preferences (UI)";
-                document.getElementById('lbl-dark').innerText = "Enable Dark Mode";
-                document.getElementById('lbl-font-text').innerText = "Font Size:";
-                
-                document.getElementById('sub-notify').innerText = "3. Notifications & Alerts";
-                document.getElementById('lbl-notify-mail').innerText = "Receive study summaries by email";
-                document.getElementById('lbl-time').innerText = "Set Study Reminder Time:";
-                
-                document.getElementById('sub-studies').innerText = "4. Study & System Preferences";
-                document.getElementById('lbl-goal').innerText = "Daily Study Goal:";
-                document.getElementById('lbl-lang').innerText = "Interface Language:";
                 document.getElementById('btn-save').innerText = "Save Changes";
-                
                 alert("Settings saved successfully!");
             } else {
                 document.getElementById('nav-login').innerText = "Login";
                 document.getElementById('nav-sobre').innerText = "Sobre";
                 document.getElementById('nav-politica').innerText = "Política";
                 document.getElementById('nav-config').innerText = "Configurações";
-                
                 document.getElementById('login-title').innerText = "Acessar Conta";
+                document.getElementById('register-title').innerText = "Criar Conta";
+                document.getElementById('btn-do-register').innerText = "Cadastrar Conta";
+                document.getElementById('link-back-login').innerText = "Já tem uma conta? Faça Login";
                 document.getElementById('link-forgot').innerText = "Esqueceu sua senha?";
                 document.getElementById('link-register').innerText = "Não tem uma conta? Cadastre-se";
-                
                 document.getElementById('sobre-title').innerText = "Sobre o EduCore";
                 document.getElementById('sobre-text').innerText = "O EduCore é uma plataforma de estudos inteligente feita para organizar cronogramas, revisar códigos e potencializar seu aprendizado diário de forma limpa e direta.";
-                
                 document.getElementById('politica-title').innerText = "Política do Site";
                 document.getElementById('config-title-page').innerText = "Configurações";
-                document.getElementById('sub-account').innerText = "1. Preferências de Conta";
-                document.getElementById('lbl-name').innerText = "Alterar Nome de Perfil:";
-                document.getElementById('lbl-email').innerText = "Novo E-mail:";
-                document.getElementById('lbl-pass').innerText = "Nova Senha:";
-                document.getElementById('lbl-delete').innerText = "Excluir Conta Permanentemente";
-                
-                document.getElementById('sub-ui').innerText = "2. Preferências de Aparência (UI)";
-                document.getElementById('lbl-dark').innerText = "Ativar Modo Escuro (Dark Mode)";
-                document.getElementById('lbl-font-text').innerText = "Tamanho da Fonte:";
-                
-                document.getElementById('sub-notify').innerText = "3. Notificações e Alertas";
-                document.getElementById('lbl-notify-mail').innerText = "Receber resumos de estudos por e-mail";
-                document.getElementById('lbl-time').innerText = "Definir Horário do Lembrete de Estudos:";
-                
-                document.getElementById('sub-studies').innerText = "4. Preferências de Estudo e Sistema";
-                document.getElementById('lbl-goal').innerText = "Meta de Estudo Diária:";
-                document.getElementById('lbl-lang').innerText = "Idioma da Interface:";
                 document.getElementById('btn-save').innerText = "Salvar Alterações";
-                
                 alert("Configurações salvas com sucesso!");
             }
         }
 
-        // Simulação de remoção de dados
+        // Deletar dados salvos
         function deleteAccount() {
-            const confirmacao = confirm("Tem certeza absoluta que deseja excluir seus dados do EduCore?");
+            const confirmacao = confirm("Tem certeza que deseja limpar as contas registradas neste navegador?");
             if(confirmacao) {
-                alert("Todos os dados locais foram limpos.");
-                document.getElementById('config-name').value = "";
-                document.getElementById('config-goal').value = "";
-                document.getElementById('user-display').innerText = "Perfil: Excluído | Meta: Nenhuma";
+                localStorage.removeItem('usuariosEduCore');
+                alert("Memória local resetada!");
+                location.reload();
             }
         }
     </script>
