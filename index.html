@@ -24,7 +24,7 @@
             min-height: 100vh; 
         }
         
-        /* Menu de Navegação Superior */
+        /* Menu Superior */
         nav { 
             background: #202020; 
             width: 100%; 
@@ -51,11 +51,10 @@
             margin: 40px 0 30px 0; 
         }
 
-        /* Sistema de Abas */
-        .page-content { display: none; width: 90%; max-width: 460px; margin-bottom: 50px; flex: 1; }
+        /* Abas */
+        .page-content { display: none; width: 90%; max-width: 460px; margin-bottom: 50px; }
         .active { display: block; }
         
-        /* Estilo das Caixas de Conteúdo */
         .box { 
             background: var(--box-bg); 
             color: var(--box-text); 
@@ -105,7 +104,7 @@
             color: #fff;
         }
 
-        /* Rodapé Profissional */
+        /* Rodapé Visual */
         footer {
             width: 100%;
             text-align: center;
@@ -120,7 +119,6 @@
 </head>
 <body>
 
-    <!-- Navegação -->
     <nav>
         <button onclick="showPage('login')">Login</button>
         <button onclick="showPage('sobre')">Sobre</button>
@@ -178,13 +176,12 @@
         </div>
     </div>
 
-    <!-- Novo Elemento Visual de Fechamento -->
     <footer>
         EduCore &copy; 2026 - Todos os direitos reservados.
     </footer>
 
     <script>
-        // Inicializa banco de dados local com credenciais limpas
+        // Inicializa Banco local simulado
         if (!localStorage.getItem('usuariosEduCore')) {
             const usuariosIniciais = [
                 { usuario: "admin", email: "admin@educore.com", senha: "123", meta: "Dominar o Sistema", lembrete: "06:00" },
@@ -216,6 +213,7 @@
 
             if (usuarioValidado) {
                 localStorage.setItem('usuarioLogadoAtivo', JSON.stringify(usuarioValidado));
+                // Redirecionamento real de arquivo
                 window.location.href = 'dashboard.html';
             } else {
                 feedbackBox.style.display = "block";
@@ -247,7 +245,6 @@
             document.getElementById('login-user').value = userText;
         }
 
-        // Segurança extra: Manda o usuário para o painel se a sessão já existir
         window.onload = function() {
             if (localStorage.getItem('usuarioLogadoAtivo')) {
                 window.location.href = 'dashboard.html';
