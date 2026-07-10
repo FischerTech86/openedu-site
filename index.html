@@ -24,6 +24,7 @@
             min-height: 100vh; 
         }
         
+        /* Menu de Navegação Superior */
         nav { 
             background: #202020; 
             width: 100%; 
@@ -50,9 +51,11 @@
             margin: 40px 0 30px 0; 
         }
 
-        .page-content { display: none; width: 90%; max-width: 460px; margin-bottom: 50px; }
+        /* Sistema de Abas */
+        .page-content { display: none; width: 90%; max-width: 460px; margin-bottom: 50px; flex: 1; }
         .active { display: block; }
         
+        /* Estilo das Caixas de Conteúdo */
         .box { 
             background: var(--box-bg); 
             color: var(--box-text); 
@@ -101,10 +104,23 @@
             background-color: #2a2a2a;
             color: #fff;
         }
+
+        /* Rodapé Profissional */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #222;
+            margin-top: auto;
+            background-color: #0b0b0b;
+        }
     </style>
 </head>
 <body>
 
+    <!-- Navegação -->
     <nav>
         <button onclick="showPage('login')">Login</button>
         <button onclick="showPage('sobre')">Sobre</button>
@@ -162,11 +178,16 @@
         </div>
     </div>
 
+    <!-- Novo Elemento Visual de Fechamento -->
+    <footer>
+        EduCore &copy; 2026 - Todos os direitos reservados.
+    </footer>
+
     <script>
-        // Inicializa banco de dados local simulado
+        // Inicializa banco de dados local com credenciais limpas
         if (!localStorage.getItem('usuariosEduCore')) {
             const usuariosIniciais = [
-                { usuario: "admin", email: "admin@educore.com", serverSenha: "123", meta: "Dominar o Sistema", lembrete: "06:00" },
+                { usuario: "admin", email: "admin@educore.com", senha: "123", meta: "Dominar o Sistema", lembrete: "06:00" },
                 { usuario: "gustavo", email: "gustavo@educore.com", senha: "senha123", meta: "Estudar Python e Focar no Enem", lembrete: "14:00" }
             ];
             localStorage.setItem('usuariosEduCore', JSON.stringify(usuariosIniciais));
@@ -191,12 +212,10 @@
             }
 
             let listaUsuarios = JSON.parse(localStorage.getItem('usuariosEduCore'));
-            // Procura o usuário (aceita tanto 'senha' quanto 'serverSenha' do mock inicial)
-            const usuarioValidado = listaUsuarios.find(u => u.usuario.toLowerCase() === userVal.toLowerCase() && (u.senha === passVal || u.serverSenha === passVal));
+            const usuarioValidado = listaUsuarios.find(u => u.usuario.toLowerCase() === userVal.toLowerCase() && u.senha === passVal);
 
             if (usuarioValidado) {
                 localStorage.setItem('usuarioLogadoAtivo', JSON.stringify(usuarioValidado));
-                // Redireciona de verdade para a outra página física
                 window.location.href = 'dashboard.html';
             } else {
                 feedbackBox.style.display = "block";
@@ -228,7 +247,7 @@
             document.getElementById('login-user').value = userText;
         }
 
-        // Se o usuário já estiver logado, manda direto pro painel
+        // Segurança extra: Manda o usuário para o painel se a sessão já existir
         window.onload = function() {
             if (localStorage.getItem('usuarioLogadoAtivo')) {
                 window.location.href = 'dashboard.html';
