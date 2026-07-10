@@ -110,10 +110,9 @@
 
     <div class="brand-title">EduCore</div>
     
-    <!-- Barra Dinâmica Superior Protegida -->
+    <!-- Proteção contra campos antigos vazios ou undefined -->
     <div class="user-badge" id="user-display">Perfil: Carregando... | Meta: Carregando... | Lembrete: --:--</div>
 
-    <!-- CONTEÚDO EXCLUSIVO DO PAINEL -->
     <div class="page-content">
         <div class="box">
             <h2 id="welcome-message">Bem-vindo de volta!</h2>
@@ -154,7 +153,7 @@ print(f"Bons estudos, {usuario}!")</div>
     <script>
         let usuarioAtivo = null;
 
-        // Trava de segurança: Se tentar acessar a página sem logar, volta para o login
+        // Guarda de Sessão: Impede acesso direto sem login
         window.onload = function() {
             const sessaoSalva = localStorage.getItem('usuarioLogadoAtivo');
             if (!sessaoSalva) {
@@ -183,12 +182,10 @@ print(f"Bons estudos, {usuario}!")</div>
             const novaMeta = document.getElementById('dash-meta').value.trim() || "Nenhuma definida";
             const novoLembrete = document.getElementById('dash-time').value || "05:02";
 
-            // Atualiza sessão ativa
             usuarioAtivo.meta = novaMeta;
             usuarioAtivo.lembrete = novoLembrete;
             localStorage.setItem('usuarioLogadoAtivo', JSON.stringify(usuarioAtivo));
 
-            // Salva na lista global de usuários
             let listaCompleta = JSON.parse(localStorage.getItem('usuariosEduCore'));
             let index = listaCompleta.findIndex(u => u.usuario.toLowerCase() === usuarioAtivo.usuario.toLowerCase());
             if (index !== -1) {
