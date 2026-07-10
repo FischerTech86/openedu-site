@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduCore - Central de Estudos</title>
     <style>
-        /* Cores do Modo Escuro Padrão (Conforme image_d16f9c.png) */
+        /* Cores do Modo Escuro Padrão */
         :root {
             --bg-background: #121212;
             --text-color: #ffffff;
@@ -102,7 +102,7 @@
             color: var(--box-text); 
         }
         
-        /* Box de Login Escura (Igual ao Print) */
+        /* Box de Login Escura */
         .login-box { 
             background-color: #202020; 
             padding: 40px; 
@@ -122,7 +122,7 @@
         .links a { color: #aaa; text-decoration: none; display: block; margin-top: 12px; font-size: 13px; cursor: pointer; }
         .links a:hover { color: #fff; }
         
-        /* Caixa de Alertas do Sistema (Idêntica à imagem_d16f9c.png) */
+        /* Caixa de Alertas do Sistema */
         .system-message {
             margin-top: 15px;
             padding: 12px;
@@ -161,19 +161,12 @@
         <div class="login-box">
             <h2 style="color: white; border-bottom: none;" id="login-title">Acessar Conta</h2>
             
-            <!-- Campo de Usuário -->
             <input type="text" id="login-user" placeholder="Usuário">
-            
-            <!-- Campo de E-mail (Invisível por padrão, aparece ao clicar em esqueci a senha) -->
             <input type="email" id="login-email" placeholder="E-mail Cadastrado" style="display: none;">
-            
-            <!-- Campo Híbrido: Começa como Senha e vira o campo "Token" dinamicamente -->
             <input type="password" id="login-pass" placeholder="Senha">
             
-            <!-- Botão Único de Ação -->
             <button class="btn-blue" id="btn-main-login" onclick="handleLoginAction()">Acessar</button>
             
-            <!-- Caixa Dinâmica de Erros/Alertas -->
             <div id="login-feedback" class="system-message"></div>
 
             <div class="links">
@@ -211,7 +204,7 @@
             <h2 id="politica-title">Política do Site</h2>
             <p><b>1. Privacidade:</b> Seus dados e códigos salvos localmente são de sua propriedade exclusiva.</p>
             <p><b>2. Segurança:</b> Não compartilhamos dados de progresso estudantil com terceiros.</p>
-            <p><b>3. Uso Seguro:</b> Ambiente protegido e focado inteiramente no crescimento acadêmico.</p>
+            <p><b>3. Uso Secure:</b> Ambiente protegido e focado inteiramente no crescimento acadêmico.</p>
         </div>
     </div>
 
@@ -255,7 +248,7 @@
             </div>
 
             <div class="config-section">
-                <h3 id="sub-studies">4. Preferências de Estudo e Sistema</h3>
+                <h3 id="sub-studies">4. Preferências de Estudo e System</h3>
                 <label id="lbl-goal">Meta de Estudo Diária:</label>
                 <input type="text" id="config-goal" placeholder="Ex: Estudar para o Enem">
                 
@@ -271,13 +264,12 @@
     </div>
 
     <script>
-        // Controla o estado atual: "login", "forgot" ou "token_validation"
         let loginMode = "login"; 
         let usuarioLogadoAtivo = null;
         let tokenSegurancaGerado = null;
         let contaEmRecuperacaoTemporaria = null;
 
-        // Banco de Dados Simulado no LocalStorage
+        // Inicia com as contas padrão salvas na memória do navegador
         if (!localStorage.getItem('usuariosEduCore')) {
             const usuariosIniciais = [
                 { usuario: "admin", email: "admin@educore.com", senha: "123" },
@@ -292,7 +284,6 @@
             document.getElementById(id).classList.add('active');
         }
 
-        // Reseta o painel para o modo de login normal
         function resetLoginFields() {
             loginMode = "login";
             document.getElementById('login-title').innerText = "Acessar Conta";
@@ -312,18 +303,15 @@
             contaEmRecuperacaoTemporaria = null;
         }
 
-        // Ativa o primeiro estágio da recuperação ao clicar no link
         function switchToForgotPasswordMode() {
             loginMode = "forgot";
             document.getElementById('login-title').innerText = "Recuperar Conta";
-            document.getElementById('login-email').style.display = "block"; // Exibe e-mail
-            document.getElementById('login-pass').style.display = "none";  // Oculta senha temporariamente
+            document.getElementById('login-email').style.display = "block";
+            document.getElementById('login-pass').style.display = "none";  
             document.getElementById('login-feedback').style.display = "none";
         }
 
-        // ==========================================
-        // MOTOR PRINCIPAL DO BOTÃO "ACESSAR"
-        // ==========================================
+        // MOTOR PRINCIPAL DE LOGIN (FRONTEND DIRETO)
         function handleLoginAction() {
             const userVal = document.getElementById('login-user').value.trim();
             const emailVal = document.getElementById('login-email').value.trim();
@@ -332,12 +320,11 @@
             
             feedbackBox.style.display = "none";
 
-            // FLUXO 1: LOGIN NORMAL
             if (loginMode === "login") {
                 const passVal = passField.value.trim();
                 if (!userVal || !passVal) {
                     feedbackBox.style.display = "block";
-                    feedbackBox.style.borderLeftColor = "#dc3545"; // Vermelho de erro
+                    feedbackBox.style.borderLeftColor = "#dc3545";
                     feedbackBox.innerHTML = "<strong>Erro:</strong> Preencha o usuário e a senha!";
                     return;
                 }
@@ -346,15 +333,16 @@
                 const usuarioValidado = listaUsuarios.find(u => u.usuario.toLowerCase() === userVal.toLowerCase() && u.senha === passVal);
 
                 if (usuarioValidado) {
+                    // Feedback visual claro de Sucesso antes de mudar de página!
+                    alert(`🎉 Login efetuado com sucesso!\nBem-vindo de volta, ${usuarioValidado.usuario}!`);
                     efetuarLoginNoSistema(usuarioValidado);
                 } else {
                     feedbackBox.style.display = "block";
                     feedbackBox.style.borderLeftColor = "#dc3545";
-                    feedbackBox.innerHTML = "<strong>Erro:</strong> Usuário ou senha incorretos! Tente novamente.";
+                    feedbackBox.innerHTML = "<strong>Erro:</strong> Usuário ou senha incorretos!";
                 }
             } 
             
-            // FLUXO 2: PROCESSAR PEDIDO DE ESQUECI A SENHA (ENVIA TOKEN)
             else if (loginMode === "forgot") {
                 if (!userVal || !emailVal) {
                     feedbackBox.style.display = "block";
@@ -369,71 +357,57 @@
                 if (!contaEncontrada) {
                     feedbackBox.style.display = "block";
                     feedbackBox.style.borderLeftColor = "#dc3545";
-                    feedbackBox.innerHTML = `<strong>Erro:</strong> O usuário "<strong>${userVal}</strong>" não existe.`;
+                    feedbackBox.innerHTML = `<strong>Erro:</strong> O usuário "${userVal}" não existe.`;
                     return;
                 }
 
                 if (contaEncontrada.email.toLowerCase() !== emailVal.toLowerCase()) {
                     feedbackBox.style.display = "block";
                     feedbackBox.style.borderLeftColor = "#dc3545";
-                    feedbackBox.innerHTML = "<strong>Erro:</strong> O e-mail informado não confere com o desta conta.";
+                    feedbackBox.innerHTML = "<strong>Erro:</strong> O e-mail informado não bate com o dessa conta.";
                     return;
                 }
 
-                // Gera token numérico aleatório de 6 posições
                 tokenSegurancaGerado = Math.floor(100000 + Math.random() * 900000).toString();
                 contaEmRecuperacaoTemporaria = contaEncontrada;
 
-                // Caixa de e-mail simulada do sistema
-                alert(`✨ [EduCore - Gateway de Segurança] ✨\n\nCódigo enviado para: ${contaEncontrada.email}\n\nSeu TOKEN de segurança é: ${tokenSegurancaGerado}`);
+                alert(`✨ [EduCore - Segurança] ✨\n\nCódigo enviado para: ${contaEncontrada.email}\n\nSeu TOKEN de acesso é: ${tokenSegurancaGerado}`);
 
-                // Próximo passo: aguardar digitação do token
                 loginMode = "token_validation";
-                
-                // Oculta e-mail
                 document.getElementById('login-email').style.display = "none";
                 
-                // TRANSFORMAÇÃO: O campo de senha volta reconfigurado como campo de Token!
                 passField.style.display = "block";
                 passField.type = "text"; 
-                passField.placeholder = "Token"; // Modificado conforme pedido!
+                passField.placeholder = "Digite o Token de 6 dígitos"; 
                 passField.value = "";
                 passField.focus();
 
                 feedbackBox.style.display = "block";
-                feedbackBox.style.borderLeftColor = "#007bff"; // Azul informativo
-                feedbackBox.innerHTML = "<strong>Token Enviado!</strong> Digite o token de segurança recebido no campo acima para acessar.";
+                feedbackBox.style.borderLeftColor = "#007bff"; 
+                feedbackBox.innerHTML = "<strong>Token Enviado!</strong> Insira o código numérico acima.";
             } 
             
-            // FLUXO 3: VALIDAR O TOKEN NO LUGAR DA SENHA
             else if (loginMode === "token_validation") {
                 const tokenDigitado = passField.value.trim();
 
                 if (!tokenDigitado) {
                     feedbackBox.style.display = "block";
                     feedbackBox.style.borderLeftColor = "#dc3545";
-                    feedbackBox.innerHTML = "<strong>Erro:</strong> Digite o token de segurança para continuar!";
+                    feedbackBox.innerHTML = "<strong>Erro:</strong> Digite o token!";
                     return;
                 }
 
                 if (tokenDigitado === tokenSegurancaGerado && contaEmRecuperacaoTemporaria) {
-                    alert(`Acesso Autorizado via Token! Bem-vindo, ${contaEmRecuperacaoTemporaria.usuario}.`);
-                    
-                    // Conecta diretamente
+                    alert(`🎉 Acesso Liberado via Token!\nBem-vindo, ${contaEmRecuperacaoTemporaria.usuario}.`);
                     efetuarLoginNoSistema(contaEmRecuperacaoTemporaria);
-                    
-                    // Limpa credenciais temporárias
-                    tokenSegurancaGerado = null;
-                    contaEmRecuperacaoTemporaria = null;
                 } else {
                     feedbackBox.style.display = "block";
                     feedbackBox.style.borderLeftColor = "#dc3545";
-                    feedbackBox.innerHTML = "<strong>Erro Crítico:</strong> Token incorreto ou já expirado!";
+                    feedbackBox.innerHTML = "<strong>Erro:</strong> Token incorreto!";
                 }
             }
         }
 
-        // Aplica as credenciais na sessão ativa e muda de aba
         function efectuarLoginNoSistema(objetoUsuario) {
             usuarioLogadoAtivo = objetoUsuario.usuario;
             document.getElementById('user-display').innerText = `Perfil: ${objetoUsuario.usuario} | Meta: Nenhuma definida | Lembrete: 05:02`;
@@ -443,35 +417,34 @@
             document.getElementById('config-pass').value = objetoUsuario.senha;
             
             resetLoginFields();
-            showPage('sobre');
+            showPage('sobre'); // Direciona para a tela interna principal
         }
 
-        // ==========================================
-        // FLUXOS AUXILIARES: CADASTRO E AJUSTES
-        // ==========================================
+        // MOTOR DE CADASTRO (SALVA DIRETO NO NAVEGADOR)
         function handleRegister() {
             const userText = document.getElementById('reg-user').value.trim();
             const emailText = document.getElementById('reg-email').value.trim();
             const passText = document.getElementById('reg-pass').value.trim();
 
             if (!userText || !emailText || !passText) {
-                alert("Preencha todos os dados!");
+                alert("Por favor, preencha todos os campos do cadastro!");
                 return;
             }
 
             let listaUsuarios = JSON.parse(localStorage.getItem('usuariosEduCore'));
             if (listaUsuarios.some(u => u.usuario.toLowerCase() === userText.toLowerCase())) {
-                alert("Este nome de usuário já está sendo usado!");
+                alert("Este nome de usuário já está em uso!");
                 return;
             }
 
+            // Adiciona a nova conta na lista do navegador
             listaUsuarios.push({ usuario: userText, email: emailText, senha: passText });
             localStorage.setItem('usuariosEduCore', JSON.stringify(listaUsuarios));
 
-            alert("Cadastro realizado com sucesso!");
+            alert(`Conta "${userText}" criada com sucesso!`);
             resetLoginFields();
             showPage('login');
-            document.getElementById('login-user').value = userText;
+            document.getElementById('login-user').value = userText; // Já deixa o nome preenchido na tela de login
         }
 
         function saveAllSettings() {
@@ -499,7 +472,7 @@
             const goalInput = document.getElementById('config-goal').value || "Nenhuma definida";
             const timeInput = document.getElementById('config-time').value;
             document.getElementById('user-display').innerText = `Perfil: ${novoNome} | Meta: ${goalInput} | Lembrete: ${timeInput}`;
-            alert("Configurações atualizadas!");
+            alert("Configurações atualizadas com sucesso!");
         }
 
         function applyDarkMode(isDark) {
@@ -513,7 +486,7 @@
         }
 
         function deleteAccount() {
-            if(confirm("Deseja apagar os dados locais do sistema?")) {
+            if(confirm("Deseja apagar os dados locais do sistema? Todas as contas criadas sumirão.")) {
                 localStorage.removeItem('usuariosEduCore');
                 location.reload();
             }
