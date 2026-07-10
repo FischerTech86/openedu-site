@@ -104,7 +104,6 @@
             color: #fff;
         }
 
-        /* Rodapé Visual */
         footer {
             width: 100%;
             text-align: center;
@@ -199,7 +198,6 @@
     </footer>
 
     <script>
-        // Inicializa Banco local simulado
         if (!localStorage.getItem('usuariosEduCore')) {
             const usuariosIniciais = [
                 { usuario: "admin", email: "admin@educore.com", senha: "123", meta: "Dominar o Sistema", lembrete: "06:00" },
@@ -211,7 +209,6 @@
         function showPage(id) {
             document.getElementById('login-feedback').style.display = "none";
             document.getElementById('recover-feedback').style.display = "none";
-            
             document.getElementById('recover-user').value = "";
             document.getElementById('recover-email').value = "";
 
