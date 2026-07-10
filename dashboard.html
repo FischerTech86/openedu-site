@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduCore - Painel Geral</title>
+    <style>
+        :root {
+            --bg-background: #121212;
+            --text-color: #ffffff;
+            --box-bg: #1e1e1e;
+            --box-text: #f0f0f0;
+            --input-border: #444;
+        }
+
+        body { 
+            margin: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: var(--bg-background); 
+            color: var(--text-color);
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+        }
+        
+        nav { 
+            background: #202020; 
+            width: 100%; 
+            padding: 20px 0; 
+            display: flex; 
+            justify-content: center; 
+            gap: 25px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2); 
+        }
+        nav button { 
+            background: none; 
+            border: none; 
+            color: white; 
+            cursor: pointer; 
+            font-size: 16px; 
+            font-weight: 500; 
+            transition: 0.3s; 
+        }
+        nav button:hover { color: #28a745; }
+        nav button.logout-btn:hover { color: #dc3545; }
+
+        .brand-title { 
+            font-size: 55px; 
+            font-weight: 800; 
+            margin: 40px 0 5px 0; 
+        }
+        
+        .user-badge { 
+            font-size: 14px; 
+            font-weight: 400; 
+            margin-bottom: 30px; 
+            opacity: 0.8; 
+        }
+
+        .page-content { width: 90%; max-width: 800px; margin-bottom: 50px; }
+        
+        .box { 
+            background: var(--box-bg); 
+            color: var(--box-text); 
+            padding: 30px; 
+            border-radius: 0; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+            border: 1px solid var(--input-border); 
+            margin-bottom: 20px;
+        }
+        
+        h2 { margin-top: 0; border-bottom: 2px solid #28a745; padding-bottom: 10px; }
+        h3 { color: #28a745; margin-top: 0; }
+
+        input[type="text"], input[type="time"] { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 15px; 
+            border: 1px solid var(--input-border); 
+            border-radius: 0; 
+            box-sizing: border-box; 
+            background-color: var(--box-bg); 
+            color: var(--box-text); 
+        }
+        
+        button.btn-green { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 0; cursor: pointer; font-weight: bold; font-size: 15px; }
+        button.btn-green:hover { background: #1e7e34; }
+        
+        .grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        @media (max-width: 600px) { .grid-layout { grid-template-columns: 1fr; } }
+
+        .code-area {
+            background-color: #151515;
+            color: #a9ffb4;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 15px;
+            border-left: 4px solid #28a745;
+            overflow-x: auto;
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <button onclick="window.location.href='dashboard.html'">Painel Geral</button>
+        <button onclick="efetuarLogout()" class="logout-btn">Sair</button>
+    </nav>
+
+    <div class="brand-title">EduCore</div>
+    
+    <!-- Barra Dinâmica Superior Protegida -->
+    <div class="user-badge" id="user-display">Perfil: Carregando... | Meta: Carregando... | Lembrete: --:--</div>
+
+    <!-- CONTEÚDO EXCLUSIVO DO PAINEL -->
+    <div class="page-content">
+        <div class="box">
+            <h2 id="welcome-message">Bem-vindo de volta!</h2>
+            <p>Seu login foi validado localmente com sucesso. Este é o seu novo ambiente de foco integrado.</p>
+        </div>
+
+        <div class="grid-layout">
+            <div class="box">
+                <h3>📚 Foco de Estudos</h3>
+                <p>Monitore suas revisões para os próximos exames e mantenha suas matérias organizadas.</p>
+                <ul>
+                    <li>Revisar Cronograma Semanal</li>
+                    <li>Simulado de Questões Ativo</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <h3>💻 Laboratório de Programação</h3>
+                <p>Estrutura básica de comandos monitorados:</p>
+                <div class="code-area"># Sandbox Python Ativo
+usuario = "Gustavo"
+print(f"Bons estudos, {usuario}!")</div>
+            </div>
+        </div>
+
+        <div class="box">
+            <h3>⚙️ Gerenciador de Metas Rápidas</h3>
+            <label>Definir Nova Meta de Estudo:</label>
+            <input type="text" id="dash-meta" placeholder="Ex: Resolver exercícios de Cinemática">
+            
+            <label>Horário do Lembrete:</label>
+            <input type="time" id="dash-time" value="05:02">
+            
+            <button class="btn-green" onclick="atualizarMetasPainel()">Atualizar Informações de Perfil</button>
+        </div>
+    </div>
+
+    <script>
+        let usuarioAtivo = null;
+
+        // Trava de segurança: Se tentar acessar a página sem logar, volta para o login
+        window.onload = function() {
+            const sessaoSalva = localStorage.getItem('usuarioLogadoAtivo');
+            if (!sessaoSalva) {
+                alert("Acesso negado! Por favor, faça o login primeiro.");
+                window.location.href = 'index.html';
+            } else {
+                usuarioAtivo = JSON.parse(sessaoSalva);
+                carregarDadosPainel();
+            }
+        };
+
+        function carregarDadosPainel() {
+            document.getElementById('welcome-message').innerText = `Bem-vindo de volta, ${usuarioAtivo.usuario}!`;
+            document.getElementById('dash-meta').value = usuarioAtivo.meta || "Nenhuma definida";
+            document.getElementById('dash-time').value = usuarioAtivo.lembrete || "05:02";
+            atualizarBadgeSuperior();
+        }
+
+        function atualizarBadgeSuperior() {
+            const metaLimpa = usuarioAtivo.meta || "Nenhuma definida";
+            const lembreteLimpo = usuarioAtivo.lembrete || "05:02";
+            document.getElementById('user-display').innerText = `Perfil: ${usuarioAtivo.usuario} | Meta: ${metaLimpa} | Lembrete: ${lembreteLimpo}`;
+        }
+
+        function atualizarMetasPainel() {
+            const novaMeta = document.getElementById('dash-meta').value.trim() || "Nenhuma definida";
+            const novoLembrete = document.getElementById('dash-time').value || "05:02";
+
+            // Atualiza sessão ativa
+            usuarioAtivo.meta = novaMeta;
+            usuarioAtivo.lembrete = novoLembrete;
+            localStorage.setItem('usuarioLogadoAtivo', JSON.stringify(usuarioAtivo));
+
+            // Salva na lista global de usuários
+            let listaCompleta = JSON.parse(localStorage.getItem('usuariosEduCore'));
+            let index = listaCompleta.findIndex(u => u.usuario.toLowerCase() === usuarioAtivo.usuario.toLowerCase());
+            if (index !== -1) {
+                listaCompleta[index].meta = novaMeta;
+                listaCompleta[index].lembrete = novoLembrete;
+                localStorage.setItem('usuariosEduCore', JSON.stringify(listaCompleta));
+            }
+
+            atualizarBadgeSuperior();
+            alert("Informações de perfil atualizadas com sucesso!");
+        }
+
+        function efetuarLogout() {
+            localStorage.removeItem('usuarioLogadoAtivo');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
