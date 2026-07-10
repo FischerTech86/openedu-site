@@ -24,6 +24,7 @@
             min-height: 100vh; 
         }
         
+        /* Menu Superior com o mesmo comportamento do login */
         nav { 
             background: #202020; 
             width: 100%; 
@@ -58,7 +59,9 @@
             opacity: 0.8; 
         }
 
-        .page-content { width: 90%; max-width: 800px; margin-bottom: 50px; }
+        /* Estrutura de Abas Ativas do Painel */
+        .tab-content { display: none; width: 90%; max-width: 800px; margin-bottom: 50px; }
+        .active { display: block; }
         
         .box { 
             background: var(--box-bg); 
@@ -103,17 +106,20 @@
 </head>
 <body>
 
+    <!-- Menu Superior Atualizado com Estrutura de Abas -->
     <nav>
-        <button onclick="window.location.href='dashboard.html'">Painel Geral</button>
+        <button onclick="showTab('painel')">Painel Geral</button>
+        <button onclick="showTab('objetivo')">Objetivo</button>
+        <button onclick="showTab('config')">Configurações</button>
         <button onclick="efetuarLogout()" class="logout-btn">Sair</button>
     </nav>
 
     <div class="brand-title">EduCore</div>
     
-    <!-- Proteção contra campos antigos vazios ou undefined -->
-    <div class="user-badge" id="user-display">Perfil: Carregando... | Meta: Carregando... | Lembrete: --:--</div>
+    <div class="user-badge" id="user-display">Perfil: Carregando... | Objetivo: Carregando... | Lembrete: --:--</div>
 
-    <div class="page-content">
+    <!-- ABA 1: PAINEL GERAL -->
+    <div id="painel" class="tab-content active">
         <div class="box">
             <h2 id="welcome-message">Bem-vindo de volta!</h2>
             <p>Seu login foi validado localmente com sucesso. Este é o seu novo ambiente de foco integrado.</p>
@@ -137,23 +143,39 @@ usuario = "Gustavo"
 print(f"Bons estudos, {usuario}!")</div>
             </div>
         </div>
+    </div>
 
+    <!-- ABA 2: OBJETIVO EXCLUSIVO -->
+    <div id="objetivo" class="tab-content">
         <div class="box">
-            <h3>⚙️ Gerenciador de Metas Rápidas</h3>
-            <label>Definir Nova Meta de Estudo:</label>
-            <input type="text" id="dash-meta" placeholder="Ex: Resolver exercícios de Cinemática">
+            <h2>🎯 Foco e Missão Atual</h2>
+            <p>Abaixo está listado o seu foco principal de desenvolvimento definido para a conta.</p>
+            <div style="background: #151515; padding: 25px; border-left: 4px solid #28a745; margin-top: 20px;">
+                <span style="font-size: 13px; color: #888; display: block; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Objetivo Ativo:</span>
+                <strong id="big-target-display" style="font-size: 22px; color: #fff; font-family: 'Segoe UI', sans-serif;">Nenhum definido</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABA 3: CONFIGURAÇÕES -->
+    <div id="config" class="tab-content">
+        <div class="box">
+            <h2>⚙️ Configurações do Sistema</h2>
+            <p>Atualize seu escopo de estudos e gerencie os horários dos seus alertas diários de foco.</p>
             
-            <label>Horário do Lembrete:</label>
+            <label style="display: block; margin-bottom: 8px; font-weight: 500;">Alterar Objetivo Atual:</label>
+            <input type="text" id="dash-meta" placeholder="Ex: Estudar Python e Focar no Enem">
+            
+            <label style="display: block; margin-bottom: 8px; font-weight: 500;">Horário do Lembrete Alvo:</label>
             <input type="time" id="dash-time" value="05:02">
             
-            <button class="btn-green" onclick="atualizarMetasPainel()">Atualizar Informações de Perfil</button>
+            <button class="btn-green" onclick="atualizarMetasPainel()">Salvar Alterações de Perfil</button>
         </div>
     </div>
 
     <script>
         let usuarioAtivo = null;
 
-        // Guarda de Sessão: Impede acesso direto sem login
         window.onload = function() {
             const sessaoSalva = localStorage.getItem('usuarioLogadoAtivo');
             if (!sessaoSalva) {
@@ -165,21 +187,33 @@ print(f"Bons estudos, {usuario}!")</div>
             }
         };
 
+        // Gerencia a troca de abas no painel interno
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            const targetTab = document.getElementById(tabId);
+            if (targetTab) targetTab.classList.add('active');
+        }
+
         function carregarDadosPainel() {
             document.getElementById('welcome-message').innerText = `Bem-vindo de volta, ${usuarioAtivo.usuario}!`;
-            document.getElementById('dash-meta').value = usuarioAtivo.meta || "Nenhuma definida";
+            document.getElementById('dash-meta').value = usuarioAtivo.meta || "Nenhum definido";
             document.getElementById('dash-time').value = usuarioAtivo.lembrete || "05:02";
             atualizarBadgeSuperior();
         }
 
         function atualizarBadgeSuperior() {
-            const metaLimpa = usuarioAtivo.meta || "Nenhuma definida";
+            const metaLimpa = usuarioAtivo.meta || "Nenhum definido";
             const lembreteLimpo = usuarioAtivo.lembrete || "05:02";
-            document.getElementById('user-display').innerText = `Perfil: ${usuarioAtivo.usuario} | Meta: ${metaLimpa} | Lembrete: ${lembreteLimpo}`;
+            
+            // Atualiza badge de texto superior
+            document.getElementById('user-display').innerText = `Perfil: ${usuarioAtivo.usuario} | Objetivo: ${metaLimpa} | Lembrete: ${lembreteLimpo}`;
+            
+            // Atualiza o display interno da aba Objetivo
+            document.getElementById('big-target-display').innerText = metaLimpa;
         }
 
         function atualizarMetasPainel() {
-            const novaMeta = document.getElementById('dash-meta').value.trim() || "Nenhuma definida";
+            const novaMeta = document.getElementById('dash-meta').value.trim() || "Nenhum definido";
             const novoLembrete = document.getElementById('dash-time').value || "05:02";
 
             usuarioAtivo.meta = novaMeta;
@@ -195,10 +229,10 @@ print(f"Bons estudos, {usuario}!")</div>
             }
 
             atualizarBadgeSuperior();
-            alert("Informações de perfil atualizadas com sucesso!");
+            alert("Configurações atualizadas com sucesso!");
         }
 
-        function efetuarLogout() {
+        function efectuarLogout() {
             localStorage.removeItem('usuarioLogadoAtivo');
             window.location.href = 'index.html';
         }
