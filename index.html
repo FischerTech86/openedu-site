@@ -51,7 +51,7 @@
             margin: 40px 0 30px 0; 
         }
 
-        /* Abas */
+        /* Sistema de Abas */
         .page-content { display: none; width: 90%; max-width: 460px; margin-bottom: 50px; }
         .active { display: block; }
         
@@ -160,7 +160,7 @@
         </div>
     </div>
 
-    <!-- TELA: RECUPERAR SENHA (Nova Estrutura Idêntica) -->
+    <!-- TELA: RECUPERAR SENHA -->
     <div id="recuperar" class="page-content">
         <div class="login-box">
             <h2 style="color: white; border-bottom: none;">Recuperar Senha</h2>
@@ -209,11 +209,9 @@
         }
 
         function showPage(id) {
-            // Limpa mensagens de erro ao trocar de página
             document.getElementById('login-feedback').style.display = "none";
             document.getElementById('recover-feedback').style.display = "none";
             
-            // Limpa campos da tela de recuperação
             document.getElementById('recover-user').value = "";
             document.getElementById('recover-email').value = "";
 
@@ -246,14 +244,13 @@
             }
         }
 
-        // Nova Função: Processa a recuperação de dados localmente
         function handleRecoverAction() {
             const userVal = document.getElementById('recover-user').value.trim();
             const emailVal = document.getElementById('recover-email').value.trim();
             const feedbackBox = document.getElementById('recover-feedback');
             
             feedbackBox.style.display = "none";
-            feedbackBox.style.borderLeft = "4px solid #dc3545"; // Cor de erro padrão
+            feedbackBox.style.borderLeft = "4px solid #dc3545"; 
 
             if (!userVal || !emailVal) {
                 feedbackBox.style.display = "block";
@@ -266,7 +263,7 @@
 
             if (contaEncontrada) {
                 feedbackBox.style.display = "block";
-                feedbackBox.style.borderLeft = "4px solid #28a745"; // Muda para verde (Sucesso)
+                feedbackBox.style.borderLeft = "4px solid #28a745"; 
                 feedbackBox.innerHTML = `<strong>Sucesso!</strong> Sua senha é: <span style="color: #a9ffb4; font-family: monospace; font-size: 14px;">${contaEncontrada.senha}</span>`;
             } else {
                 feedbackBox.style.display = "block";
