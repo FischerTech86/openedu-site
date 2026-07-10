@@ -141,6 +141,7 @@
 
             <div class="links">
                 <a href="#" onclick="showPage('cadastro')">Não tem uma conta? Cadastre-se</a>
+                <a href="#" onclick="showPage('recuperar')" style="margin-top: 10px;">Esqueci minha senha</a>
             </div>
         </div>
     </div>
@@ -155,6 +156,23 @@
             <button class="btn-blue" onclick="handleRegister()">Cadastrar Conta</button>
             <div class="links">
                 <a href="#" onclick="showPage('login')">Já tem uma conta? Faça Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- TELA: RECUPERAR SENHA (Nova Estrutura Idêntica) -->
+    <div id="recuperar" class="page-content">
+        <div class="login-box">
+            <h2 style="color: white; border-bottom: none;">Recuperar Senha</h2>
+            <input type="text" id="recover-user" placeholder="Seu Usuário">
+            <input type="email" id="recover-email" placeholder="Seu E-mail Cadastrado">
+            
+            <button class="btn-blue" onclick="handleRecoverAction()">Recuperar Acesso</button>
+            
+            <div id="recover-feedback" class="system-message"></div>
+            
+            <div class="links">
+                <a href="#" onclick="showPage('login')">Voltar para o Login</a>
             </div>
         </div>
     </div>
@@ -191,6 +209,14 @@
         }
 
         function showPage(id) {
+            // Limpa mensagens de erro ao trocar de página
+            document.getElementById('login-feedback').style.display = "none";
+            document.getElementById('recover-feedback').style.display = "none";
+            
+            // Limpa campos da tela de recuperação
+            document.getElementById('recover-user').value = "";
+            document.getElementById('recover-email').value = "";
+
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
             const targetPage = document.getElementById(id);
             if (targetPage) targetPage.classList.add('active');
@@ -213,11 +239,38 @@
 
             if (usuarioValidado) {
                 localStorage.setItem('usuarioLogadoAtivo', JSON.stringify(usuarioValidado));
-                // Redirecionamento real de arquivo
                 window.location.href = 'dashboard.html';
             } else {
                 feedbackBox.style.display = "block";
                 feedbackBox.innerHTML = "<strong>Erro:</strong> Usuário ou senha incorretos!";
+            }
+        }
+
+        // Nova Função: Processa a recuperação de dados localmente
+        function handleRecoverAction() {
+            const userVal = document.getElementById('recover-user').value.trim();
+            const emailVal = document.getElementById('recover-email').value.trim();
+            const feedbackBox = document.getElementById('recover-feedback');
+            
+            feedbackBox.style.display = "none";
+            feedbackBox.style.borderLeft = "4px solid #dc3545"; // Cor de erro padrão
+
+            if (!userVal || !emailVal) {
+                feedbackBox.style.display = "block";
+                feedbackBox.innerHTML = "<strong>Erro:</strong> Preencha todos os campos!";
+                return;
+            }
+
+            let listaUsuarios = JSON.parse(localStorage.getItem('usuariosEduCore'));
+            const contaEncontrada = listaUsuarios.find(u => u.usuario.toLowerCase() === userVal.toLowerCase() && u.email.toLowerCase() === emailVal.toLowerCase());
+
+            if (contaEncontrada) {
+                feedbackBox.style.display = "block";
+                feedbackBox.style.borderLeft = "4px solid #28a745"; // Muda para verde (Sucesso)
+                feedbackBox.innerHTML = `<strong>Sucesso!</strong> Sua senha é: <span style="color: #a9ffb4; font-family: monospace; font-size: 14px;">${contaEncontrada.senha}</span>`;
+            } else {
+                feedbackBox.style.display = "block";
+                feedbackBox.innerHTML = "<strong>Erro:</strong> Usuário ou e-mail incorretos!";
             }
         }
 
