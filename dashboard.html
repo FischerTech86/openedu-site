@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduCore - Painel Geral</title>
+    <!-- Importação da fonte de Grafite Urbana -->
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-background: #121212;
@@ -11,6 +13,7 @@
             --box-bg: #1e1e1e;
             --box-text: #f0f0f0;
             --input-border: #444;
+            --primary-green: #28a745;
         }
 
         body { 
@@ -24,7 +27,7 @@
             min-height: 100vh; 
         }
         
-        /* Menu Superior com o mesmo comportamento do login */
+        /* Menu Superior */
         nav { 
             background: #202020; 
             width: 100%; 
@@ -43,7 +46,7 @@
             font-weight: 500; 
             transition: 0.3s; 
         }
-        nav button:hover { color: #28a745; }
+        nav button:hover { color: var(--primary-green); }
         nav button.logout-btn:hover { color: #dc3545; }
 
         .brand-title { 
@@ -59,7 +62,7 @@
             opacity: 0.8; 
         }
 
-        /* Estrutura de Abas Ativas do Painel */
+        /* Estrutura de Abas */
         .tab-content { display: none; width: 90%; max-width: 800px; margin-bottom: 50px; }
         .active { display: block; }
         
@@ -73,40 +76,119 @@
             margin-bottom: 20px;
         }
         
-        h2 { margin-top: 0; border-bottom: 2px solid #28a745; padding-bottom: 10px; }
-        h3 { color: #28a745; margin-top: 0; }
+        h2 { margin-top: 0; border-bottom: 2px solid var(--primary-green); padding-bottom: 10px; }
+        h3 { color: var(--primary-green); margin-top: 0; }
 
+        /* --- ESTILIZAÇÃO DO GRAFITE E ANOS --- */
+        .graffiti-title {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 32px;
+            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            color: #fff;
+            text-shadow: 3px 3px 0px #111;
+        }
+
+        .years-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        @media (max-width: 650px) { .years-grid { grid-template-columns: 1fr; } }
+
+        .year-card {
+            background: #1a1a1a;
+            border: 3px solid #333;
+            padding: 30px 15px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Cores exclusivas de spray/neon para cada ano no hover */
+        .year-card:nth-child(1):hover { border-color: #ff0055; transform: translateY(-5px) rotate(-1deg); box-shadow: 0 10px 20px rgba(255, 0, 85, 0.3); }
+        .year-card:nth-child(2):hover { border-color: #00e5ff; transform: translateY(-5px) rotate(1deg); box-shadow: 0 10px 20px rgba(0, 229, 255, 0.3); }
+        .year-card:nth-child(3):hover { border-color: #ccff00; transform: translateY(-5px) rotate(-1deg); box-shadow: 0 10px 20px rgba(204, 255, 0, 0.3); }
+
+        /* Animação Impactante de Clique */
+        .year-card:active {
+            transform: scale(0.92);
+        }
+
+        .year-card svg {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+        .year-card:hover svg {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .graffiti-text {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 26px;
+            margin: 0;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 0px #000;
+        }
+        .c-1 { color: #ff0055; }
+        .c-2 { color: #00e5ff; }
+        .c-3 { color: #ccff00; }
+
+        /* Área de Conteúdo Expandido */
+        .content-reveal {
+            display: none;
+            background: #161616;
+            border-left: 5px solid var(--primary-green);
+            padding: 25px;
+            margin-top: 15px;
+            animation: expandSmooth 0.4s ease-out forwards;
+        }
+
+        .content-reveal h4 {
+            margin-top: 0;
+            font-size: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 8px;
+        }
+
+        .content-reveal ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+
+        .content-reveal li {
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .content-reveal li strong {
+            color: #fff;
+        }
+
+        /* Animações CSS */
+        @keyframes expandSmooth {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Outros estilos do painel */
         input[type="text"], input[type="time"] { 
-            width: 100%; 
-            padding: 12px; 
-            margin-bottom: 15px; 
-            border: 1px solid var(--input-border); 
-            border-radius: 0; 
-            box-sizing: border-box; 
-            background-color: var(--box-bg); 
-            color: var(--box-text); 
+            width: 100%; padding: 12px; margin-bottom: 15px; 
+            border: 1px solid var(--input-border); background-color: var(--box-bg); color: var(--box-text); 
         }
-        
-        button.btn-green { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 0; cursor: pointer; font-weight: bold; font-size: 15px; }
+        button.btn-green { width: 100%; padding: 12px; background: var(--primary-green); color: white; border: none; font-weight: bold; cursor: pointer; }
         button.btn-green:hover { background: #1e7e34; }
-        
-        .grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-        @media (max-width: 600px) { .grid-layout { grid-template-columns: 1fr; } }
-
-        .code-area {
-            background-color: #151515;
-            color: #a9ffb4;
-            font-family: 'Courier New', Courier, monospace;
-            padding: 15px;
-            border-left: 4px solid #28a745;
-            overflow-x: auto;
-            white-space: pre;
-        }
+        .code-area { background-color: #151515; color: #a9ffb4; font-family: monospace; padding: 15px; border-left: 4px solid var(--primary-green); white-space: pre; }
     </style>
 </head>
 <body>
 
-    <!-- Menu Superior Atualizado com Estrutura de Abas -->
     <nav>
         <button onclick="showTab('painel')">Painel Geral</button>
         <button onclick="showTab('objetivo')">Objetivo</button>
@@ -115,33 +197,51 @@
     </nav>
 
     <div class="brand-title">EduCore</div>
-    
     <div class="user-badge" id="user-display">Perfil: Carregando... | Objetivo: Carregando... | Lembrete: --:--</div>
 
     <!-- ABA 1: PAINEL GERAL -->
     <div id="painel" class="tab-content active">
         <div class="box">
             <h2 id="welcome-message">Bem-vindo de volta!</h2>
-            <p>Seu login foi validado localmente com sucesso. Este é o seu novo ambiente de foco integrado.</p>
+            <p>Seu login foi validado localmente com sucesso. Selecione o ano escolar abaixo para carregar seu cronograma ativo de matérias.</p>
         </div>
 
-        <div class="grid-layout">
-            <div class="box">
-                <h3>📚 Foco de Estudos</h3>
-                <p>Monitore suas revisões para os próximos exames e mantenha suas matérias organizadas.</p>
-                <ul>
-                    <li>Revisar Cronograma Semanal</li>
-                    <li>Simulado de Questões Ativo</li>
-                </ul>
+        <!-- SEÇÃO DOS QUADRADOS EM GRAFITE -->
+        <div class="box" style="border-color: #2c2c2c;">
+            <div class="graffiti-title">🎓 CONTEÚDOS POR ANO</div>
+            
+            <div class="years-grid">
+                <!-- 1º ANO -->
+                <div class="year-card" onclick="selectYear('ano1', '#ff0055', '1º ANO - ENSINO MÉDIO')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff0055" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    <div class="graffiti-text c-1">1º ANO</div>
+                </div>
+
+                <!-- 2º ANO -->
+                <div class="year-card" onclick="selectYear('ano2', '#00e5ff', '2º ANO - ENSINO MÉDIO')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5V3.5A2.5 2.5 0 0 1 6.5 1H20v21H6.5"/></svg>
+                    <div class="graffiti-text c-2">2º ANO</div>
+                </div>
+
+                <!-- 3º ANO -->
+                <div class="year-card" onclick="selectYear('ano3', '#ccff00', '3º ANO - ENSINO MÉDIO')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ccff00" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    <div class="graffiti-text c-3">3º ANO</div>
+                </div>
             </div>
 
-            <div class="box">
-                <h3>💻 Laboratório de Programação</h3>
-                <p>Estrutura básica de comandos monitorados:</p>
-                <div class="code-area"># Sandbox Python Ativo
-usuario = "Gustavo"
-print(f"Bons estudos, {usuario}!")</div>
+            <!-- Painel expansivo de Conteúdos -->
+            <div id="expanded-content" class="content-reveal">
+                <h4 id="reveal-title" class="graffiti-text"></h4>
+                <div id="reveal-list-container"></div>
             </div>
+        </div>
+
+        <div class="box">
+            <h3>💻 Laboratório de Programação</h3>
+            <div class="code-area"># Sandbox Python Ativo
+usuario = "Estudante"
+print(f"Bons estudos no EduCore!")</div>
         </div>
     </div>
 
@@ -149,10 +249,9 @@ print(f"Bons estudos, {usuario}!")</div>
     <div id="objetivo" class="tab-content">
         <div class="box">
             <h2>🎯 Foco e Missão Atual</h2>
-            <p>Abaixo está listado o seu foco principal de desenvolvimento definido para a conta.</p>
-            <div style="background: #151515; padding: 25px; border-left: 4px solid #28a745; margin-top: 20px;">
-                <span style="font-size: 13px; color: #888; display: block; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Objetivo Ativo:</span>
-                <strong id="big-target-display" style="font-size: 22px; color: #fff; font-family: 'Segoe UI', sans-serif;">Nenhum definido</strong>
+            <div style="background: #151515; padding: 25px; border-left: 4px solid var(--primary-green); margin-top: 20px;">
+                <span style="font-size: 13px; color: #888; display: block; margin-bottom: 5px; text-transform: uppercase;">Objetivo Ativo:</span>
+                <strong id="big-target-display" style="font-size: 22px; color: #fff;">Nenhum definido</strong>
             </div>
         </div>
     </div>
@@ -160,13 +259,11 @@ print(f"Bons estudos, {usuario}!")</div>
     <!-- ABA 3: CONFIGURAÇÕES -->
     <div id="config" class="tab-content">
         <div class="box">
-            <h2>⚙️ Configurações do Sistema</h2>
-            <p>Atualize seu escopo de estudos e gerencie os horários dos seus alertas diários de foco.</p>
+            <h2>⚙️ Configurações do System</h2>
+            <label>Alterar Objetivo Atual:</label>
+            <input type="text" id="dash-meta" placeholder="Ex: Focar nas revisões do Provão Paulista e ENEM">
             
-            <label style="display: block; margin-bottom: 8px; font-weight: 500;">Alterar Objetivo Atual:</label>
-            <input type="text" id="dash-meta" placeholder="Ex: Estudar Python e Focar no Enem">
-            
-            <label style="display: block; margin-bottom: 8px; font-weight: 500;">Horário do Lembrete Alvo:</label>
+            <label>Horário do Lembrete Alvo:</label>
             <input type="time" id="dash-time" value="05:02">
             
             <button class="btn-green" onclick="atualizarMetasPainel()">Salvar Alterações de Perfil</button>
@@ -175,6 +272,28 @@ print(f"Bons estudos, {usuario}!")</div>
 
     <script>
         let usuarioAtivo = null;
+
+        // Banco de dados de matérias estruturado
+        const conteudosEscolares = {
+            ano1: `<ul>
+                <li><strong>Física (Cinemática):</strong> Estudo do Movimento Retilíneo Uniformemente Variado (MRUV), aceleração e gráficos fundamentais.</li>
+                <li><strong>Matemática (Geometria):</strong> Teorema de Pitágoras, relações métricas no triângulo retângulo e introdução à trigonometria.</li>
+                <li><strong>Química (Modelos Atômicos):</strong> Evolução atômica (Dalton, Thomson, Rutherford, Bohr) e propriedades dos radioisótopos.</li>
+                <li><strong>Língua Portuguesa:</strong> Gêneros textuais analíticos e satíricos: Diferenças essenciais entre Charge e Cartum.</li>
+            </ul>`,
+            ano2: `<ul>
+                <li><strong>Física (Termologia):</strong> Leis da Termodinâmica, propagação de calor e comportamento de gases perfeitos.</li>
+                <li><strong>Matemática (Álgebra):</strong> Matrizes, determinantes e resolução de sistemas lineares complexos.</li>
+                <li><strong>Química (Orgânica):</strong> Estudo do carbono, cadeias carbônicas e identificação das primeiras funções oxigenadas.</li>
+                <li><strong>Biologia:</strong> Classificação dos seres vivos, fisiologia comparada e ecossistemas.</li>
+            </ul>`,
+            ano3: `<ul>
+                <li><strong>Física (Eletromagnetismo):</strong> Cargas elétricas, campo magnético, corrente e funcionamento de circuitos residenciais.</li>
+                <li><strong>Matemática (Analítica):</strong> Estudo do ponto, reta, equações da circunferência e análise de dados estatísticos.</li>
+                <li><strong>Revisão Direcionada ENEM 2028:</strong> Técnicas aplicadas para a prova de Ciências da Natureza e Matemática.</li>
+                <li><strong>Redação Dissertativa-Argumentativa:</strong> Engenharia estrutural de nota mil e conectivos para a introdução.</li>
+            </ul>`
+        };
 
         window.onload = function() {
             const sessaoSalva = localStorage.getItem('usuarioLogadoAtivo');
@@ -187,11 +306,24 @@ print(f"Bons estudos, {usuario}!")</div>
             }
         };
 
-        // Gerencia a troca de abas no painel interno
         function showTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
             const targetTab = document.getElementById(tabId);
             if (targetTab) targetTab.classList.add('active');
+        }
+
+        // Função para ativar e carregar os blocos de conteúdos ao clicar
+        function selectYear(anoKey, corHex, tituloTexto) {
+            const container = document.getElementById('expanded-content');
+            const titleElement = document.getElementById('reveal-title');
+            const listElement = document.getElementById('reveal-list-container');
+
+            container.style.display = "block";
+            container.style.borderLeftColor = corHex;
+            
+            titleElement.innerText = tituloTexto;
+            titleElement.style.color = corHex;
+            listElement.innerHTML = conteudosEscolares[anoKey];
         }
 
         function carregarDadosPainel() {
@@ -204,11 +336,7 @@ print(f"Bons estudos, {usuario}!")</div>
         function atualizarBadgeSuperior() {
             const metaLimpa = usuarioAtivo.meta || "Nenhum definido";
             const lembreteLimpo = usuarioAtivo.lembrete || "05:02";
-            
-            // Atualiza badge de texto superior
             document.getElementById('user-display').innerText = `Perfil: ${usuarioAtivo.usuario} | Objetivo: ${metaLimpa} | Lembrete: ${lembreteLimpo}`;
-            
-            // Atualiza o display interno da aba Objetivo
             document.getElementById('big-target-display').innerText = metaLimpa;
         }
 
@@ -232,7 +360,7 @@ print(f"Bons estudos, {usuario}!")</div>
             alert("Configurações atualizadas com sucesso!");
         }
 
-        function efectuarLogout() {
+        function efetuarLogout() {
             localStorage.removeItem('usuarioLogadoAtivo');
             window.location.href = 'index.html';
         }
