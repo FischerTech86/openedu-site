@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduCore - Painel Geral</title>
-    <!-- Importação da fonte de Grafite Urbana -->
+    <!-- Importação da fonte Urbana Estilo Grafite -->
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -62,7 +62,7 @@
             opacity: 0.8; 
         }
 
-        /* Estrutura de Abas */
+        /* Estrutura de Abas Ativas */
         .tab-content { display: none; width: 90%; max-width: 800px; margin-bottom: 50px; }
         .active { display: block; }
         
@@ -79,7 +79,7 @@
         h2 { margin-top: 0; border-bottom: 2px solid var(--primary-green); padding-bottom: 10px; }
         h3 { color: var(--primary-green); margin-top: 0; }
 
-        /* --- ESTILIZAÇÃO DO GRAFITE E ANOS --- */
+        /* --- ESTILIZAÇÃO URBANA (GRAFITE/ANOS) --- */
         .graffiti-title {
             font-family: 'Permanent Marker', cursive;
             font-size: 32px;
@@ -109,12 +109,12 @@
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* Cores exclusivas de spray/neon para cada ano no hover */
+        /* Cores de spray e neon personalizadas no hover */
         .year-card:nth-child(1):hover { border-color: #ff0055; transform: translateY(-5px) rotate(-1deg); box-shadow: 0 10px 20px rgba(255, 0, 85, 0.3); }
         .year-card:nth-child(2):hover { border-color: #00e5ff; transform: translateY(-5px) rotate(1deg); box-shadow: 0 10px 20px rgba(0, 229, 255, 0.3); }
         .year-card:nth-child(3):hover { border-color: #ccff00; transform: translateY(-5px) rotate(-1deg); box-shadow: 0 10px 20px rgba(204, 255, 0, 0.3); }
 
-        /* Animação Impactante de Clique */
+        /* Animação Física de Clique */
         .year-card:active {
             transform: scale(0.92);
         }
@@ -140,7 +140,7 @@
         .c-2 { color: #00e5ff; }
         .c-3 { color: #ccff00; }
 
-        /* Área de Conteúdo Expandido */
+        /* Painel Revelador de Matérias */
         .content-reveal {
             display: none;
             background: #161616;
@@ -171,13 +171,11 @@
             color: #fff;
         }
 
-        /* Animações CSS */
         @keyframes expandSmooth {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Outros estilos do painel */
         input[type="text"], input[type="time"] { 
             width: 100%; padding: 12px; margin-bottom: 15px; 
             border: 1px solid var(--input-border); background-color: var(--box-bg); color: var(--box-text); 
@@ -206,7 +204,7 @@
             <p>Seu login foi validado localmente com sucesso. Selecione o ano escolar abaixo para carregar seu cronograma ativo de matérias.</p>
         </div>
 
-        <!-- SEÇÃO DOS QUADRADOS EM GRAFITE -->
+        <!-- QUADRADOS EM ESTILO GRAFITE -->
         <div class="box" style="border-color: #2c2c2c;">
             <div class="graffiti-title">🎓 CONTEÚDOS POR ANO</div>
             
@@ -230,7 +228,7 @@
                 </div>
             </div>
 
-            <!-- Painel expansivo de Conteúdos -->
+            <!-- Painel revelador de Conteúdos -->
             <div id="expanded-content" class="content-reveal">
                 <h4 id="reveal-title" class="graffiti-text"></h4>
                 <div id="reveal-list-container"></div>
@@ -273,25 +271,25 @@ print(f"Bons estudos no EduCore!")</div>
     <script>
         let usuarioAtivo = null;
 
-        // Banco de dados de matérias estruturado
+        // Banco de dados interno dos conteúdos escolares
         const conteudosEscolares = {
             ano1: `<ul>
-                <li><strong>Física (Cinemática):</strong> Estudo do Movimento Retilíneo Uniformemente Variado (MRUV), aceleração e gráficos fundamentais.</li>
-                <li><strong>Matemática (Geometria):</strong> Teorema de Pitágoras, relações métricas no triângulo retângulo e introdução à trigonometria.</li>
-                <li><strong>Química (Modelos Atômicos):</strong> Evolução atômica (Dalton, Thomson, Rutherford, Bohr) e propriedades dos radioisótopos.</li>
-                <li><strong>Língua Portuguesa:</strong> Gêneros textuais analíticos e satíricos: Diferenças essenciais entre Charge e Cartum.</li>
+                <li><strong>Física (Cinemática):</strong> Estudo do Movimento Retilíneo Uniformemente Variado (MRUV), aceleração e análise de gráficos fundamentais.</li>
+                <li><strong>Matemática (Geometria):</strong> Aplicação prática do Teorema de Pitágoras e relações métricas no triângulo retângulo.</li>
+                <li><strong>Química (Modelos Atômicos):</strong> Evolução atômica (Dalton, Thomson, Rutherford, Bohr) e propriedades dos radioisótopos estáveis.</li>
+                <li><strong>Língua Portuguesa:</strong> Gêneros textuais analíticos e satíricos: Diferenciação clara entre Charge e Cartum.</li>
             </ul>`,
             ano2: `<ul>
-                <li><strong>Física (Termologia):</strong> Leis da Termodinâmica, propagação de calor e comportamento de gases perfeitos.</li>
-                <li><strong>Matemática (Álgebra):</strong> Matrizes, determinantes e resolução de sistemas lineares complexos.</li>
-                <li><strong>Química (Orgânica):</strong> Estudo do carbono, cadeias carbônicas e identificação das primeiras funções oxigenadas.</li>
-                <li><strong>Biologia:</strong> Classificação dos seres vivos, fisiologia comparada e ecossistemas.</li>
+                <li><strong>Física (Termologia):</strong> Leis da Termodinâmica, trocas de calor e equações de gases perfeitos.</li>
+                <li><strong>Matemática (Álgebra):</strong> Matrizes, cálculo de determinantes e aplicações em sistemas lineares homogêneos.</li>
+                <li><strong>Química (Orgânica):</strong> Propriedades do átomo de carbono, tipos de hibridização e cadeias carbônicas abertas/fechadas.</li>
+                <li><strong>Biologia:</strong> Sistemática, taxonomia, os reinos dos seres vivos e cadeias alimentares nos ecossistemas.</li>
             </ul>`,
             ano3: `<ul>
-                <li><strong>Física (Eletromagnetismo):</strong> Cargas elétricas, campo magnético, corrente e funcionamento de circuitos residenciais.</li>
-                <li><strong>Matemática (Analítica):</strong> Estudo do ponto, reta, equações da circunferência e análise de dados estatísticos.</li>
-                <li><strong>Revisão Direcionada ENEM 2028:</strong> Técnicas aplicadas para a prova de Ciências da Natureza e Matemática.</li>
-                <li><strong>Redação Dissertativa-Argumentativa:</strong> Engenharia estrutural de nota mil e conectivos para a introdução.</li>
+                <li><strong>Física (Eletromagnetismo):</strong> Campo magnético, força elétrica, lei de Ohm e circuitos de corrente contínua.</li>
+                <li><strong>Matemática (Analítica):</strong> Distância entre pontos, equações gerais e reduzidas da reta e circunferência.</li>
+                <li><strong>Foco ENEM 2028:</strong> Estratégias e resoluções dinâmicas para a prova de Ciências da Natureza e Matemática.</li>
+                <li><strong>Redação Nota 1000:</strong> Engenharia textual da dissertação-argumentativa, repertório legitimado e propostas de intervenção.</li>
             </ul>`
         };
 
@@ -312,7 +310,6 @@ print(f"Bons estudos no EduCore!")</div>
             if (targetTab) targetTab.classList.add('active');
         }
 
-        // Função para ativar e carregar os blocos de conteúdos ao clicar
         function selectYear(anoKey, corHex, tituloTexto) {
             const container = document.getElementById('expanded-content');
             const titleElement = document.getElementById('reveal-title');
