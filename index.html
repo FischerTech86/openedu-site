@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Estudos - Seleção de Ano</title>
+    <title>Ensino Fundamental II</title>
     
-    <!-- Importação de fontes para criar identidades visuais únicas -->
+    <!-- Importação da nova fonte para o Ensino Fundamental II -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Permanent+Marker&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
     
     <style>
-        /* CONFIGURAÇÕES GERAIS E RESET */
+        /* Reset básico para visualização */
         * {
             margin: 0;
             padding: 0;
@@ -19,303 +19,148 @@
         }
         body {
             background-color: #0d0e12;
-            color: #f8f9fa;
-            font-family: 'Poppins', sans-serif;
-            padding: 30px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
-        }
-        .dashboard-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .dashboard-title {
-            text-align: center;
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 40px;
-            color: #ffffff;
-            letter-spacing: -0.5px;
-        }
-        
-        /* LINHAS E GRIDS DE SUPORTE */
-        .box {
-            background: #16171d;
-            padding: 30px;
-            border-radius: 20px;
-            margin-bottom: 35px;
-            border: 3px solid transparent;
-            transition: all 0.3s ease;
-        }
-        .years-grid {
-            display: grid;
-            gap: 20px;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            padding: 20px;
         }
 
-        /* CARD BASE */
-        .year-card {
-            background: #1f2029;
-            padding: 30px 20px;
+        /* Container do bloco idêntico ao print */
+        .box-fund2 {
+            background-color: #16171d;
+            padding: 40px;
+            border-radius: 4px;
+            max-width: 950px;
+            width: 100%;
+        }
+
+        /* Título com a NOVA fonte aplicada */
+        .title-fund2 {
+            font-family: 'Bangers', cursive;
+            font-size: 38px;
+            letter-spacing: 2px;
             text-align: center;
-            cursor: pointer;
+            margin-bottom: 35px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* Grid dos 4 Cards */
+        .years-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        /* Cards escuros com bordas finas */
+        .year-card {
+            background-color: #111216;
+            border: 1px solid #2d303e;
+            padding: 35px 20px;
+            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            user-select: none;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .year-card svg {
-            width: 50px;
-            height: 50px;
-            stroke-width: 2.2;
-            transition: transform 0.25s ease;
-        }
-        .year-card:hover svg {
-            transform: scale(1.15);
+            gap: 20px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
         }
 
-        /* =======================================================
-           1. ESTILO: ENSINO FUNDAMENTAL I (ESTILO COGNITIVO/INFANTIL)
-           ======================================================= */
-        .box-fund1 {
-            border: 3px dashed #ffb703;
-            background: #18191e;
-        }
-        .title-fund1 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 26px;
-            font-weight: 700;
-            color: #ffb703;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .card-fund1 {
-            border-radius: 25px;
-            border: 3px solid #282a36;
-        }
-        .card-fund1:hover {
-            transform: translateY(-6px);
-            background: #252733;
-            box-shadow: 0 8px 20px rgba(255, 183, 3, 0.15);
-        }
-        .text-fund1 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 19px;
-            font-weight: 700;
-        }
-
-        /* =======================================================
-           2. ESTILO: ENSINO FUNDAMENTAL II (ESTILO POP ART / HQ)
-           ======================================================= */
-        .box-fund2 {
-            border: 3px solid #00f5d4;
-            background: #141519;
-            box-shadow: 0px 8px 0px #000;
-        }
-        .title-fund2 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 25px;
-            color: #00f5d4;
-            text-shadow: 2px 2px 0px #000;
-        }
-        .card-fund2 {
-            border-radius: 12px;
-            border: 3px solid #000;
-            box-shadow: 4px 4px 0px #000;
-        }
-        .card-fund2:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 8px 8px 0px #000;
-        }
-        .text-fund2 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        /* =======================================================
-           3. ESTILO: ENSINO MÉDIO (ESTILO URBANO / GRAFITE / VESTIBULAR)
-           ======================================================= */
-        .box-medio {
-            border: 2px solid #2d303e;
-            background: #111216;
-            position: relative;
-        }
-        .box-medio::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 5px;
-            background: linear-gradient(90deg, #ff0055, #7a22ff);
-            border-radius: 20px 20px 0 0;
-        }
-        .title-medio {
-            font-family: 'Permanent Marker', cursive;
-            font-size: 32px;
-            text-align: center;
-            margin-bottom: 25px;
-            color: #ff0055;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-        }
-        .card-medio {
-            border-radius: 0px;
-            border-left: 5px solid #ff0055;
-            background: #1a1b23;
-        }
-        .card-medio:hover {
-            background: #241420;
-            border-left-width: 10px;
+        .year-card:hover {
             transform: scale(1.02);
+            background-color: #1a1b23;
         }
-        .text-medio {
-            font-family: 'Permanent Marker', cursive;
-            font-size: 22px;
+
+        /* Texto dos Cards com a NOVA fonte aplicada */
+        .text-fund2 {
+            font-family: 'Bangers', cursive;
+            font-size: 26px;
             letter-spacing: 1px;
+        }
+
+        /* Ícones configurados */
+        svg {
+            width: 55px;
+            height: 55px;
+            stroke-width: 1.8;
+            fill: none;
+        }
+
+        /* Cores exatas de cada Ano do seu print */
+        .color-6 { color: #ff0055; stroke: #ff0055; }
+        .color-7 { color: #00f5d4; stroke: #00f5d4; }
+        .color-8 { color: #ccff00; stroke: #ccff00; }
+        .color-9 { color: #ff9f43; stroke: #ff9f43; }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 800px) {
+            .years-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 480px) {
+            .years-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="dashboard-container">
-        <h1 class="dashboard-title">🎒 Central de Estudos</h1>
-
-        <!-- ==========================================
-             BLOCO 1: ENSINO FUNDAMENTAL I
-             ========================================== -->
-        <div class="box box-fund1">
-            <div class="title-fund1">🧩 ENSINO FUNDAMENTAL I</div>
-            <div class="years-grid" style="grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));">
-                
-                <!-- 1º Ano -->
-                <div class="year-card card-fund1" style="border-color: #ff595e;" onclick="selectYear('ano1', '#ff595e', '🧩 1º ANO - EF I')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff595e" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16V12"/><path d="M12 8h.01"/></svg>
-                    <div class="text-fund1" style="color: #ff595e;">1º ANO</div>
-                </div>
-
-                <!-- 2º Ano -->
-                <div class="year-card card-fund1" style="border-color: #ffca3a;" onclick="selectYear('ano2', '#ffca3a', '🧩 2º ANO - EF I')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#ffca3a" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                    <div class="text-fund1" style="color: #ffca3a;">2º ANO</div>
-                </div>
-
-                <!-- 3º Ano -->
-                <div class="year-card card-fund1" style="border-color: #8ac926;" onclick="selectYear('ano3', '#8ac926', '🧩 3º ANO - EF I')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#8ac926" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><polyline points="12 12 12 21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-                    <div class="text-fund1" style="color: #8ac926;">3º ANO</div>
-                </div>
-
-                <!-- 4º Ano -->
-                <div class="year-card card-fund1" style="border-color: #1982c4;" onclick="selectYear('ano4', '#1982c4', '🧩 4º ANO - EF I')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#1982c4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                    <div class="text-fund1" style="color: #1982c4;">4º ANO</div>
-                </div>
-
-                <!-- 5º Ano -->
-                <div class="year-card card-fund1" style="border-color: #6a4c93;" onclick="selectYear('ano5', '#6a4c93', '🧩 5º ANO - EF I')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#6a4c93" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 12 15 2 8.5 12 2"/><polyline points="2 17 12 23 22 17"/><polyline points="2 12 12 18 22 12"/></svg>
-                    <div class="text-fund1" style="color: #6a4c93;">5º ANO</div>
-                </div>
-
-            </div>
+    <!-- Bloco Isolado do Ensino Fundamental II -->
+    <div class="box-fund2">
+        <div class="title-fund2">
+            <span>🔬</span> ENSINO FUNDAMENTAL II
         </div>
-
-        <!-- ==========================================
-             BLOCO 2: ENSINO FUNDAMENTAL II
-             ========================================== -->
-        <div class="box box-fund2">
-            <div class="title-fund2">💥 ENSINO FUNDAMENTAL II</div>
-            <div class="years-grid" style="grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));">
-                
-                <!-- 6º Ano -->
-                <div class="year-card card-fund2" style="background: #1c1d24;" onclick="selectYear('ano6', '#ff9f43', '🚀 6º ANO - EF II')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff9f43" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                        <circle cx="12" cy="12" r="10"/>
-                    </svg>
-                    <div class="text-fund2" style="color: #ff9f43;">6º ANO</div>
-                </div>
-
-                <!-- 7º Ano -->
-                <div class="year-card card-fund2" style="background: #1c1d24;" onclick="selectYear('ano7', '#2ed573', '🔬 7º ANO - EF II')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#2ed573" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M6 18h8M10 22h4M14 2v4M10 2H4v4M10 6H4v12a2 2 0 0 0 2 2h4M14 6h4v6M14 10h4"/>
-                        <circle cx="12" cy="6" r="2"/>
-                    </svg>
-                    <div class="text-fund2" style="color: #2ed573;">7º ANO</div>
-                </div>
-
-                <!-- 8º Ano -->
-                <div class="year-card card-fund2" style="background: #1c1d24;" onclick="selectYear('ano8', '#ff4757', '🧪 8º ANO - EF II')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M10 2h4M19 22H5M10 2v15.5a2.5 2.5 0 0 0 5 0V2M6 14h12"/>
-                    </svg>
-                    <div class="text-fund2" style="color: #ff4757;">8º ANO</div>
-                </div>
-
-                <!-- 9º Ano -->
-                <div class="year-card card-fund2" style="background: #1c1d24;" onclick="selectYear('ano9', '#9b59b6', '⚛️ 9º ANO - EF II')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#9b59b6" stroke-linecap="round" stroke-linejoin="round">
-                        <ellipse cx="12" cy="12" rx="3" ry="9" transform="rotate(45 12 12)"/>
-                        <ellipse cx="12" cy="12" rx="3" ry="9" transform="rotate(-45 12 12)"/>
-                        <circle cx="12" cy="12" r="2"/>
-                    </svg>
-                    <div class="text-fund2" style="color: #9b59b6;">9º ANO</div>
-                </div>
-
+        
+        <div class="years-grid">
+            
+            <!-- 6º Ano (Rosa/Grid) -->
+            <div class="year-card">
+                <svg class="color-6" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+                <div class="text-fund2 color-6">6º ANO</div>
             </div>
-        </div>
 
-        <!-- ==========================================
-             BLOCO 3: ENSINO MÉDIO
-             ========================================== -->
-        <div class="box box-medio">
-            <div class="title-medio">👑 ENSINO MÉDIO</div>
-            <div class="years-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-                
-                <!-- 1º Ano Ensino Médio -->
-                <div class="year-card card-medio" onclick="selectYear('medio1', '#ff0055', '⚡ 1º ANO - ENSINO MÉDIO')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff0055" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <circle cx="12" cy="12" r="6"/>
-                        <circle cx="12" cy="12" r="2"/>
-                    </svg>
-                    <div class="text-medio" style="color: #ff0055;">1º ANO EM</div>
-                </div>
-
-                <!-- 2º Ano Ensino Médio -->
-                <div class="year-card card-medio" style="border-left-color: #a855f7;" onclick="selectYear('medio2', '#a855f7', '⚡ 2º ANO - ENSINO MÉDIO')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 6.5A2.5 2.5 0 0 1 6.5 4H20"/>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                    </svg>
-                    <div class="text-medio" style="color: #a855f7;">2º ANO EM</div>
-                </div>
-
-                <!-- 3º Ano Ensino Médio -->
-                <div class="year-card card-medio" style="border-left-color: #00f5d4;" onclick="selectYear('medio3', '#00f5d4', '🎓 3º ANO - ENSINO MÉDIO')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#00f5d4" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                        <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/>
-                    </svg>
-                    <div class="text-medio" style="color: #00f5d4;">3º ANO EM</div>
-                </div>
-
+            <!-- 7º Ano (Cian/Caderno) -->
+            <div class="year-card">
+                <svg class="color-7" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    <line x1="9" y1="6" x2="15" y2="6"></line>
+                    <line x1="9" y1="10" x2="15" y2="10"></line>
+                </svg>
+                <div class="text-fund2 color-7">7º ANO</div>
             </div>
+
+            <!-- 8º Ano (Limão/Tubo de Ensaio) -->
+            <div class="year-card">
+                <svg class="color-8" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 2h4M19 22H5M10 2v15.5a2.5 2.5 0 0 0 5 0V2M6 14h12"></path>
+                </svg>
+                <div class="text-fund2 color-8">8º ANO</div>
+            </div>
+
+            <!-- 9º Ano (Laranja/Átomo) -->
+            <div class="year-card">
+                <svg class="color-9" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <ellipse cx="12" cy="12" rx="3" ry="9" transform="rotate(45 12 12)"></ellipse>
+                    <ellipse cx="12" cy="12" rx="3" ry="9" transform="rotate(-45 12 12)"></ellipse>
+                    <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+                <div class="text-fund2 color-9">9º ANO</div>
+            </div>
+
         </div>
     </div>
 
-    <!-- LOGIC SYSTEM -->
-    <script>
-        function selectYear(yearId, themeColor, sectionTitle) {
-            console.log("ID do Ano Ativo:", yearId);
-            console.log("Cor Hexadecimal do Tema:", themeColor);
-            alert("Redirecionando para as matérias de: " + sectionTitle);
-        }
-    </script>
 </body>
 </html>
