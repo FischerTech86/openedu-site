@@ -182,7 +182,20 @@
         }
         button.btn-green { width: 100%; padding: 12px; background: var(--primary-green); color: white; border: none; font-weight: bold; cursor: pointer; }
         button.btn-green:hover { background: #1e7e34; }
-        .code-area { background-color: #151515; color: #a9ffb4; font-family: monospace; padding: 15px; border-left: 4px solid var(--primary-green); white-space: pre; }
+        
+        /* Ajuste do laboratório para ocupar o espaço correto sem a box externa */
+        .lab-container {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .code-area { 
+            background-color: #151515; 
+            color: #a9ffb4; 
+            font-family: monospace; 
+            padding: 15px; 
+            border-left: 4px solid var(--primary-green); 
+            white-space: pre; 
+        }
     </style>
 </head>
 <body>
@@ -206,7 +219,6 @@
 
         <!-- QUADRADOS EM ESTILO GRAFITE -->
         <div class="box" style="border-color: #2c2c2c;">
-            <!-- SEÇÃO ALTERADA EXCLUSIVAMENTE PARA ENSINO MÉDIO -->
             <div class="graffiti-title">🎓 ENSINO MÉDIO</div>
             
             <div class="years-grid">
@@ -236,7 +248,8 @@
             </div>
         </div>
 
-        <div class="box">
+        <!-- LABORATÓRIO FORA DO RETÂNGULO (.BOX REMOVIDA) -->
+        <div class="lab-container">
             <h3>💻 Laboratório de Programação</h3>
             <div class="code-area"># Sandbox Python Ativo
 usuario = "Estudante"
@@ -272,7 +285,6 @@ print(f"Bons estudos no EduCore!")</div>
     <script>
         let usuarioAtivo = null;
 
-        // Banco de dados interno dos conteúdos escolares
         const conteudosEscolares = {
             ano1: `<ul>
                 <li><strong>Física (Cinemática):</strong> Estudo do Movimento Retilíneo Uniformemente Variado (MRUV), aceleração e análise de gráficos fundamentais.</li>
