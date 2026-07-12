@@ -167,20 +167,17 @@
             border: 4px solid #fff;
             box-shadow: 5px 5px 0px #000;
             transition: all 0.25s ease-out;
-            /* Bordas misturadas para simular encaixe de quebra-cabeça */
             border-radius: 35px 12px 35px 12px;
         }
-        /* Alterna as curvas para parecer que encaixam uma na outra */
         .puzzle-card:nth-child(even) {
             border-radius: 12px 35px 12px 35px;
         }
 
-        /* Cores vivas de brinquedo */
-        .puzzle-card.p-1 { background-color: #ff4757; } /* Vermelho vivo */
-        .puzzle-card.p-2 { background-color: #2ed573; } /* Verde limão */
-        .puzzle-card.p-3 { background-color: #1e90ff; } /* Azul brilhante */
-        .puzzle-card.p-4 { background-color: #ffa502; } /* Laranja doce */
-        .puzzle-card.p-5 { background-color: #9b59b6; } /* Roxo chiclete */
+        .puzzle-card.p-1 { background-color: #ff4757; } 
+        .puzzle-card.p-2 { background-color: #2ed573; } 
+        .puzzle-card.p-3 { background-color: #1e90ff; } 
+        .puzzle-card.p-4 { background-color: #ffa502; } 
+        .puzzle-card.p-5 { background-color: #9b59b6; } 
 
         .puzzle-card:hover {
             transform: scale(1.08) rotate(2deg);
@@ -304,7 +301,7 @@
             </div>
         </div>
 
-        <!-- BLOCO: ENSINO FUNDAMENTAL I (ESTILO QUEBRA-CABEÇA COLORIDO) -->
+        <!-- BLOCO: ENSINO FUNDAMENTAL I (QUEBRA-CABEÇA) -->
         <div class="box" style="border-color: #2c2c2c; margin-bottom: 25px;">
             <div class="kids-title">🧩 ENSINO FUNDAMENTAL I</div>
             
@@ -348,7 +345,7 @@
         </div>
     </div>
 
-    <!-- ABA 2: OBJETIVO EXCLUSIVO -->
+    <!-- ABA 2: OBJETIVO -->
     <div id="objetivo" class="tab-content">
         <div class="box">
             <h2>🎯 Foco e Missão Atual</h2>
@@ -385,7 +382,7 @@
             </ul>`,
             ano2f1: `<ul>
                 <li><strong>Língua Portuguesa:</strong> Prática de leitura fluida, escrita de frases completas e separação silábica correta.</li>
-                <li><strong>Matemática:</strong> Operações básicas de adição e subtração com reserva, e introdução aos sistemas de medidas de tempo (relógio).</li>
+                <li><strong>Matemática:</strong> Operações básicas de adição e subtração com reserva, e introdução aos sistemas de medidas de tempo.</li>
                 <li><strong>Estudos Sociais:</strong> Entendimento do papel da família, da escola e convivência com a comunidade ao redor.</li>
             </ul>`,
             ano3f1: `<ul>
@@ -407,10 +404,10 @@
             ano6: `<ul>
                 <li><strong>Matemática:</strong> Estrutura das frações, operações matemáticas com números decimais e conceitos de MMC / MDC.</li>
                 <li><strong>Língua Portuguesa:</strong> Elementos da narrativa estrutural e interpretação textual focada em Fábulas e Crônicas.</li>
-                <li><strong>Ciências:</strong> Camadas internas e externas da Terra (Crosta, Manto, Núcleo) e o ciclo litológico das rochas.</li>
+                <li><strong>Ciências:</strong> Camadas internas e externas da Terra e o ciclo litológico das rochas.</li>
                 <li><strong>História:</strong> Estudo das sociedades e civilizações da antiguidade clássica, com ênfase em Egito Antigo e Grécia.</li>
             </ul>`,
-            ano7: `<ul>
+            relative7: `<ul>
                 <li><strong>Matemática:</strong> Introdução ao conjunto dos números inteiros (positivos/negativos) e equações lineares de 1º grau.</li>
                 <li><strong>Ciências:</strong> Critérios de classificação biológica e análise estrutural dos Grandes Reinos dos seres vivos.</li>
                 <li><strong>Geografia:</strong> Dinâmica de formação do território brasileiro, divisão por regionalização e demografia.</li>
@@ -420,7 +417,7 @@
                 <li><strong>Matemática:</strong> Noções de expressões algébricas essenciais, propriedades de monômios, polinômios e áreas planas.</li>
                 <li><strong>Ciências:</strong> Anatomia sistêmica do corpo humano: Foco nos processos dos sistemas digestório, respiratório e circulatório.</li>
                 <li><strong>História:</strong> Transformações sociopolíticas mundiais: Reflexos da Revolução Industrial e a mecânica da Revolução Francesa.</li>
-                <li><strong>Língua Portuguesa:</strong> Introdução à análise sintática, termos integrantes da oração e concordância nominal/verbal básica.</li>
+                <li><strong>Língua Portuguesa:</strong> Introdução à análise sintática, termos integrantes da oração e concordância básica.</li>
             </ul>`,
             ano9: `<ul>
                 <li><strong>Matemática:</strong> Resolução prática de equações de 2º grau por Fórmula de Bhaskara e bases da trigonometria teórica.</li>
@@ -438,7 +435,7 @@
             ano2: `<ul>
                 <li><strong>Física (Termologia):</strong> Leis da Termodinâmica, trocas de calor e equações de gases perfeitos.</li>
                 <li><strong>Matemática (Álgebra):</strong> Matrizes, cálculo de determinantes e aplicações em sistemas lineares homogêneos.</li>
-                <li><strong>Química (Orgânica):</strong> Propriedades do átomo de carbono, tipos de hibridização e cadeias carbônicas abertas/fechadas.</li>
+                <li><strong>Química (Orgânica):</strong> Propriedades do átomo de carbono, tipos de hibridização e cadeias carbônicas.</li>
                 <li><strong>Biologia:</strong> Sistemática, taxonomia, os reinos dos seres vivos e cadeias alimentares nos ecossistemas.</li>
             </ul>`,
             ano3: `<ul>
@@ -448,6 +445,9 @@
                 <li><strong>Redação Nota 1000:</strong> Engenharia textual da dissertação-argumentativa, repertório legitimado e propostas de intervenção.</li>
             </ul>`
         };
+
+        // Correção de mapeamento interno para chave ano7
+        conteudosEscolares['ano7'] = conteudosEscolares['relative7'];
 
         window.onload = function() {
             const sessaoSalva = localStorage.getItem('usuarioLogadoAtivo');
@@ -477,14 +477,13 @@
             titleElement.innerText = tituloTexto;
             titleElement.style.color = corHex;
             
-            // Aplica a fonte certa no título dependendo do segmento escolhido
             if (anoKey.includes('f1')) {
                 titleElement.style.fontFamily = "'Fredoka', sans-serif";
             } else {
                 titleElement.style.fontFamily = "'Permanent Marker', cursive";
             }
 
-            listElement.innerHTML = conteudosEscolares[anoKey];
+            listElement.innerHTML = conteudosEscolares[anoKey] || "<ul><li>Nenhum cronograma adicionado para este ano.</li></ul>";
             container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
@@ -522,7 +521,7 @@
             alert("Configurações atualizadas com sucesso!");
         }
 
-        function efetuarLogout() {
+        function efectuarLogout() {
             localStorage.removeItem('usuarioLogadoAtivo');
             window.location.href = 'index.html';
         }
