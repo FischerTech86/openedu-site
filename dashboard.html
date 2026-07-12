@@ -1,326 +1,460 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Estudos - Seleção de Ano</title>
-    
-    <!-- Importação de fontes para criar identidades visuais únicas -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Permanent+Marker&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <title>EduCore - Painel Geral</title>
+    <!-- Importação de Fontes: Estilo Urbano/Sóbrio e Divertida para o Fund I -->
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        /* CONFIGURAÇÕES GERAIS E RESET */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-background: #121212;
+            --text-color: #ffffff;
+            --box-bg: #1e1e1e;
+            --box-text: #f0f0f0;
+            --input-border: #444;
+            --primary-green: #28a745;
         }
-        body {
-            background-color: #0d0e12;
-            color: #f8f9fa;
-            font-family: 'Poppins', sans-serif;
-            padding: 30px 15px;
-            min-height: 100vh;
-        }
-        .dashboard-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .dashboard-title {
-            text-align: center;
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 40px;
-            color: #ffffff;
-            letter-spacing: -0.5px;
+
+        body { 
+            margin: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: var(--bg-background); 
+            color: var(--text-color);
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
         }
         
-        /* LINHAS E GRIDS DE SUPORTE */
-        .box {
-            background: #16171d;
-            padding: 30px;
-            border-radius: 20px;
-            margin-bottom: 35px;
-            border: 3px solid transparent;
-            transition: all 0.3s ease;
+        /* Menu Superior */
+        nav { 
+            background: #202020; 
+            width: 100%; 
+            padding: 20px 0; 
+            display: flex; 
+            justify-content: center; 
+            gap: 25px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2); 
         }
-        .years-grid {
-            display: grid;
-            gap: 20px;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        nav button { 
+            background: none; 
+            border: none; 
+            color: white; 
+            cursor: pointer; 
+            font-size: 16px; 
+            font-weight: 500; 
+            transition: 0.3s; 
+        }
+        nav button:hover { color: var(--primary-green); }
+        nav button.logout-btn:hover { color: #dc3545; }
+
+        .brand-title { 
+            font-size: 55px; 
+            font-weight: 800; 
+            margin: 40px 0 5px 0; 
+        }
+        
+        .user-badge { 
+            font-size: 14px; 
+            font-weight: 400; 
+            margin-bottom: 30px; 
+            opacity: 0.8; 
         }
 
-        /* CARD BASE */
-        .year-card {
-            background: #1f2029;
-            padding: 30px 20px;
-            text-align: center;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            user-select: none;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Estrutura de Abas Ativas */
+        .tab-content { display: none; width: 90%; max-width: 800px; margin-bottom: 50px; }
+        .active { display: block; }
+        
+        .box { 
+            background: var(--box-bg); 
+            color: var(--box-text); 
+            padding: 30px; 
+            border-radius: 0; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+            border: 1px solid var(--input-border); 
+            margin-bottom: 20px;
         }
-        .year-card svg {
-            width: 50px;
-            height: 50px;
-            stroke-width: 2.2;
-            transition: transform 0.25s ease;
-        }
-        .year-card:hover svg {
-            transform: scale(1.15);
-        }
+        
+        h2 { margin-top: 0; border-bottom: 2px solid var(--primary-green); padding-bottom: 10px; }
+        h3 { color: var(--primary-green); margin-top: 0; }
 
-        /* =======================================================
-           1. ESTILO: ENSINO FUNDAMENTAL I (ESTILO COGNITIVO/INFANTIL)
-           ======================================================= */
-        .box-fund1 {
-            border: 3px dashed #ffb703;
-            background: #18191e;
-        }
-        .title-fund1 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 26px;
-            font-weight: 700;
-            color: #ffb703;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .card-fund1 {
-            border-radius: 25px;
-            border: 3px solid #282a36;
-        }
-        .card-fund1:hover {
-            transform: translateY(-6px);
-            background: #252733;
-            box-shadow: 0 8px 20px rgba(255, 183, 3, 0.15);
-        }
-        .text-fund1 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 19px;
-            font-weight: 700;
-        }
-
-        /* =======================================================
-           2. ESTILO: ENSINO FUNDAMENTAL II (ESTILO POP ART / HQ)
-           ======================================================= */
-        .box-fund2 {
-            border: 3px solid #00f5d4;
-            background: #141519;
-            box-shadow: 0px 8px 0px #000;
-        }
-        .title-fund2 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 25px;
-            color: #00f5d4;
-            text-shadow: 2px 2px 0px #000;
-        }
-        .card-fund2 {
-            border-radius: 12px;
-            border: 3px solid #000;
-            box-shadow: 4px 4px 0px #000;
-        }
-        .card-fund2:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 8px 8px 0px #000;
-        }
-        .text-fund2 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        /* =======================================================
-           3. ESTILO: ENSINO MÉDIO (ESTILO URBANO / GRAFITE / VESTIBULAR)
-           ======================================================= */
-        .box-medio {
-            border: 2px solid #2d303e;
-            background: #111216;
-            position: relative;
-        }
-        .box-medio::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 5px;
-            background: linear-gradient(90deg, #ff0055, #7a22ff);
-            border-radius: 20px 20px 0 0;
-        }
-        .title-medio {
+        /* --- ESTILIZAÇÃO UNIFICADA: ENSINO MÉDIO E FUNDAMENTAL II (TÉCNICA NEON/GRAFITE) --- */
+        .graffiti-title {
             font-family: 'Permanent Marker', cursive;
             font-size: 32px;
             text-align: center;
-            margin-bottom: 25px;
-            color: #ff0055;
             letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            margin-bottom: 25px;
+            color: #fff;
+            text-shadow: 3px 3px 0px #111;
         }
-        .card-medio {
-            border-radius: 0px;
-            border-left: 5px solid #ff0055;
-            background: #1a1b23;
+
+        .years-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 10px;
         }
-        .card-medio:hover {
-            background: #241420;
-            border-left-width: 10px;
-            transform: scale(1.02);
+        
+        .years-grid.four-cols { grid-template-columns: repeat(4, 1fr); }
+        
+        @media (max-width: 750px) { .years-grid.four-cols { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 650px) { 
+            .years-grid { grid-template-columns: 1fr; } 
+            .years-grid.four-cols { grid-template-columns: 1fr; }
         }
-        .text-medio {
+
+        .year-card {
+            background: #1a1a1a;
+            border: 3px solid #333;
+            border-radius: 0; /* Alinhado com a técnica limpa/reta do Ensino Médio */
+            padding: 30px 15px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Efeito de cores e rotação controlada (Técnica do Ensino Médio) */
+        .year-card:nth-child(1):hover { border-color: #ff0055; transform: translateY(-5px) rotate(-1deg); box-shadow: 0 10px 20px rgba(255, 0, 85, 0.25); }
+        .year-card:nth-child(2):hover { border-color: #00e5ff; transform: translateY(-5px) rotate(1deg); box-shadow: 0 10px 20px rgba(0, 229, 255, 0.25); }
+        .year-card:nth-child(3):hover { border-color: #ccff00; transform: translateY(-5px) rotate(-1deg); box-shadow: 0 10px 20px rgba(204, 255, 0, 0.25); }
+        .year-card:nth-child(4):hover { border-color: #ff9f43; transform: translateY(-5px) rotate(1deg); box-shadow: 0 10px 20px rgba(255, 159, 67, 0.25); }
+
+        .year-card:active { transform: scale(0.95); }
+
+        .year-card svg { width: 50px; height: 50px; margin-bottom: 15px; transition: transform 0.3s; }
+        .year-card:hover svg { transform: scale(1.12); }
+
+        .graffiti-text {
             font-family: 'Permanent Marker', cursive;
-            font-size: 22px;
+            font-size: 24px;
+            margin: 0;
             letter-spacing: 1px;
+            text-shadow: 2px 2px 0px #000;
         }
+        .c-1 { color: #ff0055; }
+        .c-2 { color: #00e5ff; }
+        .c-3 { color: #ccff00; }
+        .c-4 { color: #ff9f43; }
+
+        /* --- ESTILIZAÇÃO INFANTIL: ENSINO FUNDAMENTAL I (QUEBRA-CABEÇA CORES) --- */
+        .kids-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #ff4757;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 800px) { .puzzle-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 550px) { .puzzle-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        .puzzle-card {
+            font-family: 'Fredoka', sans-serif;
+            padding: 22px 10px;
+            text-align: center;
+            cursor: pointer;
+            color: #ffffff;
+            border: 4px solid #fff;
+            box-shadow: 5px 5px 0px #000;
+            transition: all 0.25s ease-out;
+            border-radius: 35px 12px 35px 12px;
+        }
+        .puzzle-card:nth-child(even) { border-radius: 12px 35px 12px 35px; }
+        .puzzle-card.p-1 { background-color: #ff4757; } 
+        .puzzle-card.p-2 { background-color: #2ed573; } 
+        .puzzle-card.p-3 { background-color: #1e90ff; } 
+        .puzzle-card.p-4 { background-color: #ffa502; } 
+        .puzzle-card.p-5 { background-color: #9b59b6; } 
+
+        .puzzle-card:hover { transform: scale(1.08) rotate(2deg); box-shadow: 7px 7px 0px #000; }
+        .puzzle-card:active { transform: scale(0.93); }
+        .puzzle-card svg { width: 45px; height: 45px; margin-bottom: 10px; filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.3)); }
+        .puzzle-text { font-size: 20px; font-weight: 700; text-shadow: 2px 2px 0px rgba(0,0,0,0.4); }
+
+        /* Painel Revelador de Matérias */
+        .content-reveal {
+            display: none;
+            background: #161616;
+            border-left: 5px solid var(--primary-green);
+            padding: 25px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            animation: expandSmooth 0.4s ease-out forwards;
+        }
+        .content-reveal h4 { margin-top: 0; font-size: 20px; border-bottom: 1px solid #333; padding-bottom: 8px; }
+        .content-reveal ul { padding-left: 20px; margin-bottom: 0; }
+        .content-reveal li { margin-bottom: 12px; line-height: 1.5; }
+        .content-reveal li strong { color: #fff; }
+
+        @keyframes expandSmooth {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        input[type="text"], input[type="time"] { 
+            width: 100%; padding: 12px; margin-bottom: 15px; 
+            border: 1px solid var(--input-border); background-color: var(--box-bg); color: var(--box-text); 
+        }
+        button.btn-green { width: 100%; padding: 12px; background: var(--primary-green); color: white; border: none; font-weight: bold; cursor: pointer; }
+        button.btn-green:hover { background: #1e7e34; }
     </style>
 </head>
 <body>
 
-    <div class="dashboard-container">
-        <h1 class="dashboard-title">🎒 Central de Estudos</h1>
+    <nav>
+        <button onclick="showTab('painel')">Painel Geral</button>
+        <button onclick="showTab('objetivo')">Objetivo</button>
+        <button onclick="showTab('config')">Configurações</button>
+        <button onclick="efetuarLogout()" class="logout-btn">Sair</button>
+    </nav>
 
-        <!-- ==========================================
-             BLOCO 1: ENSINO FUNDAMENTAL I
-             ========================================== -->
-        <div class="box box-fund1">
-            <div class="title-fund1">🧩 ENSINO FUNDAMENTAL I</div>
-            <div class="years-grid" style="grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));">
-                
-                <!-- 1º Ano -->
-                <div class="year-card card-fund1" style="border-color: #ff595e;" onclick="selectYear('ano1', '#ff595e', '🧩 1º ANO - EF I')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff595e" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16V12"/><path d="M12 8h.01"/></svg>
-                    <div class="text-fund1" style="color: #ff595e;">1º ANO</div>
+    <div class="brand-title">EduCore</div>
+    <div class="user-badge" id="user-display">Perfil: Carregando... | Objetivo: Carregando... | Lembrete: --:--</div>
+
+    <!-- ABA 1: PAINEL GERAL -->
+    <div id="painel" class="tab-content active">
+        <div class="box">
+            <h2 id="welcome-message">Bem-vindo de volta!</h2>
+            <p>Seu login foi validado localmente com sucesso. Selecione o ano escolar abaixo para carregar seu cronograma ativo de matérias.</p>
+        </div>
+
+        <!-- BLOCO: ENSINO MÉDIO -->
+        <div class="box" style="border-color: #2c2c2c; margin-bottom: 25px;">
+            <div class="graffiti-title">🎓 ENSINO MÉDIO</div>
+            
+            <div class="years-grid">
+                <div class="year-card" onclick="selectYear('ano1', '#ff0055', '1º ANO - ENSINO MÉDIO')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff0055" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    <div class="graffiti-text c-1">1º ANO</div>
                 </div>
 
-                <!-- 2º Ano -->
-                <div class="year-card card-fund1" style="border-color: #ffca3a;" onclick="selectYear('ano2', '#ffca3a', '🧩 2º ANO - EF I')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#ffca3a" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                    <div class="text-fund1" style="color: #ffca3a;">2º ANO</div>
+                <div class="year-card" onclick="selectYear('ano2', '#00e5ff', '2º ANO - ENSINO MÉDIO')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5V3.5A2.5 2.5 0 0 1 6.5 1H20v21H6.5"/></svg>
+                    <div class="graffiti-text c-2">2º ANO</div>
                 </div>
 
-                <!-- 3º Ano -->
-                <div class="year-card card-fund1" style="border-color: #8ac926;" onclick="selectYear('ano3', '#8ac926', '🧩 3º ANO - EF I')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#8ac926" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><polyline points="12 12 12 21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-                    <div class="text-fund1" style="color: #8ac926;">3º ANO</div>
+                <div class="year-card" onclick="selectYear('ano3', '#ccff00', '3º ANO - ENSINO MÉDIO')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ccff00" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    <div class="graffiti-text c-3">3º ANO</div>
                 </div>
-
-                <!-- 4º Ano -->
-                <div class="year-card card-fund1" style="border-color: #1982c4;" onclick="selectYear('ano4', '#1982c4', '🧩 4º ANO - EF I')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#1982c4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                    <div class="text-fund1" style="color: #1982c4;">4º ANO</div>
-                </div>
-
-                <!-- 5º Ano -->
-                <div class="year-card card-fund1" style="border-color: #6a4c93;" onclick="selectYear('ano5', '#6a4c93', '🧩 5º ANO - EF I')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#6a4c93" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 12 15 2 8.5 12 2"/><polyline points="2 17 12 23 22 17"/><polyline points="2 12 12 18 22 12"/></svg>
-                    <div class="text-fund1" style="color: #6a4c93;">5º ANO</div>
-                </div>
-
             </div>
         </div>
 
-        <!-- ==========================================
-             BLOCO 2: ENSINO FUNDAMENTAL II
-             ========================================== -->
-        <div class="box box-fund2">
-            <div class="title-fund2">💥 ENSINO FUNDAMENTAL II</div>
-            <div class="years-grid" style="grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));">
-                
-                <!-- 6º Ano (Planeta / Geografia / Ciências) -->
-                <div class="year-card card-fund2" style="background: #1c1d24;" onclick="selectYear('ano6', '#ff9f43', '🚀 6º ANO - EF II')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff9f43" stroke-linecap="round" stroke-linejoin="round">
+        <!-- BLOCO: ENSINO FUNDAMENTAL II (TÉCNICA UNIFICADA COM O ENSINO MÉDIO) -->
+        <div class="box" style="border-color: #2c2c2c; margin-bottom: 25px;">
+            <div class="graffiti-title">🔬 ENSINO FUNDAMENTAL II</div>
+            
+            <div class="years-grid four-cols">
+                <!-- 6º Ano - Planeta/Espaço -->
+                <div class="year-card" onclick="selectYear('ano6', '#ff0055', '🪐 6º ANO - ENSINO FUNDAMENTAL II')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff0055" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
                         <circle cx="12" cy="12" r="10"/>
                     </svg>
-                    <div class="text-fund2" style="color: #ff9f43;">6º ANO</div>
+                    <div class="graffiti-text c-1">6º ANO</div>
                 </div>
 
-                <!-- 7º Ano (Microscópio / Reinos Biológicos) -->
-                <div class="year-card card-fund2" style="background: #1c1d24;" onclick="selectYear('ano7', '#2ed573', '🔬 7º ANO - EF II')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#2ed573" stroke-linecap="round" stroke-linejoin="round">
+                <!-- 7º Ano - Microscópio/Biologia -->
+                <div class="year-card" onclick="selectYear('ano7', '#00e5ff', '🔬 7º ANO - ENSINO FUNDAMENTAL II')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M6 18h8M10 22h4M14 2v4M10 2H4v4M10 6H4v12a2 2 0 0 0 2 2h4M14 6h4v6M14 10h4"/>
                         <circle cx="12" cy="6" r="2"/>
                     </svg>
-                    <div class="text-fund2" style="color: #2ed573;">7º ANO</div>
+                    <div class="graffiti-text c-2">7º ANO</div>
                 </div>
 
-                <!-- 8º Ano (Tubo de Ensaio / Sistemas Humanos) -->
-                <div class="year-card card-fund2" style="background: #1c1d24;" onclick="selectYear('ano8', '#ff4757', '🧪 8º ANO - EF II')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-linecap="round" stroke-linejoin="round">
+                <!-- 8º Ano - Tubo de Ensaio/Laboratório -->
+                <div class="year-card" onclick="selectYear('ano8', '#ccff00', '🧪 8º ANO - ENSINO FUNDAMENTAL II')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ccff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M10 2h4M19 22H5M10 2v15.5a2.5 2.5 0 0 0 5 0V2M6 14h12"/>
                     </svg>
-                    <div class="text-fund2" style="color: #ff4757;">8º ANO</div>
+                    <div class="graffiti-text c-3">8º ANO</div>
                 </div>
 
-                <!-- 9º Ano (Átomo / Introdução à Física e Química) -->
-                <div class="year-card card-fund2" style="background: #1c1d24;" onclick="selectYear('ano9', '#9b59b6', '⚛️ 9º ANO - EF II')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#9b59b6" stroke-linecap="round" stroke-linejoin="round">
+                <!-- 9º Ano - Átomo/Física e Química -->
+                <div class="year-card" onclick="selectYear('ano9', '#ff9f43', '⚛️ 9º ANO - ENSINO FUNDAMENTAL II')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff9f43" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <ellipse cx="12" cy="12" rx="3" ry="9" transform="rotate(45 12 12)"/>
                         <ellipse cx="12" cy="12" rx="3" ry="9" transform="rotate(-45 12 12)"/>
                         <circle cx="12" cy="12" r="2"/>
                     </svg>
-                    <div class="text-fund2" style="color: #9b59b6;">9º ANO</div>
+                    <div class="graffiti-text c-4">9º ANO</div>
                 </div>
-
             </div>
         </div>
 
-        <!-- ==========================================
-             BLOCO 3: ENSINO MÉDIO
-             ========================================== -->
-        <div class="box box-medio">
-            <div class="title-medio">👑 ENSINO MÉDIO</div>
-            <div class="years-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-                
-                <!-- 1º Ano Ensino Médio -->
-                <div class="year-card card-medio" onclick="selectYear('medio1', '#ff0055', '⚡ 1º ANO - ENSINO MÉDIO')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff0055" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <circle cx="12" cy="12" r="6"/>
-                        <circle cx="12" cy="12" r="2"/>
-                    </svg>
-                    <div class="text-medio" style="color: #ff0055;">1º ANO EM</div>
+        <!-- BLOCO: ENSINO FUNDAMENTAL I -->
+        <div class="box" style="border-color: #2c2c2c; margin-bottom: 25px;">
+            <div class="kids-title">🧩 ENSINO FUNDAMENTAL I</div>
+            
+            <div class="puzzle-grid">
+                <div class="puzzle-card p-1" onclick="selectYear('ano1f1', '#ff4757', '🎈 1º ANO - FUNDAMENTAL I')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
+                    <div class="puzzle-text">1º ANO</div>
                 </div>
 
-                <!-- 2º Ano Ensino Médio -->
-                <div class="year-card card-medio" style="border-left-color: #a855f7;" onclick="selectYear('medio2', '#a855f7', '⚡ 2º ANO - ENSINO MÉDIO')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 6.5A2.5 2.5 0 0 1 6.5 4H20"/>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                    </svg>
-                    <div class="text-medio" style="color: #a855f7;">2º ANO EM</div>
+                <div class="puzzle-card p-2" onclick="selectYear('ano2f1', '#2ed573', '🎨 2º ANO - FUNDAMENTAL I')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <div class="puzzle-text">2º ANO</div>
                 </div>
 
-                <!-- 3º Ano Ensino Médio -->
-                <div class="year-card card-medio" style="border-left-color: #00f5d4;" onclick="selectYear('medio3', '#00f5d4', '🎓 3º ANO - ENSINO MÉDIO')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#00f5d4" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                        <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/>
-                    </svg>
-                    <div class="text-medio" style="color: #00f5d4;">3º ANO EM</div>
+                <div class="puzzle-card p-3" onclick="selectYear('ano3f1', '#1e90ff', '🚀 3º ANO - FUNDAMENTAL I')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                    <div class="puzzle-text">3º ANO</div>
                 </div>
 
+                <div class="puzzle-card p-4" onclick="selectYear('ano4f1', '#ffa502', '🦁 4º ANO - FUNDAMENTAL I')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+                    <div class="puzzle-text">4º ANO</div>
+                </div>
+
+                <div class="puzzle-card p-5" onclick="selectYear('ano5f1', '#9b59b6', '💎 5º ANO - FUNDAMENTAL I')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <div class="puzzle-text">5º ANO</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Painel Revelador de Conteúdos -->
+        <div id="expanded-content" class="content-reveal">
+            <h4 id="reveal-title"></h4>
+            <div id="reveal-list-container"></div>
+        </div>
+    </div>
+
+    <!-- ABA 2: OBJETIVO -->
+    <div id="objetivo" class="tab-content">
+        <div class="box">
+            <h2>🎯 Foco e Missão Atual</h2>
+            <div style="background: #151515; padding: 25px; border-left: 4px solid var(--primary-green); margin-top: 20px;">
+                <span style="font-size: 13px; color: #888; display: block; margin-bottom: 5px; text-transform: uppercase;">Objetivo Ativo:</span>
+                <strong id="big-target-display" style="font-size: 22px; color: #fff;">Nenhum definido</strong>
             </div>
         </div>
     </div>
 
-    <!-- LOGIC SYSTEM (JOCKEY/ACTION HANDLER) -->
+    <!-- ABA 3: CONFIGURAÇÕES -->
+    <div id="config" class="tab-content">
+        <div class="box">
+            <h2>⚙️ Configurações do System</h2>
+            <label>Alterar Objetivo Atual:</label>
+            <input type="text" id="dash-meta" placeholder="Ex: Focar nas revisões do Provão Paulista e ENEM">
+            
+            <label>Horário do Lembrete Alvo:</label>
+            <input type="time" id="dash-time" value="05:02">
+            
+            <button class="btn-green" onclick="atualizarMetasPainel()">Salvar Alterações de Perfil</button>
+        </div>
+    </div>
+
     <script>
-        function selectYear(yearId, themeColor, sectionTitle) {
-            // Log de desenvolvimento para monitorar cliques no console
-            console.log("ID do Ano Ativo:", yearId);
-            console.log("Cor Hexadecimal do Tema:", themeColor);
+        let usuarioAtivo = null;
+
+        const conteudosEscolares = {
+            // FUNDAMENTAL I
+            ano1f1: `<ul><li><strong>Alfabetização Dinâmica:</strong> Letras do alfabeto e primeiras sílabas.</li><li><strong>Matemática Divertida:</strong> Contagem de 1 a 100 e somas básicas.</li></ul>`,
+            ano2f1: `<ul><li><strong>Língua Portuguesa:</strong> Prática de leitura e frases completas.</li><li><strong>Matemática:</strong> Adição e subtração com reserva.</li></ul>`,
+            ano3f1: `<ul><li><strong>Língua Portuguesa:</strong> Pontuação e classes de palavras.</li><li><strong>Matemática:</strong> Tabuadas e divisões simples.</li></ul>`,
+            ano4f1: `<ul><li><strong>Matemática:</strong> Frações visuais e problemas complexos.</li><li><strong>História & Geografia:</strong> Formação dos municípios e cartografia básica.</li></ul>`,
+            ano5f1: `<ul><li><strong>Língua Portuguesa:</strong> Estrutura de textos dissertativos.</li><li><strong>Matemática:</strong> Números decimais e introdução à porcentagem.</li></ul>`,
+            // FUNDAMENTAL II
+            ano6: `<ul><li><strong>Matemática:</strong> Frações, números decimais e conceitos de MMC / MDC.</li><li><strong>Língua Portuguesa:</strong> Interpretação de Fábulas e Crônicas.</li><li><strong>Ciências:</strong> Camadas da Terra e ciclo das rochas.</li><li><strong>História:</strong> Civilizações da antiguidade (Egito e Grécia).</li></ul>`,
+            ano7: `<ul><li><strong>Matemática:</strong> Números inteiros e equações de 1º grau.</li><li><strong>Ciências:</strong> Classificação biológica e os Grandes Reinos.</li><li><strong>História:</strong> Sistema feudal e transição para a Idade Moderna.</li></ul>`,
+            ano8: `<ul><li><strong>Matemática:</strong> Expressões algébricas, monômios e polinômios.</li><li><strong>Ciências:</strong> Sistemas do corpo humano (digestório e respiratório).</li><li><strong>História:</strong> Revolução Industrial e Revolução Francesa.</li></ul>`,
+            ano9: `<ul><li><strong>Matemática:</strong> Equações de 2º grau (Bhaskara) e bases da trigonometria.</li><li><strong>Física & Química:</strong> Cinemática básica e propriedades atômicas.</li><li><strong>História:</strong> Era Vargas, Guerras Mundiais e Guerra Fria.</li></ul>`,
+            // ENSINO MÉDIO
+            ano1: `<ul><li><strong>Física (Cinemática):</strong> Movimento Retilíneo Uniformemente Variado (MRUV).</li><li><strong>Matemática (Geometria):</strong> Aplicação do Teorema de Pitágoras.</li><li><strong>Química (Modelos Atômicos):</strong> Evolução atômica e radioisótopos.</li><li><strong>Língua Portuguesa:</strong> Diferença entre Charge e Cartum.</li></ul>`,
+            ano2: `<ul><li><strong>Física:</strong> Leis da Termodinâmica.</li><li><strong>Matemática:</strong> Matrizes e determinantes.</li><li><strong>Química:</strong> Introdução à Química Orgânica.</li></ul>`,
+            ano3: `<ul><li><strong>Física:</strong> Campo magnético e Leis de Ohm.</li><li><strong>Matemática:</strong> Geometria Analítica e circunferência.</li><li><strong>Foco ENEM 2028:</strong> Ciências da Natureza e Redação nota 1000.</li></ul>`
+        };
+
+        window.onload = function() {
+            const sessaoSalva = localStorage.getItem('usuarioLogadoAtivo');
+            if (!sessaoSalva) {
+                alert("Acesso negado! Por favor, faça o login primeiro.");
+                window.location.href = 'index.html';
+            } else {
+                usuarioAtivo = JSON.parse(sessaoSalva);
+                carregarDadosPainel();
+            }
+        };
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            const targetTab = document.getElementById(tabId);
+            if (targetTab) targetTab.classList.add('active');
+        }
+
+        function selectYear(anoKey, corHex, tituloTexto) {
+            const container = document.getElementById('expanded-content');
+            const titleElement = document.getElementById('reveal-title');
+            const listElement = document.getElementById('reveal-list-container');
+
+            container.style.display = "block";
+            container.style.borderLeftColor = corHex;
             
-            // Callback básico de rota/interação
-            alert("Redirecionando para as matérias de: " + sectionTitle);
+            titleElement.innerText = tituloTexto;
+            titleElement.style.color = corHex;
             
-            // Integração futura com o back-end ou roteador SPA:
-            // window.location.href = `/materias?ano=${yearId}`;
+            if (anoKey.includes('f1')) {
+                titleElement.style.fontFamily = "'Fredoka', sans-serif";
+            } else {
+                titleElement.style.fontFamily = "'Permanent Marker', cursive";
+            }
+
+            listElement.innerHTML = conteudosEscolares[anoKey] || "<ul><li>Nenhum cronograma adicionado para este ano.</li></ul>";
+            container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function carregarDadosPainel() {
+            document.getElementById('welcome-message').innerText = `Bem-vindo de volta, ${usuarioAtivo.usuario}!`;
+            document.getElementById('dash-meta').value = usuarioAtivo.meta || "Nenhum definido";
+            document.getElementById('dash-time').value = usuarioAtivo.lembrete || "05:02";
+            atualizarBadgeSuperior();
+        }
+
+        function atualizarBadgeSuperior() {
+            const metaLimpa = usuarioAtivo.meta || "Nenhum definido";
+            const lembreteLimpo = usuarioAtivo.lembrete || "05:02";
+            document.getElementById('user-display').innerText = `Perfil: ${usuarioAtivo.usuario} | Objetivo: ${metaLimpa} | Lembrete: ${lembreteLimpo}`;
+            document.getElementById('big-target-display').innerText = metaLimpa;
+        }
+
+        function atualizarMetasPainel() {
+            const novaMeta = document.getElementById('dash-meta').value.trim() || "Nenhum definido";
+            const novoLembrete = document.getElementById('dash-time').value || "05:02";
+
+            usuarioAtivo.meta = novaMeta;
+            usuarioAtivo.lembrete = novoLembrete;
+            localStorage.setItem('usuarioLogadoAtivo', JSON.stringify(usuarioAtivo));
+
+            let listaCompleta = JSON.parse(localStorage.getItem('usuariosEduCore'));
+            let index = listaCompleta.findIndex(u => u.usuario.toLowerCase() === usuarioAtivo.usuario.toLowerCase());
+            if (index !== -1) {
+                listaCompleta[index].meta = novaMeta;
+                listaCompleta[index].lembrete = novoLembrete;
+                localStorage.setItem('usuariosEduCore', JSON.stringify(listaCompleta));
+            }
+
+            atualizarBadgeSuperior();
+            alert("Configurações updated!");
+        }
+
+        function efectuarLogout() {
+            localStorage.removeItem('usuarioLogadoAtivo');
+            window.location.href = 'index.html';
         }
     </script>
 </body>
