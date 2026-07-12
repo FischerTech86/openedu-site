@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduCore - Painel Geral</title>
-    <!-- Importação da fonte Urbana Estilo Grafite -->
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <!-- Importação de Fontes: Urbana (Grafite) e Divertida (Infantil/Quebra-Cabeça) -->
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-background: #121212;
@@ -97,14 +97,9 @@
             margin-bottom: 10px;
         }
         
-        /* Grid Customizado para 4 Colunas (Fundamental 2) */
-        .years-grid.four-cols {
-            grid-template-columns: repeat(4, 1fr);
-        }
+        .years-grid.four-cols { grid-template-columns: repeat(4, 1fr); }
         
-        @media (max-width: 750px) { 
-            .years-grid.four-cols { grid-template-columns: repeat(2, 1fr); } 
-        }
+        @media (max-width: 750px) { .years-grid.four-cols { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 650px) { 
             .years-grid { grid-template-columns: 1fr; } 
             .years-grid.four-cols { grid-template-columns: 1fr; }
@@ -121,26 +116,15 @@
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* Cores de spray e neon personalizadas no hover */
         .year-card:nth-child(1):hover { border-color: #ff0055; transform: translateY(-5px) rotate(-1deg); box-shadow: 0 10px 20px rgba(255, 0, 85, 0.3); }
         .year-card:nth-child(2):hover { border-color: #00e5ff; transform: translateY(-5px) rotate(1deg); box-shadow: 0 10px 20px rgba(0, 229, 255, 0.3); }
         .year-card:nth-child(3):hover { border-color: #ccff00; transform: translateY(-5px) rotate(-1deg); box-shadow: 0 10px 20px rgba(204, 255, 0, 0.3); }
         .year-card:nth-child(4):hover { border-color: #ff9f43; transform: translateY(-5px) rotate(1deg); box-shadow: 0 10px 20px rgba(255, 159, 67, 0.3); }
 
-        /* Animação Física de Clique */
-        .year-card:active {
-            transform: scale(0.92);
-        }
+        .year-card:active { transform: scale(0.92); }
 
-        .year-card svg {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 15px;
-            transition: transform 0.3s;
-        }
-        .year-card:hover svg {
-            transform: scale(1.15) rotate(5deg);
-        }
+        .year-card svg { width: 50px; height: 50px; margin-bottom: 15px; transition: transform 0.3s; }
+        .year-card:hover svg { transform: scale(1.15) rotate(5deg); }
 
         .graffiti-text {
             font-family: 'Permanent Marker', cursive;
@@ -153,6 +137,69 @@
         .c-2 { color: #00e5ff; }
         .c-3 { color: #ccff00; }
         .c-4 { color: #ff9f43; }
+
+        /* --- ESTILIZAÇÃO INFANTIL (QUEBRA-CABEÇA CORES) --- */
+        .kids-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #ff4757;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 800px) { .puzzle-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 550px) { .puzzle-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        .puzzle-card {
+            font-family: 'Fredoka', sans-serif;
+            padding: 22px 10px;
+            text-align: center;
+            cursor: pointer;
+            color: #ffffff;
+            border: 4px solid #fff;
+            box-shadow: 5px 5px 0px #000;
+            transition: all 0.25s ease-out;
+            /* Bordas misturadas para simular encaixe de quebra-cabeça */
+            border-radius: 35px 12px 35px 12px;
+        }
+        /* Alterna as curvas para parecer que encaixam uma na outra */
+        .puzzle-card:nth-child(even) {
+            border-radius: 12px 35px 12px 35px;
+        }
+
+        /* Cores vivas de brinquedo */
+        .puzzle-card.p-1 { background-color: #ff4757; } /* Vermelho vivo */
+        .puzzle-card.p-2 { background-color: #2ed573; } /* Verde limão */
+        .puzzle-card.p-3 { background-color: #1e90ff; } /* Azul brilhante */
+        .puzzle-card.p-4 { background-color: #ffa502; } /* Laranja doce */
+        .puzzle-card.p-5 { background-color: #9b59b6; } /* Roxo chiclete */
+
+        .puzzle-card:hover {
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 7px 7px 0px #000;
+        }
+        .puzzle-card:active {
+            transform: scale(0.93);
+        }
+        .puzzle-card svg {
+            width: 45px;
+            height: 45px;
+            margin-bottom: 10px;
+            filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.3));
+        }
+        .puzzle-text {
+            font-size: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.4);
+        }
 
         /* Painel Revelador de Matérias */
         .content-reveal {
@@ -172,19 +219,9 @@
             padding-bottom: 8px;
         }
 
-        .content-reveal ul {
-            padding-left: 20px;
-            margin-bottom: 0;
-        }
-
-        .content-reveal li {
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-
-        .content-reveal li strong {
-            color: #fff;
-        }
+        .content-reveal ul { padding-left: 20px; margin-bottom: 0; }
+        .content-reveal li { margin-bottom: 12px; line-height: 1.5; }
+        .content-reveal li strong { color: #fff; }
 
         @keyframes expandSmooth {
             from { opacity: 0; transform: translateY(10px); }
@@ -223,19 +260,16 @@
             <div class="graffiti-title">🎓 ENSINO MÉDIO</div>
             
             <div class="years-grid">
-                <!-- 1º ANO -->
                 <div class="year-card" onclick="selectYear('ano1', '#ff0055', '1º ANO - ENSINO MÉDIO')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#ff0055" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                     <div class="graffiti-text c-1">1º ANO</div>
                 </div>
 
-                <!-- 2º ANO -->
                 <div class="year-card" onclick="selectYear('ano2', '#00e5ff', '2º ANO - ENSINO MÉDIO')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5V3.5A2.5 2.5 0 0 1 6.5 1H20v21H6.5"/></svg>
                     <div class="graffiti-text c-2">2º ANO</div>
                 </div>
 
-                <!-- 3º ANO -->
                 <div class="year-card" onclick="selectYear('ano3', '#ccff00', '3º ANO - ENSINO MÉDIO')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#ccff00" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
                     <div class="graffiti-text c-3">3º ANO</div>
@@ -248,25 +282,21 @@
             <div class="graffiti-title">🎒 ENSINO FUNDAMENTAL II</div>
             
             <div class="years-grid four-cols">
-                <!-- 6º ANO -->
                 <div class="year-card" onclick="selectYear('ano6', '#ff0055', '6º ANO - ENSINO FUNDAMENTAL II')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#ff0055" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                     <div class="graffiti-text c-1">6º ANO</div>
                 </div>
 
-                <!-- 7º ANO -->
                 <div class="year-card" onclick="selectYear('ano7', '#00e5ff', '7º ANO - ENSINO FUNDAMENTAL II')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5V3.5A2.5 2.5 0 0 1 6.5 1H20v21H6.5"/></svg>
                     <div class="graffiti-text c-2">7º ANO</div>
                 </div>
 
-                <!-- 8º ANO -->
                 <div class="year-card" onclick="selectYear('ano8', '#ccff00', '8º ANO - ENSINO FUNDAMENTAL II')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#ccff00" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
                     <div class="graffiti-text c-3">8º ANO</div>
                 </div>
 
-                <!-- 9º ANO -->
                 <div class="year-card" onclick="selectYear('ano9', '#ff9f43', '9º ANO - ENSINO FUNDAMENTAL II')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#ff9f43" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
                     <div class="graffiti-text c-4">9º ANO</div>
@@ -274,9 +304,46 @@
             </div>
         </div>
 
+        <!-- BLOCO: ENSINO FUNDAMENTAL I (ESTILO QUEBRA-CABEÇA COLORIDO) -->
+        <div class="box" style="border-color: #2c2c2c; margin-bottom: 25px;">
+            <div class="kids-title">🧩 ENSINO FUNDAMENTAL I</div>
+            
+            <div class="puzzle-grid">
+                <!-- 1º ANO -->
+                <div class="puzzle-card p-1" onclick="selectYear('ano1f1', '#ff4757', '🎈 1º ANO - FUNDAMENTAL I')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                    <div class="puzzle-text">1º ANO</div>
+                </div>
+
+                <!-- 2º ANO -->
+                <div class="puzzle-card p-2" onclick="selectYear('ano2f1', '#2ed573', '🎨 2º ANO - FUNDAMENTAL I')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <div class="puzzle-text">2º ANO</div>
+                </div>
+
+                <!-- 3º ANO -->
+                <div class="puzzle-card p-3" onclick="selectYear('ano3f1', '#1e90ff', '🚀 3º ANO - FUNDAMENTAL I')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    <div class="puzzle-text">3º ANO</div>
+                </div>
+
+                <!-- 4º ANO -->
+                <div class="puzzle-card p-4" onclick="selectYear('ano4f1', '#ffa502', '🦁 4º ANO - FUNDAMENTAL I')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    <div class="puzzle-text">4º ANO</div>
+                </div>
+
+                <!-- 5º ANO -->
+                <div class="puzzle-card p-5" onclick="selectYear('ano5f1', '#9b59b6', '💎 5º ANO - FUNDAMENTAL I')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <div class="puzzle-text">5º ANO</div>
+                </div>
+            </div>
+        </div>
+
         <!-- Painel Global Revelador de Conteúdos -->
         <div id="expanded-content" class="content-reveal">
-            <h4 id="reveal-title" class="graffiti-text"></h4>
+            <h4 id="reveal-title"></h4>
             <div id="reveal-list-container"></div>
         </div>
     </div>
@@ -310,6 +377,33 @@
         let usuarioAtivo = null;
 
         const conteudosEscolares = {
+            // FUNDAMENTAL I
+            ano1f1: `<ul>
+                <li><strong>Alfabetização Dinâmica:</strong> Reconhecimento das letras do alfabeto, formação das primeiras sílabas e escrita das vogais.</li>
+                <li><strong>Matemática Divertida:</strong> Contagem numérica básica de 1 a 100, conceitos de somar quantidades e formas geométricas simples.</li>
+                <li><strong>Ciências da Natureza:</strong> Identificação e cuidado com as partes do corpo humano e hábitos saudáveis de higiene diária.</li>
+            </ul>`,
+            ano2f1: `<ul>
+                <li><strong>Língua Portuguesa:</strong> Prática de leitura fluida, escrita de frases completas e separação silábica correta.</li>
+                <li><strong>Matemática:</strong> Operações básicas de adição e subtração com reserva, e introdução aos sistemas de medidas de tempo (relógio).</li>
+                <li><strong>Estudos Sociais:</strong> Entendimento do papel da família, da escola e convivência com a comunidade ao redor.</li>
+            </ul>`,
+            ano3f1: `<ul>
+                <li><strong>Língua Portuguesa:</strong> Uso correto de pontuação, diferenciação entre substantivos e adjetivos e produção de pequenas histórias.</li>
+                <li><strong>Matemática:</strong> Construção das tabuadas e introdução prática às contas de multiplicação e divisão simples.</li>
+                <li><strong>Ciências:</strong> O ciclo da água na natureza, preservação ambiental e as principais características das plantas.</li>
+            </ul>`,
+            ano4f1: `<ul>
+                <li><strong>Matemática:</strong> Resolução de problemas complexos, frações visuais simples e leitura gráfica de tabelas elementares.</li>
+                <li><strong>História & Geografia:</strong> O surgimento do próprio município, cartografia básica (pontos cardeais) e relevos locais.</li>
+                <li><strong>Língua Portuguesa:</strong> Gêneros textuais diversos (cartas, receitas e poemas) e regras de acentuação gráfica.</li>
+            </ul>`,
+            ano5f1: `<ul>
+                <li><strong>Língua Portuguesa:</strong> Estrutura completa de textos dissertativos infantis, tempos verbais e concordância gramatical.</li>
+                <li><strong>Matemática:</strong> Operações numéricas com frações decimais, cálculo de perímetros/áreas e introdução à porcentagem elemental.</li>
+                <li><strong>Ciências:</strong> Anatomia funcional básica: Sistemas respiratório e circulatório, e o funcionamento dos ecossistemas.</li>
+            </ul>`,
+            // FUNDAMENTAL II
             ano6: `<ul>
                 <li><strong>Matemática:</strong> Estrutura das frações, operações matemáticas com números decimais e conceitos de MMC / MDC.</li>
                 <li><strong>Língua Portuguesa:</strong> Elementos da narrativa estrutural e interpretação textual focada em Fábulas e Crônicas.</li>
@@ -334,6 +428,7 @@
                 <li><strong>História:</strong> Cenário geopolítico do século XX: Características da Era Vargas, Guerras Mundiais e o bloco da Guerra Fria.</li>
                 <li><strong>Geografia:</strong> Dinâmicas da globalização econômica, blocos internacionais e contrastes no desenvolvimento mundial.</li>
             </ul>`,
+            // ENSINO MÉDIO
             ano1: `<ul>
                 <li><strong>Física (Cinemática):</strong> Estudo do Movimento Retilíneo Uniformemente Variado (MRUV), aceleração e análise de gráficos fundamentais.</li>
                 <li><strong>Matemática (Geometria):</strong> Aplicação prática do Teorema de Pitágoras e relações métricas no triângulo retângulo.</li>
@@ -381,9 +476,15 @@
             
             titleElement.innerText = tituloTexto;
             titleElement.style.color = corHex;
-            listElement.innerHTML = conteudosEscolares[anoKey];
             
-            // Rolagem suave até o painel revelador para melhorar a experiência
+            // Aplica a fonte certa no título dependendo do segmento escolhido
+            if (anoKey.includes('f1')) {
+                titleElement.style.fontFamily = "'Fredoka', sans-serif";
+            } else {
+                titleElement.style.fontFamily = "'Permanent Marker', cursive";
+            }
+
+            listElement.innerHTML = conteudosEscolares[anoKey];
             container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
@@ -418,7 +519,7 @@
             }
 
             atualizarBadgeSuperior();
-            alert("Configurações updated com sucesso!");
+            alert("Configurações atualizadas com sucesso!");
         }
 
         function efetuarLogout() {
