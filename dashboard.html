@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Estudos - Seleção de Ano</title>
     
-    <!-- Importação de fontes para criar identidades visuais únicas -->
+    <!-- Importação do novo combo de fontes de alto impacto -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Permanent+Marker&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Luckiest+Guy&family=Poppins:wght@400;500;700&family=Russo+One&display=swap" rel="stylesheet">
     
     <style>
         /* CONFIGURAÇÕES GERAIS E RESET */
@@ -30,11 +30,11 @@
         }
         .dashboard-title {
             text-align: center;
-            font-size: 36px;
-            font-weight: 700;
+            font-family: 'Russo One', sans-serif;
+            font-size: 38px;
             margin-bottom: 40px;
             color: #ffffff;
-            letter-spacing: -0.5px;
+            letter-spacing: 1px;
         }
         
         /* LINHAS E GRIDS DE SUPORTE */
@@ -77,16 +77,16 @@
         }
 
         /* =======================================================
-           1. ESTILO: ENSINO FUNDAMENTAL I (ESTILO COGNITIVO/INFANTIL)
+           1. ESTILO: ENSINO FUNDAMENTAL I (ESTILO DIVERTIDO/LUCKIEST)
            ======================================================= */
         .box-fund1 {
             border: 3px dashed #ffb703;
             background: #18191e;
         }
         .title-fund1 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 26px;
-            font-weight: 700;
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 28px;
+            letter-spacing: 1px;
             color: #ffb703;
             text-align: center;
             margin-bottom: 25px;
@@ -101,13 +101,13 @@
             box-shadow: 0 8px 20px rgba(255, 183, 3, 0.15);
         }
         .text-fund1 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 19px;
-            font-weight: 700;
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 20px;
+            letter-spacing: 0.5px;
         }
 
         /* =======================================================
-           2. ESTILO: ENSINO FUNDAMENTAL II (ESTILO POP ART / HQ)
+           2. ESTILO: ENSINO FUNDAMENTAL II (ESTILO POP ART / BANGERS)
            ======================================================= */
         .box-fund2 {
             border: 3px solid #00f5d4;
@@ -115,9 +115,9 @@
             box-shadow: 0px 8px 0px #000;
         }
         .title-fund2 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
+            font-family: 'Bangers', cursive;
+            font-size: 34px;
+            letter-spacing: 2px;
             text-align: center;
             margin-bottom: 25px;
             color: #00f5d4;
@@ -133,13 +133,14 @@
             box-shadow: 8px 8px 0px #000;
         }
         .text-fund2 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
+            font-family: 'Bangers', cursive;
+            font-size: 24px;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 0px #000;
         }
 
         /* =======================================================
-           3. ESTILO: ENSINO MÉDIO (ESTILO URBANO / GRAFITE / VESTIBULAR)
+           3. ESTILO: ENSINO MÉDIO (ESTILO URBANO BLOCK / RUSSO ONE)
            ======================================================= */
         .box-medio {
             border: 2px solid #2d303e;
@@ -154,12 +155,12 @@
             border-radius: 20px 20px 0 0;
         }
         .title-medio {
-            font-family: 'Permanent Marker', cursive;
-            font-size: 32px;
+            font-family: 'Russo One', sans-serif;
+            font-size: 30px;
             text-align: center;
             margin-bottom: 25px;
             color: #ff0055;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
         }
         .card-medio {
@@ -173,9 +174,9 @@
             transform: scale(1.02);
         }
         .text-medio {
-            font-family: 'Permanent Marker', cursive;
-            font-size: 22px;
-            letter-spacing: 1px;
+            font-family: 'Russo One', sans-serif;
+            font-size: 20px;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -231,7 +232,7 @@
             <div class="title-fund2">💥 ENSINO FUNDAMENTAL II</div>
             <div class="years-grid" style="grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));">
                 
-                <!-- 6º Ano (Planeta / Geografia / Ciências) -->
+                <!-- 6º Ano -->
                 <div class="year-card card-fund2" style="background: #1c1d24;" onclick="selectYear('ano6', '#ff9f43', '🚀 6º ANO - EF II')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#ff9f43" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
@@ -240,7 +241,7 @@
                     <div class="text-fund2" style="color: #ff9f43;">6º ANO</div>
                 </div>
 
-                <!-- 7º Ano (Microscópio / Reinos Biológicos) -->
+                <!-- 7º Ano -->
                 <div class="year-card card-fund2" style="background: #1c1d24;" onclick="selectYear('ano7', '#2ed573', '🔬 7º ANO - EF II')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#2ed573" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M6 18h8M10 22h4M14 2v4M10 2H4v4M10 6H4v12a2 2 0 0 0 2 2h4M14 6h4v6M14 10h4"/>
@@ -249,7 +250,7 @@
                     <div class="text-fund2" style="color: #2ed573;">7º ANO</div>
                 </div>
 
-                <!-- 8º Ano (Tubo de Ensaio / Sistemas Humanos) -->
+                <!-- 8º Ano -->
                 <div class="year-card card-fund2" style="background: #1c1d24;" onclick="selectYear('ano8', '#ff4757', '🧪 8º ANO - EF II')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M10 2h4M19 22H5M10 2v15.5a2.5 2.5 0 0 0 5 0V2M6 14h12"/>
@@ -257,7 +258,7 @@
                     <div class="text-fund2" style="color: #ff4757;">8º ANO</div>
                 </div>
 
-                <!-- 9º Ano (Átomo / Introdução à Física e Química) -->
+                <!-- 9º Ano -->
                 <div class="year-card card-fund2" style="background: #1c1d24;" onclick="selectYear('ano9', '#9b59b6', '⚛️ 9º ANO - EF II')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#9b59b6" stroke-linecap="round" stroke-linejoin="round">
                         <ellipse cx="12" cy="12" rx="3" ry="9" transform="rotate(45 12 12)"/>
@@ -309,18 +310,12 @@
         </div>
     </div>
 
-    <!-- LOGIC SYSTEM (JOCKEY/ACTION HANDLER) -->
+    <!-- LOGIC SYSTEM -->
     <script>
         function selectYear(yearId, themeColor, sectionTitle) {
-            // Log de desenvolvimento para monitorar cliques no console
             console.log("ID do Ano Ativo:", yearId);
             console.log("Cor Hexadecimal do Tema:", themeColor);
-            
-            // Callback básico de rota/interação
             alert("Redirecionando para as matérias de: " + sectionTitle);
-            
-            // Integração futura com o back-end ou roteador SPA:
-            // window.location.href = `/materias?ano=${yearId}`;
         }
     </script>
 </body>
