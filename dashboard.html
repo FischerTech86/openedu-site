@@ -94,9 +94,21 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            margin-bottom: 25px;
+            margin-bottom: 10px;
         }
-        @media (max-width: 650px) { .years-grid { grid-template-columns: 1fr; } }
+        
+        /* Grid Customizado para 4 Colunas (Fundamental 2) */
+        .years-grid.four-cols {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        @media (max-width: 750px) { 
+            .years-grid.four-cols { grid-template-columns: repeat(2, 1fr); } 
+        }
+        @media (max-width: 650px) { 
+            .years-grid { grid-template-columns: 1fr; } 
+            .years-grid.four-cols { grid-template-columns: 1fr; }
+        }
 
         .year-card {
             background: #1a1a1a;
@@ -113,6 +125,7 @@
         .year-card:nth-child(1):hover { border-color: #ff0055; transform: translateY(-5px) rotate(-1deg); box-shadow: 0 10px 20px rgba(255, 0, 85, 0.3); }
         .year-card:nth-child(2):hover { border-color: #00e5ff; transform: translateY(-5px) rotate(1deg); box-shadow: 0 10px 20px rgba(0, 229, 255, 0.3); }
         .year-card:nth-child(3):hover { border-color: #ccff00; transform: translateY(-5px) rotate(-1deg); box-shadow: 0 10px 20px rgba(204, 255, 0, 0.3); }
+        .year-card:nth-child(4):hover { border-color: #ff9f43; transform: translateY(-5px) rotate(1deg); box-shadow: 0 10px 20px rgba(255, 159, 67, 0.3); }
 
         /* Animação Física de Clique */
         .year-card:active {
@@ -139,6 +152,7 @@
         .c-1 { color: #ff0055; }
         .c-2 { color: #00e5ff; }
         .c-3 { color: #ccff00; }
+        .c-4 { color: #ff9f43; }
 
         /* Painel Revelador de Matérias */
         .content-reveal {
@@ -146,7 +160,8 @@
             background: #161616;
             border-left: 5px solid var(--primary-green);
             padding: 25px;
-            margin-top: 15px;
+            margin-top: 5px;
+            margin-bottom: 20px;
             animation: expandSmooth 0.4s ease-out forwards;
         }
 
@@ -203,8 +218,8 @@
             <p>Seu login foi validado localmente com sucesso. Selecione o ano escolar abaixo para carregar seu cronograma ativo de matérias.</p>
         </div>
 
-        <!-- QUADRADOS EM ESTILO GRAFITE -->
-        <div class="box" style="border-color: #2c2c2c;">
+        <!-- BLOCO: ENSINO MÉDIO -->
+        <div class="box" style="border-color: #2c2c2c; margin-bottom: 25px;">
             <div class="graffiti-title">🎓 ENSINO MÉDIO</div>
             
             <div class="years-grid">
@@ -226,12 +241,43 @@
                     <div class="graffiti-text c-3">3º ANO</div>
                 </div>
             </div>
+        </div>
 
-            <!-- Painel revelador de Conteúdos -->
-            <div id="expanded-content" class="content-reveal">
-                <h4 id="reveal-title" class="graffiti-text"></h4>
-                <div id="reveal-list-container"></div>
+        <!-- BLOCO: ENSINO FUNDAMENTAL II -->
+        <div class="box" style="border-color: #2c2c2c; margin-bottom: 25px;">
+            <div class="graffiti-title">🎒 ENSINO FUNDAMENTAL II</div>
+            
+            <div class="years-grid four-cols">
+                <!-- 6º ANO -->
+                <div class="year-card" onclick="selectYear('ano6', '#ff0055', '6º ANO - ENSINO FUNDAMENTAL II')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff0055" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    <div class="graffiti-text c-1">6º ANO</div>
+                </div>
+
+                <!-- 7º ANO -->
+                <div class="year-card" onclick="selectYear('ano7', '#00e5ff', '7º ANO - ENSINO FUNDAMENTAL II')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5V3.5A2.5 2.5 0 0 1 6.5 1H20v21H6.5"/></svg>
+                    <div class="graffiti-text c-2">7º ANO</div>
+                </div>
+
+                <!-- 8º ANO -->
+                <div class="year-card" onclick="selectYear('ano8', '#ccff00', '8º ANO - ENSINO FUNDAMENTAL II')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ccff00" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    <div class="graffiti-text c-3">8º ANO</div>
+                </div>
+
+                <!-- 9º ANO -->
+                <div class="year-card" onclick="selectYear('ano9', '#ff9f43', '9º ANO - ENSINO FUNDAMENTAL II')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff9f43" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                    <div class="graffiti-text c-4">9º ANO</div>
+                </div>
             </div>
+        </div>
+
+        <!-- Painel Global Revelador de Conteúdos -->
+        <div id="expanded-content" class="content-reveal">
+            <h4 id="reveal-title" class="graffiti-text"></h4>
+            <div id="reveal-list-container"></div>
         </div>
     </div>
 
@@ -264,6 +310,30 @@
         let usuarioAtivo = null;
 
         const conteudosEscolares = {
+            ano6: `<ul>
+                <li><strong>Matemática:</strong> Estrutura das frações, operações matemáticas com números decimais e conceitos de MMC / MDC.</li>
+                <li><strong>Língua Portuguesa:</strong> Elementos da narrativa estrutural e interpretação textual focada em Fábulas e Crônicas.</li>
+                <li><strong>Ciências:</strong> Camadas internas e externas da Terra (Crosta, Manto, Núcleo) e o ciclo litológico das rochas.</li>
+                <li><strong>História:</strong> Estudo das sociedades e civilizações da antiguidade clássica, com ênfase em Egito Antigo e Grécia.</li>
+            </ul>`,
+            ano7: `<ul>
+                <li><strong>Matemática:</strong> Introdução ao conjunto dos números inteiros (positivos/negativos) e equações lineares de 1º grau.</li>
+                <li><strong>Ciências:</strong> Critérios de classificação biológica e análise estrutural dos Grandes Reinos dos seres vivos.</li>
+                <li><strong>Geografia:</strong> Dinâmica de formação do território brasileiro, divisão por regionalização e demografia.</li>
+                <li><strong>História:</strong> Organização do sistema feudal na Europa medieval e a transição mercantil rumo à Idade Moderna.</li>
+            </ul>`,
+            ano8: `<ul>
+                <li><strong>Matemática:</strong> Noções de expressões algébricas essenciais, propriedades de monômios, polinômios e áreas planas.</li>
+                <li><strong>Ciências:</strong> Anatomia sistêmica do corpo humano: Foco nos processos dos sistemas digestório, respiratório e circulatório.</li>
+                <li><strong>História:</strong> Transformações sociopolíticas mundiais: Reflexos da Revolução Industrial e a mecânica da Revolução Francesa.</li>
+                <li><strong>Língua Portuguesa:</strong> Introdução à análise sintática, termos integrantes da oração e concordância nominal/verbal básica.</li>
+            </ul>`,
+            ano9: `<ul>
+                <li><strong>Matemática:</strong> Resolução prática de equações de 2º grau por Fórmula de Bhaskara e bases da trigonometria teórica.</li>
+                <li><strong>Física & Química:</strong> Introdução aos conceitos de cinemática (velocidade média) e propriedades atômicas da matéria.</li>
+                <li><strong>História:</strong> Cenário geopolítico do século XX: Características da Era Vargas, Guerras Mundiais e o bloco da Guerra Fria.</li>
+                <li><strong>Geografia:</strong> Dinâmicas da globalização econômica, blocos internacionais e contrastes no desenvolvimento mundial.</li>
+            </ul>`,
             ano1: `<ul>
                 <li><strong>Física (Cinemática):</strong> Estudo do Movimento Retilíneo Uniformemente Variado (MRUV), aceleração e análise de gráficos fundamentais.</li>
                 <li><strong>Matemática (Geometria):</strong> Aplicação prática do Teorema de Pitágoras e relações métricas no triângulo retângulo.</li>
@@ -312,6 +382,9 @@
             titleElement.innerText = tituloTexto;
             titleElement.style.color = corHex;
             listElement.innerHTML = conteudosEscolares[anoKey];
+            
+            // Rolagem suave até o painel revelador para melhorar a experiência
+            container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
         function carregarDadosPainel() {
@@ -345,7 +418,7 @@
             }
 
             atualizarBadgeSuperior();
-            alert("Configurações atualizadas com sucesso!");
+            alert("Configurações updated com sucesso!");
         }
 
         function efetuarLogout() {
