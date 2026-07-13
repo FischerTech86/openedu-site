@@ -3,164 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ensino Fundamental II</title>
+    <title>Gabaritei - Login</title>
     
-    <!-- Importação da nova fonte para o Ensino Fundamental II -->
+    <!-- Importando uma fonte moderna parecida com a da imagem -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+
     <style>
-        /* Reset básico para visualização */
+        /* Configurações Globais */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
+
         body {
-            background-color: #0d0e12;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            overflow: hidden;
+            position: relative;
         }
 
-        /* Container do bloco idêntico ao print */
-        .box-fund2 {
-            background-color: #16171d;
-            padding: 40px;
-            border-radius: 4px;
-            max-width: 950px;
+        /* Container da Animação de Fundo */
+        #animation-container {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            pointer-events: none; /* Garante que os elementos caindo não atrapalhem os cliques */
+            z-index: 1;
         }
 
-        /* Título com a NOVA fonte aplicada */
-        .title-fund2 {
-            font-family: 'Bangers', cursive;
-            font-size: 38px;
-            letter-spacing: 2px;
+        /* Estilo dos elementos que caem (Letras, Números e Livros) */
+        .falling-item {
+            position: absolute;
+            top: -50px;
+            color: #2d3748;
+            font-weight: 500;
+            user-select: none;
+            opacity: 0;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: var(--custom-opacity); /* Opacidade suave definida no JS */
+            }
+            90% {
+                opacity: var(--custom-opacity);
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Card de Login (Baseado na sua imagem) */
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            width: 100%;
+            max-width: 420px;
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(8px);
+            z-index: 10; /* Fica por cima da animação */
             text-align: center;
-            margin-bottom: 35px;
+        }
+
+        /* Nome do site bem grande em cima */
+        .brand-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 50px;
+            letter-spacing: -1px;
+        }
+
+        /* Grupos de Input (Estilo de linha igual ao da foto) */
+        .input-group {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: #a0aec0;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .input-group input {
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid #e2e8f0;
+            padding: 8px 0;
+            font-size: 1.1rem;
+            color: #2d3748;
+            background: transparent;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Mudança de cor ao clicar no campo */
+        .input-group input:focus {
+            border-bottom-color: #2d3748;
+        }
+
+        /* Placeholder customizado cinza claro */
+        .input-group input::placeholder {
+            color: #cbd5e0;
+            font-weight: 300;
+        }
+
+        /* Botão Acessar o Gabaritei */
+        .btn-access {
+            width: 100%;
+            background: #2d3748;
             color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
+            border: none;
+            padding: 16px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            border-radius: 30px; /* Formato de pílula igual ao da foto */
+            cursor: pointer;
+            margin-top: 15px;
+            margin-bottom: 25px;
+            transition: background 0.3s ease, transform 0.1s ease;
         }
 
-        /* Grid dos 4 Cards */
-        .years-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+        .btn-access:hover {
+            background: #1a202c;
         }
 
-        /* Cards escuros com bordas finas */
-        .year-card {
-            background-color: #111216;
-            border: 1px solid #2d303e;
-            padding: 35px 20px;
-            text-align: center;
+        .btn-access:active {
+            transform: scale(0.99);
+        }
+
+        /* Links inferiores */
+        .links-container {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s;
+            gap: 12px;
         }
 
-        .year-card:hover {
-            transform: scale(1.02);
-            background-color: #1a1b23;
+        .links-container a {
+            color: #4a5568;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: color 0.2s ease;
         }
 
-        /* Texto dos Cards com a NOVA fonte aplicada */
-        .text-fund2 {
-            font-family: 'Bangers', cursive;
-            font-size: 26px;
-            letter-spacing: 1px;
-        }
-
-        /* Ícones configurados */
-        svg {
-            width: 55px;
-            height: 55px;
-            stroke-width: 1.8;
-            fill: none;
-        }
-
-        /* Cores exatas de cada Ano do seu print */
-        .color-6 { color: #ff0055; stroke: #ff0055; }
-        .color-7 { color: #00f5d4; stroke: #00f5d4; }
-        .color-8 { color: #ccff00; stroke: #ccff00; }
-        .color-9 { color: #ff9f43; stroke: #ff9f43; }
-
-        /* Responsividade para telas menores */
-        @media (max-width: 800px) {
-            .years-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 480px) {
-            .years-grid {
-                grid-template-columns: 1fr;
-            }
+        .links-container a:hover {
+            color: #1a202c;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <!-- Bloco Isolado do Ensino Fundamental II -->
-    <div class="box-fund2">
-        <div class="title-fund2">
-            <span>🔬</span> ENSINO FUNDAMENTAL II
-        </div>
-        
-        <div class="years-grid">
-            
-            <!-- 6º Ano (Rosa/Grid) -->
-            <div class="year-card">
-                <svg class="color-6" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="2" y1="12" x2="22" y2="12"></line>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                </svg>
-                <div class="text-fund2 color-6">6º ANO</div>
+    <!-- Container onde a mágica dos livros e letras acontecem -->
+    <div id="animation-container"></div>
+
+    <!-- Caixa do formulário de login -->
+    <div class="login-card">
+        <!-- Nome grande no topo -->
+        <h1 class="brand-title">Gabaritei</h1>
+
+        <form onsubmit="event.preventDefault();">
+            <!-- Campo Usuário -->
+            <div class="input-group">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" placeholder="Digite seu usuário" autocomplete="off">
             </div>
 
-            <!-- 7º Ano (Cian/Caderno) -->
-            <div class="year-card">
-                <svg class="color-7" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                    <line x1="9" y1="6" x2="15" y2="6"></line>
-                    <line x1="9" y1="10" x2="15" y2="10"></line>
-                </svg>
-                <div class="text-fund2 color-7">7º ANO</div>
+            <!-- Campo Senha -->
+            <div class="input-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" placeholder="Digite sua senha">
             </div>
 
-            <!-- 8º Ano (Limão/Tubo de Ensaio) -->
-            <div class="year-card">
-                <svg class="color-8" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M10 2h4M19 22H5M10 2v15.5a2.5 2.5 0 0 0 5 0V2M6 14h12"></path>
-                </svg>
-                <div class="text-fund2 color-8">8º ANO</div>
-            </div>
+            <!-- Botão de Ação -->
+            <button type="submit" class="btn-access">Acessar o Gabaritei</button>
+        </form>
 
-            <!-- 9º Ano (Laranja/Átomo) -->
-            <div class="year-card">
-                <svg class="color-9" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                    <ellipse cx="12" cy="12" rx="3" ry="9" transform="rotate(45 12 12)"></ellipse>
-                    <ellipse cx="12" cy="12" rx="3" ry="9" transform="rotate(-45 12 12)"></ellipse>
-                    <circle cx="12" cy="12" r="2"></circle>
-                </svg>
-                <div class="text-fund2 color-9">9º ANO</div>
-            </div>
-
+        <!-- Links Úteis -->
+        <div class="links-container">
+            <a href="#">Esqueceu a senha?</a>
+            <a href="#">Não tem uma conta? Crie uma</a>
         </div>
     </div>
 
+    <!-- Script para gerar a animação de queda limpa e bonita -->
+    <script>
+        const container = document.getElementById('animation-container');
+        
+        // Elementos que vão cair no fundo (Livros, Letras e Números)
+        const pool = [
+            '📚', '📖', '✏️', '🎓',
+            'A', 'B', 'C', 'D', 'X', 'Y', 'Z', 'M', 'H',
+            '1', '2', '3', '4', '5', '7', '8', '9', '0'
+        ];
+
+        // Configuração para controlar a quantidade e não ficar travado ("empolado")
+        const maxItems = 35; 
+
+        function createFallingItem() {
+            // Evita criar itens demais se a janela estiver cheia
+            if (container.childElementCount >= maxItems) return;
+
+            const item = document.createElement('div');
+            item.classList.add('falling-item');
+            
+            // Escolhe um caractere aleatório da lista
+            item.innerText = pool[Math.floor(Math.random() * pool.length)];
+
+            // Posição horizontal aleatória (0% a 100% da tela)
+            item.style.left = Math.random() * 100 + 'vw';
+
+            // Tamanho aleatório (mistura de elementos grandes e pequenos para dar profundidade)
+            const size = Math.random() * 18 + 14; // entre 14px e 32px
+            item.style.fontSize = size + 'px';
+
+            // Velocidade da queda aleatória (entre 6 e 12 segundos) para ficar natural
+            const duration = Math.random() * 6 + 6;
+            item.style.animationDuration = duration + 's';
+
+            // Opacidade aleatória suave para não atrapalhar a leitura do card de login
+            const opacity = Math.random() * 0.25 + 0.1; 
+            item.style.setProperty('--custom-opacity', opacity);
+
+            container.appendChild(item);
+
+            // Remove o elemento após o término da animação para economizar memória do navegador
+            setTimeout(() => {
+                item.remove();
+            }, duration * 1000);
+        }
+
+        // Inicializa a chuva de elementos em intervalos regulados
+        setInterval(createFallingItem, 300);
+    </script>
 </body>
 </html>
