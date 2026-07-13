@@ -210,15 +210,15 @@
 
                 <div class="input-field">
                     <label for="signup-email">E-mail</label>
-                    <input type="email" id="signup-email" placeholder="Digite seu melhor e-mail" required>
+                    <input type="email" id="signup-email" placeholder="Digite seu e-mail" required>
                 </div>
 
                 <div class="input-field">
                     <label for="signup-password">Senha</label>
-                    <input type="password" id="signup-password" placeholder="Crie uma senha segura" required>
+                    <input type="password" id="signup-password" placeholder="Crie uma senha" required>
                 </div>
 
-                <button type="submit" class="btn-access">Cadastrar e Acessar</button>
+                <button type="submit" class="btn-access">Cadastrar Conta</button>
             </form>
 
             <div class="links-group">
@@ -259,26 +259,87 @@
             document.getElementById(screenId).classList.add('active');
         }
 
-        // --- SIMULAÇÃO DAS AÇÕES DOS FORMULÁRIOS ---
+        // --- SISTEMA REAL DE AUTENTICAÇÃO COM LOCALSTORAGE ---
+        
+        // 1. Função de Login
         function handleLogin(event) {
             event.preventDefault();
-            const user = document.getElementById('login-user').value;
-            alert(`Bem-vindo ao Gabaritei, ${user}! Login realizado com sucesso.`);
+            const user = document.getElementById('login-user').value.trim();
+            const pass = document.getElementById('login-password').value;
+
+            // Busca o usuário na memória do navegador
+            const savedData = localStorage.getItem(`gabaritei_user_${user.toLowerCase()}`);
+
+            if (savedData) {
+                const userData = JSON.parse(savedData);
+                if (userData.password === pass) {
+                    alert(`🎉 Sucesso! Bem-vindo ao Gabaritei, ${userData.username}!`);
+                    // Limpa os campos após o login correto
+                    document.getElementById('login-user').value = '';
+                    document.getElementById('login-password').value = '';
+                } else {
+                    alert('❌ Erro: Senha incorreta! Tente novamente.');
+                }
+            } else {
+                alert('❌ Erro: Esse usuário não existe! Clique em "Crie uma aqui" para se cadastrar.');
+            }
         }
 
+        // 2. Função de Cadastro (Salva na memória)
         function handleSignup(event) {
             event.preventDefault();
-            const user = document.getElementById('signup-user').value;
-            alert(`Conta criada com sucesso para o usuário: ${user}! Redirecionando para o login...`);
+            const user = document.getElementById('signup-user').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
+            const pass = document.getElementById('signup-password').value;
+
+            if (user === '' || email === '' || pass === '') return;
+
+            // Cria o objeto do usuário
+            const accountData = {
+                username: user,
+                email: email,
+                password: pass
+            };
+
+            // Salva usando o nome do usuário como chave única
+            localStorage.setItem(`gabaritei_user_${user.toLowerCase()}`, JSON.stringify(accountData));
+
+            alert(`✅ Conta criada com sucesso para: ${user}!\nAgora você já pode fazer o seu login.`);
+            
+            // Limpa o formulário de cadastro
+            document.getElementById('signup-user').value = '';
+            document.getElementById('signup-email').value = '';
+            document.getElementById('signup-password').value = '';
+
+            // Manda de volta para a tela de login
             navigateTo('screen-login');
         }
 
+        // 3. Função de Esqueci a Senha (Valida usuário + e-mail e mostra a senha)
         function handleForgotPassword(event) {
             event.preventDefault();
-            const email = document.getElementById('forgot-email').value;
-            alert(`Sucesso! Sua senha de acesso foi enviada para o e-mail: ${email}`);
-            navigateTo('screen-login');
+            const user = document.getElementById('forgot-user').value.trim();
+            const email = document.getElementById('forgot-email').value.trim();
+
+            const savedData = localStorage.getItem(`gabaritei_user_${user.toLowerCase()}`);
+
+            if (savedData) {
+                const userData = JSON.parse(savedData);
+                // Valida se o e-mail digitado confere com o e-mail guardado no cadastro
+                if (userData.email.toLowerCase() === email.toLowerCase()) {
+                    alert(`📧 Enviado! Sua senha recuperada é: ${userData.password}\n\n(Aviso: Um e-mail de confirmação foi disparado para ${userData.email})`);
+                    
+                    document.getElementById('forgot-user').value = '';
+                    document.getElementById('forgot-email').value = '';
+                    navigateTo('screen-login');
+                } else {
+                    alert('❌ Erro: O e-mail digitado não bate com o e-mail registrado para esse usuário.');
+                }
+            } else {
+                alert('❌ Erro: Nome de usuário não encontrado no sistema.');
+            }
         }
+
 
         // --- ANIMAÇÃO DOS ELEMENTOS DE FUNDO (COM ALTO DESTAQUE) ---
         const canvas = document.getElementById('animation-canvas');
@@ -314,7 +375,6 @@
                 this.size = Math.random() * 12 + 15; 
                 this.content = elementsPool[Math.floor(Math.random() * elementsPool.length)];
                 this.color = colorsPool[Math.floor(Math.random() * colorsPool.length)];
-                // Opacidade bem visível conforme solicitado
                 this.opacity = Math.random() * 0.3 + 0.55; 
                 this.angle = Math.random() * 360;
                 this.rotationSpeed = (Math.random() - 0.5) * 0.4; 
