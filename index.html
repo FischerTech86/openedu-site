@@ -259,33 +259,31 @@
             document.getElementById(screenId).classList.add('active');
         }
 
-        // --- SISTEMA REAL DE AUTENTICAÇÃO COM LOCALSTORAGE ---
+        // --- SISTEMA INTELIGENTE DE AUTENTICAÇÃO ---
         
-        // 1. Função de Login
+        // 1. Fazer Login
         function handleLogin(event) {
             event.preventDefault();
             const user = document.getElementById('login-user').value.trim();
             const pass = document.getElementById('login-password').value;
 
-            // Busca o usuário na memória do navegador
             const savedData = localStorage.getItem(`gabaritei_user_${user.toLowerCase()}`);
 
             if (savedData) {
                 const userData = JSON.parse(savedData);
                 if (userData.password === pass) {
                     alert(`🎉 Sucesso! Bem-vindo ao Gabaritei, ${userData.username}!`);
-                    // Limpa os campos após o login correto
                     document.getElementById('login-user').value = '';
                     document.getElementById('login-password').value = '';
                 } else {
                     alert('❌ Erro: Senha incorreta! Tente novamente.');
                 }
             } else {
-                alert('❌ Erro: Esse usuário não existe! Clique em "Crie uma aqui" para se cadastrar.');
+                alert('❌ Erro: Esse usuário não existe! Faça o seu cadastro primeiro.');
             }
         }
 
-        // 2. Função de Cadastro (Salva na memória)
+        // 2. Criar Conta (Com trava para nomes repetidos)
         function handleSignup(event) {
             event.preventDefault();
             const user = document.getElementById('signup-user').value.trim();
@@ -294,28 +292,34 @@
 
             if (user === '' || email === '' || pass === '') return;
 
-            // Cria o objeto do usuário
+            // Chave única baseada no nome de usuário
+            const userKey = `gabaritei_user_${user.toLowerCase()}`;
+
+            // CORREÇÃO: Verifica se o nome já existe na memória
+            if (localStorage.getItem(userKey)) {
+                alert('❌ Erro: Este nome de usuário já está sendo usado por outra pessoa! Escolha outro nome.');
+                return; // Bloqueia e impede a criação da conta repetida
+            }
+
             const accountData = {
                 username: user,
                 email: email,
                 password: pass
             };
 
-            // Salva usando o nome do usuário como chave única
-            localStorage.setItem(`gabaritei_user_${user.toLowerCase()}`, JSON.stringify(accountData));
+            // Guarda as informações na memória
+            localStorage.setItem(userKey, JSON.stringify(accountData));
 
             alert(`✅ Conta criada com sucesso para: ${user}!\nAgora você já pode fazer o seu login.`);
             
-            // Limpa o formulário de cadastro
             document.getElementById('signup-user').value = '';
             document.getElementById('signup-email').value = '';
             document.getElementById('signup-password').value = '';
 
-            // Manda de volta para a tela de login
             navigateTo('screen-login');
         }
 
-        // 3. Função de Esqueci a Senha (Valida usuário + e-mail e mostra a senha)
+        // 3. Recuperar Senha (Mostra a senha direto na tela imediatamente)
         function handleForgotPassword(event) {
             event.preventDefault();
             const user = document.getElementById('forgot-user').value.trim();
@@ -327,13 +331,14 @@
                 const userData = JSON.parse(savedData);
                 // Valida se o e-mail digitado confere com o e-mail guardado no cadastro
                 if (userData.email.toLowerCase() === email.toLowerCase()) {
-                    alert(`📧 Enviado! Sua senha recuperada é: ${userData.password}\n\n(Aviso: Um e-mail de confirmação foi disparado para ${userData.email})`);
+                    // CORREÇÃO: Mostra a senha exata direto na tela do usuário
+                    alert(`🔑 SUA SENHA RECUPERADA É:\n\n👉  ${userData.password}  👈\n\nGuarde-a com cuidado e faça seu login.`);
                     
                     document.getElementById('forgot-user').value = '';
                     document.getElementById('forgot-email').value = '';
                     navigateTo('screen-login');
                 } else {
-                    alert('❌ Erro: O e-mail digitado não bate com o e-mail registrado para esse usuário.');
+                    alert('❌ Erro: O e-mail digitado não confere com o e-mail registrado para este usuário.');
                 }
             } else {
                 alert('❌ Erro: Nome de usuário não encontrado no sistema.');
