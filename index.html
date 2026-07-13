@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabaritei - Login</title>
+    <title>Gabaritei - Sistema de Estudos</title>
     <style>
         /* Reset de estilos para garantir uniformidade entre navegadores */
         * {
@@ -52,10 +52,28 @@
         .main-title {
             font-size: 3rem;
             font-weight: 900;
-            color: #4f46e5;
+            color: #4f46e5; /* Azul Índigo vibrante */
             margin-bottom: 45px;
             letter-spacing: 4px;
             text-shadow: 0 2px 10px rgba(79, 70, 229, 0.1);
+        }
+
+        /* Subtítulos para as outras telas */
+        .sub-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 30px;
+        }
+
+        /* Oculta as telas que não devem aparecer inicialmente */
+        .screen {
+            display: none;
+        }
+
+        /* Exibe a tela ativa */
+        .screen.active {
+            display: block;
         }
 
         /* Campos de Entrada (Estilo Linha conforme o modelo) */
@@ -131,6 +149,7 @@
             color: #6b7280;
             text-decoration: none;
             font-size: 0.95rem;
+            cursor: pointer;
             transition: color 0.2s ease;
         }
 
@@ -154,36 +173,119 @@
     <!-- Canvas para rodar a animação de fundo -->
     <canvas id="animation-canvas"></canvas>
 
-    <!-- Caixa de Login -->
+    <!-- Caixa Principal do Sistema -->
     <div class="login-box">
         <h1 class="main-title">GABARITEI</h1>
         
-        <form onsubmit="event.preventDefault();">
-            <!-- Input de Usuário -->
-            <div class="input-field">
-                <label for="user">Usuário</label>
-                <input type="text" id="user" placeholder="Digite seu usuário" required>
+        <!-- ================= TELA DE LOGIN ================= -->
+        <div id="screen-login" class="screen active">
+            <form onsubmit="handleLogin(event)">
+                <div class="input-field">
+                    <label for="login-user">Usuário</label>
+                    <input type="text" id="login-user" placeholder="Digite seu usuário" required>
+                </div>
+
+                <div class="input-field">
+                    <label for="login-password">Senha</label>
+                    <input type="password" id="login-password" placeholder="Digite sua senha" required>
+                </div>
+
+                <button type="submit" class="btn-access">Acessar o Gabaritei</button>
+            </form>
+
+            <div class="links-group">
+                <a onclick="navigateTo('screen-forgot')" class="custom-link">Esqueceu a senha?</a>
+                <a onclick="navigateTo('screen-signup')" class="custom-link signup-link">Você não tem outra conta? Crie uma aqui</a>
             </div>
-
-            <!-- Input de Senha -->
-            <div class="input-field">
-                <label for="password">Senha</label>
-                <input type="password" id="password" placeholder="Digite sua senha" required>
-            </div>
-
-            <!-- Botão de Ação -->
-            <button type="submit" class="btn-access">Acessar o Gabaritei</button>
-        </form>
-
-        <!-- Links inferiores -->
-        <div class="links-group">
-            <a href="#" class="custom-link">Esqueceu a senha?</a>
-            <a href="#" class="custom-link signup-link">Você não tem outra conta? Crie uma aqui</a>
         </div>
+
+        <!-- ================= TELA DE CRIAR CONTA ================= -->
+        <div id="screen-signup" class="screen">
+            <h2 class="sub-title">Criar Conta</h2>
+            <form onsubmit="handleSignup(event)">
+                <div class="input-field">
+                    <label for="signup-user">Nome de Usuário</label>
+                    <input type="text" id="signup-user" placeholder="Escolha um usuário" required>
+                </div>
+
+                <div class="input-field">
+                    <label for="signup-email">E-mail</label>
+                    <input type="email" id="signup-email" placeholder="Digite seu melhor e-mail" required>
+                </div>
+
+                <div class="input-field">
+                    <label for="signup-password">Senha</label>
+                    <input type="password" id="signup-password" placeholder="Crie uma senha segura" required>
+                </div>
+
+                <button type="submit" class="btn-access">Cadastrar e Acessar</button>
+            </form>
+
+            <div class="links-group">
+                <a onclick="navigateTo('screen-login')" class="custom-link signup-link">Já tem uma conta? Acesse aqui</a>
+            </div>
+        </div>
+
+        <!-- ================= TELA DE RECUPERAR SENHA ================= -->
+        <div id="screen-forgot" class="screen">
+            <h2 class="sub-title">Recuperar Senha</h2>
+            <form onsubmit="handleForgotPassword(event)">
+                <div class="input-field">
+                    <label for="forgot-user">Nome de Usuário</label>
+                    <input type="text" id="forgot-user" placeholder="Digite seu nome de usuário" required>
+                </div>
+
+                <div class="input-field">
+                    <label for="forgot-email">E-mail</label>
+                    <input type="email" id="forgot-email" placeholder="Digite o e-mail cadastrado" required>
+                </div>
+
+                <button type="submit" class="btn-access">Recuperar Minha Senha</button>
+            </form>
+
+            <div class="links-group">
+                <a onclick="navigateTo('screen-login')" class="custom-link signup-link">Lembrou a senha? Voltar para o login</a>
+            </div>
+        </div>
+
     </div>
 
     <script>
-        // --- ANIMAÇÃO DE QUEDA DOS ELEMENTOS ---
+        // --- FUNÇÕES DE NAVEGAÇÃO ENTRE TELAS ---
+        function navigateTo(screenId) {
+            // Remove a classe active de todas as telas
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            // Adiciona a classe active na tela desejada
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        // --- SIMULAÇÃO DE AÇÕES DO FORMULÁRIO ---
+        function handleLogin(event) {
+            event.preventDefault();
+            const user = document.getElementById('login-user').value;
+            alert(`Bem-vindo ao Gabaritei, ${user}! Login realizado com sucesso.`);
+            // Aqui futuramente você pode redirecionar para a página interna do seu site
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            const user = document.getElementById('signup-user').value;
+            alert(`Conta criada com sucesso para o usuário: ${user}! Redirecionando...`);
+            navigateTo('screen-login');
+        }
+
+        document.getElementById('screen-signup').querySelector('form').addEventListener('submit', handleSignup);
+
+        function handleForgotPassword(event) {
+            event.preventDefault();
+            const email = document.getElementById('forgot-email').value;
+            alert(`Sucesso! Sua senha de acesso foi enviada para o e-mail: ${email}`);
+            navigateTo('screen-login');
+        }
+
+        // --- ANIMAÇÃO DE QUEDA DOS ELEMENTOS (IMPACTO MÁXIMO) ---
         const canvas = document.getElementById('animation-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -194,16 +296,13 @@
         window.addEventListener('resize', setupCanvas);
         setupCanvas();
 
-        // Livros, Letras, Números e Operadores
         const elementsPool = [
             '📚', '📖', '✏️', '📝', '🎓', '📓', '📐',
             'A', 'B', 'C', 'X', 'Y', 'Z', 'M', 'N', 'H',
             '1', '2', '3', '5', '7', '8', '9', '0', 'π', '√', '%', '+'
         ];
 
-        // Paleta de cores coordenadas para a animação
         const colorsPool = ['#4f46e5', '#3b82f6', '#10b981', '#f59e0b', '#6b7280'];
-
         const particleCount = 65; 
         const particlesArray = [];
 
@@ -220,8 +319,7 @@
                 this.size = Math.random() * 12 + 15; 
                 this.content = elementsPool[Math.floor(Math.random() * elementsPool.length)];
                 this.color = colorsPool[Math.floor(Math.random() * colorsPool.length)];
-                // ALTERADO: Opacidade aumentada significativamente (de 0.55 a 0.85) para dar muito mais destaque
-                this.opacity = Math.random() * 0.3 + 0.55; 
+                this.opacity = Math.random() * 0.3 + 0.55; // Mantido o destaque alto aprovado
                 this.angle = Math.random() * 360;
                 this.rotationSpeed = (Math.random() - 0.5) * 0.4; 
             }
