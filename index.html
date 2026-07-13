@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gabaritei - Login</title>
     <style>
-        /* Reset de estilos para garantir que funcione igual em qualquer navegador */
+        /* Reset de estilos para garantir uniformidade entre navegadores */
         * {
             margin: 0;
             padding: 0;
@@ -14,7 +14,7 @@
         }
 
         body {
-            background-color: #f3f4f6; /* Fundo levemente mais contrastante */
+            background-color: #f3f4f6;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -23,7 +23,7 @@
             position: relative;
         }
 
-        /* Canvas que cobre o fundo inteiro para a animação */
+        /* Canvas para a animação de fundo */
         #animation-canvas {
             position: absolute;
             top: 0;
@@ -37,8 +37,8 @@
         .login-box {
             background: rgba(255, 255, 255, 0.98);
             padding: 45px 35px;
-            border-radius: 20px; /* Bordas um pouco mais suaves */
-            box-shadow: 0 20px 50px rgba(79, 70, 229, 0.15); /* Sombra moderna com tom do tema */
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(79, 70, 229, 0.15);
             width: 100%;
             max-width: 420px;
             z-index: 2;
@@ -48,17 +48,17 @@
             border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
-        /* Título Principal com Muito Destaque */
+        /* Título Principal com Alto Destaque */
         .main-title {
             font-size: 3rem;
             font-weight: 900;
-            color: #4f46e5; /* Azul Índigo Vibrante para destacar a marca */
+            color: #4f46e5; /* Azul Índigo vibrante */
             margin-bottom: 45px;
             letter-spacing: 4px;
             text-shadow: 0 2px 10px rgba(79, 70, 229, 0.1);
         }
 
-        /* Estrutura dos Campos de Entrada (Estilo Linha do Print) */
+        /* Campos de Entrada (Estilo Linha conforme o modelo) */
         .input-field {
             text-align: left;
             margin-bottom: 28px;
@@ -67,7 +67,7 @@
         .input-field label {
             display: block;
             font-size: 0.95rem;
-            color: #4b5563; /* Rótulo mais escuro para melhor leitura */
+            color: #4b5563;
             margin-bottom: 6px;
             font-weight: 600;
         }
@@ -84,12 +84,12 @@
             transition: border-color 0.3s ease;
         }
 
-        /* Placeholder bem sutil */
+        /* Placeholder */
         .input-field input::placeholder {
             color: #9ca3af;
         }
 
-        /* Efeito ao clicar no campo - Linha acende com a cor do tema */
+        /* Linha acende com a cor do tema ao focar */
         .input-field input:focus {
             border-bottom-color: #4f46e5;
         }
@@ -97,7 +97,7 @@
         /* Botão com alto destaque e contraste */
         .btn-access {
             width: 100%;
-            background-color: #4f46e5; /* Azul Índigo de alta conversão */
+            background-color: #4f46e5;
             color: #ffffff;
             border: none;
             padding: 16px;
@@ -107,12 +107,12 @@
             cursor: pointer;
             margin-top: 15px;
             margin-bottom: 25px;
-            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35); /* Sombra no botão para dar volume */
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
             transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
         }
 
         .btn-access:hover {
-            background-color: #4338ca; /* Tom mais escuro no hover */
+            background-color: #4338ca;
             box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
         }
 
@@ -120,7 +120,7 @@
             transform: scale(0.99);
         }
 
-        /* Links de Suporte e Cadastro Inferiores */
+        /* Links de Suporte e Cadastro */
         .links-group {
             display: flex;
             flex-direction: column;
@@ -141,7 +141,7 @@
 
         .signup-link {
             font-weight: 700;
-            color: #4f46e5; /* Link de cadastro em destaque */
+            color: #4f46e5;
         }
         
         .signup-link:hover {
@@ -175,7 +175,7 @@
             <button type="submit" class="btn-access">Acessar o Gabaritei</button>
         </form>
 
-        <!-- Links solicitados -->
+        <!-- Links inferiores -->
         <div class="links-group">
             <a href="#" class="custom-link">Esqueceu a senha?</a>
             <a href="#" class="custom-link signup-link">Você não tem outra conta? Crie uma aqui</a>
@@ -183,11 +183,10 @@
     </div>
 
     <script>
-        // --- SCRIPT DA ANIMAÇÃO DE QUEDA EM ALTA PERFORMANCE ---
+        // --- ANIMAÇÃO DE QUEDA DOS ELEMENTOS ---
         const canvas = document.getElementById('animation-canvas');
         const ctx = canvas.getContext('2d');
 
-        // Redimensiona o fundo dinamicamente
         function setupCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -195,43 +194,41 @@
         window.addEventListener('resize', setupCanvas);
         setupCanvas();
 
-        // Elementos que vão cair no fundo (Livros, Letras, Números e Operadores)
+        // Livros, Letras, Números e Operadores
         const elementsPool = [
             '📚', '📖', '✏️', '📝', '🎓', '📓', '📐',
             'A', 'B', 'C', 'X', 'Y', 'Z', 'M', 'N', 'H',
             '1', '2', '3', '5', '7', '8', '9', '0', 'π', '√', '%', '+'
         ];
 
-        // Cores vibrantes alternadas para dar vida à animação de fundo
+        // Paleta de cores coordenadas para a animação
         const colorsPool = ['#4f46e5', '#3b82f6', '#10b981', '#f59e0b', '#6b7280'];
 
-        const particleCount = 65; // Densidade ideal para ficar bonito e leve
+        const particleCount = 65; 
         const particlesArray = [];
 
         class ElementParticle {
             constructor() {
                 this.init();
-                // Distribui os elementos verticalmente no primeiro carregamento
                 this.y = Math.random() * canvas.height;
             }
 
             init() {
                 this.x = Math.random() * canvas.width;
                 this.y = -60; 
-                this.speed = Math.random() * 1.3 + 0.7; // Queda suave e ritmada
-                this.size = Math.random() * 12 + 15; // Tamanhos variados entre 15px e 27px
+                this.speed = Math.random() * 1.3 + 0.7; 
+                this.size = Math.random() * 12 + 15; 
                 this.content = elementsPool[Math.floor(Math.random() * elementsPool.length)];
                 this.color = colorsPool[Math.floor(Math.random() * colorsPool.length)];
-                this.opacity = Math.random() * 0.25 + 0.12; // Transparência ideal para não poluir visualmente
+                this.opacity = Math.random() * 0.25 + 0.12; 
                 this.angle = Math.random() * 360;
-                this.rotationSpeed = (Math.random() - 0.5) * 0.4; // Rotação individual sutil
+                this.rotationSpeed = (Math.random() - 0.5) * 0.4; 
             }
 
             update() {
                 this.y += this.speed;
                 this.angle += this.rotationSpeed;
 
-                // Quando sai da tela por baixo, reinicia no topo com novas propriedades
                 if (this.y > canvas.height + 50) {
                     this.init();
                 }
@@ -249,12 +246,10 @@
             }
         }
 
-        // Criando a coleção de partículas
         for (let i = 0; i < particleCount; i++) {
             particlesArray.push(new ElementParticle());
         }
 
-        // Loop de renderização contínua (60fps nativo)
         function runAnimation() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
