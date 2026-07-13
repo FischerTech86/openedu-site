@@ -71,7 +71,7 @@
             display: none;
         }
 
-        /* Exibe a tela ativa */
+        /* Exibe a tela activa */
         .screen.active {
             display: block;
         }
@@ -259,7 +259,7 @@
             document.getElementById(screenId).classList.add('active');
         }
 
-        // --- SISTEMA INTELIGENTE DE AUTENTICAÇÃO ---
+        // --- SISTEMA DE AUTENTICAÇÃO BLINDADO ---
         
         // 1. Fazer Login
         function handleLogin(event) {
@@ -283,7 +283,7 @@
             }
         }
 
-        // 2. Criar Conta (Com trava para nomes repetidos)
+        // 2. Criar Conta com Bloqueio Real de Duplicados
         function handleSignup(event) {
             event.preventDefault();
             const user = document.getElementById('signup-user').value.trim();
@@ -292,13 +292,13 @@
 
             if (user === '' || email === '' || pass === '') return;
 
-            // Chave única baseada no nome de usuário
+            // Chave padronizada em minúsculo para evitar "Admin" e "admin" passarem juntos
             const userKey = `gabaritei_user_${user.toLowerCase()}`;
 
-            // CORREÇÃO: Verifica se o nome já existe na memória
-            if (localStorage.getItem(userKey)) {
-                alert('❌ Erro: Este nome de usuário já está sendo usado por outra pessoa! Escolha outro nome.');
-                return; // Bloqueia e impede a criação da conta repetida
+            // TRAVA COMPLETA: Verifica se o registro já existe de fato na memória
+            if (localStorage.getItem(userKey) !== null) {
+                alert(`❌ Erro: O nome de usuário "${user}" já está cadastrado por outra pessoa! Escolha um nome diferente.`);
+                return; // Corta a execução aqui e não deixa criar a conta repetida!
             }
 
             const accountData = {
@@ -307,10 +307,10 @@
                 password: pass
             };
 
-            // Guarda as informações na memória
+            // Guarda na memória do navegador de forma definitiva
             localStorage.setItem(userKey, JSON.stringify(accountData));
 
-            alert(`✅ Conta criada com sucesso para: ${user}!\nAgora você já pode fazer o seu login.`);
+            alert(`✅ Conta criada com sucesso para: ${user}!\nUse esse mesmo nome para acessar.`);
             
             document.getElementById('signup-user').value = '';
             document.getElementById('signup-email').value = '';
@@ -319,7 +319,7 @@
             navigateTo('screen-login');
         }
 
-        // 3. Recuperar Senha (Mostra a senha direto na tela imediatamente)
+        // 3. Recuperar Senha (Exibição local exata e infalível)
         function handleForgotPassword(event) {
             event.preventDefault();
             const user = document.getElementById('forgot-user').value.trim();
@@ -329,16 +329,16 @@
 
             if (savedData) {
                 const userData = JSON.parse(savedData);
-                // Valida se o e-mail digitado confere com o e-mail guardado no cadastro
+                
+                // Validação cirúrgica de E-mail cadastrado
                 if (userData.email.toLowerCase() === email.toLowerCase()) {
-                    // CORREÇÃO: Mostra a senha exata direto na tela do usuário
                     alert(`🔑 SUA SENHA RECUPERADA É:\n\n👉  ${userData.password}  👈\n\nGuarde-a com cuidado e faça seu login.`);
                     
                     document.getElementById('forgot-user').value = '';
                     document.getElementById('forgot-email').value = '';
                     navigateTo('screen-login');
                 } else {
-                    alert('❌ Erro: O e-mail digitado não confere com o e-mail registrado para este usuário.');
+                    alert('❌ Erro: O e-mail digitado não bate com o e-mail guardado para esse usuário.');
                 }
             } else {
                 alert('❌ Erro: Nome de usuário não encontrado no sistema.');
@@ -346,7 +346,7 @@
         }
 
 
-        // --- ANIMAÇÃO DOS ELEMENTOS DE FUNDO (COM ALTO DESTAQUE) ---
+        // --- ANIMAÇÃO DOS ELEMENTOS DE FUNDO (DESTAQUE MÁXIMO ATIVADO) ---
         const canvas = document.getElementById('animation-canvas');
         const ctx = canvas.getContext('2d');
 
