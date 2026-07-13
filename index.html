@@ -46,7 +46,7 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.8);
-            transition: max-width 0.5s ease; /* Suaviza se você quiser aumentar o tamanho da tela depois */
+            transition: max-width 0.5s ease;
         }
 
         /* Título Principal com Alto Destaque */
@@ -245,17 +245,33 @@
             </div>
         </div>
 
-        <!-- ================= TELA PRINCIPAL (EM BRANCO E PRONTA) ================= -->
+        <!-- ================= TELA PRINCIPAL (ATUALIZADA) ================= -->
         <div id="screen-main" class="screen">
-            <h2 class="sub-title" id="welcome-message">Bem-vindo!</h2>
+            <!-- Topo alinhado com Nome e Botão de Configurações -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; gap: 10px;">
+                <h2 class="sub-title" id="welcome-message" style="margin-bottom: 0; font-size: 1.5rem; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Olá! 👋</h2>
+                <button onclick="alert('⚙️ Menu de Configurações aberto!')" style="background: #e5e7eb; border: none; padding: 8px 14px; border-radius: 20px; font-weight: 600; color: #4b5563; cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; flex-shrink: 0; transition: background 0.2s;" onmouseover="this.style.background='#d1d5db'" onmouseout="this.style.background='#e5e7eb'">
+                    ⚙️ Configurações
+                </button>
+            </div>
+
+            <!-- Área de Conteúdo Central -->
             <p style="color: #6b7280; margin-bottom: 30px; font-size: 0.95rem;">
                 Esta tela está em branco por enquanto. Aqui você poderá construir o seu jogo, quiz ou painel de estudos!
             </p>
             
-            <!-- Botão para deslogar e voltar à tela inicial de testes -->
-            <button onclick="logout()" class="btn-access" style="background-color: #ef4444; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);">
+            <button onclick="logout()" class="btn-access" style="background-color: #ef4444; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35); margin-bottom: 20px;">
                 Sair da Conta
             </button>
+
+            <!-- Parte Final do Site: Explicação de Uso dos Dados -->
+            <hr style="border: 0; border-top: 1px solid #e5e7eb; margin-bottom: 15px;">
+            <div style="text-align: left; background: #f9fafb; padding: 12px; border-radius: 12px; border: 1px solid #e5e7eb;">
+                <h4 style="font-size: 0.85rem; color: #4b5563; margin-bottom: 4px; font-weight: 700;">📌 Como usamos suas informações:</h4>
+                <p style="font-size: 0.78rem; color: #6b7280; line-height: 1.4;">
+                    Seu Usuário, E-mail e Senha são guardados de forma simples e direta no seu navegador. Isso serve apenas para identificar sua conta localmente e permitir que você crie novos acessos ou recupere dados livremente.
+                </p>
+            </div>
         </div>
 
     </div>
@@ -283,17 +299,14 @@
             if (savedData) {
                 const userData = JSON.parse(savedData);
                 if (userData.password === pass) {
-                    // Salva qual usuário está ativo na sessão
                     localStorage.setItem('gabaritei_usuario_ativo', user.toLowerCase());
                     
-                    // Altera dinamicamente o título de boas-vindas com o nome real do usuário
+                    // Atualiza a mensagem de boas-vindas sem quebrar o layout do topo
                     document.getElementById('welcome-message').innerText = `Olá, ${userData.username}! 👋`;
                     
-                    // Limpa os campos de texto do formulário
                     document.getElementById('login-user').value = '';
                     document.getElementById('login-password').value = '';
                     
-                    // MUDANÇA: Direciona automaticamente para a tela em branco
                     navigateTo('screen-main');
                 } else {
                     alert('❌ Erro: Senha incorreta! Tente novamente.');
