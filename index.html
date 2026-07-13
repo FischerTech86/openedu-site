@@ -52,7 +52,7 @@
         .main-title {
             font-size: 3rem;
             font-weight: 900;
-            color: #4f46e5; /* Azul Índigo vibrante */
+            color: #4f46e5;
             margin-bottom: 45px;
             letter-spacing: 4px;
             text-shadow: 0 2px 10px rgba(79, 70, 229, 0.1);
@@ -253,30 +253,25 @@
     <script>
         // --- FUNÇÕES DE NAVEGAÇÃO ENTRE TELAS ---
         function navigateTo(screenId) {
-            // Remove a classe active de todas as telas
             document.querySelectorAll('.screen').forEach(screen => {
                 screen.classList.remove('active');
             });
-            // Adiciona a classe active na tela desejada
             document.getElementById(screenId).classList.add('active');
         }
 
-        // --- SIMULAÇÃO DE AÇÕES DO FORMULÁRIO ---
+        // --- SIMULAÇÃO DAS AÇÕES DOS FORMULÁRIOS ---
         function handleLogin(event) {
             event.preventDefault();
             const user = document.getElementById('login-user').value;
             alert(`Bem-vindo ao Gabaritei, ${user}! Login realizado com sucesso.`);
-            // Aqui futuramente você pode redirecionar para a página interna do seu site
         }
 
         function handleSignup(event) {
             event.preventDefault();
             const user = document.getElementById('signup-user').value;
-            alert(`Conta criada com sucesso para o usuário: ${user}! Redirecionando...`);
+            alert(`Conta criada com sucesso para o usuário: ${user}! Redirecionando para o login...`);
             navigateTo('screen-login');
         }
-
-        document.getElementById('screen-signup').querySelector('form').addEventListener('submit', handleSignup);
 
         function handleForgotPassword(event) {
             event.preventDefault();
@@ -285,7 +280,7 @@
             navigateTo('screen-login');
         }
 
-        // --- ANIMAÇÃO DE QUEDA DOS ELEMENTOS (IMPACTO MÁXIMO) ---
+        // --- ANIMAÇÃO DOS ELEMENTOS DE FUNDO (COM ALTO DESTAQUE) ---
         const canvas = document.getElementById('animation-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -319,7 +314,8 @@
                 this.size = Math.random() * 12 + 15; 
                 this.content = elementsPool[Math.floor(Math.random() * elementsPool.length)];
                 this.color = colorsPool[Math.floor(Math.random() * colorsPool.length)];
-                this.opacity = Math.random() * 0.3 + 0.55; // Mantido o destaque alto aprovado
+                // Opacidade bem visível conforme solicitado
+                this.opacity = Math.random() * 0.3 + 0.55; 
                 this.angle = Math.random() * 360;
                 this.rotationSpeed = (Math.random() - 0.5) * 0.4; 
             }
