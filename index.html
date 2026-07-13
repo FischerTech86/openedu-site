@@ -46,6 +46,7 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: max-width 0.5s ease; /* Suaviza se você quiser aumentar o tamanho da tela depois */
         }
 
         /* Título Principal com Alto Destaque */
@@ -63,7 +64,7 @@
             font-size: 1.8rem;
             font-weight: 800;
             color: #1f2937;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         /* Oculta as telas que não devem aparecer inicialmente */
@@ -76,7 +77,7 @@
             display: block;
         }
 
-        /* Campos de Entrada (Estilo Linha conforme o modelo) */
+        /* Campos de Entrada */
         .input-field {
             text-align: left;
             margin-bottom: 28px;
@@ -102,12 +103,10 @@
             transition: border-color 0.3s ease;
         }
 
-        /* Placeholder */
         .input-field input::placeholder {
             color: #9ca3af;
         }
 
-        /* Linha acende com a cor do tema ao focar */
         .input-field input:focus {
             border-bottom-color: #4f46e5;
         }
@@ -170,10 +169,8 @@
 </head>
 <body>
 
-    <!-- Canvas para rodar a animação de fundo -->
     <canvas id="animation-canvas"></canvas>
 
-    <!-- Caixa Principal do Sistema -->
     <div class="login-box">
         <h1 class="main-title">GABARITEI</h1>
         
@@ -248,6 +245,19 @@
             </div>
         </div>
 
+        <!-- ================= TELA PRINCIPAL (EM BRANCO E PRONTA) ================= -->
+        <div id="screen-main" class="screen">
+            <h2 class="sub-title" id="welcome-message">Bem-vindo!</h2>
+            <p style="color: #6b7280; margin-bottom: 30px; font-size: 0.95rem;">
+                Esta tela está em branco por enquanto. Aqui você poderá construir o seu jogo, quiz ou painel de estudos!
+            </p>
+            
+            <!-- Botão para deslogar e voltar à tela inicial de testes -->
+            <button onclick="logout()" class="btn-access" style="background-color: #ef4444; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);">
+                Sair da Conta
+            </button>
+        </div>
+
     </div>
 
     <script>
@@ -259,7 +269,7 @@
             document.getElementById(screenId).classList.add('active');
         }
 
-        // --- SISTEMA DE AUTENTICAÇÃO BLINDADO ---
+        // --- SISTEMA DE AUTENTICAÇÃO ---
         
         // 1. Fazer Login
         function handleLogin(event) {
@@ -267,14 +277,24 @@
             const user = document.getElementById('login-user').value.trim();
             const pass = document.getElementById('login-password').value;
 
-            const savedData = localStorage.getItem(`gabaritei_user_${user.toLowerCase()}`);
+            const userKey = `gabaritei_user_${user.toLowerCase()}`;
+            const savedData = localStorage.getItem(userKey);
 
             if (savedData) {
                 const userData = JSON.parse(savedData);
                 if (userData.password === pass) {
-                    alert(`🎉 Sucesso! Bem-vindo ao Gabaritei, ${userData.username}!`);
+                    // Salva qual usuário está ativo na sessão
+                    localStorage.setItem('gabaritei_usuario_ativo', user.toLowerCase());
+                    
+                    // Altera dinamicamente o título de boas-vindas com o nome real do usuário
+                    document.getElementById('welcome-message').innerText = `Olá, ${userData.username}! 👋`;
+                    
+                    // Limpa os campos de texto do formulário
                     document.getElementById('login-user').value = '';
                     document.getElementById('login-password').value = '';
+                    
+                    // MUDANÇA: Direciona automaticamente para a tela em branco
+                    navigateTo('screen-main');
                 } else {
                     alert('❌ Erro: Senha incorreta! Tente novamente.');
                 }
@@ -283,7 +303,7 @@
             }
         }
 
-        // 2. Criar Conta com Bloqueio Real de Duplicados
+        // 2. Criar Conta
         function handleSignup(event) {
             event.preventDefault();
             const user = document.getElementById('signup-user').value.trim();
@@ -292,13 +312,11 @@
 
             if (user === '' || email === '' || pass === '') return;
 
-            // Chave padronizada em minúsculo para evitar "Admin" e "admin" passarem juntos
             const userKey = `gabaritei_user_${user.toLowerCase()}`;
 
-            // TRAVA COMPLETA: Verifica se o registro já existe de fato na memória
             if (localStorage.getItem(userKey) !== null) {
-                alert(`❌ Erro: O nome de usuário "${user}" já está cadastrado por outra pessoa! Escolha um nome diferente.`);
-                return; // Corta a execução aqui e não deixa criar a conta repetida!
+                alert(`❌ Erro: O nome de usuário "${user}" já está cadastrado por outra pessoa!`);
+                return;
             }
 
             const accountData = {
@@ -307,7 +325,6 @@
                 password: pass
             };
 
-            // Guarda na memória do navegador de forma definitiva
             localStorage.setItem(userKey, JSON.stringify(accountData));
 
             alert(`✅ Conta criada com sucesso para: ${user}!\nUse esse mesmo nome para acessar.`);
@@ -319,7 +336,7 @@
             navigateTo('screen-login');
         }
 
-        // 3. Recuperar Senha (Exibição local exata e infalível)
+        // 3. Recuperar Senha
         function handleForgotPassword(event) {
             event.preventDefault();
             const user = document.getElementById('forgot-user').value.trim();
@@ -330,10 +347,8 @@
             if (savedData) {
                 const userData = JSON.parse(savedData);
                 
-                // Validação cirúrgica de E-mail cadastrado
                 if (userData.email.toLowerCase() === email.toLowerCase()) {
                     alert(`🔑 SUA SENHA RECUPERADA É:\n\n👉  ${userData.password}  👈\n\nGuarde-a com cuidado e faça seu login.`);
-                    
                     document.getElementById('forgot-user').value = '';
                     document.getElementById('forgot-email').value = '';
                     navigateTo('screen-login');
@@ -345,8 +360,14 @@
             }
         }
 
+        // 4. Sair da Conta (Logout)
+        function logout() {
+            localStorage.removeItem('gabaritei_usuario_ativo');
+            navigateTo('screen-login');
+        }
 
-        // --- ANIMAÇÃO DOS ELEMENTOS DE FUNDO (DESTAQUE MÁXIMO ATIVADO) ---
+
+        // --- ANIMAÇÃO DOS ELEMENTOS DE FUNDO ---
         const canvas = document.getElementById('animation-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -412,12 +433,10 @@
 
         function runAnimation() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
             for (let i = 0; i < particlesArray.length; i++) {
                 particlesArray[i].update();
                 particlesArray[i].draw();
             }
-            
             requestAnimationFrame(runAnimation);
         }
 
