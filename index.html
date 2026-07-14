@@ -46,7 +46,7 @@
             z-index: 2;
         }
 
-        /* Wrapper vertical para empilhar o card e o bloco de informações externo */
+        /* Wrapper vertical para o card */
         .content-wrapper {
             display: flex;
             flex-direction: column;
@@ -185,52 +185,6 @@
             text-decoration: underline;
         }
 
-        /* ================= BLOCO EXTERNO DE INFORMAÇÕES DO APP ================= */
-        .info-app-box {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 24px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            width: 100%;
-            text-align: left;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-        }
-
-        .info-app-box h3 {
-            font-size: 1rem;
-            color: #1f2937;
-            margin-bottom: 15px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border-bottom: 2px solid #f3f4f6;
-            padding-bottom: 8px;
-        }
-
-        .info-item {
-            margin-bottom: 14px;
-        }
-
-        .info-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .info-item h4 {
-            font-size: 0.82rem;
-            color: #4b5563;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .info-item p {
-            font-size: 0.76rem;
-            color: #6b7280;
-            line-height: 1.4;
-        }
-
         /* ================= RODAPÉ ================= */
         .site-footer {
             background-color: #1a1a1a;
@@ -241,6 +195,48 @@
             border-top: 4px solid #f97316;
         }
 
+        /* Estilo do bloco de informações de cima do rodapé */
+        .footer-info-app {
+            max-width: 1100px;
+            margin: 0 auto 35px auto;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #333333;
+            text-align: left;
+        }
+
+        .footer-info-app h3 {
+            color: #f97316;
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .footer-info-item h4 {
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-info-item p {
+            color: #cbd5e1;
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+
+        /* Três colunas clássicas do rodapé */
         .footer-content {
             max-width: 1100px;
             margin: 0 auto;
@@ -547,31 +543,34 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!-- ================= BLOCO DE INFORMAÇÕES DO APP EXTERNO ================= -->
-            <div class="info-app-box">
-                <h3>📌 Informações do App</h3>
-                
-                <div class="info-item">
+    <!-- ================= RODAPÉ (PRETO COM LARANJA) ================= -->
+    <footer class="site-footer">
+        
+        <!-- Bloco Superior Integrado: Informações do App -->
+        <div class="footer-info-app">
+            <h3>📌 Informações do App</h3>
+            <div class="footer-info-grid">
+                <div class="footer-info-item">
                     <h4>💡 O que é o Gabaritei?</h4>
                     <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela FichTeck. Idealizado para ajudar na organização diária, controle de progresso e preparação impecável para exames escolares e desafios educacionais.</p>
                 </div>
 
-                <div class="info-item">
+                <div class="footer-info-item">
                     <h4>🔒 Segurança e Privacidade Total</h4>
                     <p>Aqui a proteção é completa. Todas as credenciais de acesso (Usuário, E-mail e Senhas) e históricos são armazenados de forma 100% offline, direto no seu navegador com a tecnologia LocalStorage. Nenhum dado é repassado para servidores.</p>
                 </div>
 
-                <div class="info-item">
+                <div class="footer-info-item">
                     <h4>⚠️ Recomendações Importantes</h4>
                     <p>Para evitar perdas parciais ou exclusões automáticas das suas credenciais e progresso, evite limpar agressivamente o histórico/cookies do seu navegador e não acesse o sistema através de guias anônimas.</p>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- ================= RODAPÉ ================= -->
-    <footer class="site-footer">
+        <!-- Três Colunas Clássicas -->
         <div class="footer-content">
             <!-- Bloco 1: Sobre Nós -->
             <div class="footer-section">
