@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gabaritei - Sistema de Estudos</title>
     <style>
-        /* Reset de estilos para garantir uniformidade entre navegadores */
+        /* Reset de estilos para uniformidade */
         * {
             margin: 0;
             padding: 0;
@@ -35,7 +35,7 @@
             pointer-events: none;
         }
 
-        /* Container que centraliza todo o conteúdo na tela */
+        /* Container centralizador */
         .main-container {
             flex-grow: 1;
             display: flex;
@@ -46,7 +46,7 @@
             z-index: 2;
         }
 
-        /* Wrapper vertical para empilhar o card principal e o painel de info externo */
+        /* Wrapper vertical para empilhar o card e o bloco de informações externo */
         .content-wrapper {
             display: flex;
             flex-direction: column;
@@ -56,7 +56,7 @@
             max-width: 420px;
         }
 
-        /* Card de Login Centralizado */
+        /* Card Principal */
         .login-box {
             background: rgba(255, 255, 255, 0.98);
             padding: 45px 35px;
@@ -69,7 +69,7 @@
             border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
-        /* Título Principal com Alto Destaque */
+        /* Título Principal */
         .main-title {
             font-size: 3rem;
             font-weight: 900;
@@ -79,7 +79,7 @@
             text-shadow: 0 2px 10px rgba(79, 70, 229, 0.1);
         }
 
-        /* Subtítulos para as outras telas */
+        /* Subtítulos */
         .sub-title {
             font-size: 1.5rem;
             font-weight: 800;
@@ -87,12 +87,11 @@
             margin-bottom: 25px;
         }
 
-        /* Oculta as telas que não devem aparecer inicialmente */
+        /* Controle de telas */
         .screen {
             display: none;
         }
 
-        /* Exibe a tela activa */
         .screen.active {
             display: block;
         }
@@ -131,7 +130,7 @@
             border-bottom-color: #4f46e5;
         }
 
-        /* Botão com alto destaque e contraste */
+        /* Botão Principal */
         .btn-access {
             width: 100%;
             background-color: #4f46e5;
@@ -157,7 +156,7 @@
             transform: scale(0.99);
         }
 
-        /* Links de Suporte e Cadastro */
+        /* Links adicionais */
         .links-group {
             display: flex;
             flex-direction: column;
@@ -186,7 +185,7 @@
             text-decoration: underline;
         }
 
-        /* ================= BLOCO DE INFORMAÇÕES DO APP (PELE EXTERNA) ================= */
+        /* ================= BLOCO EXTERNO DE INFORMAÇÕES DO APP ================= */
         .info-app-box {
             background: rgba(255, 255, 255, 0.95);
             padding: 24px;
@@ -232,7 +231,7 @@
             line-height: 1.4;
         }
 
-        /* ================= ESTILO DO RODAPÉ (FOOTER) ================= */
+        /* ================= RODAPÉ ================= */
         .site-footer {
             background-color: #1a1a1a;
             color: #ffffff;
@@ -299,7 +298,7 @@
             font-size: 0.85rem;
         }
 
-        /* ================= SISTEMA DE MODAL (POP-UP) INTERATIVO ================= */
+        /* ================= MODAIS ================= */
         .modal {
             display: none;
             position: fixed;
@@ -375,7 +374,7 @@
             margin-bottom: 12px;
         }
 
-        /* ================= ESTILOS ESPECÍFICOS DO CONFIGURAÇÕES MODAL ================= */
+        /* ================= MODAL DE CONFIGURAÇÕES ================= */
         .config-section {
             border-bottom: 1px solid #f3f4f6;
             padding-bottom: 15px;
@@ -498,7 +497,7 @@
                             <input type="password" id="signup-password" placeholder="Crie uma senha" required>
                         </div>
 
-                    <button type="submit" class="btn-access">Cadastrar e Acessar</button>
+                        <button type="submit" class="btn-access">Cadastrar e Acessar</button>
                     </form>
 
                     <div class="links-group">
@@ -530,7 +529,7 @@
 
                 <!-- ================= TELA PRINCIPAL (DASHBOARD) ================= -->
                 <div id="screen-main" class="screen">
-                    <!-- Topo alinhado com Nome e Botão de Configurações -->
+                    <!-- Topo Dinâmico com Nome e Configurações -->
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; gap: 10px; width: 100%;">
                         <h2 class="sub-title" id="welcome-message" style="margin-bottom: 0; font-size: 1.35rem; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 210px;">Olá! 👋</h2>
                         <button onclick="openSettings()" style="background: #e5e7eb; border: none; padding: 8px 14px; border-radius: 20px; font-weight: 600; color: #4b5563; cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; flex-shrink: 0; transition: background 0.2s;" onmouseover="this.style.background='#d1d5db'" onmouseout="this.style.background='#e5e7eb'">
@@ -538,7 +537,7 @@
                         </button>
                     </div>
 
-                    <!-- Área de Conteúdo Central (Placeholder bonito e profissional) -->
+                    <!-- Conteúdo Central -->
                     <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 16px; padding: 22px; text-align: left; margin-bottom: 10px;">
                         <div style="font-size: 1.8rem; margin-bottom: 10px; text-align: center;">🎨</div>
                         <h4 style="font-size: 0.95rem; color: #1f2937; font-weight: 700; margin-bottom: 6px; text-align: center;">Espaço de Criação</h4>
@@ -549,7 +548,7 @@
                 </div>
             </div>
 
-            <!-- ================= BLOCO DE INFORMAÇÕES DO APP EXTERNO (PELE DE BAIXO) ================= -->
+            <!-- ================= BLOCO DE INFORMAÇÕES DO APP EXTERNO ================= -->
             <div class="info-app-box">
                 <h3>📌 Informações do App</h3>
                 
@@ -571,7 +570,7 @@
         </div>
     </div>
 
-    <!-- ================= NOVO RODAPÉ FORMATADO ================= -->
+    <!-- ================= RODAPÉ ================= -->
     <footer class="site-footer">
         <div class="footer-content">
             <!-- Bloco 1: Sobre Nós -->
@@ -586,7 +585,7 @@
                 <p>💡 Estude em blocos de tempo menores focando 100% na matéria e faça pausas para descanso. A constância diária vence qualquer obstáculo nos estudos!</p>
             </div>
 
-            <!-- Bloco 3: Links Úteis com Modais Interativos -->
+            <!-- Bloco 3: Links Úteis -->
             <div class="footer-section">
                 <h3>Links Úteis</h3>
                 <ul>
@@ -597,13 +596,12 @@
             </div>
         </div>
         <hr class="footer-divider">
-        <!-- Footer Bottom atualizado com FichTeck -->
         <div class="footer-bottom">
             <p>&copy; 2026 FichTeck. Todos os direitos reservados.</p>
         </div>
     </footer>
 
-    <!-- ================= MODAL CENTRALIZADO PARA OS LINKS ÚTEIS ================= -->
+    <!-- ================= MODAL DE LINKS ÚTEIS ================= -->
     <div id="info-modal" class="modal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeModal()">&times;</span>
@@ -614,7 +612,7 @@
         </div>
     </div>
 
-    <!-- ================= MODAL DE CONFIGURAÇÕES EXCLUSIVO E COMPLETO ================= -->
+    <!-- ================= MODAL DE CONFIGURAÇÕES COMPLETO ================= -->
     <div id="settings-modal" class="modal">
         <div class="modal-content" style="max-width: 450px;">
             <span class="modal-close" onclick="closeSettings()">&times;</span>
@@ -671,7 +669,7 @@
                     </form>
                 </div>
 
-                <!-- Botão de Sair da Conta Integrado (Ação) -->
+                <!-- Botão de Sair da Conta Integrado -->
                 <button onclick="logout()" class="btn-access" style="background-color: #ef4444; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35); margin-top: 15px; margin-bottom: 0; padding: 14px;">
                     Sair da Conta (Logout)
                 </button>
@@ -680,7 +678,7 @@
     </div>
 
     <script>
-        // --- ANIMAÇÃO DOS ELEMENTOS DE FUNDO (NÚMEROS, LETRAS E ÍCONES) ---
+        // --- ANIMAÇÃO DOS ELEMENTOS DE FUNDO ---
         const canvas = document.getElementById('animation-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -696,7 +694,6 @@
             '1', '2', '3', '5', '7', '8', '9', '0', 'π', '√', '%', '+'
         ];
 
-        // Paletas de cores gerenciáveis pelas configurações
         const palettes = {
             default: ['#4f46e5', '#3b82f6', '#10b981', '#f59e0b', '#6b7280'],
             indigo: ['#4f46e5', '#6366f1', '#818cf8', '#a5b4fc', '#c7d2fe'],
@@ -763,7 +760,6 @@
             requestAnimationFrame(runAnimation);
         }
 
-        // --- CONTROLES DAS CONFIGURAÇÕES DE VISUAL ---
         function updateSpeed(value) {
             animationSpeedMultiplier = parseFloat(value);
             document.getElementById('speed-value').innerText = `${animationSpeedMultiplier.toFixed(1)}x`;
@@ -773,15 +769,13 @@
         function changePalette(paletteName) {
             if (palettes[paletteName]) {
                 colorsPool = palettes[paletteName];
-                // Atualiza as cores das partículas instantaneamente
                 particlesArray.forEach(p => {
                     p.color = colorsPool[Math.floor(Math.random() * colorsPool.length)];
                 });
             }
         }
 
-
-        // --- FUNÇÕES DOS LINKS INTERATIVOS (MODAIS DO RODAPÉ) ---
+        // --- LINKS ÚTEIS (MODAIS DO RODAPÉ) ---
         function openModal(type) {
             const modal = document.getElementById('info-modal');
             const title = document.getElementById('modal-title');
@@ -791,8 +785,7 @@
                 title.innerText = 'Política de Privacidade';
                 body.innerHTML = `
                     <p>Sua privacidade é prioridade para a <strong>FichTeck</strong>.</p>
-                    <p>No <strong>Gabaritei</strong>, todos os seus dados de cadastro (Usuário, E-mail e Senha) são armazenados localmente e de forma 100% segura apenas no seu próprio navegador (usando <em>LocalStorage</em>).</p>
-                    <p><strong>Nossos compromissos:</strong></p>
+                    <p>No <strong>Gabaritei</strong>, todos os seus dados de cadastro são armazenados de forma 100% segura apenas no seu próprio navegador (usando <em>LocalStorage</em>).</p>
                     <ul>
                         <li>Não enviamos suas informações pessoais para servidores externos.</li>
                         <li>Ninguém além de você tem acesso aos seus registros de conta.</li>
@@ -802,18 +795,16 @@
             } else if (type === 'terms') {
                 title.innerText = 'Termos de Uso';
                 body.innerHTML = `
-                    <p>Ao navegar ou se cadastrar no <strong>Gabaritei</strong>, plataforma mantida pela <strong>FichTeck</strong>, você concorda em cumprir as seguintes condições:</p>
-                    <p>1. <strong>Finalidade:</strong> A ferramenta foi criada especificamente para apoio educacional e uso estritamente pessoal.</p>
-                    <p>2. <strong>Armazenamento Local:</strong> Como o salvamento de dados ocorre no seu navegador, a manutenção física do seu progresso e credenciais é de sua responsabilidade.</p>
-                    <p>3. <strong>Melhorias:</strong> Nos reservamos o direito de aprimorar recursos, corrigir falhas e adicionar funcionalidades com o intuito de otimizar sua preparação.</p>
+                    <p>Ao se cadastrar no <strong>Gabaritei</strong>, plataforma mantida pela <strong>FichTeck</strong>, você concorda em cumprir as seguintes condições:</p>
+                    <p>1. Finalidade: A ferramenta foi criada especificamente para apoio educacional e uso pessoal.</p>
+                    <p>2. Armazenamento Local: Como o salvamento de dados ocorre no seu navegador, a manutenção física do seu progresso e credenciais é de sua inteira responsabilidade.</p>
                 `;
             } else if (type === 'help') {
                 title.innerText = 'Central de Ajuda';
                 body.innerHTML = `
-                    <p>Precisa de suporte com a sua conta? Confira as soluções para as dúvidas mais comuns:</p>
-                    <p><strong>Como posso recuperar minha senha?</strong><br>Na tela de login, utilize a opção "Esqueceu a senha?". Insira seu usuário e e-mail correspondente para recuperar sua senha instantaneamente.</p>
-                    <p><strong>Por que não consigo fazer login em outro aparelho?</strong><br>O banco de dados do site é salvo localmente no seu computador ou celular atual. Para acessar em outro dispositivo, basta criar uma conta nova lá!</p>
-                    <p><strong>O que posso fazer após logar?</strong><br>Esta é sua área de estudos segura. Em breve você poderá adicionar quizzes, rastrear seus acertos de provas e registrar novas conquistas.</p>
+                    <p>Precisa de suporte com a sua conta?</p>
+                    <p><strong>Como posso recuperar minha senha?</strong><br>Utilize a opção "Esqueceu a senha?" na tela de login.</p>
+                    <p><strong>Por que não consigo logar em outro aparelho?</strong><br>Como o banco de dados é salvo localmente no seu computador ou celular atual, suas contas são independentes em cada dispositivo.</p>
                 `;
             }
 
@@ -824,8 +815,7 @@
             document.getElementById('info-modal').classList.remove('active');
         }
 
-
-        // --- MODAL EXCLUSIVO DE CONFIGURAÇÕES ---
+        // --- MODAL DE CONFIGURAÇÕES ---
         function openSettings() {
             const activeUser = localStorage.getItem('gabaritei_usuario_ativo');
             if (activeUser) {
@@ -843,7 +833,6 @@
             document.getElementById('settings-modal').classList.remove('active');
         }
 
-        // Gerenciador global de cliques fora dos Modais para fechá-los
         window.onclick = function(event) {
             const infoModal = document.getElementById('info-modal');
             const settingsModal = document.getElementById('settings-modal');
@@ -855,8 +844,7 @@
             }
         }
 
-
-        // --- FUNÇÕES DE NAVEGAÇÃO ENTRE TELAS ---
+        // --- NAVEGAÇÃO ---
         function navigateTo(screenId) {
             document.querySelectorAll('.screen').forEach(screen => {
                 screen.classList.remove('active');
@@ -864,10 +852,7 @@
             document.getElementById(screenId).classList.add('active');
         }
 
-
-        // --- SISTEMA DE AUTENTICAÇÃO E CONFIGURAÇÃO DA CONTA ---
-        
-        // 1. Fazer Login
+        // --- SISTEMA DE AUTENTICAÇÃO ---
         function handleLogin(event) {
             event.preventDefault();
             const user = document.getElementById('login-user').value.trim();
@@ -880,12 +865,9 @@
                 const userData = JSON.parse(savedData);
                 if (userData.password === pass) {
                     localStorage.setItem('gabaritei_usuario_ativo', user.toLowerCase());
-                    
                     document.getElementById('welcome-message').innerText = `Olá, ${userData.username}! 👋`;
-                    
                     document.getElementById('login-user').value = '';
                     document.getElementById('login-password').value = '';
-                    
                     navigateTo('screen-main');
                 } else {
                     alert('❌ Erro: Senha incorreta! Tente novamente.');
@@ -895,7 +877,6 @@
             }
         }
 
-        // 2. Criar Conta (Cadastrar e Acessar)
         function handleSignup(event) {
             event.preventDefault();
             const user = document.getElementById('signup-user').value.trim();
@@ -917,13 +898,10 @@
                 password: pass
             };
 
-            // Salva no banco local
             localStorage.setItem(userKey, JSON.stringify(accountData));
-            // Loga automaticamente
             localStorage.setItem('gabaritei_usuario_ativo', user.toLowerCase());
 
             alert(`✅ Conta criada com sucesso para: ${user}!\nAcessando o sistema...`);
-            
             document.getElementById('welcome-message').innerText = `Olá, ${user}! 👋`;
 
             document.getElementById('signup-user').value = '';
@@ -933,7 +911,6 @@
             navigateTo('screen-main');
         }
 
-        // 3. Recuperar Senha (Mantendo o formato real e exato do seu alerta)
         function handleForgotPassword(event) {
             event.preventDefault();
             const user = document.getElementById('forgot-user').value.trim();
@@ -943,11 +920,8 @@
 
             if (savedData) {
                 const userData = JSON.parse(savedData);
-                
                 if (userData.email.toLowerCase() === email.toLowerCase()) {
-                    // Alerta exato conforme mostrado nas suas fotos
                     alert(`📧 Enviado! Sua senha recuperada é: ${userData.password}\n\n(Aviso: Um e-mail de confirmação foi disparado para ${userData.email})`);
-                    
                     document.getElementById('forgot-user').value = '';
                     document.getElementById('forgot-email').value = '';
                     navigateTo('screen-login');
@@ -959,7 +933,6 @@
             }
         }
 
-        // 4. Alteração de Senha Segura Interna
         function handlePasswordChange(event) {
             event.preventDefault();
             const activeUser = localStorage.getItem('gabaritei_usuario_ativo');
@@ -991,23 +964,19 @@
             localStorage.setItem(userKey, JSON.stringify(userData));
 
             alert('✅ Senha alterada com sucesso!');
-            
-            // Limpa os campos do formulário
             document.getElementById('change-pass-current').value = '';
             document.getElementById('change-pass-new').value = '';
             document.getElementById('change-pass-confirm').value = '';
-            
             closeSettings();
         }
 
-        // 5. Sair da Conta (Logout)
         function logout() {
             localStorage.removeItem('gabaritei_usuario_ativo');
             closeSettings();
             navigateTo('screen-login');
         }
 
-        // Verificar sessão ao carregar a página
+        // Sessão ao carregar página
         window.onload = function() {
             const activeUser = localStorage.getItem('gabaritei_usuario_ativo');
             if (activeUser) {
