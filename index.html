@@ -1,82 +1,733 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<style>
-    /* Estilização do Rodapé */
-    footer {
-        background-color: #222; /* Fundo escuro */
-        color: white;
-        padding: 40px 20px;
-        font-family: Arial, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabaritei - Sistema de Estudos</title>
+    <style>
+        /* Reset de estilos para garantir uniformidade entre navegadores */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
 
-    .footer-container {
-        display: flex; /* Coloca as colunas lado a lado */
-        justify-content: space-around;
-        flex-wrap: wrap;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
+        body {
+            background-color: #f3f4f6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-    .footer-section {
-        margin: 20px;
-        flex: 1;
-        min-width: 250px;
-    }
+        /* Canvas fixado ao fundo para a animação */
+        #animation-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
 
-    .footer-section h3 {
-        color: #f39c12; /* Cor de destaque para títulos */
-    }
+        /* Container que centraliza o card de login na tela */
+        .main-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 40px 20px;
+            z-index: 2;
+        }
 
-    .footer-section p, .footer-section ul {
-        list-style: none;
-        padding: 0;
-        color: #ccc;
-    }
+        /* Card de Login Centralizado */
+        .login-box {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 45px 35px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(79, 70, 229, 0.15);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: max-width 0.5s ease;
+        }
 
-    .copyright {
-        text-align: center;
-        margin-top: 30px;
-        padding-top: 20px;
-        border-top: 1px solid #444;
-        color: #888;
-        font-size: 0.9em;
-    }
-</style>
+        /* Título Principal com Alto Destaque */
+        .main-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #4f46e5;
+            margin-bottom: 25px;
+            letter-spacing: 4px;
+            text-shadow: 0 2px 10px rgba(79, 70, 229, 0.1);
+        }
+
+        /* Subtítulos para as outras telas */
+        .sub-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 25px;
+        }
+
+        /* Oculta as telas que não devem aparecer inicialmente */
+        .screen {
+            display: none;
+        }
+
+        /* Exibe a tela activa */
+        .screen.active {
+            display: block;
+        }
+
+        /* Campos de Entrada */
+        .input-field {
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        .input-field label {
+            display: block;
+            font-size: 0.9rem;
+            color: #4b5563;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .input-field input {
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid #e5e7eb;
+            padding: 10px 0;
+            font-size: 1rem;
+            color: #1f2937;
+            background: transparent;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-field input::placeholder {
+            color: #9ca3af;
+        }
+
+        .input-field input:focus {
+            border-bottom-color: #4f46e5;
+        }
+
+        /* Botão com alto destaque e contraste */
+        .btn-access {
+            width: 100%;
+            background-color: #4f46e5;
+            color: #ffffff;
+            border: none;
+            padding: 16px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+            transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-access:hover {
+            background-color: #4338ca;
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-access:active {
+            transform: scale(0.99);
+        }
+
+        /* Links de Suporte e Cadastro */
+        .links-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .custom-link {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .custom-link:hover {
+            color: #4b5563;
+        }
+
+        .signup-link {
+            font-weight: 600;
+            color: #4f46e5;
+        }
+        
+        .signup-link:hover {
+            color: #4338ca;
+            text-decoration: underline;
+        }
+
+        /* ================= ESTILO DO RODAPÉ (FOOTER) ================= */
+        .site-footer {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            width: 100%;
+            padding: 45px 25px 25px 25px;
+            z-index: 2;
+            border-top: 4px solid #f97316; /* Laranja de destaque */
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            color: #f97316; /* Laranja igual ao da imagem enviada */
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-section p {
+            color: #cbd5e1;
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+            display: inline-block;
+        }
+
+        .footer-section ul li a:hover {
+            color: #f97316;
+            padding-left: 4px;
+        }
+
+        .footer-divider {
+            border: 0;
+            border-top: 1px solid #333333;
+            margin: 35px 0 20px 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+
+        /* ================= SISTEMA DE MODAL (POP-UP) INTERATIVO ================= */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 520px;
+            width: 100%;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+            position: relative;
+            text-align: left;
+            animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalFadeIn {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #9ca3af;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #111111;
+        }
+
+        .modal-title {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #4f46e5;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #f3f4f6;
+            padding-bottom: 10px;
+        }
+
+        .modal-body {
+            font-size: 0.95rem;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .modal-body p {
+            margin-bottom: 12px;
+        }
+
+        .modal-body ul {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+    </style>
 </head>
 <body>
 
-<footer>
-    <div class="footer-container">
-        <!-- Coluna 1 -->
-        <div class="footer-section">
-            <h3>Sobre Nós</h3>
-            <p>Somos uma empresa dedicada a entregar os melhores serviços para você com qualidade e compromisso.</p>
-        </div>
+    <canvas id="animation-canvas"></canvas>
 
-        <!-- Coluna 2 -->
-        <div class="footer-section">
-            <h3>Links Úteis</h3>
-            <ul>
-                <li>Política de Privacidade</li>
-                <li>Termos de Uso</li>
-                <li>Central de Ajuda</li>
-            </ul>
-        </div>
+    <!-- CONTAINER CENTRALIZADOR -->
+    <div class="main-container">
+        <div class="login-box">
+            <h1 class="main-title">GABARITEI</h1>
+            
+            <!-- ================= TELA DE LOGIN ================= -->
+            <div id="screen-login" class="screen active">
+                <form onsubmit="handleLogin(event)">
+                    <div class="input-field">
+                        <label for="login-user">Usuário</label>
+                        <input type="text" id="login-user" placeholder="Digite seu usuário" required>
+                    </div>
 
-        <!-- Coluna 3 -->
-        <div class="footer-section">
-            <h3>Contato</h3>
-            <p>Email: contato@suaempresa.com.br</p>
-            <p>Telefone: (11) 99999-9999</p>
+                    <div class="input-field">
+                        <label for="login-password">Senha</label>
+                        <input type="password" id="login-password" placeholder="Digite sua senha" required>
+                    </div>
+
+                    <button type="submit" class="btn-access">Acessar o Gabaritei</button>
+                </form>
+
+                <div class="links-group">
+                    <a onclick="navigateTo('screen-forgot')" class="custom-link">Esqueceu a senha?</a>
+                    <a onclick="navigateTo('screen-signup')" class="custom-link signup-link">Você não tem outra conta? Crie uma aqui</a>
+                </div>
+            </div>
+
+            <!-- ================= TELA DE CRIAR CONTA ================= -->
+            <div id="screen-signup" class="screen">
+                <h2 class="sub-title">Criar Conta</h2>
+                <form onsubmit="handleSignup(event)">
+                    <div class="input-field">
+                        <label for="signup-user">Nome de Usuário</label>
+                        <input type="text" id="signup-user" placeholder="Escolha um usuário" required>
+                    </div>
+
+                    <div class="input-field">
+                        <label for="signup-email">E-mail</label>
+                        <input type="email" id="signup-email" placeholder="Digite seu e-mail" required>
+                    </div>
+
+                    <div class="input-field">
+                        <label for="signup-password">Senha</label>
+                        <input type="password" id="signup-password" placeholder="Crie uma senha" required>
+                    </div>
+
+                    <button type="submit" class="btn-access">Cadastrar e Acessar</button>
+                </form>
+
+                <div class="links-group">
+                    <a onclick="navigateTo('screen-login')" class="custom-link signup-link">Já tem uma conta? Acesse aqui</a>
+                </div>
+            </div>
+
+            <!-- ================= TELA DE RECUPERAR SENHA ================= -->
+            <div id="screen-forgot" class="screen">
+                <h2 class="sub-title">Recuperar Senha</h2>
+                <form onsubmit="handleForgotPassword(event)">
+                    <div class="input-field">
+                        <label for="forgot-user">Nome de Usuário</label>
+                        <input type="text" id="forgot-user" placeholder="Digite seu nome de usuário" required>
+                    </div>
+
+                    <div class="input-field">
+                        <label for="forgot-email">E-mail</label>
+                        <input type="email" id="forgot-email" placeholder="Digite o e-mail cadastrado" required>
+                    </div>
+
+                    <button type="submit" class="btn-access">Recuperar Minha Senha</button>
+                </form>
+
+                <div class="links-group">
+                    <a onclick="navigateTo('screen-login')" class="custom-link signup-link">Lembrou a senha? Voltar para o login</a>
+                </div>
+            </div>
+
+            <!-- ================= TELA PRINCIPAL (DASHBOARD) ================= -->
+            <div id="screen-main" class="screen">
+                <!-- Topo alinhado com Nome e Botão de Configurações -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; gap: 10px;">
+                    <h2 class="sub-title" id="welcome-message" style="margin-bottom: 0; font-size: 1.4rem; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Olá! 👋</h2>
+                    <button onclick="alert('⚙️ Menu de Configurações aberto!')" style="background: #e5e7eb; border: none; padding: 8px 14px; border-radius: 20px; font-weight: 600; color: #4b5563; cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; flex-shrink: 0; transition: background 0.2s;" onmouseover="this.style.background='#d1d5db'" onmouseout="this.style.background='#e5e7eb'">
+                        ⚙️ Configurações
+                    </button>
+                </div>
+
+                <!-- Área de Conteúdo Central -->
+                <p style="color: #6b7280; margin-bottom: 30px; font-size: 0.95rem;">
+                    Esta tela está em branco por enquanto. Aqui você poderá construir o seu jogo, quiz ou painel de estudos!
+                </p>
+                
+                <button onclick="logout()" class="btn-access" style="background-color: #ef4444; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35); margin-bottom: 20px;">
+                    Sair da Conta
+                </button>
+
+                <!-- Parte Final do Card -->
+                <hr style="border: 0; border-top: 1px solid #e5e7eb; margin-bottom: 15px;">
+                <div style="text-align: left; background: #f9fafb; padding: 12px; border-radius: 12px; border: 1px solid #e5e7eb;">
+                    <h4 style="font-size: 0.85rem; color: #4b5563; margin-bottom: 4px; font-weight: 700;">📌 Informações do App:</h4>
+                    <p style="font-size: 0.78rem; color: #6b7280; line-height: 1.4;">
+                        O Gabaritei foi feito para organizar seus estudos e guardar suas credenciais salvas em segurança dentro do seu dispositivo.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Rodapé do Rodapé -->
-    <div class="copyright">
-        © 2026 Nome da Sua Empresa. CNPJ: 00.000.000/0001-00
-    </div>
-</footer>
+    <!-- ================= NOVO RODAPÉ FORMATADO ================= -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <!-- Bloco 1: Sobre Nós -->
+            <div class="footer-section">
+                <h3>Sobre Nós</h3>
+                <p>Somos uma plataforma dedicada a entregar os melhores recursos de estudos e gamificação para você gabaritar as suas avaliações com qualidade, foco e compromisso.</p>
+            </div>
 
+            <!-- Bloco 2: Dicas de Ouro -->
+            <div class="footer-section">
+                <h3>Dicas de Ouro</h3>
+                <p>💡 Estude em blocos de tempo menores focando 100% na matéria e faça pausas para descanso. A constância diária vence qualquer obstáculo nos estudos!</p>
+            </div>
+
+            <!-- Bloco 3: Links Úteis com Modais Interativos -->
+            <div class="footer-section">
+                <h3>Links Úteis</h3>
+                <ul>
+                    <li><a onclick="openModal('privacy')">Política de Privacidade</a></li>
+                    <li><a onclick="openModal('terms')">Termos de Uso</a></li>
+                    <li><a onclick="openModal('help')">Central de Ajuda</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr class="footer-divider">
+        <!-- Footer Bottom atualizado com FichTeck -->
+        <div class="footer-bottom">
+            <p>&copy; 2026 FichTeck. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- ================= MODAL CENTRALIZADO PARA OS LINKS ================= -->
+    <div id="info-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h3 class="modal-title" id="modal-title">Título</h3>
+            <div class="modal-body" id="modal-body">
+                Conteúdo dinâmico aqui...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- FUNÇÕES DOS LINKS INTERATIVOS (MODAIS) ---
+        function openModal(type) {
+            const modal = document.getElementById('info-modal');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+
+            if (type === 'privacy') {
+                title.innerText = 'Política de Privacidade';
+                body.innerHTML = `
+                    <p>Sua privacidade é prioridade para a <strong>FichTeck</strong>.</p>
+                    <p>No <strong>Gabaritei</strong>, todos os seus dados de cadastro (Usuário, E-mail e Senha) são armazenados localmente e de forma 100% segura apenas no seu próprio navegador (usando <em>LocalStorage</em>).</p>
+                    <p><strong>Nossos compromissos:</strong></p>
+                    <ul>
+                        <li>Não enviamos suas informações pessoais para servidores externos.</li>
+                        <li>Ninguém além de você tem acesso aos seus registros de conta.</li>
+                        <li>Seu histórico de estudos é mantido sob total controle seu.</li>
+                    </ul>
+                `;
+            } else if (type === 'terms') {
+                title.innerText = 'Termos de Uso';
+                body.innerHTML = `
+                    <p>Ao navegar ou se cadastrar no <strong>Gabaritei</strong>, plataforma mantida pela <strong>FichTeck</strong>, você concorda em cumprir as seguintes condições:</p>
+                    <p>1. <strong>Finalidade:</strong> A ferramenta foi criada especificamente para apoio educacional e uso estritamente pessoal.</p>
+                    <p>2. <strong>Armazenamento Local:</strong> Como o salvamento de dados ocorre no seu navegador, a manutenção física do seu progresso e credenciais é de sua responsabilidade.</p>
+                    <p>3. <strong>Melhorias:</strong> Nos reservamos o direito de aprimorar recursos, corrigir falhas e adicionar funcionalidades com o intuito de otimizar sua preparação.</p>
+                `;
+            } else if (type === 'help') {
+                title.innerText = 'Central de Ajuda';
+                body.innerHTML = `
+                    <p>Precisa de suporte com a sua conta? Confira as soluções para as dúvidas mais comuns:</p>
+                    <p><strong>Como posso recuperar minha senha?</strong><br>Na tela de login, utilize a opção "Esqueceu a senha?". Insira seu usuário e e-mail correspondente para recuperar sua senha instantaneamente.</p>
+                    <p><strong>Por que não consigo fazer login em outro aparelho?</strong><br>O banco de dados do site é salvo localmente no seu computador ou celular atual. Para acessar em outro dispositivo, basta criar uma conta nova lá!</p>
+                    <p><strong>O que posso fazer após logar?</strong><br>Esta é sua área de estudos segura. Em breve você poderá adicionar quizzes, rastrear seus acertos de provas e registrar novas conquistas.</p>
+                `;
+            }
+
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('info-modal').classList.remove('active');
+        }
+
+        // Fecha o modal ao clicar em qualquer área cinza fora do pop-up
+        window.onclick = function(event) {
+            const modal = document.getElementById('info-modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+
+        // --- FUNÇÕES DE NAVEGAÇÃO ENTRE TELAS ---
+        function navigateTo(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        // --- SISTEMA DE AUTENTICAÇÃO ---
+        
+        // 1. Fazer Login
+        function handleLogin(event) {
+            event.preventDefault();
+            const user = document.getElementById('login-user').value.trim();
+            const pass = document.getElementById('login-password').value;
+
+            const userKey = `gabaritei_user_${user.toLowerCase()}`;
+            const savedData = localStorage.getItem(userKey);
+
+            if (savedData) {
+                const userData = JSON.parse(savedData);
+                if (userData.password === pass) {
+                    localStorage.setItem('gabaritei_usuario_ativo', user.toLowerCase());
+                    
+                    document.getElementById('welcome-message').innerText = `Olá, ${userData.username}! 👋`;
+                    
+                    document.getElementById('login-user').value = '';
+                    document.getElementById('login-password').value = '';
+                    
+                    navigateTo('screen-main');
+                } else {
+                    alert('❌ Erro: Senha incorreta! Tente novamente.');
+                }
+            } else {
+                alert('❌ Erro: Esse usuário não existe! Faça o seu cadastro primeiro.');
+            }
+        }
+
+        // 2. Criar Conta (Cadastrar e Acessar)
+        function handleSignup(event) {
+            event.preventDefault();
+            const user = document.getElementById('signup-user').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
+            const pass = document.getElementById('signup-password').value;
+
+            if (user === '' || email === '' || pass === '') return;
+
+            const userKey = `gabaritei_user_${user.toLowerCase()}`;
+
+            if (localStorage.getItem(userKey) !== null) {
+                alert(`❌ Erro: O nome de usuário "${user}" já está cadastrado!`);
+                return;
+            }
+
+            const accountData = {
+                username: user,
+                email: email,
+                password: pass
+            };
+
+            // Salva no banco local
+            localStorage.setItem(userKey, JSON.stringify(accountData));
+            // Loga automaticamente
+            localStorage.setItem('gabaritei_usuario_ativo', user.toLowerCase());
+
+            alert(`✅ Conta criada com sucesso para: ${user}!\nAcessando o sistema...`);
+            
+            document.getElementById('welcome-message').innerText = `Olá, ${user}! 👋`;
+
+            document.getElementById('signup-user').value = '';
+            document.getElementById('signup-email').value = '';
+            document.getElementById('signup-password').value = '';
+
+            navigateTo('screen-main');
+        }
+
+        // 3. Recuperar Senha (Mantendo o formato real e exato do seu alerta)
+        function handleForgotPassword(event) {
+            event.preventDefault();
+            const user = document.getElementById('forgot-user').value.trim();
+            const email = document.getElementById('forgot-email').value.trim();
+
+            const savedData = localStorage.getItem(`gabaritei_user_${user.toLowerCase()}`);
+
+            if (savedData) {
+                const userData = JSON.parse(savedData);
+                
+                if (userData.email.toLowerCase() === email.toLowerCase()) {
+                    // Alerta exato conforme mostrado nas suas fotos
+                    alert(`📧 Enviado! Sua senha recuperada é: ${userData.password}\n\n(Aviso: Um e-mail de confirmação foi disparado para ${userData.email})`);
+                    
+                    document.getElementById('forgot-user').value = '';
+                    document.getElementById('forgot-email').value = '';
+                    navigateTo('screen-login');
+                } else {
+                    alert('❌ Erro: O e-mail digitado não bate com o e-mail guardado para esse usuário.');
+                }
+            } else {
+                alert('❌ Erro: Nome de usuário não encontrado no sistema.');
+            }
+        }
+
+        // 4. Sair da Conta (Logout)
+        function logout() {
+            localStorage.removeItem('gabaritei_usuario_ativo');
+            navigateTo('screen-login');
+        }
+
+        // Verificar sessão ao carregar a página
+        window.onload = function() {
+            const activeUser = localStorage.getItem('gabaritei_usuario_ativo');
+            if (activeUser) {
+                const savedData = localStorage.getItem(`gabaritei_user_${activeUser}`);
+                if (savedData) {
+                    const userData = JSON.parse(savedData);
+                    document.getElementById('welcome-message').innerText = `Olá, ${userData.username}! 👋`;
+                    navigateTo('screen-main');
+                } else {
+                    navigateTo('screen-login');
+                }
+            } else {
+                navigateTo('screen-login');
+            }
+            setupCanvas();
+            runAnimation();
+        };
+
+
+        // --- ANIMAÇÃO DOS ELEMENTOS DE FUNDO (NÚMEROS, LETRAS E ÍCONES) ---
+        const canvas = document.getElementById('animation-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function setupCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', setupCanvas);
+
+        const elementsPool = [
+            '📚', '📖', '✏️', '📝', '🎓', '📓', '📐',
+            'A', 'B', 'C', 'X', 'Y', 'Z', 'M', 'N', 'H',
+            '1', '2', '3', '5', '7', '8', '9', '0', 'π', '√', '%', '+'
+        ];
+
+        const colorsPool = ['#4f46e5', '#3b82f6', '#10b981', '#f59e0b', '#6b7280'];
+        const particleCount = 65; 
+        const particlesArray = [];
+
+        class ElementParticle {
+            constructor() {
+                this.init();
+                this.y = Math.random() * canvas.height;
+            }
+
+            init() {
+                this.x = Math.random() * canvas.width;
+                this.y = -60; 
+                this.speed = Math.random() * 1.3 + 0.7; 
+                this.size = Math.random() * 12 + 15; 
+                this.content = elementsPool[Math.floor(Math.random() * elementsPool.length)];
+                this.color = colorsPool[Math.floor(Math.random() * colorsPool.length)];
+                this.opacity = Math.random() * 0.3 + 0.55; 
+                this.angle = Math.random() * 360;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.4; 
+            }
+
+            update() {
+                this.y += this.speed;
+                this.angle += this.rotationSpeed;
+
+                if (this.y > canvas.height + 50) {
+                    this.init();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.angle * Math.PI) / 180);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.font = `bold ${this.size}px 'Segoe UI', sans-serif`;
+                ctx.fillText(this.content, 0, 0);
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particlesArray.push(new ElementParticle());
+        }
+
+        function runAnimation() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(runAnimation);
+        }
+    </script>
 </body>
 </html>
