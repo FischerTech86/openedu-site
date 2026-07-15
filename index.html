@@ -1,25 +1,103 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Gabaritei - Sistema</title>
+    <style>
+        /* CSS GERAL */
+        body { font-family: Arial, sans-serif; margin: 0; background-color: #f4f4f9; display: flex; flex-direction: column; min-height: 100vh; }
+        .conteudo { flex: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .tela { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        
+        /* Rodapé Estilo Profissional */
+        footer { background-color: #222; color: white; padding: 40px 20px; margin-top: auto; }
+        .footer-container { display: flex; justify-content: space-around; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; }
+        .footer-section { margin: 20px; flex: 1; min-width: 200px; }
+        .copyright { text-align: center; margin-top: 30px; border-top: 1px solid #444; padding-top: 20px; color: #888; }
+        
+        /* Botões e Inputs */
+        input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { background: #4a47a3; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; width: 100%; }
+        button:hover { background: #353380; }
+        a { color: #4a47a3; cursor: pointer; text-decoration: underline; }
+    </style>
 </head>
 <body>
 
-    <!-- TELA DE LOGIN (Visível por padrão) -->
-    <div id="container-login">
-        <h1>GABARITEI - Login</h1>
-        <input type="text" id="usuario" placeholder="Digite seu usuário">
-        <input type="password" id="senha" placeholder="Digite sua senha">
-        <!-- O botão chama a função 'logar' -->
-        <button onclick="logar()">Acessar o Gabaritei</button>
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="conteudo">
+        
+        <!-- TELA LOGIN -->
+        <div id="view-login" class="tela">
+            <h2>GABARITEI</h2>
+            <input type="text" placeholder="Usuário">
+            <input type="password" placeholder="Senha">
+            <button onclick="mudarTela('view-painel')">Acessar</button>
+            <p><a onclick="mudarTela('view-recuperar')">Esqueceu a senha?</a></p>
+            <p>Não tem conta? <a onclick="mudarTela('view-cadastro')">Crie uma aqui</a></p>
+        </div>
+
+        <!-- TELA CADASTRO -->
+        <div id="view-cadastro" class="tela" style="display:none;">
+            <h2>Criar Conta</h2>
+            <input type="text" placeholder="Nome de Usuário">
+            <input type="email" placeholder="E-mail">
+            <input type="password" placeholder="Senha">
+            <button onclick="mudarTela('view-login')">Cadastrar e Acessar</button>
+            <p><a onclick="mudarTela('view-login')">Já tem conta? Acesse aqui</a></p>
+        </div>
+
+        <!-- TELA RECUPERAR -->
+        <div id="view-recuperar" class="tela" style="display:none;">
+            <h2>Recuperar Senha</h2>
+            <input type="text" placeholder="Usuário">
+            <input type="email" placeholder="E-mail">
+            <button onclick="mudarTela('view-login')">Recuperar Minha Senha</button>
+            <p><a onclick="mudarTela('view-login')">Voltar para o login</a></p>
+        </div>
+
+        <!-- TELA PAINEL -->
+        <div id="view-painel" class="tela" style="display:none;">
+            <h2>Bem-vindo, Aluno!</h2>
+            <p>Este é o seu painel de estudos.</p>
+            <button onclick="mudarTela('view-login')">Sair da Conta</button>
+        </div>
     </div>
 
-    <!-- PAINEL PRINCIPAL (Escondido por padrão) -->
-    <div id="painel-principal" style="display: none;">
-        <h1>Bem-vindo ao Painel!</h1>
-        <button onclick="sair()">Sair da Conta</button>
-    </div>
+    <!-- RODAPÉ COMPLETO -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Gabaritei</h3>
+                <p>Sistema de estudos e preparação acadêmica.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Links</h3>
+                <p>Termos de Uso</p>
+                <p>Privacidade</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p>contato@gabaritei.com.br</p>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 Gabaritei. Todos os direitos reservados.
+        </div>
+    </footer>
 
-    <script src="script.js"></script>
+    <!-- LÓGICA DE NAVEGAÇÃO -->
+    <script>
+        function mudarTela(idTela) {
+            // Esconde todas as telas
+            document.getElementById('view-login').style.display = 'none';
+            document.getElementById('view-cadastro').style.display = 'none';
+            document.getElementById('view-recuperar').style.display = 'none';
+            document.getElementById('view-painel').style.display = 'none';
+            
+            // Mostra a tela que foi pedida
+            document.getElementById(idTela).style.display = 'block';
+        }
+    </script>
 </body>
 </html>
