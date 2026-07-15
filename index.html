@@ -1,82 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<style>
-    /* Estilização do Rodapé */
-    footer {
-        background-color: #222; /* Fundo escuro */
-        color: white;
-        padding: 40px 20px;
-        font-family: Arial, sans-serif;
-    }
-
-    .footer-container {
-        display: flex; /* Coloca as colunas lado a lado */
-        justify-content: space-around;
-        flex-wrap: wrap;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .footer-section {
-        margin: 20px;
-        flex: 1;
-        min-width: 250px;
-    }
-
-    .footer-section h3 {
-        color: #f39c12; /* Cor de destaque para títulos */
-    }
-
-    .footer-section p, .footer-section ul {
-        list-style: none;
-        padding: 0;
-        color: #ccc;
-    }
-
-    .copyright {
-        text-align: center;
-        margin-top: 30px;
-        padding-top: 20px;
-        border-top: 1px solid #444;
-        color: #888;
-        font-size: 0.9em;
-    }
-</style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<footer>
-    <div class="footer-container">
-        <!-- Coluna 1 -->
-        <div class="footer-section">
-            <h3>Sobre Nós</h3>
-            <p>Somos uma empresa dedicada a entregar os melhores serviços para você com qualidade e compromisso.</p>
-        </div>
-
-        <!-- Coluna 2 -->
-        <div class="footer-section">
-            <h3>Links Úteis</h3>
-            <ul>
-                <li>Política de Privacidade</li>
-                <li>Termos de Uso</li>
-                <li>Central de Ajuda</li>
-            </ul>
-        </div>
-
-        <!-- Coluna 3 -->
-        <div class="footer-section">
-            <h3>Contato</h3>
-            <p>Email: contato@suaempresa.com.br</p>
-            <p>Telefone: (11) 99999-9999</p>
-        </div>
+    <!-- TELA DE LOGIN (Visível por padrão) -->
+    <div id="container-login">
+        <h1>GABARITEI - Login</h1>
+        <input type="text" id="usuario" placeholder="Digite seu usuário">
+        <input type="password" id="senha" placeholder="Digite sua senha">
+        <!-- O botão chama a função 'logar' -->
+        <button onclick="logar()">Acessar o Gabaritei</button>
     </div>
 
-    <!-- Rodapé do Rodapé -->
-    <div class="copyright">
-        © 2026 Nome da Sua Empresa. CNPJ: 00.000.000/0001-00
+    <!-- PAINEL PRINCIPAL (Escondido por padrão) -->
+    <div id="painel-principal" style="display: none;">
+        <h1>Bem-vindo ao Painel!</h1>
+        <button onclick="sair()">Sair da Conta</button>
     </div>
-</footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
