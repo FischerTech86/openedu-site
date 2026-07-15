@@ -3,102 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabaritei - Sistema</title>
+    <title>Gabaritei - Sistema de Estudos</title>
     <style>
         /* CSS GERAL */
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #f4f4f9; display: flex; flex-direction: column; min-height: 100vh; }
-        .conteudo { flex: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
-        .tela { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        body, html { margin: 0; padding: 0; height: 100%; font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f4f9; overflow: hidden; }
         
-        /* Rodapé */
-        footer { background-color: #222; color: white; padding: 30px 20px; margin-top: auto; }
-        .footer-container { display: flex; justify-content: space-around; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
-        .footer-section { margin: 10px; flex: 1; min-width: 200px; }
-        .copyright { text-align: center; margin-top: 20px; border-top: 1px solid #444; padding-top: 15px; color: #888; font-size: 0.8em; }
+        /* Fundo Animado */
+        #background-animation { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        .float-char { position: absolute; color: rgba(74, 71, 163, 0.2); font-weight: bold; animation: float linear infinite; }
+        @keyframes float { 0% { transform: translateY(110vh) rotate(0deg); } 100% { transform: translateY(-10vh) rotate(360deg); } }
+
+        /* Conteúdo das Telas */
+        .conteudo { position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .tela { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 350px; text-align: center; }
         
-        /* Elementos do Formulário */
-        input { width: 90%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
-        button { background: #4a47a3; color: white; padding: 12px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-size: 16px; margin-top: 10px; }
+        h2 { color: #4a47a3; margin-bottom: 25px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        button { background: #4a47a3; color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 16px; margin-top: 15px; }
         button:hover { background: #353380; }
-        a { color: #4a47a3; cursor: pointer; text-decoration: underline; font-size: 0.9em; }
-        h2 { color: #333; }
+        a { color: #4a47a3; cursor: pointer; text-decoration: underline; font-size: 0.9em; display: block; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-    <!-- CONTEÚDO PRINCIPAL -->
+    <!-- CONTAINER DA ANIMAÇÃO -->
+    <div id="background-animation"></div>
+
+    <!-- TELAS -->
     <div class="conteudo">
-        
-        <!-- TELA LOGIN (Visível por padrão) -->
+        <!-- LOGIN -->
         <div id="view-login" class="tela">
             <h2>GABARITEI</h2>
             <input type="text" placeholder="Usuário">
             <input type="password" placeholder="Senha">
             <button onclick="mudarTela('view-painel')">Acessar o Gabaritei</button>
-            <p><a onclick="mudarTela('view-recuperar')">Esqueceu a senha?</a></p>
-            <p>Não tem conta? <a onclick="mudarTela('view-cadastro')">Crie uma aqui</a></p>
+            <a onclick="mudarTela('view-recuperar')">Esqueceu a senha?</a>
+            <p style="font-size: 0.8em; margin-top:15px;">Não tem conta? <a onclick="mudarTela('view-cadastro')">Crie uma aqui</a></p>
         </div>
 
-        <!-- TELA CADASTRO -->
+        <!-- CADASTRO -->
         <div id="view-cadastro" class="tela" style="display:none;">
             <h2>Criar Conta</h2>
             <input type="text" placeholder="Nome de Usuário">
             <input type="email" placeholder="E-mail">
             <input type="password" placeholder="Senha">
             <button onclick="mudarTela('view-login')">Cadastrar e Acessar</button>
-            <p><a onclick="mudarTela('view-login')">Já tem conta? Acesse aqui</a></p>
+            <a onclick="mudarTela('view-login')">Já tem conta? Acesse aqui</a>
         </div>
 
-        <!-- TELA RECUPERAR -->
+        <!-- RECUPERAR -->
         <div id="view-recuperar" class="tela" style="display:none;">
             <h2>Recuperar Senha</h2>
             <input type="text" placeholder="Usuário">
             <input type="email" placeholder="E-mail">
             <button onclick="mudarTela('view-login')">Recuperar Minha Senha</button>
-            <p><a onclick="mudarTela('view-login')">Voltar para o login</a></p>
+            <a onclick="mudarTela('view-login')">Voltar para o login</a>
         </div>
 
-        <!-- TELA PAINEL -->
+        <!-- PAINEL -->
         <div id="view-painel" class="tela" style="display:none;">
-            <h2>Bem-vindo, Aluno!</h2>
-            <p>Painel de estudos Gabaritei.</p>
+            <h2>Bem-vindo!</h2>
+            <p>Seu espaço de estudos Gabaritei.</p>
             <button onclick="mudarTela('view-login')">Sair da Conta</button>
         </div>
     </div>
 
-    <!-- RODAPÉ -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Gabaritei</h3>
-                <p>Sistema oficial de estudos.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Suporte</h3>
-                <p>Central de Ajuda</p>
-            </div>
-            <div class="footer-section">
-                <h3>Contato</h3>
-                <p>contato@gabaritei.com.br</p>
-            </div>
-        </div>
-        <div class="copyright">
-            © 2026 Gabaritei. Todos os direitos reservados.
-        </div>
-    </footer>
-
-    <!-- LÓGICA -->
     <script>
+        // Lógica de Navegação
         function mudarTela(idTela) {
-            // Esconde todas as telas
-            document.getElementById('view-login').style.display = 'none';
-            document.getElementById('view-cadastro').style.display = 'none';
-            document.getElementById('view-recuperar').style.display = 'none';
-            document.getElementById('view-painel').style.display = 'none';
-            
-            // Mostra a tela desejada
+            document.querySelectorAll('.tela').forEach(t => t.style.display = 'none');
             document.getElementById(idTela).style.display = 'block';
         }
+
+        // Lógica da Animação de Fundo
+        function criarAnimacao() {
+            const container = document.getElementById('background-animation');
+            const chars = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'A', 'B', 'C', 'X', 'Y', 'Z', 'π', 'Δ'];
+            
+            for (let i = 0; i < 40; i++) {
+                const span = document.createElement('span');
+                span.className = 'float-char';
+                span.innerText = chars[Math.floor(Math.random() * chars.length)];
+                span.style.left = Math.random() * 100 + 'vw';
+                span.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                span.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                span.style.animationDelay = Math.random() * 10 + 's';
+                container.appendChild(span);
+            }
+        }
+        window.onload = criarAnimacao;
     </script>
 </body>
 </html>
