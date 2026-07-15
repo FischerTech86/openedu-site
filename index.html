@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabaritei</title>
+    <title>Gabaritei - Sistema</title>
     <style>
         /* Estilo Geral */
         body, html {
@@ -12,8 +12,8 @@
             height: 100%;
             width: 100%;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f7f7fa; /* Cor de fundo leve */
-            overflow: hidden; /* Remove barras de rolagem */
+            background-color: #f7f7fa;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -32,85 +32,74 @@
 
         .symbol {
             position: absolute;
-            color: rgba(74, 71, 163, 0.15); /* Cor azul suave com transparência */
-            font-weight: bold;
-            font-size: 20px;
-            animation: float 15s linear infinite;
+            font-weight: 800;
+            text-shadow: 0 0 10px rgba(0,0,0,0.1); /* Destaque leve */
+            animation: float 20s linear infinite;
         }
 
         @keyframes float {
             0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
         }
 
         /* Card Central */
         .card {
             background: white;
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
             z-index: 2;
             width: 100%;
             max-width: 350px;
             text-align: center;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
         h1 {
             color: #3b3986;
             margin-bottom: 30px;
-            font-size: 24px;
-            letter-spacing: 1px;
+            font-size: 28px;
+            letter-spacing: 1.5px;
         }
 
         input {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             margin: 10px 0;
-            border: 1px solid #d1d1d1;
-            border-radius: 5px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             box-sizing: border-box;
             outline: none;
-            color: #555;
         }
 
         button {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background-color: #4a47a3;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 16px;
             cursor: pointer;
             margin-top: 15px;
-            transition: background 0.3s;
+            transition: transform 0.2s;
         }
 
         button:hover {
             background-color: #353380;
+            transform: scale(1.02);
         }
 
-        .links {
-            margin-top: 15px;
-            font-size: 14px;
-        }
-
-        .links a {
-            color: #4a47a3;
-            text-decoration: underline;
-            cursor: pointer;
-            display: block;
-            margin-top: 10px;
-        }
+        .links { margin-top: 20px; font-size: 14px; }
+        .links a { color: #4a47a3; text-decoration: underline; cursor: pointer; display: block; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-    <!-- Fundo animado -->
     <div class="animation-container" id="animation"></div>
 
-    <!-- Interface Principal -->
     <div class="card">
         <h1>GABARITEI</h1>
         <input type="text" placeholder="Digite seu usuário">
@@ -123,21 +112,23 @@
     </div>
 
     <script>
-        // Criar símbolos flutuantes
         const container = document.getElementById('animation');
         const symbols = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'A', 'B', 'C', 'X', 'Y', 'Z', 'π', 'Δ', 'Σ', '∞', '+', '='];
+        const colors = ['#4a47a3', '#ff6584', '#f1c40f', '#2ecc71', '#8e44ad', '#e67e22'];
 
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 40; i++) {
             const span = document.createElement('span');
             span.classList.add('symbol');
             span.innerText = symbols[Math.floor(Math.random() * symbols.length)];
             
-            // Posição aleatória
+            // Estilo visual
+            span.style.color = colors[Math.floor(Math.random() * colors.length)];
+            span.style.fontSize = (Math.random() * 30 + 25) + 'px'; // Fonte bem maior
+            
+            // Posição e Animação
             span.style.left = Math.random() * 100 + 'vw';
             span.style.top = Math.random() * 100 + 'vh';
-            
-            // Duração e delay aleatório para parecer natural
-            span.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            span.style.animationDuration = (Math.random() * 15 + 10) + 's';
             span.style.animationDelay = (Math.random() * 10) + 's';
             
             container.appendChild(span);
