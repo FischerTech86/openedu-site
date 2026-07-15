@@ -2,24 +2,26 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gabaritei - Sistema</title>
     <style>
         /* CSS GERAL */
-        body { font-family: Arial, sans-serif; margin: 0; background-color: #f4f4f9; display: flex; flex-direction: column; min-height: 100vh; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #f4f4f9; display: flex; flex-direction: column; min-height: 100vh; }
         .conteudo { flex: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
-        .tela { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        .tela { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
         
-        /* Rodapé Estilo Profissional */
-        footer { background-color: #222; color: white; padding: 40px 20px; margin-top: auto; }
-        .footer-container { display: flex; justify-content: space-around; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; }
-        .footer-section { margin: 20px; flex: 1; min-width: 200px; }
-        .copyright { text-align: center; margin-top: 30px; border-top: 1px solid #444; padding-top: 20px; color: #888; }
+        /* Rodapé */
+        footer { background-color: #222; color: white; padding: 30px 20px; margin-top: auto; }
+        .footer-container { display: flex; justify-content: space-around; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
+        .footer-section { margin: 10px; flex: 1; min-width: 200px; }
+        .copyright { text-align: center; margin-top: 20px; border-top: 1px solid #444; padding-top: 15px; color: #888; font-size: 0.8em; }
         
-        /* Botões e Inputs */
-        input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
-        button { background: #4a47a3; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; width: 100%; }
+        /* Elementos do Formulário */
+        input { width: 90%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        button { background: #4a47a3; color: white; padding: 12px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-size: 16px; margin-top: 10px; }
         button:hover { background: #353380; }
-        a { color: #4a47a3; cursor: pointer; text-decoration: underline; }
+        a { color: #4a47a3; cursor: pointer; text-decoration: underline; font-size: 0.9em; }
+        h2 { color: #333; }
     </style>
 </head>
 <body>
@@ -27,12 +29,12 @@
     <!-- CONTEÚDO PRINCIPAL -->
     <div class="conteudo">
         
-        <!-- TELA LOGIN -->
+        <!-- TELA LOGIN (Visível por padrão) -->
         <div id="view-login" class="tela">
             <h2>GABARITEI</h2>
             <input type="text" placeholder="Usuário">
             <input type="password" placeholder="Senha">
-            <button onclick="mudarTela('view-painel')">Acessar</button>
+            <button onclick="mudarTela('view-painel')">Acessar o Gabaritei</button>
             <p><a onclick="mudarTela('view-recuperar')">Esqueceu a senha?</a></p>
             <p>Não tem conta? <a onclick="mudarTela('view-cadastro')">Crie uma aqui</a></p>
         </div>
@@ -59,22 +61,21 @@
         <!-- TELA PAINEL -->
         <div id="view-painel" class="tela" style="display:none;">
             <h2>Bem-vindo, Aluno!</h2>
-            <p>Este é o seu painel de estudos.</p>
+            <p>Painel de estudos Gabaritei.</p>
             <button onclick="mudarTela('view-login')">Sair da Conta</button>
         </div>
     </div>
 
-    <!-- RODAPÉ COMPLETO -->
+    <!-- RODAPÉ -->
     <footer>
         <div class="footer-container">
             <div class="footer-section">
                 <h3>Gabaritei</h3>
-                <p>Sistema de estudos e preparação acadêmica.</p>
+                <p>Sistema oficial de estudos.</p>
             </div>
             <div class="footer-section">
-                <h3>Links</h3>
-                <p>Termos de Uso</p>
-                <p>Privacidade</p>
+                <h3>Suporte</h3>
+                <p>Central de Ajuda</p>
             </div>
             <div class="footer-section">
                 <h3>Contato</h3>
@@ -86,7 +87,7 @@
         </div>
     </footer>
 
-    <!-- LÓGICA DE NAVEGAÇÃO -->
+    <!-- LÓGICA -->
     <script>
         function mudarTela(idTela) {
             // Esconde todas as telas
@@ -95,7 +96,7 @@
             document.getElementById('view-recuperar').style.display = 'none';
             document.getElementById('view-painel').style.display = 'none';
             
-            // Mostra a tela que foi pedida
+            // Mostra a tela desejada
             document.getElementById(idTela).style.display = 'block';
         }
     </script>
