@@ -100,7 +100,7 @@
             margin-bottom: 30px;
         }
 
-        /* Estilo dos Inputs Shaded com Linha Inferior (Idêntico às Imagens) */
+        /* Estilo dos Inputs Shaded com Linha Inferior */
         .input-group {
             text-align: left;
             margin-bottom: 22px;
@@ -381,7 +381,7 @@
                 <!-- CARD 1: LOGIN (Padrão) -->
                 <div id="card-login" class="form-card active">
                     <h1 class="logo-title">GABARITEI</h1>
-                    <div style="height: 25px;"></div> <!-- Espaçamento sutil -->
+                    <div style="height: 25px;"></div>
                     
                     <form onsubmit="event.preventDefault(); alert('Login efetuado (Simulação)!');">
                         <div class="input-group">
@@ -459,15 +459,15 @@
             </div>
         </section>
 
-        <!-- SIMULAÇÃO EXATA DO DIÁLOGO DE ALERTA DO CHROME (DARK MODE) -->
+        <!-- SIMULAÇÃO DO DIÁLOGO DE ALERTA COM SENHA DINÂMICA -->
         <div id="custom-alert" class="alert-overlay">
             <div class="alert-box">
                 <div class="alert-header">fischertech86.github.io diz</div>
                 <div class="alert-body">
                     <span class="alert-success-icon">🔵</span> 
-                    <strong>Enviado! Sua senha recuperada é: GpM_@1533_&Pe+</strong>
+                    <strong>Enviado! Sua senha recuperada é: <span id="alert-password-text" style="color: #8ab4f8; font-family: monospace;"></span></strong>
                     <span id="alert-email-text" class="alert-email-info">
-                        (Aviso: Um e-mail de confirmação foi disparado para peixinho1533@gmail.com)
+                        (Aviso: Um e-mail de confirmação foi disparado)
                     </span>
                 </div>
                 <div class="alert-footer">
@@ -491,7 +491,7 @@
                     
                     <div class="footer-column">
                         <h3>🔒 Segurança e Privacidade Total</h3>
-                        <p>Aqui a proteção é completa. Todas as credenciais de acesso (Usuário, E-mail e Senhas) e históricos são armazenados de forma 100% offline, direto no seu navegador com a tecnologia LocalStorage. Nenhum dato é repassado para servidores.</p>
+                        <p>Aqui a proteção é completa. Todas as credenciais de acesso (Usuário, E-mail e Senhas) e históricos são armazenados de forma 100% offline, direto no seu navegador com a tecnologia LocalStorage. Nenhum dado é repassado para servidores.</p>
                     </div>
                     
                     <div class="footer-column">
@@ -534,33 +534,45 @@
     <script>
         // --- CONTROLE DE NAVEGAÇÃO DOS CARDS ---
         function navigateTo(targetCardId) {
-            // Remove a classe ativa de todos os cards
             document.querySelectorAll('.form-card').forEach(card => {
                 card.classList.remove('active');
             });
-            // Adiciona a classe ativa no card correspondente
             document.getElementById(targetCardId).classList.add('active');
         }
 
-        // --- MANIPULAÇÃO DO ALERTA DE RECUPERAÇÃO ---
+        // --- GERADOR DE SENHA COMPLEXA E DINÂMICA ---
+        // Cria uma senha aleatória mantendo a estética segura original (ex: GpM_@5891_&Pe*)
+        function generateComplexPassword() {
+            const prefixes = ["GpM_@", "KbT_@", "XyZ_@", "Fch_@", "PlM_@"];
+            const suffixes = ["_&Pe+", "_&Te*", "_&Xy#", "_&Ok!", "_&Gb$"];
+            
+            const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+            const randomNumber = Math.floor(1000 + Math.random() * 9000); // 4 dígitos dinâmicos
+            const randomSuffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+            
+            return `${randomPrefix}${randomNumber}${randomSuffix}`;
+        }
+
+        // --- MANIPULAÇÃO DO FORMULÁRIO DE RECUPERAÇÃO ---
         function handleRecoverySubmit(event) {
             event.preventDefault();
             const emailInput = document.getElementById('rec-email').value;
             
-            // Personaliza a mensagem do modal de acordo com o e-mail preenchido
+            // Gera uma nova senha dinâmica exclusiva para esta tentativa
+            const dynamicPassword = generateComplexPassword();
+            
+            // Injeta a senha dinâmica gerada e o e-mail no Alerta
+            document.getElementById('alert-password-text').innerText = dynamicPassword;
             document.getElementById('alert-email-text').innerText = 
                 `(Aviso: Um e-mail de confirmação foi disparado para ${emailInput})`;
             
-            // Mostra o Alerta simulado do Chrome
+            // Exibe o alerta customizado
             document.getElementById('custom-alert').style.display = 'flex';
         }
 
         function closeAlert() {
-            // Esconde o Alerta
             document.getElementById('custom-alert').style.display = 'none';
-            // Reseta o formulário
             document.getElementById('recovery-form').reset();
-            // Retorna o usuário para a tela de login automaticamente
             navigateTo('card-login');
         }
 
@@ -587,11 +599,11 @@
             particle.innerText = items[Math.floor(Math.random() * items.length)];
             particle.style.color = colors[Math.floor(Math.random() * colors.length)];
 
-            const size = Math.random() * 14 + 12; // De 12px a 26px
+            const size = Math.random() * 14 + 12;
             particle.style.fontSize = `${size}px`;
             particle.style.left = `${Math.random() * 100}vw`;
 
-            const duration = Math.random() * 12 + 10; // Queda fluida e constante
+            const duration = Math.random() * 12 + 10;
             const delay = Math.random() * 15;
             const anim = animations[Math.floor(Math.random() * animations.length)];
 
