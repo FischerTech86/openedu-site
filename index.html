@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabaritei - Entrar</title>
-    <!-- Importando a fonte Poppins para obter a tipografia idêntica à do App -->
+    <title>Gabaritei - Sistema de Estudos</title>
+    <!-- Fonte moderna idêntica à do App -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* --- ESTILOS GERAIS --- */
+        /* --- ESTILOS GERAIS E RESET --- */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* --- SEÇÃO DE LOGIN --- */
+        /* --- CONTAINER DE LOGIN E TRANSIÇÕES --- */
         .login-section {
             position: relative;
             min-height: 100vh;
@@ -35,7 +35,7 @@
             overflow: hidden;
         }
 
-        /* Container das Partículas Caindo */
+        /* Fundo Animado */
         #particles-container {
             position: absolute;
             top: 0;
@@ -46,7 +46,6 @@
             pointer-events: none;
         }
 
-        /* Elemento Unitário de Partícula */
         .particle {
             position: absolute;
             font-weight: bold;
@@ -55,32 +54,56 @@
             will-change: transform, opacity;
         }
 
-        /* Card de Login */
-        .login-card {
+        /* --- DESIGN UNIFICADO DOS CARDS --- */
+        .card-container {
             background: #ffffff;
-            padding: 50px 40px;
+            padding: 45px 35px;
             border-radius: 24px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04), 0 5px 15px rgba(0, 0, 0, 0.02);
             width: 100%;
             max-width: 410px;
             text-align: center;
-            z-index: 10; /* Fica por cima do fundo animado */
+            z-index: 10;
             position: relative;
         }
 
-        /* Título Principal GABARITEI */
+        /* Controle de Exibição dos Cards (Transição Suave) */
+        .form-card {
+            display: none;
+        }
+
+        .form-card.active {
+            display: block;
+            animation: cardFadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes cardFadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Estilo dos Títulos */
         .logo-title {
-            color: #4a3aff; /* Tom de azul/roxo idêntico ao da imagem */
+            color: #4a3aff;
             font-size: 34px;
             font-weight: 800;
             letter-spacing: 1.5px;
-            margin-bottom: 35px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
         }
 
-        /* Grupos de Input */
+        .subtitle {
+            color: #2d3748;
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* Estilo dos Inputs Shaded com Linha Inferior (Idêntico às Imagens) */
         .input-group {
             text-align: left;
-            margin-bottom: 24px;
+            margin-bottom: 22px;
         }
 
         .input-group label {
@@ -91,30 +114,26 @@
             font-weight: 600;
         }
 
-        /* Inputs apenas com linha inferior */
         .input-group input {
             width: 100%;
-            padding: 10px 0;
+            padding: 12px 14px;
             border: none;
-            border-bottom: 1.5px solid #e2e8f0;
+            border-bottom: 1.5px solid #cbd5e1;
             font-size: 14px;
             color: #2d3748;
-            background: transparent;
-            transition: border-color 0.3s ease;
+            background: #f8fafc; /* Shading sutil de fundo */
+            border-radius: 6px 6px 0 0;
+            transition: all 0.3s ease;
         }
 
         .input-group input:focus {
             outline: none;
+            background: #f1f5f9;
             border-bottom-color: #4a3aff;
         }
 
-        .input-group input::placeholder {
-            color: #a0aec0;
-            font-size: 13.5px;
-        }
-
-        /* Botão Arredondado (Pill Button) */
-        .login-btn {
+        /* Botões Estilo Pill (Arredondados) */
+        .btn-pill {
             width: 100%;
             padding: 14px;
             background-color: #4a3aff;
@@ -124,57 +143,129 @@
             font-size: 14px;
             font-weight: 700;
             cursor: pointer;
-            margin-top: 15px;
+            margin-top: 10px;
             box-shadow: 0 8px 20px rgba(74, 58, 255, 0.25);
             transition: background-color 0.3s ease, transform 0.1s ease;
         }
 
-        .login-btn:hover {
+        .btn-pill:hover {
             background-color: #3b2ee0;
         }
 
-        .login-btn:active {
+        .btn-pill:active {
             transform: scale(0.98);
         }
 
-        /* Links Úteis do Login */
-        .login-links {
+        /* Links e Textos Inferiores */
+        .card-links {
             margin-top: 25px;
             font-size: 13px;
             color: #718096;
         }
 
-        .forgot-pass {
-            color: #718096;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 12px;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .forgot-pass:hover {
-            color: #4a3aff;
-        }
-
-        .signup-text {
-            color: #718096;
-        }
-
-        .signup-link {
+        .card-links a {
             color: #4a3aff;
             text-decoration: none;
             font-weight: 700;
+            cursor: pointer;
+            transition: color 0.2s;
         }
 
-        .signup-link:hover {
+        .card-links a:hover {
             text-decoration: underline;
+        }
+
+        .card-links p {
+            margin-bottom: 8px;
+        }
+
+
+        /* --- SIMULAÇÃO EXATA DO ALERTA DO CHROME (DARK MODE) --- */
+        .alert-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            display: none;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 100px;
+        }
+
+        .alert-box {
+            background-color: #202124; /* Fundo cinza escuro do Chrome */
+            color: #e8eaed;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+            padding: 20px;
+            border: 1px solid #3c4043;
+            animation: alertSlideDown 0.2s ease-out;
+        }
+
+        @keyframes alertSlideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .alert-header {
+            font-size: 13px;
+            color: #9aa0a6;
+            margin-bottom: 15px;
+            font-weight: 400;
+            text-align: left;
+        }
+
+        .alert-body {
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .alert-success-icon {
+            display: inline-block;
+            color: #8ab4f8; /* Azul claro do Chrome */
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .alert-email-info {
+            display: block;
+            margin-top: 8px;
+            color: #9aa0a6;
+            font-size: 13px;
+        }
+
+        .alert-footer {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .alert-btn {
+            background: transparent;
+            border: 1px solid #8ab4f8;
+            color: #8ab4f8;
+            padding: 6px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .alert-btn:hover {
+            background: rgba(138, 180, 248, 0.08);
         }
 
 
         /* --- SEÇÃO DO RODAPÉ (FOOTER) --- */
         .site-footer {
-            background-color: #121319; /* Fundo escuro idêntico */
+            background-color: #121319;
             color: #a0aec0;
             padding: 60px 40px 30px 40px;
             position: relative;
@@ -186,9 +277,8 @@
             margin: 0 auto;
         }
 
-        /* Título Principal do Rodapé */
         .footer-main-title {
-            color: #f27224; /* Laranja característico */
+            color: #f27224; /* Laranja dos títulos */
             font-size: 24px;
             font-weight: 700;
             margin-bottom: 35px;
@@ -197,7 +287,6 @@
             gap: 8px;
         }
 
-        /* Grid de Informações */
         .footer-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -206,7 +295,7 @@
         }
 
         .footer-column h3 {
-            color: #f27224; /* Títulos menores em laranja */
+            color: #f27224;
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 15px;
@@ -221,7 +310,6 @@
             color: #cbd5e0;
         }
 
-        /* Links no Rodapé */
         .footer-links a {
             display: block;
             color: #cbd5e0;
@@ -235,7 +323,6 @@
             color: #f27224;
         }
 
-        /* Linha Divisória e Copyright */
         .footer-divider {
             border: none;
             border-top: 1px solid #2d3748;
@@ -250,55 +337,31 @@
 
 
         /* --- ANIMAÇÕES DAS PARTÍCULAS --- */
-        /* Caindo reto */
         @keyframes fall-straight {
-            0% {
-                transform: translateY(-50px) rotate(0deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
             10% { opacity: 0.6; }
             90% { opacity: 0.6; }
-            100% {
-                transform: translateY(105vh) rotate(360deg);
-                opacity: 0;
-            }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
         }
 
-        /* Caindo e derivando para a esquerda */
         @keyframes fall-left {
-            0% {
-                transform: translate(0, -50px) rotate(0deg);
-                opacity: 0;
-            }
+            0% { transform: translate(0, -50px) rotate(0deg); opacity: 0; }
             10% { opacity: 0.6; }
             90% { opacity: 0.6; }
-            100% {
-                transform: translate(-100px, 105vh) rotate(-360deg);
-                opacity: 0;
-            }
+            100% { transform: translate(-100px, 105vh) rotate(-360deg); opacity: 0; }
         }
 
-        /* Caindo e derivando para a direita */
         @keyframes fall-right {
-            0% {
-                transform: translate(0, -50px) rotate(0deg);
-                opacity: 0;
-            }
+            0% { transform: translate(0, -50px) rotate(0deg); opacity: 0; }
             10% { opacity: 0.6; }
             90% { opacity: 0.6; }
-            100% {
-                transform: translate(100px, 105vh) rotate(360deg);
-                opacity: 0;
-            }
+            100% { transform: translate(100px, 105vh) rotate(360deg); opacity: 0; }
         }
 
 
-        /* --- RESPONSIVIDADE --- */
+        /* RESPONSIVIDADE */
         @media (max-width: 900px) {
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
         }
     </style>
 </head>
@@ -307,44 +370,119 @@
     <!-- CONTAINER DA PÁGINA -->
     <div class="page-wrapper">
         
-        <!-- SEÇÃO DE LOGIN COM ANIMAÇÃO -->
+        <!-- SEÇÃO DE LOGIN COM ELEMENTOS INTERATIVOS -->
         <section class="login-section">
-            <!-- Fundo Animado -->
+            <!-- Partículas Animadas de Fundo -->
             <div id="particles-container"></div>
             
-            <!-- Card de Login -->
-            <div class="login-card">
-                <h1 class="logo-title">GABARITEI</h1>
+            <!-- Container Único de Cards -->
+            <div class="card-container">
                 
-                <form onsubmit="event.preventDefault();">
-                    <div class="input-group">
-                        <label for="user">Usuário</label>
-                        <input type="text" id="user" placeholder="Digite seu usuário" required>
-                    </div>
+                <!-- CARD 1: LOGIN (Padrão) -->
+                <div id="card-login" class="form-card active">
+                    <h1 class="logo-title">GABARITEI</h1>
+                    <div style="height: 25px;"></div> <!-- Espaçamento sutil -->
                     
-                    <div class="input-group">
-                        <label for="pass">Senha</label>
-                        <input type="password" id="pass" placeholder="Digite sua senha" required>
-                    </div>
+                    <form onsubmit="event.preventDefault(); alert('Login efetuado (Simulação)!');">
+                        <div class="input-group">
+                            <label for="login-user">Usuário</label>
+                            <input type="text" id="login-user" placeholder="Digite seu usuário" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="login-pass">Senha</label>
+                            <input type="password" id="login-pass" placeholder="Digite sua senha" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-pill">Acessar o Gabaritei</button>
+                    </form>
                     
-                    <button type="submit" class="login-btn">Acessar o Gabaritei</button>
-                </form>
-                
-                <div class="login-links">
-                    <a href="#" class="forgot-pass">Esqueceu a senha?</a>
-                    <p class="signup-text">Você não tem outra conta? <a href="#" class="signup-link">Crie uma aqui</a></p>
+                    <div class="card-links">
+                        <p><a onclick="navigateTo('card-recovery')">Esqueceu a senha?</a></p>
+                        <p>Você não tem outra conta? <a onclick="navigateTo('card-register')">Crie uma aqui</a></p>
+                    </div>
                 </div>
+
+                <!-- CARD 2: CRIAR CONTA -->
+                <div id="card-register" class="form-card">
+                    <h1 class="logo-title">GABARITEI</h1>
+                    <h2 class="subtitle">Criar Conta</h2>
+                    
+                    <form onsubmit="event.preventDefault(); alert('Conta criada com sucesso! Faça login.'); navigateTo('card-login');">
+                        <div class="input-group">
+                            <label for="reg-user">Nome de Usuário</label>
+                            <input type="text" id="reg-user" placeholder="Ex: Admi_oficial" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="reg-email">E-mail</label>
+                            <input type="email" id="reg-email" placeholder="Ex: peixinho1533@gmail.com" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="reg-pass">Senha</label>
+                            <input type="password" id="reg-pass" placeholder="Crie uma senha forte" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-pill">Cadastrar e Acessar</button>
+                    </form>
+                    
+                    <div class="card-links">
+                        <p><a onclick="navigateTo('card-login')">Já tem uma conta? Acesse aqui</a></p>
+                    </div>
+                </div>
+
+                <!-- CARD 3: RECUPERAR SENHA -->
+                <div id="card-recovery" class="form-card">
+                    <h1 class="logo-title">GABARITEI</h1>
+                    <h2 class="subtitle">Recuperar Senha</h2>
+                    
+                    <form id="recovery-form" onsubmit="handleRecoverySubmit(event)">
+                        <div class="input-group">
+                            <label for="rec-user">Nome de Usuário</label>
+                            <input type="text" id="rec-user" placeholder="Digite seu usuário" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="rec-email">E-mail</label>
+                            <input type="email" id="rec-email" placeholder="Digite seu e-mail cadastrado" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-pill">Recuperar Minha Senha</button>
+                    </form>
+                    
+                    <div class="card-links">
+                        <p><a onclick="navigateTo('card-login')">Lembrou a senha? Voltar para o login</a></p>
+                    </div>
+                </div>
+
             </div>
         </section>
 
-        <!-- SEÇÃO DO RODAPÉ (DENTRO DA ESTRUTURA ESCURA) -->
+        <!-- SIMULAÇÃO EXATA DO DIÁLOGO DE ALERTA DO CHROME (DARK MODE) -->
+        <div id="custom-alert" class="alert-overlay">
+            <div class="alert-box">
+                <div class="alert-header">fischertech86.github.io diz</div>
+                <div class="alert-body">
+                    <span class="alert-success-icon">🔵</span> 
+                    <strong>Enviado! Sua senha recuperada é: GpM_@1533_&Pe+</strong>
+                    <span id="alert-email-text" class="alert-email-info">
+                        (Aviso: Um e-mail de confirmação foi disparado para peixinho1533@gmail.com)
+                    </span>
+                </div>
+                <div class="alert-footer">
+                    <button class="alert-btn" onclick="closeAlert()">OK</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO DO RODAPÉ (FOOTER) -->
         <footer class="site-footer">
             <div class="footer-container">
                 
-                <!-- Título do Footer -->
                 <h2 class="footer-main-title">📌 Informações do App</h2>
                 
-                <!-- Primeira Linha do Grid -->
+                <!-- Primeira Linha -->
                 <div class="footer-grid">
                     <div class="footer-column">
                         <h3>💡 O que é o Gabaritei?</h3>
@@ -353,7 +491,7 @@
                     
                     <div class="footer-column">
                         <h3>🔒 Segurança e Privacidade Total</h3>
-                        <p>Aqui a proteção é completa. Todas as credenciais de acesso (Usuário, E-mail e Senhas) e históricos são armazenados de forma 100% offline, direto no seu navegador com a tecnologia LocalStorage. Nenhum dado é repassado para servidores.</p>
+                        <p>Aqui a proteção é completa. Todas as credenciais de acesso (Usuário, E-mail e Senhas) e históricos são armazenados de forma 100% offline, direto no seu navegador com a tecnologia LocalStorage. Nenhum dato é repassado para servidores.</p>
                     </div>
                     
                     <div class="footer-column">
@@ -362,7 +500,7 @@
                     </div>
                 </div>
 
-                <!-- Segunda Linha do Grid -->
+                <!-- Segunda Linha -->
                 <div class="footer-grid">
                     <div class="footer-column">
                         <h3>Sobre Nós</h3>
@@ -384,7 +522,6 @@
                     </div>
                 </div>
 
-                <!-- Linha final de Copyright -->
                 <hr class="footer-divider">
                 <p class="copyright">© 2026 FichTeck. Todos os direitos reservados.</p>
 
@@ -393,50 +530,69 @@
 
     </div>
 
-    <!-- SCRIPT DA ANIMAÇÃO DE FUNDO -->
+    <!-- SCRIPT DA ANIMAÇÃO DE FUNDO E NAVEGAÇÃO -->
     <script>
+        // --- CONTROLE DE NAVEGAÇÃO DOS CARDS ---
+        function navigateTo(targetCardId) {
+            // Remove a classe ativa de todos os cards
+            document.querySelectorAll('.form-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            // Adiciona a classe ativa no card correspondente
+            document.getElementById(targetCardId).classList.add('active');
+        }
+
+        // --- MANIPULAÇÃO DO ALERTA DE RECUPERAÇÃO ---
+        function handleRecoverySubmit(event) {
+            event.preventDefault();
+            const emailInput = document.getElementById('rec-email').value;
+            
+            // Personaliza a mensagem do modal de acordo com o e-mail preenchido
+            document.getElementById('alert-email-text').innerText = 
+                `(Aviso: Um e-mail de confirmação foi disparado para ${emailInput})`;
+            
+            // Mostra o Alerta simulado do Chrome
+            document.getElementById('custom-alert').style.display = 'flex';
+        }
+
+        function closeAlert() {
+            // Esconde o Alerta
+            document.getElementById('custom-alert').style.display = 'none';
+            // Reseta o formulário
+            document.getElementById('recovery-form').reset();
+            // Retorna o usuário para a tela de login automaticamente
+            navigateTo('card-login');
+        }
+
+
+        // --- ENGINE DO FUNDO ANIMADO (PARTÍCULAS) ---
         const container = document.getElementById('particles-container');
 
-        // Caracteres que vão cair no fundo (incluindo ícones/emojis escolares das imagens)
         const items = [
             'A', 'B', 'C', 'X', 'Y', 'Z', 'N', '3', '5', '6', '8', '9', '1', '7', 
             '%', 'π', '✏️', '🎓', '📝', '📐'
         ];
 
-        // Paleta de cores suaves inspiradas no fundo real
         const colors = [
-            '#8a85ff', // Azul/Roxo suave
-            '#4cd09b', // Verde pastel
-            '#50a5f5', // Azul claro
-            '#ff9d5c', // Laranja suave
-            '#a2b4c7', // Cinza azulado
-            '#b2ad7f', // Amarelo queimado
-            '#d64161'  // Vermelho apagado
+            '#8a85ff', '#4cd09b', '#50a5f5', '#ff9d5c', '#a2b4c7', '#b2ad7f', '#d64161'
         ];
 
-        // Direções de queda possíveis
         const animations = ['fall-straight', 'fall-left', 'fall-right'];
-
-        const maxParticles = 45; // Quantidade de elementos flutuando simultaneamente
+        const maxParticles = 40;
 
         function generateParticle() {
             const particle = document.createElement('div');
             particle.classList.add('particle');
 
-            // Define um caractere e uma cor aleatória
             particle.innerText = items[Math.floor(Math.random() * items.length)];
             particle.style.color = colors[Math.floor(Math.random() * colors.length)];
 
-            // Define o tamanho de forma aleatória
-            const size = Math.random() * 14 + 12; // De 12px até 26px
+            const size = Math.random() * 14 + 12; // De 12px a 26px
             particle.style.fontSize = `${size}px`;
-
-            // Define a posição horizontal inicial de 0% a 100% da tela
             particle.style.left = `${Math.random() * 100}vw`;
 
-            // Configura os parâmetros de tempo e animação
-            const duration = Math.random() * 12 + 10; // De 10s a 22s de queda
-            const delay = Math.random() * 15; // Intervalo para não começarem todos juntos
+            const duration = Math.random() * 12 + 10; // Queda fluida e constante
+            const delay = Math.random() * 15;
             const anim = animations[Math.floor(Math.random() * animations.length)];
 
             particle.style.animation = `${anim} ${duration}s linear ${delay}s infinite`;
@@ -444,7 +600,6 @@
             container.appendChild(particle);
         }
 
-        // Gera o lote inicial de partículas
         for (let i = 0; i < maxParticles; i++) {
             generateParticle();
         }
