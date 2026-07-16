@@ -3,117 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabaritei</title>
+    <title>Gabaritei - Acesso</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        /* CSS para o visual */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f7f7fa;
-            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f5f7; /* Cor de fundo clara */
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* Evita barras de rolagem */
+            height: 100vh;
         }
 
-        /* Fundo com elementos espalhados */
-        .background-elements {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .element {
-            position: absolute;
-            color: rgba(74, 71, 163, 0.2); /* Tom de azul suave */
-            font-weight: bold;
-            font-size: 24px;
-        }
-
-        /* Cartão de Login */
         .card {
             background: white;
             padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             width: 350px;
-            z-index: 1;
             text-align: center;
         }
 
-        h1 { color: #3b3986; margin-bottom: 30px; font-size: 26px; }
+        h1 { color: #4e44e0; margin-bottom: 25px; }
 
-        label { display: block; text-align: left; font-size: 14px; color: #555; margin-bottom: 5px; }
+        .input-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        label { display: block; font-size: 14px; color: #555; margin-bottom: 5px; }
 
         input {
             width: 100%;
             padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #d1d1d1;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            outline: none;
-            color: #333;
+            box-sizing: border-box;
         }
 
         button {
             width: 100%;
             padding: 12px;
-            background-color: #4a47a3;
+            background-color: #4e44e0;
             color: white;
             border: none;
-            border-radius: 50px; /* Formato de "pill" */
-            font-weight: bold;
+            border-radius: 8px;
+            margin-top: 15px;
             cursor: pointer;
-            margin-bottom: 15px;
+            font-weight: bold;
         }
 
-        .links { font-size: 12px; color: #666; }
-        .links a { color: #4a47a3; text-decoration: none; display: block; margin-top: 5px; }
+        .links { margin-top: 20px; font-size: 13px; color: #777; }
+        .links a { color: #4e44e0; text-decoration: none; }
     </style>
 </head>
 <body>
 
-    <!-- Container dos símbolos aleatórios -->
-    <div class="background-elements" id="bg"></div>
-
-    <!-- Cartão Central -->
     <div class="card">
         <h1>GABARITEI</h1>
         
-        <label>Usuário</label>
-        <input type="text" placeholder="Digite seu usuário">
-        
-        <label>Senha</label>
-        <input type="password" placeholder="Digite sua senha">
-        
+        <div class="input-group">
+            <label>Usuário</label>
+            <input type="text" placeholder="Digite seu usuário">
+        </div>
+
+        <div class="input-group">
+            <label>Senha</label>
+            <input type="password" placeholder="Digite sua senha">
+        </div>
+
         <button>Acessar o Gabaritei</button>
-        
+
         <div class="links">
             <p>Esqueceu a senha?</p>
-            <a href="#">Você não tem outra conta? Crie uma aqui</a>
+            <p>Você não tem outra conta? <a href="#">Crie uma aqui</a></p>
         </div>
     </div>
 
-    <script>
-        // Função para espalhar elementos no fundo
-        const bg = document.getElementById('bg');
-        const items = ['1', '2', '3', '4', '5', '8', '9', 'Y', 'Z', 'B', 'X', 'π', '∑', '✎', '🎓'];
-
-        for (let i = 0; i < 40; i++) {
-            const span = document.createElement('span');
-            span.innerText = items[Math.floor(Math.random() * items.length)];
-            span.className = 'element';
-            
-            // Posição aleatória
-            span.style.left = Math.random() * 95 + '%';
-            span.style.top = Math.random() * 95 + '%';
-            
-            // Rotação aleatória
-            span.style.transform = `rotate(${Math.random() * 360}deg)`;
-            
-            bg.appendChild(span);
-        }
-    </script>
 </body>
 </html>
