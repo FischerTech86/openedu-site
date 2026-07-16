@@ -1,107 +1,453 @@
-<style>
-    /* Estilo do Rodapé */
-    .site-footer {
-        background-color: #1a1c23; /* Tom escuro de fundo */
-        color: #d1d1d1;
-        padding: 40px 20px;
-        font-family: 'Segoe UI', sans-serif;
-    }
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabaritei - Entrar</title>
+    <!-- Importando a fonte Poppins para obter a tipografia idêntica à do App -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- ESTILOS GERAIS --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
 
-    .footer-container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
+        body {
+            background-color: #f5f6fb;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
 
-    .footer-title {
-        color: #e67e22; /* Laranja dos títulos */
-        font-size: 1.5rem;
-        margin-bottom: 25px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
+        /* --- SEÇÃO DE LOGIN --- */
+        .login-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            overflow: hidden;
+        }
 
-    .grid-row {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-        margin-bottom: 40px;
-    }
+        /* Container das Partículas Caindo */
+        #particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
 
-    .footer-col h3 {
-        color: #e67e22;
-        font-size: 1.1rem;
-        margin-bottom: 15px;
-    }
+        /* Elemento Unitário de Partícula */
+        .particle {
+            position: absolute;
+            font-weight: bold;
+            opacity: 0;
+            user-select: none;
+            will-change: transform, opacity;
+        }
 
-    .footer-col p, .footer-col a {
-        font-size: 0.95rem;
-        line-height: 1.6;
-        color: #b0b0b0;
-        text-decoration: none;
-        display: block;
-        margin-bottom: 10px;
-    }
+        /* Card de Login */
+        .login-card {
+            background: #ffffff;
+            padding: 50px 40px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04), 0 5px 15px rgba(0, 0, 0, 0.02);
+            width: 100%;
+            max-width: 410px;
+            text-align: center;
+            z-index: 10; /* Fica por cima do fundo animado */
+            position: relative;
+        }
 
-    .footer-col a:hover {
-        color: #ffffff;
-    }
+        /* Título Principal GABARITEI */
+        .logo-title {
+            color: #4a3aff; /* Tom de azul/roxo idêntico ao da imagem */
+            font-size: 34px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 35px;
+        }
 
-    .copyright {
-        text-align: center;
-        font-size: 0.85rem;
-        color: #666;
-        border-top: 1px solid #333;
-        padding-top: 20px;
-    }
+        /* Grupos de Input */
+        .input-group {
+            text-align: left;
+            margin-bottom: 24px;
+        }
 
-    /* Responsividade */
-    @media (max-width: 768px) {
-        .grid-row { grid-template-columns: 1fr; }
-    }
-</style>
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            color: #718096;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
 
-<footer class="site-footer">
-    <div class="footer-container">
-        <!-- Título principal -->
-        <h2 class="footer-title">📌 Informações do App</h2>
+        /* Inputs apenas com linha inferior */
+        .input-group input {
+            width: 100%;
+            padding: 10px 0;
+            border: none;
+            border-bottom: 1.5px solid #e2e8f0;
+            font-size: 14px;
+            color: #2d3748;
+            background: transparent;
+            transition: border-color 0.3s ease;
+        }
 
-        <!-- Linha 1 -->
-        <div class="grid-row">
-            <div class="footer-col">
-                <h3>💡 O que é o Gabaritei?</h3>
-                <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela FichTeck. Idealizado para ajudar na organização diária, controle de progresso e preparação impecável para exames escolares e desafios educacionais.</p>
+        .input-group input:focus {
+            outline: none;
+            border-bottom-color: #4a3aff;
+        }
+
+        .input-group input::placeholder {
+            color: #a0aec0;
+            font-size: 13.5px;
+        }
+
+        /* Botão Arredondado (Pill Button) */
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #4a3aff;
+            color: #ffffff;
+            border: none;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 15px;
+            box-shadow: 0 8px 20px rgba(74, 58, 255, 0.25);
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #3b2ee0;
+        }
+
+        .login-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Links Úteis do Login */
+        .login-links {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #718096;
+        }
+
+        .forgot-pass {
+            color: #718096;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .forgot-pass:hover {
+            color: #4a3aff;
+        }
+
+        .signup-text {
+            color: #718096;
+        }
+
+        .signup-link {
+            color: #4a3aff;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .signup-link:hover {
+            text-decoration: underline;
+        }
+
+
+        /* --- SEÇÃO DO RODAPÉ (FOOTER) --- */
+        .site-footer {
+            background-color: #121319; /* Fundo escuro idêntico */
+            color: #a0aec0;
+            padding: 60px 40px 30px 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Título Principal do Rodapé */
+        .footer-main-title {
+            color: #f27224; /* Laranja característico */
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 35px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Grid de Informações */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: #f27224; /* Títulos menores em laranja */
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-column p {
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: #cbd5e0;
+        }
+
+        /* Links no Rodapé */
+        .footer-links a {
+            display: block;
+            color: #cbd5e0;
+            text-decoration: none;
+            font-size: 13.5px;
+            margin-bottom: 10px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #f27224;
+        }
+
+        /* Linha Divisória e Copyright */
+        .footer-divider {
+            border: none;
+            border-top: 1px solid #2d3748;
+            margin-bottom: 25px;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 13px;
+            color: #718096;
+        }
+
+
+        /* --- ANIMAÇÕES DAS PARTÍCULAS --- */
+        /* Caindo reto */
+        @keyframes fall-straight {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Caindo e derivando para a esquerda */
+        @keyframes fall-left {
+            0% {
+                transform: translate(0, -50px) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% {
+                transform: translate(-100px, 105vh) rotate(-360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Caindo e derivando para a direita */
+        @keyframes fall-right {
+            0% {
+                transform: translate(0, -50px) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% {
+                transform: translate(100px, 105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CONTAINER DA PÁGINA -->
+    <div class="page-wrapper">
+        
+        <!-- SEÇÃO DE LOGIN COM ANIMAÇÃO -->
+        <section class="login-section">
+            <!-- Fundo Animado -->
+            <div id="particles-container"></div>
+            
+            <!-- Card de Login -->
+            <div class="login-card">
+                <h1 class="logo-title">GABARITEI</h1>
+                
+                <form onsubmit="event.preventDefault();">
+                    <div class="input-group">
+                        <label for="user">Usuário</label>
+                        <input type="text" id="user" placeholder="Digite seu usuário" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="pass">Senha</label>
+                        <input type="password" id="pass" placeholder="Digite sua senha" required>
+                    </div>
+                    
+                    <button type="submit" class="login-btn">Acessar o Gabaritei</button>
+                </form>
+                
+                <div class="login-links">
+                    <a href="#" class="forgot-pass">Esqueceu a senha?</a>
+                    <p class="signup-text">Você não tem outra conta? <a href="#" class="signup-link">Crie uma aqui</a></p>
+                </div>
             </div>
-            <div class="footer-col">
-                <h3>🔒 Segurança e Privacidade Total</h3>
-                <p>Aqui a proteção é completa. Todas as credenciais de acesso (Usuário, E-mail e Senhas) e históricos são armazenados de forma 100% offline, direto no seu navegador com a tecnologia LocalStorage. Nenhum dado é repassado para servidores.</p>
-            </div>
-            <div class="footer-col">
-                <h3>⚠️ Recomendações Importantes</h3>
-                <p>Para evitar perdas parciais ou exclusões automáticas das suas credenciais e progresso, evite limpar agressivamente o histórico/cookies do seu navegador e não acesse o sistema através de guias anônimas.</p>
-            </div>
-        </div>
+        </section>
 
-        <!-- Linha 2 -->
-        <div class="grid-row">
-            <div class="footer-col">
-                <h3>Sobre Nós</h3>
-                <p>Somos uma plataforma dedicada a entregar os melhores recursos de estudos e gamificação para você gabaritar as suas avaliações com qualidade, foco e compromisso.</p>
-            </div>
-            <div class="footer-col">
-                <h3>💡 Dicas de Ouro</h3>
-                <p>Estude em blocos de tempo menores focando 100% na matéria e faça pausas para descanso. A constância diária vence qualquer obstáculo nos estudos!</p>
-            </div>
-            <div class="footer-col">
-                <h3>Links Úteis</h3>
-                <a href="#">Política de Privacidade</a>
-                <a href="#">Termos de Uso</a>
-                <a href="#">Central de Ajuda</a>
-            </div>
-        </div>
+        <!-- SEÇÃO DO RODAPÉ (DENTRO DA ESTRUTURA ESCURA) -->
+        <footer class="site-footer">
+            <div class="footer-container">
+                
+                <!-- Título do Footer -->
+                <h2 class="footer-main-title">📌 Informações do App</h2>
+                
+                <!-- Primeira Linha do Grid -->
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h3>💡 O que é o Gabaritei?</h3>
+                        <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela FichTeck. Idealizado para ajudar na organização diária, controle de progresso e preparação impecável para exames escolares e desafios educacionais.</p>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>🔒 Segurança e Privacidade Total</h3>
+                        <p>Aqui a proteção é completa. Todas as credenciais de acesso (Usuário, E-mail e Senhas) e históricos são armazenados de forma 100% offline, direto no seu navegador com a tecnologia LocalStorage. Nenhum dado é repassado para servidores.</p>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>⚠️ Recomendações Importantes</h3>
+                        <p>Para evitar perdas parciais ou exclusões automáticas das suas credenciais e progresso, evite limpar agressivamente o histórico/cookies do seu navegador e não acesse o sistema através de guias anônimas.</p>
+                    </div>
+                </div>
 
-        <div class="copyright">
-            © 2026 FichTeck. Todos os direitos reservados.
-        </div>
+                <!-- Segunda Linha do Grid -->
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h3>Sobre Nós</h3>
+                        <p>Somos uma plataforma dedicada a entregar os melhores recursos de estudos e gamificação para você gabaritar as suas avaliações com qualidade, foco e compromisso.</p>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Dicas de Ouro</h3>
+                        <p>💡 Estude em blocos de tempo menores focando 100% na matéria e faça pausas para descanso. A constância diária vence qualquer obstáculo nos estudos!</p>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Links Úteis</h3>
+                        <div class="footer-links">
+                            <a href="#">Política de Privacidade</a>
+                            <a href="#">Termos de Uso</a>
+                            <a href="#">Central de Ajuda</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Linha final de Copyright -->
+                <hr class="footer-divider">
+                <p class="copyright">© 2026 FichTeck. Todos os direitos reservados.</p>
+
+            </div>
+        </footer>
+
     </div>
-</footer>
+
+    <!-- SCRIPT DA ANIMAÇÃO DE FUNDO -->
+    <script>
+        const container = document.getElementById('particles-container');
+
+        // Caracteres que vão cair no fundo (incluindo ícones/emojis escolares das imagens)
+        const items = [
+            'A', 'B', 'C', 'X', 'Y', 'Z', 'N', '3', '5', '6', '8', '9', '1', '7', 
+            '%', 'π', '✏️', '🎓', '📝', '📐'
+        ];
+
+        // Paleta de cores suaves inspiradas no fundo real
+        const colors = [
+            '#8a85ff', // Azul/Roxo suave
+            '#4cd09b', // Verde pastel
+            '#50a5f5', // Azul claro
+            '#ff9d5c', // Laranja suave
+            '#a2b4c7', // Cinza azulado
+            '#b2ad7f', // Amarelo queimado
+            '#d64161'  // Vermelho apagado
+        ];
+
+        // Direções de queda possíveis
+        const animations = ['fall-straight', 'fall-left', 'fall-right'];
+
+        const maxParticles = 45; // Quantidade de elementos flutuando simultaneamente
+
+        function generateParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+
+            // Define um caractere e uma cor aleatória
+            particle.innerText = items[Math.floor(Math.random() * items.length)];
+            particle.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+            // Define o tamanho de forma aleatória
+            const size = Math.random() * 14 + 12; // De 12px até 26px
+            particle.style.fontSize = `${size}px`;
+
+            // Define a posição horizontal inicial de 0% a 100% da tela
+            particle.style.left = `${Math.random() * 100}vw`;
+
+            // Configura os parâmetros de tempo e animação
+            const duration = Math.random() * 12 + 10; // De 10s a 22s de queda
+            const delay = Math.random() * 15; // Intervalo para não começarem todos juntos
+            const anim = animations[Math.floor(Math.random() * animations.length)];
+
+            particle.style.animation = `${anim} ${duration}s linear ${delay}s infinite`;
+
+            container.appendChild(particle);
+        }
+
+        // Gera o lote inicial de partículas
+        for (let i = 0; i < maxParticles; i++) {
+            generateParticle();
+        }
+    </script>
+</body>
+</html>
