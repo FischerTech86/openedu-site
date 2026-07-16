@@ -411,12 +411,12 @@
                     <form onsubmit="event.preventDefault(); alert('Conta criada com sucesso! Faça login.'); navigateTo('card-login');">
                         <div class="input-group">
                             <label for="reg-user">Nome de Usuário</label>
-                            <input type="text" id="reg-user" placeholder="Ex: Admi_oficial" required>
+                            <input type="text" id="reg-user" placeholder="Digite seu novo usuário" required>
                         </div>
                         
                         <div class="input-group">
                             <label for="reg-email">E-mail</label>
-                            <input type="email" id="reg-email" placeholder="Ex: peixinho1533@gmail.com" required>
+                            <input type="email" id="reg-email" placeholder="Digite seu e-mail" required>
                         </div>
                         
                         <div class="input-group">
@@ -459,15 +459,15 @@
             </div>
         </section>
 
-        <!-- SIMULAÇÃO DO DIÁLOGO DE ALERTA COM SENHA DINÂMICA -->
+        <!-- SIMULAÇÃO DO DIÁLOGO DE ALERTA SEGURO E DINÂMICO -->
         <div id="custom-alert" class="alert-overlay">
             <div class="alert-box">
                 <div class="alert-header">fischertech86.github.io diz</div>
                 <div class="alert-body">
                     <span class="alert-success-icon">🔵</span> 
-                    <strong>Enviado! Sua senha recuperada é: <span id="alert-password-text" style="color: #8ab4f8; font-family: monospace;"></span></strong>
+                    <strong>Solicitação enviada! Instruções de recuperação geradas com sucesso.</strong>
                     <span id="alert-email-text" class="alert-email-info">
-                        (Aviso: Um e-mail de confirmação foi disparado)
+                        (Um e-mail de redefinição de senha foi disparado para o endereço informado)
                     </span>
                 </div>
                 <div class="alert-footer">
@@ -540,33 +540,16 @@
             document.getElementById(targetCardId).classList.add('active');
         }
 
-        // --- GERADOR DE SENHA COMPLEXA E DINÂMICA ---
-        // Cria uma senha aleatória mantendo a estética segura original (ex: GpM_@5891_&Pe*)
-        function generateComplexPassword() {
-            const prefixes = ["GpM_@", "KbT_@", "XyZ_@", "Fch_@", "PlM_@"];
-            const suffixes = ["_&Pe+", "_&Te*", "_&Xy#", "_&Ok!", "_&Gb$"];
-            
-            const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-            const randomNumber = Math.floor(1000 + Math.random() * 9000); // 4 dígitos dinâmicos
-            const randomSuffix = suffixes[Math.floor(Math.random() * suffixes.length)];
-            
-            return `${randomPrefix}${randomNumber}${randomSuffix}`;
-        }
-
         // --- MANIPULAÇÃO DO FORMULÁRIO DE RECUPERAÇÃO ---
         function handleRecoverySubmit(event) {
             event.preventDefault();
             const emailInput = document.getElementById('rec-email').value;
             
-            // Gera uma nova senha dinâmica exclusiva para esta tentativa
-            const dynamicPassword = generateComplexPassword();
-            
-            // Injeta a senha dinâmica gerada e o e-mail no Alerta
-            document.getElementById('alert-password-text').innerText = dynamicPassword;
+            // Injeta o e-mail digitado dinamicamente para o aviso de disparo
             document.getElementById('alert-email-text').innerText = 
-                `(Aviso: Um e-mail de confirmação foi disparado para ${emailInput})`;
+                `(Aviso: Um e-mail com o link de redefinição foi disparado para ${emailInput})`;
             
-            // Exibe o alerta customizado
+            // Exibe o alerta customizado na tela
             document.getElementById('custom-alert').style.display = 'flex';
         }
 
