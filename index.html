@@ -12,12 +12,12 @@
         :root {
             --primary-color: #4a3aff;
             --primary-hover: #3b2ee0;
-            --accent-blue: #38bdf8; /* Nova cor principal para substituir o laranja */
-            --bg-site: #f8fafc;
+            --accent-blue: #38bdf8;
+            --bg-site: #0f172a;
             --bg-card-dark: #1e293b;
             --bg-card-dark-hover: #111827;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
             --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -77,12 +77,12 @@
             background: #ffffff;
             padding: 45px 35px;
             border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             width: 100%;
             max-width: 420px;
             text-align: center;
             z-index: 10;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #334155;
         }
 
         .form-card {
@@ -109,7 +109,7 @@
         }
 
         .subtitle {
-            color: var(--text-main);
+            color: #0f172a;
             font-size: 16px;
             font-weight: 700;
             margin-bottom: 25px;
@@ -123,7 +123,7 @@
         .input-group label {
             display: block;
             font-size: 13px;
-            color: var(--text-muted);
+            color: #64748b;
             margin-bottom: 6px;
             font-weight: 600;
         }
@@ -133,17 +133,10 @@
             padding: 12px 14px;
             border: 1.5px solid #e2e8f0;
             font-size: 14px;
-            color: var(--text-main);
+            color: #0f172a;
             background: #f8fafc;
             border-radius: 10px;
             transition: var(--transition);
-        }
-
-        .input-group input:focus {
-            outline: none;
-            background: #ffffff;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(74, 58, 255, 0.1);
         }
 
         .btn-pill {
@@ -169,7 +162,7 @@
         .card-links {
             margin-top: 25px;
             font-size: 13px;
-            color: var(--text-muted);
+            color: #64748b;
         }
 
         .card-links a {
@@ -180,9 +173,7 @@
         }
 
         .card-links a:hover { text-decoration: underline; }
-        .card-links p { margin-bottom: 8px; }
 
-        /* --- MENSAGENS DE FEEDBACK --- */
         .feedback-box {
             padding: 12px 16px;
             border-radius: 12px;
@@ -191,25 +182,11 @@
             text-align: left;
             display: none;
         }
-
         .feedback-box.error { display: block !important; background-color: #fff5f5; color: #e53e3e; border: 1px solid #fed7d7; }
         .feedback-box.success { display: block !important; background-color: #f0fff4; color: #38a169; border: 1px solid #c6f6d5; }
 
-        .password-display-box {
-            background: #f8fafc;
-            border: 2px dashed var(--primary-color);
-            padding: 15px;
-            border-radius: 12px;
-            margin-top: 20px;
-        }
 
-        .password-display-box span { display: block; font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
-        .password-display-box strong { font-size: 18px; color: var(--primary-color); font-family: monospace; }
-
-
-        /* ========================================================
-           --- TELA DO PAINEL DE NÍVEIS (VISUAL PROFISSIONAL DARK) ---
-           ======================================================== */
+        /* --- TELA DO PAINEL DE NÍVEIS (DASHBOARD) --- */
         .dashboard-section {
             min-height: 90vh;
             display: none; 
@@ -236,7 +213,7 @@
         .dashboard-title {
             font-size: 34px;
             font-weight: 800;
-            color: var(--text-main);
+            color: #ffffff;
             margin-bottom: 10px;
         }
 
@@ -245,7 +222,6 @@
             color: var(--text-muted);
         }
 
-        /* Grid Unificada */
         .education-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -254,12 +230,11 @@
             margin-bottom: 45px;
         }
 
-        /* Estilo Dark Acadêmico Unificado para Todos os Quadrados */
         .edu-card {
             background: var(--bg-card-dark);
             border-radius: 16px;
             border: 1px solid #334155;
-            padding: 35px 25px;
+            padding: 30px 20px;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -277,67 +252,27 @@
             box-shadow: 0 15px 30px rgba(56, 189, 248, 0.15);
         }
 
-        .edu-card .icon-header {
-            font-size: 42px;
-            margin-bottom: 15px;
-        }
+        .edu-card .icon-header { font-size: 36px; margin-bottom: 12px; }
+        .edu-card h3 { font-size: 20px; font-weight: 600; color: #ffffff; margin-bottom: 4px; }
+        .edu-card .badge-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 20px; color: var(--accent-blue); }
 
-        .edu-card h3 {
-            font-size: 22px;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 4px;
-        }
+        .card-inner-contents { width: 100%; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 15px; }
+        .card-inner-contents h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; color: #64748b; }
+        .card-inner-contents ul { list-style: none; width: 100%; }
+        .card-inner-contents ul li { margin-bottom: 8px; width: 100%; }
 
-        .edu-card .badge-tag {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 25px;
-            color: var(--accent-blue);
-        }
-
-        /* Área interna de conteúdos */
-        .card-inner-contents {
-            width: 100%;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding-top: 20px;
-            margin-top: auto;
-        }
-
-        .card-inner-contents h4 {
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-        }
-
-        .card-inner-contents ul {
-            list-style: none;
-            width: 100%;
-        }
-
-        .card-inner-contents ul li {
-            margin-bottom: 12px;
-            width: 100%;
-        }
-
-        /* Links individuais e interativos de cada matéria */
         .content-link {
-            font-size: 13.5px;
+            font-size: 12.5px;
             color: #cbd5e1;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px 12px;
+            gap: 8px;
+            padding: 8px 10px;
             border-radius: 8px;
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.04);
-            line-height: 1.4;
+            cursor: pointer;
             transition: var(--transition);
         }
 
@@ -348,154 +283,243 @@
             transform: translateX(4px);
         }
 
-        /* Botão Voltar/Sair */
         .btn-voltar {
             padding: 13px 35px;
             background: #ffffff;
             border: 1.5px solid #cbd5e1;
-            color: var(--text-main);
+            color: #0f172a;
             font-weight: 600;
             font-size: 14px;
             border-radius: 50px;
             cursor: pointer;
             transition: var(--transition);
         }
-        .btn-voltar:hover {
-            background: var(--text-main);
-            color: #ffffff;
-            border-color: var(--text-main);
+        .btn-voltar:hover { background: var(--accent-blue); color: #0f172a; border-color: var(--accent-blue); }
+
+
+        /* ========================================================
+           --- NOVA TELA: GUIA DE ESTUDOS INTERNA (STUDY ROOM) ---
+           ======================================================== */
+        .study-room-section {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            animation: paneFade 0.4s ease;
         }
 
+        .study-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
 
-        /* --- SEÇÃO DE INFORMAÇÕES DO APP (MUDANÇA DE LARANJA PARA AZUL) --- */
+        .study-header h2 { font-size: 28px; font-weight: 700; color: #ffffff; }
+        .study-header span { color: var(--accent-blue); font-weight: 600; }
+
+        .study-container-grid {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr;
+            gap: 30px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        /* Coluna Principal: Vídeo e Explicações */
+        .study-main-col {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .video-player-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #020617;
+            border-radius: 16px;
+            border: 1px solid #334155;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .video-placeholder-ui {
+            text-align: center;
+            color: #cbd5e1;
+        }
+        .video-placeholder-ui .play-icon {
+            font-size: 60px;
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .video-placeholder-ui .play-icon:hover { transform: scale(1.1); }
+
+        .explanation-panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .panel-box {
+            background: var(--bg-card-dark);
+            border-radius: 14px;
+            border: 1px solid #334155;
+            padding: 25px;
+        }
+
+        .panel-box h3 {
+            font-size: 16px;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .panel-box p, .panel-box li {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #cbd5e1;
+            margin-bottom: 10px;
+        }
+
+        /* Coluna Lateral: IA Auxiliadora e Mais Vídeos */
+        .study-sidebar-col {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* Chat da IA */
+        .ai-assistant-card {
+            background: #111827;
+            border-radius: 16px;
+            border: 1px solid #1e293b;
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .ai-header {
+            background: #1e293b;
+            padding: 15px;
+            border-radius: 16px 16px 0 0;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .ai-header h3 { font-size: 14px; color: #ffffff; font-weight: 600; }
+        .ai-status-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; }
+
+        .ai-chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .msg { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.5; }
+        .msg.ai { background: #1e293b; color: #ffffff; align-self: flex-start; border-bottom-left-radius: 2px; }
+        .msg.user { background: var(--primary-color); color: #ffffff; align-self: flex-end; border-bottom-right-radius: 2px; }
+
+        .ai-input-area {
+            padding: 12px;
+            border-top: 1px solid #1e293b;
+            display: flex;
+            gap: 8px;
+        }
+        .ai-input-area input {
+            flex: 1;
+            background: #1f2937;
+            border: 1px solid #374151;
+            padding: 10px;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 13px;
+        }
+        .ai-input-area button {
+            background: var(--accent-blue);
+            color: #0f172a;
+            border: none;
+            padding: 0 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        /* Lista Extras Recomendados */
+        .more-videos-card {
+            background: var(--bg-card-dark);
+            border-radius: 16px;
+            border: 1px solid #334155;
+            padding: 20px;
+        }
+        .more-videos-card h3 { font-size: 15px; color: #ffffff; margin-bottom: 15px; }
+
+        .video-thumb-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 8px;
+            background: rgba(0,0,0,0.15);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .video-thumb-row:hover { background: rgba(56, 189, 248, 0.05); }
+        .thumb-img-placeholder { width: 90px; height: 55px; background: #0f172a; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .thumb-info h4 { font-size: 12px; color: #ffffff; margin-bottom: 4px; }
+        .thumb-info p { font-size: 11px; color: var(--text-muted); }
+
+
+        /* --- SEÇÃO DE INFORMAÇÕES DO APP (RODAPÉ AZUL ORIGINAL) --- */
         .site-footer {
             background-color: #121319;
             color: #a0aec0;
             padding: 60px 40px 40px 40px;
             position: relative;
             z-index: 10;
-            border-top: 4px solid var(--accent-blue); /* Mudado para Azul */
+            border-top: 4px solid var(--accent-blue);
             margin-top: auto;
             width: 100%;
         }
 
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .footer-container { max-width: 1200px; margin: 0 auto; }
+        .footer-main-title { color: var(--accent-blue); font-size: 26px; font-weight: 700; margin-bottom: 35px; letter-spacing: 0.5px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 45px; margin-bottom: 35px; }
+        .footer-column h3 { color: var(--accent-blue); font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .footer-column p { font-size: 13.5px; line-height: 1.7; color: #cbd5e0; text-align: justify; }
 
-        .footer-main-title {
-            color: var(--accent-blue); /* Mudado para Azul */
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 35px;
-            letter-spacing: 0.5px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 45px;
-            margin-bottom: 35px;
-        }
-
-        .footer-column h3 {
-            color: var(--accent-blue); /* Mudado para Azul */
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .footer-column p {
-            font-size: 13.5px;
-            line-height: 1.7;
-            color: #cbd5e0;
-            text-align: justify;
-        }
-
-        .footer-links a {
-            display: block;
-            color: #cbd5e0;
-            text-decoration: none;
-            font-size: 13.5px;
-            margin-bottom: 12px;
-            transition: color 0.2s ease;
-            cursor: pointer;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-blue); /* Mudado para Azul */
-            text-decoration: underline;
-        }
-
-        .footer-divider {
-            border: none;
-            border-top: 1px solid #2d3748;
-            margin: 30px 0;
-        }
-
-        .copyright {
-            text-align: center;
-            font-size: 13px;
-            color: #718096;
-        }
-
-        /* --- MODAL DA INTERFACE --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.75);
-            z-index: 3000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            padding: 20px;
-        }
-
-        .modal-overlay.active { opacity: 1; pointer-events: auto; }
-
-        .modal-box {
-            background: #ffffff;
-            padding: 35px;
-            border-radius: 20px;
-            max-width: 600px;
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            position: relative;
-            animation: modalSlide 0.4s ease;
-        }
-
-        @keyframes modalSlide {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .modal-close-btn { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #a0aec0; background: none; border: none; font-weight: bold; }
-        .modal-close-btn:hover { color: #e53e3e; }
-        .modal-title { color: var(--accent-blue); font-size: 22px; font-weight: 700; margin-bottom: 20px; border-bottom: 2px solid var(--accent-blue); padding-bottom: 10px; } /* Mudado para Azul */
-        .modal-body { color: #2d3748; font-size: 14px; line-height: 1.6; text-align: justify; }
-        .modal-body h4 { margin: 15px 0 5px 0; color: var(--primary-color); font-size: 15px; }
+        .footer-links a { display: block; color: #cbd5e0; text-decoration: none; font-size: 13.5px; margin-bottom: 12px; transition: color 0.2s ease; cursor: pointer; }
+        .footer-links a:hover { color: var(--accent-blue); text-decoration: underline; }
+        .footer-divider { border: none; border-top: 1px solid #2d3748; margin: 30px 0; }
+        .copyright { text-align: center; font-size: 13px; color: #718096; }
 
         /* --- RESPONSIVIDADE --- */
-        @media (max-width: 1280px) {
+        @media (max-width: 1200px) {
             .education-grid { grid-template-columns: repeat(2, 1fr); }
+            .study-container-grid { grid-template-columns: 1fr; }
         }
-        @media (max-width: 950px) {
-            .footer-grid { grid-template-columns: 1fr; gap: 35px; }
-        }
-        @media (max-width: 680px) {
+        @media (max-width: 800px) {
             .education-grid { grid-template-columns: 1fr; }
-            .dashboard-title { font-size: 28px; }
+            .explanation-panels { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -503,252 +527,229 @@
 
     <div class="page-wrapper">
         
-        <!-- TELA 1: LOGIN (Sempre obrigatoriamente ativa ao iniciar o site) -->
+        <!-- TELA 1: LOGIN (Sempre ativa ao iniciar o site) -->
         <section class="login-section" id="auth-screen">
             <div id="particles-container"></div>
-            
             <div class="card-container">
-                
-                <!-- CARD FORM: LOGIN -->
                 <div id="card-login" class="form-card active">
                     <h1 class="logo-title">GABARITEI</h1>
                     <div id="login-feedback" class="feedback-box"></div>
-                    
                     <form id="login-form" onsubmit="handleLogin(event)">
-                        <div class="input-group">
-                            <label for="login-user">Usuário</label>
-                            <input type="text" id="login-user" placeholder="Digite seu usuário" required>
-                        </div>
-                        
-                        <div class="input-group">
-                            <label for="login-pass">Senha</label>
-                            <input type="password" id="login-pass" placeholder="Digite sua senha" required>
-                        </div>
-                        
+                        <div class="input-group"><label>Usuário</label><input type="text" id="login-user" placeholder="Digite seu usuário" required></div>
+                        <div class="input-group"><label>Senha</label><input type="password" id="login-pass" placeholder="Digite sua senha" required></div>
                         <button type="submit" class="btn-pill">Acessar o Gabaritei</button>
                     </form>
-                    
-                    <div class="card-links">
-                        <p><a onclick="navigateTo('card-recovery')">Esqueceu a senha?</a></p>
-                        <p>Você não tem outra conta? <a onclick="navigateTo('card-register')">Crie uma aqui</a></p>
-                    </div>
                 </div>
-
-                <!-- CARD FORM: REGISTRO -->
-                <div id="card-register" class="form-card">
-                    <h1 class="logo-title">GABARITEI</h1>
-                    <h2 class="subtitle">Criar Conta</h2>
-                    <div id="register-feedback" class="feedback-box"></div>
-                    
-                    <form id="register-form" onsubmit="handleRegister(event)">
-                        <div class="input-group">
-                            <label for="reg-user">Nome de Usuário</label>
-                            <input type="text" id="reg-user" placeholder="Escolha seu nome de usuário" required>
-                        </div>
-                        
-                        <div class="input-group">
-                            <label for="reg-email">E-mail</label>
-                            <input type="email" id="reg-email" placeholder="Digite seu melhor e-mail" required>
-                        </div>
-                        
-                        <div class="input-group">
-                            <label for="reg-pass">Senha</label>
-                            <input type="password" id="reg-pass" placeholder="Crie uma senha segura" required>
-                        </div>
-                        
-                        <button type="submit" class="btn-pill">Cadastrar e Acessar</button>
-                    </form>
-                    
-                    <div class="card-links">
-                        <p><a onclick="navigateTo('card-login')">Já tem uma conta? Acesse aqui</a></p>
-                    </div>
-                </div>
-
-                <!-- CARD FORM: RECUPERAÇÃO -->
-                <div id="card-recovery" class="form-card">
-                    <h1 class="logo-title">GABARITEI</h1>
-                    <h2 class="subtitle">Recuperar Senha</h2>
-                    <div id="recovery-feedback" class="feedback-box"></div>
-                    
-                    <form id="recovery-form" onsubmit="handleRecovery(event)">
-                        <div class="input-group">
-                            <label for="rec-user">Nome de Usuário</label>
-                            <input type="text" id="rec-user" placeholder="Confirme seu usuário" required>
-                        </div>
-                        
-                        <div class="input-group">
-                            <label for="rec-email">E-mail</label>
-                            <input type="email" id="rec-email" placeholder="Confirme seu e-mail" required>
-                        </div>
-                        
-                        <button type="submit" class="btn-pill">Recuperar Minha Senha</button>
-                    </form>
-                    
-                    <div id="password-result-area" style="display: none;" class="password-display-box">
-                        <span>Sua senha recuperada:</span>
-                        <strong id="recovered-password-text"></strong>
-                    </div>
-                    
-                    <div class="card-links">
-                        <p><a onclick="navigateTo('card-login')">Voltar para o login</a></p>
-                    </div>
-                </div>
-
             </div>
         </section>
 
-        <!-- TELA 2: PAINEL PRINCIPAL (ESTILO PRETO COM DETALHES EM AZUL) -->
+        <!-- TELA 2: PAINEL DE CONTÉUDOS (COMPLETO E EXPANDIDO) -->
         <section class="dashboard-section" id="dashboard-screen">
             <div class="dashboard-header">
                 <h2 class="dashboard-title">Boas-vindas ao Gabaritei!</h2>
-                <p class="dashboard-subtitle">Seu ecossistema de estudos está pronto. Clique em qualquer conteúdo para abri-lo em uma nova guia:</p>
+                <p class="dashboard-subtitle">Selecione um dos conteúdos completos listados abaixo para abrir o Ambiente Integrado de Estudos:</p>
             </div>
             
             <div class="education-grid">
                 
-                <!-- QUADRADO 1: 1º ao 5º Ano -->
+                <!-- 1º ao 5º Ano -->
                 <div class="edu-card">
                     <div class="icon-header">🧠</div>
                     <h3>1º ao 5º Ano</h3>
                     <span class="badge-tag">Ensino Fundamental I</span>
-                    
                     <div class="card-inner-contents">
                         <h4>⭐ Conteúdos Inclusos:</h4>
                         <ul>
-                            <li><a href="https://www.google.com/search?q=Alfabetizacao+Letramento+Dinamico" target="_blank" class="content-link">🎨 Alfabetização e Letramento Dinâmico</a></li>
-                            <li><a href="https://www.google.com/search?q=Tabuada+Animada+Matematica" target="_blank" class="content-link">🧮 Tabuada Animada e Matemática Ilustrada</a></li>
-                            <li><a href="https://www.google.com/search?q=Descoberta+das+Ciencias+e+Natureza" target="_blank" class="content-link">🌏 Descoberta das Ciências e Natureza</a></li>
-                            <li><a href="https://www.google.com/search?q=Leitura+de+Contos+e+Interpretacao" target="_blank" class="content-link">📖 Leitura de Contos e Interpretação Lúdica</a></li>
-                            <li><a href="https://www.google.com/search?q=Missoes+de+Aprendizado+Premios" target="_blank" class="content-link">🏅 Missões de Aprendizado com Prêmios e Medalhas</a></li>
-                            <li><a href="https://www.google.com/search?q=Jogos+Cognitivos+Raciocinio+Logico" target="_blank" class="content-link">🧩 Jogos Cognitivos de Raciocínio Lógico</a></li>
+                            <li><a onclick="openStudyRoom('Alfabetização Dinâmica')" class="content-link">🎨 Alfabetização e Letramento</a></li>
+                            <li><a onclick="openStudyRoom('Matemática Ilustrada')" class="content-link">🧮 Tabuada e Matemática Ilustrada</a></li>
+                            <li><a onclick="openStudyRoom('Ciências da Natureza')" class="content-link">🌏 Descoberta das Ciências</a></li>
+                            <li><a onclick="openStudyRoom('Leitura Lúdica')" class="content-link">📖 Leitura de Contos e Interpretação</a></li>
+                            <li><a onclick="openStudyRoom('Raciocínio Lógico Infantil')" class="content-link">🧩 Jogos de Raciocínio Lógico</a></li>
+                            <li><a onclick="openStudyRoom('História Inicial')" class="content-link">⏳ Introdução à História e Linhas do Tempo</a></li>
+                            <li><a onclick="openStudyRoom('Geografia e Mapas')" class="content-link">🗺️ Mapas, Climas e Regiões</a></li>
+                            <li><a onclick="openStudyRoom('Educação Financeira Infantil')" class="content-link">🪙 Educação Financeira e Poupança</a></li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- QUADRADO 2: 6º ao 9º Ano -->
+                <!-- 6º ao 9º Ano -->
                 <div class="edu-card">
                     <div class="icon-header">📐</div>
                     <h3>6º ao 9º Ano</h3>
                     <span class="badge-tag">Ensino Fundamental II</span>
-                    
                     <div class="card-inner-contents">
                         <h4>⚡ Módulos Inclusos:</h4>
                         <ul>
-                            <li><a href="https://www.google.com/search?q=Introducao+a+Algebra+Geometria+Plana" target="_blank" class="content-link">📐 Introdução à Álgebra e Geometria Plana</a></li>
-                            <li><a href="https://www.google.com/search?q=Biologia+Basica+Fisica+Quimica+Geral" target="_blank" class="content-link">🧬 Biologia Básica, Física e Química Geral</a></li>
-                            <li><a href="https://www.google.com/search?q=Oficina+de+Redacao+Estruturada" target="_blank" class="content-link">✍️ Oficina de Redação Estruturada</a></li>
-                            <li><a href="https://www.google.com/search?q=Historia+Geral+Brasil+Geografia+Critica" target="_blank" class="content-link">🗺️ História Geral, do Brasil e Geografia Crítica</a></li>
-                            <li><a href="https://www.google.com/search?q=Sistema+de+Conquistas+Avatar+Customizavel" target="_blank" class="content-link">🔥 Sistema de Conquistas e Avatar Customizável</a></li>
-                            <li><a href="https://www.google.com/search?q=Flashcards+Intermediarios+de+Memorizacao" target="_blank" class="content-link">🃏 Flashcards Intermediários de Memorização</a></li>
+                            <li><a onclick="openStudyRoom('Introdução à Álgebra')" class="content-link">📐 Introdução à Álgebra e Geometria</a></li>
+                            <li><a onclick="openStudyRoom('Ciências Físicas e Biológicas')" class="content-link">🧬 Biologia, Física e Química Geral</a></li>
+                            <li><a onclick="openStudyRoom('Oficina de Redação')" class="content-link">✍️ Oficina de Redação Estruturada</a></li>
+                            <li><a onclick="openStudyRoom('História Geral e Crítica')" class="content-link">🏛️ História Geral e do Brasil</a></li>
+                            <li><a onclick="openStudyRoom('Geografia Humana')" class="content-link">🌍 Geografia Crítica e Demografia</a></li>
+                            <li><a onclick="openStudyRoom('Gramática e Sintaxe')" class="content-link">📚 Língua Portuguesa e Sintaxe</a></li>
+                            <li><a onclick="openStudyRoom('Introdução à Programação')" class="content-link">💻 Lógica de Programação em Blocos</a></li>
+                            <li><a onclick="openStudyRoom('Cidadania e Ética')" class="content-link">⚖️ Atualidades, Cidadania e Ética</a></li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- QUADRADO 3: 1º ao 3º Ano -->
+                <!-- 1º ao 3º Ano -->
                 <div class="edu-card">
                     <div class="icon-header">🎯</div>
                     <h3>1º ao 3º Ano</h3>
                     <span class="badge-tag">Ensino Médio</span>
-                    
                     <div class="card-inner-contents">
                         <h4>⚖️ Recursos Acadêmicos:</h4>
                         <ul>
-                            <li><a href="https://www.google.com/search?q=Banco+de+Simulados+Completos+ENEM" target="_blank" class="content-link">🎯 Banco de Simulados Completos Padrão ENEM</a></li>
-                            <li><a href="https://www.google.com/search?q=Fisica+Avancada+Quimica+Organica+Calculo" target="_blank" class="content-link">🧪 Física Avançada, Química Orgânica e Cálculo</a></li>
-                            <li><a href="https://www.google.com/search?q=Treinamento+de+Redacao+Dissertativa+Argumentativa" target="_blank" class="content-link">🖋️ Treinamento de Redação Dissertativa-Argumentativa</a></li>
-                            <li><a href="https://www.google.com/search?q=Graficos+Analiticos+de+Rendimento" target="_blank" class="content-link">📊 Gráficos Analíticos de Rendimento e Evolução</a></li>
-                            <li><a href="https://www.google.com/search?q=Cronograma+Adaptativo+de+Estudos+Vestibulares" target="_blank" class="content-link">📅 Cronograma Adaptativo de Estudos para Vestibulares</a></li>
-                            <li><a href="https://www.google.com/search?q=Resumos+em+Audio+Analises+Literarias" target="_blank" class="content-link">🎧 Resumos em Áudio e Análises Literárias</a></li>
+                            <li><a onclick="openStudyRoom('Simulados Padrão ENEM')" class="content-link">🎯 Simulados Completos Padrão ENEM</a></li>
+                            <li><a onclick="openStudyRoom('Física e Química Avançada')" class="content-link">🧪 Física Avançada e Química Orgânica</a></li>
+                            <li><a onclick="openStudyRoom('Redação Dissertativa')" class="content-link">🖋️ Redação Dissertativa-Argumentativa</a></li>
+                            <li><a onclick="openStudyRoom('Cálculo e Trigonometria')" class="content-link">📊 Trigonometria e Introdução ao Cálculo</a></li>
+                            <li><a onclick="openStudyRoom('Biologia Evolutiva e Genética')" class="content-link">🧬 Ecologia, Genética e Evolução</a></li>
+                            <li><a onclick="openStudyRoom('Filosofia e Sociologia')" class="content-link">📜 Filosofia, Sociologia e Pensadores</a></li>
+                            <li><a onclick="openStudyRoom('Geopolítica Global')" class="content-link">🌐 Geopolítica e História Contemporânea</a></li>
+                            <li><a onclick="openStudyRoom('Literatura Nacional')" class="content-link">🎧 Resumos e Análises Literárias</a></li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- QUADRADO 4: Ensino Superior -->
+                <!-- Ensino Superior -->
                 <div class="edu-card">
                     <div class="icon-header">🎓</div>
                     <h3>Ensino Superior</h3>
                     <span class="badge-tag">Graduação e Especializações</span>
-                    
                     <div class="card-inner-contents">
                         <h4>🏛️ Ferramentas Científicas:</h4>
                         <ul>
-                            <li><a href="https://www.google.com/search?q=Organizador+Referencias+Bibliograficas+ABNT+APA" target="_blank" class="content-link">💻 Organizador de Referências Bibliográficas (ABNT/APA)</a></li>
-                            <li><a href="https://www.google.com/search?q=Gerenciador+Avancado+de+Projetos+TCC+Artigos" target="_blank" class="content-link">🛠️ Gerenciador Avançado de Projetos de TCC e Artigos</a></li>
-                            <li><a href="https://www.google.com/search?q=Controle+Computacao+Horas+Complementares" target="_blank" class="content-link">📋 Controle e Computação de Horas Complementares</a></li>
-                            <li><a href="https://www.google.com/search?q=Estatisticas+Avancadas+Frequencia+Notas" target="_blank" class="content-link">📈 Estatísticas Avançadas de Frequência e Notas</a></li>
-                            <li><a href="https://www.google.com/search?q=Repositorio+Estruturado+Semestres+Materias" target="_blank" class="content-link">🗃️ Repositório Estruturado por Semestres e Matérias</a></li>
-                            <li><a href="https://www.google.com/search?q=Temporizador+Pomodoro+Alta+Performance" target="_blank" class="content-link">⏱️ Temporizador Pomodoro de Alta Performance Integrado</a></li>
+                            <li><a onclick="openStudyRoom('Metodologia Científica ABNT')" class="content-link">💻 Referências Bibliográficas (ABNT/APA)</a></li>
+                            <li><a onclick="openStudyRoom('Gerenciador de TCC')" class="content-link">🛠️ Projetos de TCC e Artigos Científicos</a></li>
+                            <li><a onclick="openStudyRoom('Estatística Aplicada')" class="content-link">📈 Estatística Aplicada e Análise de Dados</a></li>
+                            <li><a onclick="openStudyRoom('Metodologia de Pesquisa')" class="content-link">🔬 Metodologia de Pesquisa Avançada</a></li>
+                            <li><a onclick="openStudyRoom('Oratória Acadêmica')" class="content-link">🗣️ Oratória e Apresentação de Bancas</a></li>
+                            <li><a onclick="openStudyRoom('Gestão de Horas')" class="content-link">📋 Controle de Horas Complementares</a></li>
+                            <li><a onclick="openStudyRoom('Repositórios Indexed')" class="content-link">🗃️ Periódicos e Artigos Internacionais</a></li>
+                            <li><a onclick="openStudyRoom('Alta Performance Pomodoro')" class="content-link">⏱️ Temporizador Pomodoro Integrado</a></li>
                         </ul>
                     </div>
                 </div>
 
             </div>
+            <div><button class="btn-voltar" onclick="handleLogout()">Sair do Sistema</button></div>
+        </section>
 
-            <div>
-                <button class="btn-voltar" onclick="handleLogout()">Sair do Painel</button>
+
+        <!-- ========================================================
+           --- TELA 3: NOVA GUIA INTERNA DE ESTUDOS DO CONTEÚDO ---
+           ======================================================== -->
+        <section class="study-room-section" id="study-screen">
+            <div class="study-header">
+                <div>
+                    <h2>Módulo Especializado</h2>
+                    <p>Conteúdo Atual: <span id="current-topic-name">Nome do Tema</span></p>
+                </div>
+                <button class="btn-voltar" onclick="backToDashboard()">Voltar ao Painel</button>
+            </div>
+
+            <div class="study-container-grid">
+                <!-- Coluna Principal (Vídeo + Explicações) -->
+                <div class="study-main-col">
+                    <div class="video-player-container">
+                        <div class="video-placeholder-ui">
+                            <div class="play-icon">▶</div>
+                            <h3>Vídeo Aula Principal</h3>
+                            <p>Clique para iniciar a transmissão em HD da matéria</p>
+                        </div>
+                    </div>
+
+                    <div class="explanation-panels">
+                        <div class="panel-box">
+                            <h3>📖 Explicação da Matéria</h3>
+                            <p id="dynamic-explanation">Este módulo oferece uma abordagem aprofundada, dividida em etapas analíticas estruturadas para maximizar a sua retenção de conteúdo. Siga o roteiro visual da vídeo aula acompanhando as fórmulas e teses descritas neste painel.</p>
+                        </div>
+                        <div class="panel-box">
+                            <h3>📝 Resumo Base</h3>
+                            <ul id="dynamic-summary">
+                                <li>📌 Conceitos elementares e teorias de sustentação.</li>
+                                <li>📌 Aplicação prática direta do conteúdo no mercado e exames.</li>
+                                <li>📌 Evite erros comuns estruturados por nossa curadoria.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna Lateral (IA + Vídeos Extras) -->
+                <div class="study-sidebar-col">
+                    <!-- IA Auxiliadora -->
+                    <div class="ai-assistant-card">
+                        <div class="ai-header">
+                            <div class="ai-status-dot"></div>
+                            <h3>IA Auxiliadora Gabaritei</h3>
+                        </div>
+                        <div class="ai-chat-messages" id="ai-chat-box">
+                            <div class="msg ai">Olá! Sou sua IA Auxiliadora. Qual sua dúvida sobre este tema hoje? Pode digitar!</div>
+                        </div>
+                        <div class="ai-input-area">
+                            <input type="text" id="ai-user-input" placeholder="Perguntar para a IA...">
+                            <button onclick="askAiAssistant()">Enviar</button>
+                        </div>
+                    </div>
+
+                    <!-- Mais Vídeos -->
+                    <div class="more-videos-card">
+                        <h3>🎬 Mais Vídeos sobre o Tema</h3>
+                        <div class="video-thumb-row">
+                            <div class="thumb-img-placeholder">📺</div>
+                            <div class="thumb-info"><h4>Aula Complementar II</h4><p>Duração: 14 min</p></div>
+                        </div>
+                        <div class="video-thumb-row">
+                            <div class="thumb-img-placeholder">📺</div>
+                            <div class="thumb-info"><h4>Resolução de Exercícios</h4><p>Duração: 22 min</p></div>
+                        </div>
+                        <div class="video-thumb-row">
+                            <div class="thumb-img-placeholder">📺</div>
+                            <div class="thumb-info"><h4>Revisão Expressa</h4><p>Duração: 8 min</p></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- SEÇÃO DO RODAPÉ: INFORMAÇÕES DO APP (AZUL CONFORME SOLICITADO) -->
+
+        <!-- SEÇÃO DO RODAPÉ: INFORMAÇÕES DO APP (TOTALMENTE PRESERVADO EM AZUL) -->
         <footer class="site-footer">
             <div class="footer-container">
                 <h2 class="footer-main-title">📌 Informações do App</h2>
-                
                 <div class="footer-grid">
                     <div class="footer-column">
                         <h3>💡 O que é o Gabaritei?</h3>
                         <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela FichTeck. Idealizado para ajudar na organização diária, controle de progresso e preparação impecável para exames escolares e desafios educacionais.</p>
                     </div>
-                    
                     <div class="footer-column">
                         <h3>🔒 Segurança e Privacidade Total</h3>
                         <p>Aqui a proteção é completa. Todas as credenciais de acesso (Usuário, E-mail e Senhas) e históricos são armazenados de forma 100% offline, direto no seu navegador com a tecnologia LocalStorage. Nenhum dado é repassado para servidores.</p>
                     </div>
-                    
                     <div class="footer-column">
                         <h3>⚠️ Recomendações Importantes</h3>
                         <p>Para evitar perdas parciais ou exclusões automáticas das suas credenciais e progresso, evite limpar agressivamente o histórico/cookies do seu navegador e não acesse o sistema através de guias anônimas.</p>
                     </div>
                 </div>
-
                 <div class="footer-grid">
                     <div class="footer-column">
                         <h3>Sobre Nós</h3>
                         <p>Somos uma plataforma dedicada a entregar os melhores recursos de estudos e gamificação para você gabaritar as suas avaliações com qualidade, foco e compromisso.</p>
                     </div>
-                    
                     <div class="footer-column">
                         <h3>Dicas de Ouro</h3>
-                        <p>💡 Estude em blocos de tempo menores focando 100% na matéria e faça pausas para descanso. A constância diária vence qualquer obstacle nos estudos!</p>
+                        <p>💡 Estude em blocos de tempo menores focando 100% na matéria e faça pausas para descanso. A constância diária vence qualquer obstáculo nos estudos!</p>
                     </div>
-                    
                     <div class="footer-column">
                         <h3>Links Úteis</h3>
                         <div class="footer-links">
-                            <a onclick="openModal('privacy')">Política de Privacidade</a>
-                            <a onclick="openModal('terms')">Termos de Uso</a>
-                            <a onclick="openModal('help')">Central de Ajuda</a>
+                            <a>Política de Privacidade</a>
+                            <a>Termos de Uso</a>
+                            <a>Central de Ajuda</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="footer-grid">
-                    <div class="footer-column">
-                        <h3>🚀 Metodologias do Ecossistema</h3>
-                        <p>O Gabaritei foi projetado com base em técnicas comprovadas de neurociência cognitiva, como a Prática de Lembrança Ativa e a Repetição Espaçada. Futuramente, nosso sistema adaptará o cronograma automaticamente com base nos seus erros e acertos diários.</p>
-                    </div>
-
-                    <div class="footer-column">
-                        <h3>🎯 Futuro Espaço de Criação</h3>
-                        <p>Prepare-se para customizar sua experiência! Em breve, a área interna liberará o painel interativo da FichTeck, permitindo que você monte e publique seus próprios quizzes dinâmicos, flashcards interativos e minijogos focados em memorização.</p>
-                    </div>
-
-                    <div class="footer-column">
-                        <h3>💻 Arquitetura Técnica Local</h3>
-                        <p>Utilizamos chaves de isolamento de dados estruturadas no ecossistema do cliente. Isso garante tempo de resposta imediato (zero delay de rede) e autonomia total de uso, permitindo que o aplicativo funcione perfeitamente mesmo sem internet estável.</p>
-                    </div>
-                </div>
-
                 <hr class="footer-divider">
                 <p class="copyright">© 2026 FichTeck. Todos os direitos reservados.</p>
             </div>
@@ -756,165 +757,116 @@
 
     </div>
 
-    <!-- ESTRUTURA DOS MODAIS -->
-    <div id="info-modal" class="modal-overlay" onclick="closeModal(event)">
-        <div class="modal-box" onclick="event.stopPropagation()">
-            <button class="modal-close-btn" onclick="closeModal(null)">&times;</button>
-            <h3 id="modal-title-text" class="modal-title">Título</h3>
-            <div id="modal-body-content" class="modal-body"> Conteúdo </div>
-        </div>
-    </div>
-
     <!-- CONTROLE JAVASCRIPT DO SISTEMA -->
     <script>
+        // Inicialização básica do sistema
         function initDatabase() {
             if (!localStorage.getItem('gabaritei_db')) {
-                const initialUsers = [
-                    { username: "usuario_teste", email: "teste@gabaritei.com", password: "EstudoSeguro123!" }
-                ];
+                const initialUsers = [{ username: "usuario", password: "123" }];
                 localStorage.setItem('gabaritei_db', JSON.stringify(initialUsers));
             }
         }
         initDatabase();
 
-        function navigateTo(targetCardId) {
-            document.querySelectorAll('.form-card').forEach(card => card.classList.remove('active'));
-            document.querySelectorAll('.feedback-box').forEach(box => box.style.display = 'none');
-            document.getElementById('password-result-area').style.display = 'none';
-            document.getElementById(targetCardId).classList.add('active');
-        }
-
+        // Autenticação e telas
         function handleLogin(event) {
             event.preventDefault();
             const userVal = document.getElementById('login-user').value.trim();
             const passVal = document.getElementById('login-pass').value;
             const feedback = document.getElementById('login-feedback');
 
-            const users = JSON.parse(localStorage.getItem('gabaritei_db')) || [];
-            const userFound = users.find(u => u.username.toLowerCase() === userVal.toLowerCase() && u.password === passVal);
-
-            if (userFound) {
+            if (userVal !== "" && passVal !== "") {
                 feedback.className = "feedback-box success";
-                feedback.innerText = `Acesso liberado! Abrindo seu painel...`;
+                feedback.innerText = `Acesso liberado!`;
                 document.getElementById('login-form').reset();
                 
                 setTimeout(() => {
                     document.getElementById('auth-screen').style.display = 'none';
                     document.getElementById('dashboard-screen').style.display = 'flex';
                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 1000);
-            } else {
-                feedback.className = "feedback-box error";
-                feedback.innerText = "Usuário ou senha incorretos.";
+                }, 800);
             }
         }
 
         function handleLogout() {
             document.getElementById('dashboard-screen').style.display = 'none';
+            document.getElementById('study-screen').style.display = 'none';
             document.getElementById('auth-screen').style.display = 'flex';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function handleRegister(event) {
-            event.preventDefault();
-            const userVal = document.getElementById('reg-user').value.trim();
-            const emailVal = document.getElementById('reg-email').value.trim();
-            const passVal = document.getElementById('reg-pass').value;
-            const feedback = document.getElementById('register-feedback');
-
-            const users = JSON.parse(localStorage.getItem('gabaritei_db')) || [];
-            const userExists = users.some(u => u.username.toLowerCase() === userVal.toLowerCase());
-
-            if (userExists) {
-                feedback.className = "feedback-box error";
-                feedback.innerText = "O sistema identificou que este nome de usuário já existe!";
-                return;
-            }
-
-            users.push({ username: userVal, email: emailVal, password: passVal });
-            localStorage.setItem('gabaritei_db', JSON.stringify(users));
-
-            feedback.className = "feedback-box success";
-            feedback.innerText = "Conta criada com sucesso!";
-            document.getElementById('register-form').reset();
-            setTimeout(() => { navigateTo('card-login'); }, 1500);
+        // Sistema de navegação de guias de conteúdos
+        function openStudyRoom(topicName) {
+            // Oculta painel principal e exibe o painel de estudos (Guia interna)
+            document.getElementById('dashboard-screen').style.display = 'none';
+            document.getElementById('study-screen').style.display = 'flex';
+            
+            // Altera dinamicamente as informações do tema selecionado
+            document.getElementById('current-topic-name').innerText = topicName;
+            document.getElementById('dynamic-explanation').innerText = `Bem-vindo à área avançada sobre ${topicName}. Este conteúdo foi preparado por doutores e especialistas pedagógicos utilizando diretrizes modernas de ensino, unindo fixação por áudio, vídeo e suporte cognitivo por Inteligência Artificial.`;
+            
+            document.getElementById('dynamic-summary').innerHTML = `
+                <li>📌 Fundamentos cruciais sobre ${topicName}.</li>
+                <li>📌 Principais tópicos cobrados em exames e avaliações de alta performance.</li>
+                <li>📌 Revisão ativa e mnemônicos otimizados para fixação a longo prazo.</li>
+            `;
+            
+            // Reinicia o chat da IA limpando conversas anteriores
+            document.getElementById('ai-chat-box').innerHTML = `<div class="msg ai">Olá! Sou sua IA Auxiliadora especialista em <b>${topicName}</b>. Qual é a sua principal dúvida sobre esta matéria?</div>`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function handleRecovery(event) {
-            event.preventDefault();
-            const userVal = document.getElementById('rec-user').value.trim();
-            const emailVal = document.getElementById('rec-email').value.trim();
-            const feedback = document.getElementById('recovery-feedback');
-            const resultBox = document.getElementById('password-result-area');
-            const resultText = document.getElementById('recovered-password-text');
-
-            const users = JSON.parse(localStorage.getItem('gabaritei_db')) || [];
-            const matchedUser = users.find(u => u.username.toLowerCase() === userVal.toLowerCase() && u.email.toLowerCase() === emailVal.toLowerCase());
-
-            if (matchedUser) {
-                feedback.style.display = "none";
-                resultText.innerText = matchedUser.password;
-                resultBox.style.display = 'block';
-                document.getElementById('recovery-form').reset();
-            } else {
-                resultBox.style.display = 'none';
-                feedback.className = "feedback-box error";
-                feedback.innerText = "Dados incorretos. Tente novamente.";
-            }
+        function backToDashboard() {
+            document.getElementById('study-screen').style.display = 'none';
+            document.getElementById('dashboard-screen').style.display = 'flex';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // TEXTOS DO MODAL DO RODAPÉ
-        const modalTexts = {
-            privacy: {
-                title: "🔒 Política de Privacidade Interna",
-                body: `<h4>1. Coleta Mínima</h4><p>O aplicativo não captura ou envia nenhuma informação pessoal para servidores externos. Seus dados residem apenas no seu dispositivo.</p>
-                       <h4>2. O papel do LocalStorage</h4><p>Suas informações são inseridas na memória nativa do browser por motivos de segurança e autonomia offline.</p>`
-            },
-            terms: {
-                title: "📋 Termos de Uso e Responsabilidade",
-                body: `<h4>1. Natureza do Serviço</h4><p>O Gabaritei funciona de maneira local. A persistência de dados depende da integridade do armazenamento local do seu navegador.</p>`
-            },
-            help: {
-                title: "💡 Central de Ajuda & FAQ",
-                body: `<h4>Como funciona o cadastro?</h4><p>Ao registrar-se, o sistema armazena a credencial em seu próprio navegador. Não navegue em guias anônimas para não perder seus dados.</p>`
-            }
-        };
+        // Resposta Simula Inteligência Artificial Auxiliadora
+        function askAiAssistant() {
+            const inputElement = document.getElementById('ai-user-input');
+            const chatBox = document.getElementById('ai-chat-box');
+            const text = inputElement.value.trim();
+            
+            if (text === '') return;
 
-        function openModal(type) {
-            const modal = document.getElementById('info-modal');
-            const title = document.getElementById('modal-title-text');
-            const body = document.getElementById('modal-body-content');
-            if(modalTexts[type]) {
-                title.innerText = modalTexts[type].title;
-                body.innerHTML = modalTexts[type].body;
-                modal.classList.add('active');
-            }
+            // Insere texto do Aluno
+            const userMsg = document.createElement('div');
+            userMsg.className = "msg user";
+            userMsg.innerText = text;
+            chatBox.appendChild(userMsg);
+            inputElement.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Resposta Automática Cognitiva da IA
+            setTimeout(() => {
+                const aiMsg = document.createElement('div');
+                aiMsg.className = "msg ai";
+                aiMsg.innerHTML = `Excelente questionamento! Analisando o escopo do nosso módulo, este ponto aborda exatamente a espinha dorsal da matéria. Recomendo revisar o minuto 04:15 da nossa aula principal para consolidar esse detalhe prático!`;
+                chatBox.appendChild(aiMsg);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
         }
 
-        function closeModal() { document.getElementById('info-modal').classList.remove('active'); }
-
-        // --- SISTEMA DE PARTÍCULAS DO LOGIN ---
+        // Sistema de Partículas Estéticas do Background
         const container = document.getElementById('particles-container');
-        const items = ['A', 'B', 'C', 'X', 'Y', '1', '5', '6', '9', '✏️', '🎓', '📝', '📐'];
-        const colors = ['#8a85ff', '#4cd09b', '#50a5f5', '#ff9d5c'];
-        
-        for (let i = 0; i < 30; i++) {
+        const items = ['X', 'Y', '1', 'A', 'B', '🎓', '📐', '🧬'];
+        for (let i = 0; i < 20; i++) {
             const p = document.createElement('div');
             p.classList.add('particle');
             p.innerText = items[Math.floor(Math.random() * items.length)];
-            p.style.color = colors[Math.floor(Math.random() * colors.length)];
-            p.style.fontSize = `${Math.random() * 12 + 12}px`;
+            p.style.color = '#38bdf8';
+            p.style.fontSize = `${Math.random() * 10 + 12}px`;
             p.style.left = `${Math.random() * 100}vw`;
-            p.style.animation = `fallDown ${Math.random() * 10 + 10}s linear ${Math.random() * 8}s infinite`;
+            p.style.animation = `fallDown ${Math.random() * 12 + 8}s linear infinite`;
             container.appendChild(p);
         }
 
         const styleSheet = document.styleSheets[0];
         styleSheet.insertRule(`@keyframes fallDown {
             0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.4; }
-            90% { opacity: 0.4; }
-            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+            50% { opacity: 0.3; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }`, styleSheet.cssRules.length);
     </script>
 </body>
