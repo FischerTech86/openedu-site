@@ -18,7 +18,7 @@
             --bg-card-dark-hover: #111827;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --footer-title-color: #ff5c5c; /* Tom vermelho/coral idêntico ao da imagem */
+            --footer-title-color: #4a3aff; /* Alterado de vermelho para o azul solicitado */
             --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -45,7 +45,7 @@
             width: 100%;
         }
 
-        /* --- TELA DE LOGIN (Fundo Claro com Letras/Números Caindo igual à Imagem) --- */
+        /* --- TELA DE LOGIN (Fundo Claro com Animação Corrigida de Letras/Números) --- */
         .login-section {
             position: relative;
             min-height: 90vh;
@@ -54,7 +54,8 @@
             align-items: center;
             padding: 40px 20px;
             z-index: 5;
-            background-color: #eef2f7; /* Fundo claro fiel à foto do login */
+            background-color: #eef2f7; 
+            overflow: hidden;
         }
 
         #particles-container {
@@ -65,7 +66,6 @@
             height: 100%;
             z-index: 1;
             pointer-events: none;
-            overflow: hidden;
         }
 
         .particle {
@@ -75,6 +75,14 @@
             user-select: none;
             opacity: 0;
             will-change: transform, opacity;
+        }
+
+        /* Animação de queda livre e contínua dos caracteres */
+        @keyframes fallDown {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.35; }
+            90% { opacity: 0.35; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
         }
 
         .card-container {
@@ -110,13 +118,6 @@
             letter-spacing: 1.5px;
             margin-bottom: 25px;
             text-transform: uppercase;
-        }
-
-        .subtitle {
-            color: #0f172a;
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 25px;
         }
 
         .input-group {
@@ -376,7 +377,7 @@
         .thumb-info p { font-size: 11px; color: var(--text-muted); }
 
 
-        /* --- SEÇÃO DE INFORMAÇÕES DO APP (RODAPÉ ATUALIZADO CONFORME A FOTO) --- */
+        /* --- SEÇÃO DE INFORMAÇÕES DO APP (CORES EM AZUL ATUALIZADAS) --- */
         .site-footer {
             background-color: #111625;
             color: #ffffff;
@@ -391,7 +392,7 @@
         .footer-container { max-width: 1300px; margin: 0 auto; }
         
         .footer-main-title { 
-            color: var(--footer-title-color); 
+            color: var(--footer-title-color); /* Agora exibe o azul correto */
             font-size: 24px; 
             font-weight: 700; 
             margin-bottom: 35px; 
@@ -414,7 +415,7 @@
         }
 
         .footer-block h3 { 
-            color: var(--footer-title-color); 
+            color: var(--footer-title-color); /* Títulos dos blocos agora em azul */
             font-size: 15px; 
             font-weight: 600; 
             display: flex; 
@@ -464,7 +465,7 @@
 
     <div class="page-wrapper">
         
-        <!-- TELA 1: LOGIN (Sempre ativa ao iniciar o site - Estilo focado na foto) -->
+        <!-- TELA 1: LOGIN -->
         <section class="login-section" id="auth-screen">
             <div id="particles-container"></div>
             <div class="card-container">
@@ -480,7 +481,7 @@
             </div>
         </section>
 
-        <!-- TELA 2: PAINEL DE CONTÉUDOS (COMPLETO E EXPANDIDO) -->
+        <!-- TELA 2: PAINEL DE CONTÉUDOS -->
         <section class="dashboard-section" id="dashboard-screen">
             <div class="dashboard-header">
                 <h2 class="dashboard-title">Boas-vindas ao Gabaritei!</h2>
@@ -574,7 +575,7 @@
         </section>
 
 
-        <!-- TELA 3: GUIA INTERNA DE ESTUDOS DO CONTEÚDO -->
+        <!-- TELA 3: GUIA INTERNA DE ESTUDOS -->
         <section class="study-room-section" id="study-screen">
             <div class="study-header">
                 <div>
@@ -639,7 +640,7 @@
         </section>
 
 
-        <!-- SEÇÃO DO RODAPÉ: INFORMAÇÕES DO APP (FIEL À SUA SEGUNDA IMAGEM COM TODOS OS TEXTOS E MAPA DE 3 COLUNAS) -->
+        <!-- SEÇÃO DO RODAPÉ: INFORMAÇÕES DO APP -->
         <footer class="site-footer">
             <div class="footer-container">
                 <h2 class="footer-main-title">🚀 Informações do App</h2>
@@ -661,17 +662,15 @@
                         <p>Para evitar perdas parciais ou exclusões automáticas das suas credenciais e progresso, evite limpar agressivamente o histórico/cookies do seu navegador e não acesse o sistema através de guias anônimas.</p>
                     </div>
 
-                    <!-- LINHA 2 - COLUNA 1 -->
+                    <!-- LINHA 2 -->
                     <div class="footer-block">
                         <h3>Sobre Nós</h3>
                         <p>Somos uma plataforma dedicada a entregar os melhores recursos de estudos e gamificação para você gabaritar as suas avaliações com qualidade, foco e compromisso.</p>
                     </div>
-                    <!-- LINHA 2 - COLUNA 2 -->
                     <div class="footer-block">
                         <h3>Dicas de Ouro</h3>
                         <p>💡 Estude em blocos de tempo menores focando 100% na matéria e faça pausas para descanso. A constância diária vence qualquer obstáculo nos estudos!</p>
                     </div>
-                    <!-- LINHA 2 - COLUNA 3 -->
                     <div class="footer-block">
                         <h3>Links Úteis</h3>
                         <div class="footer-links">
@@ -681,7 +680,7 @@
                         </div>
                     </div>
 
-                    <!-- LINHA 3 - TEXTOS PARCIAIS REINSTALADOS -->
+                    <!-- LINHA 3 -->
                     <div class="footer-block">
                         <h3>🚀 Metodologias do Ecossistema</h3>
                         <p>O Gabaritei foi projetado com base em técnicas comprovadas de neurociência cognitiva, como a Prática de Lembrança Ativa e a Repetição Espaçada. Futuramente, nosso sistema adaptará o cronograma automaticamente com base nos seus erros e acertos diários.</p>
@@ -691,7 +690,7 @@
                         <p>Prepare-se para customizar sua experiência! Em breve, a área interna liberará o painel interativo da FichTeck, permitindo que você monte e publique seus próprios quizzes dinâmicos, flashcards interativos e minijogos focados em memorização.</p>
                     </div>
                     <div class="footer-block">
-                        <h3>💻 Arquitetura Técnica Local</h3>
+                        <h3>💻 Arquitetura Técnico Local</h3>
                         <p>Utilizamos chaves de isolamento de dados estruturadas no ecossistema do cliente. Isso garante tempo de resposta imediato (zero delay de rede) e autonomia total de uso, permitindo que o aplicativo funcione perfeitamente mesmo sem internet estável.</p>
                     </div>
                 </div>
@@ -784,37 +783,25 @@
             }, 1000);
         }
 
-        /* --- ANIMAÇÃO EXCLUSIVA DE LETRAS E NÚMEROS FILTRADOS IGUAL À FOTO DO LOGIN --- */
+        /* --- SCRIPT DA ANIMAÇÃO DE CARACTERES CAINDO NO FUNDO --- */
         const container = document.getElementById('particles-container');
-        // Mistura real de caracteres baseados no fundo do seu sistema
-        const items = ['A', 'B', 'X', 'Y', 'Z', 'W', '1', '2', '4', '6', '8', '9', 'f', 'z', 'm', 'r'];
-        // Paleta de tons suaves (azul sutil, cinza e tons pastéis desbotados conforme a foto)
-        const colors = ['#3b82f6', '#475569', '#94a3b8', '#ef4444', '#1e3a8a', '#38bdf8'];
+        const items = ['A', 'B', 'X', 'Y', 'Z', '1', '2', '4', '6', '8', '9', 'f', 'z', 'm', 'r'];
+        const colors = ['#3b82f6', '#475569', '#94a3b8', '#38bdf8', '#4a3aff'];
 
-        for (let i = 0; i < 35; i++) {
+        for (let i = 0; i < 45; i++) {
             const p = document.createElement('div');
             p.classList.add('particle');
             p.innerText = items[Math.floor(Math.random() * items.length)];
             
-            // Estilos estáticos randômicos imitando o background original
             p.style.color = colors[Math.floor(Math.random() * colors.length)];
             p.style.fontSize = `${Math.random() * 8 + 14}px`;
-            p.style.left = `${Math.random() * 100}vw`;
+            p.style.left = `${Math.random() * 100}%`;
             
-            // Animação contínua e suave de queda vertical
-            p.style.animation = `fallDown ${Math.random() * 14 + 10}s linear infinite`;
+            // Atribui a animação de queda montada estaticamente no CSS
+            p.style.animation = `fallDown ${Math.random() * 10 + 8}s linear infinite`;
             p.style.animationDelay = `${Math.random() * -15}s`;
             container.appendChild(p);
         }
-
-        // Inserção da folha de estilos de animação direta
-        const styleSheet = document.styleSheets[0];
-        styleSheet.insertRule(`@keyframes fallDown {
-            0% { transform: translateY(-40px) rotate(0deg); opacity: 0; }
-            15% { opacity: 0.25; }
-            85% { opacity: 0.25; }
-            100% { transform: translateY(105vh) rotate(180deg); opacity: 0; }
-        }`, styleSheet.cssRules.length);
     </script>
 </body>
 </html>
