@@ -24,6 +24,12 @@
             overflow-x: hidden;
         }
 
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
         /* --- CONTAINER DE LOGIN --- */
         .login-section {
             position: relative;
@@ -53,7 +59,7 @@
             will-change: transform, opacity;
         }
 
-        /* --- DESIGN DOS CARDS --- */
+        /* --- DESIGN DOS CARDS DE LOGIN --- */
         .card-container {
             background: #ffffff;
             padding: 45px 35px;
@@ -212,6 +218,150 @@
             letter-spacing: 1px;
         }
 
+        /* =======================================================
+           --- NOVA SEÇÃO: PAINEL DE NÍVEIS DE ENSINO (DASHBOARD) ---
+           ======================================================= */
+        .dashboard-section {
+            min-height: 100vh;
+            display: none; /* Exibido apenas pós-login */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            background-color: #f8fafc;
+        }
+
+        .dashboard-title {
+            font-size: 28px;
+            color: #1e293b;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .dashboard-subtitle {
+            font-size: 15px;
+            color: #64748b;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1100px;
+            margin-bottom: 40px;
+        }
+
+        /* Estilo base comum dos retângulos */
+        .edu-card {
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .edu-card .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .edu-card h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .edu-card p {
+            font-size: 13px;
+        }
+
+        /* --- TIPO 1: ESTILO INFANTILIZADO (1º ao 5º Ano) --- */
+        .card-infantil {
+            background: linear-gradient(135deg, #ffde4d, #ffb22c);
+            border-radius: 35px;
+            border: 5px dashed #ffffff;
+            box-shadow: 0 10px 0 #d97706, 0 15px 25px rgba(251, 191, 36, 0.3);
+            color: #451a03;
+        }
+        .card-infantil h3 {
+            font-weight: 800;
+        }
+        .card-infantil p {
+            font-weight: 600;
+            color: #78350f;
+        }
+        .card-infantil:hover {
+            transform: scale(1.06) rotate(-2deg);
+            box-shadow: 0 12px 0 #b45309, 0 20px 30px rgba(251, 191, 36, 0.4);
+        }
+
+        /* --- TIPO 2: ESTILO MIX - INFANTILIZADO E MADURO (6º ao 9º Ano) --- */
+        .card-misto {
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 20px rgba(129, 140, 248, 0.3);
+            color: #ffffff;
+        }
+        .card-misto h3 {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .card-misto p {
+            color: #e0e7ff;
+            font-weight: 500;
+        }
+        .card-misto:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(129, 140, 248, 0.5);
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+        }
+
+        /* --- TIPO 3: ESTILO MADURO (Ensino Médio e Superior) --- */
+        .card-maduro {
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+            color: #0f172a;
+        }
+        .card-maduro h3 {
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .card-maduro p {
+            color: #64748b;
+        }
+        .card-maduro:hover {
+            border-color: #4a3aff;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(74, 58, 255, 0.08);
+        }
+
+        /* Botão de retorno do painel */
+        .btn-voltar {
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid #64748b;
+            color: #64748b;
+            font-weight: 600;
+            font-size: 13px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-voltar:hover {
+            background: #64748b;
+            color: #ffffff;
+        }
+
+
         /* --- SEÇÃO DO RODAPÉ AVANÇADO --- */
         .site-footer {
             background-color: #121319;
@@ -220,6 +370,7 @@
             position: relative;
             z-index: 10;
             border-top: 4px solid #f27224;
+            margin-top: auto;
         }
 
         .footer-container {
@@ -286,7 +437,7 @@
             color: #718096;
         }
 
-        /* --- ESTILOS DAS JANELAS MODAIS (POPUPS DOS LINKS) --- */
+        /* --- ESTILOS DAS JANELAS MODAIS --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -340,9 +491,7 @@
             font-weight: bold;
         }
 
-        .modal-close-btn:hover {
-            color: #e53e3e;
-        }
+        .modal-close-btn:hover { color: #e53e3e; }
 
         .modal-title {
             color: #f27224;
@@ -360,18 +509,10 @@
             text-align: justify;
         }
 
-        .modal-body h4 {
-            margin: 15px 0 5px 0;
-            color: #4a3aff;
-            font-size: 15px;
-        }
+        .modal-body h4 { margin: 15px 0 5px 0; color: #4a3aff; font-size: 15px; }
+        .modal-body ul { margin-left: 20px; margin-bottom: 15px; }
 
-        .modal-body ul {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-
-        /* --- PARTÍCULAS --- */
+        /* --- ANIMAÇÕES DAS PARTÍCULAS --- */
         @keyframes fall-straight {
             0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
             10% { opacity: 0.6; }
@@ -400,7 +541,8 @@
 
     <div class="page-wrapper">
         
-        <section class="login-section">
+        <!-- TELA 1: SEÇÃO DE LOGIN E CADASTRO -->
+        <section class="login-section" id="auth-screen">
             <div id="particles-container"></div>
             
             <div class="card-container">
@@ -428,7 +570,7 @@
                     
                     <div class="card-links">
                         <p><a onclick="navigateTo('card-recovery')">Esqueceu a senha?</a></p>
-                        <p>Você não tem outra account? <a onclick="navigateTo('card-register')">Crie uma aqui</a></p>
+                        <p>Você não tem outra conta? <a onclick="navigateTo('card-register')">Crie uma aqui</a></p>
                     </div>
                 </div>
 
@@ -497,7 +639,45 @@
             </div>
         </section>
 
-        <!-- SEÇÃO DO RODAPÉ (FOOTER COM CONTEÚDO EXPANDIDO) -->
+        <!-- TELA 2: NOVA SEÇÃO DO PAINEL DE NÍVEIS DE ENSINO (PÓS-LOGIN) -->
+        <section class="dashboard-section" id="dashboard-screen">
+            <h2 class="dashboard-title">Boas-vindas ao Gabaritei!</h2>
+            <p class="dashboard-subtitle">Selecione o seu nível de ensino atual para carregar o ecossistema personalizado:</p>
+            
+            <div class="education-grid">
+                <!-- 1 ao 5: Estilo Infantilizado -->
+                <div class="edu-card card-infantil" onclick="alert('Módulo do 1º ao 5º Ano selecionado!')">
+                    <div class="icon">🎈</div>
+                    <h3>1º ao 5º Ano</h3>
+                    <p>Ensino Fundamental I</p>
+                </div>
+
+                <!-- 6 ao 9: Estilo Infantilizado + Maduro (Misto) -->
+                <div class="edu-card card-misto" onclick="alert('Módulo do 6º ao 9º Ano selecionado!')">
+                    <div class="icon">🚀</div>
+                    <h3>6º ao 9º Ano</h3>
+                    <p>Ensino Fundamental II</p>
+                </div>
+
+                <!-- 1 ao 3: Estilo Maduro -->
+                <div class="edu-card card-maduro" onclick="alert('Módulo do Ensino Médio selecionado!')">
+                    <div class="icon">📚</div>
+                    <h3>1º ao 3º Ano</h3>
+                    <p>Ensino Médio</p>
+                </div>
+
+                <!-- Ensino Superior: Estilo Maduro -->
+                <div class="edu-card card-maduro" onclick="alert('Módulo do Ensino Superior selecionado!')">
+                    <div class="icon">🎓</div>
+                    <h3>Ensino Superior</h3>
+                    <p>Graduação e Especializações</p>
+                </div>
+            </div>
+
+            <button class="btn-voltar" onclick="handleLogout()">Sair do Painel</button>
+        </section>
+
+        <!-- SEÇÃO DO RODAPÉ (FOOTER INTEGRADO) -->
         <footer class="site-footer">
             <div class="footer-container">
                 <h2 class="footer-main-title">📌 Informações do App</h2>
@@ -535,7 +715,6 @@
                     <div class="footer-column">
                         <h3>Links Úteis</h3>
                         <div class="footer-links">
-                            <!-- Links corrigidos com funções JavaScript para abrir janelas reais -->
                             <a onclick="openModal('privacy')">Política de Privacidade</a>
                             <a onclick="openModal('terms')">Termos de Uso</a>
                             <a onclick="openModal('help')">Central de Ajuda</a>
@@ -556,7 +735,7 @@
                     </div>
 
                     <div class="footer-column">
-                        <h3>💻 Arquitetura Técnica Local</h3>
+                        <h3>💻 Arquitetura Técnico Local</h3>
                         <p>Utilizamos chaves de isolamento de dados estruturadas no ecossistema do cliente. Isso garante tempo de resposta imediato (zero delay de rede) e autonomia total de uso, permitindo que o aplicativo funcione perfeitamente mesmo sem internet estável.</p>
                     </div>
                 </div>
@@ -568,7 +747,7 @@
 
     </div>
 
-    <!-- ESTRUTURA DOS MODAIS INTERATIVOS (OCULTOS ATÉ O CLIQUE) -->
+    <!-- ESTRUTURA DOS MODAIS INTERATIVOS -->
     <div id="info-modal" class="modal-overlay" onclick="closeModal(event)">
         <div class="modal-box" onclick="event.stopPropagation()">
             <button class="modal-close-btn" onclick="closeModal(null)">&times;</button>
@@ -598,6 +777,7 @@
             document.getElementById(targetCardId).classList.add('active');
         }
 
+        // ALTERAÇÃO: Quando o login estiver correto, redireciona para a nova seção
         function handleLogin(event) {
             event.preventDefault();
             const userVal = document.getElementById('login-user').value.trim();
@@ -609,12 +789,26 @@
 
             if (userFound) {
                 feedback.className = "feedback-box success";
-                feedback.innerText = `Bem-vindo, ${userFound.username}!`;
+                feedback.innerText = `Acesso autorizado! Carregando seu painel...`;
                 document.getElementById('login-form').reset();
+                
+                // Transição suave para a nova tela de retângulos após 1.2 segundos
+                setTimeout(() => {
+                    document.getElementById('auth-screen').style.display = 'none';
+                    document.getElementById('dashboard-screen').style.display = 'flex';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 1200);
             } else {
                 feedback.className = "feedback-box error";
                 feedback.innerText = "Usuário ou senha incorretos.";
             }
+        }
+
+        // Função para desconectar da área de painéis e voltar ao Login
+        function handleLogout() {
+            document.getElementById('dashboard-screen').style.display = 'none';
+            document.getElementById('auth-screen').style.display = 'flex';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function handleRegister(event) {
@@ -666,7 +860,7 @@
             }
         }
 
-        // --- SISTEMA INTERATIVO DOS LINKS ÚTEIS (MODAL) ---
+        // --- TEXTOS DO SISTEMA INTERATIVO DE MODAIS ---
         const modalTexts = {
             privacy: {
                 title: "🔒 Política de Privacidade Interna",
@@ -678,7 +872,7 @@
             terms: {
                 title: "📋 Termos de Uso e Responsabilidade",
                 body: `<p>Ao utilizar o ecossistema Gabaritei, você concorda com as diretrizes técnicas de funcionamento estabelecidas abaixo:</p>
-                       <h4>1. Natureza do Serviço</h4><p>O Gabaritei funciona como um assistente de estudos offline focado em gamificação. A persistência de dados depende diretamente da integridade do armazenamento local do seu navegador.</p>
+                       <h4>1. Natureza do Serviço</h4><p>O Gabaritei funciona como um assistente de estudos offline focado em gamificação. A frequência e persistência de dados depende diretamente da integridade do armazenamento local do seu navegador.</p>
                        <h4>2. Responsabilidade sobre Credenciais</h4><p>Como não possuímos servidores de sincronização online para proteção de privacidade, o gerenciamento de nomes de usuário e senhas cadastrados é de responsabilidade exclusiva do estudante.</p>
                        <h4>3. Limitações de Ambientes</h4><p>O aplicativo não deve ser inicializado em navegadores configurados para apagar dados ao fechar ou através de abas anônimas, sob o risco latente de perda total de progresso e indisponibilidade do login.</p>`
             },
@@ -704,7 +898,6 @@
         }
 
         function closeModal(event) {
-            // Fecha apenas se clicar no background ou no botão de fechar diretamente
             document.getElementById('info-modal').classList.remove('active');
         }
 
