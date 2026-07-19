@@ -212,24 +212,78 @@
             letter-spacing: 1px;
         }
 
-        /* --- RODAPÉ (FOOTER) --- */
+        /* --- SEÇÃO DO RODAPÉ AVANÇADO (FOOTER EXPANDIDO) --- */
         .site-footer {
             background-color: #121319;
             color: #a0aec0;
-            padding: 60px 40px 30px 40px;
+            padding: 60px 40px 40px 40px;
             position: relative;
             z-index: 10;
+            border-top: 4px solid #f27224;
         }
 
-        .footer-container { max-width: 1200px; margin: 0 auto; }
-        .footer-main-title { color: #f27224; font-size: 24px; font-weight: 700; margin-bottom: 35px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-bottom: 40px; }
-        .footer-column h3 { color: #f27224; font-size: 16px; font-weight: 600; margin-bottom: 15px; }
-        .footer-column p { font-size: 13.5px; line-height: 1.6; color: #cbd5e0; }
-        .footer-links a { display: block; color: #cbd5e0; text-decoration: none; font-size: 13.5px; margin-bottom: 10px; }
-        .footer-links a:hover { color: #f27224; }
-        .footer-divider { border: none; border-top: 1px solid #2d3748; margin-bottom: 25px; }
-        .copyright { text-align: center; font-size: 13px; color: #718096; }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-main-title {
+            color: #f27224;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 35px;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 45px;
+            margin-bottom: 35px;
+        }
+
+        .footer-column h3 {
+            color: #f27224;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-column p {
+            font-size: 13.5px;
+            line-height: 1.7;
+            color: #cbd5e0;
+            text-align: justify;
+        }
+
+        .footer-links a {
+            display: block;
+            color: #cbd5e0;
+            text-decoration: none;
+            font-size: 13.5px;
+            margin-bottom: 12px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #f27224;
+            text-decoration: underline;
+        }
+
+        .footer-divider {
+            border: none;
+            border-top: 1px solid #2d3748;
+            margin: 30px 0;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 13px;
+            color: #718096;
+        }
 
         /* --- PARTÍCULAS --- */
         @keyframes fall-straight {
@@ -251,7 +305,9 @@
             100% { transform: translate(100px, 105vh) rotate(360deg); opacity: 0; }
         }
 
-        @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr; gap: 30px; } }
+        @media (max-width: 950px) {
+            .footer-grid { grid-template-columns: 1fr; gap: 35px; }
+        }
     </style>
 </head>
 <body>
@@ -290,7 +346,7 @@
                     </div>
                 </div>
 
-                <!-- CARD 2: CRIAR CONTA (SEM EXEMPLOS EXPOSTOS) -->
+                <!-- CARD 2: CRIAR CONTA -->
                 <div id="card-register" class="form-card">
                     <h1 class="logo-title">GABARITEI</h1>
                     <h2 class="subtitle">Criar Conta</h2>
@@ -355,24 +411,69 @@
             </div>
         </section>
 
-        <!-- RODAPÉ -->
+        <!-- SEÇÃO DO RODAPÉ (FOOTER COMPLETAMENTE INTEGRADO E EXPANDIDO) -->
         <footer class="site-footer">
             <div class="footer-container">
                 <h2 class="footer-main-title">📌 Informações do App</h2>
+                
+                <!-- LINHA 1 DO GRID (Conteúdo Original da Imagem) -->
                 <div class="footer-grid">
                     <div class="footer-column">
                         <h3>💡 O que é o Gabaritei?</h3>
-                        <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela FichTeck. Idealizado para ajudar na organização diária, controle de progresso e preparação impecável para exames escolares.</p>
+                        <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela FichTeck. Idealizado para ajudar na organização diária, controle de progresso e preparação impecável para exames escolares e desafios educacionais.</p>
                     </div>
+                    
                     <div class="footer-column">
                         <h3>🔒 Segurança e Privacidade Total</h3>
-                        <p>Aqui a proteção é completa. Todas as credenciais de acesso são armazenadas de forma 100% offline, direto no seu navegador com a tecnologia LocalStorage. Nenhum dado é repassado para servidores.</p>
+                        <p>Aqui a proteção é completa. Todas as credenciais de acesso (Usuário, E-mail e Senhas) e históricos são armazenados de forma 100% offline, direto no seu navegador com a tecnologia LocalStorage. Nenhum dado é repassado para servidores.</p>
                     </div>
+                    
                     <div class="footer-column">
                         <h3>⚠️ Recomendações Importantes</h3>
-                        <p>Para evitar perdas automáticas das suas credenciais e progresso, evite limpar de forma agressiva o histórico do seu navegador e não use guias anônimas.</p>
+                        <p>Para evitar perdas parciais ou exclusões automáticas das suas credenciais e progresso, evite limpar agressivamente o histórico/cookies do seu navegador e não acesse o sistema através de guias anônimas.</p>
                     </div>
                 </div>
+
+                <!-- LINHA 2 DO GRID (Conteúdo Original + Novas Informações Relevantes) -->
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h3>Sobre Nós</h3>
+                        <p>Somos uma plataforma dedicada a entregar os melhores recursos de estudos e gamificação para você gabaritar as suas avaliações com qualidade, foco e compromisso.</p>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Dicas de Ouro</h3>
+                        <p>💡 Estude em blocos de tempo menores focando 100% na matéria e faça pausas para descanso. A constância diária vence qualquer obstáculo nos estudos!</p>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Links Úteis</h3>
+                        <div class="footer-links">
+                            <a href="#">Política de Privacidade</a>
+                            <a href="#">Termos de Uso</a>
+                            <a href="#">Central de Ajuda</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LINHA 3 DO GRID (NOVAS SEÇÕES COMPLEMENTARES DE ALTO VALOR) -->
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h3>🚀 Metodologias do Ecossistema</h3>
+                        <p>O Gabaritei foi projetado com base em técnicas comprovadas de neurociência cognitiva, como a Prática de Lembrança Ativa e a Repetição Espaçada. Futuramente, nosso sistema adaptará o cronograma automaticamente com base nos seus erros e acertos diários.</p>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>🎯 Futuro Espaço de Criação</h3>
+                        <p>Prepare-se para customizar sua experiência! Em breve, a área interna liberará o painel interativo da FichTeck, permitindo que você monte e publique seus próprios quizzes dinâmicos, flashcards interativos e minijogos focados em memorização.</p>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>💻 Arquitetura Técnica Local</h3>
+                        <p>Utilizamos chaves de isolamento de dados estruturadas no ecossistema do cliente. Isso garante tempo de resposta imediato (zero delay de rede) e autonomia total de uso, permitindo que o aplicativo funcione perfeitamente mesmo sem internet estável.</p>
+                    </div>
+                </div>
+
                 <hr class="footer-divider">
                 <p class="copyright">© 2026 FichTeck. Todos os direitos reservados.</p>
             </div>
@@ -380,7 +481,7 @@
 
     </div>
 
-    <!-- SCRIPT DO BANCO LOCAL -->
+    <!-- SCRIPT DE GERENCIAMENTO DO BANCO DE DADOS -->
     <script>
         function initDatabase() {
             if (!localStorage.getItem('gabaritei_db')) {
@@ -438,7 +539,7 @@
             localStorage.setItem('gabaritei_db', JSON.stringify(users));
 
             feedback.className = "feedback-box success";
-            feedback.innerText = "Conta criada com sucesso! Entrando...";
+            feedback.innerText = "Conta criada com sucesso! Redirecionando...";
             document.getElementById('register-form').reset();
 
             setTimeout(() => { navigateTo('card-login'); }, 2000);
@@ -467,7 +568,7 @@
             }
         }
 
-        // --- PARTÍCULAS ---
+        // --- SISTEMA DE PARTÍCULAS EM BACKGROUND ---
         const container = document.getElementById('particles-container');
         const items = ['A', 'B', 'C', 'X', 'Y', 'Z', 'N', '3', '5', '6', '8', '9', '1', '7', '%', 'π', '✏️', '🎓', '📝', '📐'];
         const colors = ['#8a85ff', '#4cd09b', '#50a5f5', '#ff9d5c', '#a2b4c7', '#b2ad7f', '#d64161'];
