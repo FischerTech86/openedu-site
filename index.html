@@ -12,8 +12,7 @@
         :root {
             --primary-color: #4a3aff;
             --primary-hover: #3b2ee0;
-            --accent-orange: #f27224;
-            --accent-cyan: #38bdf8;
+            --accent-blue: #38bdf8; /* Nova cor principal para substituir o laranja */
             --bg-site: #f8fafc;
             --bg-card-dark: #1e293b;
             --bg-card-dark-hover: #111827;
@@ -255,7 +254,7 @@
             margin-bottom: 45px;
         }
 
-        /* NOVO DESIGN: Estilo Dark Acadêmico Unificado para Todos os Quadrados */
+        /* Estilo Dark Acadêmico Unificado para Todos os Quadrados */
         .edu-card {
             background: var(--bg-card-dark);
             border-radius: 16px;
@@ -274,7 +273,7 @@
         .edu-card:hover {
             transform: translateY(-6px);
             background: var(--bg-card-dark-hover);
-            border-color: var(--accent-cyan);
+            border-color: var(--accent-blue);
             box-shadow: 0 15px 30px rgba(56, 189, 248, 0.15);
         }
 
@@ -296,7 +295,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 25px;
-            color: var(--accent-cyan);
+            color: var(--accent-blue);
         }
 
         /* Área interna de conteúdos */
@@ -368,14 +367,14 @@
         }
 
 
-        /* --- SEÇÃO DE INFORMAÇÕES DO APP (RODAPÉ INALTERADO) --- */
+        /* --- SEÇÃO DE INFORMAÇÕES DO APP (MUDANÇA DE LARANJA PARA AZUL) --- */
         .site-footer {
             background-color: #121319;
             color: #a0aec0;
             padding: 60px 40px 40px 40px;
             position: relative;
             z-index: 10;
-            border-top: 4px solid var(--accent-orange);
+            border-top: 4px solid var(--accent-blue); /* Mudado para Azul */
             margin-top: auto;
             width: 100%;
         }
@@ -386,7 +385,7 @@
         }
 
         .footer-main-title {
-            color: var(--accent-orange);
+            color: var(--accent-blue); /* Mudado para Azul */
             font-size: 26px;
             font-weight: 700;
             margin-bottom: 35px;
@@ -401,7 +400,7 @@
         }
 
         .footer-column h3 {
-            color: var(--accent-orange);
+            color: var(--accent-blue); /* Mudado para Azul */
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 16px;
@@ -428,7 +427,7 @@
         }
 
         .footer-links a:hover {
-            color: var(--accent-orange);
+            color: var(--accent-blue); /* Mudado para Azul */
             text-decoration: underline;
         }
 
@@ -483,7 +482,7 @@
 
         .modal-close-btn { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #a0aec0; background: none; border: none; font-weight: bold; }
         .modal-close-btn:hover { color: #e53e3e; }
-        .modal-title { color: var(--accent-orange); font-size: 22px; font-weight: 700; margin-bottom: 20px; border-bottom: 2px solid var(--accent-orange); padding-bottom: 10px; }
+        .modal-title { color: var(--accent-blue); font-size: 22px; font-weight: 700; margin-bottom: 20px; border-bottom: 2px solid var(--accent-blue); padding-bottom: 10px; } /* Mudado para Azul */
         .modal-body { color: #2d3748; font-size: 14px; line-height: 1.6; text-align: justify; }
         .modal-body h4 { margin: 15px 0 5px 0; color: var(--primary-color); font-size: 15px; }
 
@@ -598,7 +597,7 @@
             </div>
         </section>
 
-        <!-- TELA 2: PAINEL PRINCIPAL (ESTILO COMPLETO PRETO PROFISSIONAL UNIFICADO) -->
+        <!-- TELA 2: PAINEL PRINCIPAL (ESTILO PRETO COM DETALHES EM AZUL) -->
         <section class="dashboard-section" id="dashboard-screen">
             <div class="dashboard-header">
                 <h2 class="dashboard-title">Boas-vindas ao Gabaritei!</h2>
@@ -690,7 +689,7 @@
             </div>
         </section>
 
-        <!-- SEÇÃO DO RODAPÉ: INFORMAÇÕES DO APP (Mantido Totalmente Conforme Solicitado) -->
+        <!-- SEÇÃO DO RODAPÉ: INFORMAÇÕES DO APP (AZUL CONFORME SOLICITADO) -->
         <footer class="site-footer">
             <div class="footer-container">
                 <h2 class="footer-main-title">📌 Informações do App</h2>
