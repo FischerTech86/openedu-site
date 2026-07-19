@@ -18,6 +18,7 @@
             --bg-card-dark-hover: #111827;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
+            --footer-title-color: #ff5c5c; /* Tom vermelho/coral idêntico ao da imagem */
             --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -44,7 +45,7 @@
             width: 100%;
         }
 
-        /* --- TELA DE LOGIN (Sempre ativa ao iniciar o site) --- */
+        /* --- TELA DE LOGIN (Fundo Claro com Letras/Números Caindo igual à Imagem) --- */
         .login-section {
             position: relative;
             min-height: 90vh;
@@ -53,6 +54,7 @@
             align-items: center;
             padding: 40px 20px;
             z-index: 5;
+            background-color: #eef2f7; /* Fundo claro fiel à foto do login */
         }
 
         #particles-container {
@@ -63,13 +65,15 @@
             height: 100%;
             z-index: 1;
             pointer-events: none;
+            overflow: hidden;
         }
 
         .particle {
             position: absolute;
             font-weight: bold;
-            opacity: 0;
+            font-family: 'Poppins', sans-serif;
             user-select: none;
+            opacity: 0;
             will-change: transform, opacity;
         }
 
@@ -77,12 +81,12 @@
             background: #ffffff;
             padding: 45px 35px;
             border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 420px;
             text-align: center;
             z-index: 10;
-            border: 1px solid #334155;
+            border: 1px solid #e2e8f0;
         }
 
         .form-card {
@@ -159,21 +163,6 @@
             transform: translateY(-2px);
         }
 
-        .card-links {
-            margin-top: 25px;
-            font-size: 13px;
-            color: #64748b;
-        }
-
-        .card-links a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .card-links a:hover { text-decoration: underline; }
-
         .feedback-box {
             padding: 12px 16px;
             border-radius: 12px;
@@ -182,7 +171,6 @@
             text-align: left;
             display: none;
         }
-        .feedback-box.error { display: block !important; background-color: #fff5f5; color: #e53e3e; border: 1px solid #fed7d7; }
         .feedback-box.success { display: block !important; background-color: #f0fff4; color: #38a169; border: 1px solid #c6f6d5; }
 
 
@@ -297,9 +285,7 @@
         .btn-voltar:hover { background: var(--accent-blue); color: #0f172a; border-color: var(--accent-blue); }
 
 
-        /* ========================================================
-           --- NOVA TELA: GUIA DE ESTUDOS INTERNA (STUDY ROOM) ---
-           ======================================================== */
+        /* --- GUIA DE ESTUDOS INTERNA (STUDY ROOM) --- */
         .study-room-section {
             display: none;
             flex-direction: column;
@@ -330,12 +316,7 @@
             margin-bottom: 40px;
         }
 
-        /* Coluna Principal: Vídeo e Explicações */
-        .study-main-col {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
+        .study-main-col { display: flex; flex-direction: column; gap: 25px; }
 
         .video-player-container {
             width: 100%;
@@ -351,57 +332,17 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .video-placeholder-ui {
-            text-align: center;
-            color: #cbd5e1;
-        }
-        .video-placeholder-ui .play-icon {
-            font-size: 60px;
-            color: var(--accent-blue);
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
+        .video-placeholder-ui { text-align: center; color: #cbd5e1; }
+        .video-placeholder-ui .play-icon { font-size: 60px; color: var(--accent-blue); margin-bottom: 10px; cursor: pointer; transition: transform 0.2s; }
         .video-placeholder-ui .play-icon:hover { transform: scale(1.1); }
 
-        .explanation-panels {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
+        .explanation-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .panel-box { background: var(--bg-card-dark); border-radius: 14px; border: 1px solid #334155; padding: 25px; }
+        .panel-box h3 { font-size: 16px; color: var(--accent-blue); margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .panel-box p, .panel-box li { font-size: 14px; line-height: 1.6; color: #cbd5e1; margin-bottom: 10px; }
 
-        .panel-box {
-            background: var(--bg-card-dark);
-            border-radius: 14px;
-            border: 1px solid #334155;
-            padding: 25px;
-        }
+        .study-sidebar-col { display: flex; flex-direction: column; gap: 25px; }
 
-        .panel-box h3 {
-            font-size: 16px;
-            color: var(--accent-blue);
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .panel-box p, .panel-box li {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #cbd5e1;
-            margin-bottom: 10px;
-        }
-
-        /* Coluna Lateral: IA Auxiliadora e Mais Vídeos */
-        .study-sidebar-col {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        /* Chat da IA */
         .ai-assistant-card {
             background: #111827;
             border-radius: 16px;
@@ -412,104 +353,100 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
-        .ai-header {
-            background: #1e293b;
-            padding: 15px;
-            border-radius: 16px 16px 0 0;
-            border-bottom: 1px solid #334155;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .ai-header { background: #1e293b; padding: 15px; border-radius: 16px 16px 0 0; border-bottom: 1px solid #334155; display: flex; align-items: center; gap: 10px; }
         .ai-header h3 { font-size: 14px; color: #ffffff; font-weight: 600; }
         .ai-status-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; }
 
-        .ai-chat-messages {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
+        .ai-chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
         .msg { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.5; }
         .msg.ai { background: #1e293b; color: #ffffff; align-self: flex-start; border-bottom-left-radius: 2px; }
         .msg.user { background: var(--primary-color); color: #ffffff; align-self: flex-end; border-bottom-right-radius: 2px; }
 
-        .ai-input-area {
-            padding: 12px;
-            border-top: 1px solid #1e293b;
-            display: flex;
-            gap: 8px;
-        }
-        .ai-input-area input {
-            flex: 1;
-            background: #1f2937;
-            border: 1px solid #374151;
-            padding: 10px;
-            border-radius: 8px;
-            color: #ffffff;
-            font-size: 13px;
-        }
-        .ai-input-area button {
-            background: var(--accent-blue);
-            color: #0f172a;
-            border: none;
-            padding: 0 16px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 13px;
-        }
+        .ai-input-area { padding: 12px; border-top: 1px solid #1e293b; display: flex; gap: 8px; }
+        .ai-input-area input { flex: 1; background: #1f2937; border: 1px solid #374151; padding: 10px; border-radius: 8px; color: #ffffff; font-size: 13px; }
+        .ai-input-area button { background: var(--accent-blue); color: #0f172a; border: none; padding: 0 16px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 13px; }
 
-        /* Lista Extras Recomendados */
-        .more-videos-card {
-            background: var(--bg-card-dark);
-            border-radius: 16px;
-            border: 1px solid #334155;
-            padding: 20px;
-        }
+        .more-videos-card { background: var(--bg-card-dark); border-radius: 16px; border: 1px solid #334155; padding: 20px; }
         .more-videos-card h3 { font-size: 15px; color: #ffffff; margin-bottom: 15px; }
 
-        .video-thumb-row {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 12px;
-            padding: 8px;
-            background: rgba(0,0,0,0.15);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
+        .video-thumb-row { display: flex; gap: 12px; margin-bottom: 12px; padding: 8px; background: rgba(0,0,0,0.15); border-radius: 8px; cursor: pointer; transition: var(--transition); }
         .video-thumb-row:hover { background: rgba(56, 189, 248, 0.05); }
         .thumb-img-placeholder { width: 90px; height: 55px; background: #0f172a; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
         .thumb-info h4 { font-size: 12px; color: #ffffff; margin-bottom: 4px; }
         .thumb-info p { font-size: 11px; color: var(--text-muted); }
 
 
-        /* --- SEÇÃO DE INFORMAÇÕES DO APP (RODAPÉ AZUL ORIGINAL) --- */
+        /* --- SEÇÃO DE INFORMAÇÕES DO APP (RODAPÉ ATUALIZADO CONFORME A FOTO) --- */
         .site-footer {
-            background-color: #121319;
-            color: #a0aec0;
-            padding: 60px 40px 40px 40px;
+            background-color: #111625;
+            color: #ffffff;
+            padding: 50px 40px 30px 40px;
             position: relative;
             z-index: 10;
-            border-top: 4px solid var(--accent-blue);
+            border-top: 2px solid #1e293b;
             margin-top: auto;
             width: 100%;
         }
 
-        .footer-container { max-width: 1200px; margin: 0 auto; }
-        .footer-main-title { color: var(--accent-blue); font-size: 26px; font-weight: 700; margin-bottom: 35px; letter-spacing: 0.5px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 45px; margin-bottom: 35px; }
-        .footer-column h3 { color: var(--accent-blue); font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-        .footer-column p { font-size: 13.5px; line-height: 1.7; color: #cbd5e0; text-align: justify; }
+        .footer-container { max-width: 1300px; margin: 0 auto; }
+        
+        .footer-main-title { 
+            color: var(--footer-title-color); 
+            font-size: 24px; 
+            font-weight: 700; 
+            margin-bottom: 35px; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-        .footer-links a { display: block; color: #cbd5e0; text-decoration: none; font-size: 13.5px; margin-bottom: 12px; transition: color 0.2s ease; cursor: pointer; }
+        .footer-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 40px 50px; 
+            margin-bottom: 35px; 
+        }
+
+        .footer-block {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-block h3 { 
+            color: var(--footer-title-color); 
+            font-size: 15px; 
+            font-weight: 600; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+
+        .footer-block p { 
+            font-size: 13px; 
+            line-height: 1.6; 
+            color: #cbd5e1; 
+            text-align: left;
+        }
+
+        .footer-links a { 
+            display: block; 
+            color: #cbd5e1; 
+            text-decoration: none; 
+            font-size: 13px; 
+            margin-bottom: 8px; 
+            cursor: pointer; 
+        }
         .footer-links a:hover { color: var(--accent-blue); text-decoration: underline; }
-        .footer-divider { border: none; border-top: 1px solid #2d3748; margin: 30px 0; }
-        .copyright { text-align: center; font-size: 13px; color: #718096; }
+        
+        .copyright { 
+            text-align: center; 
+            font-size: 12px; 
+            color: #64748b; 
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 20px;
+        }
 
         /* --- RESPONSIVIDADE --- */
         @media (max-width: 1200px) {
@@ -527,7 +464,7 @@
 
     <div class="page-wrapper">
         
-        <!-- TELA 1: LOGIN (Sempre ativa ao iniciar o site) -->
+        <!-- TELA 1: LOGIN (Sempre ativa ao iniciar o site - Estilo focado na foto) -->
         <section class="login-section" id="auth-screen">
             <div id="particles-container"></div>
             <div class="card-container">
@@ -637,9 +574,7 @@
         </section>
 
 
-        <!-- ========================================================
-           --- TELA 3: NOVA GUIA INTERNA DE ESTUDOS DO CONTEÚDO ---
-           ======================================================== -->
+        <!-- TELA 3: GUIA INTERNA DE ESTUDOS DO CONTEÚDO -->
         <section class="study-room-section" id="study-screen">
             <div class="study-header">
                 <div>
@@ -650,7 +585,6 @@
             </div>
 
             <div class="study-container-grid">
-                <!-- Coluna Principal (Vídeo + Explicações) -->
                 <div class="study-main-col">
                     <div class="video-player-container">
                         <div class="video-placeholder-ui">
@@ -663,29 +597,25 @@
                     <div class="explanation-panels">
                         <div class="panel-box">
                             <h3>📖 Explicação da Matéria</h3>
-                            <p id="dynamic-explanation">Este módulo oferece uma abordagem aprofundada, dividida em etapas analíticas estruturadas para maximizar a sua retenção de conteúdo. Siga o roteiro visual da vídeo aula acompanhando as fórmulas e teses descritas neste painel.</p>
+                            <p id="dynamic-explanation">Este módulo oferece uma abordagem aprofundada...</p>
                         </div>
                         <div class="panel-box">
                             <h3>📝 Resumo Base</h3>
                             <ul id="dynamic-summary">
                                 <li>📌 Conceitos elementares e teorias de sustentação.</li>
-                                <li>📌 Aplicação prática direta do conteúdo no mercado e exames.</li>
-                                <li>📌 Evite erros comuns estruturados por nossa curadoria.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Coluna Lateral (IA + Vídeos Extras) -->
                 <div class="study-sidebar-col">
-                    <!-- IA Auxiliadora -->
                     <div class="ai-assistant-card">
                         <div class="ai-header">
                             <div class="ai-status-dot"></div>
                             <h3>IA Auxiliadora Gabaritei</h3>
                         </div>
                         <div class="ai-chat-messages" id="ai-chat-box">
-                            <div class="msg ai">Olá! Sou sua IA Auxiliadora. Qual sua dúvida sobre este tema hoje? Pode digitar!</div>
+                            <div class="msg ai">Olá! Sou sua IA Auxiliadora...</div>
                         </div>
                         <div class="ai-input-area">
                             <input type="text" id="ai-user-input" placeholder="Perguntar para a IA...">
@@ -693,7 +623,6 @@
                         </div>
                     </div>
 
-                    <!-- Mais Vídeos -->
                     <div class="more-videos-card">
                         <h3>🎬 Mais Vídeos sobre o Tema</h3>
                         <div class="video-thumb-row">
@@ -704,44 +633,46 @@
                             <div class="thumb-img-placeholder">📺</div>
                             <div class="thumb-info"><h4>Resolução de Exercícios</h4><p>Duração: 22 min</p></div>
                         </div>
-                        <div class="video-thumb-row">
-                            <div class="thumb-img-placeholder">📺</div>
-                            <div class="thumb-info"><h4>Revisão Expressa</h4><p>Duração: 8 min</p></div>
-                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
 
-        <!-- SEÇÃO DO RODAPÉ: INFORMAÇÕES DO APP (TOTALMENTE PRESERVADO EM AZUL) -->
+        <!-- SEÇÃO DO RODAPÉ: INFORMAÇÕES DO APP (FIEL À SUA SEGUNDA IMAGEM COM TODOS OS TEXTOS E MAPA DE 3 COLUNAS) -->
         <footer class="site-footer">
             <div class="footer-container">
-                <h2 class="footer-main-title">📌 Informações do App</h2>
+                <h2 class="footer-main-title">🚀 Informações do App</h2>
+                
                 <div class="footer-grid">
-                    <div class="footer-column">
+                    <!-- COLUNA 1 -->
+                    <div class="footer-block">
                         <h3>💡 O que é o Gabaritei?</h3>
                         <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela FichTeck. Idealizado para ajudar na organização diária, controle de progresso e preparação impecável para exames escolares e desafios educacionais.</p>
                     </div>
-                    <div class="footer-column">
+                    <!-- COLUNA 2 -->
+                    <div class="footer-block">
                         <h3>🔒 Segurança e Privacidade Total</h3>
                         <p>Aqui a proteção é completa. Todas as credenciais de acesso (Usuário, E-mail e Senhas) e históricos são armazenados de forma 100% offline, direto no seu navegador com a tecnologia LocalStorage. Nenhum dado é repassado para servidores.</p>
                     </div>
-                    <div class="footer-column">
+                    <!-- COLUNA 3 -->
+                    <div class="footer-block">
                         <h3>⚠️ Recomendações Importantes</h3>
                         <p>Para evitar perdas parciais ou exclusões automáticas das suas credenciais e progresso, evite limpar agressivamente o histórico/cookies do seu navegador e não acesse o sistema através de guias anônimas.</p>
                     </div>
-                </div>
-                <div class="footer-grid">
-                    <div class="footer-column">
+
+                    <!-- LINHA 2 - COLUNA 1 -->
+                    <div class="footer-block">
                         <h3>Sobre Nós</h3>
                         <p>Somos uma plataforma dedicada a entregar os melhores recursos de estudos e gamificação para você gabaritar as suas avaliações com qualidade, foco e compromisso.</p>
                     </div>
-                    <div class="footer-column">
+                    <!-- LINHA 2 - COLUNA 2 -->
+                    <div class="footer-block">
                         <h3>Dicas de Ouro</h3>
                         <p>💡 Estude em blocos de tempo menores focando 100% na matéria e faça pausas para descanso. A constância diária vence qualquer obstáculo nos estudos!</p>
                     </div>
-                    <div class="footer-column">
+                    <!-- LINHA 2 - COLUNA 3 -->
+                    <div class="footer-block">
                         <h3>Links Úteis</h3>
                         <div class="footer-links">
                             <a>Política de Privacidade</a>
@@ -749,8 +680,22 @@
                             <a>Central de Ajuda</a>
                         </div>
                     </div>
+
+                    <!-- LINHA 3 - TEXTOS PARCIAIS REINSTALADOS -->
+                    <div class="footer-block">
+                        <h3>🚀 Metodologias do Ecossistema</h3>
+                        <p>O Gabaritei foi projetado com base em técnicas comprovadas de neurociência cognitiva, como a Prática de Lembrança Ativa e a Repetição Espaçada. Futuramente, nosso sistema adaptará o cronograma automaticamente com base nos seus erros e acertos diários.</p>
+                    </div>
+                    <div class="footer-block">
+                        <h3>🎯 Futuro Espaço de Criação</h3>
+                        <p>Prepare-se para customizar sua experiência! Em breve, a área interna liberará o painel interativo da FichTeck, permitindo que você monte e publique seus próprios quizzes dinâmicos, flashcards interativos e minijogos focados em memorização.</p>
+                    </div>
+                    <div class="footer-block">
+                        <h3>💻 Arquitetura Técnica Local</h3>
+                        <p>Utilizamos chaves de isolamento de dados estruturadas no ecossistema do cliente. Isso garante tempo de resposta imediato (zero delay de rede) e autonomia total de uso, permitindo que o aplicativo funcione perfeitamente mesmo sem internet estável.</p>
+                    </div>
                 </div>
-                <hr class="footer-divider">
+
                 <p class="copyright">© 2026 FichTeck. Todos os direitos reservados.</p>
             </div>
         </footer>
@@ -759,7 +704,6 @@
 
     <!-- CONTROLE JAVASCRIPT DO SISTEMA -->
     <script>
-        // Inicialização básica do sistema
         function initDatabase() {
             if (!localStorage.getItem('gabaritei_db')) {
                 const initialUsers = [{ username: "usuario", password: "123" }];
@@ -768,7 +712,6 @@
         }
         initDatabase();
 
-        // Autenticação e telas
         function handleLogin(event) {
             event.preventDefault();
             const userVal = document.getElementById('login-user').value.trim();
@@ -795,24 +738,20 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Sistema de navegação de guias de conteúdos
         function openStudyRoom(topicName) {
-            // Oculta painel principal e exibe o painel de estudos (Guia interna)
             document.getElementById('dashboard-screen').style.display = 'none';
             document.getElementById('study-screen').style.display = 'flex';
             
-            // Altera dinamicamente as informações do tema selecionado
             document.getElementById('current-topic-name').innerText = topicName;
-            document.getElementById('dynamic-explanation').innerText = `Bem-vindo à área avançada sobre ${topicName}. Este conteúdo foi preparado por doutores e especialistas pedagógicos utilizando diretrizes modernas de ensino, unindo fixação por áudio, vídeo e suporte cognitivo por Inteligência Artificial.`;
+            document.getElementById('dynamic-explanation').innerText = `Bem-vindo à área avançada sobre ${topicName}. Este conteúdo foi preparado utilizando diretrizes modernas de ensino, unindo fixação por áudio, vídeo e suporte cognitivo por Inteligência Artificial.`;
             
             document.getElementById('dynamic-summary').innerHTML = `
                 <li>📌 Fundamentos cruciais sobre ${topicName}.</li>
-                <li>📌 Principais tópicos cobrados em exames e avaliações de alta performance.</li>
-                <li>📌 Revisão ativa e mnemônicos otimizados para fixação a longo prazo.</li>
+                <li>📌 Tópicos essenciais cobrados em avaliações de alta performance.</li>
+                <li>📌 Revisão ativa parametrizada para fixação a longo prazo.</li>
             `;
             
-            // Reinicia o chat da IA limpando conversas anteriores
-            document.getElementById('ai-chat-box').innerHTML = `<div class="msg ai">Olá! Sou sua IA Auxiliadora especialista em <b>${topicName}</b>. Qual é a sua principal dúvida sobre esta matéria?</div>`;
+            document.getElementById('ai-chat-box').innerHTML = `<div class="msg ai">Olá! Sou sua IA Auxiliadora especialista em <b>${topicName}</b>. Qual é a sua dúvida sobre esta matéria?</div>`;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -822,7 +761,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Resposta Simula Inteligência Artificial Auxiliadora
         function askAiAssistant() {
             const inputElement = document.getElementById('ai-user-input');
             const chatBox = document.getElementById('ai-chat-box');
@@ -830,7 +768,6 @@
             
             if (text === '') return;
 
-            // Insere texto do Aluno
             const userMsg = document.createElement('div');
             userMsg.className = "msg user";
             userMsg.innerText = text;
@@ -838,35 +775,45 @@
             inputElement.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            // Resposta Automática Cognitiva da IA
             setTimeout(() => {
                 const aiMsg = document.createElement('div');
                 aiMsg.className = "msg ai";
-                aiMsg.innerHTML = `Excelente questionamento! Analisando o escopo do nosso módulo, este ponto aborda exatamente a espinha dorsal da matéria. Recomendo revisar o minuto 04:15 da nossa aula principal para consolidar esse detalhe prático!`;
+                aiMsg.innerHTML = `Excelente questionamento! Analisando o escopo do nosso módulo, este ponto aborda exatamente a estrutura central da lição. Recomendo revisar o minuto principal da nossa aula para consolidar esse detalhe prático!`;
                 chatBox.appendChild(aiMsg);
                 chatBox.scrollTop = chatBox.scrollHeight;
             }, 1000);
         }
 
-        // Sistema de Partículas Estéticas do Background
+        /* --- ANIMAÇÃO EXCLUSIVA DE LETRAS E NÚMEROS FILTRADOS IGUAL À FOTO DO LOGIN --- */
         const container = document.getElementById('particles-container');
-        const items = ['X', 'Y', '1', 'A', 'B', '🎓', '📐', '🧬'];
-        for (let i = 0; i < 20; i++) {
+        // Mistura real de caracteres baseados no fundo do seu sistema
+        const items = ['A', 'B', 'X', 'Y', 'Z', 'W', '1', '2', '4', '6', '8', '9', 'f', 'z', 'm', 'r'];
+        // Paleta de tons suaves (azul sutil, cinza e tons pastéis desbotados conforme a foto)
+        const colors = ['#3b82f6', '#475569', '#94a3b8', '#ef4444', '#1e3a8a', '#38bdf8'];
+
+        for (let i = 0; i < 35; i++) {
             const p = document.createElement('div');
             p.classList.add('particle');
             p.innerText = items[Math.floor(Math.random() * items.length)];
-            p.style.color = '#38bdf8';
-            p.style.fontSize = `${Math.random() * 10 + 12}px`;
+            
+            // Estilos estáticos randômicos imitando o background original
+            p.style.color = colors[Math.floor(Math.random() * colors.length)];
+            p.style.fontSize = `${Math.random() * 8 + 14}px`;
             p.style.left = `${Math.random() * 100}vw`;
-            p.style.animation = `fallDown ${Math.random() * 12 + 8}s linear infinite`;
+            
+            // Animação contínua e suave de queda vertical
+            p.style.animation = `fallDown ${Math.random() * 14 + 10}s linear infinite`;
+            p.style.animationDelay = `${Math.random() * -15}s`;
             container.appendChild(p);
         }
 
+        // Inserção da folha de estilos de animação direta
         const styleSheet = document.styleSheets[0];
         styleSheet.insertRule(`@keyframes fallDown {
-            0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
-            50% { opacity: 0.3; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(-40px) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.25; }
+            85% { opacity: 0.25; }
+            100% { transform: translateY(105vh) rotate(180deg); opacity: 0; }
         }`, styleSheet.cssRules.length);
     </script>
 </body>
