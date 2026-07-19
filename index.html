@@ -13,10 +13,13 @@
             --primary-color: #4a3aff;
             --primary-hover: #3b2ee0;
             --accent-orange: #f27224;
+            --accent-cyan: #38bdf8;
             --bg-site: #f8fafc;
+            --bg-card-dark: #1e293b;
+            --bg-card-dark-hover: #111827;
             --text-main: #0f172a;
             --text-muted: #64748b;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -180,7 +183,7 @@
         .card-links a:hover { text-decoration: underline; }
         .card-links p { margin-bottom: 8px; }
 
-        /* --- MENSARENS DE FEEDBACK --- */
+        /* --- MENSAGENS DE FEEDBACK --- */
         .feedback-box {
             padding: 12px 16px;
             border-radius: 12px;
@@ -206,11 +209,11 @@
 
 
         /* ========================================================
-           --- TELA DO PAINEL DE NÍVEIS (DINÂMICO E COMPLETO) ---
+           --- TELA DO PAINEL DE NÍVEIS (VISUAL PROFISSIONAL DARK) ---
            ======================================================== */
         .dashboard-section {
             min-height: 90vh;
-            display: none; /* COMEÇA OCULTO POR PADRÃO, ENTRA APÓS LOGIN */
+            display: none; 
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -243,7 +246,7 @@
             color: var(--text-muted);
         }
 
-        /* Grid dos Quadrados Reestruturado */
+        /* Grid Unificada */
         .education-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -252,16 +255,27 @@
             margin-bottom: 45px;
         }
 
-        /* Estrutura Geral Interna dos Quadrados */
+        /* NOVO DESIGN: Estilo Dark Acadêmico Unificado para Todos os Quadrados */
         .edu-card {
+            background: var(--bg-card-dark);
+            border-radius: 16px;
+            border: 1px solid #334155;
             padding: 35px 25px;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             text-align: left;
-            cursor: pointer;
             position: relative;
+            color: #f8fafc;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
             transition: var(--transition);
+        }
+
+        .edu-card:hover {
+            transform: translateY(-6px);
+            background: var(--bg-card-dark-hover);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.15);
         }
 
         .edu-card .icon-header {
@@ -271,6 +285,8 @@
 
         .edu-card h3 {
             font-size: 22px;
+            font-weight: 600;
+            color: #ffffff;
             margin-bottom: 4px;
         }
 
@@ -279,13 +295,14 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            color: var(--accent-cyan);
         }
 
-        /* Área interna de conteúdos específicos */
+        /* Área interna de conteúdos */
         .card-inner-contents {
             width: 100%;
-            border-top: 1px solid rgba(0,0,0,0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             padding-top: 20px;
             margin-top: auto;
         }
@@ -294,94 +311,42 @@
             font-size: 13px;
             font-weight: 700;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             letter-spacing: 0.5px;
+            color: #94a3b8;
         }
 
         .card-inner-contents ul {
             list-style: none;
+            width: 100%;
         }
 
         .card-inner-contents ul li {
-            font-size: 13px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            width: 100%;
+        }
+
+        /* Links individuais e interativos de cada matéria */
+        .content-link {
+            font-size: 13.5px;
+            color: #cbd5e1;
+            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             line-height: 1.4;
+            transition: var(--transition);
         }
 
-        /* --- 1º AO 5º ANO: ESTILO INFANTILIZADO --- */
-        .card-infantil {
-            background: linear-gradient(135deg, #fffbeb, #fef3c7);
-            border-radius: 40px;
-            border: 4px dashed #f59e0b;
-            box-shadow: 0 12px 0 #d97706, 0 20px 30px rgba(217, 119, 6, 0.15);
-            color: #78350f;
-        }
-        .card-infantil h3 { font-weight: 800; color: #451a03; }
-        .card-infantil .badge-tag { color: #b45309; }
-        .card-infantil .card-inner-contents h4 { color: #b45309; }
-        .card-infantil .card-inner-contents ul li { color: #78350f; font-weight: 600; }
-        .card-infantil:hover {
-            transform: scale(1.04) translateY(-4px) rotate(-1.5deg);
-            box-shadow: 0 16px 0 #b45309, 0 25px 35px rgba(217, 119, 6, 0.25);
-        }
-
-        /* --- 6º AO 9º ANO: ESTILO MISTO (INFANTILIZADO + MADURO) --- */
-        .card-misto {
-            background: linear-gradient(135deg, #e0f2fe, #e0e7ff);
-            border-radius: 22px;
-            border: 2px solid #818cf8;
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.1);
-            color: #1e1b4b;
-        }
-        .card-misto h3 { font-weight: 700; color: #312e81; }
-        .card-misto .badge-tag { color: #4f46e5; }
-        .card-misto .card-inner-contents h4 { color: #4f46e5; }
-        .card-misto .card-inner-contents ul li { color: #3730a3; font-weight: 500; }
-        .card-misto:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 18px 35px rgba(99, 102, 241, 0.22);
-            background: linear-gradient(135deg, #bae6fd, #c7d2fe);
-        }
-
-        /* --- 1º AO 3º ANO: ESTILO TOTALMENTE MADURO --- */
-        .card-maduro {
-            background: #ffffff;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.02);
-            color: var(--text-main);
-        }
-        .card-maduro h3 { font-weight: 600; color: #1e293b; }
-        .card-maduro .badge-tag { color: var(--primary-color); }
-        .card-maduro .card-inner-contents h4 { color: var(--text-muted); }
-        .card-maduro .card-inner-contents ul li { color: #334155; }
-        .card-maduro:hover {
-            transform: translateY(-6px);
-            border-color: var(--primary-color);
-            box-shadow: 0 15px 30px rgba(74, 58, 255, 0.1);
-        }
-
-        /* --- ENSINO SUPERIOR: ESTILO ACADÊMICO MADURO --- */
-        .card-superior {
-            background: #1e293b;
-            border-radius: 12px;
-            border: 1px solid #334155;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.02);
-            color: #f8fafc;
-        }
-        .card-superior h3 { font-weight: 600; color: #ffffff; }
-        .card-superior .badge-tag { color: #38bdf8; }
-        .card-superior .card-inner-contents h4 { color: #94a3b8; }
-        .card-superior .card-inner-contents ul li { color: #cbd5e1; }
-        .card-superior .card-inner-contents { border-top-color: rgba(255,255,255,0.08); }
-        .card-superior:hover {
-            transform: translateY(-6px);
-            background: #0f172a;
-            border-color: #38bdf8;
-            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.15);
+        .content-link:hover {
+            color: #ffffff;
+            background: rgba(56, 189, 248, 0.12);
+            border-color: rgba(56, 189, 248, 0.3);
+            transform: translateX(4px);
         }
 
         /* Botão Voltar/Sair */
@@ -539,7 +504,7 @@
 
     <div class="page-wrapper">
         
-        <!-- TELA 1: LOGIN (Sempre aparece por padrão ao entrar) -->
+        <!-- TELA 1: LOGIN (Sempre obrigatoriamente ativa ao iniciar o site) -->
         <section class="login-section" id="auth-screen">
             <div id="particles-container"></div>
             
@@ -633,87 +598,87 @@
             </div>
         </section>
 
-        <!-- TELA 2: PAINEL PRINCIPAL (CONTEÚDOS ADICIONADOS DIRETAMENTE DENTRO DO SEU LUGAR) -->
+        <!-- TELA 2: PAINEL PRINCIPAL (ESTILO COMPLETO PRETO PROFISSIONAL UNIFICADO) -->
         <section class="dashboard-section" id="dashboard-screen">
             <div class="dashboard-header">
                 <h2 class="dashboard-title">Boas-vindas ao Gabaritei!</h2>
-                <p class="dashboard-subtitle">Seu ecossistema de estudos está pronto. Veja os conteúdos disponíveis em cada módulo:</p>
+                <p class="dashboard-subtitle">Seu ecossistema de estudos está pronto. Clique em qualquer conteúdo para abri-lo em uma nova guia:</p>
             </div>
             
             <div class="education-grid">
                 
-                <!-- 1º ao 5º Ano: Estilo Infantilizado -->
-                <div class="edu-card card-infantil" onclick="alert('Carregando Aventuras de Aprendizado do 1º ao 5º Ano!')">
-                    <div class="icon-header">🎈</div>
+                <!-- QUADRADO 1: 1º ao 5º Ano -->
+                <div class="edu-card">
+                    <div class="icon-header">🧠</div>
                     <h3>1º ao 5º Ano</h3>
                     <span class="badge-tag">Ensino Fundamental I</span>
                     
                     <div class="card-inner-contents">
                         <h4>⭐ Conteúdos Inclusos:</h4>
                         <ul>
-                            <li>🎨 Alfabetização e Contação de Histórias</li>
-                            <li>🔢 Tabuada Divertida com Jogos Animados</li>
-                            <li>🌍 Ciências da Natureza e o Corpo Humano</li>
-                            <li>✍️ Ditado Mágico e Primeiras Redações</li>
-                            <li>🏆 Missões com Medalhas e Troféus Coletáveis</li>
-                            <li>🧩 Quebra-Cabeças de Raciocínio Lógico</li>
+                            <li><a href="https://www.google.com/search?q=Alfabetizacao+Letramento+Dinamico" target="_blank" class="content-link">🎨 Alfabetização e Letramento Dinâmico</a></li>
+                            <li><a href="https://www.google.com/search?q=Tabuada+Animada+Matematica" target="_blank" class="content-link">🧮 Tabuada Animada e Matemática Ilustrada</a></li>
+                            <li><a href="https://www.google.com/search?q=Descoberta+das+Ciencias+e+Natureza" target="_blank" class="content-link">🌏 Descoberta das Ciências e Natureza</a></li>
+                            <li><a href="https://www.google.com/search?q=Leitura+de+Contos+e+Interpretacao" target="_blank" class="content-link">📖 Leitura de Contos e Interpretação Lúdica</a></li>
+                            <li><a href="https://www.google.com/search?q=Missoes+de+Aprendizado+Premios" target="_blank" class="content-link">🏅 Missões de Aprendizado com Prêmios e Medalhas</a></li>
+                            <li><a href="https://www.google.com/search?q=Jogos+Cognitivos+Raciocinio+Logico" target="_blank" class="content-link">🧩 Jogos Cognitivos de Raciocínio Lógico</a></li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- 6º ao 9º Ano: Estilo Misto (Infantil + Maduro) -->
-                <div class="edu-card card-misto" onclick="alert('Carregando Painel Avançado do 6º ao 9º Ano!')">
-                    <div class="icon-header">🚀</div>
+                <!-- QUADRADO 2: 6º ao 9º Ano -->
+                <div class="edu-card">
+                    <div class="icon-header">📐</div>
                     <h3>6º ao 9º Ano</h3>
                     <span class="badge-tag">Ensino Fundamental II</span>
                     
                     <div class="card-inner-contents">
-                        <h4>⚡ Módulos Dinâmicos:</h4>
+                        <h4>⚡ Módulos Inclusos:</h4>
                         <ul>
-                            <li>📐 Introdução à Álgebra e Geometria</li>
-                            <li>🧬 Primeiros Passos em Física e Química</li>
-                            <li>🗺️ História do Brasil e Geografia Crítica</li>
-                            <li>📝 Produção de Texto e Gêneros Literários</li>
-                            <li>💎 Desafios de XP e Customização de Avatar</li>
-                            <li>🃏 Flashcards de Memorização Rápida</li>
+                            <li><a href="https://www.google.com/search?q=Introducao+a+Algebra+Geometria+Plana" target="_blank" class="content-link">📐 Introdução à Álgebra e Geometria Plana</a></li>
+                            <li><a href="https://www.google.com/search?q=Biologia+Basica+Fisica+Quimica+Geral" target="_blank" class="content-link">🧬 Biologia Básica, Física e Química Geral</a></li>
+                            <li><a href="https://www.google.com/search?q=Oficina+de+Redacao+Estruturada" target="_blank" class="content-link">✍️ Oficina de Redação Estruturada</a></li>
+                            <li><a href="https://www.google.com/search?q=Historia+Geral+Brasil+Geografia+Critica" target="_blank" class="content-link">🗺️ História Geral, do Brasil e Geografia Crítica</a></li>
+                            <li><a href="https://www.google.com/search?q=Sistema+de+Conquistas+Avatar+Customizavel" target="_blank" class="content-link">🔥 Sistema de Conquistas e Avatar Customizável</a></li>
+                            <li><a href="https://www.google.com/search?q=Flashcards+Intermediarios+de+Memorizacao" target="_blank" class="content-link">🃏 Flashcards Intermediários de Memorização</a></li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- 1º ao 3º Ano: Estilo Maduro -->
-                <div class="edu-card card-maduro" onclick="alert('Carregando Módulo Preparatório do Ensino Médio!')">
-                    <div class="icon-header">📚</div>
+                <!-- QUADRADO 3: 1º ao 3º Ano -->
+                <div class="edu-card">
+                    <div class="icon-header">🎯</div>
                     <h3>1º ao 3º Ano</h3>
                     <span class="badge-tag">Ensino Médio</span>
                     
                     <div class="card-inner-contents">
-                        <h4>⚖️ Matérias e Foco:</h4>
+                        <h4>⚖️ Recursos Acadêmicos:</h4>
                         <ul>
-                            <li>🎯 Banco de Questões Focadas no ENEM</li>
-                            <li>🧪 Química Orgânica, Mecânica e Termodinâmica</li>
-                            <li>🖋️ Oficina de Redação Dissertativa-Argumentativa</li>
-                            <li>📊 Gráficos Estatísticos de Erros e Acertos</li>
-                            <li>📅 Cronograma de Estudos Automatizado</li>
-                            <li>🎧 Resumos Literários em Áudio (Podcasts)</li>
+                            <li><a href="https://www.google.com/search?q=Banco+de+Simulados+Completos+ENEM" target="_blank" class="content-link">🎯 Banco de Simulados Completos Padrão ENEM</a></li>
+                            <li><a href="https://www.google.com/search?q=Fisica+Avancada+Quimica+Organica+Calculo" target="_blank" class="content-link">🧪 Física Avançada, Química Orgânica e Cálculo</a></li>
+                            <li><a href="https://www.google.com/search?q=Treinamento+de+Redacao+Dissertativa+Argumentativa" target="_blank" class="content-link">🖋️ Treinamento de Redação Dissertativa-Argumentativa</a></li>
+                            <li><a href="https://www.google.com/search?q=Graficos+Analiticos+de+Rendimento" target="_blank" class="content-link">📊 Gráficos Analíticos de Rendimento e Evolução</a></li>
+                            <li><a href="https://www.google.com/search?q=Cronograma+Adaptativo+de+Estudos+Vestibulares" target="_blank" class="content-link">📅 Cronograma Adaptativo de Estudos para Vestibulares</a></li>
+                            <li><a href="https://www.google.com/search?q=Resumos+em+Audio+Analises+Literarias" target="_blank" class="content-link">🎧 Resumos em Áudio e Análises Literárias</a></li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Ensino Superior: Estilo Maduro / Acadêmico -->
-                <div class="edu-card card-superior" onclick="alert('Carregando Plataforma Científica Superior!')">
+                <!-- QUADRADO 4: Ensino Superior -->
+                <div class="edu-card">
                     <div class="icon-header">🎓</div>
                     <h3>Ensino Superior</h3>
-                    <span class="badge-tag">Graduação e Especialização</span>
+                    <span class="badge-tag">Graduação e Especializações</span>
                     
                     <div class="card-inner-contents">
-                        <h4>🏛️ Recursos Avançados:</h4>
+                        <h4>🏛️ Ferramentas Científicas:</h4>
                         <ul>
-                            <li>📖 Normatização Automática ABNT, APA e Vancouver</li>
-                            <li>📋 Gerenciador de Projetos de TCC e Monografias</li>
-                            <li>⏱️ Temporizador Pomodoro de Foco Profundo Integrado</li>
-                            <li>🗂️ Repositório Organizador por Semestres e Cadeiras</li>
-                            <li>📈 Calculadora de Média Global e Coeficiente (CR)</li>
-                            <li>📝 Bloco de Anotações Inteligente com Markdown</li>
+                            <li><a href="https://www.google.com/search?q=Organizador+Referencias+Bibliograficas+ABNT+APA" target="_blank" class="content-link">💻 Organizador de Referências Bibliográficas (ABNT/APA)</a></li>
+                            <li><a href="https://www.google.com/search?q=Gerenciador+Avancado+de+Projetos+TCC+Artigos" target="_blank" class="content-link">🛠️ Gerenciador Avançado de Projetos de TCC e Artigos</a></li>
+                            <li><a href="https://www.google.com/search?q=Controle+Computacao+Horas+Complementares" target="_blank" class="content-link">📋 Controle e Computação de Horas Complementares</a></li>
+                            <li><a href="https://www.google.com/search?q=Estatisticas+Avancadas+Frequencia+Notas" target="_blank" class="content-link">📈 Estatísticas Avançadas de Frequência e Notas</a></li>
+                            <li><a href="https://www.google.com/search?q=Repositorio+Estruturado+Semestres+Materias" target="_blank" class="content-link">🗃️ Repositório Estruturado por Semestres e Matérias</a></li>
+                            <li><a href="https://www.google.com/search?q=Temporizador+Pomodoro+Alta+Performance" target="_blank" class="content-link">⏱️ Temporizador Pomodoro de Alta Performance Integrado</a></li>
                         </ul>
                     </div>
                 </div>
@@ -725,7 +690,7 @@
             </div>
         </section>
 
-        <!-- SEÇÃO DO RODAPÉ: INFORMAÇÕES DO APP (Mantido Conforme Solicitado) -->
+        <!-- SEÇÃO DO RODAPÉ: INFORMAÇÕES DO APP (Mantido Totalmente Conforme Solicitado) -->
         <footer class="site-footer">
             <div class="footer-container">
                 <h2 class="footer-main-title">📌 Informações do App</h2>
