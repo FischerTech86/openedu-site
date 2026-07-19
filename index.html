@@ -3,12 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabaritei - Sistema de Estudos</title>
-    <!-- Fonte moderna Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Gabaritei - Ecossistema Avançado de Estudos</title>
+    <!-- Fonte moderna Poppins com múltiplos pesos -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* --- ESTILOS GERAIS E RESET --- */
+        /* --- RESET E VARIÁVEIS GERAIS --- */
+        :root {
+            --primary: #4a3aff;
+            --primary-hover: #3b2ee0;
+            --accent-orange: #f27224;
+            --bg-site: #f8fafc;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -17,28 +28,31 @@
         }
 
         body {
-            background-color: #f5f6fb;
+            background-color: var(--bg-site);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
+            color: var(--text-dark);
         }
 
         .page-wrapper {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            width: 100%;
         }
 
-        /* --- CONTAINER DE LOGIN --- */
+        /* --- TELA DE AUTENTICAÇÃO (Sempre visível ao carregar o site) --- */
         .login-section {
             position: relative;
-            min-height: 100vh;
+            min-height: 90vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            padding: 60px 20px;
             overflow: hidden;
+            z-index: 5;
         }
 
         #particles-container {
@@ -59,17 +73,17 @@
             will-change: transform, opacity;
         }
 
-        /* --- DESIGN DOS CARDS DE LOGIN --- */
         .card-container {
             background: #ffffff;
-            padding: 45px 35px;
+            padding: 50px 40px;
             border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04), 0 5px 15px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
             width: 100%;
-            max-width: 410px;
+            max-width: 440px;
             text-align: center;
             z-index: 10;
             position: relative;
+            border: 1px solid rgba(226, 232, 240, 0.8);
         }
 
         .form-card {
@@ -78,102 +92,107 @@
 
         .form-card.active {
             display: block;
-            animation: cardFadeIn 0.4s ease-out forwards;
+            animation: cardFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
         @keyframes cardFadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .logo-title {
-            color: #4a3aff;
-            font-size: 34px;
+            color: var(--primary);
+            font-size: 36px;
             font-weight: 800;
-            letter-spacing: 1.5px;
-            margin-bottom: 5px;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
             text-transform: uppercase;
         }
 
         .subtitle {
-            color: #2d3748;
+            color: var(--text-dark);
             font-size: 16px;
             font-weight: 700;
-            margin-top: 15px;
             margin-bottom: 30px;
         }
 
         .input-group {
             text-align: left;
-            margin-bottom: 22px;
+            margin-bottom: 24px;
         }
 
         .input-group label {
             display: block;
             font-size: 13px;
-            color: #718096;
-            margin-bottom: 6px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
             font-weight: 600;
         }
 
         .input-group input {
             width: 100%;
-            padding: 12px 14px;
-            border: none;
-            border-bottom: 1.5px solid #cbd5e1;
-            font-size: 14px;
-            color: #2d3748;
+            padding: 14px 16px;
+            border: 1.5px solid #e2e8f0;
+            font-size: 14.5px;
+            color: var(--text-dark);
             background: #f8fafc;
-            border-radius: 6px 6px 0 0;
-            transition: all 0.3s ease;
+            border-radius: 12px;
+            transition: var(--transition-smooth);
         }
 
         .input-group input:focus {
             outline: none;
-            background: #f1f5f9;
-            border-bottom-color: #4a3aff;
+            background: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(74, 58, 255, 0.1);
         }
 
         .btn-pill {
             width: 100%;
-            padding: 14px;
-            background-color: #4a3aff;
+            padding: 15px;
+            background-color: var(--primary);
             color: #ffffff;
             border: none;
             border-radius: 50px;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
             cursor: pointer;
             margin-top: 10px;
-            box-shadow: 0 8px 20px rgba(74, 58, 255, 0.25);
-            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 8px 25px rgba(74, 58, 255, 0.2);
+            transition: var(--transition-smooth);
         }
 
-        .btn-pill:hover { background-color: #3b2ee0; }
-        .btn-pill:active { transform: scale(0.98); }
+        .btn-pill:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(74, 58, 255, 0.3);
+        }
+
+        .btn-pill:active { transform: translateY(0); }
 
         .card-links {
             margin-top: 25px;
-            font-size: 13px;
-            color: #718096;
+            font-size: 13.5px;
+            color: var(--text-muted);
         }
 
         .card-links a {
-            color: #4a3aff;
+            color: var(--primary);
             text-decoration: none;
             font-weight: 700;
             cursor: pointer;
+            transition: var(--transition-smooth);
         }
 
-        .card-links a:hover { text-decoration: underline; }
-        .card-links p { margin-bottom: 8px; }
+        .card-links a:hover { text-decoration: underline; color: var(--primary-hover); }
+        .card-links p { margin-bottom: 10px; }
 
-        /* --- MENSAGENS DE FEEDBACK --- */
+        /* --- FEEDBACK BOXES --- */
         .feedback-box {
-            padding: 12px 16px;
-            border-radius: 12px;
-            font-size: 13.5px;
-            margin-bottom: 20px;
+            padding: 14px 18px;
+            border-radius: 14px;
+            font-size: 14px;
+            margin-bottom: 22px;
             text-align: left;
             display: none;
             line-height: 1.5;
@@ -194,10 +213,10 @@
         }
 
         .password-display-box {
-            background: #f7fafc;
-            border: 2px dashed #4a3aff;
-            padding: 15px;
-            border-radius: 12px;
+            background: #f8fafc;
+            border: 2px dashed var(--primary);
+            padding: 16px;
+            border-radius: 14px;
             margin-top: 20px;
             text-align: center;
         }
@@ -205,172 +224,245 @@
         .password-display-box span {
             display: block;
             font-size: 12px;
-            color: #718096;
+            color: var(--text-muted);
             font-weight: 600;
             text-transform: uppercase;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
         .password-display-box strong {
-            font-size: 18px;
-            color: #4a3aff;
+            font-size: 20px;
+            color: var(--primary);
             font-family: monospace;
             letter-spacing: 1px;
         }
 
-        /* =======================================================
-           --- NOVA SEÇÃO: PAINEL DE NÍVEIS DE ENSINO (DASHBOARD) ---
-           ======================================================= */
+        /* ==========================================================
+           --- PAINEL DE NÍVEIS DE ENSINO DINÂMICO E PROFISSIONAL ---
+           ========================================================== */
         .dashboard-section {
-            min-height: 100vh;
-            display: none; /* Exibido apenas pós-login */
+            min-height: 90vh;
+            display: none; /* Mantém oculto até validação de login */
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 60px 20px;
-            background-color: #f8fafc;
+            padding: 60px 24px;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            animation: fadeInDashboard 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes fadeInDashboard {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 50px;
         }
 
         .dashboard-title {
-            font-size: 28px;
-            color: #1e293b;
+            font-size: 36px;
+            color: var(--text-dark);
             font-weight: 800;
-            margin-bottom: 10px;
-            text-align: center;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
         }
 
         .dashboard-subtitle {
-            font-size: 15px;
-            color: #64748b;
-            margin-bottom: 40px;
-            text-align: center;
+            font-size: 16px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
+        /* Grid responsiva dos Quadrados */
         .education-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
             width: 100%;
-            max-width: 1100px;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
-        /* Estilo base comum dos retângulos */
+        /* Cartão Base */
         .edu-card {
-            padding: 30px 20px;
+            background: #ffffff;
+            padding: 35px 25px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
+            position: relative;
             cursor: pointer;
             user-select: none;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
+            transition: var(--transition-smooth);
         }
 
-        .edu-card .icon {
-            font-size: 45px;
-            margin-bottom: 15px;
+        .edu-card .icon-wrapper {
+            font-size: 44px;
+            margin-bottom: 20px;
+            display: inline-block;
         }
 
         .edu-card h3 {
-            font-size: 20px;
-            margin-bottom: 5px;
+            font-size: 22px;
+            margin-bottom: 6px;
         }
 
-        .edu-card p {
+        .edu-card .subtag {
             font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            display: block;
         }
 
-        /* --- TIPO 1: ESTILO INFANTILIZADO (1º ao 5º Ano) --- */
+        /* Container de Conteúdos Internos */
+        .content-list {
+            text-align: left;
+            border-top: 1px solid rgba(0,0,0,0.06);
+            padding-top: 18px;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .content-list h4 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .content-list ul {
+            list-style: none;
+        }
+
+        .content-list ul li {
+            font-size: 13px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            line-height: 1.4;
+        }
+
+        /* --- 1º AO 5º ANO: ESTILO TOTALMENTE INFANTILIZADO --- */
         .card-infantil {
-            background: linear-gradient(135deg, #ffde4d, #ffb22c);
-            border-radius: 35px;
-            border: 5px dashed #ffffff;
-            box-shadow: 0 10px 0 #d97706, 0 15px 25px rgba(251, 191, 36, 0.3);
-            color: #451a03;
-        }
-        .card-infantil h3 {
-            font-weight: 800;
-        }
-        .card-infantil p {
-            font-weight: 600;
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border-radius: 40px;
+            border: 4px dashed #f59e0b;
+            box-shadow: 0 12px 0 #d97706, 0 20px 30px rgba(217, 119, 6, 0.15);
             color: #78350f;
         }
+        .card-infantil h3 { font-weight: 800; color: #451a03; }
+        .card-infantil .subtag { color: #b45309; }
+        .card-infantil .content-list h4 { color: #b45309; }
+        .card-infantil .content-list ul li { color: #78350f; font-weight: 500; }
         .card-infantil:hover {
-            transform: scale(1.06) rotate(-2deg);
-            box-shadow: 0 12px 0 #b45309, 0 20px 30px rgba(251, 191, 36, 0.4);
+            transform: scale(1.04) translateY(-5px) rotate(-1.5deg);
+            box-shadow: 0 16px 0 #b45309, 0 25px 35px rgba(217, 119, 6, 0.25);
+        }
+        .card-infantil .icon-wrapper { animation: bounceKid 2.5s infinite ease-in-out; }
+        @keyframes bounceKid {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
-        /* --- TIPO 2: ESTILO MIX - INFANTILIZADO E MADURO (6º ao 9º Ano) --- */
+        /* --- 6º AO 9º ANO: ESTILO MISTO (INFANTILIZADO + MADURO) --- */
         .card-misto {
-            background: linear-gradient(135deg, #38bdf8, #818cf8);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 8px 20px rgba(129, 140, 248, 0.3);
-            color: #ffffff;
+            background: linear-gradient(135deg, #e0f2fe, #e0e7ff);
+            border-radius: 24px;
+            border: 2px solid #818cf8;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.12);
+            color: #1e1b4b;
         }
-        .card-misto h3 {
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-        .card-misto p {
-            color: #e0e7ff;
-            font-weight: 500;
-        }
+        .card-misto h3 { font-weight: 700; color: #312e81; }
+        .card-misto .subtag { color: #4f46e5; }
+        .card-misto .content-list h4 { color: #4f46e5; }
+        .card-misto .content-list ul li { color: #3730a3; font-weight: 500; }
         .card-misto:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 25px rgba(129, 140, 248, 0.5);
-            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            box-shadow: 0 16px 35px rgba(99, 102, 241, 0.25);
+            border-color: #4f46e5;
+            background: linear-gradient(135deg, #bae6fd, #c7d2fe);
         }
 
-        /* --- TIPO 3: ESTILO MADURO (Ensino Médio e Superior) --- */
+        /* --- 1º AO 3º ANO: ESTILO COMPLETAMENTE MADURO --- */
         .card-maduro {
             background: #ffffff;
-            border-radius: 8px;
+            border-radius: 14px;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
-            color: #0f172a;
+            box-shadow: var(--card-shadow);
+            color: var(--text-dark);
         }
-        .card-maduro h3 {
-            font-weight: 600;
-            color: #1e293b;
-        }
-        .card-maduro p {
-            color: #64748b;
-        }
+        .card-maduro h3 { font-weight: 600; color: #1e293b; }
+        .card-maduro .subtag { color: var(--primary); }
+        .card-maduro .content-list h4 { color: var(--text-muted); }
+        .card-maduro .content-list ul li { color: #334155; }
         .card-maduro:hover {
-            border-color: #4a3aff;
-            transform: translateY(-4px);
-            box-shadow: 0 10px 20px rgba(74, 58, 255, 0.08);
+            transform: translateY(-6px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 35px rgba(74, 58, 255, 0.12);
         }
 
-        /* Botão de retorno do painel */
+        /* --- ENSINO SUPERIOR: ESTILO ACADÊMICO MADURO --- */
+        .card-superior {
+            background: #1e293b;
+            border-radius: 14px;
+            border: 1px solid #334155;
+            box-shadow: var(--card-shadow);
+            color: #f8fafc;
+        }
+        .card-superior h3 { font-weight: 600; color: #ffffff; }
+        .card-superior .subtag { color: #38bdf8; }
+        .card-superior .content-list h4 { color: #94a3b8; }
+        .card-superior .content-list ul li { color: #cbd5e1; }
+        .card-superior .content-list { border-top-color: rgba(255,255,255,0.08); }
+        .card-superior:hover {
+            transform: translateY(-6px);
+            background: #0f172a;
+            border-color: #38bdf8;
+            box-shadow: 0 15px 35px rgba(56, 189, 248, 0.15);
+        }
+
+        /* Botão Sair do Painel */
+        .btn-voltar-wrapper {
+            width: 100%;
+            text-align: center;
+        }
         .btn-voltar {
-            padding: 12px 30px;
-            background: transparent;
-            border: 2px solid #64748b;
-            color: #64748b;
+            padding: 14px 40px;
+            background: #ffffff;
+            border: 1.5px solid #cbd5e1;
+            color: var(--text-dark);
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
         }
         .btn-voltar:hover {
-            background: #64748b;
+            background: var(--text-dark);
             color: #ffffff;
+            border-color: var(--text-dark);
+            transform: translateY(-2px);
         }
 
-
-        /* --- SEÇÃO DO RODAPÉ AVANÇADO --- */
+        /* --- RODAPÉ ATUALIZADO E FIXO NO BOTTOM --- */
         .site-footer {
             background-color: #121319;
             color: #a0aec0;
             padding: 60px 40px 40px 40px;
             position: relative;
             z-index: 10;
-            border-top: 4px solid #f27224;
+            border-top: 4px solid var(--accent-orange);
             margin-top: auto;
+            width: 100%;
         }
 
         .footer-container {
@@ -379,7 +471,7 @@
         }
 
         .footer-main-title {
-            color: #f27224;
+            color: var(--accent-orange);
             font-size: 26px;
             font-weight: 700;
             margin-bottom: 35px;
@@ -394,7 +486,7 @@
         }
 
         .footer-column h3 {
-            color: #f27224;
+            color: var(--accent-orange);
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 16px;
@@ -421,7 +513,7 @@
         }
 
         .footer-links a:hover {
-            color: #f27224;
+            color: var(--accent-orange);
             text-decoration: underline;
         }
 
@@ -437,7 +529,7 @@
             color: #718096;
         }
 
-        /* --- ESTILOS DAS JANELAS MODAIS --- */
+        /* --- INTERRUPTOR DE MODAIS --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -445,7 +537,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.75);
-            z-index: 2000;
+            z-index: 3000;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -485,55 +577,26 @@
             font-size: 28px;
             cursor: pointer;
             color: #a0aec0;
-            transition: color 0.2s;
             background: none;
             border: none;
             font-weight: bold;
         }
 
         .modal-close-btn:hover { color: #e53e3e; }
+        .modal-title { color: var(--accent-orange); font-size: 22px; font-weight: 700; margin-bottom: 20px; border-bottom: 2px solid var(--accent-orange); padding-bottom: 10px; }
+        .modal-body { color: #2d3748; font-size: 14px; line-height: 1.6; text-align: justify; }
+        .modal-body h4 { margin: 15px 0 5px 0; color: var(--primary); font-size: 15px; }
 
-        .modal-title {
-            color: #f27224;
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #f27224;
-            padding-bottom: 10px;
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 1200px) {
+            .education-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
         }
-
-        .modal-body {
-            color: #2d3748;
-            font-size: 14px;
-            line-height: 1.6;
-            text-align: justify;
-        }
-
-        .modal-body h4 { margin: 15px 0 5px 0; color: #4a3aff; font-size: 15px; }
-        .modal-body ul { margin-left: 20px; margin-bottom: 15px; }
-
-        /* --- ANIMAÇÕES DAS PARTÍCULAS --- */
-        @keyframes fall-straight {
-            0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
-        }
-        @keyframes fall-left {
-            0% { transform: translate(0, -50px) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { transform: translate(-100px, 105vh) rotate(-360deg); opacity: 0; }
-        }
-        @keyframes fall-right {
-            0% { transform: translate(0, -50px) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { transform: translate(100px, 105vh) rotate(360deg); opacity: 0; }
-        }
-
         @media (max-width: 950px) {
             .footer-grid { grid-template-columns: 1fr; gap: 35px; }
+        }
+        @media (max-width: 650px) {
+            .education-grid { grid-template-columns: 1fr; }
+            .dashboard-title { font-size: 28px; }
         }
     </style>
 </head>
@@ -541,17 +604,15 @@
 
     <div class="page-wrapper">
         
-        <!-- TELA 1: SEÇÃO DE LOGIN E CADASTRO -->
+        <!-- TELA 1: LOGIN, CADASTRO E RECUPERAÇÃO (Sempre ativo no início) -->
         <section class="login-section" id="auth-screen">
             <div id="particles-container"></div>
             
             <div class="card-container">
                 
-                <!-- CARD 1: LOGIN -->
+                <!-- LOGIN FORM -->
                 <div id="card-login" class="form-card active">
                     <h1 class="logo-title">GABARITEI</h1>
-                    <div style="height: 25px;"></div>
-                    
                     <div id="login-feedback" class="feedback-box"></div>
                     
                     <form id="login-form" onsubmit="handleLogin(event)">
@@ -574,11 +635,10 @@
                     </div>
                 </div>
 
-                <!-- CARD 2: CRIAR CONTA -->
+                <!-- REGISTER FORM -->
                 <div id="card-register" class="form-card">
                     <h1 class="logo-title">GABARITEI</h1>
                     <h2 class="subtitle">Criar Conta</h2>
-                    
                     <div id="register-feedback" class="feedback-box"></div>
                     
                     <form id="register-form" onsubmit="handleRegister(event)">
@@ -605,11 +665,10 @@
                     </div>
                 </div>
 
-                <!-- CARD 3: RECUPERAR SENHA -->
+                <!-- RECOVERY FORM -->
                 <div id="card-recovery" class="form-card">
                     <h1 class="logo-title">GABARITEI</h1>
                     <h2 class="subtitle">Recuperar Senha</h2>
-                    
                     <div id="recovery-feedback" class="feedback-box"></div>
                     
                     <form id="recovery-form" onsubmit="handleRecovery(event)">
@@ -639,50 +698,103 @@
             </div>
         </section>
 
-        <!-- TELA 2: NOVA SEÇÃO DO PAINEL DE NÍVEIS DE ENSINO (PÓS-LOGIN) -->
+        <!-- TELA 2: QUADRADOS DOS NÍVEIS DE ENSINO COM TODOS OS CONTEÚDOS POSSÍVEIS -->
         <section class="dashboard-section" id="dashboard-screen">
-            <h2 class="dashboard-title">Boas-vindas ao Gabaritei!</h2>
-            <p class="dashboard-subtitle">Selecione o seu nível de ensino atual para carregar o ecossistema personalizado:</p>
+            <div class="dashboard-header">
+                <h2 class="dashboard-title">Boas-vindas ao Gabaritei!</h2>
+                <p class="dashboard-subtitle">Selecione o seu nível de ensino atual para carregar o ecossistema personalizado de módulos e ferramentas:</p>
+            </div>
             
             <div class="education-grid">
-                <!-- 1 ao 5: Estilo Infantilizado -->
-                <div class="edu-card card-infantil" onclick="alert('Módulo do 1º ao 5º Ano selecionado!')">
-                    <div class="icon">🎈</div>
+                
+                <!-- QUADRADO 1: INFANTILIZADO (1º ao 5º Ano) -->
+                <div class="edu-card card-infantil" onclick="alert('Iniciando ambiente lúdico do 1º ao 5º Ano!')">
+                    <div class="icon-wrapper">🎈</div>
                     <h3>1º ao 5º Ano</h3>
-                    <p>Ensino Fundamental I</p>
+                    <span class="subtag">Ensino Fundamental I</span>
+                    
+                    <div class="content-list">
+                        <h4>⭐ Conteúdos Inclusos:</h4>
+                        <ul>
+                            <li>🎨 Alfabetização e Letramento Dinâmico</li>
+                            <li>🔢 Tabuada Animada e Matemática Ilustrada</li>
+                            <li>🌍 Descoberta das Ciências e Natureza</li>
+                            <li>🏰 Leitura de Contos e Interpretação Lúdica</li>
+                            <li>🏆 Missões de Aprendizado com Prêmios e Medalhas</li>
+                            <li>🧩 Jogos Cognitivos de Raciocínio Lógico</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- 6 ao 9: Estilo Infantilizado + Maduro (Misto) -->
-                <div class="edu-card card-misto" onclick="alert('Módulo do 6º ao 9º Ano selecionado!')">
-                    <div class="icon">🚀</div>
+                <!-- QUADRADO 2: MISTO (6º ao 9º Ano) -->
+                <div class="edu-card card-misto" onclick="alert('Iniciando ambiente dinâmico do 6º ao 9º Ano!')">
+                    <div class="icon-wrapper">🚀</div>
                     <h3>6º ao 9º Ano</h3>
-                    <p>Ensino Fundamental II</p>
+                    <span class="subtag">Ensino Fundamental II</span>
+                    
+                    <div class="content-list">
+                        <h4>⚡ Módulos Inclusos:</h4>
+                        <ul>
+                            <li>📐 Introdução à Álgebra e Geometria Plana</li>
+                            <li>🧬 Biologia Básica, Física e Química Geral</li>
+                            <li>✍️ Oficina de Redação Estruturada</li>
+                            <li>🗺️ História Geral, do Brasil e Geografia Crítica</li>
+                            <li>🔥 Sistema de Conquistas e Avatar Customizável</li>
+                            <li>🃏 Flashcards Intermediários de Memorização</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- 1 ao 3: Estilo Maduro -->
-                <div class="edu-card card-maduro" onclick="alert('Módulo do Ensino Médio selecionado!')">
-                    <div class="icon">📚</div>
+                <!-- QUADRADO 3: MADURO (1º ao 3º Ano) -->
+                <div class="edu-card card-maduro" onclick="alert('Iniciando painel avançado do Ensino Médio!')">
+                    <div class="icon-wrapper">📚</div>
                     <h3>1º ao 3º Ano</h3>
-                    <p>Ensino Médio</p>
+                    <span class="subtag">Ensino Médio</span>
+                    
+                    <div class="content-list">
+                        <h4>⚖️ Recursos Acadêmicos:</h4>
+                        <ul>
+                            <li>🎯 Banco de Simulados Completos Padrão ENEM</li>
+                            <li>🧪 Física Avançada, Química Orgânica e Cálculo</li>
+                            <li>🖋️ Treinamento de Redação Dissertativa-Argumentativa</li>
+                            <li>📊 Gráficos Analíticos de Rendimento e Evolução</li>
+                            <li>📅 Cronograma Adaptativo de Estudos para Vestibulares</li>
+                            <li>🎧 Resumos em Áudio e Análises Literárias</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- Ensino Superior: Estilo Maduro -->
-                <div class="edu-card card-maduro" onclick="alert('Módulo do Ensino Superior selecionado!')">
-                    <div class="icon">🎓</div>
+                <!-- QUADRADO 4: MADURO ACADÊMICO (Ensino Superior) -->
+                <div class="edu-card card-superior" onclick="alert('Iniciando terminal do Ensino Superior!')">
+                    <div class="icon-wrapper">🎓</div>
                     <h3>Ensino Superior</h3>
-                    <p>Graduação e Especializações</p>
+                    <span class="subtag">Graduação e Especializações</span>
+                    
+                    <div class="content-list">
+                        <h4>🏛️ Ferramentas Científicas:</h4>
+                        <ul>
+                            <li>📖 Organizador de Referências Bibliográficas (ABNT/APA)</li>
+                            <li>🛠️ Gerenciador Avançado de Projetos de TCC e Artigos</li>
+                            <li>📋 Controle e Computação de Horas Complementares</li>
+                            <li>📈 Estatísticas Avançadas de Frequência e Notas</li>
+                            <li>🗂️ Repositório Estruturado por Semestres e Matérias</li>
+                            <li>⏱️ Temporizador Pomodoro de Alta Performance Integrado</li>
+                        </ul>
+                    </div>
                 </div>
+
             </div>
 
-            <button class="btn-voltar" onclick="handleLogout()">Sair do Painel</button>
+            <div class="btn-voltar-wrapper">
+                <button class="btn-voltar" onclick="handleLogout()">Sair do Painel</button>
+            </div>
         </section>
 
-        <!-- SEÇÃO DO RODAPÉ (FOOTER INTEGRADO) -->
+        <!-- SEÇÃO DO RODAPÉ (FOOTER INTEGRADO E INALTERADO) -->
         <footer class="site-footer">
             <div class="footer-container">
                 <h2 class="footer-main-title">📌 Informações do App</h2>
                 
-                <!-- LINHA 1 DO GRID -->
                 <div class="footer-grid">
                     <div class="footer-column">
                         <h3>💡 O que é o Gabaritei?</h3>
@@ -700,7 +812,6 @@
                     </div>
                 </div>
 
-                <!-- LINHA 2 DO GRID -->
                 <div class="footer-grid">
                     <div class="footer-column">
                         <h3>Sobre Nós</h3>
@@ -722,7 +833,6 @@
                     </div>
                 </div>
 
-                <!-- LINHA 3 DO GRID -->
                 <div class="footer-grid">
                     <div class="footer-column">
                         <h3>🚀 Metodologias do Ecossistema</h3>
@@ -735,7 +845,7 @@
                     </div>
 
                     <div class="footer-column">
-                        <h3>💻 Arquitetura Técnico Local</h3>
+                        <h3>💻 Arquitetura Técnica Local</h3>
                         <p>Utilizamos chaves de isolamento de dados estruturadas no ecossistema do cliente. Isso garante tempo de resposta imediato (zero delay de rede) e autonomia total de uso, permitindo que o aplicativo funcione perfeitamente mesmo sem internet estável.</p>
                     </div>
                 </div>
@@ -747,19 +857,18 @@
 
     </div>
 
-    <!-- ESTRUTURA DOS MODAIS INTERATIVOS -->
+    <!-- ESTRUTURA DE MODAIS -->
     <div id="info-modal" class="modal-overlay" onclick="closeModal(event)">
         <div class="modal-box" onclick="event.stopPropagation()">
             <button class="modal-close-btn" onclick="closeModal(null)">&times;</button>
-            <h3 id="modal-title-text" class="modal-title">Título do Documento</h3>
-            <div id="modal-body-content" class="modal-body">
-                Conteúdo dinâmico aqui...
-            </div>
+            <h3 id="modal-title-text" class="modal-title">Título</h3>
+            <div id="modal-body-content" class="modal-body"> Conteúdo </div>
         </div>
     </div>
 
-    <!-- SCRIPT DE GERENCIAMENTO GERAL -->
+    <!-- SCRIPT DE INTELIGÊNCIA DO SISTEMA -->
     <script>
+        // Sempre inicializa o banco de dados local
         function initDatabase() {
             if (!localStorage.getItem('gabaritei_db')) {
                 const initialUsers = [
@@ -770,6 +879,7 @@
         }
         initDatabase();
 
+        // Controla navegação interna entre cartões de login/cadastro
         function navigateTo(targetCardId) {
             document.querySelectorAll('.form-card').forEach(card => card.classList.remove('active'));
             document.querySelectorAll('.feedback-box').forEach(box => box.style.display = 'none');
@@ -777,7 +887,7 @@
             document.getElementById(targetCardId).classList.add('active');
         }
 
-        // ALTERAÇÃO: Quando o login estiver correto, redireciona para a nova seção
+        // Processo de Login autêntico
         function handleLogin(event) {
             event.preventDefault();
             const userVal = document.getElementById('login-user').value.trim();
@@ -789,28 +899,29 @@
 
             if (userFound) {
                 feedback.className = "feedback-box success";
-                feedback.innerText = `Acesso autorizado! Carregando seu painel...`;
+                feedback.innerText = `Acesso autorizado! Carregando painel de níveis pedagógicos...`;
                 document.getElementById('login-form').reset();
                 
-                // Transição suave para a nova tela de retângulos após 1.2 segundos
+                // Transição refinada para a tela dos Quadrados Pedagógicos
                 setTimeout(() => {
                     document.getElementById('auth-screen').style.display = 'none';
                     document.getElementById('dashboard-screen').style.display = 'flex';
                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 1200);
+                }, 1000);
             } else {
                 feedback.className = "feedback-box error";
                 feedback.innerText = "Usuário ou senha incorretos.";
             }
         }
 
-        // Função para desconectar da área de painéis e voltar ao Login
+        // Retorno seguro ao Login
         function handleLogout() {
             document.getElementById('dashboard-screen').style.display = 'none';
             document.getElementById('auth-screen').style.display = 'flex';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Criação de Conta com Alerta Customizado Exato
         function handleRegister(event) {
             event.preventDefault();
             const userVal = document.getElementById('reg-user').value.trim();
@@ -831,12 +942,13 @@
             localStorage.setItem('gabaritei_db', JSON.stringify(users));
 
             feedback.className = "feedback-box success";
-            feedback.innerText = "Conta criada com sucesso! Redirecionando...";
+            feedback.innerText = "Conta criada com sucesso! Redirecionando para login...";
             document.getElementById('register-form').reset();
 
-            setTimeout(() => { navigateTo('card-login'); }, 2000);
+            setTimeout(() => { navigateTo('card-login'); }, 1800);
         }
 
+        // Recuperação de Credenciais Local
         function handleRecovery(event) {
             event.preventDefault();
             const userVal = document.getElementById('rec-user').value.trim();
@@ -860,27 +972,24 @@
             }
         }
 
-        // --- TEXTOS DO SISTEMA INTERATIVO DE MODAIS ---
+        // Modais dos Links Úteis
         const modalTexts = {
             privacy: {
                 title: "🔒 Política de Privacidade Interna",
                 body: `<p>A sua privacidade é um pilar inegociável na plataforma Gabaritei da FichTeck. Como o nosso sistema opera de forma estritamente local, criamos regras claras:</p>
                        <h4>1. Coleta Mínima</h4><p>O aplicativo não captura, rastreia ou envia nenhuma informação confidencial ou pessoal para servidores externos. Todos os dados que você insere ao criar a conta residem apenas no seu dispositivo.</p>
-                       <h4>2. O papel do LocalStorage</h4><p>Suas informações são convertidas em cadeias isoladas de texto e inseridas na memória nativa do browser. Nenhum desenvolvedor da FichTeck ou terceiro possui caminhos técnicos para visualizar o seu banco de dados.</p>
-                       <h4>3. Direitos de Exclusão</h4><p>Você detém autonomia total. Para apagar permanentemente seus registros, basta limpar os dados do site nas configurações do navegador.</p>`
+                       <h4>2. O papel do LocalStorage</h4><p>Suas informações são convertidas em cadeias isoladas de texto e inseridas na memória nativa do browser. Nenhum desenvolvedor da FichTeck ou terceiro possui caminhos técnicos para visualizar o seu banco de dados.</p>`
             },
             terms: {
                 title: "📋 Termos de Uso e Responsabilidade",
                 body: `<p>Ao utilizar o ecossistema Gabaritei, você concorda com as diretrizes técnicas de funcionamento estabelecidas abaixo:</p>
-                       <h4>1. Natureza do Serviço</h4><p>O Gabaritei funciona como um assistente de estudos offline focado em gamificação. A frequência e persistência de dados depende diretamente da integridade do armazenamento local do seu navegador.</p>
-                       <h4>2. Responsabilidade sobre Credenciais</h4><p>Como não possuímos servidores de sincronização online para proteção de privacidade, o gerenciamento de nomes de usuário e senhas cadastrados é de responsabilidade exclusiva do estudante.</p>
-                       <h4>3. Limitações de Ambientes</h4><p>O aplicativo não deve ser inicializado em navegadores configurados para apagar dados ao fechar ou através de abas anônimas, sob o risco latente de perda total de progresso e indisponibilidade do login.</p>`
+                       <h4>1. Natureza do Serviço</h4><p>O Gabaritei funciona como um assistente de estudos offline focado em gamificação. A persistência de dados depende diretamente da integridade do armazenamento local do seu navegador.</p>
+                       <h4>2. Responsabilidade sobre Credenciais</h4><p>Como não possuímos servidores de sincronização online para proteção de privacidade, o gerenciamento de nomes de usuário e senhas cadastrados é de responsabilidade exclusiva do estudante.</p>`
             },
             help: {
                 title: "💡 Central de Ajuda & FAQ",
                 body: `<p>Precisa de suporte com as funções do app? Compilamos as dúvidas mais recorrentes:</p>
                        <h4>Como funciona o cadastro?</h4><p>Ao inserir um nome e e-mail novos, o sistema cria um registro único local. Se tentar criar uma conta usando um nome já ocupado, o alerta bloqueará a ação para manter seu histórico intacto.</p>
-                       <h4>Mudei de navegador e sumiu tudo, o que eu faço?</h4><p>Como os dados ficam salvos dentro do navegador específico, se você mudar do Chrome para o Edge (ou formatar o computador), precisará fazer um novo cadastro lá, pois as memórias são isoladas.</p>
                        <h4>Esqueci minha senha, como recuperar?</h4><p>Acesse o painel "Recuperar Senha" no card principal, digite seu usuário e e-mail exatamente como cadastrou. O sistema fará a varredura interna e exibirá sua senha real de volta na tela imediatamente.</p>`
             }
         };
@@ -889,7 +998,6 @@
             const modal = document.getElementById('info-modal');
             const title = document.getElementById('modal-title-text');
             const body = document.getElementById('modal-body-content');
-            
             if(modalTexts[type]) {
                 title.innerText = modalTexts[type].title;
                 body.innerHTML = modalTexts[type].body;
@@ -897,31 +1005,35 @@
             }
         }
 
-        function closeModal(event) {
-            document.getElementById('info-modal').classList.remove('active');
-        }
+        function closeModal(event) { document.getElementById('info-modal').classList.remove('active'); }
 
-        // --- SISTEMA DE PARTÍCULAS EM BACKGROUND ---
+        // --- PARTÍCULAS EM BACKGROUND NO LOGIN ---
         const container = document.getElementById('particles-container');
-        const items = ['A', 'B', 'C', 'X', 'Y', 'Z', 'N', '3', '5', '6', '8', '9', '1', '7', '%', 'π', '✏️', '🎓', '📝', '📐'];
-        const colors = ['#8a85ff', '#4cd09b', '#50a5f5', '#ff9d5c', '#a2b4c7', '#b2ad7f', '#d64161'];
-        const animations = ['fall-straight', 'fall-left', 'fall-right'];
-        const maxParticles = 40;
+        const items = ['A', 'B', 'C', 'X', 'Y', 'Z', '3', '5', '6', '8', '9', '✏️', '🎓', '📝', '📐'];
+        const colors = ['#8a85ff', '#4cd09b', '#50a5f5', '#ff9d5c', '#a2b4c7'];
+        const maxParticles = 35;
 
         function generateParticle() {
             const particle = document.createElement('div');
             particle.classList.add('particle');
             particle.innerText = items[Math.floor(Math.random() * items.length)];
             particle.style.color = colors[Math.floor(Math.random() * colors.length)];
-            const size = Math.random() * 14 + 12;
-            particle.style.fontSize = `${size}px`;
+            particle.style.fontSize = `${Math.random() * 14 + 12}px`;
             particle.style.left = `${Math.random() * 100}vw`;
             const duration = Math.random() * 12 + 10;
-            const delay = Math.random() * 15;
-            const anim = animations[Math.floor(Math.random() * animations.length)];
-            particle.style.animation = `${anim} ${duration}s linear ${delay}s infinite`;
+            const delay = Math.random() * 10;
+            particle.style.animation = `fall-straight ${duration}s linear ${delay}s infinite`;
             container.appendChild(particle);
         }
+
+        // Injeta animação chave das partículas dinamicamente
+        const sheet = window.document.styleSheets[0];
+        sheet.insertRule(`@keyframes fall-straight {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+        }`, sheet.cssRules.length);
 
         for (let i = 0; i < maxParticles; i++) { generateParticle(); }
     </script>
