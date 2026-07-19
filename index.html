@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gabaritei - Sistema de Estudos</title>
-    <!-- Fonte moderna idêntica à do App -->
+    <!-- Fonte moderna Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* --- CONTAINER DE LOGIN E TRANSIÇÕES --- */
+        /* --- CONTAINER DE LOGIN --- */
         .login-section {
             position: relative;
             min-height: 100vh;
@@ -35,7 +35,6 @@
             overflow: hidden;
         }
 
-        /* Fundo Animado */
         #particles-container {
             position: absolute;
             top: 0;
@@ -54,7 +53,7 @@
             will-change: transform, opacity;
         }
 
-        /* --- DESIGN UNIFICADO DOS CARDS --- */
+        /* --- DESIGN DOS CARDS --- */
         .card-container {
             background: #ffffff;
             padding: 45px 35px;
@@ -67,7 +66,6 @@
             position: relative;
         }
 
-        /* Controle de Exibição dos Cards */
         .form-card {
             display: none;
         }
@@ -82,7 +80,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Estilo dos Títulos */
         .logo-title {
             color: #4a3aff;
             font-size: 34px;
@@ -100,7 +97,6 @@
             margin-bottom: 30px;
         }
 
-        /* Estilo dos Inputs Shaded com Linha Inferior */
         .input-group {
             text-align: left;
             margin-bottom: 22px;
@@ -132,7 +128,6 @@
             border-bottom-color: #4a3aff;
         }
 
-        /* Botões Estilo Pill (Arredondados) */
         .btn-pill {
             width: 100%;
             padding: 14px;
@@ -151,7 +146,6 @@
         .btn-pill:hover { background-color: #3b2ee0; }
         .btn-pill:active { transform: scale(0.98); }
 
-        /* Links e Textos Inferiores */
         .card-links {
             margin-top: 25px;
             font-size: 13px;
@@ -163,13 +157,12 @@
             text-decoration: none;
             font-weight: 700;
             cursor: pointer;
-            transition: color 0.2s;
         }
 
         .card-links a:hover { text-decoration: underline; }
         .card-links p { margin-bottom: 8px; }
 
-        /* --- CAIXAS DE MENSAGENS DE FEEDBACK --- */
+        /* --- MENSAGENS DE FEEDBACK --- */
         .feedback-box {
             padding: 12px 16px;
             border-radius: 12px;
@@ -194,7 +187,6 @@
             border: 1px solid #c6f6d5;
         }
 
-        /* Painel de Exibição da Senha Recuperada */
         .password-display-box {
             background: #f7fafc;
             border: 2px dashed #4a3aff;
@@ -220,8 +212,7 @@
             letter-spacing: 1px;
         }
 
-
-        /* --- SEÇÃO DO RODAPÉ (FOOTER) --- */
+        /* --- RODAPÉ (FOOTER) --- */
         .site-footer {
             background-color: #121319;
             color: #a0aec0;
@@ -230,85 +221,29 @@
             z-index: 10;
         }
 
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .footer-container { max-width: 1200px; margin: 0 auto; }
+        .footer-main-title { color: #f27224; font-size: 24px; font-weight: 700; margin-bottom: 35px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-bottom: 40px; }
+        .footer-column h3 { color: #f27224; font-size: 16px; font-weight: 600; margin-bottom: 15px; }
+        .footer-column p { font-size: 13.5px; line-height: 1.6; color: #cbd5e0; }
+        .footer-links a { display: block; color: #cbd5e0; text-decoration: none; font-size: 13.5px; margin-bottom: 10px; }
+        .footer-links a:hover { color: #f27224; }
+        .footer-divider { border: none; border-top: 1px solid #2d3748; margin-bottom: 25px; }
+        .copyright { text-align: center; font-size: 13px; color: #718096; }
 
-        .footer-main-title {
-            color: #f27224;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 35px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            color: #f27224;
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .footer-column p {
-            font-size: 13.5px;
-            line-height: 1.6;
-            color: #cbd5e0;
-        }
-
-        .footer-links a {
-            display: block;
-            color: #cbd5e0;
-            text-decoration: none;
-            font-size: 13.5px;
-            margin-bottom: 10px;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover {
-            color: #f27224;
-        }
-
-        .footer-divider {
-            border: none;
-            border-top: 1px solid #2d3748;
-            margin-bottom: 25px;
-        }
-
-        .copyright {
-            text-align: center;
-            font-size: 13px;
-            color: #718096;
-        }
-
-
-        /* --- ANIMAÇÕES DAS PARTÍCULAS --- */
+        /* --- PARTÍCULAS --- */
         @keyframes fall-straight {
             0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
             10% { opacity: 0.6; }
             90% { opacity: 0.6; }
             100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
         }
-
         @keyframes fall-left {
             0% { transform: translate(0, -50px) rotate(0deg); opacity: 0; }
             10% { opacity: 0.6; }
             90% { opacity: 0.6; }
             100% { transform: translate(-100px, 105vh) rotate(-360deg); opacity: 0; }
         }
-
         @keyframes fall-right {
             0% { transform: translate(0, -50px) rotate(0deg); opacity: 0; }
             10% { opacity: 0.6; }
@@ -316,9 +251,7 @@
             100% { transform: translate(100px, 105vh) rotate(360deg); opacity: 0; }
         }
 
-        @media (max-width: 900px) {
-            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
-        }
+        @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr; gap: 30px; } }
     </style>
 </head>
 <body>
@@ -357,7 +290,7 @@
                     </div>
                 </div>
 
-                <!-- CARD 2: CRIAR CONTA (Placeholders e proteção idênticos às fotos) -->
+                <!-- CARD 2: CRIAR CONTA (SEM EXEMPLOS EXPOSTOS) -->
                 <div id="card-register" class="form-card">
                     <h1 class="logo-title">GABARITEI</h1>
                     <h2 class="subtitle">Criar Conta</h2>
@@ -367,17 +300,17 @@
                     <form id="register-form" onsubmit="handleRegister(event)">
                         <div class="input-group">
                             <label for="reg-user">Nome de Usuário</label>
-                            <input type="text" id="reg-user" placeholder="Ex: Admi_oficial" required>
+                            <input type="text" id="reg-user" placeholder="Escolha seu nome de usuário" required>
                         </div>
                         
                         <div class="input-group">
                             <label for="reg-email">E-mail</label>
-                            <input type="email" id="reg-email" placeholder="Ex: peixinho1533@gmail.com" required>
+                            <input type="email" id="reg-email" placeholder="Digite seu melhor e-mail" required>
                         </div>
                         
                         <div class="input-group">
                             <label for="reg-pass">Senha</label>
-                            <input type="password" id="reg-pass" placeholder="Crie uma senha forte" required>
+                            <input type="password" id="reg-pass" placeholder="Crie uma senha segura" required>
                         </div>
                         
                         <button type="submit" class="btn-pill">Cadastrar e Acessar</button>
@@ -388,7 +321,7 @@
                     </div>
                 </div>
 
-                <!-- CARD 3: RECUPERAR SENHA (Exibe a senha direto no site) -->
+                <!-- CARD 3: RECUPERAR SENHA -->
                 <div id="card-recovery" class="form-card">
                     <h1 class="logo-title">GABARITEI</h1>
                     <h2 class="subtitle">Recuperar Senha</h2>
@@ -398,97 +331,67 @@
                     <form id="recovery-form" onsubmit="handleRecovery(event)">
                         <div class="input-group">
                             <label for="rec-user">Nome de Usuário</label>
-                            <input type="text" id="rec-user" placeholder="Digite seu usuário" required>
+                            <input type="text" id="rec-user" placeholder="Confirme seu usuário" required>
                         </div>
                         
                         <div class="input-group">
                             <label for="rec-email">E-mail</label>
-                            <input type="email" id="rec-email" placeholder="Digite seu e-mail cadastrado" required>
+                            <input type="email" id="rec-email" placeholder="Confirme seu e-mail de cadastro" required>
                         </div>
                         
                         <button type="submit" class="btn-pill">Recuperar Minha Senha</button>
                     </form>
                     
-                    <!-- Painel onde a senha aparece limpa dentro do site -->
                     <div id="password-result-area" style="display: none;" class="password-display-box">
-                        <span>Sua senha recuperada com sucesso:</span>
+                        <span>Sua senha recuperada:</span>
                         <strong id="recovered-password-text"></strong>
                     </div>
                     
                     <div class="card-links">
-                        <p><a onclick="navigateTo('card-login')">Lembrou a senha? Voltar para o login</a></p>
+                        <p><a onclick="navigateTo('card-login')">Voltar para o login</a></p>
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <!-- SEÇÃO DO RODAPÉ (FOOTER - TEXTOS ORIGINAIS RESTAURADOS) -->
+        <!-- RODAPÉ -->
         <footer class="site-footer">
             <div class="footer-container">
-                
                 <h2 class="footer-main-title">📌 Informações do App</h2>
-                
                 <div class="footer-grid">
                     <div class="footer-column">
                         <h3>💡 O que é o Gabaritei?</h3>
-                        <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela FichTeck. Idealizado para ajudar na organização diária, controle de progresso e preparação impecável para exames escolares e desafios educacionais.</p>
+                        <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela FichTeck. Idealizado para ajudar na organização diária, controle de progresso e preparação impecável para exames escolares.</p>
                     </div>
-                    
                     <div class="footer-column">
                         <h3>🔒 Segurança e Privacidade Total</h3>
-                        <p>Aqui a proteção é completa. Todas as credenciais de acesso (Usuário, E-mail e Senhas) e históricos são armazenados de forma 100% offline, direto no seu navegador com a tecnologia LocalStorage. Nenhum dado é repassado para servidores.</p>
+                        <p>Aqui a proteção é completa. Todas as credenciais de acesso são armazenadas de forma 100% offline, direto no seu navegador com a tecnologia LocalStorage. Nenhum dado é repassado para servidores.</p>
                     </div>
-                    
                     <div class="footer-column">
                         <h3>⚠️ Recomendações Importantes</h3>
-                        <p>Para evitar perdas parciais ou exclusões automáticas das suas credenciais e progresso, evite limpar agressivamente o histórico/cookies do seu navegador e não acesse o sistema através de guias anônimas.</p>
+                        <p>Para evitar perdas automáticas das suas credenciais e progresso, evite limpar de forma agressiva o histórico do seu navegador e não use guias anônimas.</p>
                     </div>
                 </div>
-
-                <div class="footer-grid">
-                    <div class="footer-column">
-                        <h3>Sobre Nós</h3>
-                        <p>Somos uma plataforma dedicada a entregar os melhores recursos de estudos e gamificação para você gabaritar as suas avaliações com qualidade, foco e compromisso.</p>
-                    </div>
-                    
-                    <div class="footer-column">
-                        <h3>Dicas de Ouro</h3>
-                        <p>💡 Estude em blocos de tempo menores focando 100% na matéria e faça pausas para descanso. A constância diária vence qualquer obstacle nos estudos!</p>
-                    </div>
-                    
-                    <div class="footer-column">
-                        <h3>Links Úteis</h3>
-                        <div class="footer-links">
-                            <a href="#">Política de Privacidade</a>
-                            <a href="#">Termos de Uso</a>
-                            <a href="#">Central de Ajuda</a>
-                        </div>
-                    </div>
-                </div>
-
                 <hr class="footer-divider">
                 <p class="copyright">© 2026 FichTeck. Todos os direitos reservados.</p>
-
             </div>
         </footer>
 
     </div>
 
-    <!-- SCRIPT CORRIGIDO COM BANCO LOCAL DE VERDADE -->
+    <!-- SCRIPT DO BANCO LOCAL -->
     <script>
-        // Inicializa banco de dados com uma conta base genérica de testes caso esteja vazio
         function initDatabase() {
             if (!localStorage.getItem('gabaritei_db')) {
                 const initialUsers = [
-                    { username: "exemplo", email: "teste@gabaritei.com", password: "SenhaValida1!" }
+                    { username: "usuario_teste", email: "teste@gabaritei.com", password: "EstudoSeguro123!" }
                 ];
                 localStorage.setItem('gabaritei_db', JSON.stringify(initialUsers));
             }
         }
         initDatabase();
 
-        // Navegação entre as abas do app
         function navigateTo(targetCardId) {
             document.querySelectorAll('.form-card').forEach(card => card.classList.remove('active'));
             document.querySelectorAll('.feedback-box').forEach(box => box.style.display = 'none');
@@ -496,7 +399,6 @@
             document.getElementById(targetCardId).classList.add('active');
         }
 
-        // Lógica 1: Realizar Login
         function handleLogin(event) {
             event.preventDefault();
             const userVal = document.getElementById('login-user').value.trim();
@@ -508,7 +410,7 @@
 
             if (userFound) {
                 feedback.className = "feedback-box success";
-                feedback.innerText = `Bem-vindo, ${userFound.username}! Login efetuado com sucesso.`;
+                feedback.innerText = `Bem-vindo, ${userFound.username}!`;
                 document.getElementById('login-form').reset();
             } else {
                 feedback.className = "feedback-box error";
@@ -516,7 +418,6 @@
             }
         }
 
-        // Lógica 2: Cadastrar Conta (Bloqueia nomes repetidos com mensagem exata)
         function handleRegister(event) {
             event.preventDefault();
             const userVal = document.getElementById('reg-user').value.trim();
@@ -525,30 +426,24 @@
             const feedback = document.getElementById('register-feedback');
 
             const users = JSON.parse(localStorage.getItem('gabaritei_db')) || [];
-
-            // Verifica de forma segura se o nome já existe na memória
             const userExists = users.some(u => u.username.toLowerCase() === userVal.toLowerCase());
 
             if (userExists) {
                 feedback.className = "feedback-box error";
                 feedback.innerText = "O sistema identificou que este nome de usuário já existe!";
-                return; // Bloqueia a execução aqui
+                return;
             }
 
-            // Se for único, salva o cadastro
             users.push({ username: userVal, email: emailVal, password: passVal });
             localStorage.setItem('gabaritei_db', JSON.stringify(users));
 
             feedback.className = "feedback-box success";
-            feedback.innerText = "Conta criada com sucesso! Redirecionando para o login...";
+            feedback.innerText = "Conta criada com sucesso! Entrando...";
             document.getElementById('register-form').reset();
 
-            setTimeout(() => {
-                navigateTo('card-login');
-            }, 2000);
+            setTimeout(() => { navigateTo('card-login'); }, 2000);
         }
 
-        // Lógica 3: Recuperar Senha Direto no Site
         function handleRecovery(event) {
             event.preventDefault();
             const userVal = document.getElementById('rec-user').value.trim();
@@ -558,27 +453,21 @@
             const resultText = document.getElementById('recovered-password-text');
 
             const users = JSON.parse(localStorage.getItem('gabaritei_db')) || [];
-
-            // Procura os dados corretos correspondentes
-            const matchedUser = users.find(u => 
-                u.username.toLowerCase() === userVal.toLowerCase() && 
-                u.email.toLowerCase() === emailVal.toLowerCase()
-            );
+            const matchedUser = users.find(u => u.username.toLowerCase() === userVal.toLowerCase() && u.email.toLowerCase() === emailVal.toLowerCase());
 
             if (matchedUser) {
                 feedback.style.display = "none";
-                // Exibe a senha armazenada dele diretamente no contêiner do site
                 resultText.innerText = matchedUser.password;
                 resultBox.style.display = 'block';
                 document.getElementById('recovery-form').reset();
             } else {
                 resultBox.style.display = 'none';
                 feedback.className = "feedback-box error";
-                feedback.innerText = "Dados não conferem. Verifique o usuário e o e-mail digitados.";
+                feedback.innerText = "Dados não conferem. Verifique o usuário e e-mail digitados.";
             }
         }
 
-        // --- ENGINE DAS PARTÍCULAS DE FUNDO ---
+        // --- PARTÍCULAS ---
         const container = document.getElementById('particles-container');
         const items = ['A', 'B', 'C', 'X', 'Y', 'Z', 'N', '3', '5', '6', '8', '9', '1', '7', '%', 'π', '✏️', '🎓', '📝', '📐'];
         const colors = ['#8a85ff', '#4cd09b', '#50a5f5', '#ff9d5c', '#a2b4c7', '#b2ad7f', '#d64161'];
@@ -600,9 +489,7 @@
             container.appendChild(particle);
         }
 
-        for (let i = 0; i < maxParticles; i++) {
-            generateParticle();
-        }
+        for (let i = 0; i < maxParticles; i++) { generateParticle(); }
     </script>
 </body>
 </html>
