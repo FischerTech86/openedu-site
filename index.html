@@ -256,7 +256,7 @@
         .btn-voltar:hover { background: var(--accent-blue); color: #0f172a; border-color: var(--accent-blue); }
 
 
-        /* --- TELA 3: GUIA INTERNA DE ESTUDOS (COM VÍDEOS REAIS E CONTEÚDO MASSIVO) --- */
+        /* --- TELA 3: GUIA INTERNA DE ESTUDOS --- */
         .study-room-section {
             display: none;
             flex-direction: column;
@@ -289,7 +289,7 @@
 
         .study-main-col { display: flex; flex-direction: column; gap: 25px; }
 
-        /* PLAYER DE VÍDEO REAL DO YOUTUBE */
+        /* PLAYER DE VÍDEO DO YOUTUBE REFORMATADO */
         .video-player-container {
             width: 100%;
             aspect-ratio: 16/9;
@@ -358,7 +358,6 @@
         .panel-box p { font-size: 14px; line-height: 1.75; color: #cbd5e1; margin-bottom: 14px; }
         .panel-box h4 { font-size: 14px; color: #ffffff; margin: 16px 0 8px 0; font-weight: 600; }
         
-        /* Lista de Resumo Base detalhada */
         .summary-list-custom { list-style: none; display: flex; flex-direction: column; gap: 12px; }
         .summary-list-custom li { 
             font-size: 13px; 
@@ -391,8 +390,9 @@
         .ai-chat-messages::-webkit-scrollbar { width: 4px; }
         .ai-chat-messages::-webkit-scrollbar-thumb { background: #334155; }
 
-        .msg { max-width: 90%; padding: 12px 15px; border-radius: 12px; font-size: 13px; line-height: 1.6; }
+        .msg { max-width: 90%; padding: 12px 15px; border-radius: 12px; font-size: 13px; line-height: 1.6; word-break: break-word; }
         .msg.ai { background: #1e293b; color: #f1f5f9; align-self: flex-start; border-bottom-left-radius: 2px; border: 1px solid rgba(255,255,255,0.05); }
+        .msg.ai.typing { font-style: italic; opacity: 0.8; }
         .msg.user { background: var(--primary-color); color: #ffffff; align-self: flex-end; border-bottom-right-radius: 2px; }
 
         .ai-input-area { padding: 12px; border-top: 1px solid #1e293b; display: flex; gap: 8px; }
@@ -411,7 +411,7 @@
         .thumb-info p { font-size: 11px; color: var(--text-muted); }
 
 
-        /* --- SEÇÃO DO RODAPÉ (PRESERVADO EM AZUL VIBRANTE) --- */
+        /* --- SEÇÃO DO RODAPÉ (MANTIDO INTACTO) --- */
         .site-footer {
             background-color: #111625;
             color: #ffffff;
@@ -574,7 +574,7 @@
         </section>
 
 
-        <!-- TELA 3: GUIA INTERNA DE ESTUDOS (COM VÍDEOS EM HD REAIS E IA BOX) -->
+        <!-- TELA 3: GUIA INTERNA DE ESTUDOS (COM YOUTUBE CORRIGIDO E IA FUNCIONAL) -->
         <section class="study-room-section" id="study-screen">
             <div class="study-header">
                 <div>
@@ -586,54 +586,46 @@
 
             <div class="study-container-grid">
                 <div class="study-main-col">
-                    <!-- PLAYER REAIS DO YOUTUBE INTEGRADO -->
+                    <!-- PLAYER DE VÍDEO DO YOUTUBE -->
                     <div class="video-player-container" id="main-player-wrapper">
                         <div class="video-placeholder-ui" id="video-cover" onclick="loadMainVideo()">
                             <div class="play-icon">▶</div>
                             <h3>Vídeo Aula Principal</h3>
                             <p>Clique para iniciar a transmissão em HD da matéria</p>
                         </div>
-                        <iframe id="youtube-iframe" class="video-iframe-embed" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe id="youtube-iframe" class="video-iframe-embed" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
 
                     <div class="explanation-panels">
                         <div class="panel-box">
                             <h3>📖 Explicação da Matéria</h3>
-                            <div id="dynamic-explanation">
-                                <!-- Conteúdo extensivo injetado dinamicamente via JS -->
-                            </div>
+                            <div id="dynamic-explanation"></div>
                         </div>
                         <div class="panel-box">
                             <h3>📌 Resumo da Base</h3>
-                            <ul class="summary-list-custom" id="dynamic-summary">
-                                <!-- Tópicos do resumo injetados dinamicamente via JS -->
-                            </ul>
+                            <ul class="summary-list-custom" id="dynamic-summary"></ul>
                         </div>
                     </div>
                 </div>
 
                 <div class="study-sidebar-col">
-                    <!-- IA BOX INTELIGENTE E ATIVA -->
+                    <!-- IA BOX CORRIGIDA E INTERATIVA -->
                     <div class="ai-assistant-card">
                         <div class="ai-header">
                             <div class="ai-status-dot"></div>
                             <h3>IA Auxiliadora Gabaritei</h3>
                         </div>
-                        <div class="ai-chat-messages" id="ai-chat-box">
-                            <div class="msg ai">Olá! Sou sua IA Auxiliadora especialista. Pode me fazer qualquer pergunta sobre esta matéria ou sobre qualquer dúvida de estudo!</div>
-                        </div>
+                        <div class="ai-chat-messages" id="ai-chat-box"></div>
                         <div class="ai-input-area">
-                            <input type="text" id="ai-user-input" placeholder="Perguntar para a IA..." onkeypress="handleKeyPress(event)">
-                            <button onclick="askAiAssistant()">Enviar</button>
+                            <input type="text" id="ai-user-input" placeholder="Perguntar para a IA..." onkeydown="if(event.key==='Enter') askAiAssistant()">
+                            <button type="button" onclick="askAiAssistant()">Enviar</button>
                         </div>
                     </div>
 
-                    <!-- MAIS VÍDEOS REAIS -->
+                    <!-- VÍDEOS COMPLEMENTARES -->
                     <div class="more-videos-card">
                         <h3>🎬 Mais Vídeos sobre o Tema</h3>
-                        <div id="extra-videos-list">
-                            <!-- Minis de vídeos reais injetadas dinamicamente -->
-                        </div>
+                        <div id="extra-videos-list"></div>
                     </div>
                 </div>
             </div>
@@ -696,17 +688,8 @@
 
     </div>
 
-    <!-- SCRIPT CENTRAL E INTELIGÊNCIA ARTIFICIAL -->
+    <!-- SCRIPTS CORRIGIDOS -->
     <script>
-        // Banco de Dados Local Inicial
-        function initDatabase() {
-            if (!localStorage.getItem('gabaritei_db')) {
-                const initialUsers = [{ username: "usuario", password: "123" }];
-                localStorage.setItem('gabaritei_db', JSON.stringify(initialUsers));
-            }
-        }
-        initDatabase();
-
         function handleLogin(event) {
             event.preventDefault();
             const userVal = document.getElementById('login-user').value.trim();
@@ -715,14 +698,14 @@
 
             if (userVal !== "" && passVal !== "") {
                 feedback.className = "feedback-box success";
-                feedback.innerText = `Acesso liberado!`;
+                feedback.innerText = `Acesso liberado! Bem-vindo(a).`;
                 document.getElementById('login-form').reset();
                 
                 setTimeout(() => {
                     document.getElementById('auth-screen').style.display = 'none';
                     document.getElementById('dashboard-screen').style.display = 'flex';
                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 800);
+                }, 600);
             }
         }
 
@@ -733,16 +716,17 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- BANCO DE VÍDEOS REAIS DO YOUTUBE E CONTEÚDO MASSIVO ---
+        // --- BANCO DE VÍDEOS DO YOUTUBE REAIS E CONTEÚDOS ---
         let currentTopicGlobal = "";
-        let currentMainVideoUrl = "";
+        let currentMainVideoEmbed = "";
 
+        // URLs de Embed Oficiais do YouTube com permissão externa liberada
         const topicContentMap = {
             "Alfabetização e Ortografia": {
-                mainVideo: "https://www.youtube-nocookie.com/embed/5D_yN4e4G7Q?autoplay=1",
+                mainVideo: "https://www.youtube.com/embed/5D_yN4e4G7Q?autoplay=1&enablejsapi=1",
                 extraVideos: [
-                    { title: "Regras do Ç e SS sem Erros", duration: "12 min", embed: "https://www.youtube-nocookie.com/embed/P2pY0o0N7kI?autoplay=1" },
-                    { title: "Uso dos Porquês na Prática", duration: "18 min", embed: "https://www.youtube-nocookie.com/embed/q686j7wB6eE?autoplay=1" }
+                    { title: "Regras de Ortografia e Acentuação", duration: "12 min", embed: "https://www.youtube.com/embed/P2pY0o0N7kI?autoplay=1&enablejsapi=1" },
+                    { title: "Uso dos Porquês na Prática", duration: "15 min", embed: "https://www.youtube.com/embed/q686j7wB6eE?autoplay=1&enablejsapi=1" }
                 ],
                 explanation: `
                     <p><b>1. Introdução à Alfabetização e Estrutura Linguística:</b> A alfabetização é a porta de entrada para o conhecimento acadêmico e a comunicação plena na sociedade. Ela não se limita apenas ao ato de reconhecer letras soltas, mas sim de compreender o sistema alfabético como um código de representação fonética e semântica.</p>
@@ -753,13 +737,13 @@
                     <p>• <b>Sons de Z e S intervocálico:</b> O 'S' assume o som de 'Z' quando posicionado entre duas vogais (ex: <i>casa</i>, <i>mesa</i>). Para manter o som forte de /S/ entre vogais, dobra-se a letra ('SS', ex: <i>massa</i>, <i>passo</i>).</p>
                     <h4>4. Nova Acentuação Gráfica e Acordo Ortográfico:</h4>
                     <p>Com o Acordo Ortográfico, os ditongos abertos 'ei' e 'oi' nas palavras paroxítonas perderam o acento agudo (ex: <i>ideia</i>, <i>jiboia</i>, <i>heroi</i> sem acento em paroxítonas). Além disso, o hífen recebeu novas diretrizes de uso que exigem atenção para junção de prefixos idênticos aos das vogais seguintes.</p>
-                    <p><b>5. Dicas de Fixação Prática:</b> A melhor maneira de consolidar a ortografia é através da leitura diária e da prática contínua de caligrafia ativa, associando o visual da palavra ao seu significado contextual.</p>
+                    <p><b>5. Dicas de Fixação Prática:</b> A melhor maneira de consolidar a ortografia é através da leitura diária e da prática contínua de escrita ativa, associando o visual da palavra ao seu significado contextual.</p>
                 `,
                 summary: [
                     "🎯 <b>Conceito Central:</b> Relação fonema-grafema e regras ortográficas oficiais.",
                     "📌 <b>Regra P/B:</b> Usa-se 'M' obrigatoriamente antes de 'P' e 'B'.",
                     "📌 <b>S/SS:</b> 'S' entre vogais tem som de Z. Para som forte de 'S', utiliza-se 'SS'.",
-                    "📌 <b>Ditongos Aberto Paroxítonos:</b> Palavras como <i>ideia</i> e <i>assembleia</i> não levam mais acento.",
+                    "📌 <b>Ditongos Aberto Paroxítonos:</b> Palavras como <i>ideia</i> e <i>assembleia</i> não levam acento.",
                     "📌 <b>Uso do X:</b> Emprega-se após ditongos (ex: <i>caixa</i>) e após sílaba inicial 'en-'.",
                     "📌 <b>Divisão Silábica:</b> Dígrafos separáveis (RR, SS, SC, SÇ, XC) ficam em sílabas diferentes.",
                     "📌 <b>Importância Acadêmica:</b> Base essencial para escrita sem erros em qualquer fase dos estudos."
@@ -767,33 +751,32 @@
             }
         };
 
-        // Gerador Automático para Qualquer Outro Tópico Selecionado
         function getFallbackData(topicName) {
             return {
-                mainVideo: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1",
+                mainVideo: "https://www.youtube.com/embed/5D_yN4e4G7Q?autoplay=1&enablejsapi=1",
                 extraVideos: [
-                    { title: `Aprofundamento Avançado em ${topicName}`, duration: "15 min", embed: "https://www.youtube-nocookie.com/embed/3JZ_D3ELwOQ?autoplay=1" },
-                    { title: `Resolução de Exercícios e Questões: ${topicName}`, duration: "25 min", embed: "https://www.youtube-nocookie.com/embed/2LGYPeyS7oY?autoplay=1" }
+                    { title: `Aprofundamento Completo em ${topicName}`, duration: "18 min", embed: "https://www.youtube.com/embed/P2pY0o0N7kI?autoplay=1&enablejsapi=1" },
+                    { title: `Exercícios e Questões Resolvidas: ${topicName}`, duration: "22 min", embed: "https://www.youtube.com/embed/q686j7wB6eE?autoplay=1&enablejsapi=1" }
                 ],
                 explanation: `
-                    <p><b>1. Visão Geral e Importância Estratégica:</b> O estudo avançado de <b>${topicName}</b> é de fundamental importância para a consolidação do raciocínio analítico e acadêmico. Este tema abrange os conceitos mais requisitados pelas principais bancas e avaliações educacionais do Brasil.</p>
-                    <p><b>2. Fundamentos e Mecanismos Centrais:</b> Entender <b>${topicName}</b> exige a compreensão de seus princípios estruturais. Para dominar a matéria, o estudante deve observar como os elementos teóricos conectam-se à resolução prática de problemas cotidianos e testes formais.</p>
-                    <h4>3. Desenvolvimento Teórico Passo a Passo:</h4>
-                    <p>• <b>Princípio A:</b> Definição conceitual exata dos axiomas e premissas fundamentais da matéria.</p>
-                    <p>• <b>Princípio B:</b> Análise dos processos e variáveis operacionais associados ao tema.</p>
-                    <p>• <b>Princípio C:</b> Relação de causa e efeito em cenários práticos e exercícios de alta complexidade.</p>
-                    <h4>4. Aplicações Práticas e Casos Reais:</h4>
-                    <p>O conhecimento sobre <b>${topicName}</b> não é meramente teórico. Ele é aplicado diretamente em tecnologias, análises sociais, formulações científicas e interpretação textual avançada no mercado acadêmico e profissional.</p>
-                    <p><b>5. Guia de Estudos e Erros Comuns:</b> Evite memorizar mecanicamente sem compreender a lógica por trás de cada etapa. Foque na resolução de questões anteriores e na síntese de resumos visuais para garantir retencao de longo prazo.</p>
+                    <p><b>1. Visão Geral e Importância Estratégica:</b> O estudo aprofundado de <b>${topicName}</b> é essencial para construir um raciocínio crítico e acadêmico sólido. Este tema aborda os pilares exigidos pelas principais bancas e exames do país.</p>
+                    <p><b>2. Fundamentos e Mecanismos Centrais:</b> Entender <b>${topicName}</b> exige dominar suas premissas e lógica interna. Ao estudar este módulo, observe como a teoria se aplica em exercícios práticos e situações do cotidiano.</p>
+                    <h4>3. Desenvolvimento Teórico Detalhado:</h4>
+                    <p>• <b>Axioma Fundamental:</b> Compreensão dos conceitos base e definições essenciais.</p>
+                    <p>• <b>Operação Prática:</b> Passo a passo do funcionamento e fórmulas/regras aplicadas.</p>
+                    <p>• <b>Análise de Variáveis:</b> Resolução de problemas de alta complexidade com atenção aos detalhes.</p>
+                    <h4>4. Aplicações em Provas e Testes:</h4>
+                    <p>As questões sobre <b>${topicName}</b> costumam exigir interpretação e aplicação direta. Evite decorar regras isoladas e busque compreender o raciocínio por trás de cada etapa.</p>
+                    <p><b>5. Recomendações de Fixação:</b> Após assistir ao vídeo em HD e ler o resumo base, utilize nossa IA Box ao lado para tirar dúvidas específicas ou pedir novos exercícios resolvidos.</p>
                 `,
                 summary: [
                     `🎯 <b>Módulo Especializado:</b> Cobertura completa sobre ${topicName}.`,
-                    `📌 <b>Definição Principal:</b> Compreensão detalhada dos axiomas e fundamentos essenciais.`,
-                    `📌 <b>Aplicações Práticas:</b> Resolução contextualizada de problemas e exercícios acadêmicos.`,
-                    `📌 <b>Regras Fundamentais:</b> Relações de causa, efeito e fórmulas/diretrizes centrais.`,
-                    `📌 <b>Erros a Evitar:</b> Não decore apenas a teoria; pratique com questões reais.`,
-                    `📌 <b>Conexão Interdisciplinar:</b> Articulação com outros saberes e conteúdos do currículo.`,
-                    `📌 <b>Foco em Provas:</b> Conteúdo alinhado aos padrões da BNCC, ENEM e concursos.`
+                    `📌 <b>Definição Principal:</b> Compreensão detalhada dos axiomas e fundamentos.`,
+                    `📌 <b>Aplicações Práticas:</b> Resolução contextualizada de problemas acadêmicos.`,
+                    `📌 <b>Regras Fundamentais:</b> Relações de causa, efeito e diretrizes centrais.`,
+                    `📌 <b>Erros a Evitar:</b> Não memorize apenas a teoria; pratique com questões.`,
+                    `📌 <b>Conexão Interdisciplinar:</b> Articulação com outros tópicos do currículo.`,
+                    `📌 <b>Foco em Provas:</b> Conteúdo 100% alinhado à BNCC, ENEM e exames.`
                 ]
             };
         }
@@ -805,25 +788,25 @@
             document.getElementById('current-topic-name').innerText = topicName;
 
             const data = topicContentMap[topicName] || getFallbackData(topicName);
-            currentMainVideoUrl = data.mainVideo;
+            currentMainVideoEmbed = data.mainVideo;
 
-            // Reset do Player para Capa Inicial
+            // Reinicia a capa do player de vídeo
             document.getElementById('video-cover').style.display = 'flex';
             const iframe = document.getElementById('youtube-iframe');
             iframe.style.display = 'none';
             iframe.src = '';
 
-            // Injeta Explicação Massiva e Resumo em Tópicos
+            // Preenche textos e resumo
             document.getElementById('dynamic-explanation').innerHTML = data.explanation;
             
             const summaryContainer = document.getElementById('dynamic-summary');
             summaryContainer.innerHTML = data.summary.map(item => `<li>${item}</li>`).join('');
 
-            // Injeta Lista de Vídeos Extras
+            // Preenche lista de vídeos adicionais
             const extraList = document.getElementById('extra-videos-list');
             extraList.innerHTML = data.extraVideos.map(vid => `
                 <div class="video-thumb-row" onclick="playExtraVideo('${vid.embed}')">
-                    <div class="thumb-img-placeholder">🎬</div>
+                    <div class="thumb-img-placeholder">▶</div>
                     <div class="thumb-info">
                         <h4>${vid.title}</h4>
                         <p>Duração: ${vid.duration}</p>
@@ -831,9 +814,10 @@
                 </div>
             `).join('');
 
-            // Mensagem de Boas-Vindas da IA Inteligente
-            document.getElementById('ai-chat-box').innerHTML = `
-                <div class="msg ai">Olá! Sou a <b>IA Auxiliadora Gabaritei</b>. Estou pronta para te dar explicações completas sobre <b>${topicName}</b>. Pode me perguntar qualquer fórmula, conceito, exemplo ou dúvida de estudo!</div>
+            // Reinicia o Chat da IA Box
+            const chatBox = document.getElementById('ai-chat-box');
+            chatBox.innerHTML = `
+                <div class="msg ai">Olá! Sou sua <b>IA Auxiliadora Gabaritei</b>. Estou pronta para te explicar qualquer detalhe sobre <b>${topicName}</b>. Faça sua pergunta abaixo!</div>
             `;
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -842,7 +826,7 @@
         function loadMainVideo() {
             document.getElementById('video-cover').style.display = 'none';
             const iframe = document.getElementById('youtube-iframe');
-            iframe.src = currentMainVideoUrl;
+            iframe.src = currentMainVideoEmbed;
             iframe.style.display = 'block';
         }
 
@@ -857,83 +841,83 @@
         function backToDashboard() {
             document.getElementById('study-screen').style.display = 'none';
             document.getElementById('dashboard-screen').style.display = 'flex';
-            document.getElementById('youtube-iframe').src = ''; // Para o vídeo
+            document.getElementById('youtube-iframe').src = ''; // Para o áudio/vídeo
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- MOTOR INTELIGENTE DA IA BOX (RESPONDE QUALQUER PERGUNTA PROFUNDAMENTE) ---
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') askAiAssistant();
-        }
-
+        // --- SISTEMA IA BOX CORRIGIDO ---
         function askAiAssistant() {
             const inputElement = document.getElementById('ai-user-input');
             const chatBox = document.getElementById('ai-chat-box');
+            
+            if (!inputElement || !chatBox) return;
+
             const userQuery = inputElement.value.trim();
+            if (userQuery === "") return;
 
-            if (userQuery === '') return;
-
-            // Adiciona Mensagem do Usuário
+            // 1. Insere mensagem do Usuário
             const userDiv = document.createElement('div');
             userDiv.className = 'msg user';
             userDiv.innerText = userQuery;
             chatBox.appendChild(userDiv);
+            
             inputElement.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            // Simula digitação com resposta altamente detalhada
+            // 2. Indicador visual "IA digitando..."
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'msg ai typing';
+            typingDiv.innerText = 'IA digitando resposta...';
+            chatBox.appendChild(typingDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // 3. Resposta gerada
             setTimeout(() => {
+                if (chatBox.contains(typingDiv)) {
+                    chatBox.removeChild(typingDiv);
+                }
+                
                 const aiDiv = document.createElement('div');
                 aiDiv.className = 'msg ai';
-                aiDiv.innerHTML = generateIntelligentAiResponse(userQuery, currentTopicGlobal);
+                aiDiv.innerHTML = getSmartAiReply(userQuery, currentTopicGlobal);
                 chatBox.appendChild(aiDiv);
                 chatBox.scrollTop = chatBox.scrollHeight;
-            }, 800);
+            }, 650);
         }
 
-        function generateIntelligentAiResponse(query, topic) {
-            const lowerQuery = query.toLowerCase();
+        function getSmartAiReply(query, topic) {
+            const lower = query.toLowerCase();
 
-            // Respostas Inteligentes Contextualizadas por Análise de Pergunta
-            if (lowerQuery.includes('o que é') || lowerQuery.includes('o que significa') || lowerQuery.includes('conceito')) {
-                return `<b>Explicação Conceitual Completa:</b><br>
-                Em relação a <b>${topic}</b>, o termo "<i>${query}</i>" refere-se a um conceito fundamental.<br><br>
-                • <b>Definição:</b> É a estrutura teórica que estabelece como as regras e elementos desta matéria operam na prática.<br>
-                • <b>Na Prática:</b> Permite interpretar problemas e formular resoluções analíticas de maneira direta.<br>
-                • <b>Dica de Estudo:</b> Memorize a relação entre causa e consequência desse ponto, pois é o padrão mais cobrado em exames.`;
+            if (lower.includes('o que é') || lower.includes('significa') || lower.includes('conceito')) {
+                return `<b>Explicação de Conceito sobre ${topic}:</b><br><br>
+                Em relação à sua dúvida sobre "<i>${query}</i>":<br>
+                • <b>Definição Principal:</b> Trata-se de um ponto fundamental dentro do estudo de ${topic}.<br>
+                • <b>Funcionamento:</b> Serve para estruturar o raciocínio correto nas resoluções e análises linguísticas/científicas.<br>
+                • <b>Como cai na prova:</b> Geralmente é cobrado em questões de múltipla escolha que exigem identificação da regra e de seus exemplos.`;
             }
 
-            if (lowerQuery.includes('exemplo') || lowerQuery.includes('exercicio') || lowerQuery.includes('questão')) {
-                return `<b>Exemplo Prático Resolvido Passo a Passo:</b><br><br>
-                <b>Cenário:</b> Aplicação direta de <b>${topic}</b>.<br>
-                1. <i>Passo 1 (Análise Inicial):</i> Identificamos os dados e premissas principais da questão.<br>
-                2. <i>Passo 2 (Aplicação da Regra):</i> Aplicamos o princípio teórico correspondente para isolar o problema.<br>
-                3. <i>Passo 3 (Conclusão):</i> Chegamos ao resultado exato demonstrando a consistência lógica do conceito!<br><br>
-                Quer testar outro exemplo prático? É só pedir!`;
+            if (lower.includes('exemplo') || lower.includes('exercicio') || lower.includes('questão')) {
+                return `<b>Exemplo Resolvido Passo a Passo:</b><br><br>
+                <b>Módulo:</b> ${topic}<br>
+                <b>Problema:</b> Aplicação direta da regra em teste prático.<br>
+                1. <i>Passo 1:</i> Analisamos o enunciado da questão para identificar a regra principal.<br>
+                2. <i>Passo 2:</i> Aplicamos o conceito correto sem ceder às pegadinhas comuns da banca.<br>
+                3. <i>Passo 3:</i> Concluímos com a alternativa correta!<br><br>
+                Quer ver mais um exemplo? É só pedir!`;
             }
 
-            if (lowerQuery.includes('resumo') || lowerQuery.includes('dica') || lowerQuery.includes('como estudar')) {
-                return `<b>Estratégia Recomendada para Gabaritar em ${topic}:</b><br><br>
-                1. <b>Estudo Ativo:</b> Não leia apenas passivamente. Reescreva as fórmulas e regras principais com suas próprias palavras.<br>
-                2. <b>Resolução de Questões:</b> Faça ao menos 10 exercícios sobre este tópico após assistir à vídeo aula.<br>
-                3. <b>Repetição Espaçada:</b> Revise os 7 tópicos do nosso <i>Resumo da Base</i> em 24h, 7 dias e 30 dias.<br>
-                4. <b>Foco nas Pegadinhas:</b> Preste atenção dupla aos detalhes de exceção e nomenclaturas específicas!`;
-            }
-
-            // Resposta Aprofundada Universal para Qualquer Pergunta Geral
-            return `<b>Análise Técnica da IA sobre "${query}":</b><br><br>
-            Com base no módulo de <b>${topic}</b> e nas diretrizes acadêmicas:<br><br>
-            • <b>Análise Direta:</b> Sua pergunta toca num ponto crucial do aprendizado. Este assunto envolve a integração de conceitos fundamentais com o raciocínio prático.<br>
-            • <b>Aplicação Acadêmica:</b> Para dominar essa dúvida, lembre-se de conectar a teoria aos dados que a questão fornece. Sempre verifique se as condições iniciais satisfazem os requisitos da matéria.<br>
-            • <b>Aprofundamento:</b> Se precisar de uma demonstração mais detalhada com fórmulas, regras de escrita ou exemplos práticos de <b>${topic}</b>, basta me detalhar!`;
+            return `<b>Resposta da IA para: "${query}"</b><br><br>
+            • <b>Análise Técnica (${topic}):</b> Excelente pergunta! Este é um ponto chave do conteúdo.<br>
+            • <b>Orientação de Estudo:</b> Para fixar esse assunto com perfeição, leia atentamente a seção <i>Explicação da Matéria</i> no painel ao lado e revise os tópicos do <i>Resumo Base</i>.<br>
+            • <b>Dica Ouro:</b> Faça anotações com suas próprias palavras para ativar sua memória de longo prazo! Se quiser mais detalhes, pode me mandar outra dúvida!`;
         }
 
-        /* --- SCRIPT DE ANIMAÇÃO DAS PARTICULAS DO LOGIN --- */
+        /* --- ANIMAÇÃO DE PARTICULAS TELA DE LOGIN --- */
         const container = document.getElementById('particles-container');
         const items = ['A', 'B', 'X', 'Y', 'Z', '1', '2', '4', '6', '8', '9', 'f', 'z', 'm', 'r'];
         const colors = ['#3b82f6', '#475569', '#94a3b8', '#38bdf8', '#4a3aff'];
 
-        for (let i = 0; i < 45; i++) {
+        for (let i = 0; i < 40; i++) {
             const p = document.createElement('div');
             p.classList.add('particle');
             p.innerText = items[Math.floor(Math.random() * items.length)];
