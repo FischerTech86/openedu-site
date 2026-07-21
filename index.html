@@ -18,7 +18,7 @@
             --bg-card-dark-hover: #111827;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --footer-title-color: #4a3aff; /* Alterado de vermelho para o azul solicitado */
+            --footer-title-color: #4a3aff;
             --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -45,7 +45,7 @@
             width: 100%;
         }
 
-        /* --- TELA DE LOGIN (Fundo Claro com Animação Corrigida de Letras/Números) --- */
+        /* --- TELA 1: LOGIN (Sempre inicia ativa) --- */
         .login-section {
             position: relative;
             min-height: 90vh;
@@ -77,7 +77,6 @@
             will-change: transform, opacity;
         }
 
-        /* Animação de queda livre e contínua dos caracteres */
         @keyframes fallDown {
             0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
             10% { opacity: 0.35; }
@@ -175,7 +174,7 @@
         .feedback-box.success { display: block !important; background-color: #f0fff4; color: #38a169; border: 1px solid #c6f6d5; }
 
 
-        /* --- TELA DO PAINEL DE NÍVEIS (DASHBOARD) --- */
+        /* --- TELA 2: PAINEL DE NÍVEIS (DASHBOARD COM CONTEÚDOS EXPANDIDOS) --- */
         .dashboard-section {
             min-height: 90vh;
             display: none; 
@@ -223,7 +222,7 @@
             background: var(--bg-card-dark);
             border-radius: 16px;
             border: 1px solid #334155;
-            padding: 30px 20px;
+            padding: 25px 20px;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -241,13 +240,27 @@
             box-shadow: 0 15px 30px rgba(56, 189, 248, 0.15);
         }
 
-        .edu-card .icon-header { font-size: 36px; margin-bottom: 12px; }
+        .edu-card .icon-header { font-size: 36px; margin-bottom: 10px; }
         .edu-card h3 { font-size: 20px; font-weight: 600; color: #ffffff; margin-bottom: 4px; }
-        .edu-card .badge-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 20px; color: var(--accent-blue); }
+        .edu-card .badge-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 18px; color: var(--accent-blue); }
 
         .card-inner-contents { width: 100%; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 15px; }
         .card-inner-contents h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; color: #64748b; }
-        .card-inner-contents ul { list-style: none; width: 100%; }
+        
+        /* Scrollbar interna estilizada para os conteudos expandidos */
+        .card-inner-contents ul { 
+            list-style: none; 
+            width: 100%; 
+            max-height: 380px; 
+            overflow-y: auto; 
+            padding-right: 6px;
+        }
+        
+        .card-inner-contents ul::-webkit-scrollbar { width: 5px; }
+        .card-inner-contents ul::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.03); border-radius: 4px; }
+        .card-inner-contents ul::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        .card-inner-contents ul::-webkit-scrollbar-thumb:hover { background: var(--accent-blue); }
+
         .card-inner-contents ul li { margin-bottom: 8px; width: 100%; }
 
         .content-link {
@@ -286,7 +299,7 @@
         .btn-voltar:hover { background: var(--accent-blue); color: #0f172a; border-color: var(--accent-blue); }
 
 
-        /* --- GUIA DE ESTUDOS INTERNA (STUDY ROOM) --- */
+        /* --- TELA 3: GUIA DE ESTUDOS INTERNA --- */
         .study-room-section {
             display: none;
             flex-direction: column;
@@ -377,7 +390,7 @@
         .thumb-info p { font-size: 11px; color: var(--text-muted); }
 
 
-        /* --- SEÇÃO DE INFORMAÇÕES DO APP (CORES EM AZUL ATUALIZADAS) --- */
+        /* --- SEÇÃO DE INFORMAÇÕES DO APP (RODAPÉ PROTEGIDO EM AZUL) --- */
         .site-footer {
             background-color: #111625;
             color: #ffffff;
@@ -392,7 +405,7 @@
         .footer-container { max-width: 1300px; margin: 0 auto; }
         
         .footer-main-title { 
-            color: var(--footer-title-color); /* Agora exibe o azul correto */
+            color: var(--footer-title-color); 
             font-size: 24px; 
             font-weight: 700; 
             margin-bottom: 35px; 
@@ -415,7 +428,7 @@
         }
 
         .footer-block h3 { 
-            color: var(--footer-title-color); /* Títulos dos blocos agora em azul */
+            color: var(--footer-title-color); 
             font-size: 15px; 
             font-weight: 600; 
             display: flex; 
@@ -465,7 +478,7 @@
 
     <div class="page-wrapper">
         
-        <!-- TELA 1: LOGIN -->
+        <!-- TELA 1: LOGIN (Sempre abre primeiro) -->
         <section class="login-section" id="auth-screen">
             <div id="particles-container"></div>
             <div class="card-container">
@@ -481,7 +494,7 @@
             </div>
         </section>
 
-        <!-- TELA 2: PAINEL DE CONTÉUDOS -->
+        <!-- TELA 2: PAINEL DE CONTÉUDOS (Totalmente Completo e Aprofundado) -->
         <section class="dashboard-section" id="dashboard-screen">
             <div class="dashboard-header">
                 <h2 class="dashboard-title">Boas-vindas ao Gabaritei!</h2>
@@ -490,7 +503,7 @@
             
             <div class="education-grid">
                 
-                <!-- 1º ao 5º Ano -->
+                <!-- 1º ao 5º Ano (Fundamental I) - 12 Módulos -->
                 <div class="edu-card">
                     <div class="icon-header">🧠</div>
                     <h3>1º ao 5º Ano</h3>
@@ -498,19 +511,23 @@
                     <div class="card-inner-contents">
                         <h4>⭐ Conteúdos Inclusos:</h4>
                         <ul>
-                            <li><a onclick="openStudyRoom('Alfabetização Dinâmica')" class="content-link">🎨 Alfabetização e Letramento</a></li>
-                            <li><a onclick="openStudyRoom('Matemática Ilustrada')" class="content-link">🧮 Tabuada e Matemática Ilustrada</a></li>
-                            <li><a onclick="openStudyRoom('Ciências da Natureza')" class="content-link">🌏 Descoberta das Ciências</a></li>
-                            <li><a onclick="openStudyRoom('Leitura Lúdica')" class="content-link">📖 Leitura de Contos e Interpretação</a></li>
-                            <li><a onclick="openStudyRoom('Raciocínio Lógico Infantil')" class="content-link">🧩 Jogos de Raciocínio Lógico</a></li>
-                            <li><a onclick="openStudyRoom('História Inicial')" class="content-link">⏳ Introdução à História e Linhas do Tempo</a></li>
-                            <li><a onclick="openStudyRoom('Geografia e Mapas')" class="content-link">🗺️ Mapas, Climas e Regiões</a></li>
-                            <li><a onclick="openStudyRoom('Educação Financeira Infantil')" class="content-link">🪙 Educação Financeira e Poupança</a></li>
+                            <li><a onclick="openStudyRoom('Alfabetização e Ortografia')" class="content-link">🎨 Alfabetização, Ortografia e Caligrafia</a></li>
+                            <li><a onclick="openStudyRoom('Matemática Ilustrada')" class="content-link">🧮 Operações Básicas e Tabuada Ilustrada</a></li>
+                            <li><a onclick="openStudyRoom('Geometria Plana Infantil')" class="content-link">📐 Formas e Geometria Plana Inicial</a></li>
+                            <li><a onclick="openStudyRoom('Ciências da Natureza')" class="content-link">🌏 Ciências da Natureza e Meio Ambiente</a></li>
+                            <li><a onclick="openStudyRoom('Leitura e Contos')" class="content-link">📖 Leitura de Contos e Interpretação</a></li>
+                            <li><a onclick="openStudyRoom('Raciocínio Lógico Infantil')" class="content-link">🧩 Jogos de Raciocínio Lógico e Desafios</a></li>
+                            <li><a onclick="openStudyRoom('História Inicial')" class="content-link">⏳ História do Brasil e Linhas do Tempo</a></li>
+                            <li><a onclick="openStudyRoom('Geografia e Mapas')" class="content-link">🗺️ Geografia, Mapas e Paisagens</a></li>
+                            <li><a onclick="openStudyRoom('Educação Financeira Infantil')" class="content-link">🪙 Educação Financeira e Economia Lúdica</a></li>
+                            <li><a onclick="openStudyRoom('Inglês Básico Infantil')" class="content-link">🇬🇧 Vocabulário de Inglês Inicial</a></li>
+                            <li><a onclick="openStudyRoom('Artes Visuais')" class="content-link">🎨 Artes Visuais e Expressão Criativa</a></li>
+                            <li><a onclick="openStudyRoom('Corpo Humano e Saúde')" class="content-link">🧘 Corpo Humano, Higiene e Saúde</a></li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- 6º ao 9º Ano -->
+                <!-- 6º ao 9º Ano (Fundamental II) - 12 Módulos -->
                 <div class="edu-card">
                     <div class="icon-header">📐</div>
                     <h3>6º ao 9º Ano</h3>
@@ -518,39 +535,47 @@
                     <div class="card-inner-contents">
                         <h4>⚡ Módulos Inclusos:</h4>
                         <ul>
-                            <li><a onclick="openStudyRoom('Introdução à Álgebra')" class="content-link">📐 Introdução à Álgebra e Geometria</a></li>
-                            <li><a onclick="openStudyRoom('Ciências Físicas e Biológicas')" class="content-link">🧬 Biologia, Física e Química Geral</a></li>
-                            <li><a onclick="openStudyRoom('Oficina de Redação')" class="content-link">✍️ Oficina de Redação Estruturada</a></li>
-                            <li><a onclick="openStudyRoom('História Geral e Crítica')" class="content-link">🏛️ História Geral e do Brasil</a></li>
-                            <li><a onclick="openStudyRoom('Geografia Humana')" class="content-link">🌍 Geografia Crítica e Demografia</a></li>
-                            <li><a onclick="openStudyRoom('Gramática e Sintaxe')" class="content-link">📚 Língua Portuguesa e Sintaxe</a></li>
-                            <li><a onclick="openStudyRoom('Introdução à Programação')" class="content-link">💻 Lógica de Programação em Blocos</a></li>
-                            <li><a onclick="openStudyRoom('Cidadania e Ética')" class="content-link">⚖️ Atualidades, Cidadania e Ética</a></li>
+                            <li><a onclick="openStudyRoom('Álgebra e Equações')" class="content-link">📐 Introdução à Álgebra e Equações</a></li>
+                            <li><a onclick="openStudyRoom('Geometria e Pitágoras')" class="content-link">📏 Geometria Espacial e Pitágoras</a></li>
+                            <li><a onclick="openStudyRoom('Biologia Humana')" class="content-link">🧬 Biologia Geral, Células e Sistemas</a></li>
+                            <li><a onclick="openStudyRoom('Física Fundamental')" class="content-link">⚡ Física Clássica e Conceitos de Matéria</a></li>
+                            <li><a onclick="openStudyRoom('Química Inicial')" class="content-link">🧪 Química Inicial e Tabela Periódica</a></li>
+                            <li><a onclick="openStudyRoom('Oficina de Redação')" class="content-link">✍️ Oficina de Redação e Gêneros Textuais</a></li>
+                            <li><a onclick="openStudyRoom('Gramática e Sintaxe')" class="content-link">📚 Língua Portuguesa, Gramática e Sintaxe</a></li>
+                            <li><a onclick="openStudyRoom('História Geral e do Brasil')" class="content-link">🏛️ História Geral, Antiguidade e Brasil</a></li>
+                            <li><a onclick="openStudyRoom('Geografia Humana')" class="content-link">🌍 Geografia Crítica, Climas e Demografia</a></li>
+                            <li><a onclick="openStudyRoom('Língua Inglesa Avançada')" class="content-link">🇬🇧 Língua Inglesa e Interpretação</a></li>
+                            <li><a onclick="openStudyRoom('Lógica de Programação')" class="content-link">💻 Programação e Pensamento Computacional</a></li>
+                            <li><a onclick="openStudyRoom('Cidadania e Filosofia')" class="content-link">⚖️ Atualidades, Cidadania, Ética e Filosofia</a></li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- 1º ao 3º Ano -->
+                <!-- 1º ao 3º Ano (Ensino Médio / ENEM) - 12 Módulos -->
                 <div class="edu-card">
                     <div class="icon-header">🎯</div>
                     <h3>1º ao 3º Ano</h3>
-                    <span class="badge-tag">Ensino Médio</span>
+                    <span class="badge-tag">Ensino Médio & ENEM</span>
                     <div class="card-inner-contents">
                         <h4>⚖️ Recursos Acadêmicos:</h4>
                         <ul>
-                            <li><a onclick="openStudyRoom('Simulados Padrão ENEM')" class="content-link">🎯 Simulados Completos Padrão ENEM</a></li>
-                            <li><a onclick="openStudyRoom('Física e Química Avançada')" class="content-link">🧪 Física Avançada e Química Orgânica</a></li>
-                            <li><a onclick="openStudyRoom('Redação Dissertativa')" class="content-link">🖋️ Redação Dissertativa-Argumentativa</a></li>
-                            <li><a onclick="openStudyRoom('Cálculo e Trigonometria')" class="content-link">📊 Trigonometria e Introdução ao Cálculo</a></li>
-                            <li><a onclick="openStudyRoom('Biologia Evolutiva e Genética')" class="content-link">🧬 Ecologia, Genética e Evolução</a></li>
-                            <li><a onclick="openStudyRoom('Filosofia e Sociologia')" class="content-link">📜 Filosofia, Sociologia e Pensadores</a></li>
-                            <li><a onclick="openStudyRoom('Geopolítica Global')" class="content-link">🌐 Geopolítica e História Contemporânea</a></li>
-                            <li><a onclick="openStudyRoom('Literatura Nacional')" class="content-link">🎧 Resumos e Análises Literárias</a></li>
+                            <li><a onclick="openStudyRoom('Simulados Padrão ENEM')" class="content-link">🎯 Simulados Completos Padrão ENEM & Fuvest</a></li>
+                            <li><a onclick="openStudyRoom('Química Orgânica e Físico-Química')" class="content-link">🧪 Química Orgânica e Físico-Química</a></li>
+                            <li><a onclick="openStudyRoom('Física: Mecânica e Eletromagnetismo')" class="content-link">⚡ Física: Mecânica e Eletromagnetismo</a></li>
+                            <li><a onclick="openStudyRoom('Redação Dissertativa Nota 1000')" class="content-link">🖊️ Redação Dissertativa-Argumentativa</a></li>
+                            <li><a onclick="openStudyRoom('Trigonometria e Análise Combinatória')" class="content-link">📊 Trigonometria e Análise Combinatória</a></li>
+                            <li><a onclick="openStudyRoom('Biologia Evolutiva e Genética')" class="content-link">🧬 Biologia Evolutiva, Genética e Ecologia</a></li>
+                            <li><a onclick="openStudyRoom('Filosofia e Sociologia')" class="content-link">📜 Filosofia Moderna e Sociologia</a></li>
+                            <li><a onclick="openStudyRoom('Geopolítica Contemporânea')" class="content-link">🌐 Geopolítica e História Contemporânea</a></li>
+                            <li><a onclick="openStudyRoom('História do Brasil Completa')" class="content-link">🏛️ História do Brasil: Colônia a República</a></li>
+                            <li><a onclick="openStudyRoom('Geografia Física e Ambiental')" class="content-link">🗺️ Geografia Física e Impactos Ambientais</a></li>
+                            <li><a onclick="openStudyRoom('Literatura Brasileira')" class="content-link">🎧 Resumos e Análises Literárias</a></li>
+                            <li><a onclick="openStudyRoom('Idiomas ENEM')" class="content-link">🇬🇧/🇪🇸 Inglês e Espanhol para Exames</a></li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Ensino Superior -->
+                <!-- Ensino Superior (Graduação / Pós) - 12 Módulos -->
                 <div class="edu-card">
                     <div class="icon-header">🎓</div>
                     <h3>Ensino Superior</h3>
@@ -558,14 +583,18 @@
                     <div class="card-inner-contents">
                         <h4>🏛️ Ferramentas Científicas:</h4>
                         <ul>
-                            <li><a onclick="openStudyRoom('Metodologia Científica ABNT')" class="content-link">💻 Referências Bibliográficas (ABNT/APA)</a></li>
-                            <li><a onclick="openStudyRoom('Gerenciador de TCC')" class="content-link">🛠️ Projetos de TCC e Artigos Científicos</a></li>
+                            <li><a onclick="openStudyRoom('Metodologia Científica ABNT')" class="content-link">💻 Normas ABNT / APA e Citações</a></li>
+                            <li><a onclick="openStudyRoom('Gerenciador de TCC')" class="content-link">🛠️ Projetos de TCC, Monografias e Artigos</a></li>
                             <li><a onclick="openStudyRoom('Estatística Aplicada')" class="content-link">📈 Estatística Aplicada e Análise de Dados</a></li>
                             <li><a onclick="openStudyRoom('Metodologia de Pesquisa')" class="content-link">🔬 Metodologia de Pesquisa Avançada</a></li>
                             <li><a onclick="openStudyRoom('Oratória Acadêmica')" class="content-link">🗣️ Oratória e Apresentação de Bancas</a></li>
-                            <li><a onclick="openStudyRoom('Gestão de Horas')" class="content-link">📋 Controle de Horas Complementares</a></li>
+                            <li><a onclick="openStudyRoom('Gestão de Horas')" class="content-link">📋 Controle de Horas e Estágio Supervisionado</a></li>
                             <li><a onclick="openStudyRoom('Repositórios Indexed')" class="content-link">🗃️ Periódicos e Artigos Internacionais</a></li>
                             <li><a onclick="openStudyRoom('Alta Performance Pomodoro')" class="content-link">⏱️ Temporizador Pomodoro Integrado</a></li>
+                            <li><a onclick="openStudyRoom('Gestão de Projetos')" class="content-link">💼 Gestão de Projetos e Metodologias Ágeis</a></li>
+                            <li><a onclick="openStudyRoom('Ética Profissional')" class="content-link">⚖️ Ética Profissional e Legislação</a></li>
+                            <li><a onclick="openStudyRoom('Saúde Mental Universitária')" class="content-link">🧠 Saúde Mental e Gestão de Estresse</a></li>
+                            <li><a onclick="openStudyRoom('Networking e Carreira')" class="content-link">🌐 Networking e Preparação para o Mercado</a></li>
                         </ul>
                     </div>
                 </div>
@@ -640,7 +669,7 @@
         </section>
 
 
-        <!-- SEÇÃO DO RODAPÉ: INFORMAÇÕES DO APP -->
+        <!-- SEÇÃO DO RODAPÉ: INFORMAÇÕES DO APP (MANTIDA EM AZUL) -->
         <footer class="site-footer">
             <div class="footer-container">
                 <h2 class="footer-main-title">🚀 Informações do App</h2>
@@ -797,7 +826,6 @@
             p.style.fontSize = `${Math.random() * 8 + 14}px`;
             p.style.left = `${Math.random() * 100}%`;
             
-            // Atribui a animação de queda montada estaticamente no CSS
             p.style.animation = `fallDown ${Math.random() * 10 + 8}s linear infinite`;
             p.style.animationDelay = `${Math.random() * -15}s`;
             container.appendChild(p);
