@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma de Estudos - Módulos</title>
+    <title>Gabaritei!</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
         body {
@@ -18,449 +18,723 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            justify-content: center;
         }
 
-        /* --- TELA DE LOGIN OVERLAY --- */
-        #loginScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(11, 17, 32, 0.95);
-            backdrop-filter: blur(8px);
+        .hidden {
+            display: none !important;
+        }
+
+        /* --- BOTÃO PULA / SAIR (ESTILO PILL DAS FOTOS) --- */
+        .btn-pill {
+            background-color: #e2e8f0;
+            color: #0f172a;
+            border: none;
+            padding: 0.6rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        .btn-pill:hover {
+            background-color: #ffffff;
+            transform: scale(1.03);
+        }
+
+        /* 1. TELA DE LOGIN (image_e50118) */
+        #screen-login {
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            min-height: 100vh;
+            width: 100%;
         }
 
         .login-card {
-            background: #151c2e;
-            border: 1px solid #2a364f;
-            padding: 2.5rem;
+            background-color: #131b2e;
+            border: 1px solid #212e4a;
             border-radius: 16px;
+            padding: 2.5rem 2rem;
             width: 100%;
-            max-width: 400px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            max-width: 420px;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .login-card h2 {
-            margin-bottom: 0.5rem;
-            color: #38bdf8;
+            color: #0088cc;
+            font-size: 1.6rem;
+            margin-bottom: 0.4rem;
         }
 
         .login-card p {
-            font-size: 0.9rem;
             color: #94a3b8;
-            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            margin-bottom: 1.8rem;
         }
 
         .input-group {
-            margin-bottom: 1rem;
             text-align: left;
+            margin-bottom: 1.2rem;
         }
 
         .input-group label {
             display: block;
-            font-size: 0.8rem;
             color: #cbd5e1;
-            margin-bottom: 0.3rem;
+            font-size: 0.8rem;
+            margin-bottom: 0.4rem;
         }
 
         .input-group input {
             width: 100%;
-            padding: 0.75rem;
+            padding: 0.75rem 1rem;
+            background-color: #0d1424;
+            border: 1px solid #212e4a;
             border-radius: 8px;
-            border: 1px solid #334155;
-            background: #0f172a;
-            color: #fff;
-            font-size: 0.9rem;
+            color: #ffffff;
             outline: none;
-        }
-
-        .input-group input:focus {
-            border-color: #38bdf8;
+            font-size: 0.9rem;
         }
 
         .btn-login {
             width: 100%;
             padding: 0.8rem;
-            background: #0284c7;
-            color: white;
+            background-color: #0088cc;
+            color: #ffffff;
             border: none;
             border-radius: 8px;
             font-weight: bold;
+            font-size: 0.95rem;
             cursor: pointer;
-            transition: background 0.2s;
             margin-top: 0.5rem;
         }
 
         .btn-login:hover {
-            background: #0369a1;
+            background-color: #0077b3;
         }
 
-        /* --- DASHBOARD PRINCIPAL --- */
-        .hidden {
-            display: none !important;
-        }
-
-        header {
-            background: #151c2e;
-            border-bottom: 1px solid #1e293b;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .btn-logout {
-            background: transparent;
-            border: 1px solid #f43f5e;
-            color: #f43f5e;
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        /* BANNER INFORMATIVO DO APP */
-        .app-info-banner {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            margin: 1.5rem auto;
+        /* 2. PAINEL PRINCIPAL (IMG_20260719_122950_hdr) */
+        #screen-dashboard {
+            padding: 2.5rem 2rem;
             max-width: 1400px;
-            width: 95%;
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid #334155;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+            margin: 0 auto;
+            width: 100%;
         }
 
-        .app-info-text h3 {
-            color: #38bdf8;
-            margin-bottom: 0.3rem;
-        }
-
-        .app-info-text p {
-            color: #94a3b8;
-            font-size: 0.9rem;
-        }
-
-        .stats {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .stat-item {
+        .dash-header {
             text-align: center;
+            margin-bottom: 2.5rem;
         }
 
-        .stat-item span {
-            display: block;
-            font-weight: bold;
-            font-size: 1.2rem;
+        .dash-header h1 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .dash-header p {
             color: #38bdf8;
+            font-size: 0.95rem;
+            opacity: 0.9;
         }
 
-        .stat-item label {
-            font-size: 0.75rem;
-            color: #64748b;
-        }
-
-        /* GRID DOS QUADRADOS (CARDS) */
-        .container {
-            max-width: 1450px;
-            margin: 0 auto 3rem auto;
-            width: 95%;
+        .grid-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
+            margin-bottom: 2.5rem;
         }
 
         .card {
-            background-color: #151c2e;
+            background-color: #131b2e;
             border: 1px solid #1e293b;
             border-radius: 16px;
             padding: 1.5rem;
             display: flex;
             flex-direction: column;
-            max-height: 80vh;
-        }
-
-        .card-header {
-            margin-bottom: 1rem;
         }
 
         .card-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            margin-bottom: 0.6rem;
         }
 
         .card-title {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: bold;
             color: #ffffff;
         }
 
         .card-subtitle {
-            font-size: 0.75rem;
-            font-weight: bold;
+            font-size: 0.7rem;
             color: #38bdf8;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             margin-top: 0.2rem;
+            margin-bottom: 1.2rem;
         }
 
-        .section-label {
+        .section-tag {
             font-size: 0.7rem;
             font-weight: bold;
             color: #64748b;
             text-transform: uppercase;
-            margin: 1rem 0 0.8rem 0;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .topic-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .topic-btn {
+            background-color: #18233a;
+            border: 1px solid #23314e;
+            border-radius: 8px;
+            padding: 0.7rem 0.9rem;
+            color: #e2e8f0;
+            text-align: left;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+        }
+
+        .topic-btn:hover {
+            background-color: #202d4a;
+            border-color: #38bdf8;
+            color: #ffffff;
+        }
+
+        .dash-footer-action {
+            text-align: center;
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        /* 3. MÓDULO ESPECIALIZADO (IMG_20260719_123015) */
+        #screen-module {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .module-header h2 {
+            font-size: 1.8rem;
+            color: #ffffff;
+        }
+
+        .module-header p {
+            color: #38bdf8;
+            font-size: 0.9rem;
+        }
+
+        .module-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .module-layout { grid-template-columns: 1fr; }
+        }
+
+        .video-box {
+            background-color: #131b2e;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            height: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+        }
+
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background-color: #38bdf8;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .play-btn::after {
+            content: '';
+            border-style: solid;
+            border-width: 10px 0 10px 18px;
+            border-color: transparent transparent transparent #0b1120;
+            margin-left: 4px;
+        }
+
+        .video-box h3 {
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .video-box p {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .module-bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background-color: #131b2e;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 1.2rem;
+        }
+
+        .info-card h4 {
+            color: #38bdf8;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
             display: flex;
             align-items: center;
             gap: 0.4rem;
         }
 
-        /* LISTA ROLÁVEL COM OS LINKS */
-        .topics-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-            overflow-y: auto;
-            padding-right: 5px;
+        .info-card p, .info-card ul {
+            font-size: 0.82rem;
+            color: #cbd5e1;
+            line-height: 1.5;
         }
 
-        .topics-list::-webkit-scrollbar {
-            width: 6px;
+        .info-card ul {
+            list-style: none;
         }
 
-        .topics-list::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
+        .info-card li {
+            margin-bottom: 0.4rem;
         }
 
-        /* ITEM CLICÁVEL (LINK FIXO) */
-        .topic-item {
+        /* Lado direito do Módulo (IA e Vídeos Extra) */
+        .sidebar-box {
+            background-color: #131b2e;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-box h4 {
+            color: #38bdf8;
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            background: #1c263b;
-            border: 1px solid #26334d;
-            padding: 0.8rem 1rem;
-            border-radius: 10px;
-            color: #e2e8f0;
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: all 0.2s ease;
+            gap: 0.4rem;
         }
 
-        .topic-item:hover {
-            background: #25334f;
-            border-color: #38bdf8;
-            transform: translateX(3px);
+        .ai-chat-box {
+            font-size: 0.82rem;
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .ai-input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .ai-input-group input {
+            flex: 1;
+            background-color: #0d1424;
+            border: 1px solid #212e4a;
+            border-radius: 6px;
+            padding: 0.5rem 0.8rem;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .ai-input-group button {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem 0.9rem;
+            font-weight: bold;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .extra-video-item {
+            background-color: #18233a;
+            border-radius: 8px;
+            padding: 0.8rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .extra-video-item h5 {
             color: #ffffff;
+            font-size: 0.82rem;
         }
 
-        .topic-icon {
-            font-size: 1.1rem;
-            flex-shrink: 0;
+        .extra-video-item p {
+            color: #64748b;
+            font-size: 0.75rem;
+            margin-top: 0.2rem;
+        }
+
+        /* 4. INFORMAÇÕES DO APP (IMG_20260719_123003_hdr) */
+        #screen-info {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .info-top-bar {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .info-title {
+            color: #38bdf8;
+            font-size: 1.8rem;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        .info-block h4 {
+            color: #38bdf8;
+            font-size: 0.95rem;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .info-block p, .info-block a {
+            color: #cbd5e1;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            text-decoration: none;
+            display: block;
+        }
+
+        .info-block a {
+            margin-bottom: 0.3rem;
+        }
+
+        .info-block a:hover {
+            color: #38bdf8;
+        }
+
+        footer {
+            text-align: center;
+            color: #64748b;
+            font-size: 0.8rem;
+            border-top: 1px solid #1e293b;
+            padding-top: 1.5rem;
+            margin-top: 2rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. TELA DE LOGIN (ENTRA DIRETO AQUI) -->
-    <div id="loginScreen">
+    <!-- 1. TELA DE LOGIN -->
+    <div id="screen-login">
         <div class="login-card">
             <h2>Área do Aluno</h2>
             <p>Acesse sua conta para ver os conteúdos</p>
             <form id="loginForm">
                 <div class="input-group">
-                    <label for="email">E-mail ou Usuário</label>
-                    <input type="text" id="email" placeholder="seuemail@exemplo.com" required>
+                    <label>E-mail ou Usuário</label>
+                    <input type="text" placeholder="seualuno@exemplo.com" required>
                 </div>
                 <div class="input-group">
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" placeholder="••••••••" required>
+                    <label>Senha</label>
+                    <input type="password" placeholder="••••••••" required>
                 </div>
                 <button type="submit" class="btn-login">Entrar no Sistema</button>
             </form>
         </div>
     </div>
 
-    <!-- 2. CONTEÚDO PRINCIPAL DO APP -->
-    <div id="appContent" class="hidden">
-        
-        <!-- HEADER COM INFOS DO USUÁRIO -->
-        <header>
-            <h2>📚 Portal de Estudos</h2>
-            <div class="user-info">
-                <span id="userNameDisplay">👤 Aluno Conectado</span>
-                <button class="btn-logout" onclick="logout()">Sair</button>
-            </div>
-        </header>
+    <!-- 2. PAINEL PRINCIPAL (DASHBOARD) -->
+    <div id="screen-dashboard" class="hidden">
+        <div class="dash-header">
+            <h1>Boas-vindas ao Gabaritei!</h1>
+            <p>Selecione um dos conteudos completos listados abaixo para abrir o Ambiente Integrado de Estudos</p>
+        </div>
 
-        <!-- BANNER DE INFORMAÇÕES DO APP -->
-        <div class="app-info-banner">
-            <div class="app-info-text">
-                <h3>Informações da sua Conta</h3>
-                <p>Status: <strong>Plano VIP Ativo</strong> | Acesso irrestrito a todos os níveis de ensino.</p>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <span>48</span>
-                    <label>MÓDULOS</label>
+        <div class="grid-cards">
+            <!-- QUADRO 1 -->
+            <div class="card">
+                <div class="card-icon">🧠</div>
+                <div class="card-title">1º ao 5º Ano</div>
+                <div class="card-subtitle">ENSINO FUNDAMENTAL I</div>
+                <div class="section-tag">⭐ CONTEÚDOS INCLUSOS:</div>
+                <div class="topic-list">
+                    <button class="topic-btn" onclick="openModule('Alfabetização e Letramento')">🧠 Alfabetização e Letramento</button>
+                    <button class="topic-btn" onclick="openModule('Tabuada e Matemática Ilustrada')">🧮 Tabuada e Matemática Ilustrada</button>
+                    <button class="topic-btn" onclick="openModule('Descoberta das Ciências')">🌍 Descoberta das Ciências</button>
+                    <button class="topic-btn" onclick="openModule('Leitura de Contos e Interpretação')">📖 Leitura de Contos e Interpretação</button>
+                    <button class="topic-btn" onclick="openModule('Jogos de Raciocínio Lógico')">🧩 Jogos de Raciocínio Lógico</button>
+                    <button class="topic-btn" onclick="openModule('Introdução à História e Linhas do Tempo')">⏳ Introdução à História e Linhas do Tempo</button>
+                    <button class="topic-btn" onclick="openModule('Mapas, Climas e Regiões')">🗺️ Mapas, Climas e Regiões</button>
+                    <button class="topic-btn" onclick="openModule('Educação Financeira e Poupança')">🪙 Educação Financeira e Poupança</button>
                 </div>
-                <div class="stat-item">
-                    <span>100%</span>
-                    <label>DISPONÍVEL</label>
+            </div>
+
+            <!-- QUADRO 2 -->
+            <div class="card">
+                <div class="card-icon">📐</div>
+                <div class="card-title">6º ao 9º Ano</div>
+                <div class="card-subtitle">ENSINO FUNDAMENTAL II</div>
+                <div class="section-tag">⚡ MÓDULOS INCLUSOS:</div>
+                <div class="topic-list">
+                    <button class="topic-btn" onclick="openModule('Introdução à Álgebra e Geometria')">📐 Introdução à Álgebra e Geometria</button>
+                    <button class="topic-btn" onclick="openModule('Biologia, Física e Química Geral')">🧬 Biologia, Física e Química Geral</button>
+                    <button class="topic-btn" onclick="openModule('Oficina de Redação Estruturada')">✍️ Oficina de Redação Estruturada</button>
+                    <button class="topic-btn" onclick="openModule('História Geral e do Brasil')">🏛️ História Geral e do Brasil</button>
+                    <button class="topic-btn" onclick="openModule('Geografia Crítica e Demografia')">🌍 Geografia Crítica e Demografia</button>
+                    <button class="topic-btn" onclick="openModule('Língua Portuguesa e Sintaxe')">📗 Língua Portuguesa e Sintaxe</button>
+                    <button class="topic-btn" onclick="openModule('Lógica de Programação em Blocos')">💻 Lógica de Programação em Blocos</button>
+                    <button class="topic-btn" onclick="openModule('Atualidades, Cidadania e Ética')">⚖️ Atualidades, Cidadania e Ética</button>
+                </div>
+            </div>
+
+            <!-- QUADRO 3 -->
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <div class="card-title">1º ao 3º Ano</div>
+                <div class="card-subtitle">ENSINO MÉDIO</div>
+                <div class="section-tag">🚀 RECURSOS ACADÊMICOS:</div>
+                <div class="topic-list">
+                    <button class="topic-btn" onclick="openModule('Simulados Completos Padrão ENEM')">🎯 Simulados Completos Padrão ENEM</button>
+                    <button class="topic-btn" onclick="openModule('Física Avançada e Química Orgânica')">🧪 Física Avançada e Química Orgânica</button>
+                    <button class="topic-btn" onclick="openModule('Redação Dissertativa-Argumentativa')">🖋️ Redação Dissertativa-Argumentativa</button>
+                    <button class="topic-btn" onclick="openModule('Trigonometria e Introdução ao Cálculo')">📐 Trigonometria e Introdução ao Cálculo</button>
+                    <button class="topic-btn" onclick="openModule('Ecologia, Genética e Evolução')">🧬 Ecologia, Genética e Evolução</button>
+                    <button class="topic-btn" onclick="openModule('Filosofia, Sociologia e Pensadores')">📜 Filosofia, Sociologia e Pensadores</button>
+                    <button class="topic-btn" onclick="openModule('Geopolítica e História Contemporânea')">🌐 Geopolítica e História Contemporânea</button>
+                    <button class="topic-btn" onclick="openModule('Resumos e Análises Literárias')">🎧 Resumos e Análises Literárias</button>
+                </div>
+            </div>
+
+            <!-- QUADRO 4 -->
+            <div class="card">
+                <div class="card-icon">🎓</div>
+                <div class="card-title">Ensino Superior</div>
+                <div class="card-subtitle">GRADUAÇÃO E ESPECIALIZAÇÕES</div>
+                <div class="section-tag">🏛️ FERRAMENTAS CIENTÍFICAS:</div>
+                <div class="topic-list">
+                    <button class="topic-btn" onclick="openModule('Referências Bibliográficas (ABNT/APA)')">💻 Referências Bibliográficas (ABNT/APA)</button>
+                    <button class="topic-btn" onclick="openModule('Projetos de TCC e Artigos Científicos')">📌 Projetos de TCC e Artigos Científicos</button>
+                    <button class="topic-btn" onclick="openModule('Estatística Aplicada e Análise de Dados')">📈 Estatística Aplicada e Análise de Dados</button>
+                    <button class="topic-btn" onclick="openModule('Metodologia de Pesquisa Avançada')">🔬 Metodologia de Pesquisa Avançada</button>
+                    <button class="topic-btn" onclick="openModule('Oratória e Apresentação de Bancas')">🗣️ Oratória e Apresentação de Bancas</button>
+                    <button class="topic-btn" onclick="openModule('Controle de Horas Complementares')">📋 Controle de Horas Complementares</button>
+                    <button class="topic-btn" onclick="openModule('Periódicos e Artigos Internacionais')">📚 Periódicos e Artigos Internacionais</button>
+                    <button class="topic-btn" onclick="openModule('Temporizador Pomodoro Integrado')">⏱️ Temporizador Pomodoro Integrado</button>
                 </div>
             </div>
         </div>
 
-        <!-- QUADRADOS DE CONTEÚDO COM OS LINKS FIXOS -->
-        <div class="container">
-
-            <!-- QUADRADO 1 -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">🧠</div>
-                    <div class="card-title">1º ao 5º Ano</div>
-                    <div class="card-subtitle">ENSINO FUNDAMENTAL I</div>
-                </div>
-                <div class="section-label">⭐ CONTEÚDOS INCLUSOS:</div>
-                <div class="topics-list">
-                    <a href="#alfabetizacao" class="topic-item"><span class="topic-icon">🧠</span> Alfabetização, Ortografia e Caligrafia</a>
-                    <a href="#operacoes" class="topic-item"><span class="topic-icon">🧮</span> Operações Básicas e Tabuada Ilustrada</a>
-                    <a href="#geometria-plana" class="topic-item"><span class="topic-icon">📐</span> Formas e Geometria Plana Inicial</a>
-                    <a href="#ciencias" class="topic-item"><span class="topic-icon">🌏</span> Ciências da Natureza e Meio Ambiente</a>
-                    <a href="#leitura" class="topic-item"><span class="topic-icon">📖</span> Leitura de Contos e Interpretação</a>
-                    <a href="#jogos" class="topic-item"><span class="topic-icon">🧩</span> Jogos de Raciocínio Lógico e Desafios</a>
-                    <a href="#historia-br" class="topic-item"><span class="topic-icon">⏳</span> História do Brasil e Linhas do Tempo</a>
-                    <a href="#geografia" class="topic-item"><span class="topic-icon">🗺️</span> Geografia, Mapas e Paisagens</a>
-                    <a href="#educacao-financeira" class="topic-item"><span class="topic-icon">🪙</span> Educação Financeira e Economia Lúdica</a>
-                    <a href="#ingles-inicial" class="topic-item"><span class="topic-icon">🇬🇧</span> Vocabulário de Inglês Inicial</a>
-                    <a href="#artes" class="topic-item"><span class="topic-icon">🎨</span> Artes Visuais e Expressão Criativa</a>
-                    <a href="#corpo-humano" class="topic-item"><span class="topic-icon">🧘</span> Corpo Humano, Higiene e Saúde</a>
-                </div>
-            </div>
-
-            <!-- QUADRADO 2 -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">📐</div>
-                    <div class="card-title">6º ao 9º Ano</div>
-                    <div class="card-subtitle">ENSINO FUNDAMENTAL II</div>
-                </div>
-                <div class="section-label">⚡ MÓDULOS INCLUSOS:</div>
-                <div class="topics-list">
-                    <a href="#algebra" class="topic-item"><span class="topic-icon">📐</span> Introdução à Álgebra e Equações</a>
-                    <a href="#geometria-espacial" class="topic-item"><span class="topic-icon">📐</span> Geometria Espacial e Pitágoras</a>
-                    <a href="#biologia-geral" class="topic-item"><span class="topic-icon">🧬</span> Biologia Geral, Células e Sistemas</a>
-                    <a href="#fisica-classica" class="topic-item"><span class="topic-icon">⚡</span> Física Clássica e Conceitos de Matéria</a>
-                    <a href="#quimica-inicial" class="topic-item"><span class="topic-icon">🧪</span> Química Inicial e Tabela Periódica</a>
-                    <a href="#redacao-generos" class="topic-item"><span class="topic-icon">🎪</span> Oficina de Redação e Gêneros Textuais</a>
-                    <a href="#portugues-sintaxe" class="topic-item"><span class="topic-icon">📗</span> Língua Portuguesa, Gramática e Sintaxe</a>
-                    <a href="#historia-geral" class="topic-item"><span class="topic-icon">🏛️</span> História Geral, Antiguidade e Brasil</a>
-                    <a href="#geografia-critica" class="topic-item"><span class="topic-icon">🌍</span> Geografia Crítica, Climas e Demografia</a>
-                    <a href="#ingles-interpretacao" class="topic-item"><span class="topic-icon">🇬🇧</span> Língua Inglesa e Interpretação</a>
-                    <a href="#programacao" class="topic-item"><span class="topic-icon">💻</span> Programação e Pensamento Computacional</a>
-                    <a href="#atualidades" class="topic-item"><span class="topic-icon">⚖️</span> Atualidades, Cidadania, Ética e Filosofia</a>
-                </div>
-            </div>
-
-            <!-- QUADRADO 3 -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">🎯</div>
-                    <div class="card-title">1º ao 3º Ano</div>
-                    <div class="card-subtitle">ENSINO MÉDIO & ENEM</div>
-                </div>
-                <div class="section-label">🚀 RECURSOS ACADÊMICOS:</div>
-                <div class="topics-list">
-                    <a href="#simulados" class="topic-item"><span class="topic-icon">🎯</span> Simulados Completos Padrão ENEM & Fuvest</a>
-                    <a href="#quimica-organica" class="topic-item"><span class="topic-icon">🧪</span> Química Orgânica e Físico-Química</a>
-                    <a href="#fisica-mecanica" class="topic-item"><span class="topic-icon">⚡</span> Física: Mecânica e Eletromagnetismo</a>
-                    <a href="#redacao-enem" class="topic-item"><span class="topic-icon">🖋️</span> Redação Dissertativa-Argumentativa</a>
-                    <a href="#trigonometria" class="topic-item"><span class="topic-icon">📊</span> Trigonometria e Análise Combinatória</a>
-                    <a href="#biologia-evolutiva" class="topic-item"><span class="topic-icon">🧬</span> Biologia Evolutiva, Genética e Ecologia</a>
-                    <a href="#filosofia-sociologia" class="topic-item"><span class="topic-icon">📜</span> Filosofia Moderna e Sociologia</a>
-                    <a href="#geopolitica" class="topic-item"><span class="topic-icon">🌐</span> Geopolítica e História Contemporânea</a>
-                    <a href="#historia-colonia" class="topic-item"><span class="topic-icon">🏛️</span> História do Brasil: Colônia a República</a>
-                    <a href="#geografia-fisica" class="topic-item"><span class="topic-icon">🗺️</span> Geografia Física e Impactos Ambientais</a>
-                    <a href="#literatura" class="topic-item"><span class="topic-icon">🎧</span> Resumos e Análises Literárias</a>
-                    <a href="#idiomas-exames" class="topic-item"><span class="topic-icon">🇬🇧</span> GB/ES Inglês e Espanhol para Exames</a>
-                </div>
-            </div>
-
-            <!-- QUADRADO 4 -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">🎓</div>
-                    <div class="card-title">Ensino Superior</div>
-                    <div class="card-subtitle">GRADUAÇÃO E ESPECIALIZAÇÕES</div>
-                </div>
-                <div class="section-label">🏛️ FERRAMENTAS CIENTÍFICAS:</div>
-                <div class="topics-list">
-                    <a href="#abnt" class="topic-item"><span class="topic-icon">💻</span> Normas ABNT / APA e Citações</a>
-                    <a href="#tcc" class="topic-item"><span class="topic-icon">📌</span> Projetos de TCC, Monografias e Artigos</a>
-                    <a href="#estatistica" class="topic-item"><span class="topic-icon">📈</span> Estatística Aplicada e Análise de Dados</a>
-                    <a href="#metodologia" class="topic-item"><span class="topic-icon">🔬</span> Metodologia de Pesquisa Avançada</a>
-                    <a href="#oratoria" class="topic-item"><span class="topic-icon">🗣️</span> Oratória e Apresentação de Bancas</a>
-                    <a href="#estagio" class="topic-item"><span class="topic-icon">📋</span> Controle de Horas e Estágio Supervisionado</a>
-                    <a href="#periodicos" class="topic-item"><span class="topic-icon">📚</span> Periódicos e Artigos Internacionais</a>
-                    <a href="#pomodoro" class="topic-item"><span class="topic-icon">⏱️</span> Temporizador Pomodoro Integrado</a>
-                    <a href="#gestao-projetos" class="topic-item"><span class="topic-icon">💼</span> Gestão de Projetos e Metodologias Ágeis</a>
-                    <a href="#etica" class="topic-item"><span class="topic-icon">⚖️</span> Ética Profissional e Legislação</a>
-                    <a href="#saude-mental" class="topic-item"><span class="topic-icon">🧠</span> Saúde Mental e Gestão de Estresse</a>
-                    <a href="#networking" class="topic-item"><span class="topic-icon">🌐</span> Networking e Preparação para o Mercado</a>
-                </div>
-            </div>
-
+        <div class="dash-footer-action">
+            <button class="btn-pill" onclick="showScreen('screen-info')">Informações do App</button>
+            <button class="btn-pill" onclick="showScreen('screen-login')">Sair do Sistema</button>
         </div>
     </div>
 
-    <!-- SCRIPT DE LÓGICA DO LOGIN E CLIQUE NOS LINKS -->
-    <script>
-        // Lógica de Login
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const emailValue = document.getElementById('email').value;
-            
-            // Oculta a tela de login e revela o app
-            document.getElementById('loginScreen').classList.add('hidden');
-            document.getElementById('appContent').classList.remove('hidden');
-            
-            // Atualiza nome do usuário na barra superior
-            document.getElementById('userNameDisplay').innerText = '👤 ' + (emailValue.split('@')[0] || 'Aluno');
-        });
+    <!-- 3. MÓDULO ESPECIALIZADO DA MATÉRIA -->
+    <div id="screen-module" class="hidden">
+        <div class="module-header">
+            <div>
+                <h2>Módulo Especializado</h2>
+                <p>Conteúdo Atual: <strong id="currentModuleTitle" style="color: #38bdf8;">Ciências Físicas e Biológicas</strong></p>
+            </div>
+            <button class="btn-pill" onclick="showScreen('screen-dashboard')">Voltar ao Painel</button>
+        </div>
 
-        function logout() {
-            document.getElementById('appContent').classList.add('hidden');
-            document.getElementById('loginScreen').classList.remove('hidden');
-            document.getElementById('email').value = '';
-            document.getElementById('password').value = '';
+        <div class="module-layout">
+            <!-- Esquerda: Player + Textos -->
+            <div>
+                <div class="video-box">
+                    <div class="play-btn"></div>
+                    <h3>Vídeo Aula Principal</h3>
+                    <p>Clique para iniciar a transmissão em HD da matéria</p>
+                </div>
+
+                <div class="module-bottom-grid">
+                    <div class="info-card">
+                        <h4>📖 EXPLICAÇÃO DA MATÉRIA</h4>
+                        <p id="moduleExplanation">Bem-vindo à área avançada sobre este conteúdo. Este material foi preparado utilizando diretrizes modernas de ensino, unindo fixação por áudio, vídeo e suporte cognitivo por Inteligência Artificial.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>📄 RESUMO BASE</h4>
+                        <ul>
+                            <li>📌 Fundamentos cruciais sobre a matéria selecionada.</li>
+                            <li>📌 Tópicos essenciais cobrados em avaliações de alta performance.</li>
+                            <li>📌 Revisão ativa parametrizada para fixação a longo prazo.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direita: IA Auxiliadora + Outros Vídeos -->
+            <div>
+                <div class="sidebar-box">
+                    <h4>🤖 IA Auxiliadora Gabaritei</h4>
+                    <div class="ai-chat-box" id="aiResponse">
+                        Olá! Sou sua IA Auxiliadora especialista nesta matéria. Qual é a sua dúvida sobre este conteúdo?
+                    </div>
+                    <div class="ai-input-group">
+                        <input type="text" id="aiInput" placeholder="Perguntar para a IA...">
+                        <button onclick="askAI()">Enviar</button>
+                    </div>
+                </div>
+
+                <div class="sidebar-box">
+                    <h4>🎬 Mais Vídeos sobre o Tema</h4>
+                    <div class="extra-video-item">
+                        <h5>Aula Complementar II</h5>
+                        <p>Duração: 14 min</p>
+                    </div>
+                    <div class="extra-video-item">
+                        <h5>Resolução de Exercícios</h5>
+                        <p>Duração: 22 min</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. INFORMAÇÕES DO APP -->
+    <div id="screen-info" class="hidden">
+        <div class="info-top-bar">
+            <button class="btn-pill" onclick="showScreen('screen-dashboard')">Voltar ao Painel</button>
+        </div>
+
+        <h2 class="info-title">🚀 Informações do App</h2>
+
+        <div class="info-grid">
+            <div class="info-block">
+                <h4>💡 O que é o Gabaritei?</h4>
+                <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela FichTeck. Idealizado para ajudar na organização diária, controle de progresso e preparação impecável para exames escolares e desafios educacionais.</p>
+            </div>
+            <div class="info-block">
+                <h4>🔒 Segurança e Privacidade Total</h4>
+                <p>Aqui a proteção é completa. Todas as credenciais de acesso (Usuário, E-mail e Senhas) e históricos são armazenados de forma 100% offline, direto no seu navegador com a tecnologia LocalStorage. Nenhum dado é repassado para servidores.</p>
+            </div>
+            <div class="info-block">
+                <h4>⚠️ Recomendações Importantes</h4>
+                <p>Para evitar perdas parciais ou exclusões automáticas das suas credenciais e progresso, evite limpar agressivamente o histórico/cookies do seu navegador e não acesse o sistema através de guias anônimas.</p>
+            </div>
+
+            <div class="info-block">
+                <h4>Sobre Nós</h4>
+                <p>Somos uma plataforma dedicada a entregar os melhores recursos de estudos e gamificação para você gabaritar as suas avaliações com qualidade, foco e compromisso.</p>
+            </div>
+            <div class="info-block">
+                <h4>Dicas de Ouro</h4>
+                <p>💡 Estude em blocos de tempo menores focando 100% na matéria e faça pausas para descanso. A constância diária vence qualquer obstáculo nos estudos!</p>
+            </div>
+            <div class="info-block">
+                <h4>Links Úteis</h4>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Termos de Uso</a>
+                <a href="#">Central de Ajuda</a>
+            </div>
+
+            <div class="info-block">
+                <h4>🚀 Metodologias do Ecossistema</h4>
+                <p>O Gabaritei foi projetado com base em técnicas comprovadas de neurociência cognitiva, como a Prática de Lembrança Ativa e a Repetição Espaçada. Futuramente, nosso sistema adaptará o cronograma automaticamente com base nos seus erros e acertos diários.</p>
+            </div>
+            <div class="info-block">
+                <h4>🎯 Futuro Espaço de Criação</h4>
+                <p>Prepare-se para customizar sua experiência! Em breve, a área interna liberará o painel interativo da FichTeck, permitindo que você monte e publique seus próprios quizzes dinâmicos, flashcards interativos e minijogos focados em memorização.</p>
+            </div>
+            <div class="info-block">
+                <h4>💻 Arquitetura Técnico Local</h4>
+                <p>Utilizamos chaves de isolamento de dados estruturadas no ecossistema do cliente. Isso garante tempo de resposta imediato (zero delay de rede) e autonomia total de uso, permitindo que o aplicativo funcione perfeitamente mesmo sem internet estável.</p>
+            </div>
+        </div>
+
+        <footer>
+            © 2026 FichTeck. Todos os direitos reservados.
+        </footer>
+    </div>
+
+    <!-- SCRIPT DE NAVEGAÇÃO -->
+    <script>
+        function showScreen(screenId) {
+            document.getElementById('screen-login').classList.add('hidden');
+            document.getElementById('screen-dashboard').classList.add('hidden');
+            document.getElementById('screen-module').classList.add('hidden');
+            document.getElementById('screen-info').classList.add('hidden');
+
+            document.getElementById(screenId).classList.remove('hidden');
+            window.scrollTo(0, 0);
         }
 
-        // Exemplo de alerta ao clicar em qualquer um dos links fixos
-        document.querySelectorAll('.topic-item').forEach(link => {
-            link.addEventListener('click', function(e) {
-                const topicName = this.innerText.trim();
-                console.log('Navegando para:', topicName);
-            });
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showScreen('screen-dashboard');
         });
+
+        function openModule(moduleTitle) {
+            document.getElementById('currentModuleTitle').innerText = moduleTitle;
+            document.getElementById('moduleExplanation').innerText = `Bem-vindo à área avançada sobre ${moduleTitle}. Este conteúdo foi preparado utilizando diretrizes modernas de ensino, unindo fixação por áudio, vídeo e suporte cognitivo por Inteligência Artificial.`;
+            document.getElementById('aiResponse').innerText = `Olá! Sou sua IA Auxiliadora especialista em ${moduleTitle}. Qual é a sua dúvida sobre esta matéria?`;
+            showScreen('screen-module');
+        }
+
+        function askAI() {
+            const input = document.getElementById('aiInput');
+            if (input.value.trim() !== "") {
+                document.getElementById('aiResponse').innerText = `Entendido! Sobre "${input.value}": Lembre-se de praticar a repetição espaçada e revisar os conceitos principais do resumo.`;
+                input.value = "";
+            }
+        }
     </script>
 </body>
 </html>
