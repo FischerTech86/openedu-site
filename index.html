@@ -207,14 +207,14 @@
       flex-wrap: wrap;
       margin-bottom: 30px;
       width: 100%;
-      max-width: 900px;
+      max-width: 1050px;
     }
 
     .tab-btn {
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid #1e293b;
       color: #94a3b8;
-      padding: 12px 20px;
+      padding: 12px 18px;
       border-radius: 14px;
       font-weight: 600;
       font-size: 0.85rem;
@@ -225,7 +225,7 @@
       align-items: center;
       gap: 2px;
       flex: 1;
-      min-width: 180px;
+      min-width: 150px;
     }
 
     .tab-btn span.sub {
@@ -250,7 +250,7 @@
     .tab-content {
       display: none;
       width: 100%;
-      max-width: 900px;
+      max-width: 950px;
       animation: fadeIn 0.3s ease;
     }
 
@@ -718,7 +718,7 @@
     </div>
   </section>
 
-  <!-- 4. TELA DO DASHBOARD (RENOVADO COM ABAS) -->
+  <!-- 4. TELA DO DASHBOARD (COM 6 ABAS E ESTRUTURA EXPANDIDA) -->
   <section id="view-dashboard" class="view-section dark-theme">
     <div class="dark-header">
       <h1>Boas-vindas ao Gabaritei!</h1>
@@ -743,9 +743,17 @@
         <span>Ensino Superior</span>
         <span class="sub">Graduação</span>
       </button>
+      <button class="tab-btn" onclick="switchTab('tab-concursos', this)">
+        <span>Concursos Públicos</span>
+        <span class="sub">Carreiras Públicas</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('tab-vestibulares', this)">
+        <span>Vestibulares</span>
+        <span class="sub">ENEM & Provas</span>
+      </button>
     </div>
 
-    <!-- CONTEÚDO DA ABA 1: 1º ao 5º Ano -->
+    <!-- ABA 1: 1º ao 5º Ano -->
     <div id="tab-fund1" class="tab-content active">
       <div class="clean-module-grid">
         <div class="modern-module-card" onclick="openModule('Alfabetização e Letramento')">🧠 Alfabetização e Letramento</div>
@@ -759,7 +767,7 @@
       </div>
     </div>
 
-    <!-- CONTEÚDO DA ABA 2: 6º ao 9º Ano -->
+    <!-- ABA 2: 6º ao 9º Ano -->
     <div id="tab-fund2" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card" onclick="openModule('Introdução à Álgebra e Geometria')">📐 Introdução à Álgebra e Geometria</div>
@@ -773,7 +781,7 @@
       </div>
     </div>
 
-    <!-- CONTEÚDO DA ABA 3: Ensino Médio -->
+    <!-- ABA 3: Ensino Médio -->
     <div id="tab-medio" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card" onclick="openModule('Simulados Completos Padrão ENEM')">🎯 Simulados Completos Padrão ENEM</div>
@@ -787,7 +795,7 @@
       </div>
     </div>
 
-    <!-- CONTEÚDO DA ABA 4: Ensino Superior -->
+    <!-- ABA 4: Ensino Superior -->
     <div id="tab-superior" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card" onclick="openModule('Referências Bibliográficas (ABNT/APA)')">🎓 Referências Bibliográficas (ABNT/APA)</div>
@@ -798,6 +806,34 @@
         <div class="modern-module-card" onclick="openModule('Controle de Horas Complementares')">📋 Controle de Horas Complementares</div>
         <div class="modern-module-card" onclick="openModule('Periódicos e Artigos Internacionais')">📰 Periódicos e Artigos Internacionais</div>
         <div class="modern-module-card" onclick="openModule('Temporizador Pomodoro Integrado')">⏱️ Temporizador Pomodoro Integrado</div>
+      </div>
+    </div>
+
+    <!-- ABA 5: Concursos Públicos -->
+    <div id="tab-concursos" class="tab-content">
+      <div class="clean-module-grid">
+        <div class="modern-module-card" onclick="openModule('Direito Administrativo e Constitucional')">⚖️ Direito Administrativo e Constitucional</div>
+        <div class="modern-module-card" onclick="openModule('Português e Interpretação para Concursos')">📝 Português e Interpretação para Concursos</div>
+        <div class="modern-module-card" onclick="openModule('Raciocínio Lógico-Matemático (RLM)')">🔢 Raciocínio Lógico-Matemático (RLM)</div>
+        <div class="modern-module-card" onclick="openModule('Informática Básica e Avançada')">💻 Informática Básica e Avançada</div>
+        <div class="modern-module-card" onclick="openModule('Conhecimentos Bancários e Administração')">🏛️ Conhecimentos Bancários e Administração</div>
+        <div class="modern-module-card" onclick="openModule('Legislação Penal e Segurança Pública')">🚓 Legislação Penal e Segurança Pública</div>
+        <div class="modern-module-card" onclick="openModule('Contabilidade Geral e Fiscal')">📊 Contabilidade Geral e Fiscal</div>
+        <div class="modern-module-card" onclick="openModule('Questões Comentadas e Bancas')">🎯 Questões Comentadas e Bancas</div>
+      </div>
+    </div>
+
+    <!-- ABA 6: Vestibulares -->
+    <div id="tab-vestibulares" class="tab-content">
+      <div class="clean-module-grid">
+        <div class="modern-module-card" onclick="openModule('Maratonas ENEM & Provas Seriadas')">🎯 Maratonas ENEM & Provas Seriadas</div>
+        <div class="modern-module-card" onclick="openModule('Literatura Nacional e Leituras Obrigatórias')">📚 Literatura Nacional e Leituras Obrigatórias</div>
+        <div class="modern-module-card" onclick="openModule('Oficina Intensa de Redação Nota 1000')">✍️ Oficina Intensa de Redação Nota 1000</div>
+        <div class="modern-module-card" onclick="openModule('Matemática e Exatas Focadas')">📐 Matemática e Exatas Focadas</div>
+        <div class="modern-module-card" onclick="openModule('Biologia e Ciências da Natureza')">🧬 Biologia e Ciências da Natureza</div>
+        <div class="modern-module-card" onclick="openModule('História, Geografia e Filosofia')">📜 História, Geografia e Filosofia</div>
+        <div class="modern-module-card" onclick="openModule('Físico-Química e Reações Frequentes')">🧪 Físico-Química e Reações Frequentes</div>
+        <div class="modern-module-card" onclick="openModule('Simulados Interativos com Cronômetro')">🧩 Simulados Interativos com Cronômetro</div>
       </div>
     </div>
 
