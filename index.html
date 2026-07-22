@@ -201,7 +201,7 @@
       margin-top: 6px;
     }
 
-    /* SISTEMA DE ABAS (6 NÍVEIS) */
+    /* NAVEGAÇÃO DE ABAS */
     .tabs-container {
       display: flex;
       justify-content: center;
@@ -249,11 +249,11 @@
       box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
     }
 
-    /* GRID DE CARDS */
+    /* GRID DE CARDS POR MATÉRIA/TEMA SEPARADO */
     .tab-content {
       display: none;
       width: 100%;
-      max-width: 1000px;
+      max-width: 1100px;
       animation: fadeIn 0.3s ease;
     }
 
@@ -268,46 +268,50 @@
 
     .clean-module-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
       width: 100%;
     }
 
-    @media (max-width: 850px) {
-      .clean-module-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 550px) {
-      .clean-module-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
     .modern-module-card {
-      background: rgba(15, 23, 42, 0.7);
+      background: rgba(15, 23, 42, 0.75);
       border: 1px solid #1e293b;
-      border-radius: 14px;
-      padding: 20px 22px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #f1f5f9;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      border-radius: 16px;
+      padding: 20px;
       cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      min-height: 80px;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .modern-module-card:hover {
       background: #1e293b;
       border-color: #38bdf8;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
+    }
+
+    .card-subject-title {
+      font-size: 1.05rem;
+      font-weight: 700;
       color: #38bdf8;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-topics-list {
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    .card-topics-list li {
+      margin-bottom: 6px;
+      list-style-position: inside;
     }
 
     .btn-exit {
@@ -461,7 +465,7 @@
       cursor: pointer;
     }
 
-    /* INFORMAÇÕES DO APP (RODAPÉ) */
+    /* RODAPÉ DE INFORMAÇÕES */
     .app-footer-info {
       width: 100%;
       max-width: 1100px;
@@ -734,14 +738,14 @@
     </div>
   </section>
 
-  <!-- 4. TELA DO DASHBOARD (COM TODAS AS ABAS E MÓDULOS EXACTOS) -->
+  <!-- 4. TELA DO DASHBOARD (COM SEPARAÇÃO TOTAL DE FUNDAMENTAL I E II E MATÉRIAS INDIVIDUAIS) -->
   <section id="view-dashboard" class="view-section dark-theme">
     <div class="dark-header">
       <h1>Boas-vindas ao Gabaritei!</h1>
-      <p>Escolha o seu nível de ensino abaixo para acessar os conteúdos</p>
+      <p>Escolha o seu nível de ensino abaixo para acessar os conteúdos organizados por disciplina</p>
     </div>
 
-    <!-- NAVEGAÇÃO POR ABAS -->
+    <!-- NAVEGAÇÃO DE ABAS (FUNDAMENTAL I E FUNDAMENTAL II TOTALMENTE SEPARADOS) -->
     <div class="tabs-container">
       <button class="tab-btn active" onclick="switchTab('tab-fund1', this)">
         <span>1º ao 5º Ano</span>
@@ -759,97 +763,388 @@
         <span>Ensino Superior</span>
         <span class="sub">Graduação</span>
       </button>
-      <button class="tab-btn" onclick="switchTab('tab-concursos', this)">
-        <span>Concursos Públicos</span>
-        <span class="sub">Carreiras Públicas</span>
-      </button>
       <button class="tab-btn" onclick="switchTab('tab-vestibulares', this)">
         <span>Vestibulares</span>
         <span class="sub">ENEM & Provas</span>
       </button>
+      <button class="tab-btn" onclick="switchTab('tab-concursos', this)">
+        <span>Concursos Públicos</span>
+        <span class="sub">Carreiras Públicas</span>
+      </button>
     </div>
 
-    <!-- ABA 1: Fundamental I (1º ao 5º Ano) -->
+    <!-- ABA 1: ENSINO FUNDAMENTAL I (1º AO 5º ANO) - CARDS SEPARADOS POR TEMA -->
     <div id="tab-fund1" class="tab-content active">
       <div class="clean-module-grid">
-        <div class="modern-module-card" onclick="openModule('Alfabetização e Letramento')">🧠 Alfabetização e Letramento</div>
-        <div class="modern-module-card" onclick="openModule('Tabuada e Matemática Ilustrada')">🎨 Tabuada e Matemática Ilustrada</div>
-        <div class="modern-module-card" onclick="openModule('Descoberta das Ciências')">🌍 Descoberta das Ciências</div>
-        <div class="modern-module-card" onclick="openModule('Leitura de Contos e Interpretação')">📖 Leitura de Contos e Interpretação</div>
-        <div class="modern-module-card" onclick="openModule('Jogos de Raciocínio Lógico')">🧩 Jogos de Raciocínio Lógico</div>
-        <div class="modern-module-card" onclick="openModule('Introdução à História e Linhas do Tempo')">⏳ Introdução à História e Linhas do Tempo</div>
-        <div class="modern-module-card" onclick="openModule('Mapas, Climas e Regiões')">🗺️ Mapas, Climas e Regiões</div>
-        <div class="modern-module-card" onclick="openModule('Educação Financeira e Poupança')">🟡 Educação Financeira e Poupança</div>
+        <div class="modern-module-card" onclick="openModule('Língua Portuguesa - Fundamental I')">
+          <div class="card-subject-title">📖 Língua Portuguesa</div>
+          <ul class="card-topics-list">
+            <li>Alfabetização e Letramento</li>
+            <li>Gramática básica</li>
+            <li>Interpretação de texto inicial</li>
+            <li>Leitura de contos e gêneros textuais</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Matemática - Fundamental I')">
+          <div class="card-subject-title">➕ Matemática</div>
+          <ul class="card-topics-list">
+            <li>Quatro operações matemáticas</li>
+            <li>Frações e porcentagem inicial</li>
+            <li>Geometria básica e formas</li>
+            <li>Tabuada e matemática ilustrada</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Ciências da Natureza - Fundamental I')">
+          <div class="card-subject-title">🌱 Ciências da Natureza</div>
+          <ul class="card-topics-list">
+            <li>Corpo humano e hábitos saudáveis</li>
+            <li>Ecossistemas e meio ambiente</li>
+            <li>Sistema solar e planetas</li>
+            <li>Matéria e energia para crianças</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('História - Fundamental I')">
+          <div class="card-subject-title">⏳ História</div>
+          <ul class="card-topics-list">
+            <li>Introdução à História</li>
+            <li>História da comunidade e família</li>
+            <li>Linhas do tempo simples</li>
+            <li>História do Brasil (Colônia e Império)</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Geografia - Fundamental I')">
+          <div class="card-subject-title">🗺️ Geografia</div>
+          <ul class="card-topics-list">
+            <li>Nocões de cartografia e mapas</li>
+            <li>Relevo, clima e vegetação</li>
+            <li>Organização do espaço brasileiro</li>
+            <li>Regiões e paisagens regionais</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Artes e Educação Física - Fundamental I')">
+          <div class="card-subject-title">🎨 Artes e Educação Física</div>
+          <ul class="card-topics-list">
+            <li>Expressão corporal e dança</li>
+            <li>Esportes educativos e jogos</li>
+            <li>Artes visuais e cores</li>
+            <li>Música e ritmos infantis</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Raciocínio Lógico & Finanças - Fundamental I')">
+          <div class="card-subject-title">🧩 Raciocínio & Finanças</div>
+          <ul class="card-topics-list">
+            <li>Jogos de raciocínio lógico</li>
+            <li>Educação financeira infantil</li>
+            <li>Noções de poupança e consumo consciente</li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <!-- ABA 2: Fundamental II (6º ao 9º Ano) -->
+    <!-- ABA 2: ENSINO FUNDAMENTAL II (6º AO 9º ANO) - CARDS SEPARADOS POR TEMA -->
     <div id="tab-fund2" class="tab-content">
       <div class="clean-module-grid">
-        <div class="modern-module-card" onclick="openModule('Introdução à Álgebra e Geometria')">📐 Introdução à Álgebra e Geometria</div>
-        <div class="modern-module-card" onclick="openModule('Biologia, Física e Química Geral')">🧬 Biologia, Física e Química Geral</div>
-        <div class="modern-module-card" onclick="openModule('Oficina de Redação Estruturada')">✍️ Oficina de Redação Estruturada</div>
-        <div class="modern-module-card" onclick="openModule('História Geral e do Brasil')">🏛️ História Geral e do Brasil</div>
-        <div class="modern-module-card" onclick="openModule('Geografia Crítica e Demografia')">🌍 Geografia Crítica e Demografia</div>
-        <div class="modern-module-card" onclick="openModule('Língua Portuguesa e Sintaxe')">📚 Língua Portuguesa e Sintaxe</div>
-        <div class="modern-module-card" onclick="openModule('Lógica de Programação em Blocos')">💻 Lógica de Programação em Blocos</div>
-        <div class="modern-module-card" onclick="openModule('Atualidades, Cidadania e Ética')">🌐 Atualidades, Cidadania e Ética</div>
+        <div class="modern-module-card" onclick="openModule('Língua Portuguesa - Fundamental II')">
+          <div class="card-subject-title">📚 Língua Portuguesa e Sintaxe</div>
+          <ul class="card-topics-list">
+            <li>Gramática intermediária e sintaxe</li>
+            <li>Análise sintática e morfológica</li>
+            <li>Interpretação textual avançada</li>
+            <li>Oficina de redação estruturada</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Matemática e Álgebra - Fundamental II')">
+          <div class="card-subject-title">📐 Matemática e Álgebra</div>
+          <ul class="card-topics-list">
+            <li>Introdução à Álgebra</li>
+            <li>Equações do 1º e 2º grau</li>
+            <li>Porcentagem e regra de três</li>
+            <li>Geometria plana e espacial básica</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Ciências e Física/Química - Fundamental II')">
+          <div class="card-subject-title">🔬 Biologia, Física e Química Geral</div>
+          <ul class="card-topics-list">
+            <li>Introdução às Ciências Físicas</li>
+            <li>Química geral e tabela periódica básica</li>
+            <li>Biologia celular e ecologia inicial</li>
+            <li>Transformações da matéria e energia</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('História Geral e do Brasil - Fundamental II')">
+          <div class="card-subject-title">🏛️ História Geral e do Brasil</div>
+          <ul class="card-topics-list">
+            <li>História Geral Antiga e Medieval</li>
+            <li>História do Brasil (Colônia, Império e República)</li>
+            <li>Revolução Industrial e Guerras Mundiais</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Geografia Crítica - Fundamental II')">
+          <div class="card-subject-title">🌍 Geografia Crítica e Demografia</div>
+          <ul class="card-topics-list">
+            <li>Geografia física e geopolítica global</li>
+            <li>Estudo da população (Demografia)</li>
+            <li>Urbanização e espaço agrário</li>
+            <li>Climas e biomas globais</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Tecnologia e Ética - Fundamental II')">
+          <div class="card-subject-title">💻 Programação e Cidadania</div>
+          <ul class="card-topics-list">
+            <li>Lógica de programação em blocos</li>
+            <li>Atualidades e geopolítica regional</li>
+            <li>Cidadania, Ética e Sociedade</li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <!-- ABA 3: Ensino Médio (1º ao 3º Ano) -->
+    <!-- ABA 3: ENSINO MÉDIO (1º AO 3º ANO) - CARDS SEPARADOS POR TEMA -->
     <div id="tab-medio" class="tab-content">
       <div class="clean-module-grid">
-        <div class="modern-module-card" onclick="openModule('Simulados Completos Padrão ENEM')">🎯 Simulados Completos Padrão ENEM</div>
-        <div class="modern-module-card" onclick="openModule('Física Avançada e Química Orgânica')">🔬 Física Avançada e Química Orgânica</div>
-        <div class="modern-module-card" onclick="openModule('Redação Dissertativa-Argumentativa')">📝 Redação Dissertativa-Argumentativa</div>
-        <div class="modern-module-card" onclick="openModule('Trigonometria e Introdução ao Cálculo')">📐 Trigonometria e Introdução ao Cálculo</div>
-        <div class="modern-module-card" onclick="openModule('Ecologia, Genética e Evolução')">🌱 Ecologia, Genética e Evolução</div>
-        <div class="modern-module-card" onclick="openModule('Filosofia, Sociologia e Pensadores')">📜 Filosofia, Sociologia e Pensadores</div>
-        <div class="modern-module-card" onclick="openModule('Geopolítica e História Contemporânea')">🌍 Geopolítica e História Contemporânea</div>
-        <div class="modern-module-card" onclick="openModule('Resumos e Análises Literárias')">🎧 Resumos e Análises Literárias</div>
+        <div class="modern-module-card" onclick="openModule('Linguagens e Códigos - Ensino Médio')">
+          <div class="card-subject-title">📝 Linguagens, Códigos e Redação</div>
+          <ul class="card-topics-list">
+            <li>Gramática e sintaxe profunda</li>
+            <li>Redação dissertativa-argumentativa</li>
+            <li>Língua estrangeira (Inglês / Espanhol)</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Literatura - Ensino Médio')">
+          <div class="card-subject-title">📖 Literatura Brasileira e Portuguesa</div>
+          <ul class="card-topics-list">
+            <li>Escolas literárias (Barroco ao Modernismo)</li>
+            <li>Análises de obras clássicas</li>
+            <li>Resumos e análises literárias</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Matemática e Suas Tecnologias')">
+          <div class="card-subject-title">📐 Matemática e Suas Tecnologias</div>
+          <ul class="card-topics-list">
+            <li>Funções, trigonometria e matrizes</li>
+            <li>Análise combinatória e probabilidade</li>
+            <li>Estatística e geometria espacial</li>
+            <li>Introdução ao Cálculo</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Física Avançada - Ensino Médio')">
+          <div class="card-subject-title">⚡ Física Avançada</div>
+          <ul class="card-topics-list">
+            <li>Mecânica, cinemática e dinâmica</li>
+            <li>Termodinâmica e calorimetria</li>
+            <li>Óptica, ondas e eletromagnetismo</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Química - Ensino Médio')">
+          <div class="card-subject-title">🧪 Química Geral e Orgânica</div>
+          <ul class="card-topics-list">
+            <li>Atomística e Tabela Periódica</li>
+            <li>Ligações químicas e estequiometria</li>
+            <li>Físico-química e química orgânica</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Biologia - Ensino Médio')">
+          <div class="card-subject-title">🌱 Biologia e Ecologia</div>
+          <ul class="card-topics-list">
+            <li>Citologia e genética moderna</li>
+            <li>Evolução, botânica e zoologia</li>
+            <li>Ecologia e preservação ambiental</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('História do Brasil e Geral - Ensino Médio')">
+          <div class="card-subject-title">📜 História Geral e Brasil Contemporâneo</div>
+          <ul class="card-topics-list">
+            <li>Idade Média, Moderna e Contemporânea</li>
+            <li>Grandes Guerras e Guerra Fria</li>
+            <li>Brasil Contemporâneo e Ditadura Militar</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Geografia - Ensino Médio')">
+          <div class="card-subject-title">🌍 Geografia e Geopolítica</div>
+          <ul class="card-topics-list">
+            <li>Geopolítica mundial e globalização</li>
+            <li>Urbanização e problemas urbanos</li>
+            <li>Impactos ambientais e sustentabilidade</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Filosofia e Sociologia - Ensino Médio')">
+          <div class="card-subject-title">🧠 Filosofia e Sociologia</div>
+          <ul class="card-topics-list">
+            <li>Escolas filosóficas da Grécia à atualidade</li>
+            <li>Cidadania, direitos e cultura</li>
+            <li>Estrutura social e pensadores clássicos</li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <!-- ABA 4: Ensino Superior (Graduação) -->
+    <!-- ABA 4: ENSINO SUPERIOR (GRADUAÇÃO) - CARDS SEPARADOS POR ÁREA -->
     <div id="tab-superior" class="tab-content">
       <div class="clean-module-grid">
-        <div class="modern-module-card" onclick="openModule('Referências Bibliográficas (ABNT/APA)')">🎓 Referências Bibliográficas (ABNT/APA)</div>
-        <div class="modern-module-card" onclick="openModule('Projetos de TCC e Artigos Científicos')">🛠️ Projetos de TCC e Artigos Científicos</div>
-        <div class="modern-module-card" onclick="openModule('Estatística Aplicada e Análise de Dados')">📊 Estatística Aplicada e Análise de Dados</div>
-        <div class="modern-module-card" onclick="openModule('Metodologia de Pesquisa Avançada')">🔬 Metodologia de Pesquisa Avançada</div>
-        <div class="modern-module-card" onclick="openModule('Oratória e Apresentação de Bancas')">🗣️ Oratória e Apresentação de Bancas</div>
-        <div class="modern-module-card" onclick="openModule('Controle de Horas Complementares')">📋 Controle de Horas Complementares</div>
-        <div class="modern-module-card" onclick="openModule('Periódicos e Artigos Internacionais')">📰 Periódicos e Artigos Internacionais</div>
-        <div class="modern-module-card" onclick="openModule('Temporizador Pomodoro Integrado')">⏱️ Temporizador Pomodoro Integrado</div>
+        <div class="modern-module-card" onclick="openModule('Ciências Exatas e Tecnológicas')">
+          <div class="card-subject-title">💻 Ciências Exatas e Tecnológicas</div>
+          <ul class="card-topics-list">
+            <li>Cálculo diferencial e integral</li>
+            <li>Álgebra linear e física teórica</li>
+            <li>Algoritmos, programação e desenho técnico</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Ciências Biológicas e da Saúde')">
+          <div class="card-subject-title">🧬 Ciências Biológicas e da Saúde</div>
+          <ul class="card-topics-list">
+            <li>Anatomia humana e fisiologia</li>
+            <li>Patologia e farmacologia</li>
+            <li>Bioquímica e ética médica/biológica</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Ciências Humanas e Sociais')">
+          <div class="card-subject-title">⚖️ Ciências Humanas e Sociais</div>
+          <ul class="card-topics-list">
+            <li>Teoria política e direito constitucional</li>
+            <li>Economia e psicologia social</li>
+            <li>Metodologia científica e gestão de pessoas</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Metodologia de Pesquisa Avançada')">
+          <div class="card-subject-title">🔬 Pesquisa & Metodologia</div>
+          <ul class="card-topics-list">
+            <li>Projetos de TCC e artigos científicos</li>
+            <li>Estatística aplicada e análise de dados</li>
+            <li>Referências bibliográficas (ABNT / APA)</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Ferramentas Acadêmicas')">
+          <div class="card-subject-title">⏱️ Ferramentas & Produtividade</div>
+          <ul class="card-topics-list">
+            <li>Oratória e apresentação de bancas</li>
+            <li>Controle de horas complementares</li>
+            <li>Temporizador Pomodoro integrado</li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <!-- ABA 5: Concursos Públicos (Carreiras Públicas) -->
-    <div id="tab-concursos" class="tab-content">
-      <div class="clean-module-grid">
-        <div class="modern-module-card" onclick="openModule('Direito Administrativo e Constitucional')">⚖️ Direito Administrativo e Constitucional</div>
-        <div class="modern-module-card" onclick="openModule('Português e Interpretação para Concursos')">📝 Português e Interpretação para Concursos</div>
-        <div class="modern-module-card" onclick="openModule('Raciocínio Lógico-Matemático (RLM)')">🔢 Raciocínio Lógico-Matemático (RLM)</div>
-        <div class="modern-module-card" onclick="openModule('Informática Básica e Avançada')">💻 Informática Básica e Avançada</div>
-        <div class="modern-module-card" onclick="openModule('Conhecimentos Bancários e Administração')">🏛️ Conhecimentos Bancários e Administração</div>
-        <div class="modern-module-card" onclick="openModule('Legislação Penal e Segurança Pública')">🚓 Legislação Penal e Segurança Pública</div>
-        <div class="modern-module-card" onclick="openModule('Contabilidade Geral e Fiscal')">📊 Contabilidade Geral e Fiscal</div>
-        <div class="modern-module-card" onclick="openModule('Questões Comentadas e Bancas')">🎯 Questões Comentadas e Bancas</div>
-      </div>
-    </div>
-
-    <!-- ABA 6: Vestibulares (ENEM & Provas) -->
+    <!-- ABA 5: VESTIBULARES E ENEM - CARDS SEPARADOS POR FOCO -->
     <div id="tab-vestibulares" class="tab-content">
       <div class="clean-module-grid">
-        <div class="modern-module-card" onclick="openModule('Maratonas ENEM & Provas Seriadas')">🎯 Maratonas ENEM & Provas Seriadas</div>
-        <div class="modern-module-card" onclick="openModule('Literatura Nacional e Leituras Obrigatórias')">📚 Literatura Nacional e Leituras Obrigatórias</div>
-        <div class="modern-module-card" onclick="openModule('Oficina Intensa de Redação Nota 1000')">✍️ Oficina Intensa de Redação Nota 1000</div>
-        <div class="modern-module-card" onclick="openModule('Matemática e Exatas Focadas')">📐 Matemática e Exatas Focadas</div>
-        <div class="modern-module-card" onclick="openModule('Biologia e Ciências da Natureza')">🧬 Biologia e Ciências da Natureza</div>
-        <div class="modern-module-card" onclick="openModule('História, Geografia e Filosofia')">📜 História, Geografia e Filosofia</div>
-        <div class="modern-module-card" onclick="openModule('Físico-Química e Reações Frequentes')">🧪 Físico-Química e Reações Frequentes</div>
-        <div class="modern-module-card" onclick="openModule('Simulados Interativos com Cronômetro')">🧩 Simulados Interativos com Cronômetro</div>
+        <div class="modern-module-card" onclick="openModule('ENEM - Prova Completa')">
+          <div class="card-subject-title">🎯 Prova ENEM (4 Áreas)</div>
+          <ul class="card-topics-list">
+            <li>Linguagens, Códigos e suas Tecnologias</li>
+            <li>Ciências Humanas e suas Tecnologias</li>
+            <li>Ciências da Natureza e suas Tecnologias</li>
+            <li>Matemática e suas Tecnologias</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Oficina de Redação Nota 1000')">
+          <div class="card-subject-title">✍️ Redação Dissertativa-Argumentativa</div>
+          <ul class="card-topics-list">
+            <li>Estrutura completa da proposta ENEM</li>
+            <li>Elaboração de proposta de intervenção</li>
+            <li>Repertório sociocultural produtivo</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Vestibulares Tradicionais')">
+          <div class="card-subject-title">🏛️ Vestibulares Tradicionais (FUVEST, UNICAMP)</div>
+          <ul class="card-topics-list">
+            <li>Questões dissertativas de 2ª fase</li>
+            <li>Obras literárias de leitura obrigatória</li>
+            <li>Maior aprofundamento acadêmico teórico</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Simulados e Maratonas')">
+          <div class="card-subject-title">🧩 Simulados & Cronômetro</div>
+          <ul class="card-topics-list">
+            <li>Maratonas ENEM & Provas seriadas</li>
+            <li>Simulados interativos com cronômetro</li>
+            <li>Treinamento com gestão de tempo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 6: CONCURSOS PÚBLICOS - CARDS SEPARADOS POR MATÉRIA -->
+    <div id="tab-concursos" class="tab-content">
+      <div class="clean-module-grid">
+        <div class="modern-module-card" onclick="openModule('Língua Portuguesa para Concursos')">
+          <div class="card-subject-title">📝 Língua Portuguesa</div>
+          <ul class="card-topics-list">
+            <li>Interpretação textual e compreensão</li>
+            <li>Concordância verbal e nominal</li>
+            <li>Regência e emprego da crase</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Raciocínio Lógico e Matemática')">
+          <div class="card-subject-title">🔢 Raciocínio Lógico-Matemático (RLM)</div>
+          <ul class="card-topics-list">
+            <li>Lógica proposicional e tabelas-verdade</li>
+            <li>Diagramas lógicos e conjuntos</li>
+            <li>Resolução de problemas matemáticos</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Informática para Concursos')">
+          <div class="card-subject-title">💻 Informática Básica e Avançada</div>
+          <ul class="card-topics-list">
+            <li>Sistemas operacionais (Windows/Linux)</li>
+            <li>Pacote Office e LibreOffice</li>
+            <li>Segurança da informação e redes</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Direito Constitucional')">
+          <div class="card-subject-title">⚖️ Direito Constitucional</div>
+          <ul class="card-topics-list">
+            <li>Direitos e garantias fundamentais</li>
+            <li>Organização do Estado e Poderes</li>
+            <li>Artigos essenciais da CF/88</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Direito Administrativo')">
+          <div class="card-subject-title">📜 Direito Administrativo</div>
+          <ul class="card-topics-list">
+            <li>Atos administrativos e licitações</li>
+            <li>Agentes públicos e estatutos</li>
+            <li>Poderes da administração pública</li>
+          </ul>
+        </div>
+
+        <div class="modern-module-card" onclick="openModule('Conhecimentos Específicos e Bancas')">
+          <div class="card-subject-title">📊 Conhecimentos Específicos & Bancas</div>
+          <ul class="card-topics-list">
+            <li>Legislação interna do órgão desejado</li>
+            <li>Contabilidade e administração pública</li>
+            <li>Questões comentadas organizadas por bancas</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -915,7 +1210,7 @@
       <div class="top-bar-module">
         <div>
           <h2 style="font-size: 1.4rem;">Módulo Especializado</h2>
-          <p style="font-size: 0.85rem; color: #38bdf8;">Conteúdo Selecionado: <span id="current-module-title">Alfabetização e Letramento</span></p>
+          <p style="font-size: 0.85rem; color: #38bdf8;">Disciplina Selecionada: <span id="current-module-title">Línga Portuguesa</span></p>
         </div>
         <button class="btn-back" onclick="showView('view-dashboard')">Voltar ao Painel</button>
       </div>
@@ -944,7 +1239,7 @@
           <div class="sidebar-card">
             <h4>🤖 IA Auxiliadora Gabaritei</h4>
             <div class="chat-box">
-              Olá! Sou sua IA especialista no tema selecionado. Qual é a sua dúvida?
+              Olá! Sou sua IA especialista no tema selecionado. Qual é a sua dúvida sobre esta matéria?
             </div>
             <div class="chat-input-row">
               <input type="text" placeholder="Escreva sua pergunta..." />
