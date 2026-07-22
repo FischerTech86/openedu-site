@@ -1,1117 +1,816 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GABARITEI</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* --- BOTÃO PILULA / PILL --- */
-        .btn-pill {
-            background-color: #ffffff;
-            color: #0f172a;
-            border: none;
-            padding: 0.75rem 2.2rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            display: inline-block;
-        }
-
-        .btn-pill:hover {
-            background-color: #f1f5f9;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-        }
-
-        /* =========================================================
-           1. MODO CLARO - TELAS DE AUTENTICAÇÃO (LOGIN / REGISTRO)
-           ========================================================= */
-        .auth-wrapper {
-            background-color: #eef2f8;
-            min-height: 100vh;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            padding: 1.5rem;
-        }
-
-        /* Símbolos decorativos ao fundo das fotos */
-        .bg-symbols {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            user-select: none;
-            z-index: 1;
-        }
-
-        .bg-symbol {
-            position: absolute;
-            font-weight: bold;
-            opacity: 0.25;
-            font-size: 1.5rem;
-        }
-
-        .auth-card {
-            background-color: #ffffff;
-            border-radius: 24px;
-            padding: 2.5rem 2rem;
-            width: 100%;
-            max-width: 440px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            z-index: 10;
-            text-align: center;
-            position: relative;
-        }
-
-        .auth-card h1 {
-            color: #2563eb;
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            margin-bottom: 0.2rem;
-        }
-
-        .auth-card h3 {
-            color: #334155;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Banners de Notificação (Verde e Rosa/Vermelho) */
-        .alert-banner {
-            border-radius: 12px;
-            padding: 0.8rem 1rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .alert-success {
-            background-color: #d1fae5;
-            color: #065f46;
-            border: 1px solid #a7f3d0;
-        }
-
-        .alert-error {
-            background-color: #ffe4e6;
-            color: #9f1239;
-            border: 1px solid #fecdd3;
-        }
-
-        .form-group {
-            text-align: left;
-            margin-bottom: 1.1rem;
-        }
-
-        .form-group label {
-            display: block;
-            color: #475569;
-            font-size: 0.82rem;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.85rem 1rem;
-            background-color: #dbeafe;
-            border: 1px solid #bfdbfe;
-            border-radius: 10px;
-            color: #1e293b;
-            font-size: 0.9rem;
-            outline: none;
-            transition: all 0.2s;
-        }
-
-        .form-group input:focus {
-            background-color: #eff6ff;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-        }
-
-        .btn-auth {
-            width: 100%;
-            padding: 0.9rem;
-            background-color: #2563eb;
-            color: #ffffff;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            margin-top: 0.5rem;
-            transition: background-color 0.2s;
-        }
-
-        .btn-auth:hover {
-            background-color: #1d4ed8;
-        }
-
-        .auth-links {
-            margin-top: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .auth-links a {
-            color: #2563eb;
-            font-size: 0.83rem;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .auth-links a:hover {
-            text-decoration: underline;
-        }
-
-        .recovered-box {
-            border: 2px dashed #93c5fd;
-            border-radius: 12px;
-            padding: 1rem;
-            margin-top: 1rem;
-            background-color: #f0f9ff;
-        }
-
-        .recovered-box span {
-            display: block;
-            font-size: 0.75rem;
-            color: #1e40af;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .recovered-box strong {
-            font-size: 1.4rem;
-            color: #1e293b;
-            letter-spacing: 2px;
-        }
-
-
-        /* =========================================================
-           2. MODO ESCURO - PAINEL PRINCIPAL, MÓDULO E INFORMAÇÕES
-           ========================================================= */
-        .dark-theme {
-            background-color: #0b1329;
-            color: #f1f5f9;
-            min-height: 100vh;
-            width: 100%;
-        }
-
-        /* PAINEL PRINCIPAL (DASHBOARD) */
-        #screen-dashboard {
-            padding: 2.5rem 2rem;
-            max-width: 1440px;
-            margin: 0 auto;
-        }
-
-        .dash-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .dash-header h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 0.6rem;
-        }
-
-        .dash-header p {
-            color: #60a5fa;
-            font-size: 0.92rem;
-            opacity: 0.9;
-        }
-
-        .grid-cards {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.2rem;
-            margin-bottom: 2.5rem;
-        }
-
-        @media (max-width: 1200px) {
-            .grid-cards { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 680px) {
-            .grid-cards { grid-template-columns: 1fr; }
-        }
-
-        .card {
-            background-color: #111b36;
-            border: 1px solid #1e2c4f;
-            border-radius: 18px;
-            padding: 1.4rem;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-icon {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        .card-subtitle {
-            font-size: 0.7rem;
-            color: #38bdf8;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-top: 0.2rem;
-            margin-bottom: 1.2rem;
-            letter-spacing: 0.5px;
-        }
-
-        .section-tag {
-            font-size: 0.72rem;
-            font-weight: 800;
-            color: #94a3b8;
-            text-transform: uppercase;
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .topic-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .topic-btn {
-            background-color: #182544;
-            border: 1px solid #23355c;
-            border-radius: 10px;
-            padding: 0.7rem 0.85rem;
-            color: #e2e8f0;
-            text-align: left;
-            font-size: 0.82rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            width: 100%;
-        }
-
-        .topic-btn:hover {
-            background-color: #1d305a;
-            border-color: #38bdf8;
-            color: #ffffff;
-            transform: translateX(3px);
-        }
-
-        .dash-footer-action {
-            text-align: center;
-            margin-top: 1rem;
-            display: flex;
-            justify-content: center;
-            gap: 1.2rem;
-        }
-
-
-        /* MÓDULO ESPECIALIZADO */
-        #screen-module {
-            padding: 2.5rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .module-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.8rem;
-        }
-
-        .module-header h2 {
-            font-size: 1.8rem;
-            color: #ffffff;
-            font-weight: 800;
-        }
-
-        .module-header p {
-            color: #e2e8f0;
-            font-size: 0.95rem;
-            margin-top: 0.2rem;
-        }
-
-        .module-header p strong {
-            color: #38bdf8;
-        }
-
-        .module-layout {
-            display: grid;
-            grid-template-columns: 2.2fr 1fr;
-            gap: 1.5rem;
-        }
-
-        @media (max-width: 960px) {
-            .module-layout { grid-template-columns: 1fr; }
-        }
-
-        .video-box {
-            background-color: #111b36;
-            border: 1px solid #1e2c4f;
-            border-radius: 20px;
-            height: 380px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: border-color 0.2s;
-        }
-
-        .video-box:hover {
-            border-color: #38bdf8;
-        }
-
-        .play-btn {
-            width: 64px;
-            height: 64px;
-            background-color: #38bdf8;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 1rem;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
-        }
-
-        .play-btn::after {
-            content: '';
-            border-style: solid;
-            border-width: 10px 0 10px 18px;
-            border-color: transparent transparent transparent #0b1329;
-            margin-left: 4px;
-        }
-
-        .video-box h3 {
-            color: #ffffff;
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .video-box p {
-            color: #94a3b8;
-            font-size: 0.85rem;
-        }
-
-        .module-bottom-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        @media (max-width: 600px) {
-            .module-bottom-grid { grid-template-columns: 1fr; }
-        }
-
-        .info-card {
-            background-color: #111b36;
-            border: 1px solid #1e2c4f;
-            border-radius: 16px;
-            padding: 1.4rem;
-        }
-
-        .info-card h4 {
-            color: #38bdf8;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            letter-spacing: 0.5px;
-        }
-
-        .info-card p, .info-card ul {
-            font-size: 0.83rem;
-            color: #cbd5e1;
-            line-height: 1.6;
-        }
-
-        .info-card ul {
-            list-style: none;
-        }
-
-        .info-card li {
-            margin-bottom: 0.6rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.4rem;
-        }
-
-        /* Lateral (IA e Vídeos Extras) */
-        .sidebar-box {
-            background-color: #111b36;
-            border: 1px solid #1e2c4f;
-            border-radius: 16px;
-            padding: 1.4rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .sidebar-box h4 {
-            color: #38bdf8;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-transform: uppercase;
-        }
-
-        .ai-chat-box {
-            background-color: #0d162d;
-            border: 1px solid #1b2848;
-            border-radius: 12px;
-            padding: 1rem;
-            font-size: 0.83rem;
-            color: #e2e8f0;
-            margin-bottom: 1rem;
-            line-height: 1.5;
-            min-height: 90px;
-        }
-
-        .ai-input-group {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .ai-input-group input {
-            flex: 1;
-            background-color: #0b1329;
-            border: 1px solid #1e2c4f;
-            border-radius: 8px;
-            padding: 0.6rem 0.9rem;
-            color: white;
-            font-size: 0.82rem;
-            outline: none;
-        }
-
-        .ai-input-group input:focus {
-            border-color: #38bdf8;
-        }
-
-        .ai-input-group button {
-            background-color: #38bdf8;
-            color: #0b1329;
-            border: none;
-            border-radius: 8px;
-            padding: 0.6rem 1rem;
-            font-weight: 700;
-            font-size: 0.82rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .ai-input-group button:hover {
-            background-color: #7dd3fc;
-        }
-
-        .extra-video-item {
-            background-color: #182544;
-            border: 1px solid #213359;
-            border-radius: 10px;
-            padding: 0.85rem;
-            margin-bottom: 0.6rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .extra-video-item:hover {
-            border-color: #38bdf8;
-            background-color: #1d305a;
-        }
-
-        .extra-video-icon {
-            font-size: 1.2rem;
-        }
-
-        .extra-video-item h5 {
-            color: #ffffff;
-            font-size: 0.83rem;
-        }
-
-        .extra-video-item p {
-            color: #94a3b8;
-            font-size: 0.75rem;
-            margin-top: 0.1rem;
-        }
-
-
-        /* INFORMAÇÕES DO APP */
-        #screen-info {
-            padding: 2.5rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .info-top-bar {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .info-title {
-            color: #38bdf8;
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-weight: 800;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.8rem;
-            margin-bottom: 3rem;
-        }
-
-        @media (max-width: 960px) {
-            .info-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 640px) {
-            .info-grid { grid-template-columns: 1fr; }
-        }
-
-        .info-block h4 {
-            color: #38bdf8;
-            font-size: 0.95rem;
-            margin-bottom: 0.6rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 700;
-        }
-
-        .info-block p, .info-block a {
-            color: #cbd5e1;
-            font-size: 0.83rem;
-            line-height: 1.6;
-            text-decoration: none;
-            display: block;
-        }
-
-        .info-block a {
-            margin-bottom: 0.4rem;
-            color: #38bdf8;
-        }
-
-        .info-block a:hover {
-            text-decoration: underline;
-        }
-
-        footer {
-            text-align: center;
-            color: #64748b;
-            font-size: 0.82rem;
-            border-top: 1px solid #1e2c4f;
-            padding-top: 1.8rem;
-            margin-top: 2rem;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gabaritei</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #dbe4ee;
+    }
+
+    /* BARRA DE NAVEGAÇÃO PARA DEMONSTRAÇÃO DAS TELAS */
+    .demo-nav {
+      background: #0f172a;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      z-index: 999;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .demo-nav button {
+      background: #1e293b;
+      color: #93c5fd;
+      border: 1px solid #334155;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .demo-nav button:hover,
+    .demo-nav button.active {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #3b82f6;
+    }
+
+    /* WRAPPER PRINCIPAL */
+    .view-section {
+      display: none;
+      width: 100%;
+      min-height: calc(100vh - 50px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .view-section.active {
+      display: flex;
+    }
+
+    /* =======================================
+       1. ESTILOS DO TEMA CLARO (AUTENTICAÇÃO)
+       ======================================= */
+    .light-theme {
+      background-color: #dbe5f0;
+      background-image: radial-gradient(#a3b8cc 1px, transparent 1px);
+      background-size: 24px 24px;
+      position: relative;
+    }
+
+    .auth-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 440px;
+      padding: 40px 32px;
+      border-radius: 24px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .auth-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1d4ed8;
+      letter-spacing: 1px;
+    }
+
+    .auth-subtitle {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 5px;
+    }
+
+    /* Banners de Alerta */
+    .alert-banner {
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .alert-banner.success {
+      background-color: #d1fae5;
+      color: #065f46;
+    }
+
+    .alert-banner.error {
+      background-color: #fce7f3;
+      color: #9f1239;
+    }
+
+    .alert-banner.info {
+      background-color: #dbeafe;
+      color: #1e40af;
+    }
+
+    /* Formulários e Inputs */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      text-align: left;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      background-color: #dbe7f6;
+      color: #1e293b;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .form-group input:focus {
+      border-color: #2563eb;
+      background-color: #edf4fc;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 14px;
+      border-radius: 20px;
+      border: none;
+      background-color: #2563eb;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.2s;
+    }
+
+    .btn-primary:hover {
+      background-color: #1d4ed8;
+    }
+
+    .auth-link {
+      font-size: 0.8rem;
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 4px;
+      cursor: pointer;
+    }
+
+    .auth-link:hover {
+      text-decoration: underline;
+    }
+
+    .recovered-box {
+      border: 2px dashed #2563eb;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 10px;
+      color: #1d4ed8;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    /* =======================================
+       2. ESTILOS DO TEMA ESCURO (SISTEMA)
+       ======================================= */
+    .dark-theme {
+      background: radial-gradient(circle at top center, #0f1c3f 0%, #080d1a 100%);
+      color: #f1f5f9;
+      justify-content: flex-start;
+      padding-top: 40px;
+    }
+
+    .dark-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .dark-header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .dark-header p {
+      color: #64748b;
+      font-size: 0.85rem;
+      margin-top: 6px;
+    }
+
+    .btn-exit {
+      background-color: #ffffff;
+      color: #0f172a;
+      font-weight: 700;
+      padding: 10px 24px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      margin: 30px auto;
+      display: block;
+    }
+
+    /* Grid do Dashboard */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .dash-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dash-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .dash-card span.subtitle {
+      font-size: 0.65rem;
+      color: #38bdf8;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .module-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .module-item {
+      background: #111c35;
+      border: 1px solid #1e293b;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .module-item:hover {
+      background: #1e293b;
+      color: #ffffff;
+    }
+
+    /* Tela de Módulo / Vídeo */
+    .video-page-container {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .top-bar-module {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-back {
+      background: #ffffff;
+      color: #000000;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .video-main-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 850px) {
+      .video-main-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .video-player-box {
+      background: #000000;
+      border-radius: 16px;
+      border: 1px solid #1e293b;
+      height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .play-btn {
+      width: 0;
+      height: 0;
+      border-top: 20px solid transparent;
+      border-bottom: 20px solid transparent;
+      border-left: 35px solid #38bdf8;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+
+    .info-boxes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .info-card {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+
+    .info-card h4 {
+      color: #38bdf8;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .sidebar-card {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 15px;
+    }
+
+    .sidebar-card h4 {
+      font-size: 0.85rem;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .chat-box {
+      background: #090d16;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 0.75rem;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 6px;
+    }
+
+    .chat-input-row input {
+      flex: 1;
+      background: #1e293b;
+      border: none;
+      padding: 8px;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 0.75rem;
+    }
+
+    .chat-input-row button {
+      background: #38bdf8;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      color: #000;
+      font-weight: 700;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    /* Tela de Informações */
+    .info-app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .info-app-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .info-app-card h3 {
+      font-size: 0.95rem;
+      color: #38bdf8;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-app-card p {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    .footer-text {
+      text-align: center;
+      color: #475569;
+      font-size: 0.75rem;
+      margin-top: 40px;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- SÍMBOLOS DE FUNDO (PARA AS TELAS DE LOGIN/CADASTRO) -->
-    <div class="bg-symbols" id="bgSymbols">
-        <span class="bg-symbol" style="top: 12%; left: 10%; color: #ef4444;">+</span>
-        <span class="bg-symbol" style="top: 25%; left: 85%; color: #3b82f6;">X</span>
-        <span class="bg-symbol" style="top: 70%; left: 15%; color: #10b981;">A</span>
-        <span class="bg-symbol" style="top: 80%; left: 80%; color: #f59e0b;">5</span>
-        <span class="bg-symbol" style="top: 15%; left: 70%; color: #8b5cf6;">2</span>
-        <span class="bg-symbol" style="top: 60%; left: 90%; color: #ec4899;">C</span>
+  <!-- NAVEGAÇÃO DE DEMONSTRAÇÃO ENTRE AS TELAS -->
+  <div class="demo-nav">
+    <button onclick="showView('view-register-success')" class="active">1. Criar Conta (Sucesso)</button>
+    <button onclick="showView('view-register-error')">2. Criar Conta (Erro)</button>
+    <button onclick="showView('view-login')">3. Login (Bem-vindo)</button>
+    <button onclick="showView('view-recover')">4. Recuperar Senha</button>
+    <button onclick="showView('view-dashboard')">5. Dashboard</button>
+    <button onclick="showView('view-module')">6. Módulo Vídeo</button>
+    <button onclick="showView('view-info')">7. Informações App</button>
+  </div>
+
+  <!-- 1. CRIAR CONTA (SUCESSO) -->
+  <section id="view-register-success" class="view-section light-theme active">
+    <div class="auth-card">
+      <h1 class="auth-title">GABARITEI</h1>
+      <h2 class="auth-subtitle">Criar Conta</h2>
+      
+      <div class="alert-banner success">
+        Conta criada com sucesso! Redirecionando...
+      </div>
+
+      <div class="form-group">
+        <label>Nome de Usuário</label>
+        <input type="text" value="Admi_oficial" readonly />
+      </div>
+
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" value="peixinho1533@gmail.com" readonly />
+      </div>
+
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" value="123456" readonly />
+      </div>
+
+      <button class="btn-primary" onclick="showView('view-dashboard')">Cadastrar e Acessar</button>
+      <a class="auth-link" onclick="showView('view-login')">Já tem uma conta? Acesse aqui</a>
+    </div>
+  </section>
+
+  <!-- 2. CRIAR CONTA (ERRO) -->
+  <section id="view-register-error" class="view-section light-theme">
+    <div class="auth-card">
+      <h1 class="auth-title">GABARITEI</h1>
+      <h2 class="auth-subtitle">Criar Conta</h2>
+      
+      <div class="alert-banner error">
+        O sistema identificou que este nome de usuário já existe!
+      </div>
+
+      <div class="form-group">
+        <label>Nome de Usuário</label>
+        <input type="text" value="Admi_oficial" />
+      </div>
+
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" value="peixinho1533@gmail.com" />
+      </div>
+
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" value="..." />
+      </div>
+
+      <button class="btn-primary">Cadastrar e Acessar</button>
+      <a class="auth-link" onclick="showView('view-login')">Já tem uma conta? Acesse aqui</a>
+    </div>
+  </section>
+
+  <!-- 3. LOGIN (BEM-VINDO) -->
+  <section id="view-login" class="view-section light-theme">
+    <div class="auth-card">
+      <h1 class="auth-title">GABARITEI</h1>
+      
+      <div class="alert-banner info">
+        Bem-vindo, Admi_oficial!
+      </div>
+
+      <div class="form-group">
+        <label>Usuário</label>
+        <input type="text" value="Admi_oficial" />
+      </div>
+
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" value="..." />
+      </div>
+
+      <button class="btn-primary" onclick="showView('view-dashboard')">Acessar o Gabaritei</button>
+      <a class="auth-link" onclick="showView('view-recover')">Esqueceu a senha?</a>
+      <a class="auth-link" onclick="showView('view-register-success')">Você não tem outra account? Crie uma aqui</a>
+    </div>
+  </section>
+
+  <!-- 4. RECUPERAR SENHA -->
+  <section id="view-recover" class="view-section light-theme">
+    <div class="auth-card">
+      <h1 class="auth-title">GABARITEI</h1>
+      <h2 class="auth-subtitle">Recuperar Senha</h2>
+
+      <div class="form-group">
+        <label>Nome de Usuário</label>
+        <input type="text" value="Admi_oficial" />
+      </div>
+
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" value="peixinho1533@gmail.com" />
+      </div>
+
+      <button class="btn-primary">Recuperar Minha Senha</button>
+
+      <div class="recovered-box">
+        SUA SENHA RECUPERADA:<br />
+        <span style="font-size: 1.1rem; color: #1e293b;">123</span>
+      </div>
+
+      <a class="auth-link" onclick="showView('view-login')">Voltar para o login</a>
+    </div>
+  </section>
+
+  <!-- 5. DASHBOARD (TEMA ESCURO) -->
+  <section id="view-dashboard" class="view-section dark-theme">
+    <div class="dark-header">
+      <h1>Boas-vindas ao Gabaritei!</h1>
+      <p>Selecione um dos conteúdos completos listados abaixo para abrir o Ambiente Integrado de Estudos</p>
     </div>
 
-    <!-- =========================================================
-       1. TELA DE AUTENTICAÇÃO (LOGIN / CRIAR CONTA / RECUPERAR)
-       ========================================================= -->
-    <div class="auth-wrapper" id="authWrapper">
-        <div class="auth-card">
-            <h1>GABARITEI</h1>
-
-            <!-- VIEW 1: LOGIN -->
-            <div id="authViewLogin">
-                <h3>Acessar</h3>
-                <div class="alert-banner alert-success hidden" id="loginSuccessBanner">
-                    Bem-vindo, <span id="loginSuccessUser">Admi_oficial</span>!
-                </div>
-                <form id="formLogin">
-                    <div class="form-group">
-                        <label>Usuário</label>
-                        <input type="text" id="loginUser" placeholder="Admi_oficial" value="Admi_oficial" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Senha</label>
-                        <input type="password" id="loginPass" placeholder="••••••••" value="123" required>
-                    </div>
-                    <button type="submit" class="btn-auth">Acessar o Gabaritei</button>
-                </form>
-                <div class="auth-links">
-                    <a onclick="switchAuthView('recover')">Esqueceu a senha?</a>
-                    <a onclick="switchAuthView('register')">Você não tem outra account? Crie uma aqui</a>
-                </div>
-            </div>
-
-            <!-- VIEW 2: CRIAR CONTA -->
-            <div id="authViewRegister" class="hidden">
-                <h3>Criar Conta</h3>
-                
-                <div class="alert-banner alert-success hidden" id="regSuccessBanner">
-                    Conta criada com sucesso! Redirecionando...
-                </div>
-                <div class="alert-banner alert-error hidden" id="regErrorBanner">
-                    O sistema identificou que este nome de usuário já existe!
-                </div>
-
-                <form id="formRegister">
-                    <div class="form-group">
-                        <label>Nome de Usuário</label>
-                        <input type="text" id="regUser" placeholder="Admi_oficial" required>
-                    </div>
-                    <div class="form-group">
-                        <label>E-mail</label>
-                        <input type="email" id="regEmail" placeholder="peixinho1533@gmail.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Senha</label>
-                        <input type="password" id="regPass" placeholder="••••••••" required>
-                    </div>
-                    <button type="submit" class="btn-auth">Cadastrar e Acessar</button>
-                </form>
-                <div class="auth-links">
-                    <a onclick="switchAuthView('login')">Já tem uma conta? Acesse aqui</a>
-                </div>
-            </div>
-
-            <!-- VIEW 3: RECUPERAR SENHA -->
-            <div id="authViewRecover" class="hidden">
-                <h3>Recuperar Senha</h3>
-                <form id="formRecover">
-                    <div class="form-group">
-                        <label>Nome de Usuário</label>
-                        <input type="text" id="recUser" placeholder="Admi_oficial" required>
-                    </div>
-                    <div class="form-group">
-                        <label>E-mail</label>
-                        <input type="email" id="recEmail" placeholder="peixinho1533@gmail.com" required>
-                    </div>
-                    <button type="submit" class="btn-auth">Recuperar Minha Senha</button>
-                </form>
-
-                <div class="recovered-box hidden" id="recoveredBox">
-                    <span>SUA SENHA RECUPERADA:</span>
-                    <strong id="recoveredPass">123</strong>
-                </div>
-
-                <div class="auth-links">
-                    <a onclick="switchAuthView('login')">Voltar para o login</a>
-                </div>
-            </div>
-
+    <div class="dashboard-grid">
+      <!-- 1º ao 5º Ano -->
+      <div class="dash-card">
+        <h3>1º ao 5º Ano</h3>
+        <span class="subtitle">Ensino Fundamental I</span>
+        <div class="module-list">
+          <div class="module-item">🧠 Alfabetização e Letramento</div>
+          <div class="module-item">🎨 Tabuada e Matemática Ilustrada</div>
+          <div class="module-item">🌍 Descoberta das Ciências</div>
+          <div class="module-item">📖 Leitura de Contos e Interpretação</div>
+          <div class="module-item">🧩 Jogos de Raciocínio Lógico</div>
+          <div class="module-item">⏳ Introdução à História e Linhas do Tempo</div>
+          <div class="module-item">🗺️ Mapas, Climas e Regiões</div>
+          <div class="module-item">🟡 Educação Financeira e Poupança</div>
         </div>
+      </div>
+
+      <!-- 6º ao 9º Ano -->
+      <div class="dash-card">
+        <h3>6º ao 9º Ano</h3>
+        <span class="subtitle">Ensino Fundamental II</span>
+        <div class="module-list">
+          <div class="module-item" onclick="showView('view-module')">📐 Introdução à Álgebra e Geometria</div>
+          <div class="module-item" onclick="showView('view-module')">🧬 Biologia, Física e Química Geral</div>
+          <div class="module-item">✍️ Oficina de Redação Estruturada</div>
+          <div class="module-item">🏛️ História Geral e do Brasil</div>
+          <div class="module-item">🌎 Geografia Crítica e Demografia</div>
+          <div class="module-item">📚 Língua Portuguesa e Sintaxe</div>
+          <div class="module-item">💻 Lógica de Programação em Blocos</div>
+          <div class="module-item">🌐 Atualidades, Cidadania e Ética</div>
+        </div>
+      </div>
+
+      <!-- 1º ao 3º Ano -->
+      <div class="dash-card">
+        <h3>1º ao 3º Ano</h3>
+        <span class="subtitle">Ensino Médio</span>
+        <div class="module-list">
+          <div class="module-item">🎯 Simulados Completos Padrão ENEM</div>
+          <div class="module-item" onclick="showView('view-module')">🔬 Física Avançada e Química Orgânica</div>
+          <div class="module-item">📝 Redação Dissertativa-Argumentativa</div>
+          <div class="module-item">📐 Trigonometria e Introdução ao Cálculo</div>
+          <div class="module-item">🌱 Ecologia, Genética e Evolução</div>
+          <div class="module-item">📜 Filosofia, Sociologia e Pensadores</div>
+          <div class="module-item">🌍 Geopolítica e História Contemporânea</div>
+          <div class="module-item">🎧 Resumos e Análises Literárias</div>
+        </div>
+      </div>
+
+      <!-- Ensino Superior -->
+      <div class="dash-card">
+        <h3>Ensino Superior</h3>
+        <span class="subtitle">Graduação e Especializações</span>
+        <div class="module-list">
+          <div class="module-item">🎓 Referências Bibliográficas (ABNT/APA)</div>
+          <div class="module-item">🛠️ Projetos de TCC e Artigos Científicos</div>
+          <div class="module-item">📊 Estatística Aplicada e Análise de Dados</div>
+          <div class="module-item">🔬 Metodologia de Pesquisa Avançada</div>
+          <div class="module-item">🗣️ Oratória e Apresentação de Bancas</div>
+          <div class="module-item">📋 Controle de Horas Complementares</div>
+          <div class="module-item">📰 Periódicos e Artigos Internacionais</div>
+          <div class="module-item">⏱️ Temporizador Pomodoro Integrado</div>
+        </div>
+      </div>
     </div>
 
+    <button class="btn-exit" onclick="showView('view-login')">Sair do Sistema</button>
+  </section>
 
-    <!-- =========================================================
-       2. MODO ESCURO (SISTEMA INTERNO APÓS O LOGIN)
-       ========================================================= -->
-    <div class="dark-theme hidden" id="darkAppWrapper">
+  <!-- 6. MÓDULO DE VÍDEO -->
+  <section id="view-module" class="view-section dark-theme">
+    <div class="video-page-container">
+      <div class="top-bar-module">
+        <div>
+          <h2 style="font-size: 1.4rem;">Módulo Especializado</h2>
+          <p style="font-size: 0.8rem; color: #38bdf8;">Conteúdo Atual: Ciências Físicas e Biológicas</p>
+        </div>
+        <button class="btn-back" onclick="showView('view-dashboard')">Voltar ao Painel</button>
+      </div>
 
-        <!-- PAINEL PRINCIPAL (DASHBOARD) -->
-        <div id="screen-dashboard">
-            <div class="dash-header">
-                <h1>Boas-vindas ao Gabaritei!</h1>
-                <p>Selecione um dos conteudos completos listados abaixo para abrir o Ambiente Integrado de Estudos</p>
+      <div class="video-main-layout">
+        <!-- Esquerda: Player + Textos -->
+        <div>
+          <div class="video-player-box">
+            <div class="play-btn"></div>
+            <h3 style="font-size: 1rem;">Vídeo Aula Principal</h3>
+            <p style="font-size: 0.75rem; color: #64748b;">Clique para iniciar a transmissão em HD da matéria</p>
+          </div>
+
+          <div class="info-boxes-grid">
+            <div class="info-card">
+              <h4>Explicação da Matéria</h4>
+              <p>Bem-vindo à área avançada sobre Ciências Físicas e Biológicas. Este conteúdo foi preparado utilizando diretrizes modernas de ensino, unindo fixação por áudio, vídeo e suporte cognitivo por Inteligência Artificial.</p>
             </div>
-
-            <div class="grid-cards">
-                <!-- QUADRO 1 -->
-                <div class="card">
-                    <div class="card-icon">🧠</div>
-                    <div class="card-title">1º ao 5º Ano</div>
-                    <div class="card-subtitle">ENSINO FUNDAMENTAL I</div>
-                    <div class="section-tag">⭐ CONTEÚDOS INCLUSOS:</div>
-                    <div class="topic-list">
-                        <button class="topic-btn" onclick="openModule('Alfabetização e Letramento')">🧠 Alfabetização e Letramento</button>
-                        <button class="topic-btn" onclick="openModule('Tabuada e Matemática Ilustrada')">🧮 Tabuada e Matemática Ilustrada</button>
-                        <button class="topic-btn" onclick="openModule('Descoberta das Ciências')">🌍 Descoberta das Ciências</button>
-                        <button class="topic-btn" onclick="openModule('Leitura de Contos e Interpretação')">📖 Leitura de Contos e Interpretação</button>
-                        <button class="topic-btn" onclick="openModule('Jogos de Raciocínio Lógico')">🧩 Jogos de Raciocínio Lógico</button>
-                        <button class="topic-btn" onclick="openModule('Introdução à História e Linhas do Tempo')">⏳ Introdução à História e Linhas do Tempo</button>
-                        <button class="topic-btn" onclick="openModule('Mapas, Climas e Regiões')">🗺️ Mapas, Climas e Regiões</button>
-                        <button class="topic-btn" onclick="openModule('Educação Financeira e Poupança')">🪙 Educação Financeira e Poupança</button>
-                    </div>
-                </div>
-
-                <!-- QUADRO 2 -->
-                <div class="card">
-                    <div class="card-icon">📐</div>
-                    <div class="card-title">6º ao 9º Ano</div>
-                    <div class="card-subtitle">ENSINO FUNDAMENTAL II</div>
-                    <div class="section-tag">⚡ MÓDULOS INCLUSOS:</div>
-                    <div class="topic-list">
-                        <button class="topic-btn" onclick="openModule('Introdução à Álgebra e Geometria')">📐 Introdução à Álgebra e Geometria</button>
-                        <button class="topic-btn" onclick="openModule('Biologia, Física e Química Geral')">🧬 Biologia, Física e Química Geral</button>
-                        <button class="topic-btn" onclick="openModule('Oficina de Redação Estruturada')">✍️ Oficina de Redação Estruturada</button>
-                        <button class="topic-btn" onclick="openModule('História Geral e do Brasil')">🏛️ História Geral e do Brasil</button>
-                        <button class="topic-btn" onclick="openModule('Geografia Crítica e Demografia')">🌍 Geografia Crítica e Demografia</button>
-                        <button class="topic-btn" onclick="openModule('Língua Portuguesa e Sintaxe')">📗 Língua Portuguesa e Sintaxe</button>
-                        <button class="topic-btn" onclick="openModule('Lógica de Programação em Blocos')">💻 Lógica de Programação em Blocos</button>
-                        <button class="topic-btn" onclick="openModule('Atualidades, Cidadania e Ética')">⚖️ Atualidades, Cidadania e Ética</button>
-                    </div>
-                </div>
-
-                <!-- QUADRO 3 -->
-                <div class="card">
-                    <div class="card-icon">🎯</div>
-                    <div class="card-title">1º ao 3º Ano</div>
-                    <div class="card-subtitle">ENSINO MÉDIO</div>
-                    <div class="section-tag">🚀 RECURSOS ACADÊMICOS:</div>
-                    <div class="topic-list">
-                        <button class="topic-btn" onclick="openModule('Simulados Completos Padrão ENEM')">🎯 Simulados Completos Padrão ENEM</button>
-                        <button class="topic-btn" onclick="openModule('Física Avançada e Química Orgânica')">🧪 Física Avançada e Química Orgânica</button>
-                        <button class="topic-btn" onclick="openModule('Redação Dissertativa-Argumentativa')">🖋️ Redação Dissertativa-Argumentativa</button>
-                        <button class="topic-btn" onclick="openModule('Trigonometria e Introdução ao Cálculo')">📐 Trigonometria e Introdução ao Cálculo</button>
-                        <button class="topic-btn" onclick="openModule('Ecologia, Genética e Evolução')">🧬 Ecologia, Genética e Evolução</button>
-                        <button class="topic-btn" onclick="openModule('Filosofia, Sociologia e Pensadores')">📜 Filosofia, Sociologia e Pensadores</button>
-                        <button class="topic-btn" onclick="openModule('Geopolítica e História Contemporânea')">🌐 Geopolítica e História Contemporânea</button>
-                        <button class="topic-btn" onclick="openModule('Resumos e Análises Literárias')">🎧 Resumos e Análises Literárias</button>
-                    </div>
-                </div>
-
-                <!-- QUADRO 4 -->
-                <div class="card">
-                    <div class="card-icon">🎓</div>
-                    <div class="card-title">Ensino Superior</div>
-                    <div class="card-subtitle">GRADUAÇÃO E ESPECIALIZAÇÕES</div>
-                    <div class="section-tag">🏛️ FERRAMENTAS CIENTÍFICAS:</div>
-                    <div class="topic-list">
-                        <button class="topic-btn" onclick="openModule('Referências Bibliográficas (ABNT/APA)')">💻 Referências Bibliográficas (ABNT/APA)</button>
-                        <button class="topic-btn" onclick="openModule('Projetos de TCC e Artigos Científicos')">📌 Projetos de TCC e Artigos Científicos</button>
-                        <button class="topic-btn" onclick="openModule('Estatística Aplicada e Análise de Dados')">📈 Estatística Aplicada e Análise de Dados</button>
-                        <button class="topic-btn" onclick="openModule('Metodologia de Pesquisa Avançada')">🔬 Metodologia de Pesquisa Avançada</button>
-                        <button class="topic-btn" onclick="openModule('Oratória e Apresentação de Bancas')">🗣️ Oratória e Apresentação de Bancas</button>
-                        <button class="topic-btn" onclick="openModule('Controle de Horas Complementares')">📋 Controle de Horas Complementares</button>
-                        <button class="topic-btn" onclick="openModule('Periódicos e Artigos Internacionais')">📚 Periódicos e Artigos Internacionais</button>
-                        <button class="topic-btn" onclick="openModule('Temporizador Pomodoro Integrado')">⏱️ Temporizador Pomodoro Integrado</button>
-                    </div>
-                </div>
+            <div class="info-card">
+              <h4>Resumo Base</h4>
+              <p>📌 Fundamentos cruciais sobre Ciências Físicas e Biológicas.<br />📌 Tópicos essenciais cobrados em avaliações de alta performance.<br />📌 Revisão ativa parametrizada para fixação a longo prazo.</p>
             </div>
-
-            <div class="dash-footer-action">
-                <button class="btn-pill" onclick="showDarkScreen('screen-info')">Informações do App</button>
-                <button class="btn-pill" onclick="logout()">Sair do Sistema</button>
-            </div>
+          </div>
         </div>
 
-        <!-- MÓDULO ESPECIALIZADO DA MATÉRIA -->
-        <div id="screen-module" class="hidden">
-            <div class="module-header">
-                <div>
-                    <h2>Módulo Especializado</h2>
-                    <p>Conteúdo Atual: <strong id="currentModuleTitle">Ciências Físicas e Biológicas</strong></p>
-                </div>
-                <button class="btn-pill" onclick="showDarkScreen('screen-dashboard')">Voltar ao Painel</button>
+        <!-- Direita: IA Auxiliadora + Outros Vídeos -->
+        <div>
+          <div class="sidebar-card">
+            <h4>🤖 IA Auxiliadora Gabaritei</h4>
+            <div class="chat-box">
+              Olá! Sou sua IA Auxiliadora especialista em Ciências Físicas e Biológicas. Qual é a sua dúvida sobre esta matéria?
             </div>
-
-            <div class="module-layout">
-                <div>
-                    <div class="video-box">
-                        <div class="play-btn"></div>
-                        <h3>Vídeo Aula Principal</h3>
-                        <p>Clique para iniciar a transmissão em HD da matéria</p>
-                    </div>
-
-                    <div class="module-bottom-grid">
-                        <div class="info-card">
-                            <h4>📖 EXPLICAÇÃO DA MATÉRIA</h4>
-                            <p id="moduleExplanation">
-                                Bem-vindo à área avançada sobre Ciências Físicas e Biológicas. Este conteúdo foi preparado utilizando diretrizes modernas de ensino, unindo fixação por áudio, vídeo e suporte cognitivo por Inteligência Artificial.
-                            </p>
-                        </div>
-                        <div class="info-card">
-                            <h4>📄 RESUMO BASE</h4>
-                            <ul>
-                                <li>📌 <span id="resumoTopic1">Fundamentos cruciais sobre Ciências Físicas e Biológicas.</span></li>
-                                <li>📌 <span>Tópicos essenciais cobrados em avaliações de alta performance.</span></li>
-                                <li>📌 <span>Revisão ativa parametrizada para fixação a longo prazo.</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="sidebar-box">
-                        <h4>🤖 IA Auxiliadora Gabaritei</h4>
-                        <div class="ai-chat-box" id="aiResponse">
-                            Olá! Sou sua IA Auxiliadora especialista em <span id="aiSubjectName">Ciências Físicas e Biológicas</span>. Qual é a sua dúvida sobre esta matéria?
-                        </div>
-                        <div class="ai-input-group">
-                            <input type="text" id="aiInput" placeholder="Perguntar para a IA...">
-                            <button onclick="askAI()">Enviar</button>
-                        </div>
-                    </div>
-
-                    <div class="sidebar-box">
-                        <h4>🎬 Mais Vídeos sobre o Tema</h4>
-                        <div class="extra-video-item">
-                            <span class="extra-video-icon">💼</span>
-                            <div>
-                                <h5>Aula Complementar II</h5>
-                                <p>Duração: 14 min</p>
-                            </div>
-                        </div>
-                        <div class="extra-video-item">
-                            <span class="extra-video-icon">💼</span>
-                            <div>
-                                <h5>Resolução de Exercícios</h5>
-                                <p>Duração: 22 min</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="chat-input-row">
+              <input type="text" placeholder="Perguntar para a IA..." />
+              <button>Enviar</button>
             </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h4>🎬 Mais Vídeos sobre o Tema</h4>
+            <div class="module-list">
+              <div class="module-item">
+                📹 Aula Complementar II <br /><small style="color: #64748b;">Duração: 14 min</small>
+              </div>
+              <div class="module-item">
+                📹 Resolução de Exercícios <br /><small style="color: #64748b;">Duração: 22 min</small>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- INFORMAÇÕES DO APP -->
-        <div id="screen-info" class="hidden">
-            <div class="info-top-bar">
-                <button class="btn-pill" onclick="showDarkScreen('screen-dashboard')">Voltar ao Painel</button>
-            </div>
-
-            <h2 class="info-title">🚀 Informações do App</h2>
-
-            <div class="info-grid">
-                <div class="info-block">
-                    <h4>💡 O que é o Gabaritei?</h4>
-                    <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela FichTeck. Idealizado para ajudar na organização diária, controle de progresso e preparação impecável para exames escolares e desafios educacionais.</p>
-                </div>
-                <div class="info-block">
-                    <h4>🔒 Segurança e Privacidade Total</h4>
-                    <p>Aqui a proteção é completa. Todas as credenciais de acesso (Usuário, E-mail e Senhas) e históricos são armazenados de forma 100% offline, direto no seu navegador com a tecnologia LocalStorage. Nenhum dado é repassado para servidores.</p>
-                </div>
-                <div class="info-block">
-                    <h4>⚠️ Recomendações Importantes</h4>
-                    <p>Para evitar perdas parciais ou exclusões automáticas das suas credenciais e progresso, evite limpar agressivamente o histórico/cookies do seu navegador e não acesse o sistema através de guias anônimas.</p>
-                </div>
-
-                <div class="info-block">
-                    <h4>Sobre Nós</h4>
-                    <p>Somos uma plataforma dedicada a entregar os melhores recursos de estudos e gamificação para você gabaritar as suas avaliações com qualidade, foco e compromisso.</p>
-                </div>
-                <div class="info-block">
-                    <h4>Dicas de Ouro</h4>
-                    <p>💡 Estude em blocos de tempo menores focando 100% na matéria e faça pausas para descanso. A constância diária vence qualquer obstáculo nos estudos!</p>
-                </div>
-                <div class="info-block">
-                    <h4>Links Úteis</h4>
-                    <a href="#">Política de Privacidade</a>
-                    <a href="#">Termos de Uso</a>
-                    <a href="#">Central de Ajuda</a>
-                </div>
-
-                <div class="info-block">
-                    <h4>🚀 Metodologias do Ecossistema</h4>
-                    <p>O Gabaritei foi projetado com base em técnicas comprovadas de neurociência cognitiva, como a Prática de Lembrança Ativa e a Repetição Espaçada. Futuramente, nosso sistema adaptará o cronograma automaticamente com base nos seus erros e acertos diários.</p>
-                </div>
-                <div class="info-block">
-                    <h4>🎯 Futuro Espaço de Criação</h4>
-                    <p>Prepare-se para customizar sua experiência! Em breve, a área interna liberará o painel interativo da FichTeck, permitindo que você monte e publique seus próprios quizzes dinâmicos, flashcards interativos e minijogos focados em memorização.</p>
-                </div>
-                <div class="info-block">
-                    <h4>💻 Arquitetura Técnico Local</h4>
-                    <p>Utilizamos chaves de isolamento de dados estruturadas no ecossistema do cliente. Isso garante tempo de resposta imediato (zero delay de rede) e autonomia total de uso, permitindo que o aplicativo funcione perfeitamente mesmo sem internet estável.</p>
-                </div>
-            </div>
-
-            <footer>
-                © 2026 FichTeck. Todos os direitos reservados.
-            </footer>
-        </div>
-
+  <!-- 7. INFORMAÇÕES DO APP -->
+  <section id="view-info" class="view-section dark-theme">
+    <div class="dark-header">
+      <h1>🚀 Informações do App</h1>
     </div>
 
-    <!-- SCRIPT DE LÓGICA DE NAVEGAÇÃO E AUTENTICAÇÃO -->
-    <script>
-        // Banco de Dados Simulado no LocalStorage
-        if (!localStorage.getItem('gabaritei_users')) {
-            const initialUsers = {
-                'Admi_oficial': { email: 'peixinho1533@gmail.com', pass: '123' }
-            };
-            localStorage.setItem('gabaritei_users', JSON.stringify(initialUsers));
-        }
+    <div class="info-app-grid">
+      <div class="info-app-card">
+        <h3>💡 O que é o Gabaritei?</h3>
+        <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela FichTeck. Idealizado para ajudar na organização diária, controle de progresso e preparação impecável para exames escolares e desafios educacionais.</p>
+      </div>
 
-        function getUsers() {
-            return JSON.parse(localStorage.getItem('gabaritei_users'));
-        }
+      <div class="info-app-card">
+        <h3>🔒 Segurança e Privacidade Total</h3>
+        <p>Aqui a proteção é completa. Todas as credenciais de acesso (Usuário, E-mail e Senhas) e históricos são armazenados de forma 100% offline, direto no seu navegador com a tecnologia LocalStorage. Nenhum dado é repassado para servidores.</p>
+      </div>
 
-        // Alternar entre Telas de Autenticação (Login, Registro, Recuperar)
-        function switchAuthView(view) {
-            document.getElementById('authViewLogin').classList.add('hidden');
-            document.getElementById('authViewRegister').classList.add('hidden');
-            document.getElementById('authViewRecover').classList.add('hidden');
+      <div class="info-app-card">
+        <h3>⚠️ Recomendações Importantes</h3>
+        <p>Para evitar perdas parciais ou exclusões automáticas das suas credenciais e progresso, evite limpar agressivamente o histórico/cookies do seu navegador e não acesse o sistema através de guias anônimas.</p>
+      </div>
 
-            document.getElementById('loginSuccessBanner').classList.add('hidden');
-            document.getElementById('regSuccessBanner').classList.add('hidden');
-            document.getElementById('regErrorBanner').classList.add('hidden');
-            document.getElementById('recoveredBox').classList.add('hidden');
+      <div class="info-app-card">
+        <h3>👥 Sobre Nós</h3>
+        <p>Somos uma plataforma dedicada a entregar os melhores recursos de estudos e gamificação para você gabaritar as suas avaliações com qualidade, foco e compromisso.</p>
+      </div>
 
-            if (view === 'login') {
-                document.getElementById('authViewLogin').classList.remove('hidden');
-            } else if (view === 'register') {
-                document.getElementById('authViewRegister').classList.remove('hidden');
-            } else if (view === 'recover') {
-                document.getElementById('authViewRecover').classList.remove('hidden');
-            }
-        }
+      <div class="info-app-card">
+        <h3>💡 Dicas de Ouro</h3>
+        <p>💡 Estude em blocos de tempo menores focando 100% na matéria e faça pausas para descanso. A constância diária vence qualquer obstáculo nos estudos!</p>
+      </div>
 
-        // Submissão de Login
-        document.getElementById('formLogin').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const user = document.getElementById('loginUser').value.trim();
-            const pass = document.getElementById('loginPass').value.trim();
-            const users = getUsers();
+      <div class="info-app-card">
+        <h3>🔗 Links Úteis</h3>
+        <p>• Política de Privacidade<br />• Termos de Uso<br />• Central de Ajuda</p>
+      </div>
 
-            if (users[user] && users[user].pass === pass) {
-                document.getElementById('loginSuccessUser').innerText = user;
-                document.getElementById('loginSuccessBanner').classList.remove('hidden');
-                setTimeout(() => {
-                    enterSystem();
-                }, 800);
-            } else {
-                alert('Usuário ou senha incorretos! Tente usuário "Admi_oficial" e senha "123"');
-            }
-        });
+      <div class="info-app-card">
+        <h3>🚀 Metodologias do Ecossistema</h3>
+        <p>O Gabaritei foi projetado com base em técnicas comprovadas de neurociência cognitiva, como a Prática de Lembrança Ativa e a Repetição Espaçada. Futuramente, nosso sistema adaptará o cronograma automaticamente com base nos seus erros e acertos diários.</p>
+      </div>
 
-        // Submissão de Registro
-        document.getElementById('formRegister').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const user = document.getElementById('regUser').value.trim();
-            const email = document.getElementById('regEmail').value.trim();
-            const pass = document.getElementById('regPass').value.trim();
+      <div class="info-app-card">
+        <h3>🎯 Futuro Espaço de Criação</h3>
+        <p>Prepare-se para customizar sua experiência! Em breve, a área interna liberará o painel interativo da FichTeck, permitindo que você monte e publique seus próprios quizzes dinâmicos, flashcards interativos e minijogos focados em memorização.</p>
+      </div>
 
-            const users = getUsers();
+      <div class="info-app-card">
+        <h3>💻 Arquitetura Técnico Local</h3>
+        <p>Utilizamos chaves de isolamento de dados estruturadas no ecossistema do cliente. Isso garante tempo de resposta imediato (zero delay de rede) e autonomia total de uso, permitindo que o aplicativo funcione perfeitamente mesmo sem internet estável.</p>
+      </div>
+    </div>
 
-            if (users[user]) {
-                document.getElementById('regErrorBanner').classList.remove('hidden');
-                document.getElementById('regSuccessBanner').classList.add('hidden');
-            } else {
-                users[user] = { email: email, pass: pass };
-                localStorage.setItem('gabaritei_users', JSON.stringify(users));
-                document.getElementById('regErrorBanner').classList.add('hidden');
-                document.getElementById('regSuccessBanner').classList.remove('hidden');
+    <button class="btn-exit" onclick="showView('view-dashboard')">Sair do Sistema</button>
+    
+    <div class="footer-text">
+      © 2026 FichTeck. Todos os direitos reservados.
+    </div>
+  </section>
 
-                setTimeout(() => {
-                    switchAuthView('login');
-                    document.getElementById('loginUser').value = user;
-                    document.getElementById('loginPass').value = pass;
-                }, 1200);
-            }
-        });
+  <!-- JAVASCRIPT PARA ALTERNAR AS TELAS -->
+  <script>
+    function showView(viewId) {
+      // Oculta todas as seções
+      const views = document.querySelectorAll('.view-section');
+      views.forEach(v => v.classList.remove('active'));
 
-        // Submissão de Recuperar Senha
-        document.getElementById('formRecover').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const user = document.getElementById('recUser').value.trim();
-            const email = document.getElementById('recEmail').value.trim();
-            const users = getUsers();
+      // Remove estado ativo dos botões do menu demo
+      const buttons = document.querySelectorAll('.demo-nav button');
+      buttons.forEach(b => b.classList.remove('active'));
 
-            if (users[user] && users[user].email === email) {
-                document.getElementById('recoveredPass').innerText = users[user].pass;
-                document.getElementById('recoveredBox').classList.remove('hidden');
-            } else {
-                alert('Informações não encontradas no sistema.');
-            }
-        });
+      // Exibe a tela selecionada
+      const targetView = document.getElementById(viewId);
+      if (targetView) {
+        targetView.classList.add('active');
+      }
 
-        // Entrar no Modo Escuro (Aplicação)
-        function enterSystem() {
-            document.getElementById('authWrapper').classList.add('hidden');
-            document.getElementById('bgSymbols').classList.add('hidden');
-            document.getElementById('darkAppWrapper').classList.remove('hidden');
-            showDarkScreen('screen-dashboard');
-        }
-
-        // Logout
-        function logout() {
-            document.getElementById('darkAppWrapper').classList.add('hidden');
-            document.getElementById('authWrapper').classList.remove('hidden');
-            document.getElementById('bgSymbols').classList.remove('hidden');
-            switchAuthView('login');
-        }
-
-        // Navegação interna no Modo Escuro
-        function showDarkScreen(screenId) {
-            document.getElementById('screen-dashboard').classList.add('hidden');
-            document.getElementById('screen-module').classList.add('hidden');
-            document.getElementById('screen-info').classList.add('hidden');
-
-            document.getElementById(screenId).classList.remove('hidden');
-            window.scrollTo(0, 0);
-        }
-
-        // Abrir Módulo Específico da Matéria
-        function openModule(title) {
-            document.getElementById('currentModuleTitle').innerText = title;
-            document.getElementById('moduleExplanation').innerText = `Bem-vindo à área avançada sobre ${title}. Este conteúdo foi preparado utilizando diretrizes modernas de ensino, unindo fixação por áudio, vídeo e suporte cognitivo por Inteligência Artificial.`;
-            document.getElementById('resumoTopic1').innerText = `Fundamentos cruciais sobre ${title}.`;
-            document.getElementById('aiSubjectName').innerText = title;
-            document.getElementById('aiResponse').innerText = `Olá! Sou sua IA Auxiliadora especialista em ${title}. Qual é a sua dúvida sobre esta matéria?`;
-            
-            showDarkScreen('screen-module');
-        }
-
-        // Interação com IA
-        function askAI() {
-            const input = document.getElementById('aiInput');
-            if (input.value.trim() !== '') {
-                const query = input.value;
-                const subject = document.getElementById('currentModuleTitle').innerText;
-                document.getElementById('aiResponse').innerText = `Analisando sua pergunta sobre "${query}" em ${subject}... Lembre-se de priorizar a repetição espaçada e os conceitos chave citados no resumo!`;
-                input.value = '';
-            }
-        }
-    </script>
+      // Adiciona estilo ao botão clicado na barra demo
+      event?.target?.classList?.add('active');
+    }
+  </script>
 </body>
 </html>
