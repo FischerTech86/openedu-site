@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gabaritei</title>
+  <title>Gabaritei - Plataforma Completa de Estudos</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     * {
@@ -36,7 +36,7 @@
     }
 
     /* =======================================
-       1. ESTILOS DO TEMA CLARO (AUTENTICAÇÃO)
+       1. TEMA CLARO (LOGIN / CADASTRO / RECUPERAÇÃO)
        ======================================= */
     .light-theme {
       background-color: #dbe5f0;
@@ -58,7 +58,7 @@
     }
 
     .auth-title {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 800;
       color: #1d4ed8;
       letter-spacing: 1px;
@@ -101,7 +101,7 @@
       display: block;
     }
 
-    /* Formulários e Inputs */
+    /* Form Grupos */
     .form-group {
       display: flex;
       flex-direction: column;
@@ -175,7 +175,7 @@
     }
 
     /* =======================================
-       2. ESTILOS DO TEMA ESCURO (SISTEMA)
+       2. TEMA ESCURO (PAINEL E MÓDULO)
        ======================================= */
     .dark-theme {
       background: radial-gradient(circle at top center, #0f1c3f 0%, #080d1a 100%);
@@ -209,14 +209,19 @@
       border-radius: 20px;
       border: none;
       cursor: pointer;
-      margin: 30px auto;
+      margin: 30px auto 10px auto;
       display: block;
+      transition: opacity 0.2s;
+    }
+
+    .btn-exit:hover {
+      opacity: 0.9;
     }
 
     /* Grid do Dashboard */
     .dashboard-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
       width: 100%;
       max-width: 1100px;
@@ -272,7 +277,7 @@
       border-color: #3b82f6;
     }
 
-    /* Tela de Módulo / Vídeo */
+    /* Módulo de Vídeo */
     .video-page-container {
       width: 100%;
       max-width: 1100px;
@@ -377,6 +382,7 @@
       font-size: 0.75rem;
       color: #cbd5e1;
       margin-bottom: 10px;
+      min-height: 70px;
     }
 
     .chat-input-row {
@@ -406,21 +412,31 @@
     }
 
     /* =======================================
-       3. SEÇÃO DE INFORMAÇÕES NO RODAPÉ
+       3. SEÇÃO EXPANDIDA DE INFORMAÇÕES DO APP
        ======================================= */
     .app-footer-info {
       width: 100%;
       max-width: 1100px;
-      margin-top: 60px;
-      padding-top: 30px;
+      margin-top: 50px;
+      padding-top: 35px;
       border-top: 1px solid #1e293b;
     }
 
-    .app-footer-info h2 {
-      font-size: 1.4rem;
-      color: #ffffff;
+    .app-footer-header {
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
+    }
+
+    .app-footer-header h2 {
+      font-size: 1.6rem;
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .app-footer-header p {
+      font-size: 0.85rem;
+      color: #38bdf8;
+      margin-top: 4px;
     }
 
     .info-app-grid {
@@ -430,37 +446,65 @@
     }
 
     .info-app-card {
-      background: rgba(15, 23, 42, 0.6);
+      background: rgba(15, 23, 42, 0.7);
       border: 1px solid #1e293b;
-      border-radius: 12px;
-      padding: 20px;
+      border-radius: 14px;
+      padding: 22px;
+      transition: transform 0.2s;
+    }
+
+    .info-app-card:hover {
+      transform: translateY(-2px);
+      border-color: #2563eb;
     }
 
     .info-app-card h3 {
       font-size: 0.95rem;
       color: #38bdf8;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .info-app-card p {
+    .info-app-card p, .info-app-card ul {
       font-size: 0.8rem;
       color: #94a3b8;
-      line-height: 1.5;
+      line-height: 1.6;
+    }
+
+    .info-app-card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .info-app-card ul li {
+      margin-bottom: 6px;
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .info-app-card ul li::before {
+      content: "•";
+      color: #38bdf8;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
     }
 
     .copyright-text {
       text-align: center;
-      color: #475569;
-      font-size: 0.75rem;
-      margin-top: 30px;
-      padding-bottom: 20px;
+      color: #64748b;
+      font-size: 0.8rem;
+      margin-top: 35px;
+      padding-bottom: 25px;
     }
   </style>
 </head>
 <body>
 
   <!-- =======================================
-       1. TELA DE LOGIN (INICIAL)
+       1. TELA DE LOGIN (INICIAL OBRIGATÓRIA)
        ======================================= -->
   <section id="view-login" class="view-section light-theme active">
     <div class="auth-card">
@@ -628,44 +672,96 @@
           <div class="module-item" onclick="openModule('Oratória e Apresentação de Bancas')">🗣️ Oratória e Apresentação de Bancas</div>
           <div class="module-item" onclick="openModule('Controle de Horas Complementares')">📋 Controle de Horas Complementares</div>
           <div class="module-item" onclick="openModule('Periódicos e Artigos Internacionais')">📰 Periódicos e Artigos Internacionais</div>
-          <div class="module-item" onclick="openModule('Temporizador Pomodoro Integrado')">⏱️ Temporizador Pomizador Integrado</div>
+          <div class="module-item" onclick="openModule('Temporizador Pomodoro Integrado')">⏱️ Temporizador Pomodoro Integrado</div>
         </div>
       </div>
     </div>
 
     <button class="btn-exit" onclick="showView('view-login')">Sair do Sistema</button>
 
-    <!-- INFORMAÇÕES DO APP (NO RODAPÉ DA PÁGINA) -->
+    <!-- INFORMAÇÕES COMPLETA DO APP NO RODAPÉ DO DASHBOARD -->
     <div class="app-footer-info">
-      <h2>🚀 Informações do App</h2>
+      <div class="app-footer-header">
+        <h2>🚀 Informações do App & Guia Completo</h2>
+        <p>Tudo o que você precisa saber sobre a plataforma Gabaritei</p>
+      </div>
+
       <div class="info-app-grid">
         <div class="info-app-card">
           <h3>💡 O que é o Gabaritei?</h3>
-          <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela FichTeck. Idealizado para ajudar na organização diária, controle de progresso e preparação impecável para exames escolares e desafios educacionais.</p>
+          <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela <strong>FichTeck</strong>. Projetado para otimizar sua rotina, o app combina cronogramas inteligentes, resumos diretos ao ponto, listas de exercícios e acompanhamento em tempo real para exames escolares, vestibulares, ENEM e ambiente acadêmico.</p>
         </div>
+
         <div class="info-app-card">
           <h3>🔒 Segurança e Privacidade Total</h3>
-          <p>Aqui a proteção é completa. Todas as credenciais de acesso e históricos são armazenados de forma 100% offline, direto no seu navegador com LocalStorage.</p>
+          <p>Seus dados de progresso e credenciais são armazenados localmente no seu dispositivo utilizando criptografia em <strong>LocalStorage</strong>. O Gabaritei não rastreia suas informações pessoais nem compartilha seus dados de navegação com terceiros.</p>
         </div>
+
         <div class="info-app-card">
-          <h3>⚠️ Recomendações Importantes</h3>
-          <p>Para evitar perdas de dados e progresso, evite limpar o histórico do navegador e não acesse através de guias anônimas.</p>
+          <h3>🧠 Metodologias de Aprendizado</h3>
+          <ul>
+            <li><strong>Repetição Espaçada:</strong> Revisão programada nos momentos exatos para memorização contínua.</li>
+            <li><strong>Técnica Pomodoro:</strong> Blocos de estudo de 25 minutos seguidos de pausas revigorantes.</li>
+            <li><strong>Estudo Ativo:</strong> Resolução de problemas e simulação direta de avaliações reais.</li>
+          </ul>
         </div>
+
         <div class="info-app-card">
-          <h3>👥 Sobre Nós</h3>
-          <p>Plataforma dedicada a entregar os melhores recursos de estudos para você gabaritar as suas avaliações com qualidade e foco.</p>
+          <h3>🤖 IA Auxiliadora Gabaritei</h3>
+          <p>Presente nos módulos de vídeo, nossa IA especializada ajuda você a sanar dúvidas instantaneamente sobre o conteúdo estudado, oferecendo resumos, esquemas conceituais e explicações alternativas passo a passo.</p>
         </div>
+
         <div class="info-app-card">
-          <h3>💡 Dicas de Ouro</h3>
-          <p>Estude em blocos de tempo menores focando 100% na matéria e faça pausas para descanso. A constância diária vence qualquer obstáculo!</p>
+          <h3>🏆 Gamificação e Conquistas</h3>
+          <p>Acompanhe suas sequências diárias de estudo (streaks), ganhe pontos ao concluir aulas e conquiste insígnias de conhecimento conforme avança pelos ciclos do ensino fundamental ao acadêmico.</p>
         </div>
+
         <div class="info-app-card">
-          <h3>🔗 Links Úteis</h3>
-          <p>• Política de Privacidade<br />• Termos de Uso<br />• Central de Ajuda</p>
+          <h3>📱 Acesso em Qualquer Dispositivo</h3>
+          <p>O Gabaritei é 100% responsivo e otimizado para funcionar perfeitamente em Smartphones, Tablets, Notebooks e Desktops sem necessidade de downloads pesados.</p>
+        </div>
+
+        <div class="info-app-card">
+          <h3>⚠️ Recomendações de Uso</h3>
+          <ul>
+            <li>Não limpe o cachê do navegador para não apagar seu histórico local.</li>
+            <li>Evite usar o modo anônimo se quiser manter seu cadastro ativo.</li>
+            <li>Realize pausas regulares para evitar fadiga mental.</li>
+          </ul>
+        </div>
+
+        <div class="info-app-card">
+          <h3>👥 Sobre a FichTeck</h3>
+          <p>Desenvolvedora focada na criação de softwares educacionais acessíveis, rápidos e intuitivos. Nossa missão é democratizar o acesso a métodos de estudo eficientes para estudantes de todo o Brasil.</p>
+        </div>
+
+        <div class="info-app-card">
+          <h3>💡 Dicas de Ouro para Gabaritar</h3>
+          <ul>
+            <li>Comece pelos módulos em que você sente maior dificuldade.</li>
+            <li>Assista às videoaulas anotando apenas os tópicos-chave.</li>
+            <li>Refaça os simulados periodicamente para testar sua retenção.</li>
+          </ul>
+        </div>
+
+        <div class="info-app-card">
+          <h3>🎧 Suporte e Central de Ajuda</h3>
+          <p>Precisa de suporte ou quer enviar sugestões de novos temas? Entre em contato com a equipe FichTeck através do e-mail suporte@fichteck.com.br.</p>
+        </div>
+
+        <div class="info-app-card">
+          <h3>🔗 Links Rápidos e Termos</h3>
+          <p>• Termos de Serviço<br />• Política de Privacidade<br />• Manual do Estudante<br />• Código de Conduta da Comunidade</p>
+        </div>
+
+        <div class="info-app-card">
+          <h3>📊 Métricas de Progresso</h3>
+          <p>Acompanhe suas horas dedicadas, quantidade de módulos concluídos e porcentagem de acertos em exercícios diretamente no seu painel pessoal.</p>
         </div>
       </div>
+
       <div class="copyright-text">
-        © 2026 FichTeck. Todos os direitos reservados.
+        © 2026 FichTeck. Todos os direitos reservados. Gabaritei é uma marca registrada.
       </div>
     </div>
   </section>
@@ -684,47 +780,47 @@
       </div>
 
       <div class="video-main-layout">
-        <!-- Esquerda: Player + Textos -->
+        <!-- Esquerda: Player + Informações -->
         <div>
           <div class="video-player-box">
             <div class="play-btn"></div>
             <h3 style="font-size: 1rem;">Vídeo Aula Principal</h3>
-            <p style="font-size: 0.75rem; color: #64748b;">Clique para iniciar a transmissão em HD da matéria</p>
+            <p style="font-size: 0.75rem; color: #64748b;">Clique no play para iniciar a transmissão em HD</p>
           </div>
 
           <div class="info-boxes-grid">
             <div class="info-card">
               <h4>Explicação da Matéria</h4>
-              <p>Bem-vindo à área avançada sobre este módulo. O conteúdo foi preparado utilizando diretrizes modernas de ensino, unindo fixação por vídeo e suporte por Inteligência Artificial.</p>
+              <p>Bem-vindo à aula completa deste módulo. Conteúdo estruturado de acordo com as diretrizes curriculares nacionais, unindo vídeo explicativo e suporte contínuo por Inteligência Artificial.</p>
             </div>
             <div class="info-card">
-              <h4>Resumo Base</h4>
-              <p>📌 Fundamentos cruciais sobre o tema.<br />📌 Tópicos essenciais cobrados em avaliações.<br />📌 Revisão ativa para fixação a longo prazo.</p>
+              <h4>Resumo da Aula</h4>
+              <p>📌 Definições e fundamentos principais.<br />📌 Exemplos práticos do dia a dia.<br />📌 Questões comentadas de fixação rápida.</p>
             </div>
           </div>
         </div>
 
-        <!-- Direita: IA Auxiliadora + Outros Vídeos -->
+        <!-- Direita: Chat com IA e Outros Vídeos -->
         <div>
           <div class="sidebar-card">
             <h4>🤖 IA Auxiliadora Gabaritei</h4>
             <div class="chat-box">
-              Olá! Sou sua IA Auxiliadora especialista neste conteúdo. Qual é a sua dúvida sobre esta matéria?
+              Olá! Sou sua IA especialista no tema selecionado. Qual é a sua dúvida sobre esta matéria?
             </div>
             <div class="chat-input-row">
-              <input type="text" placeholder="Perguntar para a IA..." />
+              <input type="text" placeholder="Escreva sua pergunta..." />
               <button>Enviar</button>
             </div>
           </div>
 
           <div class="sidebar-card">
-            <h4>🎬 Mais Vídeos sobre o Tema</h4>
+            <h4>🎬 Vídeos Complementares</h4>
             <div class="module-list">
               <div class="module-item">
-                📹 Aula Complementar II <br /><small style="color: #64748b;">Duração: 14 min</small>
+                📹 Aprofundamento do Tema <br /><small style="color: #64748b;">Duração: 16 min</small>
               </div>
               <div class="module-item">
-                📹 Resolução de Exercícios <br /><small style="color: #64748b;">Duração: 22 min</small>
+                📹 Exercícios Resolvidos <br /><small style="color: #64748b;">Duração: 20 min</small>
               </div>
             </div>
           </div>
@@ -732,60 +828,120 @@
       </div>
     </div>
 
-    <!-- INFORMAÇÕES DO APP NO RODAPÉ TAMBÉM NO MÓDULO -->
+    <!-- INFORMAÇÕES COMPLETA DO APP NO RODAPÉ DO MÓDULO -->
     <div class="app-footer-info">
-      <h2>🚀 Informações do App</h2>
+      <div class="app-footer-header">
+        <h2>🚀 Informações do App & Guia Completo</h2>
+        <p>Tudo o que você precisa saber sobre a plataforma Gabaritei</p>
+      </div>
+
       <div class="info-app-grid">
         <div class="info-app-card">
           <h3>💡 O que é o Gabaritei?</h3>
-          <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela FichTeck. Idealizado para ajudar na organização diária, controle de progresso e preparação impecável para exames escolares e desafios educacionais.</p>
+          <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela <strong>FichTeck</strong>. Projetado para otimizar sua rotina, o app combina cronogramas inteligentes, resumos diretos ao ponto, listas de exercícios e acompanhamento em tempo real para exames escolares, vestibulares, ENEM e ambiente acadêmico.</p>
         </div>
+
         <div class="info-app-card">
           <h3>🔒 Segurança e Privacidade Total</h3>
-          <p>Aqui a proteção é completa. Todas as credenciais de acesso e históricos são armazenados de forma 100% offline, direto no seu navegador com LocalStorage.</p>
+          <p>Seus dados de progresso e credenciais são armazenados localmente no seu dispositivo utilizando criptografia em <strong>LocalStorage</strong>. O Gabaritei não rastreia suas informações pessoais nem compartilha seus dados de navegação com terceiros.</p>
         </div>
+
         <div class="info-app-card">
-          <h3>⚠️ Recomendações Importantes</h3>
-          <p>Para evitar perdas de dados e progresso, evite limpar o histórico do navegador e não acesse através de guias anônimas.</p>
+          <h3>🧠 Metodologias de Aprendizado</h3>
+          <ul>
+            <li><strong>Repetição Espaçada:</strong> Revisão programada nos momentos exatos para memorização contínua.</li>
+            <li><strong>Técnica Pomodoro:</strong> Blocos de estudo de 25 minutos seguidos de pausas revigorantes.</li>
+            <li><strong>Estudo Ativo:</strong> Resolução de problemas e simulação direta de avaliações reais.</li>
+          </ul>
         </div>
+
         <div class="info-app-card">
-          <h3>👥 Sobre Nós</h3>
-          <p>Plataforma dedicada a entregar os melhores recursos de estudos para você gabaritar as suas avaliações com qualidade e foco.</p>
+          <h3>🤖 IA Auxiliadora Gabaritei</h3>
+          <p>Presente nos módulos de vídeo, nossa IA especializada ajuda você a sanar dúvidas instantaneamente sobre o conteúdo estudado, oferecendo resumos, esquemas conceituais e explicações alternativas passo a passo.</p>
+        </div>
+
+        <div class="info-app-card">
+          <h3>🏆 Gamificação e Conquistas</h3>
+          <p>Acompanhe suas sequências diárias de estudo (streaks), ganhe pontos ao concluir aulas e conquiste insígnias de conhecimento conforme avança pelos ciclos do ensino fundamental ao acadêmico.</p>
+        </div>
+
+        <div class="info-app-card">
+          <h3>📱 Acesso em Qualquer Dispositivo</h3>
+          <p>O Gabaritei é 100% responsivo e otimizado para funcionar perfeitamente em Smartphones, Tablets, Notebooks e Desktops sem necessidade de downloads pesados.</p>
+        </div>
+
+        <div class="info-app-card">
+          <h3>⚠️ Recomendações de Uso</h3>
+          <ul>
+            <li>Não limpe o cachê do navegador para não apagar seu histórico local.</li>
+            <li>Evite usar o modo anônimo se quiser manter seu cadastro ativo.</li>
+            <li>Realize pausas regulares para evitar fadiga mental.</li>
+          </ul>
+        </div>
+
+        <div class="info-app-card">
+          <h3>👥 Sobre a FichTeck</h3>
+          <p>Desenvolvedora focada na criação de softwares educacionais acessíveis, rápidos e intuitivos. Nossa missão é democratizar o acesso a métodos de estudo eficientes para estudantes de todo o Brasil.</p>
+        </div>
+
+        <div class="info-app-card">
+          <h3>💡 Dicas de Ouro para Gabaritar</h3>
+          <ul>
+            <li>Comece pelos módulos em que você sente maior dificuldade.</li>
+            <li>Assista às videoaulas anotando apenas os tópicos-chave.</li>
+            <li>Refaça os simulados periodicamente para testar sua retenção.</li>
+          </ul>
+        </div>
+
+        <div class="info-app-card">
+          <h3>🎧 Suporte e Central de Ajuda</h3>
+          <p>Precisa de suporte ou quer enviar sugestões de novos temas? Entre em contato com a equipe FichTeck através do e-mail suporte@fichteck.com.br.</p>
+        </div>
+
+        <div class="info-app-card">
+          <h3>🔗 Links Rápidos e Termos</h3>
+          <p>• Termos de Serviço<br />• Política de Privacidade<br />• Manual do Estudante<br />• Código de Conduta da Comunidade</p>
+        </div>
+
+        <div class="info-app-card">
+          <h3>📊 Métricas de Progresso</h3>
+          <p>Acompanhe suas horas dedicadas, quantidade de módulos concluídos e porcentagem de acertos em exercícios diretamente no seu painel pessoal.</p>
         </div>
       </div>
+
       <div class="copyright-text">
-        © 2026 FichTeck. Todos os direitos reservados.
+        © 2026 FichTeck. Todos os direitos reservados. Gabaritei é uma marca registrada.
       </div>
     </div>
   </section>
 
   <!-- =======================================
-       6. JAVASCRIPT DE NAVEGAÇÃO E LÓGICA
+       6. JAVASCRIPT NAVEGAÇÃO E REGRAS
        ======================================= -->
   <script>
-    // Banco de dados simulado de usuários
+    // Banco de dados inicial
     const registeredUsers = [
       { user: "admin", pass: "123", email: "admin@gabaritei.com" },
       { user: "Admi_oficial", pass: "123", email: "peixinho1533@gmail.com" }
     ];
 
-    // Alternar entre seções de tela
+    // Troca de telas no sistema
     function showView(viewId) {
       const views = document.querySelectorAll('.view-section');
       views.forEach(v => v.classList.remove('active'));
 
-      // Esconder alertas ao mudar de tela
+      // Ocultar alertas e caixas ao mudar
       document.querySelectorAll('.alert-banner.error, .alert-banner.success').forEach(el => el.classList.remove('show'));
       document.getElementById('recovered-box').style.display = 'none';
 
       const target = document.getElementById(viewId);
       if (target) {
         target.classList.add('active');
-        window.scrollTo(0, 0); // Rolar para o topo ao trocar de tela
+        window.scrollTo(0, 0); // Rolar para o topo
       }
     }
 
-    // Lógica de Login
+    // Ação do Login
     function handleLogin() {
       const u = document.getElementById('login-user').value.trim();
       const p = document.getElementById('login-pass').value.trim();
@@ -801,7 +957,7 @@
       }
     }
 
-    // Lógica de Criar Conta
+    // Ação do Cadastro
     function handleRegister() {
       const u = document.getElementById('reg-user').value.trim();
       const e = document.getElementById('reg-email').value.trim();
@@ -819,7 +975,7 @@
         return;
       }
 
-      // Verificar se o usuário já existe
+      // Validar se usuário já existe
       const exists = registeredUsers.some(item => item.user.toLowerCase() === u.toLowerCase());
 
       if (exists) {
@@ -835,7 +991,7 @@
       }
     }
 
-    // Lógica de Recuperar Senha
+    // Ação de Recuperar Senha
     function handleRecover() {
       const u = document.getElementById('rec-user').value.trim();
       const recoveredBox = document.getElementById('recovered-box');
@@ -846,13 +1002,13 @@
       if (found) {
         passText.innerText = found.pass;
       } else {
-        passText.innerText = "123456"; // Senha padrão para simulação
+        passText.innerText = "123456";
       }
 
       recoveredBox.style.display = "block";
     }
 
-    // Abrir o Módulo de Vídeo com o título selecionado
+    // Abertura do Módulo de Vídeo
     function openModule(moduleTitle) {
       document.getElementById('current-module-title').innerText = moduleTitle;
       showView('view-module');
