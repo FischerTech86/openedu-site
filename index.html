@@ -17,7 +17,8 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      background-color: #dbe5f0;
+      background-color: #080d1a;
+      color: #f1f5f9;
     }
 
     /* CONTÊINER DAS TELAS */
@@ -42,6 +43,7 @@
       background-color: #dbe5f0;
       background-image: radial-gradient(#a3b8cc 1px, transparent 1px);
       background-size: 24px 24px;
+      color: #1e293b;
     }
 
     .auth-card {
@@ -50,7 +52,7 @@
       max-width: 440px;
       padding: 40px 32px;
       border-radius: 24px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -173,7 +175,7 @@
     }
 
     /* =======================================
-       2. TEMA ESCURO (PAINEL E MÓDULO)
+       2. TEMA ESCURO (PAINEL E MÓDULOS)
        ======================================= */
     .dark-theme {
       background: radial-gradient(circle at top center, #0f1c3f 0%, #080d1a 100%);
@@ -199,7 +201,7 @@
       margin-top: 6px;
     }
 
-    /* SISTEMA DE ABAS (TABS) MODERNO */
+    /* SISTEMA DE ABAS (6 NÍVEIS) */
     .tabs-container {
       display: flex;
       justify-content: center;
@@ -207,14 +209,14 @@
       flex-wrap: wrap;
       margin-bottom: 30px;
       width: 100%;
-      max-width: 1050px;
+      max-width: 1100px;
     }
 
     .tab-btn {
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid #1e293b;
       color: #94a3b8;
-      padding: 12px 18px;
+      padding: 12px 16px;
       border-radius: 14px;
       font-weight: 600;
       font-size: 0.85rem;
@@ -226,6 +228,7 @@
       gap: 2px;
       flex: 1;
       min-width: 150px;
+      text-align: center;
     }
 
     .tab-btn span.sub {
@@ -243,14 +246,14 @@
       background: #2563eb;
       border-color: #3b82f6;
       color: #ffffff;
-      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
     }
 
-    /* GRID LIMPO DE MATÉRIAS */
+    /* GRID DE CARDS */
     .tab-content {
       display: none;
       width: 100%;
-      max-width: 950px;
+      max-width: 1000px;
       animation: fadeIn 0.3s ease;
     }
 
@@ -265,17 +268,29 @@
 
     .clean-module-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
       width: 100%;
+    }
+
+    @media (max-width: 850px) {
+      .clean-module-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 550px) {
+      .clean-module-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .modern-module-card {
       background: rgba(15, 23, 42, 0.7);
       border: 1px solid #1e293b;
       border-radius: 14px;
-      padding: 18px 20px;
-      font-size: 0.88rem;
+      padding: 20px 22px;
+      font-size: 0.9rem;
       font-weight: 600;
       color: #f1f5f9;
       display: flex;
@@ -284,6 +299,7 @@
       cursor: pointer;
       transition: all 0.2s ease;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      min-height: 80px;
     }
 
     .modern-module-card:hover {
@@ -298,7 +314,7 @@
       background-color: #ffffff;
       color: #0f172a;
       font-weight: 700;
-      padding: 10px 24px;
+      padding: 12px 30px;
       border-radius: 20px;
       border: none;
       cursor: pointer;
@@ -445,7 +461,7 @@
       cursor: pointer;
     }
 
-    /* SEÇÃO DE INFORMAÇÕES DO APP */
+    /* INFORMAÇÕES DO APP (RODAPÉ) */
     .app-footer-info {
       width: 100%;
       max-width: 1100px;
@@ -718,7 +734,7 @@
     </div>
   </section>
 
-  <!-- 4. TELA DO DASHBOARD (COM 6 ABAS E ESTRUTURA EXPANDIDA) -->
+  <!-- 4. TELA DO DASHBOARD (COM TODAS AS ABAS E MÓDULOS EXACTOS) -->
   <section id="view-dashboard" class="view-section dark-theme">
     <div class="dark-header">
       <h1>Boas-vindas ao Gabaritei!</h1>
@@ -753,7 +769,7 @@
       </button>
     </div>
 
-    <!-- ABA 1: 1º ao 5º Ano -->
+    <!-- ABA 1: Fundamental I (1º ao 5º Ano) -->
     <div id="tab-fund1" class="tab-content active">
       <div class="clean-module-grid">
         <div class="modern-module-card" onclick="openModule('Alfabetização e Letramento')">🧠 Alfabetização e Letramento</div>
@@ -761,41 +777,41 @@
         <div class="modern-module-card" onclick="openModule('Descoberta das Ciências')">🌍 Descoberta das Ciências</div>
         <div class="modern-module-card" onclick="openModule('Leitura de Contos e Interpretação')">📖 Leitura de Contos e Interpretação</div>
         <div class="modern-module-card" onclick="openModule('Jogos de Raciocínio Lógico')">🧩 Jogos de Raciocínio Lógico</div>
-        <div class="modern-module-card" onclick="openModule('Introdução à História')">⏳ Introdução à História e Linhas do Tempo</div>
+        <div class="modern-module-card" onclick="openModule('Introdução à História e Linhas do Tempo')">⏳ Introdução à História e Linhas do Tempo</div>
         <div class="modern-module-card" onclick="openModule('Mapas, Climas e Regiões')">🗺️ Mapas, Climas e Regiões</div>
-        <div class="modern-module-card" onclick="openModule('Educação Financeira')">🟡 Educação Financeira e Poupança</div>
+        <div class="modern-module-card" onclick="openModule('Educação Financeira e Poupança')">🟡 Educação Financeira e Poupança</div>
       </div>
     </div>
 
-    <!-- ABA 2: 6º ao 9º Ano -->
+    <!-- ABA 2: Fundamental II (6º ao 9º Ano) -->
     <div id="tab-fund2" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card" onclick="openModule('Introdução à Álgebra e Geometria')">📐 Introdução à Álgebra e Geometria</div>
         <div class="modern-module-card" onclick="openModule('Biologia, Física e Química Geral')">🧬 Biologia, Física e Química Geral</div>
         <div class="modern-module-card" onclick="openModule('Oficina de Redação Estruturada')">✍️ Oficina de Redação Estruturada</div>
         <div class="modern-module-card" onclick="openModule('História Geral e do Brasil')">🏛️ História Geral e do Brasil</div>
-        <div class="modern-module-card" onclick="openModule('Geografia Crítica e Demografia')">🌎 Geografia Crítica e Demografia</div>
+        <div class="modern-module-card" onclick="openModule('Geografia Crítica e Demografia')">🌍 Geografia Crítica e Demografia</div>
         <div class="modern-module-card" onclick="openModule('Língua Portuguesa e Sintaxe')">📚 Língua Portuguesa e Sintaxe</div>
         <div class="modern-module-card" onclick="openModule('Lógica de Programação em Blocos')">💻 Lógica de Programação em Blocos</div>
         <div class="modern-module-card" onclick="openModule('Atualidades, Cidadania e Ética')">🌐 Atualidades, Cidadania e Ética</div>
       </div>
     </div>
 
-    <!-- ABA 3: Ensino Médio -->
+    <!-- ABA 3: Ensino Médio (1º ao 3º Ano) -->
     <div id="tab-medio" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card" onclick="openModule('Simulados Completos Padrão ENEM')">🎯 Simulados Completos Padrão ENEM</div>
         <div class="modern-module-card" onclick="openModule('Física Avançada e Química Orgânica')">🔬 Física Avançada e Química Orgânica</div>
         <div class="modern-module-card" onclick="openModule('Redação Dissertativa-Argumentativa')">📝 Redação Dissertativa-Argumentativa</div>
-        <div class="modern-module-card" onclick="openModule('Trigonometria e Cálculo')">📐 Trigonometria e Introdução ao Cálculo</div>
+        <div class="modern-module-card" onclick="openModule('Trigonometria e Introdução ao Cálculo')">📐 Trigonometria e Introdução ao Cálculo</div>
         <div class="modern-module-card" onclick="openModule('Ecologia, Genética e Evolução')">🌱 Ecologia, Genética e Evolução</div>
-        <div class="modern-module-card" onclick="openModule('Filosofia e Sociologia')">📜 Filosofia, Sociologia e Pensadores</div>
+        <div class="modern-module-card" onclick="openModule('Filosofia, Sociologia e Pensadores')">📜 Filosofia, Sociologia e Pensadores</div>
         <div class="modern-module-card" onclick="openModule('Geopolítica e História Contemporânea')">🌍 Geopolítica e História Contemporânea</div>
         <div class="modern-module-card" onclick="openModule('Resumos e Análises Literárias')">🎧 Resumos e Análises Literárias</div>
       </div>
     </div>
 
-    <!-- ABA 4: Ensino Superior -->
+    <!-- ABA 4: Ensino Superior (Graduação) -->
     <div id="tab-superior" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card" onclick="openModule('Referências Bibliográficas (ABNT/APA)')">🎓 Referências Bibliográficas (ABNT/APA)</div>
@@ -809,7 +825,7 @@
       </div>
     </div>
 
-    <!-- ABA 5: Concursos Públicos -->
+    <!-- ABA 5: Concursos Públicos (Carreiras Públicas) -->
     <div id="tab-concursos" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card" onclick="openModule('Direito Administrativo e Constitucional')">⚖️ Direito Administrativo e Constitucional</div>
@@ -823,7 +839,7 @@
       </div>
     </div>
 
-    <!-- ABA 6: Vestibulares -->
+    <!-- ABA 6: Vestibulares (ENEM & Provas) -->
     <div id="tab-vestibulares" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card" onclick="openModule('Maratonas ENEM & Provas Seriadas')">🎯 Maratonas ENEM & Provas Seriadas</div>
@@ -899,7 +915,7 @@
       <div class="top-bar-module">
         <div>
           <h2 style="font-size: 1.4rem;">Módulo Especializado</h2>
-          <p style="font-size: 0.85rem; color: #38bdf8;">Conteúdo Atual: <span id="current-module-title">Alfabetização e Letramento</span></p>
+          <p style="font-size: 0.85rem; color: #38bdf8;">Conteúdo Selecionado: <span id="current-module-title">Alfabetização e Letramento</span></p>
         </div>
         <button class="btn-back" onclick="showView('view-dashboard')">Voltar ao Painel</button>
       </div>
@@ -919,7 +935,7 @@
             </div>
             <div class="info-card">
               <h4>Resumo da Aula</h4>
-              <p>📌 Definições e fundamentos principais.<br />📌 Exemplos práticos do dia a dia.<br />📌 Questões comentadas.</p>
+              <p>📌 Definições e fundamentos principais.<br />📌 Exemplos práticos do dia a dia.<br />📌 Questões comentadas do tema.</p>
             </div>
           </div>
         </div>
@@ -993,7 +1009,7 @@
     </div>
   </div>
 
-  <!-- 7. JAVASCRIPT DE NAVEGAÇÃO E ABAS -->
+  <!-- 7. JAVASCRIPT COMPLETO E FUNCIONAL -->
   <script>
     const registeredUsers = [
       { user: "admin", pass: "123", email: "admin@gabaritei.com" },
@@ -1066,7 +1082,7 @@
         
         setTimeout(() => {
           showView('view-dashboard');
-        }, 1500);
+        }, 1200);
       }
     }
 
