@@ -71,7 +71,6 @@
       margin-bottom: 5px;
     }
 
-    /* Banners de Alerta */
     .alert-banner {
       padding: 12px 16px;
       border-radius: 12px;
@@ -101,7 +100,6 @@
       display: block;
     }
 
-    /* Form Grupos */
     .form-group {
       display: flex;
       flex-direction: column;
@@ -186,7 +184,7 @@
 
     .dark-header {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     .dark-header h1 {
@@ -196,9 +194,104 @@
     }
 
     .dark-header p {
-      color: #64748b;
-      font-size: 0.85rem;
+      color: #94a3b8;
+      font-size: 0.9rem;
       margin-top: 6px;
+    }
+
+    /* SISTEMA DE ABAS (TABS) MODERNO */
+    .tabs-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .tab-btn {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid #1e293b;
+      color: #94a3b8;
+      padding: 12px 20px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .tab-btn span.sub {
+      font-size: 0.65rem;
+      opacity: 0.7;
+      text-transform: uppercase;
+    }
+
+    .tab-btn:hover {
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+
+    .tab-btn.active {
+      background: #2563eb;
+      border-color: #3b82f6;
+      color: #ffffff;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    /* GRID LIMPO DE MATÉRIAS */
+    .tab-content {
+      display: none;
+      width: 100%;
+      max-width: 900px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .clean-module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      width: 100%;
+    }
+
+    .modern-module-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 18px 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .modern-module-card:hover {
+      background: #1e293b;
+      border-color: #38bdf8;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
     }
 
     .btn-exit {
@@ -209,72 +302,13 @@
       border-radius: 20px;
       border: none;
       cursor: pointer;
-      margin: 30px auto 10px auto;
+      margin: 40px auto 10px auto;
       display: block;
       transition: opacity 0.2s;
     }
 
     .btn-exit:hover {
       opacity: 0.9;
-    }
-
-    /* Grid do Dashboard */
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      width: 100%;
-      max-width: 1100px;
-    }
-
-    .dash-card {
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid #1e293b;
-      border-radius: 16px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .dash-card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-
-    .dash-card span.subtitle {
-      font-size: 0.65rem;
-      color: #38bdf8;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .module-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .module-item {
-      background: #111c35;
-      border: 1px solid #1e293b;
-      padding: 10px 12px;
-      border-radius: 8px;
-      font-size: 0.75rem;
-      color: #cbd5e1;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .module-item:hover {
-      background: #2563eb;
-      color: #ffffff;
-      border-color: #3b82f6;
     }
 
     /* Módulo de Vídeo */
@@ -411,9 +445,7 @@
       cursor: pointer;
     }
 
-    /* =======================================
-       3. SEÇÃO DE INFORMAÇÕES DO APP
-       ======================================= */
+    /* SEÇÃO DE INFORMAÇÕES DO APP */
     .app-footer-info {
       width: 100%;
       max-width: 1100px;
@@ -450,12 +482,6 @@
       border: 1px solid #1e293b;
       border-radius: 14px;
       padding: 22px;
-      transition: transform 0.2s;
-    }
-
-    .info-app-card:hover {
-      transform: translateY(-2px);
-      border-color: #2563eb;
     }
 
     .info-app-card h3 {
@@ -492,7 +518,6 @@
       left: 0;
     }
 
-    /* ESTILO ESPECÍFICO DOS LINKS RÁPIDOS */
     .interactive-links-list {
       list-style: none !important;
       padding: 0 !important;
@@ -515,18 +540,18 @@
       cursor: pointer;
       display: inline-block;
       transition: all 0.2s;
-      padding: 4px 8px;
-      border-radius: 6px;
+      padding: 6px 10px;
+      border-radius: 8px;
       background: rgba(56, 189, 248, 0.08);
       border: 1px solid rgba(56, 189, 248, 0.2);
       width: 100%;
+      text-align: left;
     }
 
     .interactive-link-btn:hover {
       background: #2563eb;
       color: #ffffff;
       border-color: #3b82f6;
-      transform: translateX(4px);
     }
 
     .copyright-text {
@@ -537,9 +562,7 @@
       padding-bottom: 25px;
     }
 
-    /* =======================================
-       4. MODAL POPUP PARA LER OS TERMOS
-       ======================================= */
+    /* MODAL POPUP */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -605,9 +628,7 @@
 </head>
 <body>
 
-  <!-- =======================================
-       1. TELA DE LOGIN (INICIAL OBRIGATÓRIA)
-       ======================================= -->
+  <!-- 1. TELA DE LOGIN -->
   <section id="view-login" class="view-section light-theme active">
     <div class="auth-card">
       <h1 class="auth-title">GABARITEI</h1>
@@ -636,9 +657,7 @@
     </div>
   </section>
 
-  <!-- =======================================
-       2. TELA DE CRIAR CONTA
-       ======================================= -->
+  <!-- 2. TELA DE CRIAR CONTA -->
   <section id="view-register" class="view-section light-theme">
     <div class="auth-card">
       <h1 class="auth-title">GABARITEI</h1>
@@ -672,9 +691,7 @@
     </div>
   </section>
 
-  <!-- =======================================
-       3. TELA DE RECUPERAR SENHA
-       ======================================= -->
+  <!-- 3. TELA DE RECUPERAR SENHA -->
   <section id="view-recover" class="view-section light-theme">
     <div class="auth-card">
       <h1 class="auth-title">GABARITEI</h1>
@@ -701,84 +718,92 @@
     </div>
   </section>
 
-  <!-- =======================================
-       4. TELA DO DASHBOARD (PAINEL PRINCIPAL)
-       ======================================= -->
+  <!-- 4. TELA DO DASHBOARD (RENOVADO COM ABAS) -->
   <section id="view-dashboard" class="view-section dark-theme">
     <div class="dark-header">
       <h1>Boas-vindas ao Gabaritei!</h1>
-      <p>Selecione um dos conteúdos completos listados abaixo para abrir o Ambiente Integrado de Estudos</p>
+      <p>Escolha o seu nível de ensino abaixo para acessar os conteúdos</p>
     </div>
 
-    <div class="dashboard-grid">
-      <!-- 1º ao 5º Ano -->
-      <div class="dash-card">
-        <h3>1º ao 5º Ano</h3>
-        <span class="subtitle">Ensino Fundamental I</span>
-        <div class="module-list">
-          <div class="module-item" onclick="openModule('Alfabetização e Letramento')">🧠 Alfabetização e Letramento</div>
-          <div class="module-item" onclick="openModule('Tabuada e Matemática Ilustrada')">🎨 Tabuada e Matemática Ilustrada</div>
-          <div class="module-item" onclick="openModule('Descoberta das Ciências')">🌍 Descoberta das Ciências</div>
-          <div class="module-item" onclick="openModule('Leitura de Contos e Interpretação')">📖 Leitura de Contos e Interpretação</div>
-          <div class="module-item" onclick="openModule('Jogos de Raciocínio Lógico')">🧩 Jogos de Raciocínio Lógico</div>
-          <div class="module-item" onclick="openModule('Introdução à História')">⏳ Introdução à História e Linhas do Tempo</div>
-          <div class="module-item" onclick="openModule('Mapas, Climas e Regiões')">🗺️ Mapas, Climas e Regiões</div>
-          <div class="module-item" onclick="openModule('Educação Financeira')">🟡 Educação Financeira e Poupança</div>
-        </div>
-      </div>
+    <!-- NAVEGAÇÃO POR ABAS -->
+    <div class="tabs-container">
+      <button class="tab-btn active" onclick="switchTab('tab-fund1', this)">
+        <span>1º ao 5º Ano</span>
+        <span class="sub">Fundamental I</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('tab-fund2', this)">
+        <span>6º ao 9º Ano</span>
+        <span class="sub">Fundamental II</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('tab-medio', this)">
+        <span>1º ao 3º Ano</span>
+        <span class="sub">Ensino Médio</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('tab-superior', this)">
+        <span>Ensino Superior</span>
+        <span class="sub">Graduação</span>
+      </button>
+    </div>
 
-      <!-- 6º ao 9º Ano -->
-      <div class="dash-card">
-        <h3>6º ao 9º Ano</h3>
-        <span class="subtitle">Ensino Fundamental II</span>
-        <div class="module-list">
-          <div class="module-item" onclick="openModule('Introdução à Álgebra e Geometria')">📐 Introdução à Álgebra e Geometria</div>
-          <div class="module-item" onclick="openModule('Biologia, Física e Química Geral')">🧬 Biologia, Física e Química Geral</div>
-          <div class="module-item" onclick="openModule('Oficina de Redação Estruturada')">✍️ Oficina de Redação Estruturada</div>
-          <div class="module-item" onclick="openModule('História Geral e do Brasil')">🏛️ História Geral e do Brasil</div>
-          <div class="module-item" onclick="openModule('Geografia Crítica e Demografia')">🌎 Geografia Crítica e Demografia</div>
-          <div class="module-item" onclick="openModule('Língua Portuguesa e Sintaxe')">📚 Língua Portuguesa e Sintaxe</div>
-          <div class="module-item" onclick="openModule('Lógica de Programação em Blocos')">💻 Lógica de Programação em Blocos</div>
-          <div class="module-item" onclick="openModule('Atualidades, Cidadania e Ética')">🌐 Atualidades, Cidadania e Ética</div>
-        </div>
+    <!-- CONTEÚDO DA ABA 1: 1º ao 5º Ano -->
+    <div id="tab-fund1" class="tab-content active">
+      <div class="clean-module-grid">
+        <div class="modern-module-card" onclick="openModule('Alfabetização e Letramento')">🧠 Alfabetização e Letramento</div>
+        <div class="modern-module-card" onclick="openModule('Tabuada e Matemática Ilustrada')">🎨 Tabuada e Matemática Ilustrada</div>
+        <div class="modern-module-card" onclick="openModule('Descoberta das Ciências')">🌍 Descoberta das Ciências</div>
+        <div class="modern-module-card" onclick="openModule('Leitura de Contos e Interpretação')">📖 Leitura de Contos e Interpretação</div>
+        <div class="modern-module-card" onclick="openModule('Jogos de Raciocínio Lógico')">🧩 Jogos de Raciocínio Lógico</div>
+        <div class="modern-module-card" onclick="openModule('Introdução à História')">⏳ Introdução à História e Linhas do Tempo</div>
+        <div class="modern-module-card" onclick="openModule('Mapas, Climas e Regiões')">🗺️ Mapas, Climas e Regiões</div>
+        <div class="modern-module-card" onclick="openModule('Educação Financeira')">🟡 Educação Financeira e Poupança</div>
       </div>
+    </div>
 
-      <!-- 1º ao 3º Ano -->
-      <div class="dash-card">
-        <h3>1º ao 3º Ano</h3>
-        <span class="subtitle">Ensino Médio</span>
-        <div class="module-list">
-          <div class="module-item" onclick="openModule('Simulados Completos Padrão ENEM')">🎯 Simulados Completos Padrão ENEM</div>
-          <div class="module-item" onclick="openModule('Física Avançada e Química Orgânica')">🔬 Física Avançada e Química Orgânica</div>
-          <div class="module-item" onclick="openModule('Redação Dissertativa-Argumentativa')">📝 Redação Dissertativa-Argumentativa</div>
-          <div class="module-item" onclick="openModule('Trigonometria e Cálculo')">📐 Trigonometria e Introdução ao Cálculo</div>
-          <div class="module-item" onclick="openModule('Ecologia, Genética e Evolução')">🌱 Ecologia, Genética e Evolução</div>
-          <div class="module-item" onclick="openModule('Filosofia e Sociologia')">📜 Filosofia, Sociologia e Pensadores</div>
-          <div class="module-item" onclick="openModule('Geopolítica e História Contemporânea')">🌍 Geopolítica e História Contemporânea</div>
-          <div class="module-item" onclick="openModule('Resumos e Análises Literárias')">🎧 Resumos e Análises Literárias</div>
-        </div>
+    <!-- CONTEÚDO DA ABA 2: 6º ao 9º Ano -->
+    <div id="tab-fund2" class="tab-content">
+      <div class="clean-module-grid">
+        <div class="modern-module-card" onclick="openModule('Introdução à Álgebra e Geometria')">📐 Introdução à Álgebra e Geometria</div>
+        <div class="modern-module-card" onclick="openModule('Biologia, Física e Química Geral')">🧬 Biologia, Física e Química Geral</div>
+        <div class="modern-module-card" onclick="openModule('Oficina de Redação Estruturada')">✍️ Oficina de Redação Estruturada</div>
+        <div class="modern-module-card" onclick="openModule('História Geral e do Brasil')">🏛️ História Geral e do Brasil</div>
+        <div class="modern-module-card" onclick="openModule('Geografia Crítica e Demografia')">🌎 Geografia Crítica e Demografia</div>
+        <div class="modern-module-card" onclick="openModule('Língua Portuguesa e Sintaxe')">📚 Língua Portuguesa e Sintaxe</div>
+        <div class="modern-module-card" onclick="openModule('Lógica de Programação em Blocos')">💻 Lógica de Programação em Blocos</div>
+        <div class="modern-module-card" onclick="openModule('Atualidades, Cidadania e Ética')">🌐 Atualidades, Cidadania e Ética</div>
       </div>
+    </div>
 
-      <!-- Ensino Superior -->
-      <div class="dash-card">
-        <h3>Ensino Superior</h3>
-        <span class="subtitle">Graduação e Especializações</span>
-        <div class="module-list">
-          <div class="module-item" onclick="openModule('Referências Bibliográficas (ABNT/APA)')">🎓 Referências Bibliográficas (ABNT/APA)</div>
-          <div class="module-item" onclick="openModule('Projetos de TCC e Artigos Científicos')">🛠️ Projetos de TCC e Artigos Científicos</div>
-          <div class="module-item" onclick="openModule('Estatística Aplicada e Análise de Dados')">📊 Estatística Aplicada e Análise de Dados</div>
-          <div class="module-item" onclick="openModule('Metodologia de Pesquisa Avançada')">🔬 Metodologia de Pesquisa Avançada</div>
-          <div class="module-item" onclick="openModule('Oratória e Apresentação de Bancas')">🗣️ Oratória e Apresentação de Bancas</div>
-          <div class="module-item" onclick="openModule('Controle de Horas Complementares')">📋 Controle de Horas Complementares</div>
-          <div class="module-item" onclick="openModule('Periódicos e Artigos Internacionais')">📰 Periódicos e Artigos Internacionais</div>
-          <div class="module-item" onclick="openModule('Temporizador Pomodoro Integrado')">⏱️ Temporizador Pomodoro Integrado</div>
-        </div>
+    <!-- CONTEÚDO DA ABA 3: Ensino Médio -->
+    <div id="tab-medio" class="tab-content">
+      <div class="clean-module-grid">
+        <div class="modern-module-card" onclick="openModule('Simulados Completos Padrão ENEM')">🎯 Simulados Completos Padrão ENEM</div>
+        <div class="modern-module-card" onclick="openModule('Física Avançada e Química Orgânica')">🔬 Física Avançada e Química Orgânica</div>
+        <div class="modern-module-card" onclick="openModule('Redação Dissertativa-Argumentativa')">📝 Redação Dissertativa-Argumentativa</div>
+        <div class="modern-module-card" onclick="openModule('Trigonometria e Cálculo')">📐 Trigonometria e Introdução ao Cálculo</div>
+        <div class="modern-module-card" onclick="openModule('Ecologia, Genética e Evolução')">🌱 Ecologia, Genética e Evolução</div>
+        <div class="modern-module-card" onclick="openModule('Filosofia e Sociologia')">📜 Filosofia, Sociologia e Pensadores</div>
+        <div class="modern-module-card" onclick="openModule('Geopolítica e História Contemporânea')">🌍 Geopolítica e História Contemporânea</div>
+        <div class="modern-module-card" onclick="openModule('Resumos e Análises Literárias')">🎧 Resumos e Análises Literárias</div>
+      </div>
+    </div>
+
+    <!-- CONTEÚDO DA ABA 4: Ensino Superior -->
+    <div id="tab-superior" class="tab-content">
+      <div class="clean-module-grid">
+        <div class="modern-module-card" onclick="openModule('Referências Bibliográficas (ABNT/APA)')">🎓 Referências Bibliográficas (ABNT/APA)</div>
+        <div class="modern-module-card" onclick="openModule('Projetos de TCC e Artigos Científicos')">🛠️ Projetos de TCC e Artigos Científicos</div>
+        <div class="modern-module-card" onclick="openModule('Estatística Aplicada e Análise de Dados')">📊 Estatística Aplicada e Análise de Dados</div>
+        <div class="modern-module-card" onclick="openModule('Metodologia de Pesquisa Avançada')">🔬 Metodologia de Pesquisa Avançada</div>
+        <div class="modern-module-card" onclick="openModule('Oratória e Apresentação de Bancas')">🗣️ Oratória e Apresentação de Bancas</div>
+        <div class="modern-module-card" onclick="openModule('Controle de Horas Complementares')">📋 Controle de Horas Complementares</div>
+        <div class="modern-module-card" onclick="openModule('Periódicos e Artigos Internacionais')">📰 Periódicos e Artigos Internacionais</div>
+        <div class="modern-module-card" onclick="openModule('Temporizador Pomodoro Integrado')">⏱️ Temporizador Pomodoro Integrado</div>
       </div>
     </div>
 
     <button class="btn-exit" onclick="showView('view-login')">Sair do Sistema</button>
 
-    <!-- RODAPÉ DE INFORMAÇÕES DO DASHBOARD -->
+    <!-- RODAPÉ DE INFORMAÇÕES -->
     <div class="app-footer-info">
       <div class="app-footer-header">
         <h2>🚀 Informações do App & Guia Completo</h2>
@@ -815,7 +840,6 @@
           <p>Acompanhe suas ofensivas diárias (streaks), ganhe pontos e desbloqueie insígnias conforme avança nas matérias.</p>
         </div>
 
-        <!-- CARD DE LINKS RÁPIDOS E TERMOS FUNCIONAIS -->
         <div class="info-app-card">
           <h3>🔗 Links Rápidos e Termos</h3>
           <ul class="interactive-links-list">
@@ -833,9 +857,7 @@
     </div>
   </section>
 
-  <!-- =======================================
-       5. TELA DE MÓDULO DE VÍDEO
-       ======================================= -->
+  <!-- 5. TELA DE MÓDULO DE VÍDEO -->
   <section id="view-module" class="view-section dark-theme">
     <div class="video-page-container">
       <div class="top-bar-module">
@@ -880,9 +902,9 @@
 
           <div class="sidebar-card">
             <h4>🎬 Vídeos Complementares</h4>
-            <div class="module-list">
-              <div class="module-item">📹 Aprofundamento do Tema <br /><small style="color: #64748b;">Duração: 16 min</small></div>
-              <div class="module-item">📹 Exercícios Resolvidos <br /><small style="color: #64748b;">Duração: 20 min</small></div>
+            <div class="clean-module-grid" style="grid-template-columns: 1fr;">
+              <div class="modern-module-card" style="font-size: 0.78rem;">📹 Aprofundamento do Tema <br /><small style="color: #64748b; font-weight: normal;">Duração: 16 min</small></div>
+              <div class="modern-module-card" style="font-size: 0.78rem;">📹 Exercícios Resolvidos <br /><small style="color: #64748b; font-weight: normal;">Duração: 20 min</small></div>
             </div>
           </div>
         </div>
@@ -924,9 +946,7 @@
     </div>
   </section>
 
-  <!-- =======================================
-       6. MODAL POPUP (JANELA DOS LINKS)
-       ======================================= -->
+  <!-- 6. MODAL POPUP -->
   <div id="info-modal-overlay" class="modal-overlay">
     <div class="modal-card">
       <h3 id="modal-title">Título do Documento</h3>
@@ -937,17 +957,13 @@
     </div>
   </div>
 
-  <!-- =======================================
-       7. JAVASCRIPT DE NAVEGAÇÃO E MODAL
-       ======================================= -->
+  <!-- 7. JAVASCRIPT DE NAVEGAÇÃO E ABAS -->
   <script>
-    // Banco de usuários cadastrados
     const registeredUsers = [
       { user: "admin", pass: "123", email: "admin@gabaritei.com" },
       { user: "Admi_oficial", pass: "123", email: "peixinho1533@gmail.com" }
     ];
 
-    // Alternar visualização de telas
     function showView(viewId) {
       const views = document.querySelectorAll('.view-section');
       views.forEach(v => v.classList.remove('active'));
@@ -962,7 +978,15 @@
       }
     }
 
-    // Processamento de Login
+    /* TROCAR DE ABA NO DASHBOARD */
+    function switchTab(tabId, btnElement) {
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById(tabId).classList.add('active');
+      btnElement.classList.add('active');
+    }
+
     function handleLogin() {
       const u = document.getElementById('login-user').value.trim();
       const p = document.getElementById('login-pass').value.trim();
@@ -978,7 +1002,6 @@
       }
     }
 
-    // Processamento de Cadastro
     function handleRegister() {
       const u = document.getElementById('reg-user').value.trim();
       const e = document.getElementById('reg-email').value.trim();
@@ -1011,7 +1034,6 @@
       }
     }
 
-    // Recuperar Senha
     function handleRecover() {
       const u = document.getElementById('rec-user').value.trim();
       const recoveredBox = document.getElementById('recovered-box');
@@ -1028,13 +1050,11 @@
       recoveredBox.style.display = "block";
     }
 
-    // Abrir Módulo
     function openModule(moduleTitle) {
       document.getElementById('current-module-title').innerText = moduleTitle;
       showView('view-module');
     }
 
-    /* LÓGICA DOS LINKS E MODAL */
     const modalData = {
       termos: {
         title: "📄 Termos de Serviço - Gabaritei",
