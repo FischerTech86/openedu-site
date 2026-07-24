@@ -37,7 +37,7 @@
     }
 
     /* =======================================
-       1. TEMA CLARO (LOGIN / CADASTRO / RECUPERAÇÃO)
+       1. TEMA CLARO (LOGIN / CADASTRO)
        ======================================= */
     .light-theme {
       background-color: #dbe5f0;
@@ -59,120 +59,24 @@
       gap: 16px;
     }
 
-    .auth-title {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: #1d4ed8;
-      letter-spacing: 1px;
-    }
+    .auth-title { font-size: 2.2rem; font-weight: 800; color: #1d4ed8; }
+    .auth-subtitle { font-size: 1rem; font-weight: 700; color: #1e293b; }
+    
+    .alert-banner { padding: 12px 16px; border-radius: 12px; font-size: 0.85rem; font-weight: 500; display: none; }
+    .alert-banner.show { display: block; }
+    .alert-banner.success { background-color: #d1fae5; color: #065f46; }
+    .alert-banner.error { background-color: #fce7f3; color: #9f1239; }
+    .alert-banner.info { background-color: #dbeafe; color: #1e40af; display: block; }
 
-    .auth-subtitle {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #1e293b;
-      margin-bottom: 5px;
-    }
+    .form-group { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; text-align: left; }
+    .form-group label { font-size: 0.8rem; font-weight: 600; color: #334155; }
+    .form-group input { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid transparent; background-color: #dbe7f6; outline: none; }
+    .form-group input:focus { border-color: #2563eb; background-color: #edf4fc; }
 
-    .alert-banner {
-      padding: 12px 16px;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      text-align: center;
-      display: none;
-    }
-
-    .alert-banner.show {
-      display: block;
-    }
-
-    .alert-banner.success {
-      background-color: #d1fae5;
-      color: #065f46;
-    }
-
-    .alert-banner.error {
-      background-color: #fce7f3;
-      color: #9f1239;
-    }
-
-    .alert-banner.info {
-      background-color: #dbeafe;
-      color: #1e40af;
-      display: block;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 6px;
-      text-align: left;
-    }
-
-    .form-group label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #334155;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 10px;
-      border: 1px solid transparent;
-      background-color: #dbe7f6;
-      color: #1e293b;
-      font-size: 0.9rem;
-      outline: none;
-    }
-
-    .form-group input:focus {
-      border-color: #2563eb;
-      background-color: #edf4fc;
-    }
-
-    .btn-primary {
-      width: 100%;
-      padding: 14px;
-      border-radius: 20px;
-      border: none;
-      background-color: #2563eb;
-      color: #ffffff;
-      font-size: 0.95rem;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: background-color 0.2s;
-    }
-
-    .btn-primary:hover {
-      background-color: #1d4ed8;
-    }
-
-    .auth-link {
-      font-size: 0.8rem;
-      color: #2563eb;
-      text-decoration: none;
-      font-weight: 600;
-      margin-top: 4px;
-      cursor: pointer;
-    }
-
-    .auth-link:hover {
-      text-decoration: underline;
-    }
-
-    .recovered-box {
-      border: 2px dashed #2563eb;
-      border-radius: 12px;
-      padding: 14px;
-      margin-top: 10px;
-      color: #1d4ed8;
-      font-weight: 700;
-      font-size: 0.85rem;
-      display: none;
-    }
+    .btn-primary { width: 100%; padding: 14px; border-radius: 20px; border: none; background-color: #2563eb; color: #ffffff; font-weight: 700; cursor: pointer; transition: 0.2s; }
+    .btn-primary:hover { background-color: #1d4ed8; }
+    .auth-link { font-size: 0.8rem; color: #2563eb; text-decoration: none; font-weight: 600; cursor: pointer; }
+    .auth-link:hover { text-decoration: underline; }
 
     /* =======================================
        2. TEMA ESCURO (PAINEL E MÓDULOS)
@@ -184,1260 +88,531 @@
       padding-top: 40px;
     }
 
-    .dark-header {
-      text-align: center;
-      margin-bottom: 25px;
-    }
+    .dark-header { text-align: center; margin-bottom: 25px; }
+    .dark-header h1 { font-size: 2.2rem; font-weight: 800; color: #ffffff; }
+    .dark-header p { color: #94a3b8; font-size: 0.9rem; margin-top: 6px; }
 
-    .dark-header h1 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: #ffffff;
-    }
+    .tabs-container { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; width: 100%; max-width: 1100px; }
+    .tab-btn { background: rgba(15, 23, 42, 0.8); border: 1px solid #1e293b; color: #94a3b8; padding: 12px 16px; border-radius: 14px; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 150px; transition: 0.2s; }
+    .tab-btn span.sub { font-size: 0.65rem; opacity: 0.7; text-transform: uppercase; }
+    .tab-btn:hover, .tab-btn.active { background: #2563eb; border-color: #3b82f6; color: #ffffff; }
 
-    .dark-header p {
-      color: #94a3b8;
-      font-size: 0.9rem;
-      margin-top: 6px;
-    }
+    .tab-content { display: none; width: 100%; max-width: 1100px; animation: fadeIn 0.3s ease; }
+    .tab-content.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* NAVEGAÇÃO DE ABAS */
-    .tabs-container {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 30px;
-      width: 100%;
-      max-width: 1100px;
-    }
+    .clean-module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; width: 100%; }
+    .modern-module-card { background: rgba(15, 23, 42, 0.75); border: 1px solid #1e293b; border-radius: 16px; padding: 20px; cursor: pointer; transition: 0.25s; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+    .modern-module-card:hover { background: #1e293b; border-color: #38bdf8; transform: translateY(-4px); }
+    .card-subject-title { font-size: 1.05rem; font-weight: 700; color: #38bdf8; margin-bottom: 10px; }
+    .card-topics-list { font-size: 0.82rem; color: #cbd5e1; line-height: 1.5; padding-left: 15px; }
 
-    .tab-btn {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid #1e293b;
-      color: #94a3b8;
-      padding: 12px 16px;
-      border-radius: 14px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-      flex: 1;
-      min-width: 150px;
-      text-align: center;
-    }
+    .btn-exit, .btn-back { background-color: #ffffff; color: #0f172a; font-weight: 700; padding: 10px 25px; border-radius: 20px; border: none; cursor: pointer; }
+    .btn-exit { display: block; margin: 40px auto 10px auto; }
 
-    .tab-btn span.sub {
-      font-size: 0.65rem;
-      opacity: 0.7;
-      text-transform: uppercase;
-    }
+    /* =======================================
+       3. NOVO: SELEÇÃO DO ENEM
+       ======================================= */
+    .enem-header-box { width: 100%; max-width: 1100px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
+    .video-intro-enem { background: #000; border: 1px solid #1e293b; border-radius: 16px; width: 100%; height: 350px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 30px; position: relative; }
+    .play-btn { width: 0; height: 0; border-top: 20px solid transparent; border-bottom: 20px solid transparent; border-left: 35px solid #38bdf8; margin-bottom: 15px; cursor: pointer; }
+    
+    .year-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; width: 100%; max-width: 1100px; }
+    .year-card { background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: 0.2s; }
+    .year-card:hover { background: #1e293b; border-color: #38bdf8; transform: scale(1.05); }
+    .year-card h3 { color: #fff; font-size: 1.5rem; }
+    .year-card p { color: #94a3b8; font-size: 0.8rem; margin-top: 5px; }
 
-    .tab-btn:hover {
-      border-color: #38bdf8;
-      color: #ffffff;
-    }
+    /* =======================================
+       4. NOVO: SIMULADOR DE PROVA
+       ======================================= */
+    .exam-layout { display: grid; grid-template-columns: 2.5fr 1fr; gap: 20px; width: 100%; max-width: 1100px; }
+    @media (max-width: 850px) { .exam-layout { grid-template-columns: 1fr; } }
+    
+    .question-panel { background: #0f172a; border: 1px solid #1e293b; border-radius: 16px; padding: 30px; }
+    .q-header { display: flex; justify-content: space-between; border-bottom: 1px solid #1e293b; padding-bottom: 15px; margin-bottom: 20px; }
+    .q-number { font-size: 1.2rem; font-weight: 800; color: #38bdf8; }
+    .q-text { font-size: 0.95rem; line-height: 1.6; color: #e2e8f0; margin-bottom: 25px; text-align: justify; }
+    
+    .options-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px; }
+    .option-label { display: flex; align-items: flex-start; gap: 10px; padding: 15px; background: #1e293b; border: 1px solid transparent; border-radius: 10px; cursor: pointer; transition: 0.2s; font-size: 0.9rem; }
+    .option-label:hover { background: #334155; }
+    .option-label input { margin-top: 4px; accent-color: #38bdf8; }
+    .option-label.selected { border-color: #38bdf8; background: rgba(56, 189, 248, 0.1); }
 
-    .tab-btn.active {
-      background: #2563eb;
-      border-color: #3b82f6;
-      color: #ffffff;
-      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
-    }
+    .exam-actions { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .btn-exam { background: #2563eb; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    .btn-exam:hover { background: #1d4ed8; }
+    .btn-exam.outline { background: transparent; border: 1px solid #38bdf8; color: #38bdf8; }
+    .btn-exam.outline:hover { background: rgba(56, 189, 248, 0.1); }
+    .btn-exam.success { background: #059669; }
 
-    /* GRID DE CARDS POR MATÉRIA/TEMA SEPARADO */
-    .tab-content {
-      display: none;
-      width: 100%;
-      max-width: 1100px;
-      animation: fadeIn 0.3s ease;
-    }
+    .feedback-box { display: none; padding: 20px; border-radius: 12px; margin-top: 25px; font-size: 0.9rem; line-height: 1.5; }
+    .feedback-box.correct { display: block; background: rgba(6, 78, 59, 0.3); border: 1px solid #059669; color: #a7f3d0; }
+    .feedback-box.incorrect { display: block; background: rgba(127, 29, 29, 0.3); border: 1px solid #dc2626; color: #fecaca; }
+    .feedback-box h4 { margin-bottom: 8px; font-size: 1.1rem; }
 
-    .tab-content.active {
-      display: block;
-    }
+    /* Barra Lateral do Exame */
+    .exam-sidebar { display: flex; flex-direction: column; gap: 15px; }
+    .sidebar-widget { background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 20px; }
+    .sidebar-widget h4 { font-size: 0.9rem; color: #fff; margin-bottom: 15px; border-bottom: 1px solid #1e293b; padding-bottom: 10px; }
+    
+    /* Navegador de Questões */
+    .q-navigator { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .q-nav-btn { background: #1e293b; border: 1px solid transparent; color: #fff; border-radius: 6px; padding: 8px 0; font-weight: 700; cursor: pointer; transition: 0.2s; }
+    .q-nav-btn:hover { background: #334155; }
+    .q-nav-btn.active { border-color: #38bdf8; box-shadow: 0 0 8px rgba(56, 189, 248, 0.4); }
+    .q-nav-btn.correct { background: #059669; color: #fff; }
+    .q-nav-btn.incorrect { background: #dc2626; color: #fff; }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* Vídeos Explicativos Menores */
+    .video-mini-btn { display: flex; align-items: center; gap: 10px; background: #1e293b; padding: 10px; border-radius: 8px; font-size: 0.8rem; color: #cbd5e1; cursor: pointer; margin-bottom: 10px; border: 1px solid transparent; }
+    .video-mini-btn:hover { border-color: #38bdf8; color: #fff; }
+    .video-mini-btn span { font-size: 1.2rem; }
 
-    .clean-module-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
-      width: 100%;
-    }
-
-    .modern-module-card {
-      background: rgba(15, 23, 42, 0.75);
-      border: 1px solid #1e293b;
-      border-radius: 16px;
-      padding: 20px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .modern-module-card:hover {
-      background: #1e293b;
-      border-color: #38bdf8;
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
-    }
-
-    .card-subject-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #38bdf8;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .card-topics-list {
-      font-size: 0.82rem;
-      color: #cbd5e1;
-      line-height: 1.5;
-    }
-
-    .card-topics-list li {
-      margin-bottom: 6px;
-      list-style-position: inside;
-    }
-
-    .btn-exit {
-      background-color: #ffffff;
-      color: #0f172a;
-      font-weight: 700;
-      padding: 12px 30px;
-      border-radius: 20px;
-      border: none;
-      cursor: pointer;
-      margin: 40px auto 10px auto;
-      display: block;
-      transition: opacity 0.2s;
-    }
-
-    .btn-exit:hover {
-      opacity: 0.9;
-    }
-
-    /* Módulo de Vídeo */
-    .video-page-container {
-      width: 100%;
-      max-width: 1100px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .top-bar-module {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .btn-back {
-      background: #ffffff;
-      color: #000000;
-      border: none;
-      padding: 8px 18px;
-      border-radius: 16px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      cursor: pointer;
-    }
-
-    .video-main-layout {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 20px;
-    }
-
-    @media (max-width: 850px) {
-      .video-main-layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .video-player-box {
-      background: #000000;
-      border-radius: 16px;
-      border: 1px solid #1e293b;
-      height: 320px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #ffffff;
-      text-align: center;
-    }
-
-    .play-btn {
-      width: 0;
-      height: 0;
-      border-top: 20px solid transparent;
-      border-bottom: 20px solid transparent;
-      border-left: 35px solid #38bdf8;
-      margin-bottom: 15px;
-      cursor: pointer;
-    }
-
-    .info-boxes-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin-top: 15px;
-    }
-
-    .info-card {
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 12px;
-      padding: 16px;
-      font-size: 0.75rem;
-      color: #94a3b8;
-    }
-
-    .info-card h4 {
-      color: #38bdf8;
-      margin-bottom: 8px;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-    }
-
-    .sidebar-card {
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 15px;
-    }
-
-    .sidebar-card h4 {
-      font-size: 0.85rem;
-      color: #ffffff;
-      margin-bottom: 10px;
-    }
-
-    .chat-box {
-      background: #090d16;
-      border-radius: 8px;
-      padding: 10px;
-      font-size: 0.75rem;
-      color: #cbd5e1;
-      margin-bottom: 10px;
-      min-height: 70px;
-    }
-
-    .chat-input-row {
-      display: flex;
-      gap: 6px;
-    }
-
-    .chat-input-row input {
-      flex: 1;
-      background: #1e293b;
-      border: none;
-      padding: 8px;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 0.75rem;
-    }
-
-    .chat-input-row button {
-      background: #38bdf8;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      color: #000;
-      font-weight: 700;
-      font-size: 0.75rem;
-      cursor: pointer;
-    }
-
-    /* RODAPÉ DE INFORMAÇÕES */
-    .app-footer-info {
-      width: 100%;
-      max-width: 1100px;
-      margin-top: 50px;
-      padding-top: 35px;
-      border-top: 1px solid #1e293b;
-    }
-
-    .app-footer-header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .app-footer-header h2 {
-      font-size: 1.6rem;
-      color: #ffffff;
-      font-weight: 800;
-    }
-
-    .app-footer-header p {
-      font-size: 0.85rem;
-      color: #38bdf8;
-      margin-top: 4px;
-    }
-
-    .info-app-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    .info-app-card {
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid #1e293b;
-      border-radius: 14px;
-      padding: 22px;
-    }
-
-    .info-app-card h3 {
-      font-size: 0.95rem;
-      color: #38bdf8;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .info-app-card p, .info-app-card ul {
-      font-size: 0.8rem;
-      color: #94a3b8;
-      line-height: 1.6;
-    }
-
-    .info-app-card ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .info-app-card ul li {
-      margin-bottom: 6px;
-      position: relative;
-      padding-left: 14px;
-    }
-
-    .info-app-card ul li::before {
-      content: "•";
-      color: #38bdf8;
-      font-weight: bold;
-      position: absolute;
-      left: 0;
-    }
-
-    .interactive-links-list {
-      list-style: none !important;
-      padding: 0 !important;
-    }
-
-    .interactive-links-list li {
-      padding-left: 0 !important;
-      margin-bottom: 8px !important;
-    }
-
-    .interactive-links-list li::before {
-      display: none !important;
-    }
-
-    .interactive-link-btn {
-      color: #38bdf8;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.82rem;
-      cursor: pointer;
-      display: inline-block;
-      transition: all 0.2s;
-      padding: 6px 10px;
-      border-radius: 8px;
-      background: rgba(56, 189, 248, 0.08);
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      width: 100%;
-      text-align: left;
-    }
-
-    .interactive-link-btn:hover {
-      background: #2563eb;
-      color: #ffffff;
-      border-color: #3b82f6;
-    }
-
-    .copyright-text {
-      text-align: center;
-      color: #64748b;
-      font-size: 0.8rem;
-      margin-top: 35px;
-      padding-bottom: 25px;
-    }
-
-    /* MODAL POPUP */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      padding: 20px;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .modal-card {
-      background: #0f172a;
-      border: 1px solid #38bdf8;
-      border-radius: 20px;
-      width: 100%;
-      max-width: 550px;
-      padding: 30px;
-      color: #f1f5f9;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-      position: relative;
-      max-height: 85vh;
-      overflow-y: auto;
-    }
-
-    .modal-card h3 {
-      color: #38bdf8;
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-      font-weight: 700;
-    }
-
-    .modal-card div {
-      font-size: 0.85rem;
-      line-height: 1.6;
-      color: #cbd5e1;
-    }
-
-    .modal-close-btn {
-      margin-top: 20px;
-      background: #2563eb;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    .modal-close-btn:hover {
-      background: #1d4ed8;
-    }
   </style>
 </head>
 <body>
 
-  <!-- 1. TELA DE LOGIN -->
+  <!-- ================= TELA DE LOGIN ================= -->
   <section id="view-login" class="view-section light-theme active">
     <div class="auth-card">
       <h1 class="auth-title">GABARITEI</h1>
-      
-      <div class="alert-banner info">
-        Bem-vindo ao Gabaritei
-      </div>
-
-      <div id="login-error-banner" class="alert-banner error">
-        Usuário ou senha incorretos!
-      </div>
-
       <div class="form-group">
         <label>Usuário</label>
-        <input type="text" id="login-user" placeholder="Digite seu usuário" />
+        <input type="text" id="login-user" value="aluno" />
       </div>
-
       <div class="form-group">
         <label>Senha</label>
-        <input type="password" id="login-pass" placeholder="Digite sua senha" />
+        <input type="password" id="login-pass" value="123" />
       </div>
-
-      <button class="btn-primary" onclick="handleLogin()">Acessar o Gabaritei</button>
-      <a class="auth-link" onclick="showView('view-recover')">Esqueceu a senha?</a>
-      <a class="auth-link" onclick="showView('view-register')">Você não tem outra conta? Crie uma aqui</a>
+      <button class="btn-primary" onclick="showView('view-dashboard')">Acessar o Gabaritei</button>
     </div>
   </section>
 
-  <!-- 2. TELA DE CRIAR CONTA -->
-  <section id="view-register" class="view-section light-theme">
-    <div class="auth-card">
-      <h1 class="auth-title">GABARITEI</h1>
-      <h2 class="auth-subtitle">Criar Conta</h2>
-      
-      <div id="register-success" class="alert-banner success">
-        Conta criada com sucesso! Redirecionando...
-      </div>
-
-      <div id="register-error" class="alert-banner error">
-        O sistema identificou que este nome de usuário já existe!
-      </div>
-
-      <div class="form-group">
-        <label>Nome de Usuário</label>
-        <input type="text" id="reg-user" placeholder="Escolha um nome de usuário" />
-      </div>
-
-      <div class="form-group">
-        <label>E-mail</label>
-        <input type="email" id="reg-email" placeholder="Seu melhor e-mail" />
-      </div>
-
-      <div class="form-group">
-        <label>Senha</label>
-        <input type="password" id="reg-pass" placeholder="Crie uma senha" />
-      </div>
-
-      <button class="btn-primary" onclick="handleRegister()">Cadastrar e Acessar</button>
-      <a class="auth-link" onclick="showView('view-login')">Já tem uma conta? Acesse aqui</a>
-    </div>
-  </section>
-
-  <!-- 3. TELA DE RECUPERAR SENHA -->
-  <section id="view-recover" class="view-section light-theme">
-    <div class="auth-card">
-      <h1 class="auth-title">GABARITEI</h1>
-      <h2 class="auth-subtitle">Recuperar Senha</h2>
-
-      <div class="form-group">
-        <label>Nome de Usuário</label>
-        <input type="text" id="rec-user" placeholder="Seu usuário" />
-      </div>
-
-      <div class="form-group">
-        <label>E-mail</label>
-        <input type="email" id="rec-email" placeholder="Seu e-mail cadastrado" />
-      </div>
-
-      <button class="btn-primary" onclick="handleRecover()">Recuperar Minha Senha</button>
-
-      <div id="recovered-box" class="recovered-box">
-        SUA SENHA RECUPERADA:<br />
-        <span id="recovered-pass-text" style="font-size: 1.1rem; color: #1e293b;">123</span>
-      </div>
-
-      <a class="auth-link" onclick="showView('view-login')">Voltar para o login</a>
-    </div>
-  </section>
-
-  <!-- 4. TELA DO DASHBOARD (COM SEPARAÇÃO TOTAL DE FUNDAMENTAL I E II E MATÉRIAS INDIVIDUAIS) -->
+  <!-- ================= TELA DO DASHBOARD ================= -->
   <section id="view-dashboard" class="view-section dark-theme">
     <div class="dark-header">
       <h1>Boas-vindas ao Gabaritei!</h1>
-      <p>Escolha o seu nível de ensino abaixo para acessar os conteúdos organizados por disciplina</p>
+      <p>Escolha o seu nível de ensino abaixo para acessar os conteúdos</p>
     </div>
 
-    <!-- NAVEGAÇÃO DE ABAS (FUNDAMENTAL I E FUNDAMENTAL II TOTALMENTE SEPARADOS) -->
+    <!-- ABAS (MANTIDAS COMO PEDIDO NO CÓDIGO ANTERIOR) -->
     <div class="tabs-container">
-      <button class="tab-btn active" onclick="switchTab('tab-fund1', this)">
-        <span>1º ao 5º Ano</span>
-        <span class="sub">Fundamental I</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('tab-fund2', this)">
-        <span>6º ao 9º Ano</span>
-        <span class="sub">Fundamental II</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('tab-medio', this)">
-        <span>1º ao 3º Ano</span>
-        <span class="sub">Ensino Médio</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('tab-superior', this)">
-        <span>Ensino Superior</span>
-        <span class="sub">Graduação</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('tab-vestibulares', this)">
-        <span>Vestibulares</span>
-        <span class="sub">ENEM & Provas</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('tab-concursos', this)">
-        <span>Concursos Públicos</span>
-        <span class="sub">Carreiras Públicas</span>
-      </button>
+      <button class="tab-btn" onclick="switchTab('tab-fund1', this)"><span>1º ao 5º Ano</span><span class="sub">Fundamental I</span></button>
+      <button class="tab-btn" onclick="switchTab('tab-fund2', this)"><span>6º ao 9º Ano</span><span class="sub">Fundamental II</span></button>
+      <button class="tab-btn" onclick="switchTab('tab-medio', this)"><span>1º ao 3º Ano</span><span class="sub">Ensino Médio</span></button>
+      <button class="tab-btn active" onclick="switchTab('tab-vestibulares', this)"><span>Vestibulares</span><span class="sub">ENEM & Provas</span></button>
     </div>
 
-    <!-- ABA 1: ENSINO FUNDAMENTAL I (1º AO 5º ANO) - CARDS SEPARADOS POR TEMA -->
-    <div id="tab-fund1" class="tab-content active">
+    <!-- ABA VESTIBULARES E ENEM -->
+    <div id="tab-vestibulares" class="tab-content active">
       <div class="clean-module-grid">
-        <div class="modern-module-card" onclick="openModule('Língua Portuguesa - Fundamental I')">
-          <div class="card-subject-title">📖 Língua Portuguesa</div>
-          <ul class="card-topics-list">
-            <li>Alfabetização e Letramento</li>
-            <li>Gramática básica</li>
-            <li>Interpretação de texto inicial</li>
-            <li>Leitura de contos e gêneros textuais</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Matemática - Fundamental I')">
-          <div class="card-subject-title">➕ Matemática</div>
-          <ul class="card-topics-list">
-            <li>Quatro operações matemáticas</li>
-            <li>Frações e porcentagem inicial</li>
-            <li>Geometria básica e formas</li>
-            <li>Tabuada e matemática ilustrada</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Ciências da Natureza - Fundamental I')">
-          <div class="card-subject-title">🌱 Ciências da Natureza</div>
-          <ul class="card-topics-list">
-            <li>Corpo humano e hábitos saudáveis</li>
-            <li>Ecossistemas e meio ambiente</li>
-            <li>Sistema solar e planetas</li>
-            <li>Matéria e energia para crianças</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('História - Fundamental I')">
-          <div class="card-subject-title">⏳ História</div>
-          <ul class="card-topics-list">
-            <li>Introdução à História</li>
-            <li>História da comunidade e família</li>
-            <li>Linhas do tempo simples</li>
-            <li>História do Brasil (Colônia e Império)</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Geografia - Fundamental I')">
-          <div class="card-subject-title">🗺️ Geografia</div>
-          <ul class="card-topics-list">
-            <li>Nocões de cartografia e mapas</li>
-            <li>Relevo, clima e vegetação</li>
-            <li>Organização do espaço brasileiro</li>
-            <li>Regiões e paisagens regionais</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Artes e Educação Física - Fundamental I')">
-          <div class="card-subject-title">🎨 Artes e Educação Física</div>
-          <ul class="card-topics-list">
-            <li>Expressão corporal e dança</li>
-            <li>Esportes educativos e jogos</li>
-            <li>Artes visuais e cores</li>
-            <li>Música e ritmos infantis</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Raciocínio Lógico & Finanças - Fundamental I')">
-          <div class="card-subject-title">🧩 Raciocínio & Finanças</div>
-          <ul class="card-topics-list">
-            <li>Jogos de raciocínio lógico</li>
-            <li>Educação financeira infantil</li>
-            <li>Noções de poupança e consumo consciente</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- ABA 2: ENSINO FUNDAMENTAL II (6º AO 9º ANO) - CARDS SEPARADOS POR TEMA -->
-    <div id="tab-fund2" class="tab-content">
-      <div class="clean-module-grid">
-        <div class="modern-module-card" onclick="openModule('Língua Portuguesa - Fundamental II')">
-          <div class="card-subject-title">📚 Língua Portuguesa e Sintaxe</div>
-          <ul class="card-topics-list">
-            <li>Gramática intermediária e sintaxe</li>
-            <li>Análise sintática e morfológica</li>
-            <li>Interpretação textual avançada</li>
-            <li>Oficina de redação estruturada</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Matemática e Álgebra - Fundamental II')">
-          <div class="card-subject-title">📐 Matemática e Álgebra</div>
-          <ul class="card-topics-list">
-            <li>Introdução à Álgebra</li>
-            <li>Equações do 1º e 2º grau</li>
-            <li>Porcentagem e regra de três</li>
-            <li>Geometria plana e espacial básica</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Ciências e Física/Química - Fundamental II')">
-          <div class="card-subject-title">🔬 Biologia, Física e Química Geral</div>
-          <ul class="card-topics-list">
-            <li>Introdução às Ciências Físicas</li>
-            <li>Química geral e tabela periódica básica</li>
-            <li>Biologia celular e ecologia inicial</li>
-            <li>Transformações da matéria e energia</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('História Geral e do Brasil - Fundamental II')">
-          <div class="card-subject-title">🏛️ História Geral e do Brasil</div>
-          <ul class="card-topics-list">
-            <li>História Geral Antiga e Medieval</li>
-            <li>História do Brasil (Colônia, Império e República)</li>
-            <li>Revolução Industrial e Guerras Mundiais</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Geografia Crítica - Fundamental II')">
-          <div class="card-subject-title">🌍 Geografia Crítica e Demografia</div>
-          <ul class="card-topics-list">
-            <li>Geografia física e geopolítica global</li>
-            <li>Estudo da população (Demografia)</li>
-            <li>Urbanização e espaço agrário</li>
-            <li>Climas e biomas globais</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Tecnologia e Ética - Fundamental II')">
-          <div class="card-subject-title">💻 Programação e Cidadania</div>
-          <ul class="card-topics-list">
-            <li>Lógica de programação em blocos</li>
-            <li>Atualidades e geopolítica regional</li>
-            <li>Cidadania, Ética e Sociedade</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- ABA 3: ENSINO MÉDIO (1º AO 3º ANO) - CARDS SEPARADOS POR TEMA -->
-    <div id="tab-medio" class="tab-content">
-      <div class="clean-module-grid">
-        <div class="modern-module-card" onclick="openModule('Linguagens e Códigos - Ensino Médio')">
-          <div class="card-subject-title">📝 Linguagens, Códigos e Redação</div>
-          <ul class="card-topics-list">
-            <li>Gramática e sintaxe profunda</li>
-            <li>Redação dissertativa-argumentativa</li>
-            <li>Língua estrangeira (Inglês / Espanhol)</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Literatura - Ensino Médio')">
-          <div class="card-subject-title">📖 Literatura Brasileira e Portuguesa</div>
-          <ul class="card-topics-list">
-            <li>Escolas literárias (Barroco ao Modernismo)</li>
-            <li>Análises de obras clássicas</li>
-            <li>Resumos e análises literárias</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Matemática e Suas Tecnologias')">
-          <div class="card-subject-title">📐 Matemática e Suas Tecnologias</div>
-          <ul class="card-topics-list">
-            <li>Funções, trigonometria e matrizes</li>
-            <li>Análise combinatória e probabilidade</li>
-            <li>Estatística e geometria espacial</li>
-            <li>Introdução ao Cálculo</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Física Avançada - Ensino Médio')">
-          <div class="card-subject-title">⚡ Física Avançada</div>
-          <ul class="card-topics-list">
-            <li>Mecânica, cinemática e dinâmica</li>
-            <li>Termodinâmica e calorimetria</li>
-            <li>Óptica, ondas e eletromagnetismo</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Química - Ensino Médio')">
-          <div class="card-subject-title">🧪 Química Geral e Orgânica</div>
-          <ul class="card-topics-list">
-            <li>Atomística e Tabela Periódica</li>
-            <li>Ligações químicas e estequiometria</li>
-            <li>Físico-química e química orgânica</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Biologia - Ensino Médio')">
-          <div class="card-subject-title">🌱 Biologia e Ecologia</div>
-          <ul class="card-topics-list">
-            <li>Citologia e genética moderna</li>
-            <li>Evolução, botânica e zoologia</li>
-            <li>Ecologia e preservação ambiental</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('História do Brasil e Geral - Ensino Médio')">
-          <div class="card-subject-title">📜 História Geral e Brasil Contemporâneo</div>
-          <ul class="card-topics-list">
-            <li>Idade Média, Moderna e Contemporânea</li>
-            <li>Grandes Guerras e Guerra Fria</li>
-            <li>Brasil Contemporâneo e Ditadura Militar</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Geografia - Ensino Médio')">
-          <div class="card-subject-title">🌍 Geografia e Geopolítica</div>
-          <ul class="card-topics-list">
-            <li>Geopolítica mundial e globalização</li>
-            <li>Urbanização e problemas urbanos</li>
-            <li>Impactos ambientais e sustentabilidade</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Filosofia e Sociologia - Ensino Médio')">
-          <div class="card-subject-title">🧠 Filosofia e Sociologia</div>
-          <ul class="card-topics-list">
-            <li>Escolas filosóficas da Grécia à atualidade</li>
-            <li>Cidadania, direitos e cultura</li>
-            <li>Estrutura social e pensadores clássicos</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- ABA 4: ENSINO SUPERIOR (GRADUAÇÃO) - CARDS SEPARADOS POR ÁREA -->
-    <div id="tab-superior" class="tab-content">
-      <div class="clean-module-grid">
-        <div class="modern-module-card" onclick="openModule('Ciências Exatas e Tecnológicas')">
-          <div class="card-subject-title">💻 Ciências Exatas e Tecnológicas</div>
-          <ul class="card-topics-list">
-            <li>Cálculo diferencial e integral</li>
-            <li>Álgebra linear e física teórica</li>
-            <li>Algoritmos, programação e desenho técnico</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Ciências Biológicas e da Saúde')">
-          <div class="card-subject-title">🧬 Ciências Biológicas e da Saúde</div>
-          <ul class="card-topics-list">
-            <li>Anatomia humana e fisiologia</li>
-            <li>Patologia e farmacologia</li>
-            <li>Bioquímica e ética médica/biológica</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Ciências Humanas e Sociais')">
-          <div class="card-subject-title">⚖️ Ciências Humanas e Sociais</div>
-          <ul class="card-topics-list">
-            <li>Teoria política e direito constitucional</li>
-            <li>Economia e psicologia social</li>
-            <li>Metodologia científica e gestão de pessoas</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Metodologia de Pesquisa Avançada')">
-          <div class="card-subject-title">🔬 Pesquisa & Metodologia</div>
-          <ul class="card-topics-list">
-            <li>Projetos de TCC e artigos científicos</li>
-            <li>Estatística aplicada e análise de dados</li>
-            <li>Referências bibliográficas (ABNT / APA)</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Ferramentas Acadêmicas')">
-          <div class="card-subject-title">⏱️ Ferramentas & Produtividade</div>
-          <ul class="card-topics-list">
-            <li>Oratória e apresentação de bancas</li>
-            <li>Controle de horas complementares</li>
-            <li>Temporizador Pomodoro integrado</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- ABA 5: VESTIBULARES E ENEM - CARDS SEPARADOS POR FOCO -->
-    <div id="tab-vestibulares" class="tab-content">
-      <div class="clean-module-grid">
-        <div class="modern-module-card" onclick="openModule('ENEM - Prova Completa')">
+        <!-- ALTERAÇÃO AQUI: Chama a nova tela de seleção do ENEM -->
+        <div class="modern-module-card" onclick="openEnemSelection()">
           <div class="card-subject-title">🎯 Prova ENEM (4 Áreas)</div>
           <ul class="card-topics-list">
-            <li>Linguagens, Códigos e suas Tecnologias</li>
-            <li>Ciências Humanas e suas Tecnologias</li>
-            <li>Ciências da Natureza e suas Tecnologias</li>
-            <li>Matemática e suas Tecnologias</li>
+            <li>Acesso a TODAS as provas anteriores</li>
+            <li>Correção interativa na hora</li>
+            <li>Vídeos explicativos por questão</li>
+            <li>Simulador idêntico ao oficial</li>
           </ul>
         </div>
 
-        <div class="modern-module-card" onclick="openModule('Oficina de Redação Nota 1000')">
+        <div class="modern-module-card">
           <div class="card-subject-title">✍️ Redação Dissertativa-Argumentativa</div>
           <ul class="card-topics-list">
             <li>Estrutura completa da proposta ENEM</li>
             <li>Elaboração de proposta de intervenção</li>
-            <li>Repertório sociocultural produtivo</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Vestibulares Tradicionais')">
-          <div class="card-subject-title">🏛️ Vestibulares Tradicionais (FUVEST, UNICAMP)</div>
-          <ul class="card-topics-list">
-            <li>Questões dissertativas de 2ª fase</li>
-            <li>Obras literárias de leitura obrigatória</li>
-            <li>Maior aprofundamento acadêmico teórico</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Simulados e Maratonas')">
-          <div class="card-subject-title">🧩 Simulados & Cronômetro</div>
-          <ul class="card-topics-list">
-            <li>Maratonas ENEM & Provas seriadas</li>
-            <li>Simulados interativos com cronômetro</li>
-            <li>Treinamento com gestão de tempo</li>
           </ul>
         </div>
       </div>
     </div>
-
-    <!-- ABA 6: CONCURSOS PÚBLICOS - CARDS SEPARADOS POR MATÉRIA -->
-    <div id="tab-concursos" class="tab-content">
-      <div class="clean-module-grid">
-        <div class="modern-module-card" onclick="openModule('Língua Portuguesa para Concursos')">
-          <div class="card-subject-title">📝 Língua Portuguesa</div>
-          <ul class="card-topics-list">
-            <li>Interpretação textual e compreensão</li>
-            <li>Concordância verbal e nominal</li>
-            <li>Regência e emprego da crase</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Raciocínio Lógico e Matemática')">
-          <div class="card-subject-title">🔢 Raciocínio Lógico-Matemático (RLM)</div>
-          <ul class="card-topics-list">
-            <li>Lógica proposicional e tabelas-verdade</li>
-            <li>Diagramas lógicos e conjuntos</li>
-            <li>Resolução de problemas matemáticos</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Informática para Concursos')">
-          <div class="card-subject-title">💻 Informática Básica e Avançada</div>
-          <ul class="card-topics-list">
-            <li>Sistemas operacionais (Windows/Linux)</li>
-            <li>Pacote Office e LibreOffice</li>
-            <li>Segurança da informação e redes</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Direito Constitucional')">
-          <div class="card-subject-title">⚖️ Direito Constitucional</div>
-          <ul class="card-topics-list">
-            <li>Direitos e garantias fundamentais</li>
-            <li>Organização do Estado e Poderes</li>
-            <li>Artigos essenciais da CF/88</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Direito Administrativo')">
-          <div class="card-subject-title">📜 Direito Administrativo</div>
-          <ul class="card-topics-list">
-            <li>Atos administrativos e licitações</li>
-            <li>Agentes públicos e estatutos</li>
-            <li>Poderes da administração pública</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Conhecimentos Específicos e Bancas')">
-          <div class="card-subject-title">📊 Conhecimentos Específicos & Bancas</div>
-          <ul class="card-topics-list">
-            <li>Legislação interna do órgão desejado</li>
-            <li>Contabilidade e administração pública</li>
-            <li>Questões comentadas organizadas por bancas</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
+    
     <button class="btn-exit" onclick="showView('view-login')">Sair do Sistema</button>
+  </section>
 
-    <!-- RODAPÉ DE INFORMAÇÕES -->
-    <div class="app-footer-info">
-      <div class="app-footer-header">
-        <h2>🚀 Informações do App & Guia Completo</h2>
-        <p>Tudo o que você precisa saber sobre a plataforma Gabaritei</p>
+  <!-- ================= NOVO: SELEÇÃO DE ANO DO ENEM ================= -->
+  <section id="view-enem-selection" class="view-section dark-theme">
+    <div class="enem-header-box">
+      <div>
+        <h2 style="font-size: 1.8rem;">Central de Provas ENEM</h2>
+        <p style="color: #38bdf8;">Escolha o ano ou assista à introdução</p>
+      </div>
+      <button class="btn-back" onclick="showView('view-dashboard')">Voltar ao Painel</button>
+    </div>
+
+    <!-- VÍDEO EXPLICATIVO GERAL DO ENEM -->
+    <div class="video-intro-enem" style="max-width: 1100px;">
+      <div class="play-btn"></div>
+      <h3 style="font-size: 1.2rem;">O que é o ENEM e como funciona a TRI?</h3>
+      <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 5px;">Assista antes de começar seus simulados (Duração: 12 min)</p>
+    </div>
+
+    <!-- LISTA DE PROVAS -->
+    <div class="year-grid" id="enem-year-grid">
+      <!-- Injetado por JavaScript -->
+    </div>
+  </section>
+
+  <!-- ================= NOVO: SIMULADOR DA PROVA (QUESTÕES) ================= -->
+  <section id="view-enem-exam" class="view-section dark-theme">
+    <div class="enem-header-box" style="margin-bottom: 15px;">
+      <div>
+        <h2 style="font-size: 1.5rem;" id="exam-title-display">ENEM 2023 - Caderno Azul</h2>
+        <p style="color: #94a3b8; font-size: 0.85rem;">Simulado Interativo com Correção</p>
+      </div>
+      <button class="btn-back" onclick="showView('view-enem-selection')">Sair da Prova</button>
+    </div>
+
+    <div class="exam-layout">
+      <!-- ÁREA DA QUESTÃO -->
+      <div class="question-panel">
+        <div class="q-header">
+          <span class="q-number" id="q-number-display">Questão 1</span>
+          <span style="color: #64748b; font-size: 0.9rem;" id="q-area-display">Ciências Humanas</span>
+        </div>
+
+        <div class="q-text" id="q-text-display">
+          Carregando texto da questão...
+        </div>
+
+        <div class="options-group" id="q-options-container">
+          <!-- Injetado via JS -->
+        </div>
+
+        <div class="exam-actions">
+          <button class="btn-exam outline" onclick="prevQuestion()">Anterior</button>
+          <button class="btn-exam" style="background: #38bdf8; color: #000;" onclick="submitAnswer()">Responder e Corrigir</button>
+          <button class="btn-exam success" onclick="saveProgress()">Salvar Progresso</button>
+          <button class="btn-exam outline" onclick="nextQuestion()">Próxima</button>
+        </div>
+
+        <!-- CAIXA DE FEEDBACK (CERTO/ERRADO + EXPLICAÇÃO) -->
+        <div id="q-feedback-box" class="feedback-box">
+          <h4 id="feedback-title">Resposta Correta!</h4>
+          <p id="feedback-explanation">A explicação da questão vai aqui.</p>
+        </div>
       </div>
 
-      <div class="info-app-grid">
-        <div class="info-app-card">
-          <h3>💡 O que é o Gabaritei?</h3>
-          <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela <strong>FichTeck</strong>. Projetado para otimizar sua rotina com cronogramas inteligentes, resumos e simulados.</p>
+      <!-- BARRA LATERAL (VÍDEOS E NAVEGAÇÃO) -->
+      <div class="exam-sidebar">
+        <!-- Navegador de Questões -->
+        <div class="sidebar-widget">
+          <h4>Navegação da Prova</h4>
+          <div class="q-navigator" id="q-navigator-grid">
+            <!-- Botões 1 a X injetados via JS -->
+          </div>
         </div>
 
-        <div class="info-app-card">
-          <h3>🔒 Segurança e Privacidade Total</h3>
-          <p>Seus dados e credenciais são armazenados localmente no seu dispositivo utilizando criptografia via <strong>LocalStorage</strong>.</p>
+        <!-- Vídeos Explicativos da Questão -->
+        <div class="sidebar-widget">
+          <h4>Explicações em Vídeo</h4>
+          <div class="video-mini-btn">
+            <span>▶️</span>
+            <div>
+              <strong>Resolução Resumida</strong><br/>
+              <span style="font-size:0.7rem; color:#64748b;">Direto ao ponto (1 min)</span>
+            </div>
+          </div>
+          <div class="video-mini-btn">
+            <span>🎬</span>
+            <div>
+              <strong>Explicação Completa</strong><br/>
+              <span style="font-size:0.7rem; color:#64748b;">Análise detalhada (5 min)</span>
+            </div>
+          </div>
         </div>
-
-        <div class="info-app-card">
-          <h3>🧠 Metodologias de Aprendizado</h3>
-          <ul>
-            <li><strong>Repetição Espaçada:</strong> Revisões nos momentos certos.</li>
-            <li><strong>Técnica Pomodoro:</strong> Blocos de estudo com foco máximo.</li>
-            <li><strong>Estudo Ativo:</strong> Simulação prática de provas.</li>
-          </ul>
-        </div>
-
-        <div class="info-app-card">
-          <h3>🤖 IA Auxiliadora Gabaritei</h3>
-          <p>Nossa IA integrada nas videoaulas responde às suas dúvidas e cria resumos instantâneos sobre qualquer assunto estudado.</p>
-        </div>
-
-        <div class="info-app-card">
-          <h3>🏆 Gamificação e Conquistas</h3>
-          <p>Acompanhe suas ofensivas diárias (streaks), ganhe pontos e desbloqueie insígnias conforme avança nas matérias.</p>
-        </div>
-
-        <div class="info-app-card">
-          <h3>🔗 Links Rápidos e Termos</h3>
-          <ul class="interactive-links-list">
-            <li><button class="interactive-link-btn" onclick="openTermModal('termos')">📄 Termos de Serviço</button></li>
-            <li><button class="interactive-link-btn" onclick="openTermModal('privacidade')">🔒 Política de Privacidade</button></li>
-            <li><button class="interactive-link-btn" onclick="openTermModal('manual')">📖 Manual do Estudante</button></li>
-            <li><button class="interactive-link-btn" onclick="openTermModal('conduta')">🤝 Código de Conduta</button></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="copyright-text">
-        © 2026 FichTeck. Todos os direitos reservados. Gabaritei é uma marca registrada.
       </div>
     </div>
   </section>
 
-  <!-- 5. TELA DE MÓDULO DE VÍDEO -->
-  <section id="view-module" class="view-section dark-theme">
-    <div class="video-page-container">
-      <div class="top-bar-module">
-        <div>
-          <h2 style="font-size: 1.4rem;">Módulo Especializado</h2>
-          <p style="font-size: 0.85rem; color: #38bdf8;">Disciplina Selecionada: <span id="current-module-title">Línga Portuguesa</span></p>
-        </div>
-        <button class="btn-back" onclick="showView('view-dashboard')">Voltar ao Painel</button>
-      </div>
 
-      <div class="video-main-layout">
-        <div>
-          <div class="video-player-box">
-            <div class="play-btn"></div>
-            <h3 style="font-size: 1rem;">Vídeo Aula Principal</h3>
-            <p style="font-size: 0.75rem; color: #64748b;">Clique para iniciar a transmissão em HD</p>
-          </div>
-
-          <div class="info-boxes-grid">
-            <div class="info-card">
-              <h4>Explicação da Matéria</h4>
-              <p>Conteúdo estruturado de acordo com as diretrizes curriculares nacionais com suporte de Inteligência Artificial.</p>
-            </div>
-            <div class="info-card">
-              <h4>Resumo da Aula</h4>
-              <p>📌 Definições e fundamentos principais.<br />📌 Exemplos práticos do dia a dia.<br />📌 Questões comentadas do tema.</p>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="sidebar-card">
-            <h4>🤖 IA Auxiliadora Gabaritei</h4>
-            <div class="chat-box">
-              Olá! Sou sua IA especialista no tema selecionado. Qual é a sua dúvida sobre esta matéria?
-            </div>
-            <div class="chat-input-row">
-              <input type="text" placeholder="Escreva sua pergunta..." />
-              <button>Enviar</button>
-            </div>
-          </div>
-
-          <div class="sidebar-card">
-            <h4>🎬 Vídeos Complementares</h4>
-            <div class="clean-module-grid" style="grid-template-columns: 1fr;">
-              <div class="modern-module-card" style="font-size: 0.78rem;">📹 Aprofundamento do Tema <br /><small style="color: #64748b; font-weight: normal;">Duração: 16 min</small></div>
-              <div class="modern-module-card" style="font-size: 0.78rem;">📹 Exercícios Resolvidos <br /><small style="color: #64748b; font-weight: normal;">Duração: 20 min</small></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- RODAPÉ DE INFORMAÇÕES DO MÓDULO -->
-    <div class="app-footer-info">
-      <div class="app-footer-header">
-        <h2>🚀 Informações do App & Guia Completo</h2>
-        <p>Tudo o que você precisa saber sobre a plataforma Gabaritei</p>
-      </div>
-
-      <div class="info-app-grid">
-        <div class="info-app-card">
-          <h3>💡 O que é o Gabaritei?</h3>
-          <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela <strong>FichTeck</strong>.</p>
-        </div>
-
-        <div class="info-app-card">
-          <h3>🔒 Segurança e Privacidade Total</h3>
-          <p>Armazenamento local seguro através de <strong>LocalStorage</strong> no navegador.</p>
-        </div>
-
-        <div class="info-app-card">
-          <h3>🔗 Links Rápidos e Termos</h3>
-          <ul class="interactive-links-list">
-            <li><button class="interactive-link-btn" onclick="openTermModal('termos')">📄 Termos de Serviço</button></li>
-            <li><button class="interactive-link-btn" onclick="openTermModal('privacidade')">🔒 Política de Privacidade</button></li>
-            <li><button class="interactive-link-btn" onclick="openTermModal('manual')">📖 Manual do Estudante</button></li>
-            <li><button class="interactive-link-btn" onclick="openTermModal('conduta')">🤝 Código de Conduta</button></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="copyright-text">
-        © 2026 FichTeck. Todos os direitos reservados. Gabaritei é uma marca registrada.
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. MODAL POPUP -->
-  <div id="info-modal-overlay" class="modal-overlay">
-    <div class="modal-card">
-      <h3 id="modal-title">Título do Documento</h3>
-      <div id="modal-content-body">
-        Conteúdo...
-      </div>
-      <button class="modal-close-btn" onclick="closeTermModal()">Entendi e Fechar</button>
-    </div>
-  </div>
-
-  <!-- 7. JAVASCRIPT COMPLETO E FUNCIONAL -->
   <script>
-    const registeredUsers = [
-      { user: "admin", pass: "123", email: "admin@gabaritei.com" },
-      { user: "Admi_oficial", pass: "123", email: "peixinho1533@gmail.com" }
-    ];
-
+    // Navegação Básica de Telas
     function showView(viewId) {
-      const views = document.querySelectorAll('.view-section');
-      views.forEach(v => v.classList.remove('active'));
-
-      document.querySelectorAll('.alert-banner.error, .alert-banner.success').forEach(el => el.classList.remove('show'));
-      document.getElementById('recovered-box').style.display = 'none';
-
-      const target = document.getElementById(viewId);
-      if (target) {
-        target.classList.add('active');
-        window.scrollTo(0, 0);
-      }
+      document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+      document.getElementById(viewId).classList.add('active');
+      window.scrollTo(0, 0);
     }
-
-    /* TROCAR DE ABA NO DASHBOARD */
     function switchTab(tabId, btnElement) {
-      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
       btnElement.classList.add('active');
     }
 
-    function handleLogin() {
-      const u = document.getElementById('login-user').value.trim();
-      const p = document.getElementById('login-pass').value.trim();
-      const errBanner = document.getElementById('login-error-banner');
+    // ==========================================
+    // SISTEMA DO ENEM (DADOS E LÓGICA)
+    // ==========================================
 
-      const found = registeredUsers.find(item => item.user === u && item.pass === p);
+    // Banco de Dados Simulado de Provas (Para demonstrar a estrutura real)
+    const enemDatabase = {
+      "2023": [
+        {
+          id: 1,
+          area: "Ciências Humanas e suas Tecnologias",
+          text: "<strong>(ENEM 2023)</strong> O uso da água é um dos principais temas debatidos mundialmente. A escassez hídrica afeta diretamente diversas nações.<br><br>Qual a principal causa da crise hídrica em regiões metropolitanas do Brasil?",
+          options: [
+            "A) O alto índice de chuvas no verão que transborda os rios.",
+            "B) A falta de infraestrutura, poluição dos rios e desmatamento.",
+            "C) A diminuição das calotas polares.",
+            "D) A migração de populações para áreas rurais.",
+            "E) O excesso de usinas nucleares."
+          ],
+          correctIndex: 1, // Letra B
+          explanation: "A poluição dos mananciais (rios), a falta de saneamento básico e o desmatamento nas áreas de nascentes comprometem drasticamente a disponibilidade de água limpa para as grandes cidades."
+        },
+        {
+          id: 2,
+          area: "Linguagens e Códigos",
+          text: "<strong>(ENEM 2023)</strong> Considere o poema clássico modernista. A principal característica do Modernismo da primeira fase no Brasil foi:",
+          options: [
+            "A) A busca por uma linguagem rebuscada e clássica.",
+            "B) O retorno aos valores da antiguidade grega.",
+            "C) A ruptura com o tradicionalismo e a busca por uma identidade nacional.",
+            "D) O foco exclusivo em temas religiosos.",
+            "E) A cópia de estilos europeus sem adaptação."
+          ],
+          correctIndex: 2, // Letra C
+          explanation: "A Semana de Arte Moderna de 1922 (1ª fase) marcou a ruptura com a métrica clássica e temas tradicionais, buscando o verso livre e a valorização da cultura puramente brasileira."
+        },
+        {
+          id: 3,
+          area: "Matemática e suas Tecnologias",
+          text: "<strong>(ENEM 2023)</strong> Uma loja vende um produto por R$ 200,00. Na Black Friday, o gerente aplica um desconto de 20%. Qual é o novo valor do produto?",
+          options: [
+            "A) R$ 180,00",
+            "B) R$ 150,00",
+            "C) R$ 160,00",
+            "D) R$ 140,00",
+            "E) R$ 120,00"
+          ],
+          correctIndex: 2, // Letra C
+          explanation: "20% de R$ 200 é igual a R$ 40 (200 x 0,20). Subtraindo o desconto do valor original: 200 - 40 = R$ 160,00."
+        }
+      ],
+      "2022": [
+        // Adicionei uma de exemplo para o ano 2022
+        {
+          id: 1, area: "Ciências da Natureza",
+          text: "<strong>(ENEM 2022)</strong> A fotossíntese é um processo essencial para a vida na Terra. Qual gás é absorvido pelas plantas durante esse processo?",
+          options: ["A) Oxigênio (O2)", "B) Dióxido de Carbono (CO2)", "C) Nitrogênio (N2)", "D) Hélio (He)", "E) Metano (CH4)"],
+          correctIndex: 1, explanation: "As plantas absorvem o Dióxido de Carbono (CO2) da atmosfera e, com a luz solar, produzem glicose e liberam Oxigênio (O2)."
+        }
+      ]
+    };
 
-      if (found || (u !== "" && p !== "")) {
-        errBanner.classList.remove('show');
-        showView('view-dashboard');
-      } else {
-        errBanner.classList.add('show');
-      }
+    let currentYear = null;
+    let currentQuestionIndex = 0;
+    
+    // Objeto para armazenar as respostas do usuário: { "2023": { 0: { status: "correct", choice: 1 } } }
+    let userProgress = {}; 
+
+    // Renderiza a lista de Anos na tela de Seleção
+    function openEnemSelection() {
+      const grid = document.getElementById('enem-year-grid');
+      grid.innerHTML = '';
+      
+      // Anos fictícios de 2023 até 2010
+      const years = ["2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014"];
+      
+      years.forEach(year => {
+        const card = document.createElement('div');
+        card.className = 'year-card';
+        card.innerHTML = `<h3>${year}</h3><p>Prova Oficial + Gabarito</p>`;
+        card.onclick = () => startExam(year);
+        grid.appendChild(card);
+      });
+
+      showView('view-enem-selection');
     }
 
-    function handleRegister() {
-      const u = document.getElementById('reg-user').value.trim();
-      const e = document.getElementById('reg-email').value.trim();
-      const p = document.getElementById('reg-pass').value.trim();
+    // Inicia a prova de um ano específico
+    function startExam(year) {
+      if (!enemDatabase[year]) {
+        alert("As questões para este ano ainda estão sendo processadas pelo sistema. Teste 2023 ou 2022!");
+        return;
+      }
+      currentYear = year;
+      currentQuestionIndex = 0;
+      if (!userProgress[year]) userProgress[year] = {}; // Inicializa progresso vazio para o ano
 
-      const errBanner = document.getElementById('register-error');
-      const succBanner = document.getElementById('register-success');
+      document.getElementById('exam-title-display').innerText = `ENEM ${year} - Simulado Completo`;
+      showView('view-enem-exam');
+      renderQuestion();
+      renderNavigator();
+    }
 
-      errBanner.classList.remove('show');
-      succBanner.classList.remove('show');
+    // Renderiza a questão atual na tela
+    function renderQuestion() {
+      const exam = enemDatabase[currentYear];
+      const q = exam[currentQuestionIndex];
+      
+      document.getElementById('q-number-display').innerText = `Questão ${currentQuestionIndex + 1}`;
+      document.getElementById('q-area-display').innerText = q.area;
+      document.getElementById('q-text-display').innerHTML = q.text;
 
-      if (!u || !p) {
-        errBanner.innerText = "Por favor, preencha o usuário e a senha!";
-        errBanner.classList.add('show');
+      const optionsContainer = document.getElementById('q-options-container');
+      optionsContainer.innerHTML = '';
+
+      // Feedback box invisível por padrão ao trocar de questão
+      const feedbackBox = document.getElementById('q-feedback-box');
+      feedbackBox.className = 'feedback-box';
+
+      // Verifica se o usuário já respondeu esta questão
+      const savedAnswer = userProgress[currentYear][currentQuestionIndex];
+
+      q.options.forEach((optText, index) => {
+        const label = document.createElement('label');
+        label.className = 'option-label';
+        
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = 'enem-option';
+        radio.value = index;
+
+        // Se já respondeu, marca a opção salva e desabilita cliques novos
+        if (savedAnswer) {
+          if (savedAnswer.choice === index) {
+            radio.checked = true;
+            label.classList.add('selected');
+          }
+          radio.disabled = true; // Trava após responder
+        }
+
+        radio.onchange = () => {
+          document.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected'));
+          if (radio.checked) label.classList.add('selected');
+        };
+
+        label.appendChild(radio);
+        label.appendChild(document.createTextNode(optText));
+        optionsContainer.appendChild(label);
+      });
+
+      // Se já estava respondido, mostra logo a explicação que estava salva
+      if (savedAnswer) {
+        showFeedback(savedAnswer.status === 'correct', q.explanation);
+      }
+      
+      updateNavigatorHighlight();
+    }
+
+    // Valida a resposta
+    function submitAnswer() {
+      const exam = enemDatabase[currentYear];
+      const q = exam[currentQuestionIndex];
+      const savedAnswer = userProgress[currentYear][currentQuestionIndex];
+
+      if (savedAnswer) {
+        alert("Você já respondeu esta questão! Navegue para a próxima.");
         return;
       }
 
-      const exists = registeredUsers.some(item => item.user.toLowerCase() === u.toLowerCase());
+      const selectedOption = document.querySelector('input[name="enem-option"]:checked');
+      if (!selectedOption) {
+        alert("Por favor, selecione uma alternativa antes de corrigir.");
+        return;
+      }
 
-      if (exists) {
-        errBanner.innerText = "O sistema identificou que este nome de usuário já existe!";
-        errBanner.classList.add('show');
+      const userChoice = parseInt(selectedOption.value);
+      const isCorrect = (userChoice === q.correctIndex);
+
+      // Salva no progresso
+      userProgress[currentYear][currentQuestionIndex] = {
+        status: isCorrect ? 'correct' : 'incorrect',
+        choice: userChoice
+      };
+
+      // Exibe a explicação
+      showFeedback(isCorrect, q.explanation);
+      
+      // Trava os botões radio
+      document.querySelectorAll('input[name="enem-option"]').forEach(radio => radio.disabled = true);
+
+      // Atualiza cores no navegador lateral
+      renderNavigator();
+    }
+
+    // Exibe a div de acerto ou erro
+    function showFeedback(isCorrect, explanationText) {
+      const box = document.getElementById('q-feedback-box');
+      const title = document.getElementById('feedback-title');
+      const exp = document.getElementById('feedback-explanation');
+
+      if (isCorrect) {
+        box.className = 'feedback-box correct';
+        title.innerText = '✅ Resposta Correta!';
       } else {
-        registeredUsers.push({ user: u, pass: p, email: e });
-        succBanner.classList.add('show');
+        box.className = 'feedback-box incorrect';
+        title.innerText = '❌ Resposta Incorreta!';
+      }
+      exp.innerHTML = `<strong>Explicação:</strong> ${explanationText}`;
+    }
+
+    // Navegação (Anterior, Próximo, Pular para Número)
+    function nextQuestion() {
+      if (currentQuestionIndex < enemDatabase[currentYear].length - 1) {
+        currentQuestionIndex++;
+        renderQuestion();
+      } else {
+        alert("Você chegou à última questão disponível para este ano.");
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderQuestion();
+      }
+    }
+
+    function jumpToQuestion(index) {
+      currentQuestionIndex = index;
+      renderQuestion();
+    }
+
+    // Salvar Progresso Fictício (Mostra um alerta amigável)
+    function saveProgress() {
+      alert("Progresso salvo com sucesso! Você pode fechar a prova e voltar exatamente de onde parou.");
+    }
+
+    // Atualiza o menu lateral de quadradinhos de questões
+    function renderNavigator() {
+      const grid = document.getElementById('q-navigator-grid');
+      grid.innerHTML = '';
+      const examLength = enemDatabase[currentYear].length;
+
+      for (let i = 0; i < examLength; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'q-nav-btn';
+        btn.innerText = i + 1;
+        btn.onclick = () => jumpToQuestion(i);
         
-        setTimeout(() => {
-          showView('view-dashboard');
-        }, 1200);
+        // Pinta de verde ou vermelho se já respondeu
+        const ans = userProgress[currentYear][i];
+        if (ans) {
+          if (ans.status === 'correct') btn.classList.add('correct');
+          if (ans.status === 'incorrect') btn.classList.add('incorrect');
+        }
+
+        if (i === currentQuestionIndex) {
+          btn.classList.add('active');
+        }
+
+        grid.appendChild(btn);
       }
     }
 
-    function handleRecover() {
-      const u = document.getElementById('rec-user').value.trim();
-      const recoveredBox = document.getElementById('recovered-box');
-      const passText = document.getElementById('recovered-pass-text');
-
-      const found = registeredUsers.find(item => item.user.toLowerCase() === u.toLowerCase());
-
-      if (found) {
-        passText.innerText = found.pass;
-      } else {
-        passText.innerText = "123456";
-      }
-
-      recoveredBox.style.display = "block";
-    }
-
-    function openModule(moduleTitle) {
-      document.getElementById('current-module-title').innerText = moduleTitle;
-      showView('view-module');
-    }
-
-    const modalData = {
-      termos: {
-        title: "📄 Termos de Serviço - Gabaritei",
-        body: `<p><strong>1. Aceitação dos Termos:</strong> Ao utilizar a plataforma Gabaritei desenvolvida pela FichTeck, você concorda com os termos de uso vigentes.</p><br/>
-               <p><strong>2. Uso do Conteúdo:</strong> Todo o material (vídeos, simulados e resumos) é voltado para uso pessoal do estudante.</p><br/>
-               <p><strong>3. Atualizações:</strong> A plataforma reserva-se o direito de atualizar conteúdos para manter a concordância com o ENEM e exames nacionais.</p>`
-      },
-      privacidade: {
-        title: "🔒 Política de Privacidade",
-        body: `<p><strong>1. Armazenamento Seguro:</strong> Seus dados de acesso, senhas e progresso de estudo ficam guardados de forma restrita e 100% offline no seu próprio dispositivo via LocalStorage.</p><br/>
-               <p><strong>2. Não Compartilhamento:</strong> O Gabaritei não vende e não repassa informações para plataformas de anúncios terceiras.</p>`
-      },
-      manual: {
-        title: "📖 Manual do Estudante",
-        body: `<p><strong>1. Como Estudar:</strong> Selecione o nível desejado no painel inicial e escolha a disciplina específica.</p><br/>
-               <p><strong>2. Dica de Foco:</strong> Utilize o temporizador Pomodoro de 25 minutos para manter a concentração máxima sem exaustão.</p><br/>
-               <p><strong>3. IA Auxiliadora:</strong> Faça perguntas na barra do módulo de vídeo para receber resumos rápidos.</p>`
-      },
-      conduta: {
-        title: "🤝 Código de Conduta da Comunidade",
-        body: `<p><strong>1. Respeito Mútuo:</strong> Valorize o aprendizado contínuo e mantenha uma postura positiva no ambiente de estudos.</p><br/>
-               <p><strong>2. Integridade Acadêmica:</strong> Utilize os gabaritos e resumos como auxílio de aprendizado real para testar seu conhecimento.</p>`
-      }
-    };
-
-    function openTermModal(key) {
-      const item = modalData[key];
-      if (item) {
-        document.getElementById('modal-title').innerText = item.title;
-        document.getElementById('modal-content-body').innerHTML = item.body;
-        document.getElementById('info-modal-overlay').classList.add('active');
-      }
-    }
-
-    function closeTermModal() {
-      document.getElementById('info-modal-overlay').classList.remove('active');
+    function updateNavigatorHighlight() {
+      document.querySelectorAll('.q-nav-btn').forEach((btn, index) => {
+        if (index === currentQuestionIndex) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
     }
   </script>
 </body>
