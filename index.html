@@ -6,9 +6,6 @@
   <title>Gabaritei - Plataforma Completa de Estudos</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    /* =======================================
-       CÓDIGO ORIGINAL (INTACTO)
-       ======================================= */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -24,6 +21,7 @@
       color: #f1f5f9;
     }
 
+    /* CONTÊINER DAS TELAS */
     .view-section {
       display: none;
       width: 100%;
@@ -38,6 +36,9 @@
       display: flex;
     }
 
+    /* =======================================
+       1. TEMA CLARO (LOGIN / CADASTRO / RECUPERAÇÃO)
+       ======================================= */
     .light-theme {
       background-color: #dbe5f0;
       background-image: radial-gradient(#a3b8cc 1px, transparent 1px);
@@ -58,8 +59,19 @@
       gap: 16px;
     }
 
-    .auth-title { font-size: 2.2rem; font-weight: 800; color: #1d4ed8; letter-spacing: 1px; }
-    .auth-subtitle { font-size: 1rem; font-weight: 700; color: #1e293b; margin-bottom: 5px; }
+    .auth-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #1d4ed8;
+      letter-spacing: 1px;
+    }
+
+    .auth-subtitle {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 5px;
+    }
 
     .alert-banner {
       padding: 12px 16px;
@@ -69,148 +81,547 @@
       text-align: center;
       display: none;
     }
-    .alert-banner.show { display: block; }
-    .alert-banner.success { background-color: #d1fae5; color: #065f46; }
-    .alert-banner.error { background-color: #fce7f3; color: #9f1239; }
-    .alert-banner.info { background-color: #dbeafe; color: #1e40af; display: block; }
 
-    .form-group { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; text-align: left; }
-    .form-group label { font-size: 0.8rem; font-weight: 600; color: #334155; }
-    .form-group input {
-      width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid transparent;
-      background-color: #dbe7f6; color: #1e293b; font-size: 0.9rem; outline: none;
+    .alert-banner.show {
+      display: block;
     }
-    .form-group input:focus { border-color: #2563eb; background-color: #edf4fc; }
+
+    .alert-banner.success {
+      background-color: #d1fae5;
+      color: #065f46;
+    }
+
+    .alert-banner.error {
+      background-color: #fce7f3;
+      color: #9f1239;
+    }
+
+    .alert-banner.info {
+      background-color: #dbeafe;
+      color: #1e40af;
+      display: block;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      text-align: left;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      background-color: #dbe7f6;
+      color: #1e293b;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .form-group input:focus {
+      border-color: #2563eb;
+      background-color: #edf4fc;
+    }
 
     .btn-primary {
-      width: 100%; padding: 14px; border-radius: 20px; border: none; background-color: #2563eb;
-      color: #ffffff; font-size: 0.95rem; font-weight: 700; cursor: pointer; margin-top: 10px; transition: background-color 0.2s;
+      width: 100%;
+      padding: 14px;
+      border-radius: 20px;
+      border: none;
+      background-color: #2563eb;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.2s;
     }
-    .btn-primary:hover { background-color: #1d4ed8; }
 
-    .auth-link { font-size: 0.8rem; color: #2563eb; text-decoration: none; font-weight: 600; margin-top: 4px; cursor: pointer; }
-    .auth-link:hover { text-decoration: underline; }
+    .btn-primary:hover {
+      background-color: #1d4ed8;
+    }
+
+    .auth-link {
+      font-size: 0.8rem;
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 4px;
+      cursor: pointer;
+    }
+
+    .auth-link:hover {
+      text-decoration: underline;
+    }
 
     .recovered-box {
-      border: 2px dashed #2563eb; border-radius: 12px; padding: 14px; margin-top: 10px; color: #1d4ed8; font-weight: 700; font-size: 0.85rem; display: none;
+      border: 2px dashed #2563eb;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 10px;
+      color: #1d4ed8;
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: none;
     }
-
-    .dark-theme { background: radial-gradient(circle at top center, #0f1c3f 0%, #080d1a 100%); color: #f1f5f9; justify-content: flex-start; padding-top: 40px; }
-    .dark-header { text-align: center; margin-bottom: 25px; }
-    .dark-header h1 { font-size: 2.2rem; font-weight: 800; color: #ffffff; }
-    .dark-header p { color: #94a3b8; font-size: 0.9rem; margin-top: 6px; }
-
-    .tabs-container { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; width: 100%; max-width: 1100px; }
-    .tab-btn {
-      background: rgba(15, 23, 42, 0.8); border: 1px solid #1e293b; color: #94a3b8; padding: 12px 16px; border-radius: 14px; font-weight: 600; font-size: 0.85rem;
-      cursor: pointer; transition: all 0.25s ease; display: flex; flex-direction: column; align-items: center; gap: 2px; flex: 1; min-width: 150px; text-align: center;
-    }
-    .tab-btn span.sub { font-size: 0.65rem; opacity: 0.7; text-transform: uppercase; }
-    .tab-btn:hover { border-color: #38bdf8; color: #ffffff; }
-    .tab-btn.active { background: #2563eb; border-color: #3b82f6; color: #ffffff; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4); }
-
-    .tab-content { display: none; width: 100%; max-width: 1100px; animation: fadeIn 0.3s ease; }
-    .tab-content.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-
-    .clean-module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; width: 100%; }
-    .modern-module-card {
-      background: rgba(15, 23, 42, 0.75); border: 1px solid #1e293b; border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.25s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; justify-content: space-between; position: relative;
-    }
-    .modern-module-card:hover { background: #1e293b; border-color: #38bdf8; transform: translateY(-4px); box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2); }
-    .card-subject-title { font-size: 1.05rem; font-weight: 700; color: #38bdf8; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-    .card-topics-list { font-size: 0.82rem; color: #cbd5e1; line-height: 1.5; }
-    .card-topics-list li { margin-bottom: 6px; list-style-position: inside; }
-
-    .btn-exit { background-color: #ffffff; color: #0f172a; font-weight: 700; padding: 12px 30px; border-radius: 20px; border: none; cursor: pointer; margin: 40px auto 10px auto; display: block; transition: opacity 0.2s; }
-    .btn-exit:hover { opacity: 0.9; }
-
-    /* Módulo de Vídeo Original */
-    .video-page-container { width: 100%; max-width: 1100px; display: flex; flex-direction: column; gap: 20px; }
-    .top-bar-module { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .btn-back { background: #ffffff; color: #000000; border: none; padding: 8px 18px; border-radius: 16px; font-weight: 700; font-size: 0.8rem; cursor: pointer; }
-    
-    .video-main-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-    @media (max-width: 850px) { .video-main-layout { grid-template-columns: 1fr; } }
-    
-    .video-player-box { background: #000000; border-radius: 16px; border: 1px solid #1e293b; height: 400px; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative;}
-    .video-player-box iframe { width: 100%; height: 100%; border: none; }
-
-    .info-boxes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
-    .info-card { background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 16px; font-size: 0.75rem; color: #94a3b8; max-height: 300px; overflow-y: auto;}
-    .info-card h4 { color: #38bdf8; margin-bottom: 8px; font-size: 0.85rem; text-transform: uppercase; }
-    
-    .sidebar-card { background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 16px; margin-bottom: 15px; }
-    .sidebar-card h4 { font-size: 0.85rem; color: #ffffff; margin-bottom: 10px; }
-    
-    .chat-box { background: #090d16; border-radius: 8px; padding: 10px; font-size: 0.75rem; color: #cbd5e1; margin-bottom: 10px; min-height: 150px; max-height: 250px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;}
-    .chat-msg { background: #1e293b; padding: 8px; border-radius: 8px; width: fit-content; max-width: 90%; line-height: 1.4;}
-    .chat-msg.ia { background: #0284c7; color: white;}
-    .chat-input-row { display: flex; gap: 6px; }
-    .chat-input-row input { flex: 1; background: #1e293b; border: none; padding: 8px; border-radius: 6px; color: #fff; font-size: 0.75rem; }
-    .chat-input-row button { background: #38bdf8; border: none; padding: 8px 12px; border-radius: 6px; color: #000; font-weight: 700; font-size: 0.75rem; cursor: pointer; }
 
     /* =======================================
-       NOVOS ESTILOS ADICIONADOS (PROVAS, QUIZ E CONFIG)
+       2. TEMA ESCURO (PAINEL E MÓDULOS)
        ======================================= */
-    .exam-years-container { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 5px; }
-    .exam-year-btn { background: #1e293b; border: 1px solid #38bdf8; color: #38bdf8; padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: bold; cursor: pointer; transition: 0.2s;}
-    .exam-year-btn:hover { background: #38bdf8; color: #0f172a;}
+    .dark-theme {
+      background: #060913;
+      color: #f1f5f9;
+      justify-content: flex-start;
+      padding-top: 40px;
+    }
 
-    /* Quiz/Prova Layout */
-    .quiz-layout { display: grid; grid-template-columns: 250px 1fr; gap: 20px; width: 100%; max-width: 1100px; margin-top: 20px; }
-    @media (max-width: 850px) { .quiz-layout { grid-template-columns: 1fr; } }
-    
-    .quiz-sidebar { background: rgba(15, 23, 42, 0.75); border: 1px solid #1e293b; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; }
-    .quiz-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 15px; }
-    .quiz-num-btn { background: #1e293b; color: #fff; border: 1px solid #334155; border-radius: 8px; padding: 10px 0; text-align: center; font-weight: bold; cursor: pointer; transition: 0.2s; }
-    .quiz-num-btn:hover:not(:disabled) { background: #38bdf8; color: #000; }
-    .quiz-num-btn.active { background: #2563eb; border-color: #3b82f6; }
-    .quiz-num-btn.correct { background: #10b981; border-color: #059669; }
-    .quiz-num-btn.incorrect { background: #ef4444; border-color: #b91c1c; }
-    .quiz-num-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .dark-header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
 
-    .quiz-main { background: rgba(15, 23, 42, 0.75); border: 1px solid #1e293b; border-radius: 16px; padding: 30px; position: relative;}
-    .quiz-question-text { font-size: 1.1rem; line-height: 1.6; color: #f1f5f9; margin-bottom: 25px; }
-    
-    .quiz-options { display: flex; flex-direction: column; gap: 10px; }
-    .quiz-option { background: #1e293b; border: 2px solid transparent; border-radius: 12px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px; transition: 0.2s; font-size: 0.95rem;}
-    .quiz-option:hover { background: #334155; }
-    .quiz-option.selected { border-color: #38bdf8; background: rgba(56, 189, 248, 0.1); }
-    .quiz-option.correct-ans { border-color: #10b981; background: rgba(16, 185, 129, 0.1); }
-    .quiz-option.wrong-ans { border-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
-    
-    .quiz-letter { background: #334155; color: #fff; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; flex-shrink: 0;}
-    
-    .quiz-controls { display: flex; justify-content: space-between; margin-top: 30px; align-items: center;}
-    .btn-quiz-action { background: #2563eb; color: #fff; padding: 12px 25px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; transition: 0.2s;}
-    .btn-quiz-action:hover { background: #1d4ed8; }
-    .btn-config { background: transparent; border: 1px solid #64748b; color: #cbd5e1; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;}
-    .btn-config:hover { background: #334155; }
+    .dark-header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
 
-    .quiz-feedback { margin-top: 25px; padding: 20px; border-radius: 12px; display: none; }
-    .quiz-feedback.success { background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; display: block; }
-    .quiz-feedback.error { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; display: block; }
-    .quiz-feedback h3 { margin-bottom: 10px; font-size: 1.1rem; }
-    .quiz-feedback p { font-size: 0.9rem; line-height: 1.5; color: #cbd5e1; }
+    .dark-header p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
 
-    /* Modal de Configuração */
-    .config-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 10000; }
-    .config-modal-overlay.active { display: flex; }
-    .config-card { background: #0f172a; padding: 30px; border-radius: 16px; border: 1px solid #38bdf8; width: 400px; color: #fff; }
-    .config-card h2 { margin-bottom: 20px; color: #38bdf8; }
-    .config-toggle { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 0.9rem;}
-    .toggle-switch { position: relative; width: 50px; height: 24px; appearance: none; background: #334155; outline: none; border-radius: 12px; cursor: pointer; transition: 0.3s; }
-    .toggle-switch:checked { background: #10b981; }
-    .toggle-switch::before { content: ''; position: absolute; width: 20px; height: 20px; border-radius: 50%; top: 2px; left: 2px; background: #fff; transition: 0.3s; }
-    .toggle-switch:checked::before { transform: translateX(26px); }
+    /* NAVEGAÇÃO DE ABAS */
+    .tabs-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 1100px;
+    }
 
-    /* Sugestões de vídeo */
-    .suggested-video-card { display: flex; gap: 10px; margin-bottom: 10px; padding: 8px; background: #1e293b; border-radius: 8px; cursor: pointer; }
-    .suggested-video-card iframe { width: 100px; height: 60px; border-radius: 6px; border: none; pointer-events: none;}
-    .suggested-info h5 { font-size: 0.75rem; color: #f1f5f9; margin-bottom: 4px; }
-    .suggested-info span { font-size: 0.65rem; color: #94a3b8; }
+    .tab-btn {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid #1e293b;
+      color: #94a3b8;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+    }
+
+    .tab-btn span.sub {
+      font-size: 0.65rem;
+      opacity: 0.7;
+      text-transform: uppercase;
+    }
+
+    .tab-btn:hover {
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+
+    .tab-btn.active {
+      background: #2563eb;
+      border-color: #3b82f6;
+      color: #ffffff;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+    }
+
+    /* CARDS DAS MATÉRIAS */
+    .tab-content {
+      display: none;
+      width: 100%;
+      max-width: 1100px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .clean-module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      width: 100%;
+    }
+
+    .modern-module-card {
+      background: rgba(13, 22, 41, 0.85);
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      padding: 22px;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .modern-module-card:hover {
+      border-color: #38bdf8;
+      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
+    }
+
+    .card-subject-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-topics-list {
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .card-topics-list li {
+      margin-bottom: 6px;
+      list-style-position: inside;
+    }
+
+    /* BOTÕES DE PROVAS DENTRO DOS CARDS (IGUAL DA IMAGEM 1) */
+    .card-provas-container {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .btn-prova-tag {
+      background: rgba(37, 99, 235, 0.2);
+      border: 1px solid #2563eb;
+      color: #60a5fa;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-prova-tag:hover {
+      background: #2563eb;
+      color: #ffffff;
+    }
+
+    .btn-exit {
+      background-color: #ffffff;
+      color: #0f172a;
+      font-weight: 700;
+      padding: 12px 32px;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+      margin: 35px auto 10px auto;
+      display: block;
+      transition: opacity 0.2s;
+    }
+
+    .btn-exit:hover {
+      opacity: 0.9;
+    }
+
+    /* RODAPÉ E GUIA COMPLETO (IGUAL DA IMAGEM 2) */
+    .app-footer-info {
+      width: 100%;
+      max-width: 1100px;
+      margin-top: 50px;
+      padding-top: 35px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .app-footer-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .app-footer-header h2 {
+      font-size: 1.5rem;
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .app-footer-header p {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+
+    .info-app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .info-app-card {
+      background: rgba(13, 22, 41, 0.7);
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 22px;
+    }
+
+    .info-app-card h3 {
+      font-size: 0.95rem;
+      color: #38bdf8;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-app-card p, .info-app-card ul {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    .info-app-card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .info-app-card ul li {
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .interactive-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .interactive-link-btn {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.82rem;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      width: 100%;
+      text-align: center;
+      transition: all 0.2s;
+      display: block;
+    }
+
+    .interactive-link-btn:hover {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #3b82f6;
+    }
+
+    .copyright-text {
+      text-align: center;
+      color: #64748b;
+      font-size: 0.78rem;
+      margin-top: 35px;
+      padding-bottom: 25px;
+    }
+
+    /* MÓDULO DE VÍDEO */
+    .video-page-container {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .top-bar-module {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-back {
+      background: #ffffff;
+      color: #000000;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .video-main-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 850px) {
+      .video-main-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .video-player-box {
+      background: #000000;
+      border-radius: 16px;
+      border: 1px solid #1e293b;
+      height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .play-btn {
+      width: 0;
+      height: 0;
+      border-top: 20px solid transparent;
+      border-bottom: 20px solid transparent;
+      border-left: 35px solid #38bdf8;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+
+    .sidebar-card {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .sidebar-card h4 {
+      font-size: 0.85rem;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .chat-box {
+      background: #090d16;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 0.75rem;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+      min-height: 120px;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 6px;
+    }
+
+    .chat-input-row input {
+      flex: 1;
+      background: #1e293b;
+      border: none;
+      padding: 8px;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 0.75rem;
+    }
+
+    .chat-input-row button {
+      background: #38bdf8;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      color: #000;
+      font-weight: 700;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    /* MODAL POPUP */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #0f172a;
+      border: 1px solid #38bdf8;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 550px;
+      padding: 30px;
+      color: #f1f5f9;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .modal-card h3 {
+      color: #38bdf8;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .modal-card div {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+
+    .modal-close-btn {
+      margin-top: 20px;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
@@ -221,8 +632,17 @@
       <h1 class="auth-title">GABARITEI</h1>
       <div class="alert-banner info">Bem-vindo ao Gabaritei</div>
       <div id="login-error-banner" class="alert-banner error">Usuário ou senha incorretos!</div>
-      <div class="form-group"><label>Usuário</label><input type="text" id="login-user" placeholder="Digite seu usuário" /></div>
-      <div class="form-group"><label>Senha</label><input type="password" id="login-pass" placeholder="Digite sua senha" /></div>
+
+      <div class="form-group">
+        <label>Usuário</label>
+        <input type="text" id="login-user" placeholder="Digite seu usuário" />
+      </div>
+
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" id="login-pass" placeholder="Digite sua senha" />
+      </div>
+
       <button class="btn-primary" onclick="handleLogin()">Acessar o Gabaritei</button>
       <a class="auth-link" onclick="showView('view-recover')">Esqueceu a senha?</a>
       <a class="auth-link" onclick="showView('view-register')">Você não tem outra conta? Crie uma aqui</a>
@@ -234,11 +654,25 @@
     <div class="auth-card">
       <h1 class="auth-title">GABARITEI</h1>
       <h2 class="auth-subtitle">Criar Conta</h2>
+      
       <div id="register-success" class="alert-banner success">Conta criada com sucesso! Redirecionando...</div>
-      <div id="register-error" class="alert-banner error">O sistema identificou que este nome de usuário já existe!</div>
-      <div class="form-group"><label>Nome de Usuário</label><input type="text" id="reg-user" placeholder="Escolha um nome de usuário" /></div>
-      <div class="form-group"><label>E-mail</label><input type="email" id="reg-email" placeholder="Seu melhor e-mail" /></div>
-      <div class="form-group"><label>Senha</label><input type="password" id="reg-pass" placeholder="Crie uma senha" /></div>
+      <div id="register-error" class="alert-banner error">Preencha todos os campos corretamente!</div>
+
+      <div class="form-group">
+        <label>Nome de Usuário</label>
+        <input type="text" id="reg-user" placeholder="Escolha um nome de usuário" />
+      </div>
+
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" id="reg-email" placeholder="Seu melhor e-mail" />
+      </div>
+
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" id="reg-pass" placeholder="Crie uma senha" />
+      </div>
+
       <button class="btn-primary" onclick="handleRegister()">Cadastrar e Acessar</button>
       <a class="auth-link" onclick="showView('view-login')">Já tem uma conta? Acesse aqui</a>
     </div>
@@ -249,10 +683,24 @@
     <div class="auth-card">
       <h1 class="auth-title">GABARITEI</h1>
       <h2 class="auth-subtitle">Recuperar Senha</h2>
-      <div class="form-group"><label>Nome de Usuário</label><input type="text" id="rec-user" placeholder="Seu usuário" /></div>
-      <div class="form-group"><label>E-mail</label><input type="email" id="rec-email" placeholder="Seu e-mail cadastrado" /></div>
+
+      <div class="form-group">
+        <label>Nome de Usuário</label>
+        <input type="text" id="rec-user" placeholder="Seu usuário" />
+      </div>
+
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" id="rec-email" placeholder="Seu e-mail cadastrado" />
+      </div>
+
       <button class="btn-primary" onclick="handleRecover()">Recuperar Minha Senha</button>
-      <div id="recovered-box" class="recovered-box">SUA SENHA RECUPERADA:<br /><span id="recovered-pass-text" style="font-size: 1.1rem; color: #1e293b;">123</span></div>
+
+      <div id="recovered-box" class="recovered-box">
+        SUA SENHA RECUPERADA:<br />
+        <span id="recovered-pass-text" style="font-size: 1.1rem; color: #1e293b;">123</span>
+      </div>
+
       <a class="auth-link" onclick="showView('view-login')">Voltar para o login</a>
     </div>
   </section>
@@ -267,192 +715,296 @@
     <!-- NAVEGAÇÃO DE ABAS -->
     <div class="tabs-container">
       <button class="tab-btn active" onclick="switchTab('tab-fund1', this)">
-        <span>1º ao 5º Ano</span><span class="sub">Fundamental I</span>
+        <span>1º ao 5º Ano</span>
+        <span class="sub">FUNDAMENTAL I</span>
       </button>
       <button class="tab-btn" onclick="switchTab('tab-fund2', this)">
-        <span>6º ao 9º Ano</span><span class="sub">Fundamental II</span>
+        <span>6º ao 9º Ano</span>
+        <span class="sub">FUNDAMENTAL II</span>
       </button>
       <button class="tab-btn" onclick="switchTab('tab-medio', this)">
-        <span>1º ao 3º Ano</span><span class="sub">Ensino Médio</span>
+        <span>1º ao 3º Ano</span>
+        <span class="sub">ENSINO MÉDIO</span>
       </button>
       <button class="tab-btn" onclick="switchTab('tab-superior', this)">
-        <span>Ensino Superior</span><span class="sub">Graduação</span>
+        <span>Ensino Superior</span>
+        <span class="sub">GRADUAÇÃO</span>
       </button>
       <button class="tab-btn" onclick="switchTab('tab-vestibulares', this)">
-        <span>Vestibulares</span><span class="sub">ENEM & Provas</span>
+        <span>Vestibulares</span>
+        <span class="sub">ENEM & PROVAS</span>
       </button>
       <button class="tab-btn" onclick="switchTab('tab-concursos', this)">
-        <span>Concursos Públicos</span><span class="sub">Carreiras Públicas</span>
+        <span>Concursos Públicos</span>
+        <span class="sub">CARREIRAS PÚBLICAS</span>
       </button>
     </div>
 
-    <!-- ABA 1: FUNDAMENTAL I -->
+    <!-- ABA 1: FUNDAMENTAL I (IGUAL DA IMAGEM 1) -->
     <div id="tab-fund1" class="tab-content active">
       <div class="clean-module-grid">
-        <div class="modern-module-card" onclick="openModule('Língua Portuguesa - Fundamental I')">
-          <div class="card-subject-title">📖 Língua Portuguesa</div>
-          <ul class="card-topics-list"><li>Alfabetização e Letramento</li><li>Gramática básica</li></ul>
-          <div class="exam-years-container">
-             <button class="exam-year-btn" onclick="event.stopPropagation(); startExam('port-fund1', 2022)">Prova 2022</button>
-             <button class="exam-year-btn" onclick="event.stopPropagation(); startExam('port-fund1', 2023)">Prova 2023</button>
+        <div class="modern-module-card">
+          <div>
+            <div class="card-subject-title">📖 Língua Portuguesa</div>
+            <ul class="card-topics-list">
+              <li>Alfabetização e Letramento</li>
+              <li>Gramática básica</li>
+            </ul>
+          </div>
+          <div class="card-provas-container">
+            <button class="btn-prova-tag" onclick="openModule('Língua Portuguesa - Prova 2022')">Prova 2022</button>
+            <button class="btn-prova-tag" onclick="openModule('Língua Portuguesa - Prova 2023')">Prova 2023</button>
           </div>
         </div>
-        <!-- Outros cards mantidos minimalistas para brevidade, sistema se aplica a todos -->
-        <div class="modern-module-card" onclick="openModule('Matemática - Fundamental I')">
-          <div class="card-subject-title">➕ Matemática</div>
-          <ul class="card-topics-list"><li>Quatro operações matemáticas</li><li>Geometria básica</li></ul>
+
+        <div class="modern-module-card">
+          <div>
+            <div class="card-subject-title">➕ Matemática</div>
+            <ul class="card-topics-list">
+              <li>Quatro operações matemáticas</li>
+              <li>Geometria básica</li>
+            </ul>
+          </div>
+          <div class="card-provas-container">
+            <button class="btn-prova-tag" onclick="openModule('Matemática - Prova 2022')">Prova 2022</button>
+            <button class="btn-prova-tag" onclick="openModule('Matemática - Prova 2023')">Prova 2023</button>
+          </div>
+        </div>
+
+        <div class="modern-module-card">
+          <div>
+            <div class="card-subject-title">🌱 Ciências da Natureza</div>
+            <ul class="card-topics-list">
+              <li>Corpo humano e ecossistemas</li>
+              <li>Sistema solar básico</li>
+            </ul>
+          </div>
+          <div class="card-provas-container">
+            <button class="btn-prova-tag" onclick="openModule('Ciências - Prova 2022')">Prova 2022</button>
+            <button class="btn-prova-tag" onclick="openModule('Ciências - Prova 2023')">Prova 2023</button>
+          </div>
+        </div>
+
+        <div class="modern-module-card">
+          <div>
+            <div class="card-subject-title">⏳ História & Geografia</div>
+            <ul class="card-topics-list">
+              <li>História da comunidade</li>
+              <li>Mapas e relevo brasileiro</li>
+            </ul>
+          </div>
+          <div class="card-provas-container">
+            <button class="btn-prova-tag" onclick="openModule('História/Geografia - Prova 2022')">Prova 2022</button>
+            <button class="btn-prova-tag" onclick="openModule('História/Geografia - Prova 2023')">Prova 2023</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- ABA 2, 3, 4 (Encurtadas visualmente, mas prontas para escalar) -->
+    <!-- ABA 2: FUNDAMENTAL II -->
     <div id="tab-fund2" class="tab-content">
       <div class="clean-module-grid">
-        <div class="modern-module-card" onclick="openModule('Ciências - Fundamental II')">
-            <div class="card-subject-title">🔬 Ciências da Natureza</div>
-            <ul class="card-topics-list"><li>Biologia celular e ecologia inicial</li></ul>
+        <div class="modern-module-card">
+          <div>
+            <div class="card-subject-title">📚 Língua Portuguesa e Sintaxe</div>
+            <ul class="card-topics-list">
+              <li>Análise sintática e morfológica</li>
+              <li>Interpretação textual avançada</li>
+            </ul>
+          </div>
+          <div class="card-provas-container">
+            <button class="btn-prova-tag" onclick="openModule('Portugues Fund II - Prova 2022')">Prova 2022</button>
+            <button class="btn-prova-tag" onclick="openModule('Portugues Fund II - Prova 2023')">Prova 2023</button>
+          </div>
+        </div>
+
+        <div class="modern-module-card">
+          <div>
+            <div class="card-subject-title">📐 Matemática e Álgebra</div>
+            <ul class="card-topics-list">
+              <li>Equações do 1º e 2º grau</li>
+              <li>Geometria plana e espacial</li>
+            </ul>
+          </div>
+          <div class="card-provas-container">
+            <button class="btn-prova-tag" onclick="openModule('Matemática Fund II - Prova 2022')">Prova 2022</button>
+            <button class="btn-prova-tag" onclick="openModule('Matemática Fund II - Prova 2023')">Prova 2023</button>
+          </div>
         </div>
       </div>
     </div>
-    
+
+    <!-- ABA 3: ENSINO MÉDIO -->
     <div id="tab-medio" class="tab-content">
-        <div class="clean-module-grid">
-            <div class="modern-module-card" onclick="openModule('Física Avançada - Ensino Médio')">
-              <div class="card-subject-title">⚡ Física Avançada</div>
-              <ul class="card-topics-list"><li>Mecânica, cinemática e dinâmica</li></ul>
-            </div>
+      <div class="clean-module-grid">
+        <div class="modern-module-card">
+          <div>
+            <div class="card-subject-title">📝 Linguagens e Redação</div>
+            <ul class="card-topics-list">
+              <li>Sintaxe e estrutura dissertativa</li>
+              <li>Literatura brasileira e estrangeira</li>
+            </ul>
+          </div>
+          <div class="card-provas-container">
+            <button class="btn-prova-tag" onclick="openModule('Linguagens Médio - Prova 2022')">Prova 2022</button>
+            <button class="btn-prova-tag" onclick="openModule('Linguagens Médio - Prova 2023')">Prova 2023</button>
+          </div>
         </div>
+
+        <div class="modern-module-card">
+          <div>
+            <div class="card-subject-title">⚡ Física, Química & Biologia</div>
+            <ul class="card-topics-list">
+              <li>Mecânica, Termodinâmica e Química Orgânica</li>
+              <li>Citologia e Genética</li>
+            </ul>
+          </div>
+          <div class="card-provas-container">
+            <button class="btn-prova-tag" onclick="openModule('Natureza Médio - Prova 2022')">Prova 2022</button>
+            <button class="btn-prova-tag" onclick="openModule('Natureza Médio - Prova 2023')">Prova 2023</button>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <!-- ABA 4: ENSINO SUPERIOR -->
     <div id="tab-superior" class="tab-content">
-        <div class="clean-module-grid">
-            <div class="modern-module-card" onclick="openModule('Ciências Biológicas e da Saúde')">
-              <div class="card-subject-title">🧬 Ciências Biológicas e da Saúde</div>
-              <ul class="card-topics-list"><li>Anatomia humana e fisiologia</li></ul>
-            </div>
+      <div class="clean-module-grid">
+        <div class="modern-module-card">
+          <div>
+            <div class="card-subject-title">💻 Ciências Exatas e Engenharia</div>
+            <ul class="card-topics-list">
+              <li>Cálculo diferencial e integral</li>
+              <li>Álgebra linear avançada</li>
+            </ul>
+          </div>
+          <div class="card-provas-container">
+            <button class="btn-prova-tag" onclick="openModule('Cálculo I - Exame 2023')">Exame 2023</button>
+          </div>
         </div>
+      </div>
     </div>
 
-    <!-- ABA 5: VESTIBULARES (FECHAMENTO DA CORTADA DO USUÁRIO + ADIÇÕES DE ANOS) -->
+    <!-- ABA 5: VESTIBULARES -->
     <div id="tab-vestibulares" class="tab-content">
       <div class="clean-module-grid">
-        <div class="modern-module-card" onclick="openModule('ENEM - Prova Completa')">
-          <div class="card-subject-title">🎯 Prova ENEM (4 Áreas)</div>
-          <ul class="card-topics-list">
-            <li>Linguagens, Códigos e suas Tecnologias</li>
-            <li>Ciências Humanas e suas Tecnologias</li>
-            <li>Ciências da Natureza e suas Tecnologias</li>
-            <li>Matemática e suas Tecnologias</li>
-          </ul>
-          <div class="exam-years-container">
-             <!-- Anos de provas completas -->
-             <button class="exam-year-btn" onclick="event.stopPropagation(); startExam('enem-geral', 2019)">ENEM 2019</button>
-             <button class="exam-year-btn" onclick="event.stopPropagation(); startExam('enem-geral', 2020)">ENEM 2020</button>
-             <button class="exam-year-btn" onclick="event.stopPropagation(); startExam('enem-geral', 2021)">ENEM 2021</button>
-             <button class="exam-year-btn" onclick="event.stopPropagation(); startExam('enem-geral', 2022)">ENEM 2022</button>
-             <button class="exam-year-btn" onclick="event.stopPropagation(); startExam('enem-geral', 2023)">ENEM 2023</button>
+        <div class="modern-module-card">
+          <div>
+            <div class="card-subject-title">🎯 Prova ENEM Completa</div>
+            <ul class="card-topics-list">
+              <li>Simulados oficiais e caderno de questões</li>
+              <li>Gabarito comentado passo a passo</li>
+            </ul>
           </div>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Oficina de Redação Nota 1000')">
-          <div class="card-subject-title">✍️ Redação Dissertativa-Argumentativa</div>
-          <ul class="card-topics-list">
-            <li>Estrutura completa da proposta ENEM</li>
-            <li>Elaboração de proposta de intervenção</li>
-            <li>Repertório sociocultural produtivo</li>
-          </ul>
-          <div class="exam-years-container">
-             <!-- Redação: todos os anos -->
-             <button class="exam-year-btn" onclick="event.stopPropagation(); startExam('enem-redacao', 2018)">Tema 2018</button>
-             <button class="exam-year-btn" onclick="event.stopPropagation(); startExam('enem-redacao', 2019)">Tema 2019</button>
-             <button class="exam-year-btn" onclick="event.stopPropagation(); startExam('enem-redacao', 2020)">Tema 2020</button>
-             <button class="exam-year-btn" onclick="event.stopPropagation(); startExam('enem-redacao', 2021)">Tema 2021</button>
-             <button class="exam-year-btn" onclick="event.stopPropagation(); startExam('enem-redacao', 2022)">Tema 2022</button>
-             <button class="exam-year-btn" onclick="event.stopPropagation(); startExam('enem-redacao', 2023)">Tema 2023</button>
+          <div class="card-provas-container">
+            <button class="btn-prova-tag" onclick="openModule('ENEM - Prova 2021')">ENEM 2021</button>
+            <button class="btn-prova-tag" onclick="openModule('ENEM - Prova 2022')">ENEM 2022</button>
+            <button class="btn-prova-tag" onclick="openModule('ENEM - Prova 2023')">ENEM 2023</button>
           </div>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Vestibulares Tradicionais')">
-          <div class="card-subject-title">🏛️ Vestibulares Tradicionais</div>
-          <ul class="card-topics-list">
-            <li>FUVEST, UNICAMP, UNESP</li>
-            <li>Obras literárias obrigatórias</li>
-          </ul>
-        </div>
-
-        <div class="modern-module-card" onclick="openModule('Simulados e Maratonas')">
-          <div class="card-subject-title">🧩 Simulados & Cronômetro</div>
-          <ul class="card-topics-list">
-            <li>Maratonas ENEM & Provas seriadas</li>
-          </ul>
         </div>
       </div>
     </div>
 
-    <!-- ABA 6: CONCURSOS (Adicionado para completar) -->
+    <!-- ABA 6: CONCURSOS PÚBLICOS -->
     <div id="tab-concursos" class="tab-content">
       <div class="clean-module-grid">
-         <div class="modern-module-card" onclick="openModule('Direito Constitucional')">
-          <div class="card-subject-title">⚖️ Direito Constitucional</div>
-          <ul class="card-topics-list"><li>Artigo 5º e Direitos Fundamentais</li></ul>
+        <div class="modern-module-card">
+          <div>
+            <div class="card-subject-title">⚖️ Direito Constitucional e Administrativo</div>
+            <ul class="card-topics-list">
+              <li>Atos Administrativos e Licitações</li>
+              <li>Direitos e garantias fundamentais</li>
+            </ul>
+          </div>
+          <div class="card-provas-container">
+            <button class="btn-prova-tag" onclick="openModule('Concurso - Prova 2022')">Prova 2022</button>
+            <button class="btn-prova-tag" onclick="openModule('Concurso - Prova 2023')">Prova 2023</button>
+          </div>
         </div>
       </div>
     </div>
-    
+
     <button class="btn-exit" onclick="showView('view-login')">Sair do Sistema</button>
+
+    <!-- RODAPÉ DE INFORMAÇÕES EXATAMENTE IGUAL À IMAGEM 2 -->
+    <div class="app-footer-info">
+      <div class="app-footer-header">
+        <h2>🚀 Informações do App & Guia Completo</h2>
+        <p>Tudo o que você precisa saber sobre a plataforma Gabaritei</p>
+      </div>
+
+      <div class="info-app-grid">
+        <div class="info-app-card">
+          <h3>💡 O que é o Gabaritei?</h3>
+          <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela <strong>FichTeck</strong>. Projetado para otimizar sua rotina com cronogramas inteligentes, resumos e simulados.</p>
+        </div>
+
+        <div class="info-app-card">
+          <h3>🔒 Segurança e Privacidade Total</h3>
+          <p>Seus dados e credenciais são armazenados localmente no seu dispositivo utilizando criptografia via <strong>LocalStorage</strong>.</p>
+        </div>
+
+        <div class="info-app-card">
+          <h3>🧠 Metodologias de Aprendizado</h3>
+          <ul>
+            <li><strong>• Repetição Espaçada:</strong> Revisões nos momentos certos.</li>
+            <li><strong>• Técnica Pomodoro:</strong> Blocos de estudo com foco máximo.</li>
+            <li><strong>• Estudo Ativo:</strong> Simulação prática de provas.</li>
+          </ul>
+        </div>
+
+        <div class="info-app-card">
+          <h3>🤖 IA Auxiliadora Gabaritei</h3>
+          <p>Nossa IA integrada nas videoaulas responde às suas dúvidas e cria resumos instantâneos sobre qualquer assunto estudado.</p>
+        </div>
+
+        <div class="info-app-card">
+          <h3>🏆 Gamificação e Conquistas</h3>
+          <p>Acompanhe suas ofensivas diárias (streaks), ganhe pontos e desbloqueie insígnias conforme avança nas matérias.</p>
+        </div>
+
+        <div class="info-app-card">
+          <h3>🔗 Links Rápidos e Termos</h3>
+          <div class="interactive-links-list">
+            <button class="interactive-link-btn" onclick="openModal('Termos de Serviço', 'Termos de Serviço completos do Gabaritei e FichTeck.')">📄 Termos de Serviço</button>
+            <button class="interactive-link-btn" onclick="openModal('Política de Privacidade', 'Política de Privacidade e Proteção de Dados.')">🔒 Política de Privacidade</button>
+            <button class="interactive-link-btn" onclick="openModal('Manual do Estudante', 'Guia do estudante para utilizar o sistema.')">📖 Manual do Estudante</button>
+            <button class="interactive-link-btn" onclick="openModal('Código de Conduta', 'Diretrizes e regras da comunidade.')">🛡️ Código de Conduta</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright-text">
+        © 2026 FichTeck. Todos os direitos reservados. Gabaritei é uma marca registrada.
+      </div>
+    </div>
   </section>
 
-  <!-- 5. TELA DO MÓDULO DE VÍDEO (AULA DETALHADA E IA) -->
+  <!-- 5. TELA DE MÓDULO E VÍDEO -->
   <section id="view-module" class="view-section dark-theme">
     <div class="video-page-container">
       <div class="top-bar-module">
-        <div>
-          <h2 style="color: #fff; font-size: 1.5rem;" id="module-title">Módulo Especializado</h2>
-          <p style="color: #38bdf8; font-size: 0.9rem;" id="module-subtitle">Disciplina Selecionada</p>
-        </div>
-        <button class="btn-back" onclick="showView('view-dashboard')">Voltar ao Painel</button>
+        <button class="btn-back" onclick="showView('view-dashboard')">← Voltar para o Painel</button>
+        <h2 id="module-title-display" style="color: #38bdf8; font-size: 1.2rem;">Módulo de Aula</h2>
       </div>
 
       <div class="video-main-layout">
-        <!-- Esquerda: Vídeo Principal e Textos -->
         <div>
-          <div class="video-player-box" id="main-video-container">
-            <!-- Iframe injetado via JS -->
-          </div>
-          
-          <div class="info-boxes-grid">
-            <div class="info-card">
-              <h4>EXPLICAÇÃO COMPLETA DA MATÉRIA</h4>
-              <div id="long-explanation-text">
-                Conteúdo longo e detalhado será carregado aqui.
-              </div>
-            </div>
-            <div class="info-card">
-              <h4>RESUMO DA AULA</h4>
-              <div id="short-explanation-text">
-                Resumo em tópicos será carregado aqui.
-              </div>
-            </div>
+          <div class="video-player-box">
+            <div class="play-btn" onclick="alert('Iniciando reprodução...')"></div>
+            <p style="font-size: 0.9rem; font-weight: 600;">Clique para iniciar o vídeo/prova selecionada</p>
           </div>
         </div>
 
-        <!-- Direita: IA e Vídeos Complementares -->
         <div>
           <div class="sidebar-card">
-            <h4>🤖 IA Auxiliadora Gabaritei</h4>
-            <div class="chat-box" id="ai-chat-box">
-              <div class="chat-msg ia">Olá! Sou sua Inteligência Artificial especialista neste tema. Li toda a teoria dessa prova e matriz do MEC. Qual é a sua dúvida?</div>
+            <h4>💬 IA Auxiliadora Gabaritei</h4>
+            <div id="chat-box" class="chat-box">
+              <p><strong>IA Gabaritei:</strong> Olá! Como posso te ajudar com esta prova ou assunto hoje?</p>
             </div>
             <div class="chat-input-row">
-              <input type="text" id="ai-input" placeholder="Escreva sua pergunta..." onkeypress="handleAIPress(event)"/>
-              <button onclick="sendAIMessage()">Enviar</button>
-            </div>
-          </div>
-
-          <div class="sidebar-card">
-            <h4>📽️ Sugestões de Vídeos</h4>
-            <div id="suggested-videos-container">
-              <!-- Sugestões injetadas via JS -->
+              <input type="text" id="chat-input" placeholder="Pergunte à IA..." />
+              <button onclick="sendChatMessage()">Enviar</button>
             </div>
           </div>
         </div>
@@ -460,403 +1012,109 @@
     </div>
   </section>
 
-  <!-- 6. TELA DE PROVA / QUIZ INTERATIVO COM CONFIGURAÇÕES -->
-  <section id="view-quiz" class="view-section dark-theme">
-    <div class="video-page-container">
-      <div class="top-bar-module">
-        <div>
-          <h2 style="color: #fff; font-size: 1.5rem;" id="quiz-title">Simulado ENEM</h2>
-          <p style="color: #38bdf8; font-size: 0.9rem;" id="quiz-subtitle">Ano da Prova</p>
-        </div>
-        <div style="display:flex; gap: 10px;">
-           <button class="btn-config" onclick="toggleConfigModal()">⚙️ Configurações de Prova</button>
-           <button class="btn-back" onclick="showView('view-dashboard')">Sair da Prova</button>
-        </div>
-      </div>
-
-      <div class="quiz-layout">
-        <!-- Sidebar: Navegação Livre das Questões -->
-        <div class="quiz-sidebar">
-          <h4 style="color: #fff; text-align: center;">Mapa de Questões</h4>
-          <p style="color: #94a3b8; font-size: 0.75rem; text-align: center; margin-bottom: 10px;">Você tem total liberdade para navegar.</p>
-          <div class="quiz-grid" id="quiz-nav-grid">
-             <!-- Botões gerados no JS -->
-          </div>
-        </div>
-
-        <!-- Main: Pergunta e Alternativas -->
-        <div class="quiz-main">
-           <h3 style="color: #38bdf8; margin-bottom: 10px;" id="current-q-number">Questão 1</h3>
-           <div class="quiz-question-text" id="quiz-question">Carregando questão...</div>
-           
-           <div class="quiz-options" id="quiz-options-container">
-              <!-- Alternativas geradas via JS -->
-           </div>
-
-           <div class="quiz-controls">
-              <button class="btn-quiz-action" id="btn-show-answer" style="display: none; background: #f59e0b;" onclick="showEarlyAnswer()">Espiar Resposta</button>
-              <button class="btn-quiz-action" onclick="submitQuizAnswer()">Confirmar Resposta</button>
-           </div>
-
-           <!-- Feedback Box -->
-           <div class="quiz-feedback" id="quiz-feedback-box">
-              <h3 id="feedback-title">Resposta Correta!</h3>
-              <p id="feedback-text">Explicação gigante sobre o motivo de estar certa ou errada.</p>
-           </div>
-        </div>
-      </div>
+  <!-- MODAL DE INFORMAÇÕES -->
+  <div id="modal-info" class="modal-overlay">
+    <div class="modal-card">
+      <h3 id="modal-title">Título</h3>
+      <div id="modal-body">Conteúdo...</div>
+      <button class="modal-close-btn" onclick="closeModal()">Fechar</button>
     </div>
-  </section>
-
-  <!-- MODAL DE CONFIGURAÇÃO DE PROVA -->
-  <div class="config-modal-overlay" id="config-modal">
-     <div class="config-card">
-        <h2>Liberdades do Estudante</h2>
-        <div class="config-toggle">
-           <span>Navegação Livre (Pular Questões)</span>
-           <input type="checkbox" class="toggle-switch" id="cfg-free-nav" checked onchange="applyConfig()">
-        </div>
-        <div class="config-toggle">
-           <span>Permitir ver respostas antes da hora</span>
-           <input type="checkbox" class="toggle-switch" id="cfg-show-early" onchange="applyConfig()">
-        </div>
-        <button class="btn-primary" onclick="toggleConfigModal()">Salvar e Fechar</button>
-     </div>
   </div>
 
+  <!-- SCRIPT DE LÓGICA DO SISTEMA -->
   <script>
-    // =======================================
-    // DADOS SIMULADOS (AULA, YOUTUBE, TEXTOS)
-    // =======================================
-    const moduleDatabase = {
-      "Língua Portuguesa - Fundamental I": {
-        videoUrl: "https://www.youtube.com/embed/Z8XJk7P0j1Y", // Vídeos educativos genéricos (Ex: canal Nostalgia/Manual do mundo/Educação)
-        sug1: { title: "Dicas de Leitura Rápida", url: "https://www.youtube.com/embed/s2b1W0yQnO8" },
-        sug2: { title: "Exercícios de Alfabetização", url: "https://www.youtube.com/embed/P6V1yWdMstU" },
-        longText: "A alfabetização é um processo amplo, imenso e contínuo. Não se trata apenas de codificar e decodificar letras, mas de compreender o mundo. Segundo Paulo Freire, a leitura de mundo precede a leitura da palavra. Neste módulo, trabalhamos a estruturação de fonemas, formação de sílabas complexas, e interpretação de pequenos textos. Entender as regras básicas de gramática, como o uso de maiúsculas, pontuação final e concordância simples entre substantivo e adjetivo é fundamental para o sucesso acadêmico da criança.",
-        shortText: "📌 Alfabetização: Ler e escrever com compreensão.<br>📌 Fonemas e Sílabas: Unidades do som.<br>📌 Gramática: Uso de pontuação e letra maiúscula inicial."
-      },
-      "Oficina de Redação Nota 1000": {
-        videoUrl: "https://www.youtube.com/embed/k92e_DMB9-4",
-        sug1: { title: "Técnicas de Intervenção", url: "https://www.youtube.com/embed/1kL8Z05O6dY" },
-        sug2: { title: "Como fazer a Introdução Perfeita", url: "https://www.youtube.com/embed/9w_Yh8Q62z0" },
-        longText: "A Redação do ENEM cobra uma estrutura Dissertativo-Argumentativa. Isso significa que você precisa não apenas expor um problema (dissertar), mas defender um ponto de vista com argumentos válidos (argumentar). O texto deve ser dividido em: 1) Introdução (Apresentação do tema e Tese); 2) Desenvolvimento 1 (Causa ou argumento principal + Repertório Sociocultural); 3) Desenvolvimento 2 (Consequência ou argumento secundário + Repertório); 4) Conclusão (Proposta de Intervenção detalhando: Agente, Ação, Modo/Meio, Efeito e Detalhamento). Fique atento às 5 competências avaliativas do Inep, especialmente o uso correto da gramática e o respeito aos Direitos Humanos.",
-        shortText: "📌 Estrutura: Intro, Desenv 1, Desenv 2 e Conclusão.<br>📌 Tese: Sua opinião sobre o tema.<br>📌 Intervenção: Quem vai resolver? O que vai fazer? Como? Para quê? + Detalhe."
-      },
-      "ENEM - Prova Completa": {
-        videoUrl: "https://www.youtube.com/embed/oD6d2l4BmsA",
-        sug1: { title: "Como chutar no ENEM usando TRI", url: "https://www.youtube.com/embed/q_Dk-H27aEQ" },
-        sug2: { title: "Gerenciamento de Tempo na Prova", url: "https://www.youtube.com/embed/WbLzP-m8pEU" },
-        longText: "A prova do ENEM é baseada na Teoria de Resposta ao Item (TRI). Isso significa que acertar questões fáceis vale mais do que acertar apenas as difíceis (pois a máquina detecta coerência pedagógica). São 180 questões divididas em dois finais de semana. A resistência física e mental é tão cobrada quanto o conhecimento conteudista. Nesta seção de provas completas, você pode realizar simulações exatas dos anos anteriores, avaliando não só seus acertos brutos, mas sua coerência.",
-        shortText: "📌 180 Questões + Redação.<br>📌 Avaliação por TRI (Teoria de Resposta ao Item).<br>📌 Foco em resistência e interpretação de texto."
-      }
-    };
-
-    // =======================================
-    // BANCO DE DADOS DE PROVAS (EXEMPLOS ROBUSTOS)
-    // =======================================
-    const examsDatabase = {
-       "enem-redacao-2023": [
-         {
-           q: "Tema da Redação ENEM 2023: Desafios para o enfrentamento da invisibilidade do trabalho de cuidado realizado pela mulher no Brasil.",
-           options: [
-             "Fazer um texto narrativo sobre uma mulher que trabalha em casa.",
-             "Dissertar defendendo que o trabalho de cuidado é exclusivo da mulher por biologia.",
-             "Dissertar argumentando as causas da desvalorização do trabalho doméstico e propor políticas públicas (creches, conscientização).",
-             "Apresentar uma poesia sobre o sofrimento feminino no mercado de trabalho."
-           ],
-           correct: 2,
-           explanation: "Correto! O ENEM exige um texto dissertativo-argumentativo. A invisibilidade do trabalho de cuidado (limpar, cuidar de idosos/crianças) recai historicamente sobre a mulher e é não-remunerado. A proposta de intervenção ideal envolveria Estado e Mídia na redistribuição dessas tarefas."
-         }
-       ],
-       "enem-geral-2023": [
-         {
-           q: "ENEM 2023 - Ciências Humanas: A expansão do agronegócio no Brasil central tem gerado, nas últimas décadas, impactos socioterritoriais. Qual é uma consequência direta desse processo?",
-           options: [
-             "Aumento da agricultura familiar e fixação do homem no campo.",
-             "Concentração fundiária e conflitos por terra envolvendo comunidades tradicionais.",
-             "Preservação integral do bioma Cerrado por meio de leis rígidas.",
-             "Desaceleração do uso de agrotóxicos devido às exportações europeias."
-           ],
-           correct: 1,
-           explanation: "A resposta está Correta! A expansão da fronteira agrícola no Centro-Oeste (agronegócio) gerou alta concentração de terras nas mãos de poucos (latifúndios) e intensificou conflitos com indígenas e quilombolas."
-         },
-         {
-           q: "ENEM 2023 - Matemática: Uma empresa vende caixas de papelão em formato de paralelepípedo. Se as dimensões dobrarem, o que ocorre com o volume?",
-           options: [
-             "O volume dobra.",
-             "O volume quadruplica.",
-             "O volume é multiplicado por 8.",
-             "O volume permanece constante."
-           ],
-           correct: 2,
-           explanation: "Correto! O volume V de um paralelepípedo é (Largura x Altura x Comprimento). Se cada dimensão é dobrada (2L x 2A x 2C), o novo volume será 8 vezes maior (2³ = 8)."
-         }
-       ],
-       "port-fund1-2022": [
-         {
-           q: "Assinale a alternativa em que TODAS as palavras estão escritas corretamente:",
-           options: [
-             "Casa, Pássaro, Exceção",
-             "Caza, Pássaro, Exceção",
-             "Casa, Passaro, Excessão",
-             "Kasa, Pássaro, Exseção"
-           ],
-           correct: 0,
-           explanation: "Perfeito! 'Casa' se escreve com S com som de Z. 'Pássaro' é uma proparoxítona, portanto tem acento e ss. 'Exceção' deriva de exceto e escreve-se com 'ç'."
-         }
-       ]
-    };
-
-    // =======================================
-    // VARIÁVEIS DE ESTADO
-    // =======================================
-    let currentExamData = [];
-    let currentQuestionIndex = 0;
-    let userAnswers = {};
-    
-    // Configurações do Usuário
-    let configAllowFreeNav = true;
-    let configShowEarlyAnswers = false;
-
-    // =======================================
-    // NAVEGAÇÃO ENTRE TELAS E ABAS ORIGINAIS
-    // =======================================
     function showView(viewId) {
-      document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-      document.getElementById(viewId).classList.add('active');
+      document.querySelectorAll('.view-section').forEach(view => {
+        view.classList.remove('active');
+      });
+      const targetView = document.getElementById(viewId);
+      if (targetView) {
+        targetView.classList.add('active');
+        window.scrollTo(0, 0);
+      }
     }
 
     function switchTab(tabId, btnElement) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-      btnElement.classList.add('active');
-      document.getElementById(tabId).classList.add('active');
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+
+      if (btnElement) btnElement.classList.add('active');
+      const targetTab = document.getElementById(tabId);
+      if (targetTab) targetTab.classList.add('active');
     }
 
-    // =======================================
-    // FUNÇÕES DE LOGIN/AUTH (ORIGINAIS)
-    // =======================================
-    function handleLogin() { showView('view-dashboard'); }
-    function handleRegister() { document.getElementById('register-success').classList.add('show'); setTimeout(() => { showView('view-dashboard'); }, 1000); }
-    function handleRecover() { document.getElementById('recovered-box').style.display = 'block'; }
+    function handleLogin() {
+      const user = document.getElementById('login-user').value.trim();
+      const pass = document.getElementById('login-pass').value.trim();
+      const errorBanner = document.getElementById('login-error-banner');
 
-    // =======================================
-    // FUNÇÕES DO MÓDULO DE VÍDEO & IA
-    // =======================================
-    function openModule(theme) {
-      document.getElementById('module-subtitle').innerText = theme;
-      let data = moduleDatabase[theme] || moduleDatabase["ENEM - Prova Completa"]; // Fallback generico
-      
-      document.getElementById('main-video-container').innerHTML = `<iframe src="${data.videoUrl}" allowfullscreen></iframe>`;
-      document.getElementById('long-explanation-text').innerHTML = data.longText;
-      document.getElementById('short-explanation-text').innerHTML = data.shortText;
+      if (user !== '' && pass !== '') {
+        errorBanner.classList.remove('show');
+        showView('view-dashboard');
+      } else {
+        errorBanner.classList.add('show');
+      }
+    }
 
-      document.getElementById('suggested-videos-container').innerHTML = `
-        <div class="suggested-video-card">
-          <iframe src="${data.sug1.url}"></iframe>
-          <div class="suggested-info"><h5>${data.sug1.title}</h5><span>Duração: 12 min</span></div>
-        </div>
-        <div class="suggested-video-card">
-          <iframe src="${data.sug2.url}"></iframe>
-          <div class="suggested-info"><h5>${data.sug2.title}</h5><span>Duração: 18 min</span></div>
-        </div>
-      `;
+    function handleRegister() {
+      const user = document.getElementById('reg-user').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const pass = document.getElementById('reg-pass').value.trim();
+      const successBanner = document.getElementById('register-success');
+      const errorBanner = document.getElementById('register-error');
 
-      // Reseta Chat
-      document.getElementById('ai-chat-box').innerHTML = `<div class="chat-msg ia">Olá! Sou sua Inteligência Artificial especialista em ${theme}. Li toda a teoria dessa prova. Qual é a sua dúvida?</div>`;
+      if (user !== '' && email !== '' && pass !== '') {
+        errorBanner.classList.remove('show');
+        successBanner.classList.add('show');
+        setTimeout(() => {
+          successBanner.classList.remove('show');
+          showView('view-dashboard');
+        }, 1200);
+      } else {
+        errorBanner.classList.add('show');
+      }
+    }
+
+    function handleRecover() {
+      const user = document.getElementById('rec-user').value.trim();
+      const email = document.getElementById('rec-email').value.trim();
+      const recoveredBox = document.getElementById('recovered-box');
+
+      if (user !== '' && email !== '') {
+        document.getElementById('recovered-pass-text').innerText = 'gb' + Math.floor(100 + Math.random() * 900);
+        recoveredBox.style.display = 'block';
+      } else {
+        alert('Por favor, preencha os campos para recuperar a senha.');
+      }
+    }
+
+    function openModule(moduleTitle) {
+      document.getElementById('module-title-display').innerText = moduleTitle;
       showView('view-module');
     }
 
-    function handleAIPress(e) { if(e.key === 'Enter') sendAIMessage(); }
-    
-    function sendAIMessage() {
-      const input = document.getElementById('ai-input');
-      const text = input.value.trim();
-      if(!text) return;
+    function openModal(title, text) {
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-body').innerHTML = text;
+      document.getElementById('modal-info').classList.add('active');
+    }
 
-      const chatBox = document.getElementById('ai-chat-box');
-      // Msg do usuário
-      chatBox.innerHTML += `<div class="chat-msg" style="align-self: flex-end; background:#38bdf8; color:#000;">${text}</div>`;
-      input.value = '';
-      chatBox.scrollTop = chatBox.scrollHeight;
+    function closeModal() {
+      document.getElementById('modal-info').classList.remove('active');
+    }
 
-      // Resposta simulada da IA
-      setTimeout(() => {
-        let aiResponse = "Excelente pergunta! Como IA do Gabaritei, analisei sua questão. Isso está ligado às raízes estruturais da matéria. Lembre-se sempre de interpretar o contexto geral antes da fórmula/regra específica.";
-        if(text.toLowerCase().includes("redação")) aiResponse = "Na redação, nunca se esqueça dos 5 elementos da proposta de intervenção. Isso garante os 200 pontos na competência 5!";
-        if(text.toLowerCase().includes("matemática")) aiResponse = "Em matemática pelo ENEM, priorize as questões fáceis primeiro (geralmente leitura de gráficos e regra de 3) para valorizar sua nota pela TRI.";
-        
-        chatBox.innerHTML += `<div class="chat-msg ia">🤖 IA: ${aiResponse}</div>`;
+    function sendChatMessage() {
+      const input = document.getElementById('chat-input');
+      const chatBox = document.getElementById('chat-box');
+      if (input.value.trim() !== '') {
+        const msg = document.createElement('p');
+        msg.innerHTML = `<strong>Você:</strong> ${input.value}`;
+        msg.style.marginTop = '6px';
+        chatBox.appendChild(msg);
+        input.value = '';
         chatBox.scrollTop = chatBox.scrollHeight;
-      }, 800);
-    }
-
-    // =======================================
-    // FUNÇÕES DO SISTEMA DE PROVAS/QUIZ
-    // =======================================
-    function startExam(examId, year) {
-      let key = `${examId}-${year}`;
-      currentExamData = examsDatabase[key] || examsDatabase["enem-geral-2023"]; // Fallback se não existir no mock
-      
-      document.getElementById('quiz-title').innerText = "Simulado: " + (examId.includes('redacao') ? "Redação" : "Prova Objetiva");
-      document.getElementById('quiz-subtitle').innerText = "Ano Base: " + year;
-      
-      currentQuestionIndex = 0;
-      userAnswers = {};
-      
-      buildQuizNav();
-      renderQuestion();
-      applyConfig(); // Aplica visibilidade de botões baseado nas config
-      
-      showView('view-quiz');
-    }
-
-    function buildQuizNav() {
-      const grid = document.getElementById('quiz-nav-grid');
-      grid.innerHTML = '';
-      for (let i = 0; i < currentExamData.length; i++) {
-        let btn = document.createElement('button');
-        btn.className = 'quiz-num-btn';
-        btn.innerText = i + 1;
-        btn.onclick = () => jumpToQuestion(i);
-        grid.appendChild(btn);
-      }
-      updateNavUI();
-    }
-
-    function updateNavUI() {
-      const btns = document.querySelectorAll('.quiz-num-btn');
-      btns.forEach((btn, idx) => {
-        btn.className = 'quiz-num-btn'; // reseta
-        if(idx === currentQuestionIndex) btn.classList.add('active');
-        if(userAnswers[idx] !== undefined) {
-           if(userAnswers[idx] === currentExamData[idx].correct) btn.classList.add('correct');
-           else btn.classList.add('incorrect');
-        }
-        // Aplica regra de navegação livre (travar se config disser não)
-        if(!configAllowFreeNav && idx > currentQuestionIndex && userAnswers[currentQuestionIndex] === undefined) {
-           btn.disabled = true;
-        } else {
-           btn.disabled = false;
-        }
-      });
-    }
-
-    function jumpToQuestion(index) {
-      currentQuestionIndex = index;
-      renderQuestion();
-      updateNavUI();
-    }
-
-    function renderQuestion() {
-      const qData = currentExamData[currentQuestionIndex];
-      document.getElementById('current-q-number').innerText = `Questão ${currentQuestionIndex + 1} de ${currentExamData.length}`;
-      document.getElementById('quiz-question').innerText = qData.q;
-      
-      const optionsBox = document.getElementById('quiz-options-container');
-      optionsBox.innerHTML = '';
-      const letters = ['A', 'B', 'C', 'D', 'E'];
-
-      qData.options.forEach((optText, idx) => {
-        let div = document.createElement('div');
-        div.className = 'quiz-option';
-        
-        // Se já foi respondido, marcar estilo correto/errado
-        let isAnswered = userAnswers[currentQuestionIndex] !== undefined;
-        let isSelected = userAnswers[currentQuestionIndex] === idx;
-        let isCorrect = qData.correct === idx;
-
-        if (isAnswered) {
-           if (isCorrect) div.classList.add('correct-ans');
-           if (isSelected && !isCorrect) div.classList.add('wrong-ans');
-        } else {
-           div.onclick = () => selectOption(idx);
-        }
-
-        if (isSelected && !isAnswered) div.classList.add('selected');
-
-        div.innerHTML = `<div class="quiz-letter">${letters[idx]}</div><div>${optText}</div>`;
-        optionsBox.appendChild(div);
-      });
-
-      // Esconder feedback ao renderizar nova questão
-      const feedbackBox = document.getElementById('quiz-feedback-box');
-      if (userAnswers[currentQuestionIndex] !== undefined) {
-         showFeedbackBox(userAnswers[currentQuestionIndex] === qData.correct, qData.explanation);
-      } else {
-         feedbackBox.style.display = 'none';
       }
     }
-
-    let tempSelectedOption = null;
-    function selectOption(idx) {
-      if(userAnswers[currentQuestionIndex] !== undefined) return; // Ja respondeu
-      tempSelectedOption = idx;
-      
-      const options = document.querySelectorAll('.quiz-option');
-      options.forEach(op => op.classList.remove('selected'));
-      options[idx].classList.add('selected');
-    }
-
-    function submitQuizAnswer() {
-      if(tempSelectedOption === null && userAnswers[currentQuestionIndex] === undefined) {
-        alert("Selecione uma alternativa antes de confirmar.");
-        return;
-      }
-      if (userAnswers[currentQuestionIndex] !== undefined) {
-         // Se ja respondeu, apenas avança para próxima se tiver
-         if (currentQuestionIndex < currentExamData.length - 1) jumpToQuestion(currentQuestionIndex + 1);
-         return;
-      }
-
-      const qData = currentExamData[currentQuestionIndex];
-      let isRight = tempSelectedOption === qData.correct;
-      userAnswers[currentQuestionIndex] = tempSelectedOption;
-      tempSelectedOption = null;
-
-      renderQuestion(); // Re-renderiza para pintar vermelho/verde
-      updateNavUI(); // Pinta o botão lateral
-      showFeedbackBox(isRight, qData.explanation);
-    }
-
-    function showFeedbackBox(isRight, explanationText) {
-      const fbBox = document.getElementById('quiz-feedback-box');
-      const fbTitle = document.getElementById('feedback-title');
-      const fbText = document.getElementById('feedback-text');
-
-      fbBox.className = 'quiz-feedback ' + (isRight ? 'success' : 'error');
-      fbTitle.innerText = isRight ? "✅ Alternativa Correta!" : "❌ Alternativa Incorreta!";
-      fbText.innerText = explanationText;
-      fbBox.style.display = 'block';
-    }
-
-    // =======================================
-    // SISTEMA DE CONFIGURAÇÕES (LIBERDADES DO ALUNO)
-    // =======================================
-    function toggleConfigModal() {
-      const modal = document.getElementById('config-modal');
-      modal.classList.toggle('active');
-    }
-
-    function applyConfig() {
-      configAllowFreeNav = document.getElementById('cfg-free-nav').checked;
-      configShowEarlyAnswers = document.getElementById('cfg-show-early').checked;
-      
-      const btnEspiar = document.getElementById('btn-show-answer');
-      if (configShowEarlyAnswers) {
-         btnEspiar.style.display = 'block';
-      } else {
-         btnEspiar.style.display = 'none';
-      }
-      updateNavUI();
-    }
-
-    function showEarlyAnswer() {
-       const qData = currentExamData[currentQuestionIndex];
-       showFeedbackBox(true, "⚠️ SPOILER ATIVADO: A resposta correta era a alternativa " + ['A','B','C','D','E'][qData.correct] + ". Explicação: " + qData.explanation);
-    }
-
   </script>
 </body>
 </html>
