@@ -330,30 +330,59 @@
       margin-top: 4px;
     }
 
+    /* AREA DE SELEÇÃO DE TODAS AS PROVAS */
     .card-provas-container {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
+      flex-direction: column;
       gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .btn-prova-tag {
-      background: rgba(37, 99, 235, 0.2);
+    .provas-label {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+
+    .provas-select-wrapper {
+      display: flex;
+      gap: 6px;
+    }
+
+    .provas-select {
+      flex: 1;
+      background: #0f172a;
       border: 1px solid #2563eb;
       color: #60a5fa;
-      padding: 6px 12px;
+      padding: 8px 10px;
       border-radius: 8px;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 600;
+      outline: none;
       cursor: pointer;
-      transition: all 0.2s;
     }
 
-    .btn-prova-tag:hover {
+    .provas-select option {
+      background: #0f172a;
+      color: #ffffff;
+    }
+
+    .btn-open-prova {
       background: #2563eb;
       color: #ffffff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-open-prova:hover {
+      background: #1d4ed8;
     }
 
     .btn-exit {
@@ -823,7 +852,7 @@
 
         <!-- CARD LÍNGUA PORTUGUESA -->
         <div class="modern-module-card">
-          <div class="card-top-clickable" onclick="openStudyGuide('Língua Portuguesa', 'portugues')">
+          <div class="card-top-clickable" onclick="openStudyGuide('Língua Portuguesa - Aulas', 'portugues')">
             <div class="card-subject-title">📖 Língua Portuguesa</div>
             <ul class="card-topics-list">
               <li>• Alfabetização e Letramento</li>
@@ -832,14 +861,30 @@
             <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openStudyGuide('Língua Portuguesa - Prova 2022', 'portugues')">Prova 2022</button>
-            <button class="btn-prova-tag" onclick="openStudyGuide('Língua Portuguesa - Prova 2023', 'portugues')">Prova 2023</button>
+            <span class="provas-label">📝 Selecionar Prova Completa:</span>
+            <div class="provas-select-wrapper">
+              <select id="select-prova-portugues" class="provas-select">
+                <option value="Prova 2026">Prova 2026</option>
+                <option value="Prova 2025">Prova 2025</option>
+                <option value="Prova 2024">Prova 2024</option>
+                <option value="Prova 2023">Prova 2023</option>
+                <option value="Prova 2022">Prova 2022</option>
+                <option value="Prova 2021">Prova 2021</option>
+                <option value="Prova 2020">Prova 2020</option>
+                <option value="Prova 2019">Prova 2019</option>
+                <option value="Prova 2018">Prova 2018</option>
+                <option value="Prova 2017">Prova 2017</option>
+                <option value="Prova 2016">Prova 2016</option>
+                <option value="Prova 2015">Prova 2015</option>
+              </select>
+              <button class="btn-open-prova" onclick="openSelectedProva('Língua Portuguesa', 'select-prova-portugues', 'portugues')">Abrir</button>
+            </div>
           </div>
         </div>
 
         <!-- CARD MATEMÁTICA -->
         <div class="modern-module-card">
-          <div class="card-top-clickable" onclick="openStudyGuide('Matemática', 'matematica')">
+          <div class="card-top-clickable" onclick="openStudyGuide('Matemática - Aulas', 'matematica')">
             <div class="card-subject-title">➕ Matemática</div>
             <ul class="card-topics-list">
               <li>• Quatro operações matemáticas</li>
@@ -848,14 +893,30 @@
             <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openStudyGuide('Matemática - Prova 2022', 'matematica')">Prova 2022</button>
-            <button class="btn-prova-tag" onclick="openStudyGuide('Matemática - Prova 2023', 'matematica')">Prova 2023</button>
+            <span class="provas-label">📝 Selecionar Prova Completa:</span>
+            <div class="provas-select-wrapper">
+              <select id="select-prova-matematica" class="provas-select">
+                <option value="Prova 2026">Prova 2026</option>
+                <option value="Prova 2025">Prova 2025</option>
+                <option value="Prova 2024">Prova 2024</option>
+                <option value="Prova 2023">Prova 2023</option>
+                <option value="Prova 2022">Prova 2022</option>
+                <option value="Prova 2021">Prova 2021</option>
+                <option value="Prova 2020">Prova 2020</option>
+                <option value="Prova 2019">Prova 2019</option>
+                <option value="Prova 2018">Prova 2018</option>
+                <option value="Prova 2017">Prova 2017</option>
+                <option value="Prova 2016">Prova 2016</option>
+                <option value="Prova 2015">Prova 2015</option>
+              </select>
+              <button class="btn-open-prova" onclick="openSelectedProva('Matemática', 'select-prova-matematica', 'matematica')">Abrir</button>
+            </div>
           </div>
         </div>
 
         <!-- CARD CIÊNCIAS -->
         <div class="modern-module-card">
-          <div class="card-top-clickable" onclick="openStudyGuide('Ciências da Natureza', 'ciencias')">
+          <div class="card-top-clickable" onclick="openStudyGuide('Ciências da Natureza - Aulas', 'ciencias')">
             <div class="card-subject-title">🌱 Ciências da Natureza</div>
             <ul class="card-topics-list">
               <li>• Corpo humano e ecossistemas</li>
@@ -864,14 +925,30 @@
             <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openStudyGuide('Ciências - Prova 2022', 'ciencias')">Prova 2022</button>
-            <button class="btn-prova-tag" onclick="openStudyGuide('Ciências - Prova 2023', 'ciencias')">Prova 2023</button>
+            <span class="provas-label">📝 Selecionar Prova Completa:</span>
+            <div class="provas-select-wrapper">
+              <select id="select-prova-ciencias" class="provas-select">
+                <option value="Prova 2026">Prova 2026</option>
+                <option value="Prova 2025">Prova 2025</option>
+                <option value="Prova 2024">Prova 2024</option>
+                <option value="Prova 2023">Prova 2023</option>
+                <option value="Prova 2022">Prova 2022</option>
+                <option value="Prova 2021">Prova 2021</option>
+                <option value="Prova 2020">Prova 2020</option>
+                <option value="Prova 2019">Prova 2019</option>
+                <option value="Prova 2018">Prova 2018</option>
+                <option value="Prova 2017">Prova 2017</option>
+                <option value="Prova 2016">Prova 2016</option>
+                <option value="Prova 2015">Prova 2015</option>
+              </select>
+              <button class="btn-open-prova" onclick="openSelectedProva('Ciências da Natureza', 'select-prova-ciencias', 'ciencias')">Abrir</button>
+            </div>
           </div>
         </div>
 
         <!-- CARD HISTÓRIA & GEOGRAFIA -->
         <div class="modern-module-card">
-          <div class="card-top-clickable" onclick="openStudyGuide('História & Geografia', 'historia')">
+          <div class="card-top-clickable" onclick="openStudyGuide('História & Geografia - Aulas', 'historia')">
             <div class="card-subject-title">⏳ História & Geografia</div>
             <ul class="card-topics-list">
               <li>• História da comunidade</li>
@@ -880,15 +957,31 @@
             <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openStudyGuide('História - Prova 2022', 'historia')">Prova 2022</button>
-            <button class="btn-prova-tag" onclick="openStudyGuide('Geografia - Prova 2023', 'historia')">Prova 2023</button>
+            <span class="provas-label">📝 Selecionar Prova Completa:</span>
+            <div class="provas-select-wrapper">
+              <select id="select-prova-historia" class="provas-select">
+                <option value="Prova 2026">Prova 2026</option>
+                <option value="Prova 2025">Prova 2025</option>
+                <option value="Prova 2024">Prova 2024</option>
+                <option value="Prova 2023">Prova 2023</option>
+                <option value="Prova 2022">Prova 2022</option>
+                <option value="Prova 2021">Prova 2021</option>
+                <option value="Prova 2020">Prova 2020</option>
+                <option value="Prova 2019">Prova 2019</option>
+                <option value="Prova 2018">Prova 2018</option>
+                <option value="Prova 2017">Prova 2017</option>
+                <option value="Prova 2016">Prova 2016</option>
+                <option value="Prova 2015">Prova 2015</option>
+              </select>
+              <button class="btn-open-prova" onclick="openSelectedProva('História & Geografia', 'select-prova-historia', 'historia')">Abrir</button>
+            </div>
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- OUTRAS ABAS -->
+    <!-- ABA 2: FUNDAMENTAL II -->
     <div id="tab-fund2" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card">
@@ -901,13 +994,24 @@
             <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openStudyGuide('Português Fund II - 2022', 'portugues')">Prova 2022</button>
-            <button class="btn-prova-tag" onclick="openStudyGuide('Português Fund II - 2023', 'portugues')">Prova 2023</button>
+            <span class="provas-label">📝 Selecionar Prova Completa:</span>
+            <div class="provas-select-wrapper">
+              <select id="select-prova-fund2-port" class="provas-select">
+                <option value="Prova 2026">Prova 2026</option>
+                <option value="Prova 2025">Prova 2025</option>
+                <option value="Prova 2024">Prova 2024</option>
+                <option value="Prova 2023">Prova 2023</option>
+                <option value="Prova 2022">Prova 2022</option>
+                <option value="Prova 2021">Prova 2021</option>
+              </select>
+              <button class="btn-open-prova" onclick="openSelectedProva('Português Fund II', 'select-prova-fund2-port', 'portugues')">Abrir</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- ABA 3: ENSINO MÉDIO -->
     <div id="tab-medio" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card">
@@ -920,29 +1024,51 @@
             <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openStudyGuide('Redação ENEM - 2022', 'portugues')">Prova 2022</button>
+            <span class="provas-label">📝 Selecionar Prova Completa:</span>
+            <div class="provas-select-wrapper">
+              <select id="select-prova-medio-ling" class="provas-select">
+                <option value="Prova 2026">Prova 2026</option>
+                <option value="Prova 2025">Prova 2025</option>
+                <option value="Prova 2024">Prova 2024</option>
+                <option value="Prova 2023">Prova 2023</option>
+                <option value="Prova 2022">Prova 2022</option>
+              </select>
+              <button class="btn-open-prova" onclick="openSelectedProva('Linguagens Ensino Médio', 'select-prova-medio-ling', 'portugues')">Abrir</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- ABA 4: ENSINO SUPERIOR -->
     <div id="tab-superior" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card">
           <div class="card-top-clickable" onclick="openStudyGuide('Cálculo I e Exatas', 'matematica')">
-            <div class="card-subject-title">💻 Cálculo diferencial e integral</div>
+            <div class="card-subject-title">💻 Cálculo Diferencial e Integral</div>
             <ul class="card-topics-list">
               <li>• Limites, Derivadas e Integrais</li>
             </ul>
             <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openStudyGuide('Cálculo I - Exame 2023', 'matematica')">Exame 2023</button>
+            <span class="provas-label">📝 Selecionar Prova Completa:</span>
+            <div class="provas-select-wrapper">
+              <select id="select-prova-calc" class="provas-select">
+                <option value="Exame 2026">Exame 2026</option>
+                <option value="Exame 2025">Exame 2025</option>
+                <option value="Exame 2024">Exame 2024</option>
+                <option value="Exame 2023">Exame 2023</option>
+                <option value="Exame 2022">Exame 2022</option>
+              </select>
+              <button class="btn-open-prova" onclick="openSelectedProva('Cálculo I', 'select-prova-calc', 'matematica')">Abrir</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- ABA 5: VESTIBULARES -->
     <div id="tab-vestibulares" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card">
@@ -954,13 +1080,26 @@
             <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openStudyGuide('ENEM 2022', 'matematica')">ENEM 2022</button>
-            <button class="btn-prova-tag" onclick="openStudyGuide('ENEM 2023', 'matematica')">ENEM 2023</button>
+            <span class="provas-label">📝 Selecionar Edição do ENEM:</span>
+            <div class="provas-select-wrapper">
+              <select id="select-prova-enem" class="provas-select">
+                <option value="ENEM 2025">ENEM 2025</option>
+                <option value="ENEM 2024">ENEM 2024</option>
+                <option value="ENEM 2023">ENEM 2023</option>
+                <option value="ENEM 2022">ENEM 2022</option>
+                <option value="ENEM 2021">ENEM 2021</option>
+                <option value="ENEM 2020">ENEM 2020</option>
+                <option value="ENEM 2019">ENEM 2019</option>
+                <option value="ENEM 2018">ENEM 2018</option>
+              </select>
+              <button class="btn-open-prova" onclick="openSelectedProva('ENEM Completo', 'select-prova-enem', 'matematica')">Abrir</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- ABA 6: CONCURSOS -->
     <div id="tab-concursos" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card">
@@ -972,7 +1111,17 @@
             <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openStudyGuide('Concurso 2023', 'portugues')">Prova 2023</button>
+            <span class="provas-label">📝 Selecionar Prova de Concurso:</span>
+            <div class="provas-select-wrapper">
+              <select id="select-prova-concurso" class="provas-select">
+                <option value="Concurso 2026">Concurso 2026</option>
+                <option value="Concurso 2025">Concurso 2025</option>
+                <option value="Concurso 2024">Concurso 2024</option>
+                <option value="Concurso 2023">Concurso 2023</option>
+                <option value="Concurso 2022">Concurso 2022</option>
+              </select>
+              <button class="btn-open-prova" onclick="openSelectedProva('Direito Constitucional', 'select-prova-concurso', 'portugues')">Abrir</button>
+            </div>
           </div>
         </div>
       </div>
@@ -1230,12 +1379,20 @@
       showView('view-module');
     }
 
+    // ABRIR PROVA SELECIONADA NO DROPDOWN
+    function openSelectedProva(subjectName, selectId, subjectKey) {
+      const selectElem = document.getElementById(selectId);
+      const selectedYear = selectElem ? selectElem.value : 'Prova';
+      const fullTitle = `${subjectName} - ${selectedYear}`;
+      
+      openStudyGuide(fullTitle, subjectKey);
+    }
+
     function exitModuleView() {
       document.getElementById('youtube-iframe').src = "";
       showView('view-dashboard');
     }
 
-    // PULAR PARA O BLOCO DE QUESTÕES (EX: QUESTÃO 16 A 20)
     function jumpToQuestionRange() {
       const qStart = parseInt(document.getElementById('quest-start').value) || 1;
       const qEnd = parseInt(document.getElementById('quest-end').value) || 20;
