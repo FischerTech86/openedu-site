@@ -28,7 +28,7 @@
       min-height: 100vh;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       padding: 20px;
     }
 
@@ -44,6 +44,7 @@
       background-image: radial-gradient(#a3b8cc 1px, transparent 1px);
       background-size: 24px 24px;
       color: #1e293b;
+      justify-content: center;
     }
 
     .auth-card {
@@ -180,7 +181,6 @@
     .dark-theme {
       background: #060913;
       color: #f1f5f9;
-      justify-content: flex-start;
       padding-top: 40px;
     }
 
@@ -289,6 +289,17 @@
       box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
     }
 
+    .card-top-clickable {
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 10px;
+      transition: background 0.2s;
+    }
+
+    .card-top-clickable:hover {
+      background: rgba(56, 189, 248, 0.08);
+    }
+
     .card-subject-title {
       font-size: 1.1rem;
       font-weight: 700;
@@ -303,7 +314,7 @@
       font-size: 0.82rem;
       color: #cbd5e1;
       line-height: 1.6;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     .card-topics-list li {
@@ -311,7 +322,14 @@
       list-style-position: inside;
     }
 
-    /* BOTÕES DE PROVAS DENTRO DOS CARDS (IGUAL DA IMAGEM 1) */
+    .click-hint {
+      font-size: 0.7rem;
+      color: #38bdf8;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
     .card-provas-container {
       display: flex;
       gap: 8px;
@@ -355,7 +373,7 @@
       opacity: 0.9;
     }
 
-    /* RODAPÉ E GUIA COMPLETO (IGUAL DA IMAGEM 2) */
+    /* RODAPÉ E GUIA COMPLETO */
     .app-footer-info {
       width: 100%;
       max-width: 1100px;
@@ -416,7 +434,6 @@
 
     .info-app-card ul li {
       margin-bottom: 8px;
-      position: relative;
     }
 
     .interactive-links-list {
@@ -431,14 +448,16 @@
       font-weight: 600;
       font-size: 0.82rem;
       cursor: pointer;
-      padding: 8px 12px;
+      padding: 10px 14px;
       border-radius: 8px;
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid rgba(56, 189, 248, 0.2);
       width: 100%;
-      text-align: center;
+      text-align: left;
       transition: all 0.2s;
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .interactive-link-btn:hover {
@@ -455,7 +474,9 @@
       padding-bottom: 25px;
     }
 
-    /* MÓDULO DE VÍDEO */
+    /* =======================================
+       3. TELA DE MÓDULO (VÍDEO + EXERCÍCIOS)
+       ======================================= */
     .video-page-container {
       width: 100%;
       max-width: 1100px;
@@ -468,6 +489,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .btn-back {
@@ -481,13 +504,48 @@
       cursor: pointer;
     }
 
+    /* CONTROLES DE NAVEGAÇÃO DE QUESTÕES E DIFICULDADE */
+    .controls-panel {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-group label {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+
+    .filter-group select, .filter-group input {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #ffffff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      outline: none;
+    }
+
     .video-main-layout {
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 1.8fr 1.2fr;
       gap: 20px;
     }
 
-    @media (max-width: 850px) {
+    @media (max-width: 900px) {
       .video-main-layout {
         grid-template-columns: 1fr;
       }
@@ -497,84 +555,92 @@
       background: #000000;
       border-radius: 16px;
       border: 1px solid #1e293b;
-      height: 320px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #ffffff;
-      text-align: center;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      width: 100%;
     }
 
-    .play-btn {
-      width: 0;
-      height: 0;
-      border-top: 20px solid transparent;
-      border-bottom: 20px solid transparent;
-      border-left: 35px solid #38bdf8;
-      margin-bottom: 15px;
-      cursor: pointer;
+    .video-player-box iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
     }
 
-    .sidebar-card {
+    .quiz-container {
       background: #0f172a;
       border: 1px solid #1e293b;
-      border-radius: 12px;
-      padding: 16px;
-    }
-
-    .sidebar-card h4 {
-      font-size: 0.85rem;
-      color: #ffffff;
-      margin-bottom: 10px;
-    }
-
-    .chat-box {
-      background: #090d16;
-      border-radius: 8px;
-      padding: 10px;
-      font-size: 0.75rem;
-      color: #cbd5e1;
-      margin-bottom: 10px;
-      min-height: 120px;
-      max-height: 180px;
-      overflow-y: auto;
-    }
-
-    .chat-input-row {
+      border-radius: 16px;
+      padding: 20px;
       display: flex;
-      gap: 6px;
+      flex-direction: column;
+      gap: 15px;
     }
 
-    .chat-input-row input {
-      flex: 1;
+    .quiz-header-badge {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .quiz-question {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #f8fafc;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quiz-option-btn {
       background: #1e293b;
-      border: none;
-      padding: 8px;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 0.75rem;
-    }
-
-    .chat-input-row button {
-      background: #38bdf8;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      color: #000;
-      font-weight: 700;
-      font-size: 0.75rem;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      padding: 10px 14px;
+      border-radius: 10px;
+      text-align: left;
+      font-size: 0.82rem;
       cursor: pointer;
+      transition: all 0.2s;
     }
 
-    /* MODAL POPUP */
+    .quiz-option-btn:hover {
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+
+    .feedback-box {
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: none;
+    }
+
+    .feedback-box.correct {
+      display: block;
+      background: rgba(34, 197, 94, 0.2);
+      border: 1px solid #22c55e;
+      color: #4ade80;
+    }
+
+    .feedback-box.wrong {
+      display: block;
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid #ef4444;
+      color: #f87171;
+    }
+
+    /* MODAL */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(4px);
       display: none;
       align-items: center;
@@ -592,23 +658,34 @@
       border: 1px solid #38bdf8;
       border-radius: 20px;
       width: 100%;
-      max-width: 550px;
+      max-width: 650px;
+      max-height: 85vh;
       padding: 30px;
       color: #f1f5f9;
       box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
     }
 
     .modal-card h3 {
       color: #38bdf8;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       margin-bottom: 15px;
       font-weight: 700;
     }
 
-    .modal-card div {
+    .modal-body-content {
       font-size: 0.85rem;
-      line-height: 1.6;
+      line-height: 1.7;
       color: #cbd5e1;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+
+    .modal-body-content h4 {
+      color: #ffffff;
+      margin-top: 12px;
+      margin-bottom: 4px;
     }
 
     .modal-close-btn {
@@ -616,7 +693,7 @@
       background: #2563eb;
       color: #fff;
       border: none;
-      padding: 10px 20px;
+      padding: 12px 20px;
       border-radius: 12px;
       font-weight: 700;
       cursor: pointer;
@@ -740,185 +817,162 @@
       </button>
     </div>
 
-    <!-- ABA 1: FUNDAMENTAL I (IGUAL DA IMAGEM 1) -->
+    <!-- ABA 1: FUNDAMENTAL I -->
     <div id="tab-fund1" class="tab-content active">
       <div class="clean-module-grid">
+
+        <!-- CARD LÍNGUA PORTUGUESA -->
         <div class="modern-module-card">
-          <div>
+          <div class="card-top-clickable" onclick="openStudyGuide('Língua Portuguesa', 'portugues')">
             <div class="card-subject-title">📖 Língua Portuguesa</div>
             <ul class="card-topics-list">
-              <li>Alfabetização e Letramento</li>
-              <li>Gramática básica</li>
+              <li>• Alfabetização e Letramento</li>
+              <li>• Gramática básica</li>
             </ul>
+            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openModule('Língua Portuguesa - Prova 2022')">Prova 2022</button>
-            <button class="btn-prova-tag" onclick="openModule('Língua Portuguesa - Prova 2023')">Prova 2023</button>
+            <button class="btn-prova-tag" onclick="openStudyGuide('Língua Portuguesa - Prova 2022', 'portugues')">Prova 2022</button>
+            <button class="btn-prova-tag" onclick="openStudyGuide('Língua Portuguesa - Prova 2023', 'portugues')">Prova 2023</button>
           </div>
         </div>
 
+        <!-- CARD MATEMÁTICA -->
         <div class="modern-module-card">
-          <div>
+          <div class="card-top-clickable" onclick="openStudyGuide('Matemática', 'matematica')">
             <div class="card-subject-title">➕ Matemática</div>
             <ul class="card-topics-list">
-              <li>Quatro operações matemáticas</li>
-              <li>Geometria básica</li>
+              <li>• Quatro operações matemáticas</li>
+              <li>• Geometria básica</li>
             </ul>
+            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openModule('Matemática - Prova 2022')">Prova 2022</button>
-            <button class="btn-prova-tag" onclick="openModule('Matemática - Prova 2023')">Prova 2023</button>
+            <button class="btn-prova-tag" onclick="openStudyGuide('Matemática - Prova 2022', 'matematica')">Prova 2022</button>
+            <button class="btn-prova-tag" onclick="openStudyGuide('Matemática - Prova 2023', 'matematica')">Prova 2023</button>
           </div>
         </div>
 
+        <!-- CARD CIÊNCIAS -->
         <div class="modern-module-card">
-          <div>
+          <div class="card-top-clickable" onclick="openStudyGuide('Ciências da Natureza', 'ciencias')">
             <div class="card-subject-title">🌱 Ciências da Natureza</div>
             <ul class="card-topics-list">
-              <li>Corpo humano e ecossistemas</li>
-              <li>Sistema solar básico</li>
+              <li>• Corpo humano e ecossistemas</li>
+              <li>• Sistema solar básico</li>
             </ul>
+            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openModule('Ciências - Prova 2022')">Prova 2022</button>
-            <button class="btn-prova-tag" onclick="openModule('Ciências - Prova 2023')">Prova 2023</button>
+            <button class="btn-prova-tag" onclick="openStudyGuide('Ciências - Prova 2022', 'ciencias')">Prova 2022</button>
+            <button class="btn-prova-tag" onclick="openStudyGuide('Ciências - Prova 2023', 'ciencias')">Prova 2023</button>
           </div>
         </div>
 
+        <!-- CARD HISTÓRIA & GEOGRAFIA -->
         <div class="modern-module-card">
-          <div>
+          <div class="card-top-clickable" onclick="openStudyGuide('História & Geografia', 'historia')">
             <div class="card-subject-title">⏳ História & Geografia</div>
             <ul class="card-topics-list">
-              <li>História da comunidade</li>
-              <li>Mapas e relevo brasileiro</li>
+              <li>• História da comunidade</li>
+              <li>• Mapas e relevo brasileiro</li>
             </ul>
+            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openModule('História/Geografia - Prova 2022')">Prova 2022</button>
-            <button class="btn-prova-tag" onclick="openModule('História/Geografia - Prova 2023')">Prova 2023</button>
+            <button class="btn-prova-tag" onclick="openStudyGuide('História - Prova 2022', 'historia')">Prova 2022</button>
+            <button class="btn-prova-tag" onclick="openStudyGuide('Geografia - Prova 2023', 'historia')">Prova 2023</button>
           </div>
         </div>
+
       </div>
     </div>
 
-    <!-- ABA 2: FUNDAMENTAL II -->
+    <!-- OUTRAS ABAS -->
     <div id="tab-fund2" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card">
-          <div>
+          <div class="card-top-clickable" onclick="openStudyGuide('Língua Portuguesa e Sintaxe', 'portugues')">
             <div class="card-subject-title">📚 Língua Portuguesa e Sintaxe</div>
             <ul class="card-topics-list">
-              <li>Análise sintática e morfológica</li>
-              <li>Interpretação textual avançada</li>
+              <li>• Análise sintática e morfológica</li>
+              <li>• Interpretação textual avançada</li>
             </ul>
+            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openModule('Portugues Fund II - Prova 2022')">Prova 2022</button>
-            <button class="btn-prova-tag" onclick="openModule('Portugues Fund II - Prova 2023')">Prova 2023</button>
-          </div>
-        </div>
-
-        <div class="modern-module-card">
-          <div>
-            <div class="card-subject-title">📐 Matemática e Álgebra</div>
-            <ul class="card-topics-list">
-              <li>Equações do 1º e 2º grau</li>
-              <li>Geometria plana e espacial</li>
-            </ul>
-          </div>
-          <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openModule('Matemática Fund II - Prova 2022')">Prova 2022</button>
-            <button class="btn-prova-tag" onclick="openModule('Matemática Fund II - Prova 2023')">Prova 2023</button>
+            <button class="btn-prova-tag" onclick="openStudyGuide('Português Fund II - 2022', 'portugues')">Prova 2022</button>
+            <button class="btn-prova-tag" onclick="openStudyGuide('Português Fund II - 2023', 'portugues')">Prova 2023</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ABA 3: ENSINO MÉDIO -->
     <div id="tab-medio" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card">
-          <div>
+          <div class="card-top-clickable" onclick="openStudyGuide('Linguagens e Redação', 'portugues')">
             <div class="card-subject-title">📝 Linguagens e Redação</div>
             <ul class="card-topics-list">
-              <li>Sintaxe e estrutura dissertativa</li>
-              <li>Literatura brasileira e estrangeira</li>
+              <li>• Sintaxe e estrutura dissertativa</li>
+              <li>• Literatura brasileira</li>
             </ul>
+            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openModule('Linguagens Médio - Prova 2022')">Prova 2022</button>
-            <button class="btn-prova-tag" onclick="openModule('Linguagens Médio - Prova 2023')">Prova 2023</button>
-          </div>
-        </div>
-
-        <div class="modern-module-card">
-          <div>
-            <div class="card-subject-title">⚡ Física, Química & Biologia</div>
-            <ul class="card-topics-list">
-              <li>Mecânica, Termodinâmica e Química Orgânica</li>
-              <li>Citologia e Genética</li>
-            </ul>
-          </div>
-          <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openModule('Natureza Médio - Prova 2022')">Prova 2022</button>
-            <button class="btn-prova-tag" onclick="openModule('Natureza Médio - Prova 2023')">Prova 2023</button>
+            <button class="btn-prova-tag" onclick="openStudyGuide('Redação ENEM - 2022', 'portugues')">Prova 2022</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ABA 4: ENSINO SUPERIOR -->
     <div id="tab-superior" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card">
-          <div>
-            <div class="card-subject-title">💻 Ciências Exatas e Engenharia</div>
+          <div class="card-top-clickable" onclick="openStudyGuide('Cálculo I e Exatas', 'matematica')">
+            <div class="card-subject-title">💻 Cálculo diferencial e integral</div>
             <ul class="card-topics-list">
-              <li>Cálculo diferencial e integral</li>
-              <li>Álgebra linear avançada</li>
+              <li>• Limites, Derivadas e Integrais</li>
             </ul>
+            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openModule('Cálculo I - Exame 2023')">Exame 2023</button>
+            <button class="btn-prova-tag" onclick="openStudyGuide('Cálculo I - Exame 2023', 'matematica')">Exame 2023</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ABA 5: VESTIBULARES -->
     <div id="tab-vestibulares" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card">
-          <div>
+          <div class="card-top-clickable" onclick="openStudyGuide('Simulado ENEM Completo', 'matematica')">
             <div class="card-subject-title">🎯 Prova ENEM Completa</div>
             <ul class="card-topics-list">
-              <li>Simulados oficiais e caderno de questões</li>
-              <li>Gabarito comentado passo a passo</li>
+              <li>• Simulados e resolução de questões</li>
             </ul>
+            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openModule('ENEM - Prova 2021')">ENEM 2021</button>
-            <button class="btn-prova-tag" onclick="openModule('ENEM - Prova 2022')">ENEM 2022</button>
-            <button class="btn-prova-tag" onclick="openModule('ENEM - Prova 2023')">ENEM 2023</button>
+            <button class="btn-prova-tag" onclick="openStudyGuide('ENEM 2022', 'matematica')">ENEM 2022</button>
+            <button class="btn-prova-tag" onclick="openStudyGuide('ENEM 2023', 'matematica')">ENEM 2023</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ABA 6: CONCURSOS PÚBLICOS -->
     <div id="tab-concursos" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card">
-          <div>
-            <div class="card-subject-title">⚖️ Direito Constitucional e Administrativo</div>
+          <div class="card-top-clickable" onclick="openStudyGuide('Direito Constitucional', 'portugues')">
+            <div class="card-subject-title">⚖️ Direito Constitucional</div>
             <ul class="card-topics-list">
-              <li>Atos Administrativos e Licitações</li>
-              <li>Direitos e garantias fundamentais</li>
+              <li>• Atos Administrativos e Leis</li>
             </ul>
+            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
           <div class="card-provas-container">
-            <button class="btn-prova-tag" onclick="openModule('Concurso - Prova 2022')">Prova 2022</button>
-            <button class="btn-prova-tag" onclick="openModule('Concurso - Prova 2023')">Prova 2023</button>
+            <button class="btn-prova-tag" onclick="openStudyGuide('Concurso 2023', 'portugues')">Prova 2023</button>
           </div>
         </div>
       </div>
@@ -926,7 +980,7 @@
 
     <button class="btn-exit" onclick="showView('view-login')">Sair do Sistema</button>
 
-    <!-- RODAPÉ DE INFORMAÇÕES EXATAMENTE IGUAL À IMAGEM 2 -->
+    <!-- RODAPÉ DE INFORMAÇÕES E LINKS COMPLETO -->
     <div class="app-footer-info">
       <div class="app-footer-header">
         <h2>🚀 Informações do App & Guia Completo</h2>
@@ -966,10 +1020,10 @@
         <div class="info-app-card">
           <h3>🔗 Links Rápidos e Termos</h3>
           <div class="interactive-links-list">
-            <button class="interactive-link-btn" onclick="openModal('Termos de Serviço', 'Termos de Serviço completos do Gabaritei e FichTeck.')">📄 Termos de Serviço</button>
-            <button class="interactive-link-btn" onclick="openModal('Política de Privacidade', 'Política de Privacidade e Proteção de Dados.')">🔒 Política de Privacidade</button>
-            <button class="interactive-link-btn" onclick="openModal('Manual do Estudante', 'Guia do estudante para utilizar o sistema.')">📖 Manual do Estudante</button>
-            <button class="interactive-link-btn" onclick="openModal('Código de Conduta', 'Diretrizes e regras da comunidade.')">🛡️ Código de Conduta</button>
+            <button class="interactive-link-btn" onclick="openFullLink('termos')">📄 Termos de Serviço</button>
+            <button class="interactive-link-btn" onclick="openFullLink('privacidade')">🔒 Política de Privacidade</button>
+            <button class="interactive-link-btn" onclick="openFullLink('manual')">📖 Manual do Estudante</button>
+            <button class="interactive-link-btn" onclick="openFullLink('conduta')">🛡️ Código de Conduta</button>
           </div>
         </div>
       </div>
@@ -980,53 +1034,175 @@
     </div>
   </section>
 
-  <!-- 5. TELA DE MÓDULO E VÍDEO -->
+  <!-- 5. TELA DE MÓDULO (VÍDEO YOUTUBE + EXERCÍCIOS) -->
   <section id="view-module" class="view-section dark-theme">
     <div class="video-page-container">
       <div class="top-bar-module">
-        <button class="btn-back" onclick="showView('view-dashboard')">← Voltar para o Painel</button>
-        <h2 id="module-title-display" style="color: #38bdf8; font-size: 1.2rem;">Módulo de Aula</h2>
+        <button class="btn-back" onclick="exitModuleView()">← Voltar ao Painel</button>
+        <h2 id="module-title-display" style="color: #38bdf8; font-size: 1.2rem;">Língua Portuguesa</h2>
       </div>
 
-      <div class="video-main-layout">
-        <div>
-          <div class="video-player-box">
-            <div class="play-btn" onclick="alert('Iniciando reprodução...')"></div>
-            <p style="font-size: 0.9rem; font-weight: 600;">Clique para iniciar o vídeo/prova selecionada</p>
-          </div>
+      <!-- PAINEL DE CONTROLE DE NAVEGAÇÃO DE QUESTÕES -->
+      <div class="controls-panel">
+        <div class="filter-group">
+          <label>Nível de Dificuldade:</label>
+          <select id="difficulty-select" onchange="updateLessonDifficulty()">
+            <option value="leve">Fácil / Leve</option>
+            <option value="medio" selected>Médio</option>
+            <option value="dificil">Difícil</option>
+          </select>
         </div>
 
-        <div>
-          <div class="sidebar-card">
-            <h4>💬 IA Auxiliadora Gabaritei</h4>
-            <div id="chat-box" class="chat-box">
-              <p><strong>IA Gabaritei:</strong> Olá! Como posso te ajudar com esta prova ou assunto hoje?</p>
-            </div>
-            <div class="chat-input-row">
-              <input type="text" id="chat-input" placeholder="Pergunte à IA..." />
-              <button onclick="sendChatMessage()">Enviar</button>
-            </div>
+        <!-- PULAR DA QUESTÃO X PARA QUESTÃO Y -->
+        <div class="filter-group">
+          <label>Ir para o bloco de questões:</label>
+          <input type="number" id="quest-start" value="16" min="1" max="100" style="width: 55px;" />
+          <span style="color: #94a3b8; font-size: 0.8rem;">até</span>
+          <input type="number" id="quest-end" value="20" min="1" max="100" style="width: 55px;" />
+          <button onclick="jumpToQuestionRange()" style="background: #2563eb; color: #fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size: 0.75rem; font-weight:600;">Pular Questões</button>
+        </div>
+      </div>
+
+      <!-- VÍDEO DO YOUTUBE + EXERCÍCIOS INTERATIVOS -->
+      <div class="video-main-layout">
+        <div class="video-player-box">
+          <iframe id="youtube-iframe" src="" title="Vídeo de Estudo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <div class="quiz-container">
+          <div class="quiz-header-badge">
+            <h3 style="color: #38bdf8; font-size: 1rem;">📝 Exercício do Módulo</h3>
+            <span id="question-number-badge" style="background:#1e293b; color:#38bdf8; font-size:0.75rem; padding:4px 10px; border-radius:12px; font-weight:700;">Questão #16</span>
           </div>
+
+          <p id="quiz-question-text" class="quiz-question">Carregando questão...</p>
+          
+          <div id="quiz-options-container" class="quiz-options">
+            <!-- As opções de resposta aparecem via JavaScript -->
+          </div>
+
+          <div id="feedback-box" class="feedback-box"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MODAL DE INFORMAÇÕES -->
+  <!-- MODAL DE TEXTOS -->
   <div id="modal-info" class="modal-overlay">
     <div class="modal-card">
       <h3 id="modal-title">Título</h3>
-      <div id="modal-body">Conteúdo...</div>
-      <button class="modal-close-btn" onclick="closeModal()">Fechar</button>
+      <div id="modal-body" class="modal-body-content">Conteúdo...</div>
+      <button class="modal-close-btn" onclick="closeModal()">Entendido e Fechar</button>
     </div>
   </div>
 
-  <!-- SCRIPT DE LÓGICA DO SISTEMA -->
   <script>
+    // BANCO DE DADOS DAS QUESTÕES
+    const subjectData = {
+      portugues: {
+        youtube: "https://www.youtube.com/embed/3A-3X9c0Gps",
+        questions: {
+          leve: {
+            q: "Qual é o sujeito da frase: 'O aluno estudou para a prova'?",
+            opts: ["estudou", "O aluno", "para a prova", "A prova"],
+            correct: 1,
+            explain: "Correto! 'O aluno' é quem pratica a ação de estudar."
+          },
+          medio: {
+            q: "Na frase 'A aluna entregou o livro ao professor', qual é o objeto indireto?",
+            opts: ["A aluna", "entregou", "o livro", "ao professor"],
+            correct: 3,
+            explain: "Exato! 'ao professor' vem regido de preposição (a + o), caracterizando objeto indireto."
+          },
+          dificil: {
+            q: "Assinale a opção com erro de concordância verbal:",
+            opts: ["Fazem cinco anos que não estudo.", "Havia muitos alunos na sala.", "Existe um problema grave.", "Sobraram duas vagas."],
+            correct: 0,
+            explain: "Muito bem! O verbo 'fazer' indicando tempo decorrido é impessoal (fica no singular: 'Faz cinco anos')."
+          }
+        }
+      },
+      matematica: {
+        youtube: "https://www.youtube.com/embed/n4K1qYx5t3c",
+        questions: {
+          leve: {
+            q: "Quanto é 7 + 8 x 2?",
+            opts: ["30", "23", "17", "16"],
+            correct: 1,
+            explain: "Parabéns! Multiplica-se primeiro: 8 x 2 = 16, depois soma 7 = 23."
+          },
+          medio: {
+            q: "Qual a raiz da equação 2x + 6 = 14?",
+            opts: ["x = 4", "x = 3", "x = 5", "x = 2"],
+            correct: 0,
+            explain: "Perfeito! 2x = 14 - 6 -> 2x = 8 -> x = 4."
+          },
+          dificil: {
+            q: "Qual a derivada da função f(x) = x³?",
+            opts: ["f'(x) = 3x²", "f'(x) = x²", "f'(x) = 3x", "f'(x) = x³/3"],
+            correct: 0,
+            explain: "Correto! Pela regra do tombo: d/dx(xⁿ) = n·xⁿ⁻¹ -> 3x²."
+          }
+        }
+      },
+      ciencias: {
+        youtube: "https://www.youtube.com/embed/2_Y5S-Wb2nU",
+        questions: {
+          leve: {
+            q: "Qual organela é responsável pela respiração celular?",
+            opts: ["Ribossomo", "Mitocôndria", "Complexo de Golgi", "Lisossomo"],
+            correct: 1,
+            explain: "Correto! A mitocôndria gera energia para a célula."
+          },
+          medio: {
+            q: "Qual gás é essencial para a fotossíntese vegetal?",
+            opts: ["Oxigênio", "Gás Carbônico (CO2)", "Nitrogênio", "Hidrogênio"],
+            correct: 1,
+            explain: "Exato! As plantas usam CO2 e luz para produzir glicose."
+          },
+          dificil: {
+            q: "Em qual fase da mitose os cromossomos se alinham na placa equatorial?",
+            opts: ["Prófase", "Metáfase", "Anáfase", "Telófase"],
+            correct: 1,
+            explain: "Correto! Na Metáfase ocorre o alinhamento central."
+          }
+        }
+      },
+      historia: {
+        youtube: "https://www.youtube.com/embed/8I9p_yG5T20",
+        questions: {
+          leve: {
+            q: "Em que ano ocorreu a Independência do Brasil?",
+            opts: ["1500", "1822", "1889", "1945"],
+            correct: 1,
+            explain: "Correto! Ocorreu em 7 de setembro de 1822."
+          },
+          medio: {
+            q: "Quem proclamou a República no Brasil?",
+            opts: ["Dom Pedro II", "Marechal Deodoro da Fonseca", "Getúlio Vargas", "Juscelino Kubitschek"],
+            correct: 1,
+            explain: "Correto! Marechal Deodoro liderou a proclamação em 1889."
+          },
+          dificil: {
+            q: "Qual evento marcou o início da Idade Moderna em 1453?",
+            opts: ["Queda de Constantinopla", "Revolução Francesa", "Descobrimento da América", "Guerra dos Cem Anos"],
+            correct: 0,
+            explain: "Exato! A queda de Constantinopla encerrou o Império Bizantino."
+          }
+        }
+      }
+    };
+
+    let currentSubjectKey = 'portugues';
+    let currentQuestionNum = 16;
+
     function showView(viewId) {
       document.querySelectorAll('.view-section').forEach(view => {
         view.classList.remove('active');
       });
+
+      document.querySelectorAll('.alert-banner.error, .alert-banner.success').forEach(el => el.classList.remove('show'));
+
       const targetView = document.getElementById(viewId);
       if (targetView) {
         targetView.classList.add('active');
@@ -1041,6 +1217,109 @@
       if (btnElement) btnElement.classList.add('active');
       const targetTab = document.getElementById(tabId);
       if (targetTab) targetTab.classList.add('active');
+    }
+
+    function openStudyGuide(title, subjectKey) {
+      currentSubjectKey = subjectKey || 'portugues';
+      document.getElementById('module-title-display').innerText = title;
+      
+      const data = subjectData[currentSubjectKey] || subjectData['portugues'];
+      document.getElementById('youtube-iframe').src = data.youtube;
+
+      updateLessonDifficulty();
+      showView('view-module');
+    }
+
+    function exitModuleView() {
+      document.getElementById('youtube-iframe').src = "";
+      showView('view-dashboard');
+    }
+
+    // PULAR PARA O BLOCO DE QUESTÕES (EX: QUESTÃO 16 A 20)
+    function jumpToQuestionRange() {
+      const qStart = parseInt(document.getElementById('quest-start').value) || 1;
+      const qEnd = parseInt(document.getElementById('quest-end').value) || 20;
+
+      currentQuestionNum = qStart;
+      document.getElementById('question-number-badge').innerText = `Questão #${currentQuestionNum} (até #${qEnd})`;
+      
+      updateLessonDifficulty();
+    }
+
+    function updateLessonDifficulty() {
+      const difficulty = document.getElementById('difficulty-select').value;
+      const data = subjectData[currentSubjectKey] || subjectData['portugues'];
+      const qData = data.questions[difficulty] || data.questions['medio'];
+
+      document.getElementById('quiz-question-text').innerText = `${currentQuestionNum}. ${qData.q}`;
+      const optsContainer = document.getElementById('quiz-options-container');
+      const feedbackBox = document.getElementById('feedback-box');
+      
+      feedbackBox.className = 'feedback-box';
+      feedbackBox.style.display = 'none';
+      optsContainer.innerHTML = '';
+
+      qData.opts.forEach((optText, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option-btn';
+        btn.innerText = `${String.fromCharCode(65 + index)}) ${optText}`;
+        btn.onclick = () => checkAnswer(index, qData.correct, qData.explain);
+        optsContainer.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selectedIndex, correctIndex, explanation) {
+      const feedbackBox = document.getElementById('feedback-box');
+      if (selectedIndex === correctIndex) {
+        feedbackBox.className = 'feedback-box correct';
+        feedbackBox.innerHTML = `<strong>✨ RESPOSTA CORRETA!</strong><br/>${explanation}`;
+      } else {
+        feedbackBox.className = 'feedback-box wrong';
+        feedbackBox.innerHTML = `<strong>❌ RESPOSTA INCORRETA!</strong><br/>Tente novamente ou assista ao trecho do vídeo.`;
+      }
+    }
+
+    function openFullLink(type) {
+      const modalTitle = document.getElementById('modal-title');
+      const modalBody = document.getElementById('modal-body');
+
+      if (type === 'termos') {
+        modalTitle.innerText = '📄 Termos de Serviço - Gabaritei & FichTeck';
+        modalBody.innerHTML = `
+          <h4>1. Aceitação dos Termos</h4>
+          <p>Ao acessar o Gabaritei, você concorda com as diretrizes da FichTeck de uso educacional contínuo e responsável.</p>
+          <h4>2. Licença de Uso</h4>
+          <p>Concedemos acesso pessoal, individual e intransferível para fins de estudo e simulados para concursos e vestibulares.</p>
+          <h4>3. Propriedade Intelectual</h4>
+          <p>Todo o conteúdo, logotipo, questões e algoritmos são de propriedade exclusiva da FichTeck © 2026.</p>
+        `;
+      } else if (type === 'privacidade') {
+        modalTitle.innerText = '🔒 Política de Privacidade';
+        modalBody.innerHTML = `
+          <h4>1. Armazenamento Seguro via LocalStorage</h4>
+          <p>Seus dados de progresso e preferências são mantidos com total segurança no seu próprio navegador.</p>
+          <h4>2. Proteção de Dados</h4>
+          <p>Não compartilhamos suas notas ou e-mail com terceiros sem sua autorização prévia.</p>
+        `;
+      } else if (type === 'manual') {
+        modalTitle.innerText = '📖 Manual do Estudante';
+        modalBody.innerHTML = `
+          <h4>Como Funciona a Navegação de Questões?</h4>
+          <p>• <strong>Pular Questões:</strong> Digite o número da questão desejada (ex: pular da questão 16 para a 20) no topo do módulo e clique em "Pular Questões".</p>
+          <p>• <strong>Resolução ao Vivo:</strong> Selecione a alternativa desejada para ver a explicação na hora.</p>
+        `;
+      } else if (type === 'conduta') {
+        modalTitle.innerText = '🛡️ Código de Conduta';
+        modalBody.innerHTML = `
+          <h4>Respeito e Foco no Estudo</h4>
+          <p>Incentivamos o apoio mútuo entre alunos na nossa IA e fóruns. Atitudes desrespeitosas resultarão na suspensão da conta.</p>
+        `;
+      }
+      document.getElementById('modal-info').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('modal-info').classList.remove('active');
     }
 
     function handleLogin() {
@@ -1085,34 +1364,6 @@
         recoveredBox.style.display = 'block';
       } else {
         alert('Por favor, preencha os campos para recuperar a senha.');
-      }
-    }
-
-    function openModule(moduleTitle) {
-      document.getElementById('module-title-display').innerText = moduleTitle;
-      showView('view-module');
-    }
-
-    function openModal(title, text) {
-      document.getElementById('modal-title').innerText = title;
-      document.getElementById('modal-body').innerHTML = text;
-      document.getElementById('modal-info').classList.add('active');
-    }
-
-    function closeModal() {
-      document.getElementById('modal-info').classList.remove('active');
-    }
-
-    function sendChatMessage() {
-      const input = document.getElementById('chat-input');
-      const chatBox = document.getElementById('chat-box');
-      if (input.value.trim() !== '') {
-        const msg = document.createElement('p');
-        msg.innerHTML = `<strong>Você:</strong> ${input.value}`;
-        msg.style.marginTop = '6px';
-        chatBox.appendChild(msg);
-        input.value = '';
-        chatBox.scrollTop = chatBox.scrollHeight;
       }
     }
   </script>
