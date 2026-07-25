@@ -456,15 +456,6 @@
       line-height: 1.6;
     }
 
-    .info-app-card ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .info-app-card ul li {
-      margin-bottom: 8px;
-    }
-
     .interactive-links-list {
       display: flex;
       flex-direction: column;
@@ -557,7 +548,7 @@
       font-weight: 600;
     }
 
-    .filter-group select, .filter-group input {
+    .filter-group select {
       background: #1e293b;
       border: 1px solid #334155;
       color: #ffffff;
@@ -604,18 +595,6 @@
       gap: 15px;
     }
 
-    .quiz-header-badge {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .quiz-question {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #f8fafc;
-    }
-
     .quiz-options {
       display: flex;
       flex-direction: column;
@@ -640,23 +619,24 @@
     }
 
     .feedback-box {
-      padding: 12px;
-      border-radius: 10px;
-      font-size: 0.8rem;
-      font-weight: 600;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      line-height: 1.5;
       display: none;
     }
 
     .feedback-box.correct {
       display: block;
-      background: rgba(34, 197, 94, 0.2);
+      background: rgba(34, 197, 94, 0.15);
       border: 1px solid #22c55e;
       color: #4ade80;
     }
 
     .feedback-box.wrong {
       display: block;
-      background: rgba(239, 68, 68, 0.2);
+      background: rgba(239, 68, 68, 0.15);
       border: 1px solid #ef4444;
       color: #f87171;
     }
@@ -670,6 +650,28 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+    }
+
+    .top-actions-bar {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-secondary-action {
+      background: #1e293b;
+      color: #38bdf8;
+      border: 1px solid #38bdf8;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary-action:hover {
+      background: #38bdf8;
+      color: #0f172a;
     }
 
     .prova-full-card {
@@ -734,6 +736,63 @@
       background: #111e38;
     }
 
+    .prova-option-item.selected {
+      border-color: #2563eb;
+      background: rgba(37, 99, 235, 0.2);
+      color: #ffffff;
+    }
+
+    /* RODAPÉ DE NAVEGAÇÃO DA PROVA */
+    .prova-bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      padding-top: 15px;
+      border-top: 1px solid #1e293b;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      background: #1e293b;
+      color: #ffffff;
+      border: 1px solid #334155;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      background: #334155;
+      border-color: #38bdf8;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .btn-verify {
+      background: #22c55e;
+      color: #ffffff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-left: auto;
+    }
+
+    .btn-verify:hover {
+      background: #16a34a;
+    }
+
     /* MODAL */
     .modal-overlay {
       position: fixed;
@@ -783,12 +842,6 @@
       padding-right: 10px;
     }
 
-    .modal-body-content h4 {
-      color: #ffffff;
-      margin-top: 12px;
-      margin-bottom: 4px;
-    }
-
     .modal-close-btn {
       margin-top: 20px;
       background: #2563eb;
@@ -833,9 +886,6 @@
       <h1 class="auth-title">GABARITEI</h1>
       <h2 class="auth-subtitle">Criar Conta</h2>
       
-      <div id="register-success" class="alert-banner success">Conta criada com sucesso! Redirecionando...</div>
-      <div id="register-error" class="alert-banner error">Preencha todos os campos corretamente!</div>
-
       <div class="form-group">
         <label>Nome de Usuário</label>
         <input type="text" id="reg-user" placeholder="Escolha um nome de usuário" />
@@ -904,17 +954,9 @@
         <span>1º ao 3º Ano</span>
         <span class="sub">ENSINO MÉDIO</span>
       </button>
-      <button class="tab-btn" onclick="switchTab('tab-superior', this)">
-        <span>Ensino Superior</span>
-        <span class="sub">GRADUAÇÃO</span>
-      </button>
       <button class="tab-btn" onclick="switchTab('tab-vestibulares', this)">
         <span>Vestibulares</span>
         <span class="sub">ENEM & PROVAS</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('tab-concursos', this)">
-        <span>Concursos Públicos</span>
-        <span class="sub">CARREIRAS PÚBLICAS</span>
       </button>
     </div>
 
@@ -939,15 +981,7 @@
                 <option value="2026">Prova 2026</option>
                 <option value="2025">Prova 2025</option>
                 <option value="2024">Prova 2024</option>
-                <option value="2023">Prova 2023</option>
-                <option value="2022">Prova 2022</option>
-                <option value="2021">Prova 2021</option>
                 <option value="2020">Prova 2020</option>
-                <option value="2019">Prova 2019</option>
-                <option value="2018">Prova 2018</option>
-                <option value="2017">Prova 2017</option>
-                <option value="2016">Prova 2016</option>
-                <option value="2015">Prova 2015</option>
               </select>
               <button class="btn-open-prova" onclick="openOnlyProva('Língua Portuguesa', 'select-prova-portugues', 'portugues')">Abrir</button>
             </div>
@@ -970,39 +1004,8 @@
               <select id="select-prova-matematica" class="provas-select">
                 <option value="2026">Prova 2026</option>
                 <option value="2025">Prova 2025</option>
-                <option value="2024">Prova 2024</option>
-                <option value="2023">Prova 2023</option>
-                <option value="2022">Prova 2022</option>
-                <option value="2021">Prova 2021</option>
-                <option value="2020">Prova 2020</option>
-                <option value="2019">Prova 2019</option>
               </select>
               <button class="btn-open-prova" onclick="openOnlyProva('Matemática', 'select-prova-matematica', 'matematica')">Abrir</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD CIÊNCIAS -->
-        <div class="modern-module-card">
-          <div class="card-top-clickable" onclick="openStudyGuide('Ciências da Natureza - Aulas', 'ciencias')">
-            <div class="card-subject-title">🌱 Ciências da Natureza</div>
-            <ul class="card-topics-list">
-              <li>• Corpo humano e ecossistemas</li>
-              <li>• Sistema solar básico</li>
-            </ul>
-            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
-          </div>
-          <div class="card-provas-container">
-            <span class="provas-label">📝 Selecionar Prova Completa:</span>
-            <div class="provas-select-wrapper">
-              <select id="select-prova-ciencias" class="provas-select">
-                <option value="2026">Prova 2026</option>
-                <option value="2025">Prova 2025</option>
-                <option value="2024">Prova 2024</option>
-                <option value="2023">Prova 2023</option>
-                <option value="2022">Prova 2022</option>
-              </select>
-              <button class="btn-open-prova" onclick="openOnlyProva('Ciências da Natureza', 'select-prova-ciencias', 'ciencias')">Abrir</button>
             </div>
           </div>
         </div>
@@ -1010,7 +1013,6 @@
       </div>
     </div>
 
-    <!-- DEMAIS ABAS PERMANECEM COM AS MESMAS OPÇÕES -->
     <div id="tab-fund2" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card">
@@ -1026,8 +1028,6 @@
             <div class="provas-select-wrapper">
               <select id="select-prova-fund2-port" class="provas-select">
                 <option value="2026">Prova 2026</option>
-                <option value="2025">Prova 2025</option>
-                <option value="2024">Prova 2024</option>
               </select>
               <button class="btn-open-prova" onclick="openOnlyProva('Português Fund II', 'select-prova-fund2-port', 'portugues')">Abrir</button>
             </div>
@@ -1051,7 +1051,6 @@
             <div class="provas-select-wrapper">
               <select id="select-prova-medio-ling" class="provas-select">
                 <option value="2026">Prova 2026</option>
-                <option value="2025">Prova 2025</option>
               </select>
               <button class="btn-open-prova" onclick="openOnlyProva('Linguagens Ensino Médio', 'select-prova-medio-ling', 'portugues')">Abrir</button>
             </div>
@@ -1075,9 +1074,6 @@
             <div class="provas-select-wrapper">
               <select id="select-prova-enem" class="provas-select">
                 <option value="2025">ENEM 2025</option>
-                <option value="2024">ENEM 2024</option>
-                <option value="2023">ENEM 2023</option>
-                <option value="2022">ENEM 2022</option>
               </select>
               <button class="btn-open-prova" onclick="openOnlyProva('ENEM Completo', 'select-prova-enem', 'matematica')">Abrir</button>
             </div>
@@ -1104,13 +1100,6 @@
           <h3>🔒 Segurança e Privacidade Total</h3>
           <p>Seus dados e credenciais são armazenados localmente via <strong>LocalStorage</strong>.</p>
         </div>
-        <div class="info-app-card">
-          <h3>🔗 Links Rápidos e Termos</h3>
-          <div class="interactive-links-list">
-            <button class="interactive-link-btn" onclick="openFullLink('termos')">📄 Termos de Serviço</button>
-            <button class="interactive-link-btn" onclick="openFullLink('privacidade')">🔒 Política de Privacidade</button>
-          </div>
-        </div>
       </div>
 
       <div class="copyright-text">
@@ -1127,27 +1116,13 @@
         <h2 id="module-title-display" style="color: #38bdf8; font-size: 1.2rem;">Língua Portuguesa</h2>
       </div>
 
-      <div class="controls-panel">
-        <div class="filter-group">
-          <label>Nível de Dificuldade:</label>
-          <select id="difficulty-select" onchange="updateLessonDifficulty()">
-            <option value="leve">Fácil / Leve</option>
-            <option value="medio" selected>Médio</option>
-            <option value="dificil">Difícil</option>
-          </select>
-        </div>
-      </div>
-
       <div class="video-main-layout">
         <div class="video-player-box">
           <iframe id="youtube-iframe" src="" title="Vídeo de Estudo" allowfullscreen></iframe>
         </div>
 
         <div class="quiz-container">
-          <div class="quiz-header-badge">
-            <h3 style="color: #38bdf8; font-size: 1rem;">📝 Exercício da Aula</h3>
-          </div>
-
+          <h3 style="color: #38bdf8; font-size: 1rem;">📝 Exercício da Aula</h3>
           <p id="quiz-question-text" class="quiz-question">Carregando questão...</p>
           <div id="quiz-options-container" class="quiz-options"></div>
           <div id="feedback-box" class="feedback-box"></div>
@@ -1156,18 +1131,22 @@
     </div>
   </section>
 
-  <!-- 6. NOVA TELA EXCLUSIVA DE PROVA COMPLETA (SEM VÍDEO) -->
+  <!-- 6. TELA EXCLUSIVA DE PROVA COMPLETA (SEM VÍDEO / SEM TEMPO NO TOPO / NAVEGAÇÃO COMPLETA) -->
   <section id="view-only-prova" class="view-section dark-theme">
     <div class="prova-page-container">
       <div class="top-bar-module">
         <button class="btn-back" onclick="showView('view-dashboard')">← Voltar ao Painel</button>
-        <div style="font-weight:700; color:#38bdf8;" id="prova-time-counter">⏱️ Tempo restante: 50:00</div>
+        
+        <div class="top-actions-bar">
+          <button class="btn-secondary-action" onclick="restartProva()">🔄 Reiniciar Prova</button>
+          <button class="btn-secondary-action" onclick="saveProgress()">💾 Salvar Progresso</button>
+        </div>
       </div>
 
       <div class="prova-full-card">
         <div class="prova-header">
           <h2 id="prova-title-display">Prova de Língua Portuguesa</h2>
-          <span id="prova-year-display" class="prova-badge-year">Edição 2020</span>
+          <span id="prova-year-display" class="prova-badge-year">Edição 2026</span>
         </div>
 
         <div class="prova-question-box">
@@ -1175,81 +1154,99 @@
         </div>
 
         <div id="prova-options-container" class="prova-options-list">
-          <!-- Opções da Prova -->
+          <!-- Opções da Prova serão renderizadas via JavaScript -->
         </div>
 
+        <!-- CAIXA DE FEEDBACK / EXPLICAÇÃO -->
         <div id="prova-feedback-box" class="feedback-box"></div>
+
+        <!-- NAVEGAÇÃO INFERIOR -->
+        <div class="prova-bottom-nav">
+          <button id="btn-prev-question" class="nav-btn" onclick="prevQuestion()">⬅️ Anterior</button>
+          <span id="question-index-display" style="font-size: 0.85rem; color: #94a3b8; font-weight: 600;">Questão 1 de 2</span>
+          <button id="btn-next-question" class="nav-btn" onclick="nextQuestion()">Próximo ➡️</button>
+          
+          <button class="btn-verify" onclick="verifyCurrentAnswer()">Verificar</button>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- MODAL DE TEXTOS -->
-  <div id="modal-info" class="modal-overlay">
-    <div class="modal-card">
-      <h3 id="modal-title">Título</h3>
-      <div id="modal-body" class="modal-body-content">Conteúdo...</div>
-      <button class="modal-close-btn" onclick="closeModal()">Entendido e Fechar</button>
-    </div>
-  </div>
-
   <script>
+    // BANCO DE DADOS DE PROVAS COM MÚLTIPLAS QUESTÕES E JUSTIFICATIVAS DETALHADAS
     const subjectData = {
       portugues: {
         youtube: "https://www.youtube.com/embed/3A-3X9c0Gps",
-        questions: {
-          leve: { q: "Qual é o sujeito de 'O aluno estudou'?", opts: ["estudou", "O aluno", "para a prova"], correct: 1, explain: "Correto!" },
-          medio: { q: "Na frase 'A aluna entregou o livro ao professor', qual é o objeto indireto?", opts: ["A aluna", "entregou", "o livro", "ao professor"], correct: 3, explain: "Exato! 'ao professor' é objeto indireto." },
-          dificil: { q: "Assinale a opção com erro de concordância:", opts: ["Fazem cinco anos que não estudo.", "Havia muitos alunos na sala."], correct: 0, explain: "Verbo fazer indicando tempo é impessoal." }
-        },
-        provas: {
-          q: "Questão Oficial da Prova: Indique a alternativa em que a regência verbal está em conformidade com a norma-padrão da língua portuguesa:",
-          opts: [
-            "A) O médico assistiu o paciente com toda a dedicação.",
-            "B) Preferia mais estudar do que sair com os amigos no fim de semana.",
-            "C) O filme a que assistimos ontem à noite foi premiado no festival.",
-            "D) O Diretor aspirava ao cargo, mas obedeceu o regulamento."
-          ],
-          correct: 2,
-          explain: "Correto! O verbo assistir no sentido de ver/presenciar exige preposição 'a' (assistir a algo)."
-        }
+        provas: [
+          {
+            q: "1) Indique a alternativa em que a regência verbal está em conformidade com a norma-padrão da língua portuguesa:",
+            opts: [
+              "A) O médico assistiu o paciente com toda a dedicação.",
+              "B) Preferia mais estudar do que sair com os amigos no fim de semana.",
+              "C) O filme a que assistimos ontem à noite foi premiado no festival.",
+              "D) O Diretor aspirava ao cargo, mas obedeceu o regulamento."
+            ],
+            correct: 2,
+            explanations: {
+              correct: "✨ Você acertou! O verbo 'assistir' no sentido de 'ver/presenciar' é transitivo indireto e exige a preposição 'a' (assistir A algo). Por isso, 'o filme A QUE assistimos' está perfeito.",
+              wrong: "❌ Você errou! \n• Na A: 'assistir' no sentido de prestar socorro não exige preposiçãoobrigatoriamente, mas o sentido aqui exige atenção.\n• Na B: Não se usa 'preferir mais... do que', o correto é 'Preferia estudar A sair'.\n• Na D: O verbo 'obedecer' exige preposição 'a' (obedeceu AO regulamento)."
+            }
+          },
+          {
+            q: "2) Identifique a frase onde a crase foi empregada corretamente:",
+            opts: [
+              "A) Refiro-me à aluna que tirou a nota máxima na prova.",
+              "B) Chegamos à uma hora muito avançada da noite.",
+              "C) Ele foi à pé para a escola hoje de manhã.",
+              "D) Entreguei o relatório à ele pessoalmente."
+            ],
+            correct: 0,
+            explanations: {
+              correct: "✨ Você acertou! Houve a fusão da preposição 'a' (exigida por 'Refiro-me') com o artigo definido feminino 'a' (de 'aluna').",
+              wrong: "❌ Você errou! \n• Não se usa crase antes de artigo indefinido ('uma'), palavras masculinas ('pé') ou pronomes pessoais masculinos ('ele')."
+            }
+          }
+        ]
       },
       matematica: {
         youtube: "https://www.youtube.com/embed/n4K1qYx5t3c",
-        questions: {
-          medio: { q: "Qual a raiz de 2x + 6 = 14?", opts: ["x = 4", "x = 3"], correct: 0, explain: "Perfeito!" }
-        },
-        provas: {
-          q: "Questão Oficial da Prova: Um reservatório com capacidade de 5.000 litros está totalmente cheio. Uma torneira de escoamento é aberta com vazão constante de 250 litros por hora. Após quantas horas restará apenas 20% da capacidade total?",
-          opts: [
-            "A) 12 horas",
-            "B) 16 horas",
-            "C) 18 horas",
-            "D) 20 horas"
-          ],
-          correct: 1,
-          explain: "Correto! 20% de 5000 = 1000L. Para escoar 4000L a 250L/h: 4000 / 250 = 16 horas."
-        }
-      },
-      ciencias: {
-        youtube: "https://www.youtube.com/embed/2_Y5S-Wb2nU",
-        questions: {
-          medio: { q: "Qual gás é essencial para a fotossíntese?", opts: ["Oxigênio", "Gás Carbônico (CO2)"], correct: 1, explain: "Exato!" }
-        },
-        provas: {
-          q: "Questão Oficial da Prova: Qual das seguintes organelas celulares possui DNA próprio e é responsável pela produção da principal moeda energética celular (ATP)?",
-          opts: [
-            "A) Retículo Endoplasmático",
-            "B) Lisossomo",
-            "C) Mitocôndria",
-            "D) Peroxissomo"
-          ],
-          correct: 2,
-          explain: "Exato! As mitocôndrias possuem DNA próprio e realizam a respiração celular."
-        }
+        provas: [
+          {
+            q: "1) Um reservatório com capacidade de 5.000 litros está cheio. Uma torneira escoa 250 litros por hora. Após quantas horas restará apenas 20% da capacidade total?",
+            opts: [
+              "A) 12 horas",
+              "B) 16 horas",
+              "C) 18 horas",
+              "D) 20 horas"
+            ],
+            correct: 1,
+            explanations: {
+              correct: "✨ Você acertou! 20% de 5.000L = 1.000L restante. Para escoar 4.000L com vazão de 250L/h: 4000 ÷ 250 = 16 horas.",
+              wrong: "❌ Você errou! Lembre-se de calcular quanto volume precisa ser escoado (80% de 5000L = 4000L) e depois dividir pela vazão de 250 L/h."
+            }
+          },
+          {
+            q: "2) Qual o valor de x na equação 3x - 9 = 18?",
+            opts: [
+              "A) x = 6",
+              "B) x = 9",
+              "C) x = 27",
+              "D) x = 3"
+            ],
+            correct: 1,
+            explanations: {
+              correct: "✨ Você acertou! Somando 9 nos dois lados temos: 3x = 27. Dividindo por 3: x = 9.",
+              wrong: "❌ Você errou! Resolva isolando o x: 3x = 18 + 9 -> 3x = 27 -> x = 27 / 3 -> x = 9."
+            }
+          }
+        ]
       }
     };
 
+    // ESTADOS DA PROVA ATUAL
     let currentSubjectKey = 'portugues';
+    let currentQuestionIndex = 0;
+    let selectedAnswers = {}; // Armazena a opção selecionada para cada questão
 
     function showView(viewId) {
       document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
@@ -1268,54 +1265,13 @@
       if (targetTab) targetTab.classList.add('active');
     }
 
-    /* ABRIR MÓDULO COM VÍDEO (AULA) */
+    /* ABRIR MÓDULO COM VÍDEO */
     function openStudyGuide(title, subjectKey) {
       currentSubjectKey = subjectKey || 'portugues';
       document.getElementById('module-title-display').innerText = title;
       const data = subjectData[currentSubjectKey] || subjectData['portugues'];
       document.getElementById('youtube-iframe').src = data.youtube;
-      updateLessonDifficulty();
       showView('view-module');
-    }
-
-    /* ABRIR APENAS A PROVA (SEM VÍDEO NO LAYOUT) */
-    function openOnlyProva(subjectName, selectId, subjectKey) {
-      const selectElem = document.getElementById(selectId);
-      const selectedYear = selectElem ? selectElem.value : '2020';
-      
-      currentSubjectKey = subjectKey || 'portugues';
-      const data = subjectData[currentSubjectKey] || subjectData['portugues'];
-      const provaData = data.provas;
-
-      document.getElementById('prova-title-display').innerText = `Prova de ${subjectName}`;
-      document.getElementById('prova-year-display').innerText = `Edição ${selectedYear}`;
-      document.getElementById('prova-question-text').innerText = provaData.q;
-
-      const optsContainer = document.getElementById('prova-options-container');
-      const feedbackBox = document.getElementById('prova-feedback-box');
-      feedbackBox.style.display = 'none';
-      optsContainer.innerHTML = '';
-
-      provaData.opts.forEach((optText, index) => {
-        const btn = document.createElement('div');
-        btn.className = 'prova-option-item';
-        btn.innerText = optText;
-        btn.onclick = () => checkProvaAnswer(index, provaData.correct, provaData.explain);
-        optsContainer.appendChild(btn);
-      });
-
-      showView('view-only-prova');
-    }
-
-    function checkProvaAnswer(selectedIndex, correctIndex, explanation) {
-      const feedbackBox = document.getElementById('prova-feedback-box');
-      if (selectedIndex === correctIndex) {
-        feedbackBox.className = 'feedback-box correct';
-        feedbackBox.innerHTML = `<strong>✨ RESPOSTA CORRETA!</strong><br/>${explanation}`;
-      } else {
-        feedbackBox.className = 'feedback-box wrong';
-        feedbackBox.innerHTML = `<strong>❌ RESPOSTA INCORRETA!</strong><br/>Revise o conteúdo e tente novamente.`;
-      }
     }
 
     function exitModuleView() {
@@ -1323,56 +1279,117 @@
       showView('view-dashboard');
     }
 
-    function updateLessonDifficulty() {
-      const difficulty = document.getElementById('difficulty-select').value;
-      const data = subjectData[currentSubjectKey] || subjectData['portugues'];
-      const qData = data.questions[difficulty] || data.questions['medio'];
-
-      document.getElementById('quiz-question-text').innerText = qData.q;
-      const optsContainer = document.getElementById('quiz-options-container');
-      const feedbackBox = document.getElementById('feedback-box');
+    /* ABRIR TELA EXCLUSIVA DE PROVA */
+    function openOnlyProva(subjectName, selectId, subjectKey) {
+      const selectElem = document.getElementById(selectId);
+      const selectedYear = selectElem ? selectElem.value : '2026';
       
+      currentSubjectKey = subjectKey || 'portugues';
+      currentQuestionIndex = 0;
+      selectedAnswers = {}; // Limpa respostas anteriores
+
+      document.getElementById('prova-title-display').innerText = `Prova de ${subjectName}`;
+      document.getElementById('prova-year-display').innerText = `Edição ${selectedYear}`;
+
+      loadQuestion(currentQuestionIndex);
+      showView('view-only-prova');
+    }
+
+    /* CARREGAR QUESTÃO NA TELA */
+    function loadQuestion(index) {
+      const data = subjectData[currentSubjectKey] || subjectData['portugues'];
+      const questionsList = data.provas;
+
+      if (!questionsList || questionsList.length === 0) return;
+
+      const qData = questionsList[index];
+
+      // Atualiza texto da questão e índice
+      document.getElementById('prova-question-text').innerText = qData.q;
+      document.getElementById('question-index-display').innerText = `Questão ${index + 1} de ${questionsList.length}`;
+
+      // Oculta caixa de feedback até clicar em "Verificar"
+      const feedbackBox = document.getElementById('prova-feedback-box');
       feedbackBox.style.display = 'none';
+
+      // Renderiza as opções de resposta
+      const optsContainer = document.getElementById('prova-options-container');
       optsContainer.innerHTML = '';
 
-      qData.opts.forEach((optText, index) => {
-        const btn = document.createElement('button');
-        btn.className = 'quiz-option-btn';
-        btn.innerText = `${String.fromCharCode(65 + index)}) ${optText}`;
-        btn.onclick = () => checkAnswer(index, qData.correct, qData.explain);
-        optsContainer.appendChild(btn);
+      qData.opts.forEach((optText, optIndex) => {
+        const item = document.createElement('div');
+        item.className = 'prova-option-item';
+        if (selectedAnswers[index] === optIndex) {
+          item.classList.add('selected');
+        }
+        item.innerText = optText;
+        item.onclick = () => selectOption(optIndex);
+        optsContainer.appendChild(item);
       });
+
+      // Atualiza estado dos botões Anterior e Próximo
+      document.getElementById('btn-prev-question').disabled = (index === 0);
+      document.getElementById('btn-next-question').disabled = (index === questionsList.length - 1);
     }
 
-    function checkAnswer(selectedIndex, correctIndex, explanation) {
-      const feedbackBox = document.getElementById('feedback-box');
-      if (selectedIndex === correctIndex) {
+    function selectOption(optIndex) {
+      selectedAnswers[currentQuestionIndex] = optIndex;
+      loadQuestion(currentQuestionIndex);
+    }
+
+    /* NAVEGAÇÃO ENTRE QUESTÕES */
+    function nextQuestion() {
+      const data = subjectData[currentSubjectKey] || subjectData['portugues'];
+      if (currentQuestionIndex < data.provas.length - 1) {
+        currentQuestionIndex++;
+        loadQuestion(currentQuestionIndex);
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        loadQuestion(currentQuestionIndex);
+      }
+    }
+
+    /* BOTÃO VERIFICAR RESPOSTA */
+    function verifyCurrentAnswer() {
+      const data = subjectData[currentSubjectKey] || subjectData['portugues'];
+      const qData = data.provas[currentQuestionIndex];
+      const selected = selectedAnswers[currentQuestionIndex];
+      const feedbackBox = document.getElementById('prova-feedback-box');
+
+      if (selected === undefined) {
+        alert('Por favor, selecione uma opção antes de verificar!');
+        return;
+      }
+
+      if (selected === qData.correct) {
         feedbackBox.className = 'feedback-box correct';
-        feedbackBox.innerHTML = `<strong>✨ RESPOSTA CORRETA!</strong><br/>${explanation}`;
+        feedbackBox.innerText = qData.explanations.correct;
       } else {
         feedbackBox.className = 'feedback-box wrong';
-        feedbackBox.innerHTML = `<strong>❌ RESPOSTA INCORRETA!</strong><br/>Tente novamente.`;
+        feedbackBox.innerText = qData.explanations.wrong;
+      }
+      feedbackBox.style.display = 'block';
+    }
+
+    /* BOTÕES REINICIAR E SALVAR PROGRESSO */
+    function restartProva() {
+      if (confirm('Tem certeza que deseja reiniciar a prova? Todas as respostas serão limpas.')) {
+        selectedAnswers = {};
+        currentQuestionIndex = 0;
+        loadQuestion(0);
       }
     }
 
-    function openFullLink(type) {
-      const modalTitle = document.getElementById('modal-title');
-      const modalBody = document.getElementById('modal-body');
-
-      if (type === 'termos') {
-        modalTitle.innerText = '📄 Termos de Serviço - Gabaritei & FichTeck';
-        modalBody.innerHTML = `<h4>1. Aceitação dos Termos</h4><p>Uso educacional da FichTeck.</p>`;
-      } else if (type === 'privacidade') {
-        modalTitle.innerText = '🔒 Política de Privacidade';
-        modalBody.innerHTML = `<h4>1. Armazenamento Seguro</h4><p>Dados mantidos no seu navegador via LocalStorage.</p>`;
-      }
-      document.getElementById('modal-info').classList.add('active');
+    function saveProgress() {
+      localStorage.setItem(`prova_progress_${currentSubjectKey}`, JSON.stringify(selectedAnswers));
+      alert('Progresso salvo com sucesso!');
     }
 
-    function closeModal() {
-      document.getElementById('modal-info').classList.remove('active');
-    }
-
+    /* FUNÇÕES DE AUTENTICAÇÃO E CADASTRO */
     function handleLogin() {
       const user = document.getElementById('login-user').value.trim();
       const pass = document.getElementById('login-pass').value.trim();
