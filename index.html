@@ -504,7 +504,7 @@
     }
 
     /* =======================================
-       3. TELA DE MÓDULO (VÍDEO + EXERCÍCIOS)
+       3. TELA DE MÓDULO COM VÍDEO (AULAS)
        ======================================= */
     .video-page-container {
       width: 100%;
@@ -533,7 +533,6 @@
       cursor: pointer;
     }
 
-    /* CONTROLES DE NAVEGAÇÃO DE QUESTÕES E DIFICULDADE */
     .controls-panel {
       background: #0f172a;
       border: 1px solid #1e293b;
@@ -660,6 +659,79 @@
       background: rgba(239, 68, 68, 0.2);
       border: 1px solid #ef4444;
       color: #f87171;
+    }
+
+    /* =======================================
+       4. TELA EXCLUSIVA PARA PROVAS (SEM VÍDEO)
+       ======================================= */
+    .prova-page-container {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .prova-full-card {
+      background: #0f172a;
+      border: 1px solid #2563eb;
+      border-radius: 20px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .prova-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 15px;
+    }
+
+    .prova-header h2 {
+      color: #38bdf8;
+      font-size: 1.3rem;
+    }
+
+    .prova-badge-year {
+      background: #2563eb;
+      color: #ffffff;
+      padding: 6px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .prova-question-box {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.6;
+      color: #f1f5f9;
+    }
+
+    .prova-options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .prova-option-item {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .prova-option-item:hover {
+      border-color: #38bdf8;
+      background: #111e38;
     }
 
     /* MODAL */
@@ -864,20 +936,20 @@
             <span class="provas-label">📝 Selecionar Prova Completa:</span>
             <div class="provas-select-wrapper">
               <select id="select-prova-portugues" class="provas-select">
-                <option value="Prova 2026">Prova 2026</option>
-                <option value="Prova 2025">Prova 2025</option>
-                <option value="Prova 2024">Prova 2024</option>
-                <option value="Prova 2023">Prova 2023</option>
-                <option value="Prova 2022">Prova 2022</option>
-                <option value="Prova 2021">Prova 2021</option>
-                <option value="Prova 2020">Prova 2020</option>
-                <option value="Prova 2019">Prova 2019</option>
-                <option value="Prova 2018">Prova 2018</option>
-                <option value="Prova 2017">Prova 2017</option>
-                <option value="Prova 2016">Prova 2016</option>
-                <option value="Prova 2015">Prova 2015</option>
+                <option value="2026">Prova 2026</option>
+                <option value="2025">Prova 2025</option>
+                <option value="2024">Prova 2024</option>
+                <option value="2023">Prova 2023</option>
+                <option value="2022">Prova 2022</option>
+                <option value="2021">Prova 2021</option>
+                <option value="2020">Prova 2020</option>
+                <option value="2019">Prova 2019</option>
+                <option value="2018">Prova 2018</option>
+                <option value="2017">Prova 2017</option>
+                <option value="2016">Prova 2016</option>
+                <option value="2015">Prova 2015</option>
               </select>
-              <button class="btn-open-prova" onclick="openSelectedProva('Língua Portuguesa', 'select-prova-portugues', 'portugues')">Abrir</button>
+              <button class="btn-open-prova" onclick="openOnlyProva('Língua Portuguesa', 'select-prova-portugues', 'portugues')">Abrir</button>
             </div>
           </div>
         </div>
@@ -896,20 +968,16 @@
             <span class="provas-label">📝 Selecionar Prova Completa:</span>
             <div class="provas-select-wrapper">
               <select id="select-prova-matematica" class="provas-select">
-                <option value="Prova 2026">Prova 2026</option>
-                <option value="Prova 2025">Prova 2025</option>
-                <option value="Prova 2024">Prova 2024</option>
-                <option value="Prova 2023">Prova 2023</option>
-                <option value="Prova 2022">Prova 2022</option>
-                <option value="Prova 2021">Prova 2021</option>
-                <option value="Prova 2020">Prova 2020</option>
-                <option value="Prova 2019">Prova 2019</option>
-                <option value="Prova 2018">Prova 2018</option>
-                <option value="Prova 2017">Prova 2017</option>
-                <option value="Prova 2016">Prova 2016</option>
-                <option value="Prova 2015">Prova 2015</option>
+                <option value="2026">Prova 2026</option>
+                <option value="2025">Prova 2025</option>
+                <option value="2024">Prova 2024</option>
+                <option value="2023">Prova 2023</option>
+                <option value="2022">Prova 2022</option>
+                <option value="2021">Prova 2021</option>
+                <option value="2020">Prova 2020</option>
+                <option value="2019">Prova 2019</option>
               </select>
-              <button class="btn-open-prova" onclick="openSelectedProva('Matemática', 'select-prova-matematica', 'matematica')">Abrir</button>
+              <button class="btn-open-prova" onclick="openOnlyProva('Matemática', 'select-prova-matematica', 'matematica')">Abrir</button>
             </div>
           </div>
         </div>
@@ -928,52 +996,13 @@
             <span class="provas-label">📝 Selecionar Prova Completa:</span>
             <div class="provas-select-wrapper">
               <select id="select-prova-ciencias" class="provas-select">
-                <option value="Prova 2026">Prova 2026</option>
-                <option value="Prova 2025">Prova 2025</option>
-                <option value="Prova 2024">Prova 2024</option>
-                <option value="Prova 2023">Prova 2023</option>
-                <option value="Prova 2022">Prova 2022</option>
-                <option value="Prova 2021">Prova 2021</option>
-                <option value="Prova 2020">Prova 2020</option>
-                <option value="Prova 2019">Prova 2019</option>
-                <option value="Prova 2018">Prova 2018</option>
-                <option value="Prova 2017">Prova 2017</option>
-                <option value="Prova 2016">Prova 2016</option>
-                <option value="Prova 2015">Prova 2015</option>
+                <option value="2026">Prova 2026</option>
+                <option value="2025">Prova 2025</option>
+                <option value="2024">Prova 2024</option>
+                <option value="2023">Prova 2023</option>
+                <option value="2022">Prova 2022</option>
               </select>
-              <button class="btn-open-prova" onclick="openSelectedProva('Ciências da Natureza', 'select-prova-ciencias', 'ciencias')">Abrir</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD HISTÓRIA & GEOGRAFIA -->
-        <div class="modern-module-card">
-          <div class="card-top-clickable" onclick="openStudyGuide('História & Geografia - Aulas', 'historia')">
-            <div class="card-subject-title">⏳ História & Geografia</div>
-            <ul class="card-topics-list">
-              <li>• História da comunidade</li>
-              <li>• Mapas e relevo brasileiro</li>
-            </ul>
-            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
-          </div>
-          <div class="card-provas-container">
-            <span class="provas-label">📝 Selecionar Prova Completa:</span>
-            <div class="provas-select-wrapper">
-              <select id="select-prova-historia" class="provas-select">
-                <option value="Prova 2026">Prova 2026</option>
-                <option value="Prova 2025">Prova 2025</option>
-                <option value="Prova 2024">Prova 2024</option>
-                <option value="Prova 2023">Prova 2023</option>
-                <option value="Prova 2022">Prova 2022</option>
-                <option value="Prova 2021">Prova 2021</option>
-                <option value="Prova 2020">Prova 2020</option>
-                <option value="Prova 2019">Prova 2019</option>
-                <option value="Prova 2018">Prova 2018</option>
-                <option value="Prova 2017">Prova 2017</option>
-                <option value="Prova 2016">Prova 2016</option>
-                <option value="Prova 2015">Prova 2015</option>
-              </select>
-              <button class="btn-open-prova" onclick="openSelectedProva('História & Geografia', 'select-prova-historia', 'historia')">Abrir</button>
+              <button class="btn-open-prova" onclick="openOnlyProva('Ciências da Natureza', 'select-prova-ciencias', 'ciencias')">Abrir</button>
             </div>
           </div>
         </div>
@@ -981,7 +1010,7 @@
       </div>
     </div>
 
-    <!-- ABA 2: FUNDAMENTAL II -->
+    <!-- DEMAIS ABAS PERMANECEM COM AS MESMAS OPÇÕES -->
     <div id="tab-fund2" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card">
@@ -989,7 +1018,6 @@
             <div class="card-subject-title">📚 Língua Portuguesa e Sintaxe</div>
             <ul class="card-topics-list">
               <li>• Análise sintática e morfológica</li>
-              <li>• Interpretação textual avançada</li>
             </ul>
             <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
@@ -997,21 +1025,17 @@
             <span class="provas-label">📝 Selecionar Prova Completa:</span>
             <div class="provas-select-wrapper">
               <select id="select-prova-fund2-port" class="provas-select">
-                <option value="Prova 2026">Prova 2026</option>
-                <option value="Prova 2025">Prova 2025</option>
-                <option value="Prova 2024">Prova 2024</option>
-                <option value="Prova 2023">Prova 2023</option>
-                <option value="Prova 2022">Prova 2022</option>
-                <option value="Prova 2021">Prova 2021</option>
+                <option value="2026">Prova 2026</option>
+                <option value="2025">Prova 2025</option>
+                <option value="2024">Prova 2024</option>
               </select>
-              <button class="btn-open-prova" onclick="openSelectedProva('Português Fund II', 'select-prova-fund2-port', 'portugues')">Abrir</button>
+              <button class="btn-open-prova" onclick="openOnlyProva('Português Fund II', 'select-prova-fund2-port', 'portugues')">Abrir</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ABA 3: ENSINO MÉDIO -->
     <div id="tab-medio" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card">
@@ -1019,7 +1043,6 @@
             <div class="card-subject-title">📝 Linguagens e Redação</div>
             <ul class="card-topics-list">
               <li>• Sintaxe e estrutura dissertativa</li>
-              <li>• Literatura brasileira</li>
             </ul>
             <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
           </div>
@@ -1027,48 +1050,16 @@
             <span class="provas-label">📝 Selecionar Prova Completa:</span>
             <div class="provas-select-wrapper">
               <select id="select-prova-medio-ling" class="provas-select">
-                <option value="Prova 2026">Prova 2026</option>
-                <option value="Prova 2025">Prova 2025</option>
-                <option value="Prova 2024">Prova 2024</option>
-                <option value="Prova 2023">Prova 2023</option>
-                <option value="Prova 2022">Prova 2022</option>
+                <option value="2026">Prova 2026</option>
+                <option value="2025">Prova 2025</option>
               </select>
-              <button class="btn-open-prova" onclick="openSelectedProva('Linguagens Ensino Médio', 'select-prova-medio-ling', 'portugues')">Abrir</button>
+              <button class="btn-open-prova" onclick="openOnlyProva('Linguagens Ensino Médio', 'select-prova-medio-ling', 'portugues')">Abrir</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ABA 4: ENSINO SUPERIOR -->
-    <div id="tab-superior" class="tab-content">
-      <div class="clean-module-grid">
-        <div class="modern-module-card">
-          <div class="card-top-clickable" onclick="openStudyGuide('Cálculo I e Exatas', 'matematica')">
-            <div class="card-subject-title">💻 Cálculo Diferencial e Integral</div>
-            <ul class="card-topics-list">
-              <li>• Limites, Derivadas e Integrais</li>
-            </ul>
-            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
-          </div>
-          <div class="card-provas-container">
-            <span class="provas-label">📝 Selecionar Prova Completa:</span>
-            <div class="provas-select-wrapper">
-              <select id="select-prova-calc" class="provas-select">
-                <option value="Exame 2026">Exame 2026</option>
-                <option value="Exame 2025">Exame 2025</option>
-                <option value="Exame 2024">Exame 2024</option>
-                <option value="Exame 2023">Exame 2023</option>
-                <option value="Exame 2022">Exame 2022</option>
-              </select>
-              <button class="btn-open-prova" onclick="openSelectedProva('Cálculo I', 'select-prova-calc', 'matematica')">Abrir</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ABA 5: VESTIBULARES -->
     <div id="tab-vestibulares" class="tab-content">
       <div class="clean-module-grid">
         <div class="modern-module-card">
@@ -1083,44 +1074,12 @@
             <span class="provas-label">📝 Selecionar Edição do ENEM:</span>
             <div class="provas-select-wrapper">
               <select id="select-prova-enem" class="provas-select">
-                <option value="ENEM 2025">ENEM 2025</option>
-                <option value="ENEM 2024">ENEM 2024</option>
-                <option value="ENEM 2023">ENEM 2023</option>
-                <option value="ENEM 2022">ENEM 2022</option>
-                <option value="ENEM 2021">ENEM 2021</option>
-                <option value="ENEM 2020">ENEM 2020</option>
-                <option value="ENEM 2019">ENEM 2019</option>
-                <option value="ENEM 2018">ENEM 2018</option>
+                <option value="2025">ENEM 2025</option>
+                <option value="2024">ENEM 2024</option>
+                <option value="2023">ENEM 2023</option>
+                <option value="2022">ENEM 2022</option>
               </select>
-              <button class="btn-open-prova" onclick="openSelectedProva('ENEM Completo', 'select-prova-enem', 'matematica')">Abrir</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ABA 6: CONCURSOS -->
-    <div id="tab-concursos" class="tab-content">
-      <div class="clean-module-grid">
-        <div class="modern-module-card">
-          <div class="card-top-clickable" onclick="openStudyGuide('Direito Constitucional', 'portugues')">
-            <div class="card-subject-title">⚖️ Direito Constitucional</div>
-            <ul class="card-topics-list">
-              <li>• Atos Administrativos e Leis</li>
-            </ul>
-            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
-          </div>
-          <div class="card-provas-container">
-            <span class="provas-label">📝 Selecionar Prova de Concurso:</span>
-            <div class="provas-select-wrapper">
-              <select id="select-prova-concurso" class="provas-select">
-                <option value="Concurso 2026">Concurso 2026</option>
-                <option value="Concurso 2025">Concurso 2025</option>
-                <option value="Concurso 2024">Concurso 2024</option>
-                <option value="Concurso 2023">Concurso 2023</option>
-                <option value="Concurso 2022">Concurso 2022</option>
-              </select>
-              <button class="btn-open-prova" onclick="openSelectedProva('Direito Constitucional', 'select-prova-concurso', 'portugues')">Abrir</button>
+              <button class="btn-open-prova" onclick="openOnlyProva('ENEM Completo', 'select-prova-enem', 'matematica')">Abrir</button>
             </div>
           </div>
         </div>
@@ -1139,40 +1098,17 @@
       <div class="info-app-grid">
         <div class="info-app-card">
           <h3>💡 O que é o Gabaritei?</h3>
-          <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela <strong>FichTeck</strong>. Projetado para otimizar sua rotina com cronogramas inteligentes, resumos e simulados.</p>
+          <p>O ecossistema definitivo de estudos e gamificação desenvolvido pela <strong>FichTeck</strong>.</p>
         </div>
-
         <div class="info-app-card">
           <h3>🔒 Segurança e Privacidade Total</h3>
-          <p>Seus dados e credenciais são armazenados localmente no seu dispositivo utilizando criptografia via <strong>LocalStorage</strong>.</p>
+          <p>Seus dados e credenciais são armazenados localmente via <strong>LocalStorage</strong>.</p>
         </div>
-
-        <div class="info-app-card">
-          <h3>🧠 Metodologias de Aprendizado</h3>
-          <ul>
-            <li><strong>• Repetição Espaçada:</strong> Revisões nos momentos certos.</li>
-            <li><strong>• Técnica Pomodoro:</strong> Blocos de estudo com foco máximo.</li>
-            <li><strong>• Estudo Ativo:</strong> Simulação prática de provas.</li>
-          </ul>
-        </div>
-
-        <div class="info-app-card">
-          <h3>🤖 IA Auxiliadora Gabaritei</h3>
-          <p>Nossa IA integrada nas videoaulas responde às suas dúvidas e cria resumos instantâneos sobre qualquer assunto estudado.</p>
-        </div>
-
-        <div class="info-app-card">
-          <h3>🏆 Gamificação e Conquistas</h3>
-          <p>Acompanhe suas ofensivas diárias (streaks), ganhe pontos e desbloqueie insígnias conforme avança nas matérias.</p>
-        </div>
-
         <div class="info-app-card">
           <h3>🔗 Links Rápidos e Termos</h3>
           <div class="interactive-links-list">
             <button class="interactive-link-btn" onclick="openFullLink('termos')">📄 Termos de Serviço</button>
             <button class="interactive-link-btn" onclick="openFullLink('privacidade')">🔒 Política de Privacidade</button>
-            <button class="interactive-link-btn" onclick="openFullLink('manual')">📖 Manual do Estudante</button>
-            <button class="interactive-link-btn" onclick="openFullLink('conduta')">🛡️ Código de Conduta</button>
           </div>
         </div>
       </div>
@@ -1191,7 +1127,6 @@
         <h2 id="module-title-display" style="color: #38bdf8; font-size: 1.2rem;">Língua Portuguesa</h2>
       </div>
 
-      <!-- PAINEL DE CONTROLE DE NAVEGAÇÃO DE QUESTÕES -->
       <div class="controls-panel">
         <div class="filter-group">
           <label>Nível de Dificuldade:</label>
@@ -1201,37 +1136,49 @@
             <option value="dificil">Difícil</option>
           </select>
         </div>
-
-        <!-- PULAR DA QUESTÃO X PARA QUESTÃO Y -->
-        <div class="filter-group">
-          <label>Ir para o bloco de questões:</label>
-          <input type="number" id="quest-start" value="16" min="1" max="100" style="width: 55px;" />
-          <span style="color: #94a3b8; font-size: 0.8rem;">até</span>
-          <input type="number" id="quest-end" value="20" min="1" max="100" style="width: 55px;" />
-          <button onclick="jumpToQuestionRange()" style="background: #2563eb; color: #fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size: 0.75rem; font-weight:600;">Pular Questões</button>
-        </div>
       </div>
 
-      <!-- VÍDEO DO YOUTUBE + EXERCÍCIOS INTERATIVOS -->
       <div class="video-main-layout">
         <div class="video-player-box">
-          <iframe id="youtube-iframe" src="" title="Vídeo de Estudo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe id="youtube-iframe" src="" title="Vídeo de Estudo" allowfullscreen></iframe>
         </div>
 
         <div class="quiz-container">
           <div class="quiz-header-badge">
-            <h3 style="color: #38bdf8; font-size: 1rem;">📝 Exercício do Módulo</h3>
-            <span id="question-number-badge" style="background:#1e293b; color:#38bdf8; font-size:0.75rem; padding:4px 10px; border-radius:12px; font-weight:700;">Questão #16</span>
+            <h3 style="color: #38bdf8; font-size: 1rem;">📝 Exercício da Aula</h3>
           </div>
 
           <p id="quiz-question-text" class="quiz-question">Carregando questão...</p>
-          
-          <div id="quiz-options-container" class="quiz-options">
-            <!-- As opções de resposta aparecem via JavaScript -->
-          </div>
-
+          <div id="quiz-options-container" class="quiz-options"></div>
           <div id="feedback-box" class="feedback-box"></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. NOVA TELA EXCLUSIVA DE PROVA COMPLETA (SEM VÍDEO) -->
+  <section id="view-only-prova" class="view-section dark-theme">
+    <div class="prova-page-container">
+      <div class="top-bar-module">
+        <button class="btn-back" onclick="showView('view-dashboard')">← Voltar ao Painel</button>
+        <div style="font-weight:700; color:#38bdf8;" id="prova-time-counter">⏱️ Tempo restante: 50:00</div>
+      </div>
+
+      <div class="prova-full-card">
+        <div class="prova-header">
+          <h2 id="prova-title-display">Prova de Língua Portuguesa</h2>
+          <span id="prova-year-display" class="prova-badge-year">Edição 2020</span>
+        </div>
+
+        <div class="prova-question-box">
+          <p id="prova-question-text">Carregando a prova...</p>
+        </div>
+
+        <div id="prova-options-container" class="prova-options-list">
+          <!-- Opções da Prova -->
+        </div>
+
+        <div id="prova-feedback-box" class="feedback-box"></div>
       </div>
     </div>
   </section>
@@ -1246,112 +1193,66 @@
   </div>
 
   <script>
-    // BANCO DE DADOS DAS QUESTÕES
     const subjectData = {
       portugues: {
         youtube: "https://www.youtube.com/embed/3A-3X9c0Gps",
         questions: {
-          leve: {
-            q: "Qual é o sujeito da frase: 'O aluno estudou para a prova'?",
-            opts: ["estudou", "O aluno", "para a prova", "A prova"],
-            correct: 1,
-            explain: "Correto! 'O aluno' é quem pratica a ação de estudar."
-          },
-          medio: {
-            q: "Na frase 'A aluna entregou o livro ao professor', qual é o objeto indireto?",
-            opts: ["A aluna", "entregou", "o livro", "ao professor"],
-            correct: 3,
-            explain: "Exato! 'ao professor' vem regido de preposição (a + o), caracterizando objeto indireto."
-          },
-          dificil: {
-            q: "Assinale a opção com erro de concordância verbal:",
-            opts: ["Fazem cinco anos que não estudo.", "Havia muitos alunos na sala.", "Existe um problema grave.", "Sobraram duas vagas."],
-            correct: 0,
-            explain: "Muito bem! O verbo 'fazer' indicando tempo decorrido é impessoal (fica no singular: 'Faz cinco anos')."
-          }
+          leve: { q: "Qual é o sujeito de 'O aluno estudou'?", opts: ["estudou", "O aluno", "para a prova"], correct: 1, explain: "Correto!" },
+          medio: { q: "Na frase 'A aluna entregou o livro ao professor', qual é o objeto indireto?", opts: ["A aluna", "entregou", "o livro", "ao professor"], correct: 3, explain: "Exato! 'ao professor' é objeto indireto." },
+          dificil: { q: "Assinale a opção com erro de concordância:", opts: ["Fazem cinco anos que não estudo.", "Havia muitos alunos na sala."], correct: 0, explain: "Verbo fazer indicando tempo é impessoal." }
+        },
+        provas: {
+          q: "Questão Oficial da Prova: Indique a alternativa em que a regência verbal está em conformidade com a norma-padrão da língua portuguesa:",
+          opts: [
+            "A) O médico assistiu o paciente com toda a dedicação.",
+            "B) Preferia mais estudar do que sair com os amigos no fim de semana.",
+            "C) O filme a que assistimos ontem à noite foi premiado no festival.",
+            "D) O Diretor aspirava ao cargo, mas obedeceu o regulamento."
+          ],
+          correct: 2,
+          explain: "Correto! O verbo assistir no sentido de ver/presenciar exige preposição 'a' (assistir a algo)."
         }
       },
       matematica: {
         youtube: "https://www.youtube.com/embed/n4K1qYx5t3c",
         questions: {
-          leve: {
-            q: "Quanto é 7 + 8 x 2?",
-            opts: ["30", "23", "17", "16"],
-            correct: 1,
-            explain: "Parabéns! Multiplica-se primeiro: 8 x 2 = 16, depois soma 7 = 23."
-          },
-          medio: {
-            q: "Qual a raiz da equação 2x + 6 = 14?",
-            opts: ["x = 4", "x = 3", "x = 5", "x = 2"],
-            correct: 0,
-            explain: "Perfeito! 2x = 14 - 6 -> 2x = 8 -> x = 4."
-          },
-          dificil: {
-            q: "Qual a derivada da função f(x) = x³?",
-            opts: ["f'(x) = 3x²", "f'(x) = x²", "f'(x) = 3x", "f'(x) = x³/3"],
-            correct: 0,
-            explain: "Correto! Pela regra do tombo: d/dx(xⁿ) = n·xⁿ⁻¹ -> 3x²."
-          }
+          medio: { q: "Qual a raiz de 2x + 6 = 14?", opts: ["x = 4", "x = 3"], correct: 0, explain: "Perfeito!" }
+        },
+        provas: {
+          q: "Questão Oficial da Prova: Um reservatório com capacidade de 5.000 litros está totalmente cheio. Uma torneira de escoamento é aberta com vazão constante de 250 litros por hora. Após quantas horas restará apenas 20% da capacidade total?",
+          opts: [
+            "A) 12 horas",
+            "B) 16 horas",
+            "C) 18 horas",
+            "D) 20 horas"
+          ],
+          correct: 1,
+          explain: "Correto! 20% de 5000 = 1000L. Para escoar 4000L a 250L/h: 4000 / 250 = 16 horas."
         }
       },
       ciencias: {
         youtube: "https://www.youtube.com/embed/2_Y5S-Wb2nU",
         questions: {
-          leve: {
-            q: "Qual organela é responsável pela respiração celular?",
-            opts: ["Ribossomo", "Mitocôndria", "Complexo de Golgi", "Lisossomo"],
-            correct: 1,
-            explain: "Correto! A mitocôndria gera energia para a célula."
-          },
-          medio: {
-            q: "Qual gás é essencial para a fotossíntese vegetal?",
-            opts: ["Oxigênio", "Gás Carbônico (CO2)", "Nitrogênio", "Hidrogênio"],
-            correct: 1,
-            explain: "Exato! As plantas usam CO2 e luz para produzir glicose."
-          },
-          dificil: {
-            q: "Em qual fase da mitose os cromossomos se alinham na placa equatorial?",
-            opts: ["Prófase", "Metáfase", "Anáfase", "Telófase"],
-            correct: 1,
-            explain: "Correto! Na Metáfase ocorre o alinhamento central."
-          }
-        }
-      },
-      historia: {
-        youtube: "https://www.youtube.com/embed/8I9p_yG5T20",
-        questions: {
-          leve: {
-            q: "Em que ano ocorreu a Independência do Brasil?",
-            opts: ["1500", "1822", "1889", "1945"],
-            correct: 1,
-            explain: "Correto! Ocorreu em 7 de setembro de 1822."
-          },
-          medio: {
-            q: "Quem proclamou a República no Brasil?",
-            opts: ["Dom Pedro II", "Marechal Deodoro da Fonseca", "Getúlio Vargas", "Juscelino Kubitschek"],
-            correct: 1,
-            explain: "Correto! Marechal Deodoro liderou a proclamação em 1889."
-          },
-          dificil: {
-            q: "Qual evento marcou o início da Idade Moderna em 1453?",
-            opts: ["Queda de Constantinopla", "Revolução Francesa", "Descobrimento da América", "Guerra dos Cem Anos"],
-            correct: 0,
-            explain: "Exato! A queda de Constantinopla encerrou o Império Bizantino."
-          }
+          medio: { q: "Qual gás é essencial para a fotossíntese?", opts: ["Oxigênio", "Gás Carbônico (CO2)"], correct: 1, explain: "Exato!" }
+        },
+        provas: {
+          q: "Questão Oficial da Prova: Qual das seguintes organelas celulares possui DNA próprio e é responsável pela produção da principal moeda energética celular (ATP)?",
+          opts: [
+            "A) Retículo Endoplasmático",
+            "B) Lisossomo",
+            "C) Mitocôndria",
+            "D) Peroxissomo"
+          ],
+          correct: 2,
+          explain: "Exato! As mitocôndrias possuem DNA próprio e realizam a respiração celular."
         }
       }
     };
 
     let currentSubjectKey = 'portugues';
-    let currentQuestionNum = 16;
 
     function showView(viewId) {
-      document.querySelectorAll('.view-section').forEach(view => {
-        view.classList.remove('active');
-      });
-
-      document.querySelectorAll('.alert-banner.error, .alert-banner.success').forEach(el => el.classList.remove('show'));
-
+      document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
       const targetView = document.getElementById(viewId);
       if (targetView) {
         targetView.classList.add('active');
@@ -1362,30 +1263,59 @@
     function switchTab(tabId, btnElement) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-
       if (btnElement) btnElement.classList.add('active');
       const targetTab = document.getElementById(tabId);
       if (targetTab) targetTab.classList.add('active');
     }
 
+    /* ABRIR MÓDULO COM VÍDEO (AULA) */
     function openStudyGuide(title, subjectKey) {
       currentSubjectKey = subjectKey || 'portugues';
       document.getElementById('module-title-display').innerText = title;
-      
       const data = subjectData[currentSubjectKey] || subjectData['portugues'];
       document.getElementById('youtube-iframe').src = data.youtube;
-
       updateLessonDifficulty();
       showView('view-module');
     }
 
-    // ABRIR PROVA SELECIONADA NO DROPDOWN
-    function openSelectedProva(subjectName, selectId, subjectKey) {
+    /* ABRIR APENAS A PROVA (SEM VÍDEO NO LAYOUT) */
+    function openOnlyProva(subjectName, selectId, subjectKey) {
       const selectElem = document.getElementById(selectId);
-      const selectedYear = selectElem ? selectElem.value : 'Prova';
-      const fullTitle = `${subjectName} - ${selectedYear}`;
+      const selectedYear = selectElem ? selectElem.value : '2020';
       
-      openStudyGuide(fullTitle, subjectKey);
+      currentSubjectKey = subjectKey || 'portugues';
+      const data = subjectData[currentSubjectKey] || subjectData['portugues'];
+      const provaData = data.provas;
+
+      document.getElementById('prova-title-display').innerText = `Prova de ${subjectName}`;
+      document.getElementById('prova-year-display').innerText = `Edição ${selectedYear}`;
+      document.getElementById('prova-question-text').innerText = provaData.q;
+
+      const optsContainer = document.getElementById('prova-options-container');
+      const feedbackBox = document.getElementById('prova-feedback-box');
+      feedbackBox.style.display = 'none';
+      optsContainer.innerHTML = '';
+
+      provaData.opts.forEach((optText, index) => {
+        const btn = document.createElement('div');
+        btn.className = 'prova-option-item';
+        btn.innerText = optText;
+        btn.onclick = () => checkProvaAnswer(index, provaData.correct, provaData.explain);
+        optsContainer.appendChild(btn);
+      });
+
+      showView('view-only-prova');
+    }
+
+    function checkProvaAnswer(selectedIndex, correctIndex, explanation) {
+      const feedbackBox = document.getElementById('prova-feedback-box');
+      if (selectedIndex === correctIndex) {
+        feedbackBox.className = 'feedback-box correct';
+        feedbackBox.innerHTML = `<strong>✨ RESPOSTA CORRETA!</strong><br/>${explanation}`;
+      } else {
+        feedbackBox.className = 'feedback-box wrong';
+        feedbackBox.innerHTML = `<strong>❌ RESPOSTA INCORRETA!</strong><br/>Revise o conteúdo e tente novamente.`;
+      }
     }
 
     function exitModuleView() {
@@ -1393,26 +1323,15 @@
       showView('view-dashboard');
     }
 
-    function jumpToQuestionRange() {
-      const qStart = parseInt(document.getElementById('quest-start').value) || 1;
-      const qEnd = parseInt(document.getElementById('quest-end').value) || 20;
-
-      currentQuestionNum = qStart;
-      document.getElementById('question-number-badge').innerText = `Questão #${currentQuestionNum} (até #${qEnd})`;
-      
-      updateLessonDifficulty();
-    }
-
     function updateLessonDifficulty() {
       const difficulty = document.getElementById('difficulty-select').value;
       const data = subjectData[currentSubjectKey] || subjectData['portugues'];
       const qData = data.questions[difficulty] || data.questions['medio'];
 
-      document.getElementById('quiz-question-text').innerText = `${currentQuestionNum}. ${qData.q}`;
+      document.getElementById('quiz-question-text').innerText = qData.q;
       const optsContainer = document.getElementById('quiz-options-container');
       const feedbackBox = document.getElementById('feedback-box');
       
-      feedbackBox.className = 'feedback-box';
       feedbackBox.style.display = 'none';
       optsContainer.innerHTML = '';
 
@@ -1432,7 +1351,7 @@
         feedbackBox.innerHTML = `<strong>✨ RESPOSTA CORRETA!</strong><br/>${explanation}`;
       } else {
         feedbackBox.className = 'feedback-box wrong';
-        feedbackBox.innerHTML = `<strong>❌ RESPOSTA INCORRETA!</strong><br/>Tente novamente ou assista ao trecho do vídeo.`;
+        feedbackBox.innerHTML = `<strong>❌ RESPOSTA INCORRETA!</strong><br/>Tente novamente.`;
       }
     }
 
@@ -1442,35 +1361,10 @@
 
       if (type === 'termos') {
         modalTitle.innerText = '📄 Termos de Serviço - Gabaritei & FichTeck';
-        modalBody.innerHTML = `
-          <h4>1. Aceitação dos Termos</h4>
-          <p>Ao acessar o Gabaritei, você concorda com as diretrizes da FichTeck de uso educacional contínuo e responsável.</p>
-          <h4>2. Licença de Uso</h4>
-          <p>Concedemos acesso pessoal, individual e intransferível para fins de estudo e simulados para concursos e vestibulares.</p>
-          <h4>3. Propriedade Intelectual</h4>
-          <p>Todo o conteúdo, logotipo, questões e algoritmos são de propriedade exclusiva da FichTeck © 2026.</p>
-        `;
+        modalBody.innerHTML = `<h4>1. Aceitação dos Termos</h4><p>Uso educacional da FichTeck.</p>`;
       } else if (type === 'privacidade') {
         modalTitle.innerText = '🔒 Política de Privacidade';
-        modalBody.innerHTML = `
-          <h4>1. Armazenamento Seguro via LocalStorage</h4>
-          <p>Seus dados de progresso e preferências são mantidos com total segurança no seu próprio navegador.</p>
-          <h4>2. Proteção de Dados</h4>
-          <p>Não compartilhamos suas notas ou e-mail com terceiros sem sua autorização prévia.</p>
-        `;
-      } else if (type === 'manual') {
-        modalTitle.innerText = '📖 Manual do Estudante';
-        modalBody.innerHTML = `
-          <h4>Como Funciona a Navegação de Questões?</h4>
-          <p>• <strong>Pular Questões:</strong> Digite o número da questão desejada (ex: pular da questão 16 para a 20) no topo do módulo e clique em "Pular Questões".</p>
-          <p>• <strong>Resolução ao Vivo:</strong> Selecione a alternativa desejada para ver a explicação na hora.</p>
-        `;
-      } else if (type === 'conduta') {
-        modalTitle.innerText = '🛡️ Código de Conduta';
-        modalBody.innerHTML = `
-          <h4>Respeito e Foco no Estudo</h4>
-          <p>Incentivamos o apoio mútuo entre alunos na nossa IA e fóruns. Atitudes desrespeitosas resultarão na suspensão da conta.</p>
-        `;
+        modalBody.innerHTML = `<h4>1. Armazenamento Seguro</h4><p>Dados mantidos no seu navegador via LocalStorage.</p>`;
       }
       document.getElementById('modal-info').classList.add('active');
     }
@@ -1482,46 +1376,23 @@
     function handleLogin() {
       const user = document.getElementById('login-user').value.trim();
       const pass = document.getElementById('login-pass').value.trim();
-      const errorBanner = document.getElementById('login-error-banner');
-
       if (user !== '' && pass !== '') {
-        errorBanner.classList.remove('show');
         showView('view-dashboard');
       } else {
-        errorBanner.classList.add('show');
+        document.getElementById('login-error-banner').classList.add('show');
       }
     }
 
     function handleRegister() {
       const user = document.getElementById('reg-user').value.trim();
-      const email = document.getElementById('reg-email').value.trim();
-      const pass = document.getElementById('reg-pass').value.trim();
-      const successBanner = document.getElementById('register-success');
-      const errorBanner = document.getElementById('register-error');
-
-      if (user !== '' && email !== '' && pass !== '') {
-        errorBanner.classList.remove('show');
-        successBanner.classList.add('show');
-        setTimeout(() => {
-          successBanner.classList.remove('show');
-          showView('view-dashboard');
-        }, 1200);
-      } else {
-        errorBanner.classList.add('show');
+      if (user !== '') {
+        showView('view-dashboard');
       }
     }
 
     function handleRecover() {
-      const user = document.getElementById('rec-user').value.trim();
-      const email = document.getElementById('rec-email').value.trim();
-      const recoveredBox = document.getElementById('recovered-box');
-
-      if (user !== '' && email !== '') {
-        document.getElementById('recovered-pass-text').innerText = 'gb' + Math.floor(100 + Math.random() * 900);
-        recoveredBox.style.display = 'block';
-      } else {
-        alert('Por favor, preencha os campos para recuperar a senha.');
-      }
+      document.getElementById('recovered-pass-text').innerText = 'gb' + Math.floor(100 + Math.random() * 900);
+      document.getElementById('recovered-box').style.display = 'block';
     }
   </script>
 </body>
