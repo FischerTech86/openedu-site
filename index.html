@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ESTILOS GERAIS */
+        /* ESTILOS GERAIS DA PÁGINA */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -91,7 +91,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* GRID DE CARDs DAS MATÉRIAS */
+        /* GRID DE CARDS DAS MATÉRIAS */
         .grid-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -124,7 +124,7 @@
         }
 
         .card-header h3 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
         }
 
@@ -147,13 +147,17 @@
             color: #3b82f6;
         }
 
-        /* CORES DOS ÍCONES */
+        /* CORES DOS ÍCONES DAS MATÉRIAS */
         .c-blue { color: #38bdf8; }
         .c-purple { color: #a855f7; }
         .c-green { color: #22c55e; }
         .c-orange { color: #f97316; }
+        .c-red { color: #ef4444; }
+        .c-yellow { color: #eab308; }
+        .c-pink { color: #ec4899; }
+        .c-teal { color: #14b8a6; }
 
-        /* LÓGICA DE GUIAS (OCULTAR/EXIBIR) */
+        /* LÓGICA DE VISIBILIDADE DAS GUIAS */
         .tab-content {
             display: none;
         }
@@ -162,15 +166,15 @@
             display: block;
         }
 
-        /* MODAL / POPUP DE OPÇÕES (PROVAS, EXPLICAÇÃO, PERGUNTAS, VÍDEOS) */
+        /* POPUP / MODAL (IDÊNTICO À FOTO DO SISTEMA) */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -182,26 +186,27 @@
         }
 
         .modal-box {
-            background: #0d1527;
-            border: 1px solid #1e2d4a;
+            background: #0b1322;
+            border: 1px solid #1e2e48;
             border-radius: 16px;
             width: 90%;
-            max-width: 450px;
-            padding: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            max-width: 440px;
+            padding: 28px 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             text-align: center;
             position: relative;
         }
 
         .modal-box h2 {
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             margin-bottom: 6px;
+            font-weight: 700;
         }
 
         .modal-box p {
             color: #8a99ad;
-            font-size: 0.85rem;
-            margin-bottom: 20px;
+            font-size: 0.82rem;
+            margin-bottom: 22px;
         }
 
         .modal-options {
@@ -211,60 +216,63 @@
         }
 
         .option-btn {
-            background: #060913;
-            border: 1px solid #18253a;
-            padding: 15px;
+            background: #050811;
+            border: 1px solid #18263e;
+            padding: 16px 10px;
             border-radius: 10px;
-            color: #fff;
+            color: #ffffff;
             text-decoration: none;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 8px;
             font-size: 0.85rem;
+            font-weight: 500;
             transition: all 0.2s ease;
         }
 
         .option-btn i {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: #38bdf8;
         }
 
         .option-btn:hover {
             border-color: #2563eb;
-            background: #101a30;
+            background: #0e182e;
         }
 
         .close-btn {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 16px;
+            right: 18px;
             background: none;
             border: none;
             color: #8a99ad;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             cursor: pointer;
+            transition: color 0.2s;
         }
 
         .close-btn:hover {
-            color: #fff;
+            color: #ffffff;
         }
 
-        /* BOTÃO DE SAIR */
+        /* BOTÃO DE SAIR DO SISTEMA */
         .logout-area {
             text-align: center;
             margin-top: 50px;
         }
 
         .btn-logout {
-            padding: 10px 30px;
+            padding: 10px 32px;
             border: 1px solid #ffffff;
             background: transparent;
             border-radius: 30px;
             color: #ffffff;
             cursor: pointer;
             font-weight: 500;
-            transition: all 0.3s;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
         }
 
         .btn-logout:hover {
@@ -276,13 +284,13 @@
 <body>
 
     <div class="container">
-        <!-- Cabeçalho -->
+        <!-- Cabeçalho Principal -->
         <header class="header">
             <h1>Boas-vindas ao Gabaritei!</h1>
             <p>Escolha o seu nível de ensino abaixo para acessar os conteúdos organizados por disciplina</p>
         </header>
 
-        <!-- Menu de Guias (Tabs) -->
+        <!-- Menu de Guias (Níveis de Ensino) -->
         <nav class="tabs-nav">
             <button class="tab-btn active" onclick="trocarGuia('fund1', this)">
                 <strong>1º ao 5º Ano</strong>
@@ -302,112 +310,159 @@
             </button>
         </nav>
 
-        <!-- Conteúdo da Guia: Fundamental 1 -->
+        <!-- GUIA: ENSINO FUNDAMENTAL 1 -->
         <div id="fund1" class="tab-content active">
             <div class="grid-cards">
                 
-                <!-- Card 1 -->
+                <!-- Língua Portuguesa -->
                 <div class="card" onclick="abrirModal('Língua Portuguesa')">
                     <div class="card-header">
                         <i class="fa-solid fa-book c-blue"></i>
                         <h3>Língua Portuguesa</h3>
                     </div>
                     <ul>
-                        <li>Alfabetização e Letramento</li>
-                        <li>Gramática básica</li>
-                        <li>Interpretação de texto inicial</li>
-                        <li>Leitura de contos e gêneros textuais</li>
+                        <li>Processo de Alfabetização</li>
+                        <li>Prática de Leitura e Escrita</li>
+                        <li>Interpretação de Textos</li>
+                        <li>Gramática e Ortografia Básica</li>
                     </ul>
                 </div>
 
-                <!-- Card 2 -->
+                <!-- Matemática -->
                 <div class="card" onclick="abrirModal('Matemática')">
                     <div class="card-header">
                         <i class="fa-solid fa-plus c-purple"></i>
                         <h3>Matemática</h3>
                     </div>
                     <ul>
-                        <li>Quatro operações matemáticas</li>
-                        <li>Frações e porcentagem inicial</li>
-                        <li>Geometria básica e formas</li>
-                        <li>Tabuada e matemática ilustrada</li>
+                        <li>Estudo dos Números</li>
+                        <li>Operações Básicas (+, -, ×, ÷)</li>
+                        <li>Geometria Simples</li>
+                        <li>Noções de Medidas e Dinheiro</li>
                     </ul>
                 </div>
 
-                <!-- Card 3 -->
-                <div class="card" onclick="abrirModal('Ciências da Natureza')">
+                <!-- Ciências -->
+                <div class="card" onclick="abrirModal('Ciências')">
                     <div class="card-header">
                         <i class="fa-solid fa-seedling c-green"></i>
                         <h3>Ciências da Natureza</h3>
                     </div>
                     <ul>
-                        <li>Corpo humano e hábitos saudáveis</li>
-                        <li>Ecossistemas e meio ambiente</li>
-                        <li>Sistema solar e planetas</li>
-                        <li>Matéria e energia para crianças</li>
+                        <li>Estudo do Corpo Humano</li>
+                        <li>Preservação do Meio Ambiente</li>
+                        <li>Hábitos de Saúde e Higiene</li>
+                        <li>Fenômenos da Natureza</li>
                     </ul>
                 </div>
 
-                <!-- Card 4 -->
+                <!-- História -->
                 <div class="card" onclick="abrirModal('História')">
                     <div class="card-header">
                         <i class="fa-solid fa-hourglass-half c-orange"></i>
                         <h3>História</h3>
                     </div>
                     <ul>
-                        <li>Introdução à História</li>
-                        <li>História da comunidade e família</li>
-                        <li>Linhas do tempo simples</li>
-                        <li>História do Brasil (Colônia)</li>
+                        <li>Noções de Identidade e Tempo</li>
+                        <li>História da Família e Escola</li>
+                        <li>Convivência na Comunidade</li>
+                        <li>Cidadania e Transformações</li>
+                    </ul>
+                </div>
+
+                <!-- Geografia -->
+                <div class="card" onclick="abrirModal('Geografia')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-map c-teal"></i>
+                        <h3>Geografia</h3>
+                    </div>
+                    <ul>
+                        <li>Compreensão do Espaço Vivenciado</li>
+                        <li>Estudo de Bairros e Cidades</li>
+                        <li>Mapas Simples e Orientação</li>
+                        <li>Paisagens Naturais e Modificadas</li>
+                    </ul>
+                </div>
+
+                <!-- Artes -->
+                <div class="card" onclick="abrirModal('Artes')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-palette c-pink"></i>
+                        <h3>Artes</h3>
+                    </div>
+                    <ul>
+                        <li>Expressão Criativa e Desenho</li>
+                        <li>Pintura e Formas Visuais</li>
+                        <li>Atividades de Teatro</li>
+                        <li>Música e Ritmo</li>
+                    </ul>
+                </div>
+
+                <!-- Educação Física -->
+                <div class="card" onclick="abrirModal('Educação Física')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-person-running c-red"></i>
+                        <h3>Educação Física</h3>
+                    </div>
+                    <ul>
+                        <li>Desenvolvimento Motor</li>
+                        <li>Jogos e Brincadeiras</li>
+                        <li>Regras de Convivência</li>
+                        <li>Coordenação Corporal</li>
+                    </ul>
+                </div>
+
+                <!-- Ensino Religioso -->
+                <div class="card" onclick="abrirModal('Ensino Religioso')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-hands-praying c-yellow"></i>
+                        <h3>Ensino Religioso</h3>
+                    </div>
+                    <ul>
+                        <li>Valores Éticos e Humanos</li>
+                        <li>Respeito à Diversidade</li>
+                        <li>Cultura de Paz e Empatia</li>
+                        <li>Convivência em Sociedade</li>
+                    </ul>
+                </div>
+
+                <!-- Língua Inglesa -->
+                <div class="card" onclick="abrirModal('Língua Inglesa')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-language c-blue"></i>
+                        <h3>Língua Inglesa</h3>
+                    </div>
+                    <ul>
+                        <li>Vocabulário Inicial</li>
+                        <li>Saudações e Expressões</li>
+                        <li>Cores, Números e Objetos</li>
+                        <li>Escuta e Pronúncia Básica</li>
                     </ul>
                 </div>
 
             </div>
         </div>
 
-        <!-- Conteúdo da Guia: Fundamental 2 -->
+        <!-- OUTRAS GUIAS (EXEMPLOS) -->
         <div id="fund2" class="tab-content">
-            <div class="grid-cards">
-                <div class="card" onclick="abrirModal('Matemática Avançada')">
-                    <div class="card-header">
-                        <i class="fa-solid fa-calculator c-purple"></i>
-                        <h3>Matemática 6º-9º</h3>
-                    </div>
-                    <ul>
-                        <li>Álgebra e Equações</li>
-                        <li>Geometria Espacial</li>
-                    </ul>
-                </div>
-            </div>
+            <p style="text-align: center; color: #8a99ad; padding: 40px 0;">Conteúdos do Fundamental II em breve...</p>
         </div>
 
-        <!-- Conteúdo da Guia: Ensino Médio -->
         <div id="em" class="tab-content">
-            <div class="grid-cards">
-                <div class="card" onclick="abrirModal('Física & Química')">
-                    <div class="card-header">
-                        <i class="fa-solid fa-atom c-blue"></i>
-                        <h3>Física & Química</h3>
-                    </div>
-                    <ul>
-                        <li>Cinemática e Mecânica</li>
-                        <li>Tabela Periódica</li>
-                    </ul>
-                </div>
-            </div>
+            <p style="text-align: center; color: #8a99ad; padding: 40px 0;">Conteúdos do Ensino Médio em breve...</p>
         </div>
 
-        <!-- Conteúdo da Guia: Superior -->
         <div id="superior" class="tab-content">
-            <p style="text-align: center; color: #8a99ad;">Conteúdo de Graduação em breve...</p>
+            <p style="text-align: center; color: #8a99ad; padding: 40px 0;">Conteúdos de Graduação em breve...</p>
         </div>
 
+        <!-- Botão Sair do Sistema -->
         <div class="logout-area">
             <button class="btn-logout">Sair do Sistema</button>
         </div>
     </div>
 
-    <!-- POPUP / MODAL (Onde o aluno escolhe o recurso) -->
+    <!-- MODAL / POPUP DE SELEÇÃO DE CONTEÚDO -->
     <div class="modal-overlay" id="modalRecursos">
         <div class="modal-box">
             <button class="close-btn" onclick="fecharModal()"><i class="fa-solid fa-xmark"></i></button>
@@ -435,24 +490,21 @@
         </div>
     </div>
 
-    <!-- SCRIPT SIMPLES PARA MUDAR GUIAS E ABRIR MODAL -->
+    <!-- SCRIPT DE NAVEGAÇÃO E INTERAÇÃO -->
     <script>
-        // Função para trocar de abas/guias
+        // Função para alternar as abas do sistema
         function trocarGuia(idGuia, elementoBotao) {
-            // Oculta todas as guias
             const guias = document.querySelectorAll('.tab-content');
             guias.forEach(g => g.classList.remove('active'));
 
-            // Remove a seleção de todos os botões
             const botoes = document.querySelectorAll('.tab-btn');
             botoes.forEach(b => b.classList.remove('active'));
 
-            // Ativa a guia e o botão clicado
             document.getElementById(idGuia).classList.add('active');
             elementoBotao.classList.add('active');
         }
 
-        // Funções para abrir/fechar o Modal de opções
+        // Funções para abrir/fechar a tela de opções (Modal)
         function abrirModal(nomeMateria) {
             document.getElementById('modalTitulo').innerText = nomeMateria;
             document.getElementById('modalRecursos').classList.add('active');
