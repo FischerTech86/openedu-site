@@ -3,1434 +3,495 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gabaritei - Plataforma Completa de Estudos</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <title>Gabaritei - Plataforma de Estudos</title>
+  
   <style>
+    /* ==========================================
+       1. ESTILOS GERAIS E RESET
+       ========================================== */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background-color: #080d1a;
+      background-color: #0b1120;
       color: #f1f5f9;
-    }
-
-    /* CONTÊINER DAS TELAS */
-    .view-section {
-      display: none;
-      width: 100%;
       min-height: 100vh;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
       padding: 20px;
     }
 
-    .view-section.active {
-      display: flex;
+    /* Regra de Ouro: Esconde elementos via JS */
+    .hidden {
+      display: none !important;
     }
 
-    /* =======================================
-       1. TEMA CLARO (LOGIN / CADASTRO / RECUPERAÇÃO)
-       ======================================= */
-    .light-theme {
-      background-color: #dbe5f0;
-      background-image: radial-gradient(#a3b8cc 1px, transparent 1px);
-      background-size: 24px 24px;
-      color: #1e293b;
+    .btn-voltar {
+      background-color: #1e293b;
+      color: #38bdf8;
+      border: 1px solid #334155;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-bottom: 20px;
+      transition: background 0.2s ease;
+    }
+
+    .btn-voltar:hover {
+      background-color: #334155;
+    }
+
+    /* ==========================================
+       2. TELA 1: PAINEL PRINCIPAL (CARDS)
+       ========================================== */
+    .dashboard {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header-title {
+      font-size: 2rem;
+      margin-bottom: 24px;
+      color: #38bdf8;
+      text-align: center;
+    }
+
+    .cards-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
       justify-content: center;
     }
 
-    .auth-card {
-      background: #ffffff;
-      width: 100%;
-      max-width: 440px;
-      padding: 40px 32px;
-      border-radius: 24px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .auth-title {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: #1d4ed8;
-      letter-spacing: 1px;
-    }
-
-    .auth-subtitle {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #1e293b;
-      margin-bottom: 5px;
-    }
-
-    .alert-banner {
-      padding: 12px 16px;
+    .card {
+      background-color: #0f172a;
+      border: 1px solid #1e293b;
       border-radius: 12px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      text-align: center;
-      display: none;
+      padding: 24px;
+      width: 320px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
     }
 
-    .alert-banner.show {
-      display: block;
-    }
-
-    .alert-banner.error {
-      background-color: #fce7f3;
-      color: #9f1239;
-    }
-
-    .alert-banner.info {
-      background-color: #dbeafe;
-      color: #1e40af;
-      display: block;
-    }
-
-    .form-group {
+    .card-title {
+      font-size: 1.25rem;
+      color: #38bdf8;
+      margin-bottom: 12px;
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 6px;
-      text-align: left;
+      align-items: center;
+      gap: 8px;
     }
 
-    .form-group label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #334155;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 10px;
-      border: 1px solid transparent;
-      background-color: #dbe7f6;
-      color: #1e293b;
-      font-size: 0.9rem;
-      outline: none;
-    }
-
-    .form-group input:focus {
-      border-color: #2563eb;
-      background-color: #edf4fc;
-    }
-
-    .btn-primary {
-      width: 100%;
-      padding: 14px;
-      border-radius: 20px;
-      border: none;
-      background-color: #2563eb;
-      color: #ffffff;
+    .card-topics {
+      list-style-type: none;
+      margin-bottom: 20px;
+      color: #94a3b8;
       font-size: 0.95rem;
-      font-weight: 700;
+    }
+
+    .card-topics li {
+      margin-bottom: 6px;
+    }
+
+    .btn-video-link {
+      background: none;
+      border: none;
+      color: #38bdf8;
+      font-weight: bold;
       cursor: pointer;
-      margin-top: 10px;
-      transition: background-color 0.2s;
+      text-align: left;
+      font-size: 0.95rem;
+      padding: 0;
+      margin-bottom: 20px;
+      display: block;
+      transition: color 0.2s;
     }
 
-    .btn-primary:hover {
-      background-color: #1d4ed8;
-    }
-
-    .auth-link {
-      font-size: 0.8rem;
-      color: #2563eb;
-      text-decoration: none;
-      font-weight: 600;
-      margin-top: 4px;
-      cursor: pointer;
-    }
-
-    .auth-link:hover {
+    .btn-video-link:hover {
+      color: #7dd3fc;
       text-decoration: underline;
     }
 
-    .recovered-box {
-      border: 2px dashed #2563eb;
-      border-radius: 12px;
-      padding: 14px;
-      margin-top: 10px;
-      color: #1d4ed8;
-      font-weight: 700;
+    .divider {
+      border: none;
+      border-top: 1px solid #1e293b;
+      margin-bottom: 16px;
+    }
+
+    .select-label {
       font-size: 0.85rem;
-      display: none;
-    }
-
-    /* =======================================
-       2. TEMA ESCURO (PAINEL E MÓDULOS)
-       ======================================= */
-    .dark-theme {
-      background: #060913;
-      color: #f1f5f9;
-      padding-top: 40px;
-    }
-
-    .dark-header {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .dark-header h1 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: #ffffff;
-    }
-
-    .dark-header p {
       color: #94a3b8;
-      font-size: 0.9rem;
-      margin-top: 6px;
-    }
-
-    /* NAVEGAÇÃO DE ABAS */
-    .tabs-container {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 30px;
-      width: 100%;
-      max-width: 1100px;
-    }
-
-    .tab-btn {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid #1e293b;
-      color: #94a3b8;
-      padding: 12px 16px;
-      border-radius: 14px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-      flex: 1;
-      min-width: 140px;
-      text-align: center;
-    }
-
-    .tab-btn span.sub {
-      font-size: 0.65rem;
-      opacity: 0.7;
-      text-transform: uppercase;
-    }
-
-    .tab-btn:hover {
-      border-color: #38bdf8;
-      color: #ffffff;
-    }
-
-    .tab-btn.active {
-      background: #2563eb;
-      border-color: #3b82f6;
-      color: #ffffff;
-      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
-    }
-
-    /* CARDS DAS MATÉRIAS */
-    .tab-content {
-      display: none;
-      width: 100%;
-      max-width: 1100px;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .tab-content.active {
+      margin-bottom: 8px;
       display: block;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .clean-module-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
-      width: 100%;
-    }
-
-    .modern-module-card {
-      background: rgba(13, 22, 41, 0.85);
-      border: 1px solid #1e293b;
-      border-radius: 16px;
-      padding: 22px;
-      transition: all 0.25s ease;
+    .select-group {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .modern-module-card:hover {
-      border-color: #38bdf8;
-      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
-    }
-
-    .card-top-clickable {
-      cursor: pointer;
-      padding: 8px;
-      border-radius: 10px;
-      transition: background 0.2s;
-    }
-
-    .card-top-clickable:hover {
-      background: rgba(56, 189, 248, 0.08);
-    }
-
-    .card-subject-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #38bdf8;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
       gap: 8px;
     }
 
-    .card-topics-list {
-      font-size: 0.82rem;
-      color: #cbd5e1;
-      line-height: 1.6;
-      margin-bottom: 10px;
-    }
-
-    .card-topics-list li {
-      margin-bottom: 6px;
-      list-style-position: inside;
-    }
-
-    .click-hint {
-      font-size: 0.7rem;
-      color: #38bdf8;
-      font-weight: 600;
-      display: inline-block;
-      margin-top: 4px;
-    }
-
-    .card-provas-container {
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .provas-label {
-      font-size: 0.75rem;
-      color: #94a3b8;
-      font-weight: 600;
-    }
-
-    .provas-select-wrapper {
-      display: flex;
-      gap: 6px;
-    }
-
-    .provas-select {
+    .select-group select {
       flex: 1;
-      background: #0f172a;
+      background-color: #0b1120;
       border: 1px solid #2563eb;
-      color: #60a5fa;
-      padding: 8px 10px;
+      color: #fff;
+      padding: 8px 12px;
       border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: 600;
       outline: none;
-      cursor: pointer;
     }
 
-    .provas-select option {
-      background: #0f172a;
-      color: #ffffff;
-    }
-
-    .btn-open-prova {
-      background: #2563eb;
-      color: #ffffff;
+    .btn-abrir {
+      background-color: #2563eb;
+      color: #fff;
       border: none;
-      padding: 8px 14px;
+      padding: 8px 16px;
       border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: 700;
+      font-weight: bold;
       cursor: pointer;
       transition: background 0.2s;
     }
 
-    .btn-open-prova:hover {
-      background: #1d4ed8;
+    .btn-abrir:hover {
+      background-color: #1d4ed8;
     }
 
-    .btn-exit {
-      background-color: #ffffff;
-      color: #0f172a;
-      font-weight: 700;
-      padding: 12px 32px;
-      border-radius: 25px;
-      border: none;
-      cursor: pointer;
-      margin: 35px auto 10px auto;
-      display: block;
-      transition: opacity 0.2s;
+    /* ==========================================
+       3. TELA 2: VÍDEOS
+       ========================================== */
+    .video-screen {
+      max-width: 900px;
+      margin: 0 auto;
     }
 
-    .btn-exit:hover {
-      opacity: 0.9;
+    .video-screen h1 {
+      font-size: 1.8rem;
+      color: #f8fafc;
     }
 
-    /* RODAPÉ E GUIA COMPLETO */
-    .app-footer-info {
-      width: 100%;
-      max-width: 1100px;
-      margin-top: 50px;
-      padding-top: 35px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .app-footer-header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .app-footer-header h2 {
-      font-size: 1.5rem;
-      color: #ffffff;
-      font-weight: 800;
-    }
-
-    .app-footer-header p {
-      font-size: 0.85rem;
+    .video-screen h2 {
+      font-size: 1.2rem;
       color: #94a3b8;
-      margin-top: 4px;
+      margin-bottom: 20px;
     }
 
-    .info-app-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
-    }
-
-    .info-app-card {
-      background: rgba(13, 22, 41, 0.7);
-      border: 1px solid #1e293b;
-      border-radius: 14px;
-      padding: 22px;
-    }
-
-    .info-app-card h3 {
-      font-size: 0.95rem;
-      color: #38bdf8;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .info-app-card p {
-      font-size: 0.8rem;
-      color: #94a3b8;
-      line-height: 1.6;
-    }
-
-    .copyright-text {
-      text-align: center;
-      color: #64748b;
-      font-size: 0.78rem;
-      margin-top: 35px;
-      padding-bottom: 25px;
-    }
-
-    /* =======================================
-       3. TELA DE MÓDULO COM VÍDEO (AULAS)
-       ======================================= */
-    .video-page-container {
-      width: 100%;
-      max-width: 1100px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .top-bar-module {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .btn-back {
-      background: #ffffff;
-      color: #000000;
-      border: none;
-      padding: 8px 18px;
-      border-radius: 16px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      cursor: pointer;
-    }
-
-    .video-main-layout {
-      display: grid;
-      grid-template-columns: 1.8fr 1.2fr;
-      gap: 20px;
-    }
-
-    @media (max-width: 900px) {
-      .video-main-layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .video-player-box {
-      background: #000000;
-      border-radius: 16px;
-      border: 1px solid #1e293b;
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* Proporção 16:9 */
+      height: 0;
       overflow: hidden;
-      aspect-ratio: 16/9;
-      width: 100%;
+      border-radius: 12px;
+      background-color: #000;
+      border: 1px solid #1e293b;
     }
 
-    .video-player-box iframe {
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      border: none;
+      border: 0;
     }
 
-    .quiz-container {
-      background: #0f172a;
+    /* ==========================================
+       4. TELA 3: SIMULADO + IA (LADO A LADO)
+       ========================================== */
+    .simulado-screen {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Layout de duas colunas com Flexbox */
+    .flex-container {
+      display: flex;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .coluna {
+      flex: 1; /* Faz com que ambas as colunas ocupem tamanhos iguais */
+      background-color: #0f172a;
       border: 1px solid #1e293b;
-      border-radius: 16px;
-      padding: 20px;
+      border-radius: 12px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
-      gap: 15px;
     }
 
-    /* =======================================
-       4. TELA EXCLUSIVA PARA PROVAS
-       ======================================= */
-    .prova-page-container {
-      width: 100%;
-      max-width: 900px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .top-actions-bar {
+    /* Coluna Esquerda: Perguntas */
+    .toolbar {
       display: flex;
       gap: 10px;
-    }
-
-    .btn-secondary-action {
-      background: #1e293b;
-      color: #38bdf8;
-      border: 1px solid #38bdf8;
-      padding: 8px 14px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-secondary-action:hover {
-      background: #38bdf8;
-      color: #0f172a;
-    }
-
-    .prova-full-card {
-      background: #0f172a;
-      border: 1px solid #2563eb;
-      border-radius: 20px;
-      padding: 30px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    }
-
-    .prova-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #1e293b;
-      padding-bottom: 15px;
-    }
-
-    .prova-header h2 {
-      color: #38bdf8;
-      font-size: 1.3rem;
-    }
-
-    .prova-badge-year {
-      background: #2563eb;
-      color: #ffffff;
-      padding: 6px 14px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.85rem;
-    }
-
-    .prova-question-box {
-      font-size: 1rem;
-      font-weight: 500;
-      line-height: 1.6;
-      color: #f1f5f9;
-      white-space: pre-line;
-    }
-
-    .prova-options-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .prova-option-item {
-      background: #1e293b;
-      border: 1px solid #334155;
-      color: #e2e8f0;
-      padding: 14px 18px;
-      border-radius: 12px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .prova-option-item:hover {
-      border-color: #38bdf8;
-      background: #111e38;
-    }
-
-    .prova-option-item.selected {
-      border-color: #2563eb;
-      background: rgba(37, 99, 235, 0.2);
-      color: #ffffff;
-    }
-
-    .feedback-box {
-      padding: 16px;
-      border-radius: 12px;
-      font-size: 0.88rem;
-      font-weight: 500;
-      line-height: 1.6;
-      display: none;
-      white-space: pre-line;
-    }
-
-    .feedback-box.correct {
-      display: block;
-      background: rgba(34, 197, 94, 0.15);
-      border: 1px solid #22c55e;
-      color: #4ade80;
-    }
-
-    .feedback-box.wrong {
-      display: block;
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid #ef4444;
-      color: #f87171;
-    }
-
-    /* RODAPÉ DE NAVEGAÇÃO DA PROVA */
-    .prova-bottom-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 10px;
-      padding-top: 15px;
-      border-top: 1px solid #1e293b;
+      margin-bottom: 20px;
       flex-wrap: wrap;
+    }
+
+    .btn-action {
+      background-color: #1e293b;
+      color: #f1f5f9;
+      border: 1px solid #334155;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .btn-action:hover {
+      background-color: #334155;
+    }
+
+    .question-box {
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .question-box h3 {
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
       gap: 10px;
     }
 
-    .nav-btn {
-      background: #1e293b;
-      color: #ffffff;
-      border: 1px solid #334155;
-      padding: 10px 20px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.85rem;
+    .option-label {
+      background-color: #0b1120;
+      border: 1px solid #1e293b;
+      padding: 12px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: border-color 0.2s;
     }
 
-    .nav-btn:hover:not(:disabled) {
-      background: #334155;
-      border-color: #38bdf8;
+    .option-label:hover {
+      border-color: #2563eb;
     }
 
-    .nav-btn:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
+    .nav-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #1e293b;
     }
 
-    .btn-verify {
-      background: #22c55e;
-      color: #ffffff;
+    .btn-verificar {
+      background-color: #16a34a;
+      color: #fff;
       border: none;
-      padding: 10px 24px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.9rem;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: bold;
       cursor: pointer;
-      transition: background 0.2s;
-      margin-left: auto;
     }
 
-    .btn-verify:hover {
-      background: #16a34a;
+    .btn-verificar:hover {
+      background-color: #15803d;
+    }
+
+    /* Coluna Direita: Explicação IA */
+    .ia-header {
+      color: #38bdf8;
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 12px;
+    }
+
+    .ia-content {
+      color: #cbd5e1;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    /* Responsividade para telas menores/celulares */
+    @media (max-width: 900px) {
+      .flex-container {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- 1. TELA DE LOGIN -->
-  <section id="view-login" class="view-section light-theme active">
-    <div class="auth-card">
-      <h1 class="auth-title">GABARITEI</h1>
-      <div class="alert-banner info">Bem-vindo ao Gabaritei</div>
-      <div id="login-error-banner" class="alert-banner error">Usuário ou senha incorretos!</div>
+  <!-- ==========================================
+       TELA 1: PAINEL PRINCIPAL
+       ========================================== -->
+  <section id="tela-painel" class="dashboard">
+    <h1 class="header-title">🎓 Gabaritei - Painel de Estudos</h1>
+    
+    <div class="cards-grid">
+      <!-- Card: Língua Portuguesa -->
+      <div class="card">
+        <h2 class="card-title">📖 Língua Portuguesa</h2>
+        <ul class="card-topics">
+          <li>• Alfabetização e Ortografia</li>
+          <li>• Leitura e Interpretação</li>
+        </ul>
 
-      <div class="form-group">
-        <label>Usuário</label>
-        <input type="text" id="login-user" placeholder="Digite seu usuário" />
+        <button class="btn-video-link" onclick="abrirVideos('Língua Portuguesa')">
+          ▶ Clique para abrir Vídeos & Lições
+        </button>
+
+        <hr class="divider" />
+
+        <span class="select-label">📝 Selecionar Prova Completa:</span>
+        <div class="select-group">
+          <select id="select-portugues">
+            <option value="Prova 2026">Prova 2026</option>
+            <option value="Prova 2025">Prova 2025</option>
+          </select>
+          <button class="btn-abrir" onclick="abrirSimulado('Língua Portuguesa', 'select-portugues')">Abrir</button>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Senha</label>
-        <input type="password" id="login-pass" placeholder="Digite sua senha" />
-      </div>
+      <!-- Card: Matemática (Exemplo Adicional) -->
+      <div class="card">
+        <h2 class="card-title">📐 Matemática</h2>
+        <ul class="card-topics">
+          <li>• Álgebra e Equações</li>
+          <li>• Geometria Plana</li>
+        </ul>
 
-      <button class="btn-primary" onclick="handleLogin()">Acessar o Gabaritei</button>
-      <a class="auth-link" onclick="showView('view-recover')">Esqueceu a senha?</a>
-      <a class="auth-link" onclick="showView('view-register')">Você não tem outra conta? Crie uma aqui</a>
+        <button class="btn-video-link" onclick="abrirVideos('Matemática')">
+          ▶ Clique para abrir Vídeos & Lições
+        </button>
+
+        <hr class="divider" />
+
+        <span class="select-label">📝 Selecionar Prova Completa:</span>
+        <div class="select-group">
+          <select id="select-matematica">
+            <option value="Prova 2026">Prova 2026</option>
+            <option value="Prova 2025">Prova 2025</option>
+          </select>
+          <button class="btn-abrir" onclick="abrirSimulado('Matemática', 'select-matematica')">Abrir</button>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- 2. TELA DE CRIAR CONTA -->
-  <section id="view-register" class="view-section light-theme">
-    <div class="auth-card">
-      <h1 class="auth-title">GABARITEI</h1>
-      <h2 class="auth-subtitle">Criar Conta</h2>
+
+  <!-- ==========================================
+       TELA 2: CONTEÚDO EM VÍDEO (GATILHO 1)
+       ========================================== -->
+  <section id="tela-video" class="video-screen hidden">
+    <button class="btn-voltar" onclick="mostrarSecao('tela-painel')">← Voltar ao Painel</button>
+    
+    <h1 id="video-materia-titulo">Conteúdo em Vídeo</h1>
+    <h2>📝 Guia Rápido de Estudo</h2>
+
+    <div class="video-container">
+      <!-- Player Responsivo Iframe -->
+      <iframe 
+        id="video-player"
+        src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" 
+        title="Player de Vídeo" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       TELA 3: SIMULADO + IA LADO A LADO (GATILHO 2)
+       ========================================== -->
+  <section id="tela-simulado" class="simulado-screen hidden">
+    <button class="btn-voltar" onclick="mostrarSecao('tela-painel')">← Voltar ao Painel</button>
+
+    <div class="flex-container">
       
-      <div class="form-group">
-        <label>Nome de Usuário</label>
-        <input type="text" id="reg-user" placeholder="Escolha um nome de usuário" />
+      <!-- Coluna da Esquerda: Perguntas -->
+      <div class="coluna">
+        <div class="toolbar">
+          <button class="btn-action">🔄 Reiniciar Prova</button>
+          <button class="btn-action">💾 Salvar Progresso</button>
+        </div>
+
+        <div class="question-box">
+          <h3 id="simulado-titulo-questao">Questão 1: Identifique a alternativa correta</h3>
+          <div class="options">
+            <label class="option-label">
+              <input type="radio" name="opcao" value="A"> A) Opção A sobre a matéria
+            </label>
+            <label class="option-label">
+              <input type="radio" name="opcao" value="B"> B) Opção B sobre a matéria
+            </label>
+            <label class="option-label">
+              <input type="radio" name="opcao" value="C"> C) Opção C sobre a matéria
+            </label>
+          </div>
+        </div>
+
+        <div class="nav-controls">
+          <button class="btn-action">⬅ Anterior</button>
+          <span>Questão 1 de 1</span>
+          <button class="btn-action">Próximo ➡</button>
+          <button class="btn-verificar">Verificar</button>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>E-mail</label>
-        <input type="email" id="reg-email" placeholder="Seu melhor e-mail" />
+      <!-- Coluna da Direita: Explicação IA -->
+      <div class="coluna">
+        <div class="ia-header">
+          🤖 Explicações Completas e Resumos Detalhados da IA
+        </div>
+        <div class="ia-content">
+          <p><strong>Resumo do Conteúdo:</strong></p>
+          <p>Selecione uma opção e clique em "Verificar" para que a IA analise sua resposta e exiba a justificativa detalhada com a resolução passo a passo do exercício.</p>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Senha</label>
-        <input type="password" id="reg-pass" placeholder="Crie uma senha" />
-      </div>
-
-      <button class="btn-primary" onclick="handleRegister()">Cadastrar e Acessar</button>
-      <a class="auth-link" onclick="showView('view-login')">Já tem uma conta? Acesse aqui</a>
     </div>
   </section>
 
-  <!-- 3. TELA DE RECUPERAR SENHA -->
-  <section id="view-recover" class="view-section light-theme">
-    <div class="auth-card">
-      <h1 class="auth-title">GABARITEI</h1>
-      <h2 class="auth-subtitle">Recuperar Senha</h2>
 
-      <div class="form-group">
-        <label>Nome de Usuário</label>
-        <input type="text" id="rec-user" placeholder="Seu usuário" />
-      </div>
-
-      <div class="form-group">
-        <label>E-mail</label>
-        <input type="email" id="rec-email" placeholder="Seu e-mail cadastrado" />
-      </div>
-
-      <button class="btn-primary" onclick="handleRecover()">Recuperar Minha Senha</button>
-
-      <div id="recovered-box" class="recovered-box">
-        SUA SENHA RECUPERADA:<br />
-        <span id="recovered-pass-text" style="font-size: 1.1rem; color: #1e293b;">123</span>
-      </div>
-
-      <a class="auth-link" onclick="showView('view-login')">Voltar para o login</a>
-    </div>
-  </section>
-
-  <!-- 4. TELA DO DASHBOARD -->
-  <section id="view-dashboard" class="view-section dark-theme">
-    <div class="dark-header">
-      <h1>Boas-vindas ao Gabaritei!</h1>
-      <p>Escolha o seu nível de ensino abaixo para acessar os conteúdos organizados por disciplina e provas completas.</p>
-    </div>
-
-    <!-- NAVEGAÇÃO DE ABAS -->
-    <div class="tabs-container">
-      <button class="tab-btn active" onclick="switchTab('tab-fund1', this)">
-        <span>1º ao 5º Ano</span>
-        <span class="sub">FUNDAMENTAL I</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('tab-fund2', this)">
-        <span>6º ao 9º Ano</span>
-        <span class="sub">FUNDAMENTAL II</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('tab-medio', this)">
-        <span>1º ao 3º Ano</span>
-        <span class="sub">ENSINO MÉDIO</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('tab-vestibulares', this)">
-        <span>Vestibulares</span>
-        <span class="sub">ENEM & PROVAS</span>
-      </button>
-    </div>
-
-    <!-- ABA 1: FUNDAMENTAL I -->
-    <div id="tab-fund1" class="tab-content active">
-      <div class="clean-module-grid">
-        <div class="modern-module-card">
-          <div class="card-top-clickable" onclick="openStudyGuide('Língua Portuguesa - Fundamental I', 'portugues')">
-            <div class="card-subject-title">📖 Língua Portuguesa</div>
-            <ul class="card-topics-list">
-              <li>• Alfabetização e Ortografia</li>
-              <li>• Leitura e Interpretação</li>
-            </ul>
-            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
-          </div>
-          <div class="card-provas-container">
-            <span class="provas-label">📝 Selecionar Prova Completa:</span>
-            <div class="provas-select-wrapper">
-              <select id="select-prova-portugues" class="provas-select">
-                <option value="2026">Prova 2026</option>
-                <option value="2025">Prova 2025</option>
-              </select>
-              <button class="btn-open-prova" onclick="openOnlyProva('Língua Portuguesa', 'select-prova-portugues', 'portugues')">Abrir</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="modern-module-card">
-          <div class="card-top-clickable" onclick="openStudyGuide('Matemática - Fundamental I', 'matematica')">
-            <div class="card-subject-title">➕ Matemática</div>
-            <ul class="card-topics-list">
-              <li>• Quatro Operações Básicas</li>
-              <li>• Geometria e Formas</li>
-            </ul>
-            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
-          </div>
-          <div class="card-provas-container">
-            <span class="provas-label">📝 Selecionar Prova Completa:</span>
-            <div class="provas-select-wrapper">
-              <select id="select-prova-matematica" class="provas-select">
-                <option value="2026">Prova 2026</option>
-                <option value="2025">Prova 2025</option>
-              </select>
-              <button class="btn-open-prova" onclick="openOnlyProva('Matemática', 'select-prova-matematica', 'matematica')">Abrir</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ABA 2: FUNDAMENTAL II -->
-    <div id="tab-fund2" class="tab-content">
-      <div class="clean-module-grid">
-        <div class="modern-module-card">
-          <div class="card-top-clickable" onclick="openStudyGuide('História Geral e do Brasil', 'historia')">
-            <div class="card-subject-title">📜 História</div>
-            <ul class="card-topics-list">
-              <li>• História do Brasil Colônia</li>
-              <li>• Idade Média e Antiguidade</li>
-            </ul>
-            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
-          </div>
-          <div class="card-provas-container">
-            <span class="provas-label">📝 Selecionar Prova Completa:</span>
-            <div class="provas-select-wrapper">
-              <select id="select-prova-historia" class="provas-select">
-                <option value="2026">Prova 2026</option>
-              </select>
-              <button class="btn-open-prova" onclick="openOnlyProva('História', 'select-prova-historia', 'historia')">Abrir</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="modern-module-card">
-          <div class="card-top-clickable" onclick="openStudyGuide('Geografia e Meio Ambiente', 'geografia')">
-            <div class="card-subject-title">🌍 Geografia</div>
-            <ul class="card-topics-list">
-              <li>• Cartografia e Climas</li>
-              <li>• Relevo e Biomas</li>
-            </ul>
-            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
-          </div>
-          <div class="card-provas-container">
-            <span class="provas-label">📝 Selecionar Prova Completa:</span>
-            <div class="provas-select-wrapper">
-              <select id="select-prova-geografia" class="provas-select">
-                <option value="2026">Prova 2026</option>
-              </select>
-              <button class="btn-open-prova" onclick="openOnlyProva('Geografia', 'select-prova-geografia', 'geografia')">Abrir</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ABA 3: ENSINO MÉDIO -->
-    <div id="tab-medio" class="tab-content">
-      <div class="clean-module-grid">
-        <div class="modern-module-card">
-          <div class="card-top-clickable" onclick="openStudyGuide('Física Clássica e Moderna', 'fisica')">
-            <div class="card-subject-title">⚡ Física</div>
-            <ul class="card-topics-list">
-              <li>• Mecânica e Leis de Newton</li>
-              <li>• Termodinâmica e Óptica</li>
-            </ul>
-            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
-          </div>
-          <div class="card-provas-container">
-            <span class="provas-label">📝 Selecionar Prova Completa:</span>
-            <div class="provas-select-wrapper">
-              <select id="select-prova-fisica" class="provas-select">
-                <option value="2026">Prova 2026</option>
-              </select>
-              <button class="btn-open-prova" onclick="openOnlyProva('Física', 'select-prova-fisica', 'fisica')">Abrir</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="modern-module-card">
-          <div class="card-top-clickable" onclick="openStudyGuide('Química Geral e Orgânica', 'quimica')">
-            <div class="card-subject-title">🧪 Química</div>
-            <ul class="card-topics-list">
-              <li>• Tabela Periódica e Ligações</li>
-              <li>• Estequiometria e Reações</li>
-            </ul>
-            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
-          </div>
-          <div class="card-provas-container">
-            <span class="provas-label">📝 Selecionar Prova Completa:</span>
-            <div class="provas-select-wrapper">
-              <select id="select-prova-quimica" class="provas-select">
-                <option value="2026">Prova 2026</option>
-              </select>
-              <button class="btn-open-prova" onclick="openOnlyProva('Química', 'select-prova-quimica', 'quimica')">Abrir</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="modern-module-card">
-          <div class="card-top-clickable" onclick="openStudyGuide('Biologia Celular e Ecologia', 'biologia')">
-            <div class="card-subject-title">🧬 Biologia</div>
-            <ul class="card-topics-list">
-              <li>• Citologia e Genética</li>
-              <li>• Ecologia e Evolução</li>
-            </ul>
-            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
-          </div>
-          <div class="card-provas-container">
-            <span class="provas-label">📝 Selecionar Prova Completa:</span>
-            <div class="provas-select-wrapper">
-              <select id="select-prova-biologia" class="provas-select">
-                <option value="2026">Prova 2026</option>
-              </select>
-              <button class="btn-open-prova" onclick="openOnlyProva('Biologia', 'select-prova-biologia', 'biologia')">Abrir</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ABA 4: VESTIBULARES -->
-    <div id="tab-vestibulares" class="tab-content">
-      <div class="clean-module-grid">
-        <div class="modern-module-card">
-          <div class="card-top-clickable" onclick="openStudyGuide('Filosofia e Sociologia', 'filosofia')">
-            <div class="card-subject-title">🧠 Filosofia e Sociologia</div>
-            <ul class="card-topics-list">
-              <li>• Ética e Política</li>
-              <li>• Cidadania e Sociedade</li>
-            </ul>
-            <span class="click-hint">▶ Clique para abrir Vídeos & Lições</span>
-          </div>
-          <div class="card-provas-container">
-            <span class="provas-label">📝 Selecionar Edição do ENEM:</span>
-            <div class="provas-select-wrapper">
-              <select id="select-prova-filosofia" class="provas-select">
-                <option value="2026">Simulado ENEM 2026</option>
-              </select>
-              <button class="btn-open-prova" onclick="openOnlyProva('Filosofia/Sociologia', 'select-prova-filosofia', 'filosofia')">Abrir</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <button class="btn-exit" onclick="showView('view-login')">Sair do Sistema</button>
-
-    <div class="app-footer-info">
-      <div class="app-footer-header">
-        <h2>🚀 Informações do App & Guia Completo</h2>
-        <p>Tudo o que você precisa saber sobre a plataforma Gabaritei</p>
-      </div>
-
-      <div class="info-app-grid">
-        <div class="info-app-card">
-          <h3>💡 O que é o Gabaritei?</h3>
-          <p>O ecossistema definitivo de estudos desenvolvido para acelerar seu aprendizado com provas práticas e justificativas detalhadas.</p>
-        </div>
-        <div class="info-app-card">
-          <h3>🔒 Segurança e Privacidade Total</h3>
-          <p>Seus dados e credenciais são armazenados localmente via <strong>LocalStorage</strong>.</p>
-        </div>
-      </div>
-
-      <div class="copyright-text">
-        © 2026 FichTeck. Todos os direitos reservados. Gabaritei é uma marca registrada.
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. TELA DE MÓDULO COM VÍDEO YOUTUBE -->
-  <section id="view-module" class="view-section dark-theme">
-    <div class="video-page-container">
-      <div class="top-bar-module">
-        <button class="btn-back" onclick="exitModuleView()">← Voltar ao Painel</button>
-        <h2 id="module-title-display" style="color: #38bdf8; font-size: 1.2rem;">Conteúdo em Vídeo</h2>
-      </div>
-
-      <div class="video-main-layout">
-        <div class="video-player-box">
-          <iframe id="youtube-iframe" src="" title="Vídeo de Estudo" allowfullscreen></iframe>
-        </div>
-
-        <div class="quiz-container">
-          <h3 style="color: #38bdf8; font-size: 1rem;">📝 Guia Rápido de Estudo</h3>
-          <p style="color: #cbd5e1; font-size: 0.85rem; line-height: 1.6;">
-            Assista ao vídeo explicativo ao lado para fixar os conceitos teóricos principais antes de realizar as simuladas no painel de provas!
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. TELA EXCLUSIVA DE PROVA COMPLETA -->
-  <section id="view-only-prova" class="view-section dark-theme">
-    <div class="prova-page-container">
-      <div class="top-bar-module">
-        <button class="btn-back" onclick="showView('view-dashboard')">← Voltar ao Painel</button>
-        
-        <div class="top-actions-bar">
-          <button class="btn-secondary-action" onclick="restartProva()">🔄 Reiniciar Prova</button>
-          <button class="btn-secondary-action" onclick="saveProgress()">💾 Salvar Progresso</button>
-        </div>
-      </div>
-
-      <div class="prova-full-card">
-        <div class="prova-header">
-          <h2 id="prova-title-display">Prova Selecionada</h2>
-          <span id="prova-year-display" class="prova-badge-year">Edição 2026</span>
-        </div>
-
-        <div class="prova-question-box">
-          <p id="prova-question-text">Carregando a prova...</p>
-        </div>
-
-        <div id="prova-options-container" class="prova-options-list">
-          <!-- Opções renderizadas via JS -->
-        </div>
-
-        <div id="prova-feedback-box" class="feedback-box"></div>
-
-        <div class="prova-bottom-nav">
-          <button id="btn-prev-question" class="nav-btn" onclick="prevQuestion()">⬅️ Anterior</button>
-          <span id="question-index-display" style="font-size: 0.85rem; color: #94a3b8; font-weight: 600;">Questão 1 de 1</span>
-          <button id="btn-next-question" class="nav-btn" onclick="nextQuestion()">Próximo ➡️</button>
-          
-          <button class="btn-verify" onclick="verifyCurrentAnswer()">Verificar</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!-- ==========================================
+       5. JAVASCRIPT PURO (LÓGICA DA SPA)
+       ========================================== -->
   <script>
-    // BANCO DE DADOS COMPLETO E EXPANDIDO
-    const subjectData = {
-      portugues: {
-        youtube: "https://www.youtube.com/embed/3A-3X9c0Gps",
-        provas: [
-          {
-            q: "1) Indique a alternativa em que a regência verbal está em conformidade com a norma-padrão da língua portuguesa:",
-            opts: [
-              "A) O médico assistiu o paciente com toda a dedicação.",
-              "B) Preferia mais estudar do que sair com os amigos no fim de semana.",
-              "C) O filme a que assistimos ontem à noite foi premiado no festival.",
-              "D) O Diretor aspirava ao cargo, mas obedeceu o regulamento."
-            ],
-            correct: 2,
-            explanations: {
-              correct: "✨ Excelente! O verbo 'assistir' no sentido de 'ver/presenciar' é transitivo indireto e exige a preposição 'a'. Por isso, 'o filme A QUE assistimos' está perfeito.",
-              wrong: "❌ Atenção!\n• Na B: O verbo 'preferir' exige a preposição 'a' (Preferia estudar A sair). Não se usa 'mais... do que'.\n• Na D: O verbo 'obedecer' exige preposição 'a' (obedeceu AO regulamento)."
-            }
-          },
-          {
-            q: "2) Identifique a alternativa onde a crase foi empregada corretamente:",
-            opts: [
-              "A) Refiro-me à aluna que tirou a nota máxima na prova.",
-              "B) Chegamos à uma hora muito avançada da noite.",
-              "C) Ele foi à pé para a escola hoje de manhã.",
-              "D) Entreguei o relatório à ele pessoalmente."
-            ],
-            correct: 0,
-            explanations: {
-              correct: "✨ Correto! Houve a fusão da preposição 'a' (exigida por 'Refiro-me') com o artigo feminino 'a' (de 'aluna').",
-              wrong: "❌ Atenção: Nunca se utiliza crase antes de artigo indefinido ('uma'), palavras masculinas ('pé') ou pronomes pessoais masculinos ('ele')."
-            }
-          }
-        ]
-      },
-      matematica: {
-        youtube: "https://www.youtube.com/embed/n4K1qYx5t3c",
-        provas: [
-          {
-            q: "1) Um reservatório com capacidade de 5.000 litros está cheio. Uma torneira escoa 250 litros por hora. Após quantas horas restará apenas 20% da capacidade total?",
-            opts: [
-              "A) 12 horas",
-              "B) 16 horas",
-              "C) 18 horas",
-              "D) 20 horas"
-            ],
-            correct: 1,
-            explanations: {
-              correct: "✨ Certo! 20% de 5.000L = 1.000L restantes. É necessário escoar 4.000L. Dividindo 4.000L por 250L/h obtemos exatamente 16 horas.",
-              wrong: "❌ Tente novamente! Lembre-se de calcular 80% do volume para saber quanto precisa ser escoado (4.000L) e divida por 250."
-            }
-          },
-          {
-            q: "2) Qual é o valor da raiz da equação do 1º grau: 3x - 9 = 18?",
-            opts: [
-              "A) x = 6",
-              "B) x = 9",
-              "C) x = 27",
-              "D) x = 3"
-            ],
-            correct: 1,
-            explanations: {
-              correct: "✨ Correto! Isolando o termo com x: 3x = 18 + 9 => 3x = 27 => x = 9.",
-              wrong: "❌ Incorreto. Mude o -9 para o outro lado somando (+9) e depois divida o resultado por 3."
-            }
-          }
-        ]
-      },
-      historia: {
-        youtube: "https://www.youtube.com/embed/3A-3X9c0Gps",
-        provas: [
-          {
-            q: "1) Durante o período do Brasil Colônia, a principal atividade econômica inicial desenvolvida pelos portugueses foi:",
-            opts: [
-              "A) A mineração de ouro e diamantes em Minas Gerais.",
-              "B) O cultivo extensivo de café para exportação.",
-              "C) A exploração do pau-brasil com mão de obra indígena.",
-              "D) A criação de indústrias têxteis nas capitais."
-            ],
-            correct: 2,
-            explanations: {
-              correct: "✨ Certo! Entre 1500 e 1530 (Período Pré-Colonial), a principal atividade foi a extração do pau-brasil através do escambo com indígenas.",
-              wrong: "❌ Incorreto. A mineração só ganhou força no século XVIII e o café no século XIX. No início, a exploração focou no pau-brasil."
-            }
-          }
-        ]
-      },
-      geografia: {
-        youtube: "https://www.youtube.com/embed/n4K1qYx5t3c",
-        provas: [
-          {
-            q: "1) As linhas imaginárias horizontais que medem a distância em graus em relação à Linha do Equador são chamadas de:",
-            opts: [
-              "A) Meridianos e medem a Longitude.",
-              "B) Paralelos e medem a Latitude.",
-              "C) Trópicos e medem o Fuso Horário.",
-              "D) Afluentes e medem a Altitude."
-            ],
-            correct: 1,
-            explanations: {
-              correct: "✨ Muito bem! Os Paralelos são as linhas horizontais que variam de 0° a 90° para o Norte e Sul, definindo a Latitude.",
-              wrong: "❌ Errado! Os Meridianos são linhas verticais que medem a Longitude (em relação ao Meridiano de Greenwich)."
-            }
-          }
-        ]
-      },
-      fisica: {
-        youtube: "https://www.youtube.com/embed/3A-3X9c0Gps",
-        provas: [
-          {
-            q: "1) De acordo com a Segunda Lei de Newton (Princípio Fundamental da Dinâmica), a força resultante aplicada a um corpo é igual a:",
-            opts: [
-              "A) Sua massa multiplicada pela sua aceleração (F = m · a).",
-              "B) Sua velocidade dividida pelo tempo decorrido.",
-              "C) Sua energia cinética dividida pela distância.",
-              "D) Sua massa dividida pelo seu volume."
-            ],
-            correct: 0,
-            explanations: {
-              correct: "✨ Correto! A fórmula clássica da Segunda Lei de Newton é F = m · a (Força = massa × aceleração).",
-              wrong: "❌ Incorreto. A Segunda Lei estabelece que a aceleração adquirida por um corpo é diretamente proporcional à força resultante aplicada sobre ele (F = m · a)."
-            }
-          }
-        ]
-      },
-      quimica: {
-        youtube: "https://www.youtube.com/embed/n4K1qYx5t3c",
-        provas: [
-          {
-            q: "1) Qual das alternativas apresenta uma transformação estritamente QUÍMICA?",
-            opts: [
-              "A) Derretimento de um cubo de gelo.",
-              "B) Queima (combustão) de uma folha de papel.",
-              "C) Quebra de um copo de vidro.",
-              "D) Dissolução de açúcar em água."
-            ],
-            correct: 1,
-            explanations: {
-              correct: "✨ Exato! Na combustão do papel ocorrem reações químicas com alteração na composição da matéria (formação de cinzas, CO2 e água).",
-              wrong: "❌ Errado! Mudanças de estado físico (gelo derretendo) e alterações de formato (vidro quebrado) são fenômenos físicos, não químicos."
-            }
-          }
-        ]
-      },
-      biologia: {
-        youtube: "https://www.youtube.com/embed/3A-3X9c0Gps",
-        provas: [
-          {
-            q: "1) Qual organela celular é responsável pela produção de energia (ATP) através da respiração celular?",
-            opts: [
-              "A) Complexo de Golgi",
-              "B) Ribossomo",
-              "C) Mitocôndria",
-              "D) Lisossomo"
-            ],
-            correct: 2,
-            explanations: {
-              correct: "✨ Perfeito! As mitocôndrias são conhecidas como as 'usinas energéticas' das células eucarióticas.",
-              wrong: "❌ Incorreto. Ribossomos sintetizam proteínas e Lisossomos realizam a digestão celular. A energia é gerada nas mitocôndrias."
-            }
-          }
-        ]
-      },
-      filosofia: {
-        youtube: "https://www.youtube.com/embed/n4K1qYx5t3c",
-        provas: [
-          {
-            q: "1) O célebre método filosófico conhecido como 'Maiêutica', que visava partejar o conhecimento por meio de perguntas, foi criado por:",
-            opts: [
-              "A) Aristóteles",
-              "B) Sócrates",
-              "C) Platão",
-              "D) René Descartes"
-            ],
-            correct: 1,
-            explanations: {
-              correct: "✨ Acertou! Sócrates utilizava o diálogo e as perguntas para fazer com que os interlocutores chegassem à verdade por si mesmos.",
-              wrong: "❌ Errado! Platão foi seu discípulo e Aristóteles aluno de Platão. A Maiêutica é a marca registrada do método socrático."
-            }
-          }
-        ]
-      }
-    };
+    // Função principal de navegação que gerencia a exibição das seções
+    function mostrarSecao(idSecaoDesejada) {
+      // Lista de todas as telas cadastradas
+      const secoes = ['tela-painel', 'tela-video', 'tela-simulado'];
 
-    // ESTADOS NATIVOS DA PROVA
-    let currentSubjectKey = 'portugues';
-    let currentQuestionIndex = 0;
-    let selectedAnswers = {};
-
-    function showView(viewId) {
-      document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
-      const targetView = document.getElementById(viewId);
-      if (targetView) {
-        targetView.classList.add('active');
-        window.scrollTo(0, 0);
-      }
-    }
-
-    function switchTab(tabId, btnElement) {
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      if (btnElement) btnElement.classList.add('active');
-      const targetTab = document.getElementById(tabId);
-      if (targetTab) targetTab.classList.add('active');
-    }
-
-    /* ABRIR VÍDEO AULA */
-    function openStudyGuide(title, subjectKey) {
-      currentSubjectKey = subjectKey || 'portugues';
-      document.getElementById('module-title-display').innerText = title;
-      const data = subjectData[currentSubjectKey] || subjectData['portugues'];
-      document.getElementById('youtube-iframe').src = data.youtube;
-      showView('view-module');
-    }
-
-    function exitModuleView() {
-      document.getElementById('youtube-iframe').src = "";
-      showView('view-dashboard');
-    }
-
-    /* ABRIR TELA DE PROVA */
-    function openOnlyProva(subjectName, selectId, subjectKey) {
-      const selectElem = document.getElementById(selectId);
-      const selectedYear = selectElem ? selectElem.value : '2026';
-      
-      currentSubjectKey = subjectKey || 'portugues';
-      currentQuestionIndex = 0;
-      
-      // Tenta recuperar progresso salvo no LocalStorage
-      const savedData = localStorage.getItem(`prova_progress_${currentSubjectKey}`);
-      if (savedData) {
-        selectedAnswers = JSON.parse(savedData);
-      } else {
-        selectedAnswers = {};
-      }
-
-      document.getElementById('prova-title-display').innerText = `Prova de ${subjectName}`;
-      document.getElementById('prova-year-display').innerText = `Edição ${selectedYear}`;
-
-      loadQuestion(currentQuestionIndex);
-      showView('view-only-prova');
-    }
-
-    /* CARREGAR QUESTÃO NA TELA */
-    function loadQuestion(index) {
-      const data = subjectData[currentSubjectKey] || subjectData['portugues'];
-      const questionsList = data.provas;
-
-      if (!questionsList || questionsList.length === 0) return;
-
-      const qData = questionsList[index];
-
-      document.getElementById('prova-question-text').innerText = qData.q;
-      document.getElementById('question-index-display').innerText = `Questão ${index + 1} de ${questionsList.length}`;
-
-      const feedbackBox = document.getElementById('prova-feedback-box');
-      feedbackBox.style.display = 'none';
-
-      const optsContainer = document.getElementById('prova-options-container');
-      optsContainer.innerHTML = '';
-
-      qData.opts.forEach((optText, optIndex) => {
-        const item = document.createElement('div');
-        item.className = 'prova-option-item';
-        if (selectedAnswers[index] === optIndex) {
-          item.classList.add('selected');
+      secoes.forEach(id => {
+        const elemento = document.getElementById(id);
+        if (id === idSecaoDesejada) {
+          elemento.classList.remove('hidden'); // Exibe a tela escolhida
+        } else {
+          elemento.classList.add('hidden'); // Oculta as outras
         }
-        item.innerText = optText;
-        item.onclick = () => selectOption(optIndex);
-        optsContainer.appendChild(item);
       });
 
-      document.getElementById('btn-prev-question').disabled = (index === 0);
-      document.getElementById('btn-next-question').disabled = (index === questionsList.length - 1);
+      // Rola para o topo ao trocar de tela
+      window.scrollTo(0, 0);
     }
 
-    function selectOption(optIndex) {
-      selectedAnswers[currentQuestionIndex] = optIndex;
-      loadQuestion(currentQuestionIndex);
+    // Ação do Gatilho 1: Abrir Tela de Vídeos
+    function abrirVideos(materia) {
+      document.getElementById('video-materia-titulo').innerText = `Conteúdo em Vídeo - ${materia}`;
+      mostrarSecao('tela-video');
     }
 
-    function nextQuestion() {
-      const data = subjectData[currentSubjectKey] || subjectData['portugues'];
-      if (currentQuestionIndex < data.provas.length - 1) {
-        currentQuestionIndex++;
-        loadQuestion(currentQuestionIndex);
-      }
-    }
-
-    function prevQuestion() {
-      if (currentQuestionIndex > 0) {
-        currentQuestionIndex--;
-        loadQuestion(currentQuestionIndex);
-      }
-    }
-
-    /* VERIFICAR RESPOSTA E EXIBIR JUSTIFICATIVA */
-    function verifyCurrentAnswer() {
-      const data = subjectData[currentSubjectKey] || subjectData['portugues'];
-      const qData = data.provas[currentQuestionIndex];
-      const selected = selectedAnswers[currentQuestionIndex];
-      const feedbackBox = document.getElementById('prova-feedback-box');
-
-      if (selected === undefined) {
-        alert('Por favor, selecione uma opção antes de verificar!');
-        return;
-      }
-
-      if (selected === qData.correct) {
-        feedbackBox.className = 'feedback-box correct';
-        feedbackBox.innerText = qData.explanations.correct;
-      } else {
-        feedbackBox.className = 'feedback-box wrong';
-        feedbackBox.innerText = qData.explanations.wrong;
-      }
-      feedbackBox.style.display = 'block';
-    }
-
-    function restartProva() {
-      if (confirm('Deseja reiniciar esta prova? Suas respostas selecionadas nesta matéria serão zeradas.')) {
-        selectedAnswers = {};
-        localStorage.removeItem(`prova_progress_${currentSubjectKey}`);
-        currentQuestionIndex = 0;
-        loadQuestion(0);
-      }
-    }
-
-    function saveProgress() {
-      localStorage.setItem(`prova_progress_${currentSubjectKey}`, JSON.stringify(selectedAnswers));
-      alert('💾 Progresso salvo com sucesso no LocalStorage!');
-    }
-
-    /* AUTENTICAÇÃO */
-    function handleLogin() {
-      const user = document.getElementById('login-user').value.trim();
-      const pass = document.getElementById('login-pass').value.trim();
-      if (user !== '' && pass !== '') {
-        showView('view-dashboard');
-      } else {
-        document.getElementById('login-error-banner').classList.add('show');
-      }
-    }
-
-    function handleRegister() {
-      const user = document.getElementById('reg-user').value.trim();
-      if (user !== '') {
-        showView('view-dashboard');
-      }
-    }
-
-    function handleRecover() {
-      document.getElementById('recovered-pass-text').innerText = 'gb' + Math.floor(100 + Math.random() * 900);
-      document.getElementById('recovered-box').style.display = 'block';
+    // Ação do Gatilho 2: Abrir Tela de Simulado
+    function abrirSimulado(materia, selectId) {
+      const select = document.getElementById(selectId);
+      const provaSelecionada = select.value;
+      
+      document.getElementById('simulado-titulo-questao').innerText = `${materia} (${provaSelecionada}) - Questão 1`;
+      mostrarSecao('tela-simulado');
     }
   </script>
 </body>
