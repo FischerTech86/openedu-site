@@ -1,498 +1,196 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gabaritei - Plataforma de Estudos</title>
-  
-  <style>
-    /* ==========================================
-       1. ESTILOS GERAIS E RESET
-       ========================================== */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    }
-
-    body {
-      background-color: #0b1120;
-      color: #f1f5f9;
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    /* Regra de Ouro: Esconde elementos via JS */
-    .hidden {
-      display: none !important;
-    }
-
-    .btn-voltar {
-      background-color: #1e293b;
-      color: #38bdf8;
-      border: 1px solid #334155;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      margin-bottom: 20px;
-      transition: background 0.2s ease;
-    }
-
-    .btn-voltar:hover {
-      background-color: #334155;
-    }
-
-    /* ==========================================
-       2. TELA 1: PAINEL PRINCIPAL (CARDS)
-       ========================================== */
-    .dashboard {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .header-title {
-      font-size: 2rem;
-      margin-bottom: 24px;
-      color: #38bdf8;
-      text-align: center;
-    }
-
-    .cards-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
-
-    .card {
-      background-color: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 12px;
-      padding: 24px;
-      width: 320px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-    }
-
-    .card-title {
-      font-size: 1.25rem;
-      color: #38bdf8;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .card-topics {
-      list-style-type: none;
-      margin-bottom: 20px;
-      color: #94a3b8;
-      font-size: 0.95rem;
-    }
-
-    .card-topics li {
-      margin-bottom: 6px;
-    }
-
-    .btn-video-link {
-      background: none;
-      border: none;
-      color: #38bdf8;
-      font-weight: bold;
-      cursor: pointer;
-      text-align: left;
-      font-size: 0.95rem;
-      padding: 0;
-      margin-bottom: 20px;
-      display: block;
-      transition: color 0.2s;
-    }
-
-    .btn-video-link:hover {
-      color: #7dd3fc;
-      text-decoration: underline;
-    }
-
-    .divider {
-      border: none;
-      border-top: 1px solid #1e293b;
-      margin-bottom: 16px;
-    }
-
-    .select-label {
-      font-size: 0.85rem;
-      color: #94a3b8;
-      margin-bottom: 8px;
-      display: block;
-    }
-
-    .select-group {
-      display: flex;
-      gap: 8px;
-    }
-
-    .select-group select {
-      flex: 1;
-      background-color: #0b1120;
-      border: 1px solid #2563eb;
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 8px;
-      outline: none;
-    }
-
-    .btn-abrir {
-      background-color: #2563eb;
-      color: #fff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .btn-abrir:hover {
-      background-color: #1d4ed8;
-    }
-
-    /* ==========================================
-       3. TELA 2: VÍDEOS
-       ========================================== */
-    .video-screen {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .video-screen h1 {
-      font-size: 1.8rem;
-      color: #f8fafc;
-    }
-
-    .video-screen h2 {
-      font-size: 1.2rem;
-      color: #94a3b8;
-      margin-bottom: 20px;
-    }
-
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%; /* Proporção 16:9 */
-      height: 0;
-      overflow: hidden;
-      border-radius: 12px;
-      background-color: #000;
-      border: 1px solid #1e293b;
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    /* ==========================================
-       4. TELA 3: SIMULADO + IA (LADO A LADO)
-       ========================================== */
-    .simulado-screen {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    /* Layout de duas colunas com Flexbox */
-    .flex-container {
-      display: flex;
-      gap: 20px;
-      align-items: stretch;
-    }
-
-    .coluna {
-      flex: 1; /* Faz com que ambas as colunas ocupem tamanhos iguais */
-      background-color: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 12px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Coluna Esquerda: Perguntas */
-    .toolbar {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .btn-action {
-      background-color: #1e293b;
-      color: #f1f5f9;
-      border: 1px solid #334155;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.85rem;
-    }
-
-    .btn-action:hover {
-      background-color: #334155;
-    }
-
-    .question-box {
-      margin-bottom: 20px;
-      flex-grow: 1;
-    }
-
-    .question-box h3 {
-      margin-bottom: 12px;
-      font-size: 1.1rem;
-    }
-
-    .options {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .option-label {
-      background-color: #0b1120;
-      border: 1px solid #1e293b;
-      padding: 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: border-color 0.2s;
-    }
-
-    .option-label:hover {
-      border-color: #2563eb;
-    }
-
-    .nav-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid #1e293b;
-    }
-
-    .btn-verificar {
-      background-color: #16a34a;
-      color: #fff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .btn-verificar:hover {
-      background-color: #15803d;
-    }
-
-    /* Coluna Direita: Explicação IA */
-    .ia-header {
-      color: #38bdf8;
-      font-size: 1.2rem;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-bottom: 1px solid #1e293b;
-      padding-bottom: 12px;
-    }
-
-    .ia-content {
-      color: #cbd5e1;
-      line-height: 1.6;
-      font-size: 0.95rem;
-    }
-
-    /* Responsividade para telas menores/celulares */
-    @media (max-width: 900px) {
-      .flex-container {
-        flex-direction: column;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabaritei - Painel de Estudos</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Arquivo CSS Unificado -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="dashboard-body">
 
-  <!-- ==========================================
-       TELA 1: PAINEL PRINCIPAL
-       ========================================== -->
-  <section id="tela-painel" class="dashboard">
-    <h1 class="header-title">🎓 Gabaritei - Painel de Estudos</h1>
-    
-    <div class="cards-grid">
-      <!-- Card: Língua Portuguesa -->
-      <div class="card">
-        <h2 class="card-title">📖 Língua Portuguesa</h2>
-        <ul class="card-topics">
-          <li>• Alfabetização e Ortografia</li>
-          <li>• Leitura e Interpretação</li>
-        </ul>
+    <main class="dashboard-container">
+        <!-- Cabeçalho -->
+        <header class="dashboard-header">
+            <h1>Boas-vindas ao Gabaritei!</h1>
+            <p>Escolha o seu nível de ensino abaixo para acessar os conteúdos organizados por disciplina</p>
+        </header>
 
-        <button class="btn-video-link" onclick="abrirVideos('Língua Portuguesa')">
-          ▶ Clique para abrir Vídeos & Lições
-        </button>
+        <!-- Menu de Tabs -->
+        <nav class="tabs-nav">
+            <button class="tab-btn active" data-target="tab-fund1">
+                <span class="tab-title">1º ao 5º Ano</span>
+                <span class="tab-subtitle">FUNDAMENTAL I</span>
+            </button>
+            <button class="tab-btn" data-target="tab-fund2">
+                <span class="tab-title">6º ao 9º Ano</span>
+                <span class="tab-subtitle">FUNDAMENTAL II</span>
+            </button>
+            <button class="tab-btn" data-target="tab-em">
+                <span class="tab-title">1º ao 3º Ano</span>
+                <span class="tab-subtitle">ENSINO MÉDIO</span>
+            </button>
+            <button class="tab-btn" data-target="tab-sup">
+                <span class="tab-title">Ensino Superior</span>
+                <span class="tab-subtitle">GRADUAÇÃO</span>
+            </button>
+            <button class="tab-btn" data-target="tab-vest">
+                <span class="tab-title">Vestibulares</span>
+                <span class="tab-subtitle">ENEM & PROVAS</span>
+            </button>
+            <button class="tab-btn" data-target="tab-conc">
+                <span class="tab-title">Concursos Públicos</span>
+                <span class="tab-subtitle">CARREIRAS PÚBLICAS</span>
+            </button>
+        </nav>
 
-        <hr class="divider" />
+        <!-- Área de Conteúdo das Tabs -->
+        <section class="tabs-content">
+            
+            <!-- CONTEÚDO: 1º ao 5º Ano (Ativo por padrão) -->
+            <div id="tab-fund1" class="tab-pane active">
+                
+                <!-- Separador de Ano -->
+                <h2 class="year-divider">Conteúdos do 1º Ano</h2>
+                <div class="cards-grid">
+                    
+                    <!-- Cartão 1: Língua Portuguesa -->
+                    <article class="subject-card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-book text-blue"></i>
+                            <h3>Língua Portuguesa</h3>
+                        </div>
+                        <ul class="topic-list">
+                            <li>Alfabetização e Letramento</li>
+                            <li>Gramática básica</li>
+                            <li>Interpretação de texto inicial</li>
+                            <li>Leitura de contos e gêneros textuais</li>
+                        </ul>
+                        <!-- Bloco de Ações -->
+                        <div class="card-actions">
+                            <a href="#" class="action-btn" title="Provas"><i class="fa-solid fa-file-lines"></i><span>Provas</span></a>
+                            <a href="#" class="action-btn" title="Vídeos"><i class="fa-solid fa-circle-play"></i><span>Vídeos</span></a>
+                            <a href="#" class="action-btn" title="Perguntas"><i class="fa-solid fa-circle-question"></i><span>Perguntas</span></a>
+                            <a href="#" class="action-btn" title="Explicações"><i class="fa-solid fa-lightbulb"></i><span>Explicações</span></a>
+                        </div>
+                    </article>
 
-        <span class="select-label">📝 Selecionar Prova Completa:</span>
-        <div class="select-group">
-          <select id="select-portugues">
-            <option value="Prova 2026">Prova 2026</option>
-            <option value="Prova 2025">Prova 2025</option>
-          </select>
-          <button class="btn-abrir" onclick="abrirSimulado('Língua Portuguesa', 'select-portugues')">Abrir</button>
+                    <!-- Cartão 2: Matemática -->
+                    <article class="subject-card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-plus text-purple"></i>
+                            <h3>Matemática</h3>
+                        </div>
+                        <ul class="topic-list">
+                            <li>Quatro operações matemáticas</li>
+                            <li>Frações e porcentagem inicial</li>
+                            <li>Geometria básica e formas</li>
+                            <li>Tabuada e matemática ilustrada</li>
+                        </ul>
+                        <div class="card-actions">
+                            <a href="#" class="action-btn" title="Provas"><i class="fa-solid fa-file-lines"></i><span>Provas</span></a>
+                            <a href="#" class="action-btn" title="Vídeos"><i class="fa-solid fa-circle-play"></i><span>Vídeos</span></a>
+                            <a href="#" class="action-btn" title="Perguntas"><i class="fa-solid fa-circle-question"></i><span>Perguntas</span></a>
+                            <a href="#" class="action-btn" title="Explicações"><i class="fa-solid fa-lightbulb"></i><span>Explicações</span></a>
+                        </div>
+                    </article>
+
+                    <!-- Cartão 3: Ciências -->
+                    <article class="subject-card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-seedling text-green"></i>
+                            <h3>Ciências da Natureza</h3>
+                        </div>
+                        <ul class="topic-list">
+                            <li>Corpo humano e hábitos saudáveis</li>
+                            <li>Ecossistemas e meio ambiente</li>
+                            <li>Sistema solar e planetas</li>
+                            <li>Matéria e energia para crianças</li>
+                        </ul>
+                        <div class="card-actions">
+                            <a href="#" class="action-btn" title="Provas"><i class="fa-solid fa-file-lines"></i><span>Provas</span></a>
+                            <a href="#" class="action-btn" title="Vídeos"><i class="fa-solid fa-circle-play"></i><span>Vídeos</span></a>
+                            <a href="#" class="action-btn" title="Perguntas"><i class="fa-solid fa-circle-question"></i><span>Perguntas</span></a>
+                            <a href="#" class="action-btn" title="Explicações"><i class="fa-solid fa-lightbulb"></i><span>Explicações</span></a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Separador de Ano 2 -->
+                <h2 class="year-divider">Conteúdos do 2º Ano</h2>
+                <div class="cards-grid">
+                    
+                    <!-- Cartão 4: História -->
+                    <article class="subject-card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-hourglass-half text-orange"></i>
+                            <h3>História</h3>
+                        </div>
+                        <ul class="topic-list">
+                            <li>Introdução à História</li>
+                            <li>História da comunidade e família</li>
+                            <li>Linhas do tempo simples</li>
+                            <li>História do Brasil (Colônia)</li>
+                        </ul>
+                        <div class="card-actions">
+                            <a href="#" class="action-btn" title="Provas"><i class="fa-solid fa-file-lines"></i><span>Provas</span></a>
+                            <a href="#" class="action-btn" title="Vídeos"><i class="fa-solid fa-circle-play"></i><span>Vídeos</span></a>
+                            <a href="#" class="action-btn" title="Perguntas"><i class="fa-solid fa-circle-question"></i><span>Perguntas</span></a>
+                            <a href="#" class="action-btn" title="Explicações"><i class="fa-solid fa-lightbulb"></i><span>Explicações</span></a>
+                        </div>
+                    </article>
+
+                    <!-- Cartão 5: Geografia -->
+                    <article class="subject-card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-map text-lightblue"></i>
+                            <h3>Geografia</h3>
+                        </div>
+                        <ul class="topic-list">
+                            <li>Noções de cartografia e mapas</li>
+                            <li>Relevo, clima e vegetação</li>
+                            <li>Organização do espaço brasileiro</li>
+                            <li>Regiões e paisagens regionais</li>
+                        </ul>
+                        <div class="card-actions">
+                            <a href="#" class="action-btn" title="Provas"><i class="fa-solid fa-file-lines"></i><span>Provas</span></a>
+                            <a href="#" class="action-btn" title="Vídeos"><i class="fa-solid fa-circle-play"></i><span>Vídeos</span></a>
+                            <a href="#" class="action-btn" title="Perguntas"><i class="fa-solid fa-circle-question"></i><span>Perguntas</span></a>
+                            <a href="#" class="action-btn" title="Explicações"><i class="fa-solid fa-lightbulb"></i><span>Explicações</span></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Outras Tabs -->
+            <div id="tab-fund2" class="tab-pane">
+                <div class="placeholder-msg">Conteúdos do Fundamental II em breve...</div>
+            </div>
+            <div id="tab-em" class="tab-pane">
+                <div class="placeholder-msg">Conteúdos do Ensino Médio em breve...</div>
+            </div>
+            <div id="tab-sup" class="tab-pane">
+                <div class="placeholder-msg">Conteúdos de Graduação em breve...</div>
+            </div>
+            <div id="tab-vest" class="tab-pane">
+                <div class="placeholder-msg">Conteúdos de Vestibulares em breve...</div>
+            </div>
+            <div id="tab-conc" class="tab-pane">
+                <div class="placeholder-msg">Conteúdos de Concursos Públicos em breve...</div>
+            </div>
+
+        </section>
+        
+        <!-- Botão Sair -->
+        <div class="logout-section">
+            <a href="login.html" class="btn-outline-white">Sair do Sistema</a>
         </div>
-      </div>
+    </main>
 
-      <!-- Card: Matemática (Exemplo Adicional) -->
-      <div class="card">
-        <h2 class="card-title">📐 Matemática</h2>
-        <ul class="card-topics">
-          <li>• Álgebra e Equações</li>
-          <li>• Geometria Plana</li>
-        </ul>
-
-        <button class="btn-video-link" onclick="abrirVideos('Matemática')">
-          ▶ Clique para abrir Vídeos & Lições
-        </button>
-
-        <hr class="divider" />
-
-        <span class="select-label">📝 Selecionar Prova Completa:</span>
-        <div class="select-group">
-          <select id="select-matematica">
-            <option value="Prova 2026">Prova 2026</option>
-            <option value="Prova 2025">Prova 2025</option>
-          </select>
-          <button class="btn-abrir" onclick="abrirSimulado('Matemática', 'select-matematica')">Abrir</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ==========================================
-       TELA 2: CONTEÚDO EM VÍDEO (GATILHO 1)
-       ========================================== -->
-  <section id="tela-video" class="video-screen hidden">
-    <button class="btn-voltar" onclick="mostrarSecao('tela-painel')">← Voltar ao Painel</button>
-    
-    <h1 id="video-materia-titulo">Conteúdo em Vídeo</h1>
-    <h2>📝 Guia Rápido de Estudo</h2>
-
-    <div class="video-container">
-      <!-- Player Responsivo Iframe -->
-      <iframe 
-        id="video-player"
-        src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" 
-        title="Player de Vídeo" 
-        allowfullscreen>
-      </iframe>
-    </div>
-  </section>
-
-
-  <!-- ==========================================
-       TELA 3: SIMULADO + IA LADO A LADO (GATILHO 2)
-       ========================================== -->
-  <section id="tela-simulado" class="simulado-screen hidden">
-    <button class="btn-voltar" onclick="mostrarSecao('tela-painel')">← Voltar ao Painel</button>
-
-    <div class="flex-container">
-      
-      <!-- Coluna da Esquerda: Perguntas -->
-      <div class="coluna">
-        <div class="toolbar">
-          <button class="btn-action">🔄 Reiniciar Prova</button>
-          <button class="btn-action">💾 Salvar Progresso</button>
-        </div>
-
-        <div class="question-box">
-          <h3 id="simulado-titulo-questao">Questão 1: Identifique a alternativa correta</h3>
-          <div class="options">
-            <label class="option-label">
-              <input type="radio" name="opcao" value="A"> A) Opção A sobre a matéria
-            </label>
-            <label class="option-label">
-              <input type="radio" name="opcao" value="B"> B) Opção B sobre a matéria
-            </label>
-            <label class="option-label">
-              <input type="radio" name="opcao" value="C"> C) Opção C sobre a matéria
-            </label>
-          </div>
-        </div>
-
-        <div class="nav-controls">
-          <button class="btn-action">⬅ Anterior</button>
-          <span>Questão 1 de 1</span>
-          <button class="btn-action">Próximo ➡</button>
-          <button class="btn-verificar">Verificar</button>
-        </div>
-      </div>
-
-      <!-- Coluna da Direita: Explicação IA -->
-      <div class="coluna">
-        <div class="ia-header">
-          🤖 Explicações Completas e Resumos Detalhados da IA
-        </div>
-        <div class="ia-content">
-          <p><strong>Resumo do Conteúdo:</strong></p>
-          <p>Selecione uma opção e clique em "Verificar" para que a IA analise sua resposta e exiba a justificativa detalhada com a resolução passo a passo do exercício.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ==========================================
-       5. JAVASCRIPT PURO (LÓGICA DA SPA)
-       ========================================== -->
-  <script>
-    // Função principal de navegação que gerencia a exibição das seções
-    function mostrarSecao(idSecaoDesejada) {
-      // Lista de todas as telas cadastradas
-      const secoes = ['tela-painel', 'tela-video', 'tela-simulado'];
-
-      secoes.forEach(id => {
-        const elemento = document.getElementById(id);
-        if (id === idSecaoDesejada) {
-          elemento.classList.remove('hidden'); // Exibe a tela escolhida
-        } else {
-          elemento.classList.add('hidden'); // Oculta as outras
-        }
-      });
-
-      // Rola para o topo ao trocar de tela
-      window.scrollTo(0, 0);
-    }
-
-    // Ação do Gatilho 1: Abrir Tela de Vídeos
-    function abrirVideos(materia) {
-      document.getElementById('video-materia-titulo').innerText = `Conteúdo em Vídeo - ${materia}`;
-      mostrarSecao('tela-video');
-    }
-
-    // Ação do Gatilho 2: Abrir Tela de Simulado
-    function abrirSimulado(materia, selectId) {
-      const select = document.getElementById(selectId);
-      const provaSelecionada = select.value;
-      
-      document.getElementById('simulado-titulo-questao').innerText = `${materia} (${provaSelecionada}) - Questão 1`;
-      mostrarSecao('tela-simulado');
-    }
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
