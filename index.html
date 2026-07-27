@@ -292,11 +292,11 @@
 
         <!-- Menu de Guias (Níveis de Ensino) -->
         <nav class="tabs-nav">
-            <button class="tab-btn" onclick="trocarGuia('fund1', this)">
+            <button class="tab-btn active" onclick="trocarGuia('fund1', this)">
                 <strong>1º ao 5º Ano</strong>
                 <span>FUNDAMENTAL I</span>
             </button>
-            <button class="tab-btn active" onclick="trocarGuia('fund2', this)">
+            <button class="tab-btn" onclick="trocarGuia('fund2', this)">
                 <strong>6º ao 9º Ano</strong>
                 <span>FUNDAMENTAL II</span>
             </button>
@@ -311,21 +311,140 @@
         </nav>
 
         <!-- GUIA: ENSINO FUNDAMENTAL 1 -->
-        <div id="fund1" class="tab-content">
+        <div id="fund1" class="tab-content active">
             <div class="grid-cards">
-                <div class="card" onclick="abrirModal('Língua Portuguesa (Fund. 1)')">
-                    <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
-                    <ul><li>Alfabetização e Leitura</li><li>Gramática Básica</li></ul>
+                
+                <!-- Língua Portuguesa -->
+                <div class="card" onclick="abrirModal('Língua Portuguesa')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-book c-blue"></i>
+                        <h3>Língua Portuguesa</h3>
+                    </div>
+                    <ul>
+                        <li>Processo de Alfabetização</li>
+                        <li>Prática de Leitura e Escrita</li>
+                        <li>Interpretação de Textos</li>
+                        <li>Gramática e Ortografia Básica</li>
+                    </ul>
                 </div>
-                <div class="card" onclick="abrirModal('Matemática (Fund. 1)')">
-                    <div class="card-header"><i class="fa-solid fa-plus c-purple"></i><h3>Matemática</h3></div>
-                    <ul><li>Operações Básicas</li><li>Geometria Inicial</li></ul>
+
+                <!-- Matemática -->
+                <div class="card" onclick="abrirModal('Matemática')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-plus c-purple"></i>
+                        <h3>Matemática</h3>
+                    </div>
+                    <ul>
+                        <li>Estudo dos Números</li>
+                        <li>Operações Básicas (+, -, ×, ÷)</li>
+                        <li>Geometria Simples</li>
+                        <li>Noções de Medidas e Dinheiro</li>
+                    </ul>
                 </div>
+
+                <!-- Ciências da Natureza -->
+                <div class="card" onclick="abrirModal('Ciências da Natureza')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-seedling c-green"></i>
+                        <h3>Ciências da Natureza</h3>
+                    </div>
+                    <ul>
+                        <li>Estudo do Corpo Humano</li>
+                        <li>Preservação do Meio Ambiente</li>
+                        <li>Hábitos de Saúde e Higiene</li>
+                        <li>Fenômenos da Natureza</li>
+                    </ul>
+                </div>
+
+                <!-- História -->
+                <div class="card" onclick="abrirModal('História')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-hourglass-half c-orange"></i>
+                        <h3>História</h3>
+                    </div>
+                    <ul>
+                        <li>Noções de Identidade e Tempo</li>
+                        <li>História da Família e Escola</li>
+                        <li>Convivência na Comunidade</li>
+                        <li>Cidadania e Transformações</li>
+                    </ul>
+                </div>
+
+                <!-- Geografia -->
+                <div class="card" onclick="abrirModal('Geografia')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-map c-teal"></i>
+                        <h3>Geografia</h3>
+                    </div>
+                    <ul>
+                        <li>Compreensão do Espaço Vivenciado</li>
+                        <li>Estudo de Bairros e Cidades</li>
+                        <li>Mapas Simples e Orientação</li>
+                        <li>Paisagens Naturais e Modificadas</li>
+                    </ul>
+                </div>
+
+                <!-- Artes -->
+                <div class="card" onclick="abrirModal('Artes')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-palette c-pink"></i>
+                        <h3>Artes</h3>
+                    </div>
+                    <ul>
+                        <li>Expressão Criativa e Desenho</li>
+                        <li>Pintura e Formas Visuais</li>
+                        <li>Atividades de Teatro</li>
+                        <li>Música e Ritmo</li>
+                    </ul>
+                </div>
+
+                <!-- Educação Física -->
+                <div class="card" onclick="abrirModal('Educação Física')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-person-running c-red"></i>
+                        <h3>Educação Física</h3>
+                    </div>
+                    <ul>
+                        <li>Desenvolvimento Motor</li>
+                        <li>Jogos e Brincadeiras</li>
+                        <li>Regras de Convivência</li>
+                        <li>Coordenação Corporal</li>
+                    </ul>
+                </div>
+
+                <!-- Ensino Religioso -->
+                <div class="card" onclick="abrirModal('Ensino Religioso')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-hands-praying c-yellow"></i>
+                        <h3>Ensino Religioso</h3>
+                    </div>
+                    <ul>
+                        <li>Valores Éticos e Humanos</li>
+                        <li>Respeito à Diversidade</li>
+                        <li>Cultura de Paz e Empatia</li>
+                        <li>Convivência em Sociedade</li>
+                    </ul>
+                </div>
+
+                <!-- Língua Inglesa -->
+                <div class="card" onclick="abrirModal('Língua Inglesa')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-language c-blue"></i>
+                        <h3>Língua Inglesa</h3>
+                    </div>
+                    <ul>
+                        <li>Vocabulário Inicial</li>
+                        <li>Saudações e Expressões</li>
+                        <li>Cores, Números e Objetos</li>
+                        <li>Escuta e Pronúncia Básica</li>
+                    </ul>
+                </div>
+
             </div>
         </div>
 
         <!-- GUIA: ENSINO FUNDAMENTAL 2 -->
-        <div id="fund2" class="tab-content active">
+        <div id="fund2" class="tab-content">
             <div class="grid-cards">
                 
                 <!-- Língua Portuguesa -->
@@ -405,7 +524,7 @@
                         <h3>Língua Inglesa</h3>
                     </div>
                     <ul>
-                        <li>Gramática e Estruturas Verbalis (Tenses)</li>
+                        <li>Gramática e Estruturas Verbais (Tenses)</li>
                         <li>Interpretação e Leitura (Reading)</li>
                         <li>Vocabulário Temático e Expressões</li>
                         <li>Habilidades de Compreensão Auditiva</li>
@@ -416,7 +535,7 @@
                 <div class="card" onclick="abrirModal('Arte (6º-9º)')">
                     <div class="card-header">
                         <i class="fa-solid fa-palette c-pink"></i>
-                        <h3>Arte</h3>
+                        <h3>Artes</h3>
                     </div>
                     <ul>
                         <li>História da Arte Clássica e Moderna</li>
