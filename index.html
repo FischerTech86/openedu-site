@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabaritei - Painel de Estudos</title>
-    <!-- Fontes e Ícones -->
+    <title>Gabaritei</title>
+    <!-- Fonte Google Poppins & Ícones FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         /* ESTILOS GERAIS */
         * {
@@ -18,62 +18,59 @@
         }
 
         body {
-            background-color: #080c18;
+            background-color: #060913;
             color: #ffffff;
             min-height: 100vh;
-            padding: 30px 20px;
+            padding: 40px 20px;
             display: flex;
             justify-content: center;
         }
 
-        .dashboard-container {
-            max-width: 1200px;
+        .container {
+            max-width: 1100px;
             width: 100%;
-            margin: 0 auto;
         }
 
         /* CABEÇALHO */
-        .dashboard-header {
+        .header {
             text-align: center;
             margin-bottom: 30px;
         }
 
-        .dashboard-header h1 {
+        .header h1 {
             font-size: 2.2rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
-        .dashboard-header p {
-            color: #a0aec0;
-            font-size: 0.95rem;
+        .header p {
+            color: #8a99ad;
+            font-size: 0.9rem;
         }
 
-        /* NAVEGAÇÃO POR TABS */
+        /* BARRA DE NAVEGAÇÃO DE GUIAS (TABS) */
         .tabs-nav {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px;
-            margin-bottom: 35px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
         }
 
         .tab-btn {
-            background: #0f172a;
-            border: 1px solid #1e293b;
-            border-radius: 10px;
-            padding: 12px 15px;
-            color: #94a3b8;
+            background: #0d1527;
+            border: 1px solid #1a263e;
+            border-radius: 12px;
+            padding: 12px 20px;
+            color: #8a99ad;
             cursor: pointer;
             text-align: center;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
+            transition: all 0.2s ease;
         }
 
         .tab-btn:hover {
             border-color: #2563eb;
-            color: #ffffff;
+            color: #fff;
         }
 
         .tab-btn.active {
@@ -83,61 +80,47 @@
             box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
         }
 
-        .tab-title {
-            font-weight: 600;
+        .tab-btn strong {
+            display: block;
             font-size: 0.9rem;
         }
 
-        .tab-subtitle {
-            font-size: 0.7rem;
+        .tab-btn span {
+            font-size: 0.68rem;
             opacity: 0.8;
-            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        /* DIVISOR DE ANO */
-        .year-divider {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin: 25px 0 15px 0;
-            color: #38bdf8;
-            border-bottom: 2px solid #1e293b;
-            padding-bottom: 8px;
-        }
-
-        /* GRID DE CARTÕES DE MATÉRIA */
-        .cards-grid {
+        /* GRID DE CARDs DAS MATÉRIAS */
+        .grid-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 20px;
-            margin-bottom: 20px;
         }
 
-        .subject-card {
-            background: #0f172a;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+        .card {
+            background: #0a1120;
+            border: 1px solid #18253a;
+            border-radius: 14px;
+            padding: 22px;
+            cursor: pointer;
             transition: transform 0.2s ease, border-color 0.2s ease;
         }
 
-        .subject-card:hover {
-            border-color: #334155;
-            transform: translateY(-2px);
+        .card:hover {
+            border-color: #2563eb;
+            transform: translateY(-3px);
         }
 
         .card-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
+            gap: 10px;
+            margin-bottom: 12px;
         }
 
         .card-header i {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
         .card-header h3 {
@@ -145,296 +128,338 @@
             font-weight: 600;
         }
 
-        /* CORES DOS ÍCONES */
-        .text-blue { color: #38bdf8; }
-        .text-purple { color: #c084fc; }
-        .text-green { color: #4ade80; }
-        .text-orange { color: #fb923c; }
-        .text-lightblue { color: #60a5fa; }
-
-        /* LISTA DE TÓPICOS */
-        .topic-list {
+        .card ul {
             list-style: none;
-            margin-bottom: 20px;
         }
 
-        .topic-list li {
+        .card ul li {
+            color: #8a99ad;
             font-size: 0.85rem;
-            color: #94a3b8;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             position: relative;
             padding-left: 15px;
         }
 
-        .topic-list li::before {
+        .card ul li::before {
             content: "•";
             position: absolute;
             left: 0;
-            color: #475569;
+            color: #3b82f6;
         }
 
-        /* BARRA DE AÇÕES/OPÇÕES (PROVAS, VÍDEOS, PERGUNTAS, EXPLICAÇÕES) */
-        .card-actions {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
-            background: #070d19;
-            padding: 8px;
-            border-radius: 8px;
-            border: 1px solid #1e293b;
-        }
+        /* CORES DOS ÍCONES */
+        .c-blue { color: #38bdf8; }
+        .c-purple { color: #a855f7; }
+        .c-green { color: #22c55e; }
+        .c-orange { color: #f97316; }
 
-        .action-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            padding: 8px 4px;
-            background: #1e293b;
-            color: #38bdf8;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.7rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .action-btn i {
-            font-size: 0.9rem;
-        }
-
-        .action-btn:hover {
-            background: #2563eb;
-            color: #ffffff;
-        }
-
-        /* CONTEÚDO DAS TABS */
-        .tab-pane {
+        /* LÓGICA DE GUIAS (OCULTAR/EXIBIR) */
+        .tab-content {
             display: none;
         }
 
-        .tab-pane.active {
+        .tab-content.active {
             display: block;
         }
 
-        .placeholder-msg {
+        /* MODAL / POPUP DE OPÇÕES (PROVAS, EXPLICAÇÃO, PERGUNTAS, VÍDEOS) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #0d1527;
+            border: 1px solid #1e2d4a;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 450px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             text-align: center;
-            padding: 50px;
-            color: #64748b;
-            font-style: italic;
+            position: relative;
+        }
+
+        .modal-box h2 {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+        }
+
+        .modal-box p {
+            color: #8a99ad;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .modal-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: #060913;
+            border: 1px solid #18253a;
+            padding: 15px;
+            border-radius: 10px;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn i {
+            font-size: 1.4rem;
+            color: #38bdf8;
+        }
+
+        .option-btn:hover {
+            border-color: #2563eb;
+            background: #101a30;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #8a99ad;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #fff;
         }
 
         /* BOTÃO DE SAIR */
-        .logout-section {
+        .logout-area {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 50px;
         }
 
-        .btn-outline-white {
-            display: inline-block;
+        .btn-logout {
             padding: 10px 30px;
             border: 1px solid #ffffff;
-            border-radius: 25px;
+            background: transparent;
+            border-radius: 30px;
             color: #ffffff;
-            text-decoration: none;
+            cursor: pointer;
             font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
 
-        .btn-outline-white:hover {
+        .btn-logout:hover {
             background: #ffffff;
-            color: #080c18;
+            color: #060913;
         }
     </style>
 </head>
 <body>
 
-    <main class="dashboard-container">
+    <div class="container">
         <!-- Cabeçalho -->
-        <header class="dashboard-header">
+        <header class="header">
             <h1>Boas-vindas ao Gabaritei!</h1>
             <p>Escolha o seu nível de ensino abaixo para acessar os conteúdos organizados por disciplina</p>
         </header>
 
-        <!-- Menu de Tabs -->
+        <!-- Menu de Guias (Tabs) -->
         <nav class="tabs-nav">
-            <button class="tab-btn active" onclick="switchTab('tab-fund1', this)">
-                <span class="tab-title">1º ao 5º Ano</span>
-                <span class="tab-subtitle">FUNDAMENTAL I</span>
+            <button class="tab-btn active" onclick="trocarGuia('fund1', this)">
+                <strong>1º ao 5º Ano</strong>
+                <span>FUNDAMENTAL I</span>
             </button>
-            <button class="tab-btn" onclick="switchTab('tab-fund2', this)">
-                <span class="tab-title">6º ao 9º Ano</span>
-                <span class="tab-subtitle">FUNDAMENTAL II</span>
+            <button class="tab-btn" onclick="trocarGuia('fund2', this)">
+                <strong>6º ao 9º Ano</strong>
+                <span>FUNDAMENTAL II</span>
             </button>
-            <button class="tab-btn" onclick="switchTab('tab-em', this)">
-                <span class="tab-title">1º ao 3º Ano</span>
-                <span class="tab-subtitle">ENSINO MÉDIO</span>
+            <button class="tab-btn" onclick="trocarGuia('em', this)">
+                <strong>1º ao 3º Ano</strong>
+                <span>ENSINO MÉDIO</span>
             </button>
-            <button class="tab-btn" onclick="switchTab('tab-sup', this)">
-                <span class="tab-title">Ensino Superior</span>
-                <span class="tab-subtitle">GRADUAÇÃO</span>
-            </button>
-            <button class="tab-btn" onclick="switchTab('tab-vest', this)">
-                <span class="tab-title">Vestibulares</span>
-                <span class="tab-subtitle">ENEM & PROVAS</span>
-            </button>
-            <button class="tab-btn" onclick="switchTab('tab-conc', this)">
-                <span class="tab-title">Concursos Públicos</span>
-                <span class="tab-subtitle">CARREIRAS PÚBLICAS</span>
+            <button class="tab-btn" onclick="trocarGuia('superior', this)">
+                <strong>Ensino Superior</strong>
+                <span>GRADUAÇÃO</span>
             </button>
         </nav>
 
-        <!-- Área de Conteúdo das Tabs -->
-        <section class="tabs-content">
-            
-            <!-- CONTEÚDO: 1º ao 5º Ano -->
-            <div id="tab-fund1" class="tab-pane active">
+        <!-- Conteúdo da Guia: Fundamental 1 -->
+        <div id="fund1" class="tab-content active">
+            <div class="grid-cards">
                 
-                <!-- 1º Ano -->
-                <h2 class="year-divider">Conteúdos do 1º Ano</h2>
-                <div class="cards-grid">
-                    
-                    <article class="subject-card">
-                        <div class="card-header">
-                            <i class="fa-solid fa-book text-blue"></i>
-                            <h3>Língua Portuguesa</h3>
-                        </div>
-                        <ul class="topic-list">
-                            <li>Alfabetização e Letramento</li>
-                            <li>Gramática básica</li>
-                            <li>Interpretação de texto inicial</li>
-                            <li>Leitura de contos e gêneros textuais</li>
-                        </ul>
-                        <div class="card-actions">
-                            <a href="#" class="action-btn"><i class="fa-solid fa-file-lines"></i><span>Provas</span></a>
-                            <a href="#" class="action-btn"><i class="fa-solid fa-circle-play"></i><span>Vídeos</span></a>
-                            <a href="#" class="action-btn"><i class="fa-solid fa-circle-question"></i><span>Perguntas</span></a>
-                            <a href="#" class="action-btn"><i class="fa-solid fa-lightbulb"></i><span>Explicações</span></a>
-                        </div>
-                    </article>
-
-                    <article class="subject-card">
-                        <div class="card-header">
-                            <i class="fa-solid fa-plus text-purple"></i>
-                            <h3>Matemática</h3>
-                        </div>
-                        <ul class="topic-list">
-                            <li>Quatro operações matemáticas</li>
-                            <li>Frações e porcentagem inicial</li>
-                            <li>Geometria básica e formas</li>
-                            <li>Tabuada e matemática ilustrada</li>
-                        </ul>
-                        <div class="card-actions">
-                            <a href="#" class="action-btn"><i class="fa-solid fa-file-lines"></i><span>Provas</span></a>
-                            <a href="#" class="action-btn"><i class="fa-solid fa-circle-play"></i><span>Vídeos</span></a>
-                            <a href="#" class="action-btn"><i class="fa-solid fa-circle-question"></i><span>Perguntas</span></a>
-                            <a href="#" class="action-btn"><i class="fa-solid fa-lightbulb"></i><span>Explicações</span></a>
-                        </div>
-                    </article>
-
-                    <article class="subject-card">
-                        <div class="card-header">
-                            <i class="fa-solid fa-seedling text-green"></i>
-                            <h3>Ciências da Natureza</h3>
-                        </div>
-                        <ul class="topic-list">
-                            <li>Corpo humano e hábitos saudáveis</li>
-                            <li>Ecossistemas e meio ambiente</li>
-                            <li>Sistema solar e planetas</li>
-                            <li>Matéria e energia para crianças</li>
-                        </ul>
-                        <div class="card-actions">
-                            <a href="#" class="action-btn"><i class="fa-solid fa-file-lines"></i><span>Provas</span></a>
-                            <a href="#" class="action-btn"><i class="fa-solid fa-circle-play"></i><span>Vídeos</span></a>
-                            <a href="#" class="action-btn"><i class="fa-solid fa-circle-question"></i><span>Perguntas</span></a>
-                            <a href="#" class="action-btn"><i class="fa-solid fa-lightbulb"></i><span>Explicações</span></a>
-                        </div>
-                    </article>
+                <!-- Card 1 -->
+                <div class="card" onclick="abrirModal('Língua Portuguesa')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-book c-blue"></i>
+                        <h3>Língua Portuguesa</h3>
+                    </div>
+                    <ul>
+                        <li>Alfabetização e Letramento</li>
+                        <li>Gramática básica</li>
+                        <li>Interpretação de texto inicial</li>
+                        <li>Leitura de contos e gêneros textuais</li>
+                    </ul>
                 </div>
 
-                <!-- 2º Ano -->
-                <h2 class="year-divider">Conteúdos do 2º Ano</h2>
-                <div class="cards-grid">
-                    
-                    <article class="subject-card">
-                        <div class="card-header">
-                            <i class="fa-solid fa-hourglass-half text-orange"></i>
-                            <h3>História</h3>
-                        </div>
-                        <ul class="topic-list">
-                            <li>Introdução à História</li>
-                            <li>História da comunidade e família</li>
-                            <li>Linhas do tempo simples</li>
-                            <li>História do Brasil (Colônia)</li>
-                        </ul>
-                        <div class="card-actions">
-                            <a href="#" class="action-btn"><i class="fa-solid fa-file-lines"></i><span>Provas</span></a>
-                            <a href="#" class="action-btn"><i class="fa-solid fa-circle-play"></i><span>Vídeos</span></a>
-                            <a href="#" class="action-btn"><i class="fa-solid fa-circle-question"></i><span>Perguntas</span></a>
-                            <a href="#" class="action-btn"><i class="fa-solid fa-lightbulb"></i><span>Explicações</span></a>
-                        </div>
-                    </article>
-
-                    <article class="subject-card">
-                        <div class="card-header">
-                            <i class="fa-solid fa-map text-lightblue"></i>
-                            <h3>Geografia</h3>
-                        </div>
-                        <ul class="topic-list">
-                            <li>Noções de cartografia e mapas</li>
-                            <li>Relevo, clima e vegetação</li>
-                            <li>Organização do espaço brasileiro</li>
-                            <li>Regiões e paisagens regionais</li>
-                        </ul>
-                        <div class="card-actions">
-                            <a href="#" class="action-btn"><i class="fa-solid fa-file-lines"></i><span>Provas</span></a>
-                            <a href="#" class="action-btn"><i class="fa-solid fa-circle-play"></i><span>Vídeos</span></a>
-                            <a href="#" class="action-btn"><i class="fa-solid fa-circle-question"></i><span>Perguntas</span></a>
-                            <a href="#" class="action-btn"><i class="fa-solid fa-lightbulb"></i><span>Explicações</span></a>
-                        </div>
-                    </article>
+                <!-- Card 2 -->
+                <div class="card" onclick="abrirModal('Matemática')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-plus c-purple"></i>
+                        <h3>Matemática</h3>
+                    </div>
+                    <ul>
+                        <li>Quatro operações matemáticas</li>
+                        <li>Frações e porcentagem inicial</li>
+                        <li>Geometria básica e formas</li>
+                        <li>Tabuada e matemática ilustrada</li>
+                    </ul>
                 </div>
-            </div>
 
-            <!-- Outras Tabs -->
-            <div id="tab-fund2" class="tab-pane">
-                <div class="placeholder-msg">Conteúdos do Fundamental II em breve...</div>
-            </div>
-            <div id="tab-em" class="tab-pane">
-                <div class="placeholder-msg">Conteúdos do Ensino Médio em breve...</div>
-            </div>
-            <div id="tab-sup" class="tab-pane">
-                <div class="placeholder-msg">Conteúdos de Graduação em breve...</div>
-            </div>
-            <div id="tab-vest" class="tab-pane">
-                <div class="placeholder-msg">Conteúdos de Vestibulares em breve...</div>
-            </div>
-            <div id="tab-conc" class="tab-pane">
-                <div class="placeholder-msg">Conteúdos de Concursos Públicos em breve...</div>
-            </div>
+                <!-- Card 3 -->
+                <div class="card" onclick="abrirModal('Ciências da Natureza')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-seedling c-green"></i>
+                        <h3>Ciências da Natureza</h3>
+                    </div>
+                    <ul>
+                        <li>Corpo humano e hábitos saudáveis</li>
+                        <li>Ecossistemas e meio ambiente</li>
+                        <li>Sistema solar e planetas</li>
+                        <li>Matéria e energia para crianças</li>
+                    </ul>
+                </div>
 
-        </section>
-        
-        <div class="logout-section">
-            <a href="#" class="btn-outline-white">Sair do Sistema</a>
+                <!-- Card 4 -->
+                <div class="card" onclick="abrirModal('História')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-hourglass-half c-orange"></i>
+                        <h3>História</h3>
+                    </div>
+                    <ul>
+                        <li>Introdução à História</li>
+                        <li>História da comunidade e família</li>
+                        <li>Linhas do tempo simples</li>
+                        <li>História do Brasil (Colônia)</li>
+                    </ul>
+                </div>
+
+            </div>
         </div>
-    </main>
 
+        <!-- Conteúdo da Guia: Fundamental 2 -->
+        <div id="fund2" class="tab-content">
+            <div class="grid-cards">
+                <div class="card" onclick="abrirModal('Matemática Avançada')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-calculator c-purple"></i>
+                        <h3>Matemática 6º-9º</h3>
+                    </div>
+                    <ul>
+                        <li>Álgebra e Equações</li>
+                        <li>Geometria Espacial</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo da Guia: Ensino Médio -->
+        <div id="em" class="tab-content">
+            <div class="grid-cards">
+                <div class="card" onclick="abrirModal('Física & Química')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-atom c-blue"></i>
+                        <h3>Física & Química</h3>
+                    </div>
+                    <ul>
+                        <li>Cinemática e Mecânica</li>
+                        <li>Tabela Periódica</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo da Guia: Superior -->
+        <div id="superior" class="tab-content">
+            <p style="text-align: center; color: #8a99ad;">Conteúdo de Graduação em breve...</p>
+        </div>
+
+        <div class="logout-area">
+            <button class="btn-logout">Sair do Sistema</button>
+        </div>
+    </div>
+
+    <!-- POPUP / MODAL (Onde o aluno escolhe o recurso) -->
+    <div class="modal-overlay" id="modalRecursos">
+        <div class="modal-box">
+            <button class="close-btn" onclick="fecharModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h2 id="modalTitulo">Nome da Matéria</h2>
+            <p>Selecione o tipo de conteúdo que deseja acessar:</p>
+
+            <div class="modal-options">
+                <a href="#" class="option-btn">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>Provas</span>
+                </a>
+                <a href="#" class="option-btn">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <span>Explicações</span>
+                </a>
+                <a href="#" class="option-btn">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span>Perguntas</span>
+                </a>
+                <a href="#" class="option-btn">
+                    <i class="fa-solid fa-circle-play"></i>
+                    <span>Vídeos</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT SIMPLES PARA MUDAR GUIAS E ABRIR MODAL -->
     <script>
-        function switchTab(targetId, buttonElement) {
-            // Oculta todas as tabs
-            const panes = document.querySelectorAll('.tab-pane');
-            panes.forEach(pane => pane.classList.remove('active'));
+        // Função para trocar de abas/guias
+        function trocarGuia(idGuia, elementoBotao) {
+            // Oculta todas as guias
+            const guias = document.querySelectorAll('.tab-content');
+            guias.forEach(g => g.classList.remove('active'));
 
-            // Remove a classe active de todos os botões
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
+            // Remove a seleção de todos os botões
+            const botoes = document.querySelectorAll('.tab-btn');
+            botoes.forEach(b => b.classList.remove('active'));
 
-            // Ativa a tab e o botão clicado
-            document.getElementById(targetId).classList.add('active');
-            buttonElement.classList.add('active');
+            // Ativa a guia e o botão clicado
+            document.getElementById(idGuia).classList.add('active');
+            elementoBotao.classList.add('active');
+        }
+
+        // Funções para abrir/fechar o Modal de opções
+        function abrirModal(nomeMateria) {
+            document.getElementById('modalTitulo').innerText = nomeMateria;
+            document.getElementById('modalRecursos').classList.add('active');
+        }
+
+        function fecharModal() {
+            document.getElementById('modalRecursos').classList.remove('active');
         }
     </script>
 </body>
