@@ -91,7 +91,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* SUB-FILTROS DE ANOS / SÉRIES */
+        /* SUB-FILTROS DE ANOS / SÉRIES / ÁREAS */
         .years-subnav {
             display: flex;
             justify-content: center;
@@ -346,7 +346,7 @@
         <!-- Cabeçalho Principal -->
         <header class="header">
             <h1>Boas-vindas ao Gabaritei!</h1>
-            <p>Escolha o seu nível de ensino e a sua série para acessar o conteúdo correto</p>
+            <p>Escolha o seu nível de ensino ou área para acessar o conteúdo correto</p>
         </header>
 
         <!-- Menu de Guias Principais -->
@@ -366,6 +366,10 @@
             <button class="tab-btn" onclick="trocarGuia('superior', this)">
                 <strong>Ensino Superior</strong>
                 <span>GRADUAÇÃO</span>
+            </button>
+            <button class="tab-btn" onclick="trocarGuia('concurso', this)">
+                <strong>Concurso Público</strong>
+                <span>CARREIRAS</span>
             </button>
         </nav>
 
@@ -389,7 +393,7 @@
                             <li>Alfabetização e Consciência Fonológica</li>
                             <li>Vogais, Encontros Vocálicos e Consoantes</li>
                             <li>Formação de Sílabas e Palavras Simples</li>
-                            <li>Leitura Guiada de Rimas e Parendas</li>
+                            <li>Leitura Guiada de Rimas e Parlendas</li>
                         </ul>
                     </div>
                     <div class="card" onclick="abrirModal('Matemática - 1º Ano')">
@@ -398,7 +402,7 @@
                             <li>Contagem e Reconhecimento de Números</li>
                             <li>Adição e Subtração Simples (Até 20)</li>
                             <li>Formas Geométricas Básicas</li>
-                            <li>Nções de Tamanho e Posição</li>
+                            <li>Noções de Tamanho e Posição</li>
                         </ul>
                     </div>
                     <div class="card" onclick="abrirModal('Ciências da Natureza - 1º Ano')">
@@ -507,7 +511,7 @@
                         <div class="card-header"><i class="fa-solid fa-plus c-purple"></i><h3>Matemática</h3></div>
                         <ul>
                             <li>Centenas e Números até 1.000</li>
-                            <li>Tabuada e Taboas da Multiplicação</li>
+                            <li>Tabuada e Táboas da Multiplicação</li>
                             <li>Introdução à Divisão exata</li>
                             <li>Horas e Medidas de Comprimento (cm, m)</li>
                         </ul>
@@ -814,7 +818,7 @@
                     <div class="card" onclick="abrirModal('Língua Portuguesa - 9º Ano')">
                         <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
                         <ul>
-                            <li>Periodo Composto por Coordenação e Subordinação</li>
+                            <li>Período Composto por Coordenação e Subordinação</li>
                             <li>Regência Verbal/Nominal e Crase</li>
                             <li>Coesão, Coerência e Figuras de Linguagem</li>
                             <li>Dissertação Argumentativa e Redação</li>
@@ -1264,6 +1268,179 @@
 
         </div>
 
+        <!-- ==================== GUIA 5: CONCURSO PÚBLICO ==================== -->
+        <div id="concurso" class="tab-content">
+            <!-- Sub-Menu de Áreas -->
+            <div class="years-subnav">
+                <button class="year-btn active" onclick="trocarAno('concurso', 'conc-policial', this)">Área Policial</button>
+                <button class="year-btn" onclick="trocarAno('concurso', 'conc-tribunais', this)">Tribunais e Jurídica</button>
+                <button class="year-btn" onclick="trocarAno('concurso', 'conc-admin', this)">Área Administrativa</button>
+                <button class="year-btn" onclick="trocarAno('concurso', 'conc-fiscal', this)">Fiscal e Controle</button>
+            </div>
+
+            <!-- ÁREA POLICIAL -->
+            <div id="conc-policial" class="year-content active">
+                <div class="grid-cards">
+                    <div class="card" onclick="abrirModal('Direito Penal - Policial')">
+                        <div class="card-header"><i class="fa-solid fa-shield-halved c-red"></i><h3>Direito Penal</h3></div>
+                        <ul>
+                            <li>Crimes contra a pessoa</li>
+                            <li>Crimes contra o patrimônio</li>
+                            <li>Crimes contra a Administração Pública</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" onclick="abrirModal('Direito Processual Penal - Policial')">
+                        <div class="card-header"><i class="fa-solid fa-scale-balanced c-yellow"></i><h3>Direito Processual Penal</h3></div>
+                        <ul>
+                            <li>Inquérito policial</li>
+                            <li>Prisão em flagrante</li>
+                            <li>Provas</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" onclick="abrirModal('Legislação Penal Especial - Policial')">
+                        <div class="card-header"><i class="fa-solid fa-handcuffs c-orange"></i><h3>Legislação Penal Especial</h3></div>
+                        <ul>
+                            <li>Lei de Drogas</li>
+                            <li>Estatuto do Desarmamento</li>
+                            <li>Lei Maria da Penha</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" onclick="abrirModal('Criminologia e Direitos Humanos - Policial')">
+                        <div class="card-header"><i class="fa-solid fa-hand-holding-hand c-blue"></i><h3>Criminologia e Direitos Humanos</h3></div>
+                        <ul>
+                            <li>Conceitos de crime</li>
+                            <li>Tratados internacionais</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" onclick="abrirModal('Contabilidade e Estatística - Policial')">
+                        <div class="card-header"><i class="fa-solid fa-calculator c-purple"></i><h3>Contabilidade Geral e Estatística</h3></div>
+                        <ul>
+                            <li>Contabilidade para Agente (PF)</li>
+                            <li>Estatística Descritiva e Inferencial</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRIBUNAIS E JURÍDICA -->
+            <div id="conc-tribunais" class="year-content">
+                <div class="grid-cards">
+                    <div class="card" onclick="abrirModal('Direito Processual Civil - Tribunais')">
+                        <div class="card-header"><i class="fa-solid fa-gavel c-blue"></i><h3>Direito Processual Civil</h3></div>
+                        <ul>
+                            <li>Prazos e recursos</li>
+                            <li>Petição inicial</li>
+                            <li>Execução de sentenças</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" onclick="abrirModal('Direito Civil - Tribunais')">
+                        <div class="card-header"><i class="fa-solid fa-book-bookmark c-purple"></i><h3>Direito Civil</h3></div>
+                        <ul>
+                            <li>Bens e pessoas jurídicas</li>
+                            <li>Contratos</li>
+                            <li>Obrigações</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" onclick="abrirModal('Direito do Trabalho - TRT')">
+                        <div class="card-header"><i class="fa-solid fa-user-tie c-teal"></i><h3>Direito do Trabalho e Processual</h3></div>
+                        <ul>
+                            <li>Exclusivo para Tribunais Regionais do Trabalho (TRT)</li>
+                            <li>Relações de trabalho e processo trabalhista</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" onclick="abrirModal('Direito Eleitoral - TRE')">
+                        <div class="card-header"><i class="fa-solid fa-check-to-slot c-green"></i><h3>Direito Eleitoral</h3></div>
+                        <ul>
+                            <li>Exclusivo para Tribunais Regionais Eleitorais (TRE)</li>
+                            <li>Legislação e processo eleitoral</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ÁREA ADMINISTRATIVA -->
+            <div id="conc-admin" class="year-content">
+                <div class="grid-cards">
+                    <div class="card" onclick="abrirModal('Administração Geral - Administrativa')">
+                        <div class="card-header"><i class="fa-solid fa-sitemap c-indigo"></i><h3>Administração Geral</h3></div>
+                        <ul>
+                            <li>Teorias administrativas</li>
+                            <li>Motivação e liderança</li>
+                            <li>Processos organizacionais</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" onclick="abrirModal('Administração Pública - Administrativa')">
+                        <div class="card-header"><i class="fa-solid fa-building-columns c-blue"></i><h3>Administração Pública</h3></div>
+                        <ul>
+                            <li>Gestão da qualidade no setor público</li>
+                            <li>Governança e transparência</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" onclick="abrirModal('AFO - Administrativa')">
+                        <div class="card-header"><i class="fa-solid fa-coins c-yellow"></i><h3>Admin. Financeira e Orçamentária (AFO)</h3></div>
+                        <ul>
+                            <li>Orçamento público</li>
+                            <li>PPA, LDO e LOA</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" onclick="abrirModal('Arquivologia - Administrativa')">
+                        <div class="card-header"><i class="fa-solid fa-box-archive c-orange"></i><h3>Arquivologia</h3></div>
+                        <ul>
+                            <li>Gestão de documentos</li>
+                            <li>Protocolo e técnicas de arquivamento</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FISCAL E CONTROLE -->
+            <div id="conc-fiscal" class="year-content">
+                <div class="grid-cards">
+                    <div class="card" onclick="abrirModal('Direito Tributário - Fiscal')">
+                        <div class="card-header"><i class="fa-solid fa-file-invoice-dollar c-green"></i><h3>Direito Tributário</h3></div>
+                        <ul>
+                            <li>Impostos, taxas e contribuições</li>
+                            <li>Código Tributário Nacional (CTN)</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" onclick="abrirModal('Contabilidade Geral e Avançada - Fiscal')">
+                        <div class="card-header"><i class="fa-solid fa-chart-pie c-purple"></i><h3>Contabilidade Geral e Avançada</h3></div>
+                        <ul>
+                            <li>Balanço patrimonial e DRE</li>
+                            <li>Escrituração e auditoria</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" onclick="abrirModal('Auditoria Governamental - Fiscal')">
+                        <div class="card-header"><i class="fa-solid fa-magnifying-glass-dollar c-red"></i><h3>Auditoria Governamental</h3></div>
+                        <ul>
+                            <li>Técnicas de fiscalização de contas públicas</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" onclick="abrirModal('Economia e Finanças Públicas - Fiscal')">
+                        <div class="card-header"><i class="fa-solid fa-chart-line c-teal"></i><h3>Economia e Finanças Públicas</h3></div>
+                        <ul>
+                            <li>Macroeconomia e microeconomia</li>
+                            <li>Política fiscal</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
         <!-- Botão Sair do Sistema -->
         <div class="logout-area">
             <button class="btn-logout">Sair do Sistema</button>
@@ -1300,7 +1477,7 @@
 
     <!-- SCRIPT DE NAVEGAÇÃO E INTERAÇÃO -->
     <script>
-        // Alternar as abas principais (Níveis de ensino)
+        // Alternar as abas principais (Níveis de ensino / Carreiras)
         function trocarGuia(idGuia, elementoBotao) {
             const guias = document.querySelectorAll('.tab-content');
             guias.forEach(g => g.classList.remove('active'));
@@ -1312,19 +1489,19 @@
             elementoBotao.classList.add('active');
         }
 
-        // Alternar os sub-filtros de Anos/Séries dentro de cada aba
+        // Alternar os sub-filtros de Anos/Séries/Áreas dentro de cada aba
         function trocarAno(idAbaPai, idAno, elementoBotao) {
             const containerAba = document.getElementById(idAbaPai);
             
-            // Esconde todas as séries da aba atual
+            // Esconde todas as séries/áreas da aba atual
             const anos = containerAba.querySelectorAll('.year-content');
             anos.forEach(a => a.classList.remove('active'));
 
-            // Remove classe ativa dos botões de ano dessa aba
+            // Remove classe ativa dos botões de ano/área dessa aba
             const botoesAno = containerAba.querySelectorAll('.year-btn');
             botoesAno.forEach(b => b.classList.remove('active'));
 
-            // Mostra o ano selecionado e ativa o botão
+            // Mostra o ano/área selecionado e ativa o botão
             document.getElementById(idAno).classList.add('active');
             elementoBotao.classList.add('active');
         }
