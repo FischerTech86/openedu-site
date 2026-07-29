@@ -225,14 +225,14 @@
             display: block;
         }
 
-        /* POPUP / MODAL */
+        /* POPUP / MODAL EXPANSIBILIZADO */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(6px);
             display: none;
             justify-content: center;
@@ -249,7 +249,9 @@
             border: 1px solid #1e2e48;
             border-radius: 16px;
             width: 90%;
-            max-width: 440px;
+            max-width: 650px;
+            max-height: 85vh;
+            overflow-y: auto;
             padding: 28px 24px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             text-align: center;
@@ -262,7 +264,7 @@
             font-weight: 700;
         }
 
-        .modal-box p {
+        .modal-box p.subtitle {
             color: #8a99ad;
             font-size: 0.82rem;
             margin-bottom: 22px;
@@ -280,7 +282,7 @@
             padding: 16px 10px;
             border-radius: 10px;
             color: #ffffff;
-            text-decoration: none;
+            cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -314,6 +316,88 @@
 
         .close-btn:hover {
             color: #ffffff;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 16px;
+            left: 18px;
+            background: none;
+            border: none;
+            color: #38bdf8;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+        }
+
+        /* ESTILOS DO CONTEÚDO DETALHADO DO MODAL */
+        .details-container {
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .details-container h3 {
+            font-size: 1.1rem;
+            color: #38bdf8;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #18263e;
+            padding-bottom: 8px;
+        }
+
+        .details-container h4 {
+            font-size: 0.95rem;
+            color: #ffffff;
+            margin: 15px 0 8px 0;
+        }
+
+        .details-container p {
+            font-size: 0.85rem;
+            color: #a3b8cc;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .details-container ul {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        .details-container ul li {
+            font-size: 0.85rem;
+            color: #8a99ad;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 18px;
+            line-height: 1.4;
+        }
+
+        .details-container ul li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+            font-size: 0.75rem;
+        }
+
+        .details-container .video-item {
+            background: #050811;
+            border: 1px solid #18263e;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .details-container .video-item h5 {
+            color: #38bdf8;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
         }
 
         /* BOTÃO DE SAIR DO SISTEMA */
@@ -387,7 +471,7 @@
             <!-- 1º ANO FUND I -->
             <div id="f1-1ano" class="year-content active">
                 <div class="grid-cards">
-                    <div class="card" onclick="abrirModal('Língua Portuguesa - 1º Ano')">
+                    <div class="card" onclick="abrirModal('Língua Portuguesa - 1º Ano', 'port1')">
                         <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
                         <ul>
                             <li>Alfabetização e Consciência Fonológica</li>
@@ -649,797 +733,11 @@
             </div>
         </div>
 
-        <!-- ==================== GUIA 2: FUNDAMENTAL II ==================== -->
-        <div id="fund2" class="tab-content">
-            <!-- Sub-Menu de Anos -->
-            <div class="years-subnav">
-                <button class="year-btn active" onclick="trocarAno('fund2', 'f2-6ano', this)">6º Ano</button>
-                <button class="year-btn" onclick="trocarAno('fund2', 'f2-7ano', this)">7º Ano</button>
-                <button class="year-btn" onclick="trocarAno('fund2', 'f2-8ano', this)">8º Ano</button>
-                <button class="year-btn" onclick="trocarAno('fund2', 'f2-9ano', this)">9º Ano</button>
-            </div>
-
-            <!-- 6º ANO FUND II -->
-            <div id="f2-6ano" class="year-content active">
-                <div class="grid-cards">
-                    <div class="card" onclick="abrirModal('Língua Portuguesa - 6º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
-                        <ul>
-                            <li>Classes de Palavras (Substantivo, Artigo, Adjetivo)</li>
-                            <li>Elementos da Narrativa e Tipos de Discurso</li>
-                            <li>Variedades Linguísticas e Normas Cultas</li>
-                            <li>Pontuação e Acentuação Gráfica</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Matemática - 6º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-calculator c-purple"></i><h3>Matemática</h3></div>
-                        <ul>
-                            <li>Conjunto dos Números Naturais e Decimais</li>
-                            <li>MDC, MMC e Critérios de Divisibilidade</li>
-                            <li>Operações com Frações e Potenciação</li>
-                            <li>Ângulos, Polígonos e Unidades de Medida</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Ciências - 6º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-flask c-green"></i><h3>Ciências da Natureza</h3></div>
-                        <ul>
-                            <li>Células e Organização dos Seres Vivos</li>
-                            <li>Camadas da Terra e Tipos de Rochas</li>
-                            <li>Misturas Homogêneas e Heterogêneas</li>
-                            <li>Sistema Locomotor e Nervoso</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('História - 6º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-landmark c-orange"></i><h3>História</h3></div>
-                        <ul>
-                            <li>Pré-História e Origem da Humanidade</li>
-                            <li>Mesopotâmia e Egito Antigo</li>
-                            <li>Grécia Antiga (Democracia e Cultura)</li>
-                            <li>Roma Antiga (da República ao Império)</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Geografia - 6º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-earth-americas c-teal"></i><h3>Geografia</h3></div>
-                        <ul>
-                            <li>Orientação e Coordenadas Geográficas</li>
-                            <li>Estrutura Interna da Terra e Tectônica</li>
-                            <li>Climas da Terra e Agentes do Relevo</li>
-                            <li>A Bacia Hidrográfica e Relevo Continental</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 7º ANO FUND II -->
-            <div id="f2-7ano" class="year-content">
-                <div class="grid-cards">
-                    <div class="card" onclick="abrirModal('Língua Portuguesa - 7º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
-                        <ul>
-                            <li>Sujeito e Predicado (Estrutura da Oração)</li>
-                            <li>Verbos: Modos, Tempos e Regência Simples</li>
-                            <li>Gêneros Noticiosos e Textos de Opinião</li>
-                            <li>Advérbios, Preposições e Conjunções</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Matemática - 7º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-calculator c-purple"></i><h3>Matemática</h3></div>
-                        <ul>
-                            <li>Números Inteiros (Positivos e Negativos)</li>
-                            <li>Equações e Inequações de 1º Grau</li>
-                            <li>Razão, Proporção e Regra de Três Simples</li>
-                            <li>Simetria, Transformações e Probabilidade</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Ciências - 7º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-flask c-green"></i><h3>Ciências da Natureza</h3></div>
-                        <ul>
-                            <li>Reinos dos Seres Vivos (Vírus, Bactérias, Fungos)</li>
-                            <li>Biodiversidade Brasileira e Biomas</li>
-                            <li>Máquinas Simples e Formas de Calor/Temperatura</li>
-                            <li>Ecologia e Equilíbrio Ambiental</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('História - 7º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-landmark c-orange"></i><h3>História</h3></div>
-                        <ul>
-                            <li>Idade Média e Feudalismo</li>
-                            <li>Renascimento Cultural e Reforma Religiosa</li>
-                            <li>Reinos Africanos e Povos Pré-Colombianos</li>
-                            <li>Brasil Colônia: Engenhos e Ouro</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Geografia - 7º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-earth-americas c-teal"></i><h3>Geografia</h3></div>
-                        <ul>
-                            <li>Território e Formação do Brasil</li>
-                            <li>Domínios Morfoclimáticos e Biomas do Brasil</li>
-                            <li>Demografia Brasileira e Migrações</li>
-                            <li>Urbanização e Industrialização no Brasil</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 8º ANO FUND II -->
-            <div id="f2-8ano" class="year-content">
-                <div class="grid-cards">
-                    <div class="card" onclick="abrirModal('Língua Portuguesa - 8º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
-                        <ul>
-                            <li>Complementos Verbais e Nominais (Objetos)</li>
-                            <li>Vozes Verbais (Ativa, Passiva e Reflexiva)</li>
-                            <li>Aposto, Vocativo e Orações Subordinadas</li>
-                            <li>Artigos de Opinião e Debate Regrado</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Matemática - 8º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-calculator c-purple"></i><h3>Matemática</h3></div>
-                        <ul>
-                            <li>Cálculo Algébrico e Polinômios</li>
-                            <li>Produtos Notáveis e Fatoração</li>
-                            <li>Sistemas de Equações do 1º Grau</li>
-                            <li>Geometria: Triângulos e Teorema de Tales</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Ciências - 8º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-flask c-green"></i><h3>Ciências da Natureza</h3></div>
-                        <ul>
-                            <li>Anatomia Humana Avançada e Fisiologia</li>
-                            <li>Sistema Endócrino e Reprodução Humana</li>
-                            <li>Eletricidade e Redes de Energia</li>
-                            <li>Fases da Lua, Eclipses e Clima Terrestre</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('História - 8º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-landmark c-orange"></i><h3>História</h3></div>
-                        <ul>
-                            <li>Iluminismo e Revolução Francesa</li>
-                            <li>Revolução Industrial e Suas Consequências</li>
-                            <li>Independência das Américas e do Brasil</li>
-                            <li>Brasil Império (Primeiro e Segundo Reinado)</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Geografia - 8º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-earth-americas c-teal"></i><h3>Geografia</h3></div>
-                        <ul>
-                            <li>Regionalização do Continente Americano</li>
-                            <li>América do Norte, Central e do Sul</li>
-                            <li>Continente Africano: Aspectos Físicos e Humanos</li>
-                            <li>Geopolítica Global e Países Desenvolvidos</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 9º ANO FUND II -->
-            <div id="f2-9ano" class="year-content">
-                <div class="grid-cards">
-                    <div class="card" onclick="abrirModal('Língua Portuguesa - 9º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
-                        <ul>
-                            <li>Período Composto por Coordenação e Subordinação</li>
-                            <li>Regência Verbal/Nominal e Crase</li>
-                            <li>Coesão, Coerência e Figuras de Linguagem</li>
-                            <li>Dissertação Argumentativa e Redação</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Matemática - 9º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-calculator c-purple"></i><h3>Matemática</h3></div>
-                        <ul>
-                            <li>Equações do 2º Grau (Fórmula de Bhaskara)</li>
-                            <li>Funções do 1º e 2º Grau</li>
-                            <li>Teorema de Pitágoras e Trigonometria no Triângulo</li>
-                            <li>Estatística Avançada e Análise de Gráficos</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Física e Química - 9º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-flask c-green"></i><h3>Física e Química</h3></div>
-                        <ul>
-                            <li>Estrutura Atômica e Tabela Periódica</li>
-                            <li>Ligações Químicas e Reações Químicas</li>
-                            <li>Movimento, Velocidade e Leis de Newton</li>
-                            <li>Ondas, Som, Luz e Radiação</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('História - 9º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-landmark c-orange"></i><h3>História</h3></div>
-                        <ul>
-                            <li>Proclamação da República no Brasil</li>
-                            <li>Primeira e Segunda Guerra Mundial</li>
-                            <li>Era Vargas e Ditadura Militar no Brasil</li>
-                            <li>Guerra Fria e Globalização Recente</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Geografia - 9º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-earth-americas c-teal"></i><h3>Geografia</h3></div>
-                        <ul>
-                            <li>Europa, Ásia e Oceania</li>
-                            <li>Blocos Econômicos Globais</li>
-                            <li>A Nova Ordem Mundial e Conflitos Recentes</li>
-                            <li>Impactos Ambientais Globais</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==================== GUIA 3: ENSINO MÉDIO ==================== -->
-        <div id="em" class="tab-content">
-            <!-- Sub-Menu de Anos -->
-            <div class="years-subnav">
-                <button class="year-btn active" onclick="trocarAno('em', 'em-1ano', this)">1º Ano EM</button>
-                <button class="year-btn" onclick="trocarAno('em', 'em-2ano', this)">2º Ano EM</button>
-                <button class="year-btn" onclick="trocarAno('em', 'em-3ano', this)">3º Ano EM</button>
-            </div>
-
-            <!-- 1º ANO EM -->
-            <div id="em-1ano" class="year-content active">
-                <div class="grid-cards">
-                    <div class="card" onclick="abrirModal('Língua Portuguesa e Literatura - 1º EM')">
-                        <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa e Literatura</h3></div>
-                        <ul>
-                            <li>Linguagem, Texto e Enunciado</li>
-                            <li>Trovadorismo, Humanismo e Classicismo</li>
-                            <li>Quinhentismo e Barroco no Brasil</li>
-                            <li>Estrutura da Redação estilo ENEM</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Matemática - 1º EM')">
-                        <div class="card-header"><i class="fa-solid fa-calculator c-purple"></i><h3>Matemática</h3></div>
-                        <ul>
-                            <li>Conjuntos Numéricos e Relações</li>
-                            <li>Função Afim (1º Grau) e Quadrática (2º Grau)</li>
-                            <li>Função Exponencial e Logaritmos</li>
-                            <li>Geometria Plana Avançada</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Física - 1º EM')">
-                        <div class="card-header"><i class="fa-solid fa-bolt c-yellow"></i><h3>Física</h3></div>
-                        <ul>
-                            <li>Cinemática (MRU e MRUV)</li>
-                            <li>Vetores e Movimento Circular</li>
-                            <li>Dinâmica e Leis de Newton</li>
-                            <li>Trabalho, Energia e Conservação</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Química - 1º EM')">
-                        <div class="card-header"><i class="fa-solid fa-flask c-teal"></i><h3>Química</h3></div>
-                        <ul>
-                            <li>Modelos Atômicos e Tabela Periódica</li>
-                            <li>Ligações Químicas (Iônica, Covalente, Metálica)</li>
-                            <li>Funções Inorgânicas (Ácidos, Bases, Sais, Óxidos)</li>
-                            <li>Reações Químicas e Estequiometria Básica</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Biologia - 1º EM')">
-                        <div class="card-header"><i class="fa-solid fa-dna c-green"></i><h3>Biologia</h3></div>
-                        <ul>
-                            <li>Bioquímica Celular (Água, Proteínas, Lipídios)</li>
-                            <li>Citologia: Organelas Celulares e Membrana</li>
-                            <li>Metabolismo Energético (Fotossíntese e Respiração)</li>
-                            <li>Divisão Celular (Mitose e Meiose)</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('História - 1º EM')">
-                        <div class="card-header"><i class="fa-solid fa-landmark c-orange"></i><h3>História</h3></div>
-                        <ul>
-                            <li>Antiguidade Oriental e Clássica</li>
-                            <li>Mundo Feudal e Expansão Marítima</li>
-                            <li>América Colonial e Sociedade Açucareira</li>
-                            <li>Absolutismo e Iluminismo</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Geografia - 1º EM')">
-                        <div class="card-header"><i class="fa-solid fa-globe c-teal"></i><h3>Geografia</h3></div>
-                        <ul>
-                            <li>Cartografia, Projeções e Fuso Horário</li>
-                            <li>Geologia, Relevo e Tectônica de Placas</li>
-                            <li>Climatologia e Biomas Terrestres</li>
-                            <li>Hidrografia e Recurso Hídrico</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Filosofia e Sociologia - 1º EM')">
-                        <div class="card-header"><i class="fa-solid fa-brain c-indigo"></i><h3>Filosofia e Sociologia</h3></div>
-                        <ul>
-                            <li>Surgimento da Filosofia e Pré-Socráticos</li>
-                            <li>Sócrates, Platão e Aristóteles</li>
-                            <li>O Olhar Sociológico e Socialização</li>
-                            <li>Cultura, Identidade e Diversidade</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 2º ANO EM -->
-            <div id="em-2ano" class="year-content">
-                <div class="grid-cards">
-                    <div class="card" onclick="abrirModal('Língua Portuguesa e Literatura - 2º EM')">
-                        <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa e Literatura</h3></div>
-                        <ul>
-                            <li>Arcadismo e Romantismo (Poesia e Prosa)</li>
-                            <li>Realismo, Naturalismo e Parnasianismo</li>
-                            <li>Simbolismo e Pré-Modernismo</li>
-                            <li>Sintaxe de Regência e Concordância Avançada</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Matemática - 2º EM')">
-                        <div class="card-header"><i class="fa-solid fa-calculator c-purple"></i><h3>Matemática</h3></div>
-                        <ul>
-                            <li>Trigonometria no Círculo e Funções Trigonométricas</li>
-                            <li>Matrizes, Determinantes e Sistemas Lineares</li>
-                            <li>Análise Combinatória e Probabilidade</li>
-                            <li>Geometria Espacial (Prismas, Pirâmides, Esferas)</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Física - 2º EM')">
-                        <div class="card-header"><i class="fa-solid fa-bolt c-yellow"></i><h3>Física</h3></div>
-                        <ul>
-                            <li>Termometria, Dilatação e Calorimetria</li>
-                            <li>Termodinâmica e Gases Perfeitos</li>
-                            <li>Óptica Geométrica (Espelhos e Lentes)</li>
-                            <li>Ondulatória e Acústica</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Química - 2º EM')">
-                        <div class="card-header"><i class="fa-solid fa-flask c-teal"></i><h3>Química</h3></div>
-                        <ul>
-                            <li>Soluções e Concentrações Químicas</li>
-                            <li>Termoquímica (Entalpia e Reações)</li>
-                            <li>Cinética Química e Equilíbrio Químico</li>
-                            <li>Eletroquímica (Pilhas e Eletrólise)</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Biologia - 2º EM')">
-                        <div class="card-header"><i class="fa-solid fa-dna c-green"></i><h3>Biologia</h3></div>
-                        <ul>
-                            <li>Classificação dos Seres Vivos e Taxonomia</li>
-                            <li>Reino Vegetal (Botânica)</li>
-                            <li>Reino Animal (Invertebrados e Vertebrados)</li>
-                            <li>Fisiologia Humana Completa</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('História - 2º EM')">
-                        <div class="card-header"><i class="fa-solid fa-landmark c-orange"></i><h3>História</h3></div>
-                        <ul>
-                            <li>Revoluções Burguesas e Século XIX</li>
-                            <li>Processos de Independência na América Latina</li>
-                            <li>Brasil Império (1º e 2º Reinado)</li>
-                            <li>Imperialismo e Primeira Guerra Mundial</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Geografia - 2º EM')">
-                        <div class="card-header"><i class="fa-solid fa-globe c-teal"></i><h3>Geografia</h3></div>
-                        <ul>
-                            <li>Geografia Agrária e Questão da Terra</li>
-                            <li>Industrialização Global e do Brasil</li>
-                            <li>Urbanização, Metropolização e Problemas Urbanos</li>
-                            <li>Demografia Global e Matriz Energética</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Filosofia e Sociologia - 2º EM')">
-                        <div class="card-header"><i class="fa-solid fa-brain c-indigo"></i><h3>Filosofia e Sociologia</h3></div>
-                        <ul>
-                            <li>Filosofia Medieval e Política (Maquiavel, Hobbes)</li>
-                            <li>Racionalismo e Empirismo (Descartes, Locke)</li>
-                            <li>Clássicos da Sociologia (Marx, Durkheim, Weber)</li>
-                            <li>Trabalho, Produção e Capitalismo</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3º ANO EM -->
-            <div id="em-3ano" class="year-content">
-                <div class="grid-cards">
-                    <div class="card" onclick="abrirModal('Língua Portuguesa e Literatura - 3º EM')">
-                        <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa e Literatura</h3></div>
-                        <ul>
-                            <li>Modernismo no Brasil (1ª, 2ª e 3ª Gerações)</li>
-                            <li>Literatura Contemporânea e Tendências</li>
-                            <li>Intertextualidade e Análise de Discurso</li>
-                            <li>Revisão Geral e Redação Nota 1000</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Matemática - 3º EM')">
-                        <div class="card-header"><i class="fa-solid fa-calculator c-purple"></i><h3>Matemática</h3></div>
-                        <ul>
-                            <li>Geometria Analítica (Ponto, Reta, Círculo)</li>
-                            <li>Números Complexos e Polinômios</li>
-                            <li>Estatística e Interpretação de Gráficos Avançados</li>
-                            <li>Revisão Intensiva para ENEM e Vestibulares</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Física - 3º EM')">
-                        <div class="card-header"><i class="fa-solid fa-bolt c-yellow"></i><h3>Física</h3></div>
-                        <ul>
-                            <li>Eletrostática (Carga e Campo Elétrico)</li>
-                            <li>Eletrodinâmica (Circuitos, Leis de Ohm e Potência)</li>
-                            <li>Eletromagnetismo e Indução</li>
-                            <li>Introdução à Física Moderna</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Química - 3º EM')">
-                        <div class="card-header"><i class="fa-solid fa-flask c-teal"></i><h3>Química</h3></div>
-                        <ul>
-                            <li>Introdução à Química Orgânica e Cadeias</li>
-                            <li>Funções Orgânicas e Isomeria</li>
-                            <li>Reações Orgânicas e Polímeros</li>
-                            <li>Bioquímica e Química Ambiental</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Biologia - 3º EM')">
-                        <div class="card-header"><i class="fa-solid fa-dna c-green"></i><h3>Biologia</h3></div>
-                        <ul>
-                            <li>Genética Mendeliana e Biotecnologia</li>
-                            <li>Evolução Biológica (Lamarck, Darwin, Neodarwinismo)</li>
-                            <li>Ecologia Avançada e Impactos Ambientais</li>
-                            <li>Saúde Pública, Viroses e Parasitoses</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('História - 3º EM')">
-                        <div class="card-header"><i class="fa-solid fa-landmark c-orange"></i><h3>História</h3></div>
-                        <ul>
-                            <li>Brasil República (República Velha, Era Vargas, Ditadura)</li>
-                            <li>Segunda Guerra Mundial e Guerra Fria</li>
-                            <li>Redemocratização do Brasil e Idade Contemporânea</li>
-                            <li>Geopolítica do Século XXI</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Geografia - 3º EM')">
-                        <div class="card-header"><i class="fa-solid fa-globe c-teal"></i><h3>Geografia</h3></div>
-                        <ul>
-                            <li>Globalização e A Nova Ordem Mundial</li>
-                            <li>Geopolítica e Principais Conflitos Atuais</li>
-                            <li>Questões Ambientais Globais e Mudanças Climáticas</li>
-                            <li>Revisão Geral e Cartografia Temática</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Filosofia e Sociologia - 3º EM')">
-                        <div class="card-header"><i class="fa-solid fa-brain c-indigo"></i><h3>Filosofia e Sociologia</h3></div>
-                        <ul>
-                            <li>Filosofia Contemporânea e Escola de Frankfurt</li>
-                            <li>Ética, Política e Direitos Humanos</li>
-                            <li>Mídia, Indústria Cultural e Consumo</li>
-                            <li>Movimentos Sociais e Cidadania</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==================== GUIA 4: ENSINO SUPERIOR (GRADUAÇÃO) ==================== -->
-        <div id="superior" class="tab-content">
-            
-            <!-- SEÇÃO 1: BACHARELADO -->
-            <h2 class="section-title"><i class="fa-solid fa-user-graduate"></i> Cursos de Bacharelado <span>(4 a 6 anos) - Formação profunda voltada para a atuação geral de mercado</span></h2>
-            
-            <div class="grid-cards">
-                <div class="card" onclick="abrirModal('Saúde e Biológicas (Bacharelado)')">
-                    <div class="card-header"><i class="fa-solid fa-heart-pulse c-red"></i><h3>Saúde e Biológicas</h3></div>
-                    <ul>
-                        <li>Medicina, Enfermagem, Odontologia</li>
-                        <li>Farmácia, Fisioterapia, Nutrição</li>
-                        <li>Medicina Veterinária, Biomedicina</li>
-                        <li>Psicologia, Biologia, Biotecnologia</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Engenharias (Bacharelado)')">
-                    <div class="card-header"><i class="fa-solid fa-gears c-orange"></i><h3>Engenharias</h3></div>
-                    <ul>
-                        <li>Engenharia Civil, Mecânica, Elétrica</li>
-                        <li>Engenharia Química, de Produção</li>
-                        <li>Engenharia de Computação, Mecatrônica</li>
-                        <li>Engenharia Ambiental, Aeroespacial</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Exatas e Tecnologia (Bacharelado)')">
-                    <div class="card-header"><i class="fa-solid fa-laptop-code c-blue"></i><h3>Exatas e Tecnologia</h3></div>
-                    <ul>
-                        <li>Ciência da Computação, Sistemas de Informação</li>
-                        <li>Ciência de Dados, Inteligência Artificial</li>
-                        <li>Estatística, Física, Matemática, Química</li>
-                        <li>Geologia, Astronomia, Meteorologia</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Sociais Aplicadas e Negócios (Bacharelado)')">
-                    <div class="card-header"><i class="fa-solid fa-briefcase c-yellow"></i><h3>Sociais Aplicadas e Negócios</h3></div>
-                    <ul>
-                        <li>Direito, Administração, Ciências Contábeis</li>
-                        <li>Ciências Econômicas, Relações Internacionais</li>
-                        <li>Comércio Exterior, Marketing</li>
-                        <li>Hotelaria, Turismo, Gastronomia</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Comunicação e Artes (Bacharelado)')">
-                    <div class="card-header"><i class="fa-solid fa-photo-film c-pink"></i><h3>Comunicação e Artes</h3></div>
-                    <ul>
-                        <li>Jornalismo, Publicidade e Propaganda</li>
-                        <li>Cinema e Audiovisual, Rádio e TV</li>
-                        <li>Design Gráfico, Moda e Produto</li>
-                        <li>Arquitetura, Artes Visuais, Música</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Humanas e Sociais (Bacharelado)')">
-                    <div class="card-header"><i class="fa-solid fa-book-open-reader c-indigo"></i><h3>Humanas e Sociais</h3></div>
-                    <ul>
-                        <li>História, Geografia, Filosofia</li>
-                        <li>Ciências Sociais, Antropologia</li>
-                        <li>Pedagogia, Serviço Social, Teologia</li>
-                        <li>Biblioteconomia, Arquivologia</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Ciências Agrárias (Bacharelado)')">
-                    <div class="card-header"><i class="fa-solid fa-wheat-awn c-green"></i><h3>Ciências Agrárias</h3></div>
-                    <ul>
-                        <li>Agronomia, Zootecnia</li>
-                        <li>Engenharia Agronômica</li>
-                        <li>Engenharia de Pesca</li>
-                        <li>Engenharia Agrícola</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- SEÇÃO 2: LICENCIATURA -->
-            <h2 class="section-title"><i class="fa-solid fa-chalkboard-user"></i> Cursos de Licenciatura <span>(4 anos) - Voltados para formação de professores na Educação Básica</span></h2>
-
-            <div class="grid-cards">
-                <div class="card" onclick="abrirModal('Pedagogia e Humanas (Licenciatura)')">
-                    <div class="card-header"><i class="fa-solid fa-icons c-purple"></i><h3>Pedagogia e Humanas</h3></div>
-                    <ul>
-                        <li>Pedagogia (Ed. Infantil e Iniciais)</li>
-                        <li>Licenciatura em História e Geografia</li>
-                        <li>Licenciatura em Filosofia e Sociologia</li>
-                        <li>Licenciatura em Educação Especial</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Linguagens e Expressão (Licenciatura)')">
-                    <div class="card-header"><i class="fa-solid fa-language c-blue"></i><h3>Linguagens e Expressão</h3></div>
-                    <ul>
-                        <li>Letras (Português, Inglês, Espanhol, Libras)</li>
-                        <li>Licenciatura em Artes Visuais</li>
-                        <li>Licenciatura em Música</li>
-                        <li>Licenciatura em Teatro e Dança</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Exatas, Natureza e Educação Física (Licenciatura)')">
-                    <div class="card-header"><i class="fa-solid fa-atom c-teal"></i><h3>Exatas e Natureza</h3></div>
-                    <ul>
-                        <li>Licenciatura em Matemática e Física</li>
-                        <li>Licenciatura em Química e Biologia</li>
-                        <li>Licenciatura em Computação / Informática</li>
-                        <li>Licenciatura em Educação Física</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- SEÇÃO 3: TECNÓLOGOS -->
-            <h2 class="section-title"><i class="fa-solid fa-microchip"></i> Cursos Tecnólogos <span>(2 a 3 anos) - Focados nas práticas do mercado (Eixos do MEC)</span></h2>
-
-            <div class="grid-cards">
-                <div class="card" onclick="abrirModal('Informação e Comunicação (Tecnólogo)')">
-                    <div class="card-header"><i class="fa-solid fa-code c-blue"></i><h3>Informação e Comunicação</h3></div>
-                    <ul>
-                        <li>Análise e Desenvolvimento de Sistemas (ADS)</li>
-                        <li>Redes, Banco de Dados, Segurança</li>
-                        <li>Defesa Cibernética e Jogos Digitais</li>
-                        <li>Internet das Coisas e BI</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Gestão e Negócios (Tecnólogo)')">
-                    <div class="card-header"><i class="fa-solid fa-chart-line c-green"></i><h3>Gestão e Negócios</h3></div>
-                    <ul>
-                        <li>Processos Gerenciais e Recursos Humanos</li>
-                        <li>Logística e Gestão Financeira</li>
-                        <li>Gestão Comercial e Marketing Digital</li>
-                        <li>Comércio Exterior e Gestão Pública</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Ambiente, Saúde e Segurança (Tecnólogo)')">
-                    <div class="card-header"><i class="fa-solid fa-user-shield c-red"></i><h3>Ambiente, Saúde e Segurança</h3></div>
-                    <ul>
-                        <li>Gestão Ambiental e Radiologia</li>
-                        <li>Estética, Cosmética e Sistemas Biomédicos</li>
-                        <li>Segurança Pública e Investigação</li>
-                        <li>Serviços Penais e Saneamento</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Infraestrutura, Indústria e Lazer (Tecnólogo)')">
-                    <div class="card-header"><i class="fa-solid fa-city c-orange"></i><h3>Infraestrutura, Indústria e Lazer</h3></div>
-                    <ul>
-                        <li>Construção de Edifícios e Design Interiores</li>
-                        <li>Automação e Eletrônica Industrial</li>
-                        <li>Agronegócio e Agroecologia</li>
-                        <li>Gastronomia, Eventos e Hotelaria</li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- ==================== GUIA 5: CONCURSO PÚBLICO ==================== -->
-        <div id="concurso" class="tab-content">
-            <!-- Sub-Menu de Áreas -->
-            <div class="years-subnav">
-                <button class="year-btn active" onclick="trocarAno('concurso', 'conc-policial', this)">Área Policial</button>
-                <button class="year-btn" onclick="trocarAno('concurso', 'conc-tribunais', this)">Tribunais e Jurídica</button>
-                <button class="year-btn" onclick="trocarAno('concurso', 'conc-admin', this)">Área Administrativa</button>
-                <button class="year-btn" onclick="trocarAno('concurso', 'conc-fiscal', this)">Fiscal e Controle</button>
-            </div>
-
-            <!-- ÁREA POLICIAL -->
-            <div id="conc-policial" class="year-content active">
-                <div class="grid-cards">
-                    <div class="card" onclick="abrirModal('Direito Penal - Policial')">
-                        <div class="card-header"><i class="fa-solid fa-shield-halved c-red"></i><h3>Direito Penal</h3></div>
-                        <ul>
-                            <li>Crimes contra a pessoa</li>
-                            <li>Crimes contra o patrimônio</li>
-                            <li>Crimes contra a Administração Pública</li>
-                        </ul>
-                    </div>
-
-                    <div class="card" onclick="abrirModal('Direito Processual Penal - Policial')">
-                        <div class="card-header"><i class="fa-solid fa-scale-balanced c-yellow"></i><h3>Direito Processual Penal</h3></div>
-                        <ul>
-                            <li>Inquérito policial</li>
-                            <li>Prisão em flagrante</li>
-                            <li>Provas</li>
-                        </ul>
-                    </div>
-
-                    <div class="card" onclick="abrirModal('Legislação Penal Especial - Policial')">
-                        <div class="card-header"><i class="fa-solid fa-handcuffs c-orange"></i><h3>Legislação Penal Especial</h3></div>
-                        <ul>
-                            <li>Lei de Drogas</li>
-                            <li>Estatuto do Desarmamento</li>
-                            <li>Lei Maria da Penha</li>
-                        </ul>
-                    </div>
-
-                    <div class="card" onclick="abrirModal('Criminologia e Direitos Humanos - Policial')">
-                        <div class="card-header"><i class="fa-solid fa-hand-holding-hand c-blue"></i><h3>Criminologia e Direitos Humanos</h3></div>
-                        <ul>
-                            <li>Conceitos de crime</li>
-                            <li>Tratados internacionais</li>
-                        </ul>
-                    </div>
-
-                    <div class="card" onclick="abrirModal('Contabilidade e Estatística - Policial')">
-                        <div class="card-header"><i class="fa-solid fa-calculator c-purple"></i><h3>Contabilidade Geral e Estatística</h3></div>
-                        <ul>
-                            <li>Contabilidade para Agente (PF)</li>
-                            <li>Estatística Descritiva e Inferencial</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TRIBUNAIS E JURÍDICA -->
-            <div id="conc-tribunais" class="year-content">
-                <div class="grid-cards">
-                    <div class="card" onclick="abrirModal('Direito Processual Civil - Tribunais')">
-                        <div class="card-header"><i class="fa-solid fa-gavel c-blue"></i><h3>Direito Processual Civil</h3></div>
-                        <ul>
-                            <li>Prazos e recursos</li>
-                            <li>Petição inicial</li>
-                            <li>Execução de sentenças</li>
-                        </ul>
-                    </div>
-
-                    <div class="card" onclick="abrirModal('Direito Civil - Tribunais')">
-                        <div class="card-header"><i class="fa-solid fa-book-bookmark c-purple"></i><h3>Direito Civil</h3></div>
-                        <ul>
-                            <li>Bens e pessoas jurídicas</li>
-                            <li>Contratos</li>
-                            <li>Obrigações</li>
-                        </ul>
-                    </div>
-
-                    <div class="card" onclick="abrirModal('Direito do Trabalho - TRT')">
-                        <div class="card-header"><i class="fa-solid fa-user-tie c-teal"></i><h3>Direito do Trabalho e Processual</h3></div>
-                        <ul>
-                            <li>Exclusivo para Tribunais Regionais do Trabalho (TRT)</li>
-                            <li>Relações de trabalho e processo trabalhista</li>
-                        </ul>
-                    </div>
-
-                    <div class="card" onclick="abrirModal('Direito Eleitoral - TRE')">
-                        <div class="card-header"><i class="fa-solid fa-check-to-slot c-green"></i><h3>Direito Eleitoral</h3></div>
-                        <ul>
-                            <li>Exclusivo para Tribunais Regionais Eleitorais (TRE)</li>
-                            <li>Legislação e processo eleitoral</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ÁREA ADMINISTRATIVA -->
-            <div id="conc-admin" class="year-content">
-                <div class="grid-cards">
-                    <div class="card" onclick="abrirModal('Administração Geral - Administrativa')">
-                        <div class="card-header"><i class="fa-solid fa-sitemap c-indigo"></i><h3>Administração Geral</h3></div>
-                        <ul>
-                            <li>Teorias administrativas</li>
-                            <li>Motivação e liderança</li>
-                            <li>Processos organizacionais</li>
-                        </ul>
-                    </div>
-
-                    <div class="card" onclick="abrirModal('Administração Pública - Administrativa')">
-                        <div class="card-header"><i class="fa-solid fa-building-columns c-blue"></i><h3>Administração Pública</h3></div>
-                        <ul>
-                            <li>Gestão da qualidade no setor público</li>
-                            <li>Governança e transparência</li>
-                        </ul>
-                    </div>
-
-                    <div class="card" onclick="abrirModal('AFO - Administrativa')">
-                        <div class="card-header"><i class="fa-solid fa-coins c-yellow"></i><h3>Admin. Financeira e Orçamentária (AFO)</h3></div>
-                        <ul>
-                            <li>Orçamento público</li>
-                            <li>PPA, LDO e LOA</li>
-                        </ul>
-                    </div>
-
-                    <div class="card" onclick="abrirModal('Arquivologia - Administrativa')">
-                        <div class="card-header"><i class="fa-solid fa-box-archive c-orange"></i><h3>Arquivologia</h3></div>
-                        <ul>
-                            <li>Gestão de documentos</li>
-                            <li>Protocolo e técnicas de arquivamento</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FISCAL E CONTROLE -->
-            <div id="conc-fiscal" class="year-content">
-                <div class="grid-cards">
-                    <div class="card" onclick="abrirModal('Direito Tributário - Fiscal')">
-                        <div class="card-header"><i class="fa-solid fa-file-invoice-dollar c-green"></i><h3>Direito Tributário</h3></div>
-                        <ul>
-                            <li>Impostos, taxas e contribuições</li>
-                            <li>Código Tributário Nacional (CTN)</li>
-                        </ul>
-                    </div>
-
-                    <div class="card" onclick="abrirModal('Contabilidade Geral e Avançada - Fiscal')">
-                        <div class="card-header"><i class="fa-solid fa-chart-pie c-purple"></i><h3>Contabilidade Geral e Avançada</h3></div>
-                        <ul>
-                            <li>Balanço patrimonial e DRE</li>
-                            <li>Escrituração e auditoria</li>
-                        </ul>
-                    </div>
-
-                    <div class="card" onclick="abrirModal('Auditoria Governamental - Fiscal')">
-                        <div class="card-header"><i class="fa-solid fa-magnifying-glass-dollar c-red"></i><h3>Auditoria Governamental</h3></div>
-                        <ul>
-                            <li>Técnicas de fiscalização de contas públicas</li>
-                        </ul>
-                    </div>
-
-                    <div class="card" onclick="abrirModal('Economia e Finanças Públicas - Fiscal')">
-                        <div class="card-header"><i class="fa-solid fa-chart-line c-teal"></i><h3>Economia e Finanças Públicas</h3></div>
-                        <ul>
-                            <li>Macroeconomia e microeconomia</li>
-                            <li>Política fiscal</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        <!-- OUTRAS GUIAS (MANTIDAS) -->
+        <div id="fund2" class="tab-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Selecione os módulos do Fundamental II...</p></div>
+        <div id="em" class="tab-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Selecione os módulos do Ensino Médio...</p></div>
+        <div id="superior" class="tab-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Selecione os módulos do Ensino Superior...</p></div>
+        <div id="concurso" class="tab-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Selecione os módulos de Concursos...</p></div>
 
         <!-- Botão Sair do Sistema -->
         <div class="logout-area">
@@ -1447,37 +745,47 @@
         </div>
     </div>
 
-    <!-- MODAL / POPUP DE SELEÇÃO DE CONTEÚDO -->
+    <!-- MODAL / POPUP DINÂMICO -->
     <div class="modal-overlay" id="modalRecursos">
         <div class="modal-box">
             <button class="close-btn" onclick="fecharModal()"><i class="fa-solid fa-xmark"></i></button>
+            <button class="back-btn" id="btnVoltarModal" onclick="exibirMenuModal()" style="display: none;">
+                <i class="fa-solid fa-arrow-left"></i> Voltar
+            </button>
+            
             <h2 id="modalTitulo">Nome da Matéria</h2>
-            <p>Selecione o tipo de conteúdo que deseja acessar:</p>
+            <p class="subtitle" id="modalSubtitulo">Selecione o tipo de conteúdo que deseja acessar:</p>
 
-            <div class="modal-options">
-                <a href="#" class="option-btn">
+            <!-- MENU DE OPÇÕES (BOTÕES) -->
+            <div class="modal-options" id="modalMenuOpcoes">
+                <button class="option-btn" onclick="carregarConteudo('provas')">
                     <i class="fa-solid fa-file-lines"></i>
                     <span>Provas</span>
-                </a>
-                <a href="#" class="option-btn">
+                </button>
+                <button class="option-btn" onclick="carregarConteudo('explicacoes')">
                     <i class="fa-solid fa-lightbulb"></i>
                     <span>Explicações</span>
-                </a>
-                <a href="#" class="option-btn">
+                </button>
+                <button class="option-btn" onclick="carregarConteudo('perguntas')">
                     <i class="fa-solid fa-circle-question"></i>
                     <span>Perguntas</span>
-                </a>
-                <a href="#" class="option-btn">
+                </button>
+                <button class="option-btn" onclick="carregarConteudo('videos')">
                     <i class="fa-solid fa-circle-play"></i>
                     <span>Vídeos</span>
-                </a>
+                </button>
             </div>
+
+            <!-- ÁREA ONDE O CONTEÚDO DETALHADO APARECE -->
+            <div id="modalConteudoDetalhado" class="details-container" style="display: none;"></div>
         </div>
     </div>
 
-    <!-- SCRIPT DE NAVEGAÇÃO E INTERAÇÃO -->
+    <!-- SCRIPT DE NAVEGAÇÃO E LÓGICA DO MODAL -->
     <script>
-        // Alternar as abas principais (Níveis de ensino / Carreiras)
+        let materiaAtualId = '';
+
+        // Alternar as abas principais
         function trocarGuia(idGuia, elementoBotao) {
             const guias = document.querySelectorAll('.tab-content');
             guias.forEach(g => g.classList.remove('active'));
@@ -1489,31 +797,136 @@
             elementoBotao.classList.add('active');
         }
 
-        // Alternar os sub-filtros de Anos/Séries/Áreas dentro de cada aba
+        // Alternar sub-filtros de Anos
         function trocarAno(idAbaPai, idAno, elementoBotao) {
             const containerAba = document.getElementById(idAbaPai);
-            
-            // Esconde todas as séries/áreas da aba atual
             const anos = containerAba.querySelectorAll('.year-content');
             anos.forEach(a => a.classList.remove('active'));
 
-            // Remove classe ativa dos botões de ano/área dessa aba
             const botoesAno = containerAba.querySelectorAll('.year-btn');
             botoesAno.forEach(b => b.classList.remove('active'));
 
-            // Mostra o ano/área selecionado e ativa o botão
             document.getElementById(idAno).classList.add('active');
             elementoBotao.classList.add('active');
         }
 
-        // Funções para abrir e fechar o Modal
-        function abrirModal(nomeMateria) {
+        // Abrir Modal
+        function abrirModal(nomeMateria, idMateria = '') {
+            materiaAtualId = idMateria;
             document.getElementById('modalTitulo').innerText = nomeMateria;
+            exibirMenuModal();
             document.getElementById('modalRecursos').classList.add('active');
         }
 
+        // Fechar Modal
         function fecharModal() {
             document.getElementById('modalRecursos').classList.remove('active');
+        }
+
+        // Voltar para a tela com as 4 opções no modal
+        function exibirMenuModal() {
+            document.getElementById('modalSubtitulo').style.display = 'block';
+            document.getElementById('modalMenuOpcoes').style.display = 'grid';
+            document.getElementById('modalConteudoDetalhado').style.display = 'none';
+            document.getElementById('btnVoltarModal').style.display = 'none';
+        }
+
+        // Carregar conteúdo interativo dinamicamente
+        function carregarConteudo(tipo) {
+            const container = document.getElementById('modalConteudoDetalhado');
+            
+            // Verifica se é o 1º ano de Língua Portuguesa
+            if (materiaAtualId === 'port1') {
+                if (tipo === 'provas') {
+                    container.innerHTML = `
+                        <h3>Conteúdos Avaliados em Provas</h3>
+                        <ul>
+                            <li><strong>Reconhecimento de letras:</strong> Identificação do alfabeto e diferenciação entre letras, números e desenhos.</li>
+                            <li><strong>Consciência fonológica:</strong> Pintar ou marcar sílabas iniciais e finais, além de rimas em palavras simples.</li>
+                            <li><strong>Leitura e escrita:</strong> Ligar o nome correto ao desenho correspondente e formar pequenas palavras.</li>
+                            <li><strong>Interpretação de textos:</strong> Compreensão do sentido de cartilhas, convites ou frases curtas ouvidas ou lidas em sala.</li>
+                        </ul>
+                    `;
+                } else if (tipo === 'explicacoes') {
+                    container.innerHTML = `
+                        <h3>Explicações de Língua Portuguesa</h3>
+                        <p>O ensino de Língua Portuguesa no 1º ano do Ensino Fundamental foca na alfabetização e no letramento inicial, ajudando a criança a conhecer o alfabeto, juntar vogais e consoantes para formar sílabas e ler palavras simples.</p>
+                        
+                        <h4>O que a criança aprende:</h4>
+                        <ul>
+                            <li><strong>O Alfabeto:</strong> Reconhecer e diferenciar as letras de outros desenhos, sabendo a ordem correta.</li>
+                            <li><strong>Vogais e Consoantes:</strong> Entender que as consoantes precisam das vogais para formar os sons e as sílabas.</li>
+                            <li><strong>Leitura e Escrita Simples:</strong> Formar palavras com sílabas básicas (como ba-be-bi-bo-bu ou pa-pe-pi-po-pu).</li>
+                            <li><strong>Reconhecimento de Textos:</strong> Perceber a orientação da leitura (da esquerda para a direita, de cima para baixo).</li>
+                        </ul>
+
+                        <h4>Atividades do dia a dia:</h4>
+                        <ul>
+                            <li><strong>Uso de nomes próprios:</strong> Escrever o próprio nome, o de colegas e da professora.</li>
+                            <li><strong>Interpretação e escuta:</strong> Ouvir histórias contadas pelo professor e conversar sobre elas.</li>
+                            <li><strong>Mensagens curtas:</strong> Ler e tentar escrever bilhetes ou avisos simples.</li>
+                        </ul>
+                    `;
+                } else if (tipo === 'perguntas') {
+                    container.innerHTML = `
+                        <h3>Perguntas e Questões Comuns</h3>
+                        <p>As perguntas de Língua Portuguesa no 1º ano focam em reconhecimento do alfabeto, associação entre som e letra e leitura de palavras simples usando formatos visuais e lúdicos.</p>
+                        
+                        <h4>Tipos de Perguntas Comuns:</h4>
+                        <ul>
+                            <li><strong>Identificação de letras e vogais:</strong> Pintar ou circular as vogais (A, E, I, O, U) e consoantes em um alfabeto ilustrado.</li>
+                            <li><strong>Associação de imagem e palavra:</strong> Questões com o desenho de um objeto (ex: bala ou pato) para marcar a opção com o nome correto.</li>
+                            <li><strong>Completar palavras:</strong> Mostrar uma figura e preencher a sílaba ou letra que falta.</li>
+                            <li><strong>Reconhecimento do próprio nome:</strong> Exercícios para escrever ou identificar as letras do próprio nome.</li>
+                            <li><strong>Separação de pedacinhos (sílabas):</strong> Perguntas sobre quantas vezes abrimos a boca para falar uma palavra.</li>
+                        </ul>
+                    `;
+                } else if (tipo === 'videos') {
+                    container.innerHTML = `
+                        <h3>Vídeos e Recursos Audiovisuais</h3>
+                        <p>Os vídeos para essa etapa precisam ser altamente visuais, lúdicos, curtos e interativos.</p>
+
+                        <div class="video-item">
+                            <h5>📹 1. Vídeos Musicais e Cantigas</h5>
+                            <p><strong>Como funciona:</strong> Usam rimas e ritmo para destacar os sons das letras (fonemas). Exemplo: Músicas do estilo "Palavra Cantada" apresentando o alfabeto.</p>
+                        </div>
+
+                        <div class="video-item">
+                            <h5>🎨 2. Vídeos de Animação com Associação Visual</h5>
+                            <p><strong>Como funciona:</strong> Desenhos onde a letra ganha vida. Exemplo: A letra B se junta com a A ("BA") e surge uma BAlana na tela.</p>
+                        </div>
+
+                        <div class="video-item">
+                            <h5>🧸 3. Contação de Histórias Animada</h5>
+                            <p><strong>Como funciona:</strong> Leitura dialogada de livros infantis ou parlendas com palavras piscando na tela conforme são lidas.</p>
+                        </div>
+
+                        <div class="video-item">
+                            <h5>🏫 4. "Aulinhas Virtuais" com Professor e Concreto</h5>
+                            <p><strong>Como funciona:</strong> Professor em vídeo usando letras móveis, crachás e brinquedos reais para ensinar a escrita do nome.</p>
+                        </div>
+
+                        <div class="video-item">
+                            <h5>🏷️ 5. Vídeos de Leitura do Cotidiano</h5>
+                            <p><strong>Como funciona:</strong> Letramento prático mostrando rótulos de supermercado, placas e avisos do dia a dia.</p>
+                        </div>
+
+                        <div class="video-item">
+                            <h5>🎮 6. Desafios e Jogos Interativos (Gamificação)</h5>
+                            <p><strong>Como funciona:</strong> "O que é, o que é?" com pausinhas para a criança responder ativamente antes da revelação.</p>
+                        </div>
+                    `;
+                }
+            } else {
+                // Conteúdo genérico para outras matérias
+                container.innerHTML = `<p style="padding: 15px 0;">Conteúdo em desenvolvimento para esta seção de <strong>${tipo.toUpperCase()}</strong>.</p>`;
+            }
+
+            // Transição das telas no modal
+            document.getElementById('modalSubtitulo').style.display = 'none';
+            document.getElementById('modalMenuOpcoes').style.display = 'none';
+            document.getElementById('modalConteudoDetalhado').style.display = 'block';
+            document.getElementById('btnVoltarModal').style.display = 'flex';
         }
     </script>
 </body>
