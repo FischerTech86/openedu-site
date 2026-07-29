@@ -156,6 +156,7 @@
         .c-yellow { color: #eab308; }
         .c-pink { color: #ec4899; }
         .c-teal { color: #14b8a6; }
+        .c-indigo { color: #6366f1; }
 
         /* LÓGICA DE VISIBILIDADE DAS GUIAS */
         .tab-content {
@@ -292,7 +293,7 @@
 
         <!-- Menu de Guias (Níveis de Ensino) -->
         <nav class="tabs-nav">
-            <button class="tab-btn active" onclick="trocarGuia('fund1', this)">
+            <button class="tab-btn" onclick="trocarGuia('fund1', this)">
                 <strong>1º ao 5º Ano</strong>
                 <span>FUNDAMENTAL I</span>
             </button>
@@ -300,7 +301,7 @@
                 <strong>6º ao 9º Ano</strong>
                 <span>FUNDAMENTAL II</span>
             </button>
-            <button class="tab-btn" onclick="trocarGuia('em', this)">
+            <button class="tab-btn active" onclick="trocarGuia('em', this)">
                 <strong>1º ao 3º Ano</strong>
                 <span>ENSINO MÉDIO</span>
             </button>
@@ -310,16 +311,11 @@
             </button>
         </nav>
 
-        <!-- GUIA: ENSINO FUNDAMENTAL 1 -->
-        <div id="fund1" class="tab-content active">
+        <!-- GUIA 1: ENSINO FUNDAMENTAL 1 -->
+        <div id="fund1" class="tab-content">
             <div class="grid-cards">
-                
-                <!-- Língua Portuguesa -->
                 <div class="card" onclick="abrirModal('Língua Portuguesa')">
-                    <div class="card-header">
-                        <i class="fa-solid fa-book c-blue"></i>
-                        <h3>Língua Portuguesa</h3>
-                    </div>
+                    <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
                     <ul>
                         <li>Processo de Alfabetização</li>
                         <li>Prática de Leitura e Escrita</li>
@@ -327,13 +323,8 @@
                         <li>Gramática e Ortografia Básica</li>
                     </ul>
                 </div>
-
-                <!-- Matemática -->
                 <div class="card" onclick="abrirModal('Matemática')">
-                    <div class="card-header">
-                        <i class="fa-solid fa-plus c-purple"></i>
-                        <h3>Matemática</h3>
-                    </div>
+                    <div class="card-header"><i class="fa-solid fa-plus c-purple"></i><h3>Matemática</h3></div>
                     <ul>
                         <li>Estudo dos Números</li>
                         <li>Operações Básicas (+, -, ×, ÷)</li>
@@ -341,13 +332,8 @@
                         <li>Noções de Medidas e Dinheiro</li>
                     </ul>
                 </div>
-
-                <!-- Ciências da Natureza -->
                 <div class="card" onclick="abrirModal('Ciências da Natureza')">
-                    <div class="card-header">
-                        <i class="fa-solid fa-seedling c-green"></i>
-                        <h3>Ciências da Natureza</h3>
-                    </div>
+                    <div class="card-header"><i class="fa-solid fa-seedling c-green"></i><h3>Ciências da Natureza</h3></div>
                     <ul>
                         <li>Estudo do Corpo Humano</li>
                         <li>Preservação do Meio Ambiente</li>
@@ -355,13 +341,8 @@
                         <li>Fenômenos da Natureza</li>
                     </ul>
                 </div>
-
-                <!-- História -->
                 <div class="card" onclick="abrirModal('História')">
-                    <div class="card-header">
-                        <i class="fa-solid fa-hourglass-half c-orange"></i>
-                        <h3>História</h3>
-                    </div>
+                    <div class="card-header"><i class="fa-solid fa-hourglass-half c-orange"></i><h3>História</h3></div>
                     <ul>
                         <li>Noções de Identidade e Tempo</li>
                         <li>História da Família e Escola</li>
@@ -369,13 +350,8 @@
                         <li>Cidadania e Transformações</li>
                     </ul>
                 </div>
-
-                <!-- Geografia -->
                 <div class="card" onclick="abrirModal('Geografia')">
-                    <div class="card-header">
-                        <i class="fa-solid fa-map c-teal"></i>
-                        <h3>Geografia</h3>
-                    </div>
+                    <div class="card-header"><i class="fa-solid fa-map c-teal"></i><h3>Geografia</h3></div>
                     <ul>
                         <li>Compreensão do Espaço Vivenciado</li>
                         <li>Estudo de Bairros e Cidades</li>
@@ -383,13 +359,8 @@
                         <li>Paisagens Naturais e Modificadas</li>
                     </ul>
                 </div>
-
-                <!-- Artes -->
                 <div class="card" onclick="abrirModal('Artes')">
-                    <div class="card-header">
-                        <i class="fa-solid fa-palette c-pink"></i>
-                        <h3>Artes</h3>
-                    </div>
+                    <div class="card-header"><i class="fa-solid fa-palette c-pink"></i><h3>Artes</h3></div>
                     <ul>
                         <li>Expressão Criativa e Desenho</li>
                         <li>Pintura e Formas Visuais</li>
@@ -397,13 +368,8 @@
                         <li>Música e Ritmo</li>
                     </ul>
                 </div>
-
-                <!-- Educação Física -->
                 <div class="card" onclick="abrirModal('Educação Física')">
-                    <div class="card-header">
-                        <i class="fa-solid fa-person-running c-red"></i>
-                        <h3>Educação Física</h3>
-                    </div>
+                    <div class="card-header"><i class="fa-solid fa-person-running c-red"></i><h3>Educação Física</h3></div>
                     <ul>
                         <li>Desenvolvimento Motor</li>
                         <li>Jogos e Brincadeiras</li>
@@ -411,18 +377,129 @@
                         <li>Coordenação Corporal</li>
                     </ul>
                 </div>
-
-                <!-- Ensino Religioso -->
                 <div class="card" onclick="abrirModal('Ensino Religioso')">
-                    <div class="card-header">
-                        <i class="fa-solid fa-hands-praying c-yellow"></i>
-                        <h3>Ensino Religioso</h3>
-                    </div>
+                    <div class="card-header"><i class="fa-solid fa-hands-praying c-yellow"></i><h3>Ensino Religioso</h3></div>
                     <ul>
                         <li>Valores Éticos e Humanos</li>
                         <li>Respeito à Diversidade</li>
                         <li>Cultura de Paz e Empatia</li>
                         <li>Convivência em Sociedade</li>
+                    </ul>
+                </div>
+                <div class="card" onclick="abrirModal('Língua Inglesa')">
+                    <div class="card-header"><i class="fa-solid fa-language c-blue"></i><h3>Língua Inglesa</h3></div>
+                    <ul>
+                        <li>Vocabulário Inicial</li>
+                        <li>Saudações e Expressões</li>
+                        <li>Cores, Números e Objetos</li>
+                        <li>Escuta e Pronúncia Básica</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- GUIA 2: ENSINO FUNDAMENTAL 2 -->
+        <div id="fund2" class="tab-content">
+            <div class="grid-cards">
+                <div class="card" onclick="abrirModal('Língua Portuguesa')">
+                    <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
+                    <ul>
+                        <li>Gêneros Textuais e Análise Crítica</li>
+                        <li>Sintaxe, Morfologia e Gramática</li>
+                        <li>Produção Textual e Argumentação</li>
+                        <li>Leitura e Literatura Infantojuvenil</li>
+                    </ul>
+                </div>
+                <div class="card" onclick="abrirModal('Matemática')">
+                    <div class="card-header"><i class="fa-solid fa-calculator c-purple"></i><h3>Matemática</h3></div>
+                    <ul>
+                        <li>Álgebra e Equações de 1º e 2º Grau</li>
+                        <li>Geometria Plana e Espacial</li>
+                        <li>Estatística e Probabilidade</li>
+                        <li>Grandezas, Unidades e Razão/Proporção</li>
+                    </ul>
+                </div>
+                <div class="card" onclick="abrirModal('Ciências da Natureza')">
+                    <div class="card-header"><i class="fa-solid fa-flask c-green"></i><h3>Ciências da Natureza</h3></div>
+                    <ul>
+                        <li>Nivelamento em Biologia e Ecologia</li>
+                        <li>Noções de Física (Movimento, Energia e Som)</li>
+                        <li>Noções de Química (Matéria e Misturas)</li>
+                        <li>Astronomia, Terra e Universo</li>
+                    </ul>
+                </div>
+                <div class="card" onclick="abrirModal('História')">
+                    <div class="card-header"><i class="fa-solid fa-landmark c-orange"></i><h3>História</h3></div>
+                    <ul>
+                        <li>História Antiga e Feudalismo</li>
+                        <li>Brasil Colônia, Império e República</li>
+                        <li>Guerra Mundial e História Contemporânea</li>
+                        <li>Cidadania, Direitos e Movimentos Sociais</li>
+                    </ul>
+                </div>
+                <div class="card" onclick="abrirModal('Geografia')">
+                    <div class="card-header"><i class="fa-solid fa-earth-americas c-teal"></i><h3>Geografia</h3></div>
+                    <ul>
+                        <li>Cartografia, Clima e Geomorfologia</li>
+                        <li>Geopolítica e Globalização</li>
+                        <li>Domínios Morfoclimáticos do Brasil</li>
+                        <li>Urbanização e Impactos Ambientais</li>
+                    </ul>
+                </div>
+                <div class="card" onclick="abrirModal('Língua Inglesa')">
+                    <div class="card-header"><i class="fa-solid fa-language c-blue"></i><h3>Língua Inglesa</h3></div>
+                    <ul>
+                        <li>Gramática e Estruturas Verbais</li>
+                        <li>Interpretação e Leitura (Reading)</li>
+                        <li>Vocabulário Temático e Expressões</li>
+                        <li>Habilidades de Compreensão Auditiva</li>
+                    </ul>
+                </div>
+                <div class="card" onclick="abrirModal('Artes')">
+                    <div class="card-header"><i class="fa-solid fa-palette c-pink"></i><h3>Artes</h3></div>
+                    <ul>
+                        <li>História da Arte Clássica e Moderna</li>
+                        <li>Artes Visuais, Dança e Teatro</li>
+                        <li>Música e Elementos Sonoros</li>
+                        <li>Patrimônio Cultural e Arte Brasileira</li>
+                    </ul>
+                </div>
+                <div class="card" onclick="abrirModal('Educação Física')">
+                    <div class="card-header"><i class="fa-solid fa-futbol c-red"></i><h3>Educação Física</h3></div>
+                    <ul>
+                        <li>Esportes de Redes, Campo e Precisão</li>
+                        <li>Lutas, Ginástica e Práticas Corporais</li>
+                        <li>Saúde, Qualidade de Vida e Corpo</li>
+                        <li>Jogos Eletrônicos e Práticas Urbanas</li>
+                    </ul>
+                </div>
+                <div class="card" onclick="abrirModal('Ensino Religioso')">
+                    <div class="card-header"><i class="fa-solid fa-hands-praying c-yellow"></i><h3>Ensino Religioso</h3></div>
+                    <ul>
+                        <li>Tradições Religiosas e Filosóficas</li>
+                        <li>Direitos Humanos e Respeito Mútuo</li>
+                        <li>Análise de Textos Sagrados e Mitos</li>
+                        <li>Ética, Alteridade e Sociedade</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- GUIA 3: ENSINO MÉDIO (ATIVADO E ATUALIZADO COM OS CONTEÚDOS SOLICITADOS) -->
+        <div id="em" class="tab-content active">
+            <div class="grid-cards">
+                
+                <!-- Língua Portuguesa e Literatura -->
+                <div class="card" onclick="abrirModal('Língua Portuguesa e Literatura')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-book c-blue"></i>
+                        <h3>Língua Portuguesa e Literatura</h3>
+                    </div>
+                    <ul>
+                        <li>Estudo do Idioma</li>
+                        <li>Gramática e Sintaxe</li>
+                        <li>Textos Literários e Escolas</li>
+                        <li>Leitura e Redação</li>
                     </ul>
                 </div>
 
@@ -433,154 +510,157 @@
                         <h3>Língua Inglesa</h3>
                     </div>
                     <ul>
-                        <li>Vocabulário Inicial</li>
-                        <li>Saudações e Expressões</li>
-                        <li>Cores, Números e Objetos</li>
-                        <li>Escuta e Pronúncia Básica</li>
+                        <li>Aprendizado da Língua Estrangeira</li>
+                        <li>Vocabulário e Gramática</li>
+                        <li>Leitura e Interpretação</li>
+                        <li>Compreensão Auditiva</li>
                     </ul>
                 </div>
 
-            </div>
-        </div>
-
-        <!-- GUIA: ENSINO FUNDAMENTAL 2 -->
-        <div id="fund2" class="tab-content">
-            <div class="grid-cards">
-                
-                <!-- Língua Portuguesa -->
-                <div class="card" onclick="abrirModal('Língua Portuguesa (6º-9º)')">
+                <!-- Arte -->
+                <div class="card" onclick="abrirModal('Arte')">
                     <div class="card-header">
-                        <i class="fa-solid fa-book c-blue"></i>
-                        <h3>Língua Portuguesa</h3>
+                        <i class="fa-solid fa-palette c-pink"></i>
+                        <h3>Arte</h3>
                     </div>
                     <ul>
-                        <li>Gêneros Textuais e Análise Crítica</li>
-                        <li>Sintaxe, Morfologia e Gramática</li>
-                        <li>Produção Textual e Argumentação</li>
-                        <li>Leitura e Literatura Infantojuvenil</li>
+                        <li>Expressão Artística e Cultural</li>
+                        <li>Artes Visuais e Plásticas</li>
+                        <li>Artes Cênicas e Teatro</li>
+                        <li>Música e Patrimônio Artístico</li>
+                    </ul>
+                </div>
+
+                <!-- Educação Física -->
+                <div class="card" onclick="abrirModal('Educação Física')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-person-running c-red"></i>
+                        <h3>Educação Física</h3>
+                    </div>
+                    <ul>
+                        <li>Práticas Corporais</li>
+                        <li>Modalidades Esportivas</li>
+                        <li>Saúde e Qualidade de Vida</li>
+                        <li>Cultura do Movimento</li>
                     </ul>
                 </div>
 
                 <!-- Matemática -->
-                <div class="card" onclick="abrirModal('Matemática (6º-9º)')">
+                <div class="card" onclick="abrirModal('Matemática')">
                     <div class="card-header">
                         <i class="fa-solid fa-calculator c-purple"></i>
                         <h3>Matemática</h3>
                     </div>
                     <ul>
-                        <li>Álgebra e Equações de 1º e 2º Grau</li>
+                        <li>Estudo dos Números e Conjuntos</li>
+                        <li>Álgebra e Funções</li>
                         <li>Geometria Plana e Espacial</li>
                         <li>Estatística e Probabilidade</li>
-                        <li>Grandezas, Unidades e Razão/Proporção</li>
                     </ul>
                 </div>
 
-                <!-- Ciências da Natureza -->
-                <div class="card" onclick="abrirModal('Ciências da Natureza (6º-9º)')">
+                <!-- Biologia -->
+                <div class="card" onclick="abrirModal('Biologia')">
                     <div class="card-header">
-                        <i class="fa-solid fa-flask c-green"></i>
-                        <h3>Ciências da Natureza</h3>
+                        <i class="fa-solid fa-dna c-green"></i>
+                        <h3>Biologia</h3>
                     </div>
                     <ul>
-                        <li>Nivelamento em Biologia e Ecologia</li>
-                        <li>Noções de Física (Movimento, Energia e Som)</li>
-                        <li>Noções de Química (Matéria e Misturas)</li>
-                        <li>Astronomia, Terra e Universo</li>
+                        <li>Estudo dos Seres Vivos</li>
+                        <li>Ecologia e Meio Ambiente</li>
+                        <li>Anatomia do Corpo Humano</li>
+                        <li>Genética e Citologia</li>
+                    </ul>
+                </div>
+
+                <!-- Física -->
+                <div class="card" onclick="abrirModal('Física')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-bolt c-yellow"></i>
+                        <h3>Física</h3>
+                    </div>
+                    <ul>
+                        <li>Leis da Natureza</li>
+                        <li>Mecânica e Movimentos</li>
+                        <li>Termodinâmica e Calor</li>
+                        <li>Eletricidade e Magnetismo</li>
+                    </ul>
+                </div>
+
+                <!-- Química -->
+                <div class="card" onclick="abrirModal('Química')">
+                    <div class="card-header">
+                        <i class="fa-solid fa-flask c-teal"></i>
+                        <h3>Química</h3>
+                    </div>
+                    <ul>
+                        <li>Estudo de Átomos e Moléculas</li>
+                        <li>Tabela Periódica dos Elementos</li>
+                        <li>Substâncias e Misturas</li>
+                        <li>Reações Químicas</li>
                     </ul>
                 </div>
 
                 <!-- História -->
-                <div class="card" onclick="abrirModal('História (6º-9º)')">
+                <div class="card" onclick="abrirModal('História')">
                     <div class="card-header">
                         <i class="fa-solid fa-landmark c-orange"></i>
                         <h3>História</h3>
                     </div>
                     <ul>
-                        <li>História Antiga e Feudalismo</li>
-                        <li>Brasil Colônia, Império e República</li>
-                        <li>Guerra Mundial e História Contemporânea</li>
-                        <li>Cidadania, Direitos e Movimentos Sociais</li>
+                        <li>Fatos Históricos do Brasil</li>
+                        <li>História Geral e Mundial</li>
+                        <li>Evolução das Sociedades</li>
+                        <li>Cidadania e Política</li>
                     </ul>
                 </div>
 
                 <!-- Geografia -->
-                <div class="card" onclick="abrirModal('Geografia (6º-9º)')">
+                <div class="card" onclick="abrirModal('Geografia')">
                     <div class="card-header">
-                        <i class="fa-solid fa-earth-americas c-teal"></i>
+                        <i class="fa-solid fa-globe c-teal"></i>
                         <h3>Geografia</h3>
                     </div>
                     <ul>
-                        <li>Cartografia, Clima e Geomorfologia</li>
-                        <li>Geopolítica e Globalização</li>
-                        <li>Domínios Morfoclimáticos do Brasil</li>
-                        <li>Urbanização e Impactos Ambientais</li>
+                        <li>Estudo do Espaço Geográfico</li>
+                        <li>Geopolítica Global</li>
+                        <li>Preservação do Meio Ambiente</li>
+                        <li>Cartografia e Clima</li>
                     </ul>
                 </div>
 
-                <!-- Língua Inglesa -->
-                <div class="card" onclick="abrirModal('Língua Inglesa (6º-9º)')">
+                <!-- Sociologia -->
+                <div class="card" onclick="abrirModal('Sociologia')">
                     <div class="card-header">
-                        <i class="fa-solid fa-language c-blue"></i>
-                        <h3>Língua Inglesa</h3>
+                        <i class="fa-solid fa-users c-pink"></i>
+                        <h3>Sociologia</h3>
                     </div>
                     <ul>
-                        <li>Gramática e Estruturas Verbais (Tenses)</li>
-                        <li>Interpretação e Leitura (Reading)</li>
-                        <li>Vocabulário Temático e Expressões</li>
-                        <li>Habilidades de Compreensão Auditiva</li>
+                        <li>Estudo da Sociedade</li>
+                        <li>Cultura e Identidade</li>
+                        <li>Relações Humanas e Sociais</li>
+                        <li>Direitos e Cidadania</li>
                     </ul>
                 </div>
 
-                <!-- Arte -->
-                <div class="card" onclick="abrirModal('Arte (6º-9º)')">
+                <!-- Filosofia -->
+                <div class="card" onclick="abrirModal('Filosofia')">
                     <div class="card-header">
-                        <i class="fa-solid fa-palette c-pink"></i>
-                        <h3>Artes</h3>
+                        <i class="fa-solid fa-brain c-indigo"></i>
+                        <h3>Filosofia</h3>
                     </div>
                     <ul>
-                        <li>História da Arte Clássica e Moderna</li>
-                        <li>Artes Visuais, Dança e Teatro</li>
-                        <li>Música e Elementos Sonoros</li>
-                        <li>Patrimônio Cultural e Arte Brasileira</li>
-                    </ul>
-                </div>
-
-                <!-- Educação Física -->
-                <div class="card" onclick="abrirModal('Educação Física (6º-9º)')">
-                    <div class="card-header">
-                        <i class="fa-solid fa-futbol c-red"></i>
-                        <h3>Educação Física</h3>
-                    </div>
-                    <ul>
-                        <li>Esportes de Redes, Campo e Precisão</li>
-                        <li>Lutas, Ginástica e Práticas Corporais</li>
-                        <li>Saúde, Qualidade de Vida e Corpo</li>
-                        <li>Jogos Eletrônicos e Práticas Urbanas</li>
-                    </ul>
-                </div>
-
-                <!-- Ensino Religioso -->
-                <div class="card" onclick="abrirModal('Ensino Religioso (6º-9º)')">
-                    <div class="card-header">
-                        <i class="fa-solid fa-hands-praying c-yellow"></i>
-                        <h3>Ensino Religioso</h3>
-                    </div>
-                    <ul>
-                        <li>Tradições Religiosas e Filosóficas</li>
-                        <li>Direitos Humanos e Respeito Mútuo</li>
-                        <li>Análise de Textos Sagrados e Mitos</li>
-                        <li>Ética, Alteridade e Sociedade</li>
+                        <li>Desenvolvimento do Pensamento Crítico</li>
+                        <li>Ética e Moral</li>
+                        <li>História das Ideias</li>
+                        <li>Lógica e Conhecimento</li>
                     </ul>
                 </div>
 
             </div>
         </div>
 
-        <!-- OUTRAS GUIAS -->
-        <div id="em" class="tab-content">
-            <p style="text-align: center; color: #8a99ad; padding: 40px 0;">Conteúdos do Ensino Médio em breve...</p>
-        </div>
-
+        <!-- GUIA 4: ENSINO SUPERIOR -->
         <div id="superior" class="tab-content">
             <p style="text-align: center; color: #8a99ad; padding: 40px 0;">Conteúdos de Graduação em breve...</p>
         </div>
