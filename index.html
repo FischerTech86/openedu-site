@@ -659,6 +659,11 @@
         function carregarConteudo(tipo) {
             const container = document.getElementById('modalConteudoDetalhado');
             
+            document.getElementById('modalSubtitulo').style.display = 'none';
+            document.getElementById('modalMenuOpcoes').style.display = 'none';
+            document.getElementById('btnVoltarModal').style.display = 'flex';
+            container.style.display = 'block';
+
             if (materiaAtualId === 'port1') {
 
                 // 1. PROVAS (Avaliação Prática Pronta)
@@ -758,14 +763,11 @@
                     `;
                 }
             } else {
-                container.innerHTML = `<p style="padding: 15px 0;">Conteúdo em desenvolvimento para esta disciplina.</p>`;
+                container.innerHTML = `
+                    <h3>Conteúdo em Desenvolvimento</h3>
+                    <p style="color:#8a99ad; font-size:0.9rem;">O material interativo para este módulo estará disponível em breve!</p>
+                `;
             }
-
-            // Alternar a visualização interna do modal
-            document.getElementById('modalSubtitulo').style.display = 'none';
-            document.getElementById('modalMenuOpcoes').style.display = 'none';
-            document.getElementById('modalConteudoDetalhado').style.display = 'block';
-            document.getElementById('btnVoltarModal').style.display = 'flex';
         }
     </script>
 </body>
