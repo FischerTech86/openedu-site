@@ -130,25 +130,6 @@
             font-weight: 600;
         }
 
-        /* DIVISÓRIAS DE SEÇÃO (GRADUAÇÃO) */
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #38bdf8;
-            margin: 35px 0 15px 0;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #1a263e;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title span {
-            font-size: 0.85rem;
-            color: #8a99ad;
-            font-weight: 400;
-        }
-
         /* GRID DE CARDS */
         .grid-cards {
             display: grid;
@@ -210,11 +191,8 @@
         .c-purple { color: #a855f7; }
         .c-green { color: #22c55e; }
         .c-orange { color: #f97316; }
-        .c-red { color: #ef4444; }
-        .c-yellow { color: #eab308; }
-        .c-pink { color: #ec4899; }
         .c-teal { color: #14b8a6; }
-        .c-indigo { color: #6366f1; }
+        .c-pink { color: #ec4899; }
 
         /* VISIBILIDADE DAS SEÇÕES */
         .tab-content, .year-content {
@@ -232,7 +210,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(6px);
             display: none;
             justify-content: center;
@@ -249,7 +227,7 @@
             border: 1px solid #1e2e48;
             border-radius: 16px;
             width: 90%;
-            max-width: 650px;
+            max-width: 700px;
             max-height: 85vh;
             overflow-y: auto;
             padding: 28px 24px;
@@ -311,12 +289,9 @@
             color: #8a99ad;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: color 0.2s;
         }
 
-        .close-btn:hover {
-            color: #ffffff;
-        }
+        .close-btn:hover { color: #ffffff; }
 
         .back-btn {
             position: absolute;
@@ -333,71 +308,109 @@
             font-weight: 500;
         }
 
-        .back-btn:hover {
-            color: #ffffff;
-        }
+        .back-btn:hover { color: #ffffff; }
 
-        /* ESTILOS DO CONTEÚDO DETALHADO DO MODAL */
+        /* ESTILOS INTERATIVOS DO CONTEÚDO DO MODAL */
         .details-container {
             text-align: left;
             margin-top: 15px;
         }
 
         .details-container h3 {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: #38bdf8;
             margin-bottom: 15px;
             border-bottom: 1px solid #18263e;
             padding-bottom: 8px;
         }
 
-        .details-container h4 {
-            font-size: 0.95rem;
-            color: #ffffff;
-            margin: 15px 0 8px 0;
-        }
-
-        .details-container p {
-            font-size: 0.85rem;
-            color: #a3b8cc;
-            line-height: 1.5;
-            margin-bottom: 10px;
-        }
-
-        .details-container ul {
-            list-style: none;
-            margin-bottom: 15px;
-        }
-
-        .details-container ul li {
-            font-size: 0.85rem;
-            color: #8a99ad;
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 18px;
-            line-height: 1.4;
-        }
-
-        .details-container ul li::before {
-            content: "✔";
-            position: absolute;
-            left: 0;
-            color: #22c55e;
-            font-size: 0.75rem;
-        }
-
-        .details-container .video-item {
+        .quiz-card {
             background: #050811;
             border: 1px solid #18263e;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 12px;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 16px;
         }
 
-        .details-container .video-item h5 {
-            color: #38bdf8;
+        .quiz-card p {
             font-size: 0.9rem;
-            margin-bottom: 4px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .quiz-opt {
+            background: #0a1120;
+            border: 1px solid #1a2942;
+            padding: 10px 14px;
+            border-radius: 8px;
+            color: #a3b8cc;
+            cursor: pointer;
+            font-size: 0.85rem;
+            text-align: left;
+            transition: all 0.2s ease;
+        }
+
+        .quiz-opt:hover {
+            background: #101c33;
+            color: #fff;
+            border-color: #38bdf8;
+        }
+
+        .quiz-opt.correct {
+            background: #064e3b !important;
+            border-color: #22c55e !important;
+            color: #ffffff !important;
+        }
+
+        .quiz-opt.incorrect {
+            background: #7f1d1d !important;
+            border-color: #ef4444 !important;
+            color: #ffffff !important;
+        }
+
+        .explanation-text {
+            line-height: 1.6;
+            color: #a3b8cc;
+            font-size: 0.88rem;
+        }
+
+        .explanation-text h4 {
+            color: #38bdf8;
+            margin: 15px 0 6px 0;
+            font-size: 0.98rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* Proporção 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #18263e;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 6px;
         }
 
         /* BOTÃO DE SAIR DO SISTEMA */
@@ -471,6 +484,7 @@
             <!-- 1º ANO FUND I -->
             <div id="f1-1ano" class="year-content active">
                 <div class="grid-cards">
+                    <!-- CARD LÍNGUA PORTUGUESA 1º ANO -->
                     <div class="card" onclick="abrirModal('Língua Portuguesa - 1º Ano', 'port1')">
                         <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
                         <ul>
@@ -480,6 +494,7 @@
                             <li>Leitura Guiada de Rimas e Parlendas</li>
                         </ul>
                     </div>
+                    
                     <div class="card" onclick="abrirModal('Matemática - 1º Ano')">
                         <div class="card-header"><i class="fa-solid fa-plus c-purple"></i><h3>Matemática</h3></div>
                         <ul>
@@ -528,218 +543,17 @@
                 </div>
             </div>
 
-            <!-- 2º ANO FUND I -->
-            <div id="f1-2ano" class="year-content">
-                <div class="grid-cards">
-                    <div class="card" onclick="abrirModal('Língua Portuguesa - 2º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
-                        <ul>
-                            <li>Leitura e Ortografia (CH, LH, NH, RR, SS)</li>
-                            <li>Separação de Sílabas e Acentuação Básica</li>
-                            <li>Gêneros Textuais: Bilhetes, Listas e Convites</li>
-                            <li>Uso de Letra Maiúscula e Pontuação ( . ? ! )</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Matemática - 2º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-plus c-purple"></i><h3>Matemática</h3></div>
-                        <ul>
-                            <li>Números até 100, Dúzias e Dezenas</li>
-                            <li>Adição e Subtração com Armação de Conta</li>
-                            <li>Introdução à Multiplicação (Grupos)</li>
-                            <li>Moedas e Cédulas (Sistema Monetário)</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Ciências da Natureza - 2º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-seedling c-green"></i><h3>Ciências da Natureza</h3></div>
-                        <ul>
-                            <li>Plantas e Suas Partes</li>
-                            <li>Animais Domésticos e Silvestres</li>
-                            <li>Materiais do Cotidiano e Reciclagem</li>
-                            <li>Prevenção de Acidentes Domésticos</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('História - 2º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-hourglass-half c-orange"></i><h3>História</h3></div>
-                        <ul>
-                            <li>A História da Nossa Escola</li>
-                            <li>Tradições e Festas Familiares</li>
-                            <li>Comunidades do Presente e do Passado</li>
-                            <li>Profissões e Suas Ferramentas</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Geografia - 2º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-map c-teal"></i><h3>Geografia</h3></div>
-                        <ul>
-                            <li>O Bairro e Seus Pontos de Referência</li>
-                            <li>Tipos de Ruas e Meios de Transporte</li>
-                            <li>Meios de Comunicação</li>
-                            <li>Representação do Espaço por Maquetes</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3º ANO FUND I -->
-            <div id="f1-3ano" class="year-content">
-                <div class="grid-cards">
-                    <div class="card" onclick="abrirModal('Língua Portuguesa - 3º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
-                        <ul>
-                            <li>Substantivos Próprios e Comuns, Adjetivos</li>
-                            <li>Sinônimos, Antônimos e Verbos de Ação</li>
-                            <li>Interpretação de Fábulas e Histórias em Quadrinhos</li>
-                            <li>Produção de Pequenos Textos Narrativos</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Matemática - 3º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-plus c-purple"></i><h3>Matemática</h3></div>
-                        <ul>
-                            <li>Centenas e Números até 1.000</li>
-                            <li>Tabuada e Táboas da Multiplicação</li>
-                            <li>Introdução à Divisão exata</li>
-                            <li>Horas e Medidas de Comprimento (cm, m)</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Ciências da Natureza - 3º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-seedling c-green"></i><h3>Ciências da Natureza</h3></div>
-                        <ul>
-                            <li>Solo, Água e Ar na Terra</li>
-                            <li>Luz, Som e Suas Fontes</li>
-                            <li>Ecossistemas e Teias Alimentares Simples</li>
-                            <li>Cuidado com o Consumo de Água</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('História - 3º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-hourglass-half c-orange"></i><h3>História</h3></div>
-                        <ul>
-                            <li>Formação dos Municípios e Cidades</li>
-                            <li>Patrimônios Históricos e Culturais</li>
-                            <li>Povos Indígenas e Comunidades Quilombolas</li>
-                            <li>Modos de Vida Campo x Cidade</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Geografia - 3º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-map c-teal"></i><h3>Geografia</h3></div>
-                        <ul>
-                            <li>O Município: Zona Urbana e Zona Rural</li>
-                            <li>Rosa dos Ventos e Pontos Cardeais</li>
-                            <li>Atividades Econômicas (Agricultura, Comércio)</li>
-                            <li>Impactos da Ação Humana na Natureza</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4º ANO FUND I -->
-            <div id="f1-4ano" class="year-content">
-                <div class="grid-cards">
-                    <div class="card" onclick="abrirModal('Língua Portuguesa - 4º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
-                        <ul>
-                            <li>Pronomes, Numerais e Tempos Verbais</li>
-                            <li>Regras Ortográficas Avançadas (S/Z, X/CH, G/J)</li>
-                            <li>Gêneros: Notícias, Cartas e Poemas</li>
-                            <li>Estrutura do Parágrafo e Pontuação Completa</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Matemática - 4º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-plus c-purple"></i><h3>Matemática</h3></div>
-                        <ul>
-                            <li>Milhares e Grandeza dos Números</li>
-                            <li>Multiplicação com 2 Algarismos e Divisão Completa</li>
-                            <li>Frações Simples e Representação Gráfica</li>
-                            <li>Perímetro e Área de Figuras Planas</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Ciências da Natureza - 4º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-seedling c-green"></i><h3>Ciências da Natureza</h3></div>
-                        <ul>
-                            <li>Sistemas do Corpo Humano (Digestório, Respiratório)</li>
-                            <li>Transformações Reversíveis e Irreversíveis da Matéria</li>
-                            <li>Cadeias Alimentares e Micro-organismos</li>
-                            <li>Movimentos da Terra (Rotação e Traslação)</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('História - 4º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-hourglass-half c-orange"></i><h3>História</h3></div>
-                        <ul>
-                            <li>As Grandes Navegações e a Chegada dos Portugueses</li>
-                            <li>Povoamento do Brasil e Rotas de Migração</li>
-                            <li>Escravidão e Resistência Africana</li>
-                            <li>Comércio e Circulação de Mercadorias</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Geografia - 4º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-map c-teal"></i><h3>Geografia</h3></div>
-                        <ul>
-                            <li>O Território Brasileiro e Suas Regiões</li>
-                            <li>Relatividades da Superfície Terrestre e Rios</li>
-                            <li>Vegetação Original do Brasil</li>
-                            <li>Mapas Temáticos e Escalas Cartográficas</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5º ANO FUND I -->
-            <div id="f1-5ano" class="year-content">
-                <div class="grid-cards">
-                    <div class="card" onclick="abrirModal('Língua Portuguesa - 5º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
-                        <ul>
-                            <li>Concordância Verbal e Nominal Básica</li>
-                            <li>Advérbios e Preposições no Texto</li>
-                            <li>Textos Argumentativos e Resenhas de Livros</li>
-                            <li>Interpretação Avançada e Coesão Textual</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Matemática - 5º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-plus c-purple"></i><h3>Matemática</h3></div>
-                        <ul>
-                            <li>Operações com Números Decimais e Frações</li>
-                            <li>Porcentagem e Resolução de Problemas</li>
-                            <li>Volume e Geometria dos Sólidos (Poliedros)</li>
-                            <li>Médias Simples e Análise de Gráficos</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Ciências da Natureza - 5º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-seedling c-green"></i><h3>Ciências da Natureza</h3></div>
-                        <ul>
-                            <li>Sistema Circulatório, Nervoso e Imunológico</li>
-                            <li>Propriedades da Água e Ciclo Hidrológico</li>
-                            <li>Constelações, Sistema Solar e Fases da Lua</li>
-                            <li>Uso Sustentável dos Recursos Naturais</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('História - 5º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-hourglass-half c-orange"></i><h3>História</h3></div>
-                        <ul>
-                            <li>Do Império à República no Brasil</li>
-                            <li>Cidadania, Constituição e Direitos Sociais</li>
-                            <li>Patrimônio Histórico Nacional e da Humanidade</li>
-                            <li>A Invenção da Escrita e Registros Históricos</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Geografia - 5º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-map c-teal"></i><h3>Geografia</h3></div>
-                        <ul>
-                            <li>Dinâmica Populacional e Crescimento das Cidades</li>
-                            <li>Redes de Transporte e Telecomunicações</li>
-                            <li>Fontes de Energia Renováveis e Não Renováveis</li>
-                            <li>Divisão Político-Administrativa do Brasil</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <div id="f1-2ano" class="year-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Conteúdo do 2º Ano...</p></div>
+            <div id="f1-3ano" class="year-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Conteúdo do 3º Ano...</p></div>
+            <div id="f1-4ano" class="year-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Conteúdo do 4º Ano...</p></div>
+            <div id="f1-5ano" class="year-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Conteúdo do 5º Ano...</p></div>
         </div>
 
-        <!-- OUTRAS GUIAS (MANTIDAS) -->
         <div id="fund2" class="tab-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Selecione os módulos do Fundamental II...</p></div>
         <div id="em" class="tab-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Selecione os módulos do Ensino Médio...</p></div>
         <div id="superior" class="tab-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Selecione os módulos do Ensino Superior...</p></div>
         <div id="concurso" class="tab-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Selecione os módulos de Concursos...</p></div>
 
-        <!-- Botão Sair do Sistema -->
         <div class="logout-area">
             <button class="btn-logout">Sair do Sistema</button>
         </div>
@@ -776,16 +590,14 @@
                 </button>
             </div>
 
-            <!-- ÁREA ONDE O CONTEÚDO DETALHADO APARECE -->
+            <!-- ÁREA ONDE O CONTEÚDO REAL APARECE -->
             <div id="modalConteudoDetalhado" class="details-container" style="display: none;"></div>
         </div>
     </div>
 
-    <!-- SCRIPT DE NAVEGAÇÃO E LÓGICA DO MODAL -->
     <script>
         let materiaAtualId = '';
 
-        // Alternar as abas principais
         function trocarGuia(idGuia, elementoBotao) {
             const guias = document.querySelectorAll('.tab-content');
             guias.forEach(g => g.classList.remove('active'));
@@ -797,7 +609,6 @@
             elementoBotao.classList.add('active');
         }
 
-        // Alternar sub-filtros de Anos
         function trocarAno(idAbaPai, idAno, elementoBotao) {
             const containerAba = document.getElementById(idAbaPai);
             const anos = containerAba.querySelectorAll('.year-content');
@@ -810,7 +621,6 @@
             elementoBotao.classList.add('active');
         }
 
-        // Abrir Modal
         function abrirModal(nomeMateria, idMateria = '') {
             materiaAtualId = idMateria;
             document.getElementById('modalTitulo').innerText = nomeMateria;
@@ -818,12 +628,10 @@
             document.getElementById('modalRecursos').classList.add('active');
         }
 
-        // Fechar Modal
         function fecharModal() {
             document.getElementById('modalRecursos').classList.remove('active');
         }
 
-        // Voltar para a tela com as 4 opções no modal
         function exibirMenuModal() {
             document.getElementById('modalSubtitulo').style.display = 'block';
             document.getElementById('modalMenuOpcoes').style.display = 'grid';
@@ -831,98 +639,129 @@
             document.getElementById('btnVoltarModal').style.display = 'none';
         }
 
-        // Carregar conteúdo interativo dinamicamente
+        // Função de checar resposta dos Quizzes/Perguntas/Provas
+        function verificarResposta(btn, eCorreta) {
+            const container = btn.parentElement;
+            const opcoes = container.querySelectorAll('.quiz-opt');
+            opcoes.forEach(opt => {
+                opt.disabled = true;
+                opt.style.cursor = 'default';
+            });
+
+            if(eCorreta) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+            }
+        }
+
+        // Carregar conteúdo interativo e real
         function carregarConteudo(tipo) {
             const container = document.getElementById('modalConteudoDetalhado');
             
-            // Verifica se é o 1º ano de Língua Portuguesa
             if (materiaAtualId === 'port1') {
+
+                // 1. PROVAS (Avaliação Prática Pronta)
                 if (tipo === 'provas') {
                     container.innerHTML = `
-                        <h3>Conteúdos Avaliados em Provas</h3>
-                        <ul>
-                            <li><strong>Reconhecimento de letras:</strong> Identificação do alfabeto e diferenciação entre letras, números e desenhos.</li>
-                            <li><strong>Consciência fonológica:</strong> Pintar ou marcar sílabas iniciais e finais, além de rimas em palavras simples.</li>
-                            <li><strong>Leitura e escrita:</strong> Ligar o nome correto ao desenho correspondente e formar pequenas palavras.</li>
-                            <li><strong>Interpretação de textos:</strong> Compreensão do sentido de cartilhas, convites ou frases curtas ouvidas ou lidas em sala.</li>
-                        </ul>
+                        <h3>Avaliação de Língua Portuguesa - 1º Ano</h3>
+                        <p style="margin-bottom: 15px; color:#8a99ad; font-size:0.85rem;">Responda às questões abaixo para testar o aprendizado do aluno:</p>
+                        
+                        <div class="quiz-card">
+                            <p>Questão 1: Qual das opções abaixo contém apenas VOGAIS?</p>
+                            <div class="quiz-options">
+                                <button class="quiz-opt" onclick="verificarResposta(this, false)">A) B, C, D, F, G</button>
+                                <button class="quiz-opt" onclick="verificarResposta(this, true)">B) A, E, I, O, U</button>
+                                <button class="quiz-opt" onclick="verificarResposta(this, false)">C) 1, 2, 3, 4, 5</button>
+                            </div>
+                        </div>
+
+                        <div class="quiz-card">
+                            <p>Questão 2: Qual a sílaba INICIAL da palavra "BOLA"?</p>
+                            <div class="quiz-options">
+                                <button class="quiz-opt" onclick="verificarResposta(this, true)">A) BO</button>
+                                <button class="quiz-opt" onclick="verificarResposta(this, false)">B) LA</button>
+                                <button class="quiz-opt" onclick="verificarResposta(this, false)">C) BA</button>
+                            </div>
+                        </div>
+
+                        <div class="quiz-card">
+                            <p>Questão 3: Qual palavra rima com "GATO"?</p>
+                            <div class="quiz-options">
+                                <button class="quiz-opt" onclick="verificarResposta(this, false)">A) BOLA</button>
+                                <button class="quiz-opt" onclick="verificarResposta(this, false)">B) CASA</button>
+                                <button class="quiz-opt" onclick="verificarResposta(this, true)">C) RATO</button>
+                            </div>
+                        </div>
                     `;
+
+                // 2. EXPLICAÇÕES (Conteúdo Didático Completo)
                 } else if (tipo === 'explicacoes') {
                     container.innerHTML = `
-                        <h3>Explicações de Língua Portuguesa</h3>
-                        <p>O ensino de Língua Portuguesa no 1º ano do Ensino Fundamental foca na alfabetização e no letramento inicial, ajudando a criança a conhecer o alfabeto, juntar vogais e consoantes para formar sílabas e ler palavras simples.</p>
-                        
-                        <h4>O que a criança aprende:</h4>
-                        <ul>
-                            <li><strong>O Alfabeto:</strong> Reconhecer e diferenciar as letras de outros desenhos, sabendo a ordem correta.</li>
-                            <li><strong>Vogais e Consoantes:</strong> Entender que as consoantes precisam das vogais para formar os sons e as sílabas.</li>
-                            <li><strong>Leitura e Escrita Simples:</strong> Formar palavras com sílabas básicas (como ba-be-bi-bo-bu ou pa-pe-pi-po-pu).</li>
-                            <li><strong>Reconhecimento de Textos:</strong> Perceber a orientação da leitura (da esquerda para a direita, de cima para baixo).</li>
-                        </ul>
+                        <h3>Explicação do Conteúdo (1º Ano)</h3>
+                        <div class="explanation-text">
+                            <h4>1. O Alfabeto e os Sons</h4>
+                            <p>O alfabeto possui 26 letras. Elas são divididas em <strong>Vogais</strong> (A, E, I, O, U) e <strong>Consoantes</strong> (B, C, D, F, G...). As vogais são os sons principais que dão força às palavras!</p>
 
-                        <h4>Atividades do dia a dia:</h4>
-                        <ul>
-                            <li><strong>Uso de nomes próprios:</strong> Escrever o próprio nome, o de colegas e da professora.</li>
-                            <li><strong>Interpretação e escuta:</strong> Ouvir histórias contadas pelo professor e conversar sobre elas.</li>
-                            <li><strong>Mensagens curtas:</strong> Ler e tentar escrever bilhetes ou avisos simples.</li>
-                        </ul>
+                            <h4>2. Como Formar Sílabas?</h4>
+                            <p>Quando juntamos uma consoante com uma vogal, criamos um pedacinho chamado <strong>sílaba</strong>. Por exemplo:</p>
+                            <p>• <strong>B + A</strong> = BA (de BAlinha)</p>
+                            <p>• <strong>P + A</strong> = PA (de PATO)</p>
+
+                            <h4>3. O Que São Rimas?</h4>
+                            <p>Rimas são palavras que terminam com o mesmo som! Exemplo: <i>João</i> rima com <i>Pão</i>, e <i>Janela</i> rima com <i>Panela</i>.</p>
+                        </div>
                     `;
+
+                // 3. PERGUNTAS (Exercícios Rápidos e Interativos)
                 } else if (tipo === 'perguntas') {
                     container.innerHTML = `
-                        <h3>Perguntas e Questões Comuns</h3>
-                        <p>As perguntas de Língua Portuguesa no 1º ano focam em reconhecimento do alfabeto, associação entre som e letra e leitura de palavras simples usando formatos visuais e lúdicos.</p>
+                        <h3>Exercícios Rápidos de Fixação</h3>
                         
-                        <h4>Tipos de Perguntas Comuns:</h4>
-                        <ul>
-                            <li><strong>Identificação de letras e vogais:</strong> Pintar ou circular as vogais (A, E, I, O, U) e consoantes em um alfabeto ilustrado.</li>
-                            <li><strong>Associação de imagem e palavra:</strong> Questões com o desenho de um objeto (ex: bala ou pato) para marcar a opção com o nome correto.</li>
-                            <li><strong>Completar palavras:</strong> Mostrar uma figura e preencher a sílaba ou letra que falta.</li>
-                            <li><strong>Reconhecimento do próprio nome:</strong> Exercícios para escrever ou identificar as letras do próprio nome.</li>
-                            <li><strong>Separação de pedacinhos (sílabas):</strong> Perguntas sobre quantas vezes abrimos a boca para falar uma palavra.</li>
-                        </ul>
+                        <div class="quiz-card">
+                            <p>1. Quantas sílabas (pedacinhos) tem a palavra "PIPOCA"?</p>
+                            <div class="quiz-options">
+                                <button class="quiz-opt" onclick="verificarResposta(this, false)">A) 2 sílabas</button>
+                                <button class="quiz-opt" onclick="verificarResposta(this, true)">B) 3 sílabas (PI - PO - CA)</button>
+                                <button class="quiz-opt" onclick="verificarResposta(this, false)">C) 4 sílabas</button>
+                            </div>
+                        </div>
+
+                        <div class="quiz-card">
+                            <p>2. Complete a palavra: _ACO (desenho de um Sapo)</p>
+                            <div class="quiz-options">
+                                <button class="quiz-opt" onclick="verificarResposta(this, true)">A) S</button>
+                                <button class="quiz-opt" onclick="verificarResposta(this, false)">B) M</button>
+                                <button class="quiz-opt" onclick="verificarResposta(this, false)">C) P</button>
+                            </div>
+                        </div>
                     `;
+
+                // 4. VÍDEOS (Player do YouTube Embutido)
                 } else if (tipo === 'videos') {
                     container.innerHTML = `
-                        <h3>Vídeos e Recursos Audiovisuais</h3>
-                        <p>Os vídeos para essa etapa precisam ser altamente visuais, lúdicos, curtos e interativos.</p>
-
-                        <div class="video-item">
-                            <h5>📹 1. Vídeos Musicais e Cantigas</h5>
-                            <p><strong>Como funciona:</strong> Usam rimas e ritmo para destacar os sons das letras (fonemas). Exemplo: Músicas do estilo "Palavra Cantada" apresentando o alfabeto.</p>
+                        <h3>Vídeo-Aulas Recomendadas</h3>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p class="video-title">📹 1. Músicas das Vogais e do Alfabeto</p>
+                            <div class="video-wrapper">
+                                <iframe src="https://www.youtube.com/embed/v9bV_x8j59k" allowfullscreen></iframe>
+                            </div>
                         </div>
 
-                        <div class="video-item">
-                            <h5>🎨 2. Vídeos de Animação com Associação Visual</h5>
-                            <p><strong>Como funciona:</strong> Desenhos onde a letra ganha vida. Exemplo: A letra B se junta com a A ("BA") e surge uma BAlana na tela.</p>
-                        </div>
-
-                        <div class="video-item">
-                            <h5>🧸 3. Contação de Histórias Animada</h5>
-                            <p><strong>Como funciona:</strong> Leitura dialogada de livros infantis ou parlendas com palavras piscando na tela conforme são lidas.</p>
-                        </div>
-
-                        <div class="video-item">
-                            <h5>🏫 4. "Aulinhas Virtuais" com Professor e Concreto</h5>
-                            <p><strong>Como funciona:</strong> Professor em vídeo usando letras móveis, crachás e brinquedos reais para ensinar a escrita do nome.</p>
-                        </div>
-
-                        <div class="video-item">
-                            <h5>🏷️ 5. Vídeos de Leitura do Cotidiano</h5>
-                            <p><strong>Como funciona:</strong> Letramento prático mostrando rótulos de supermercado, placas e avisos do dia a dia.</p>
-                        </div>
-
-                        <div class="video-item">
-                            <h5>🎮 6. Desafios e Jogos Interativos (Gamificação)</h5>
-                            <p><strong>Como funciona:</strong> "O que é, o que é?" com pausinhas para a criança responder ativamente antes da revelação.</p>
+                        <div style="margin-bottom: 20px;">
+                            <p class="video-title">🎨 2. Aprendendo as Famílias Silábicas (BA BE BI BO BU)</p>
+                            <div class="video-wrapper">
+                                <iframe src="https://www.youtube.com/embed/5a8bO1T_k9Y" allowfullscreen></iframe>
+                            </div>
                         </div>
                     `;
                 }
             } else {
-                // Conteúdo genérico para outras matérias
-                container.innerHTML = `<p style="padding: 15px 0;">Conteúdo em desenvolvimento para esta seção de <strong>${tipo.toUpperCase()}</strong>.</p>`;
+                container.innerHTML = `<p style="padding: 15px 0;">Conteúdo em desenvolvimento para esta disciplina.</p>`;
             }
 
-            // Transição das telas no modal
+            // Alternar a visualização interna do modal
             document.getElementById('modalSubtitulo').style.display = 'none';
             document.getElementById('modalMenuOpcoes').style.display = 'none';
             document.getElementById('modalConteudoDetalhado').style.display = 'block';
