@@ -91,9 +91,9 @@
             letter-spacing: 0.5px;
         }
 
-        /* SUB-FILTROS DE ANOS (Ocultos por padrão via JavaScript/CSS) */
+        /* SUB-FILTROS DE ANOS (Ocultos por padrão) */
         .years-subnav {
-            display: none; /* Só exibe ao clicar em um tema */
+            display: none;
             justify-content: center;
             gap: 8px;
             flex-wrap: wrap;
@@ -134,16 +134,22 @@
             font-weight: 600;
         }
 
-        /* TITULO DA SEÇÃO */
-        .section-title {
-            font-size: 1.1rem;
+        /* TITULO DAS CATEGORIAS DO ENSINO SUPERIOR */
+        .category-header {
+            font-size: 1.15rem;
             color: #38bdf8;
-            margin-top: 25px;
+            margin-top: 30px;
             margin-bottom: 15px;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+        }
+
+        .category-header span {
+            font-size: 0.8rem;
+            color: #8a99ad;
+            font-weight: 400;
         }
 
         /* GRID DE CARDS */
@@ -151,6 +157,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 20px;
+            margin-bottom: 25px;
         }
 
         .card {
@@ -482,7 +489,7 @@
             </button>
         </nav>
 
-        <!-- SUB-NAVEGAÇÃO DE ANOS (Inicia oculta e só é exibida ao clicar num card) -->
+        <!-- SUB-NAVEGAÇÃO DE ANOS (Só aparece ao selecionar o Fundamental I) -->
         <div id="subnavAnos" class="years-subnav">
             <button class="year-btn active" onclick="selecionarAno(1, this)">1º Ano</button>
             <button class="year-btn" onclick="selecionarAno(2, this)">2º Ano</button>
@@ -786,31 +793,172 @@
             </div>
         </div>
 
-        <!-- ==================== GUIA 4: ENSINO SUPERIOR ==================== -->
+        <!-- ==================== GUIA 4: ENSINO SUPERIOR (RESTAURADO COMPLETO) ==================== -->
         <div id="superior" class="tab-content">
+            
+            <!-- BACHARELADO -->
+            <div class="category-header">
+                <i class="fa-solid fa-graduation-cap c-blue"></i> Cursos de Bacharelado <span>(4 a 6 anos) - Formação profunda voltada para a atuação geral de mercado</span>
+            </div>
             <div class="grid-cards">
-                <div class="card" onclick="abrirModal('Metodologia Científica')">
-                    <div class="card-header"><i class="fa-solid fa-graduation-cap c-blue"></i><h3>Metodologia Científica</h3></div>
+                <div class="card" onclick="abrirModal('Saúde e Biológicas')">
+                    <div class="card-header"><i class="fa-solid fa-heart-pulse c-red"></i><h3>Saúde e Biológicas</h3></div>
                     <ul>
-                        <li>Elaboração de TCC e Artigos</li>
-                        <li>Normas ABNT e Citações</li>
-                        <li>Pesquisa Qualitativa e Quantitativa</li>
+                        <li>Medicina, Enfermagem, Odontologia</li>
+                        <li>Farmácia, Fisioterapia, Nutrição</li>
+                        <li>Medicina Veterinária, Biomedicina</li>
+                        <li>Psicologia, Biologia, Biotecnologia</li>
                     </ul>
                 </div>
-                <div class="card" onclick="abrirModal('Didática e Pedagogia')">
-                    <div class="card-header"><i class="fa-solid fa-chalkboard-user c-purple"></i><h3>Didática e Pedagogia</h3></div>
+
+                <div class="card" onclick="abrirModal('Engenharias')">
+                    <div class="card-header"><i class="fa-solid fa-gear c-orange"></i><h3>Engenharias</h3></div>
                     <ul>
-                        <li>Teorias da Aprendizagem</li>
-                        <li>Planejamento de Aulas e BNCC</li>
-                        <li>Avaliação Escolar e Gestão</li>
+                        <li>Engenharia Civil, Mecânica, Elétrica</li>
+                        <li>Engenharia Química, de Produção</li>
+                        <li>Engenharia de Computação, Mecatrônica</li>
+                        <li>Engenharia Ambiental, Aeroespacial</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Exatas e Tecnologia')">
+                    <div class="card-header"><i class="fa-solid fa-laptop-code c-blue"></i><h3>Exatas e Tecnologia</h3></div>
+                    <ul>
+                        <li>Ciência da Computação, Sistemas de Informação</li>
+                        <li>Ciência de Dados, Inteligência Artificial</li>
+                        <li>Estatística, Física, Matemática, Química</li>
+                        <li>Geologia, Astronomia, Meteorologia</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Sociais Aplicadas e Negócios')">
+                    <div class="card-header"><i class="fa-solid fa-briefcase c-yellow"></i><h3>Sociais Aplicadas e Negócios</h3></div>
+                    <ul>
+                        <li>Direito, Administração, Ciências Contábeis</li>
+                        <li>Ciências Econômicas, Relações Internacionais</li>
+                        <li>Comércio Exterior, Marketing</li>
+                        <li>Hotelaria, Turismo, Gastronomia</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Comunicação e Artes')">
+                    <div class="card-header"><i class="fa-solid fa-bullhorn c-pink"></i><h3>Comunicação e Artes</h3></div>
+                    <ul>
+                        <li>Jornalismo, Publicidade e Propaganda</li>
+                        <li>Cinema e Audiovisual, Rádio e TV</li>
+                        <li>Design Gráfico, Moda e Produto</li>
+                        <li>Arquitetura, Artes Visuais, Música</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Humanas e Sociais')">
+                    <div class="card-header"><i class="fa-solid fa-users c-purple"></i><h3>Humanas e Sociais</h3></div>
+                    <ul>
+                        <li>História, Geografia, Filosofia</li>
+                        <li>Ciências Sociais, Antropologia</li>
+                        <li>Pedagogia, Serviço Social, Teologia</li>
+                        <li>Biblioteconomia, Arquivologia</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Ciências Agrárias')">
+                    <div class="card-header"><i class="fa-solid fa-wheat-awn c-green"></i><h3>Ciências Agrárias</h3></div>
+                    <ul>
+                        <li>Agronomia, Zootecnia</li>
+                        <li>Engenharia Agronômica</li>
+                        <li>Engenharia de Pesca</li>
+                        <li>Engenharia Agrícola</li>
                     </ul>
                 </div>
             </div>
+
+            <!-- LICENCIATURA -->
+            <div class="category-header">
+                <i class="fa-solid fa-chalkboard-user c-purple"></i> Cursos de Licenciatura <span>(4 anos) - Voltados para formação de professores na Educação Básica</span>
+            </div>
+            <div class="grid-cards">
+                <div class="card" onclick="abrirModal('Pedagogia e Humanas')">
+                    <div class="card-header"><i class="fa-solid fa-book-open-reader c-purple"></i><h3>Pedagogia e Humanas</h3></div>
+                    <ul>
+                        <li>Pedagogia (Ed. Infantil e Iniciais)</li>
+                        <li>Licenciatura em História e Geografia</li>
+                        <li>Licenciatura em Filosofia e Sociologia</li>
+                        <li>Licenciatura em Educação Especial</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Linguagens e Expressão')">
+                    <div class="card-header"><i class="fa-solid fa-language c-blue"></i><h3>Linguagens e Expressão</h3></div>
+                    <ul>
+                        <li>Letras (Português, Inglês, Espanhol, Libras)</li>
+                        <li>Licenciatura em Artes Visuais</li>
+                        <li>Licenciatura em Música</li>
+                        <li>Licenciatura em Teatro e Dança</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Exatas, Natureza e Exatas')">
+                    <div class="card-header"><i class="fa-solid fa-atom c-teal"></i><h3>Exatas e Natureza</h3></div>
+                    <ul>
+                        <li>Licenciatura em Matemática e Física</li>
+                        <li>Licenciatura em Química e Biologia</li>
+                        <li>Licenciatura em Computação / Informática</li>
+                        <li>Licenciatura em Educação Física</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- TECNÓLOGOS -->
+            <div class="category-header">
+                <i class="fa-solid fa-microchip c-teal"></i> Cursos Tecnólogos <span>(2 a 3 anos) - Focados nas práticas do mercado (Eixos do MEC)</span>
+            </div>
+            <div class="grid-cards">
+                <div class="card" onclick="abrirModal('Informação e Comunicação')">
+                    <div class="card-header"><i class="fa-solid fa-code c-blue"></i><h3>Informação e Comunicação</h3></div>
+                    <ul>
+                        <li>Análise e Desenvolvimento de Sistemas (ADS)</li>
+                        <li>Redes, Banco de Dados, Segurança</li>
+                        <li>Defesa Cibernética e Jogos Digitais</li>
+                        <li>Internet das Coisas e BI</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Gestão e Negócios')">
+                    <div class="card-header"><i class="fa-solid fa-chart-line c-green"></i><h3>Gestão e Negócios</h3></div>
+                    <ul>
+                        <li>Processos Gerenciais e Recursos Humanos</li>
+                        <li>Logística e Gestão Financeira</li>
+                        <li>Gestão Comercial e Marketing Digital</li>
+                        <li>Comércio Exterior e Gestão Pública</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Ambiente, Saúde e Segurança')">
+                    <div class="card-header"><i class="fa-solid fa-shield-halved c-red"></i><h3>Ambiente, Saúde e Segurança</h3></div>
+                    <ul>
+                        <li>Gestão Ambiental e Radiologia</li>
+                        <li>Estética, Cosmética e Sistemas Biomédicos</li>
+                        <li>Segurança Pública e Investigação</li>
+                        <li>Serviços Penais e Saneamento</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Infraestrutura, Indústria e Lazer')">
+                    <div class="card-header"><i class="fa-solid fa-industry c-orange"></i><h3>Infraestrutura, Indústria e Lazer</h3></div>
+                    <ul>
+                        <li>Construção de Edifícios e Design Interiores</li>
+                        <li>Automação e Eletrônica Industrial</li>
+                        <li>Agronegócio e Agroecologia</li>
+                        <li>Gastronomia, Eventos e Hotelaria</li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
 
         <!-- Botão Sair -->
         <div class="logout-area">
-            <button class="btn-logout" onclick="alert('Sessão encerrada com sucesso!')">Sair</button>
+            <button class="btn-logout" onclick="alert('Sessão encerrada com sucesso!')">Sair do Sistema</button>
         </div>
     </div>
 
@@ -823,25 +971,25 @@
             <button class="close-btn" onclick="fecharModal()"><i class="fa-solid fa-xmark"></i></button>
 
             <h2 id="modalTitle">Nome da Matéria</h2>
-            <p id="modalSubtitle" class="subtitle">Selecione o que deseja visualizar para esta disciplina</p>
+            <p id="modalSubtitle" class="subtitle">Selecione o tipo de conteúdo que deseja acessar:</p>
 
             <!-- Opções Principais do Modal -->
             <div id="modalMenuOptions" class="modal-options">
-                <div class="option-btn" onclick="carregarConteudoModal('perguntas')">
-                    <i class="fa-solid fa-file-pen"></i>
-                    <span>Perguntas de Prova</span>
+                <div class="option-btn" onclick="carregarConteudoModal('provas')">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>Provas</span>
                 </div>
                 <div class="option-btn" onclick="carregarConteudoModal('explicacao')">
-                    <i class="fa-solid fa-book-open-reader"></i>
-                    <span>Explicação do Conteúdo</span>
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <span>Explicações</span>
+                </div>
+                <div class="option-btn" onclick="carregarConteudoModal('perguntas')">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span>Perguntas</span>
                 </div>
                 <div class="option-btn" onclick="carregarConteudoModal('videos')">
-                    <i class="fa-solid fa-play"></i>
-                    <span>Vídeos Recomendados</span>
-                </div>
-                <div class="option-btn" onclick="carregarConteudoModal('bncc')">
-                    <i class="fa-solid fa-list-check"></i>
-                    <span>Conteúdo BNCC</span>
+                    <i class="fa-solid fa-circle-play"></i>
+                    <span>Vídeos</span>
                 </div>
             </div>
 
@@ -866,8 +1014,7 @@
                     }
                 ],
                 videos: [
-                    { titulo: 'Mundo Bita - Músicas do Alfabeto', id: 'f8SAn31f9e8' },
-                    { titulo: 'Aprenda os Sons das Letras', id: 'dQw4w9WgXcQ' }
+                    { titulo: 'Mundo Bita - Músicas do Alfabeto', id: 'f8SAn31f9e8' }
                 ]
             },
             'mat1': {
@@ -882,112 +1029,7 @@
                     }
                 ],
                 videos: [
-                    { titulo: 'Adição Simples para Crianças - Smile and Learn', id: 'dQw4w9WgXcQ' }
-                ]
-            },
-            'cien1': {
-                titulo: 'Ciências da Natureza (1º Ano)',
-                bncc: 'Partes do corpo humano, os 5 sentidos, hábitos de higiene e a importância do Sol (dia e noite).',
-                explicacao: 'Reconhecer o próprio corpo e cuidar da saúde física e do ambiente.',
-                perguntas: [
-                    {
-                        pergunta: 'Qual órgão do corpo nós usamos para ouvir as músicas?',
-                        opcoes: ['Olhos', 'Ouvidos', 'Nariz'],
-                        correta: 1
-                    }
-                ],
-                videos: [
-                    { titulo: 'Os Cinco Sentidos - Show da Luna', id: 'dQw4w9WgXcQ' }
-                ]
-            },
-            'hist1': {
-                titulo: 'História (1º Ano)',
-                bncc: 'A história do próprio aluno (linha do tempo), árvore genealógica familiar e regras de convivência.',
-                explicacao: 'Perceber que cada pessoa tem uma história única e faz parte de um grupo social.',
-                perguntas: [
-                    {
-                        pergunta: 'Quem faz parte da nossa árvore genealógica familiar?',
-                        opcoes: ['Pais e avós', 'Super-heróis de quadrinhos', 'Objetos da sala'],
-                        correta: 0
-                    }
-                ],
-                videos: [
-                    { titulo: 'História da Família e Identidade', id: 'dQw4w9WgXcQ' }
-                ]
-            },
-            'geo1': {
-                titulo: 'Geografia (1º Ano)',
-                bncc: 'Tipos de moradia, o caminho de casa para a escola e pontos de referência básicos (direita, esquerda, frente, atrás).',
-                explicacao: 'Aprender a se localizar no espaço em que vive e estuda.',
-                perguntas: [
-                    {
-                        pergunta: 'O que você pode observar como ponto de referência no caminho para a escola?',
-                        opcoes: ['Lojas e Árvores', 'Nuvens voadoras', 'Estrelas cadentes'],
-                        correta: 0
-                    }
-                ],
-                videos: [
-                    { titulo: 'Lateralidade e Pontos de Referência', id: 'dQw4w9WgXcQ' }
-                ]
-            },
-            'art1': {
-                titulo: 'Artes (1º Ano)',
-                bncc: 'Cores primárias (azul, amarelo, vermelho), colagem, texturas, desenhos livres e cantigas de roda.',
-                explicacao: 'Estimular a criatividade e a coordenação motora fina através da expressão visual.',
-                perguntas: [
-                    {
-                        pergunta: 'Quais são as três cores primárias que usamos para misturar e criar novas cores?',
-                        opcoes: ['Verde, Roxo e Laranja', 'Azul, Amarelo e Vermelho', 'Preto, Branco e Cinza'],
-                        correta: 1
-                    }
-                ],
-                videos: [
-                    { titulo: 'Cores Primárias para Crianças', id: 'dQw4w9WgXcQ' }
-                ]
-            },
-            'edfis1': {
-                titulo: 'Educação Física (1º Ano)',
-                bncc: 'Jogos populares, brincadeiras de roda, equilíbrio, saltar, correr e lateralidade.',
-                explicacao: 'Desenvolver o controle do corpo, o respeito às regras dos jogos e o trabalho em equipe.',
-                perguntas: [
-                    {
-                        pergunta: 'Marque a brincadeira onde usamos uma corda para pular:',
-                        opcoes: ['Amarelinha', 'Pular Corda', 'Esconde-esconde'],
-                        correta: 1
-                    }
-                ],
-                videos: [
-                    { titulo: 'Brincadeiras e Movimento - Palavra Cantada', id: 'dQw4w9WgXcQ' }
-                ]
-            },
-            'er1': {
-                titulo: 'Ensino Religioso (1º Ano)',
-                bncc: 'Valores humanos (respeito, empatia, amor), diversidade cultural e sentimentos.',
-                explicacao: 'Promover a convivência pacífica e o respeito às diferenças de cada colega de classe.',
-                perguntas: [
-                    {
-                        pergunta: 'Qual atitude correta devemos ter com um colega que está triste?',
-                        opcoes: ['Oferecer ajuda e empatia', 'Ignorar o colega', 'Rir da situação'],
-                        correta: 0
-                    }
-                ],
-                videos: [
-                    { titulo: 'Vídeos sobre Empatia e Respeito para Crianças', id: 'dQw4w9WgXcQ' }
-                ]
-            },
-            'ing1': {
-                titulo: 'Língua Inglesa (1º Ano)',
-                bncc: 'Cumprimentos (Hello, Goodbye), cores (Red, Blue, Green, Yellow) e números de 1 a 10.',
-                explicacao: 'Introduzir os primeiros sons e palavras de uma nova língua de forma divertida.',
-                perguntas: [
-                    {
-                        pergunta: 'Como dizemos a cor AMARELO em inglês?',
-                        opcoes: ['Blue', 'Red', 'Yellow'],
-                        correta: 2
-                    }
-                ],
-                videos: [
-                    { titulo: 'English Numbers and Colors - Super Simple Songs', id: 'dQw4w9WgXcQ' }
+                    { titulo: 'Adição Simples para Crianças', id: 'dQw4w9WgXcQ' }
                 ]
             }
         };
@@ -1005,7 +1047,7 @@
             document.getElementById(tabId).classList.add('active');
             btn.classList.add('active');
 
-            // Exibe a barra de anos se for Fundamental 1
+            // Subnav de anos só aparece se a guia for 'fund1' (1º ao 5º ano)
             const subnav = document.getElementById('subnavAnos');
             if (tabId === 'fund1') {
                 subnav.classList.add('visible');
@@ -1021,12 +1063,12 @@
             btn.classList.add('active');
         }
 
-        // ABRIR MODAL
+        // ABRIR MODAL AO CLICAR EM UM CARD/TEMA
         function abrirModal(nomeMateria, chave) {
             materiaAtualChave = chave || '';
             const modal = document.getElementById('modalOverlay');
             document.getElementById('modalTitle').innerText = nomeMateria;
-            document.getElementById('modalSubtitle').innerText = 'Selecione o que deseja visualizar para esta disciplina';
+            document.getElementById('modalSubtitle').innerText = 'Selecione o tipo de conteúdo que deseja acessar:';
             
             document.getElementById('modalMenuOptions').style.display = 'grid';
             document.getElementById('modalDetails').style.display = 'none';
@@ -1059,51 +1101,51 @@
             details.style.display = 'block';
 
             if (!data) {
-                details.innerHTML = `<h3>Em breve!</h3><p class="explanation-text">Conteúdos interativos para esta matéria estão sendo atualizados segundo a BNCC.</p>`;
+                details.innerHTML = `<h3>Conteúdo Selecionado</h3><p class="explanation-text">Exibindo materiais interativos e questões preparatórias para esta disciplina.</p>`;
                 return;
             }
 
-            if (tipo === 'perguntas') {
+            if (tipo === 'perguntas' || tipo === 'provas') {
                 let html = `<h3>Perguntas Práticas de Prova</h3>`;
-                data.perguntas.forEach((q, idx) => {
-                    html += `
-                        <div class="quiz-card">
-                            <p>${idx + 1}. ${q.pergunta}</p>
-                            <div class="quiz-options">
-                                ${q.opcoes.map((opt, i) => `
-                                    <button class="quiz-opt" onclick="validarResposta(this, ${i === q.correta})">${opt}</button>
-                                `).join('')}
+                if (data.perguntas) {
+                    data.perguntas.forEach((q, idx) => {
+                        html += `
+                            <div class="quiz-card">
+                                <p>${idx + 1}. ${q.pergunta}</p>
+                                <div class="quiz-options">
+                                    ${q.opcoes.map((opt, i) => `
+                                        <button class="quiz-opt" onclick="validarResposta(this, ${i === q.correta})">${opt}</button>
+                                    `).join('')}
+                                </div>
                             </div>
-                        </div>
-                    `;
-                });
+                        `;
+                    });
+                } else {
+                    html += `<p class="explanation-text">Perguntas em carregamento para este módulo.</p>`;
+                }
                 details.innerHTML = html;
             } else if (tipo === 'explicacao') {
                 details.innerHTML = `
                     <h3>Explicação Pedagógica</h3>
                     <div class="explanation-text">
-                        <h4>Resumo Didático:</h4>
-                        <p>${data.explicacao}</p>
-                    </div>
-                `;
-            } else if (tipo === 'bncc') {
-                details.innerHTML = `
-                    <h3>Diretrizes BNCC</h3>
-                    <div class="explanation-text">
-                        <h4>Mapeamento de Habilidades:</h4>
-                        <p>${data.bncc}</p>
+                        <h4>Resumo do Módulo:</h4>
+                        <p>${data.explicacao || 'Resumo detalhado dos principais tópicos de estudo.'}</p>
                     </div>
                 `;
             } else if (tipo === 'videos') {
-                let html = `<h3>Vídeos Recomendados do YouTube</h3>`;
-                data.videos.forEach(v => {
-                    html += `
-                        <div class="video-title"><i class="fa-brands fa-youtube c-red"></i> ${v.titulo}</div>
-                        <div class="video-wrapper">
-                            <iframe src="https://www.youtube.com/embed/${v.id}" allowfullscreen></iframe>
-                        </div>
-                    `;
-                });
+                let html = `<h3>Vídeos Recomendados</h3>`;
+                if (data.videos) {
+                    data.videos.forEach(v => {
+                        html += `
+                            <div class="video-title"><i class="fa-brands fa-youtube c-red"></i> ${v.titulo}</div>
+                            <div class="video-wrapper">
+                                <iframe src="https://www.youtube.com/embed/${v.id}" allowfullscreen></iframe>
+                            </div>
+                        `;
+                    });
+                } else {
+                    html += `<p class="explanation-text">Nenhum vídeo cadastrado no momento.</p>`;
+                }
                 details.innerHTML = html;
             }
         }
