@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ESTILOS GERAIS DA PÁGINA */
+        /* ESTILOS GERAIS */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -48,7 +48,7 @@
             font-size: 0.9rem;
         }
 
-        /* BARRA DE NAVEGAÇÃO DE GUIAS PRINCIPAIS */
+        /* BARRA DE NAVEGAÇÃO PRINCIPAL */
         .tabs-nav {
             display: flex;
             gap: 10px;
@@ -91,9 +91,9 @@
             letter-spacing: 0.5px;
         }
 
-        /* SUB-FILTROS DE ANOS / SÉRIES / ÁREAS */
+        /* SUB-FILTROS DE ANOS (Ocultos por padrão via JavaScript/CSS) */
         .years-subnav {
-            display: flex;
+            display: none; /* Só exibe ao clicar em um tema */
             justify-content: center;
             gap: 8px;
             flex-wrap: wrap;
@@ -105,6 +105,10 @@
             max-width: fit-content;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        .years-subnav.visible {
+            display: flex;
         }
 
         .year-btn {
@@ -128,6 +132,18 @@
             background: #1d4ed8;
             color: #ffffff;
             font-weight: 600;
+        }
+
+        /* TITULO DA SEÇÃO */
+        .section-title {
+            font-size: 1.1rem;
+            color: #38bdf8;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         /* GRID DE CARDS */
@@ -186,24 +202,26 @@
             color: #3b82f6;
         }
 
-        /* CORES DOS ÍCONES */
+        /* CORES DE ÍCONES */
         .c-blue { color: #38bdf8; }
         .c-purple { color: #a855f7; }
         .c-green { color: #22c55e; }
         .c-orange { color: #f97316; }
         .c-teal { color: #14b8a6; }
         .c-pink { color: #ec4899; }
+        .c-yellow { color: #eab308; }
+        .c-red { color: #ef4444; }
 
         /* VISIBILIDADE DAS SEÇÕES */
-        .tab-content, .year-content {
+        .tab-content {
             display: none;
         }
 
-        .tab-content.active, .year-content.active {
+        .tab-content.active {
             display: block;
         }
 
-        /* POPUP / MODAL EXPANSIBILIZADO */
+        /* MODAL / POPUP */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -227,7 +245,7 @@
             border: 1px solid #1e2e48;
             border-radius: 16px;
             width: 90%;
-            max-width: 700px;
+            max-width: 600px;
             max-height: 85vh;
             overflow-y: auto;
             padding: 28px 24px;
@@ -310,7 +328,6 @@
 
         .back-btn:hover { color: #ffffff; }
 
-        /* ESTILOS INTERATIVOS DO CONTEÚDO DO MODAL */
         .details-container {
             text-align: left;
             margin-top: 15px;
@@ -389,7 +406,7 @@
 
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* Proporção 16:9 */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             border-radius: 10px;
@@ -413,7 +430,6 @@
             margin-bottom: 6px;
         }
 
-        /* BOTÃO DE SAIR DO SISTEMA */
         .logout-area {
             text-align: center;
             margin-top: 50px;
@@ -440,13 +456,13 @@
 <body>
 
     <div class="container">
-        <!-- Cabeçalho Principal -->
+        <!-- Cabeçalho -->
         <header class="header">
             <h1>Boas-vindas ao Gabaritei!</h1>
-            <p>Escolha o seu nível de ensino ou área para acessar o conteúdo correto</p>
+            <p>Escolha o seu nível de ensino abaixo para acessar os conteúdos organizados por disciplina</p>
         </header>
 
-        <!-- Menu de Guias Principais -->
+        <!-- Menu de Abas Principais -->
         <nav class="tabs-nav">
             <button class="tab-btn active" onclick="trocarGuia('fund1', this)">
                 <strong>1º ao 5º Ano</strong>
@@ -464,102 +480,471 @@
                 <strong>Ensino Superior</strong>
                 <span>GRADUAÇÃO</span>
             </button>
-            <button class="tab-btn" onclick="trocarGuia('concurso', this)">
-                <strong>Concurso Público</strong>
-                <span>CARREIRAS</span>
-            </button>
         </nav>
+
+        <!-- SUB-NAVEGAÇÃO DE ANOS (Inicia oculta e só é exibida ao clicar num card) -->
+        <div id="subnavAnos" class="years-subnav">
+            <button class="year-btn active" onclick="selecionarAno(1, this)">1º Ano</button>
+            <button class="year-btn" onclick="selecionarAno(2, this)">2º Ano</button>
+            <button class="year-btn" onclick="selecionarAno(3, this)">3º Ano</button>
+            <button class="year-btn" onclick="selecionarAno(4, this)">4º Ano</button>
+            <button class="year-btn" onclick="selecionarAno(5, this)">5º Ano</button>
+        </div>
 
         <!-- ==================== GUIA 1: FUNDAMENTAL I ==================== -->
         <div id="fund1" class="tab-content active">
-            <!-- Sub-Menu de Anos -->
-            <div class="years-subnav">
-                <button class="year-btn active" onclick="trocarAno('fund1', 'f1-1ano', this)">1º Ano</button>
-                <button class="year-btn" onclick="trocarAno('fund1', 'f1-2ano', this)">2º Ano</button>
-                <button class="year-btn" onclick="trocarAno('fund1', 'f1-3ano', this)">3º Ano</button>
-                <button class="year-btn" onclick="trocarAno('fund1', 'f1-4ano', this)">4º Ano</button>
-                <button class="year-btn" onclick="trocarAno('fund1', 'f1-5ano', this)">5º Ano</button>
-            </div>
+            <div class="grid-cards">
+                <div class="card" onclick="abrirModal('Língua Portuguesa', 'port1')">
+                    <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
+                    <ul>
+                        <li>Processo de Alfabetização</li>
+                        <li>Prática de Leitura e Escrita</li>
+                        <li>Interpretação de Textos</li>
+                        <li>Gramática e Ortografia Básica</li>
+                    </ul>
+                </div>
+                
+                <div class="card" onclick="abrirModal('Matemática', 'mat1')">
+                    <div class="card-header"><i class="fa-solid fa-plus c-purple"></i><h3>Matemática</h3></div>
+                    <ul>
+                        <li>Estudo dos Números</li>
+                        <li>Operações Básicas (+, -, ×, ÷)</li>
+                        <li>Geometria Simples</li>
+                        <li>Noções de Medidas e Dinheiro</li>
+                    </ul>
+                </div>
 
-            <!-- 1º ANO FUND I -->
-            <div id="f1-1ano" class="year-content active">
-                <div class="grid-cards">
-                    <!-- CARD LÍNGUA PORTUGUESA 1º ANO -->
-                    <div class="card" onclick="abrirModal('Língua Portuguesa - 1º Ano', 'port1')">
-                        <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
-                        <ul>
-                            <li>Alfabetização e Consciência Fonológica</li>
-                            <li>Vogais, Encontros Vocálicos e Consoantes</li>
-                            <li>Formação de Sílabas e Palavras Simples</li>
-                            <li>Leitura Guiada de Rimas e Parlendas</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="card" onclick="abrirModal('Matemática - 1º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-plus c-purple"></i><h3>Matemática</h3></div>
-                        <ul>
-                            <li>Contagem e Reconhecimento de Números</li>
-                            <li>Adição e Subtração Simples (Até 20)</li>
-                            <li>Formas Geométricas Básicas</li>
-                            <li>Noções de Tamanho e Posição</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Ciências da Natureza - 1º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-seedling c-green"></i><h3>Ciências da Natureza</h3></div>
-                        <ul>
-                            <li>Partes do Corpo Humano e Órgãos dos Sentidos</li>
-                            <li>Hábitos de Higiene Corporal</li>
-                            <li>Seres Vivos e Elementos Não Vivos</li>
-                            <li>O Dia, a Noite e o Tempo</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('História - 1º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-hourglass-half c-orange"></i><h3>História</h3></div>
-                        <ul>
-                            <li>A Minha História e Meu Nome</li>
-                            <li>A Família e A Minha Casa</li>
-                            <li>História dos Brinquedos e Brincadeiras</li>
-                            <li>Rotina Diária e Noção do Tempo</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Geografia - 1º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-map c-teal"></i><h3>Geografia</h3></div>
-                        <ul>
-                            <li>O Espaço da Sala de Aula e da Casa</li>
-                            <li>Esquerda, Direita, Frente e Atrás</li>
-                            <li>Diferentes Tipos de Moradia</li>
-                            <li>Paisagens do Meu Dia a Dia</li>
-                        </ul>
-                    </div>
-                    <div class="card" onclick="abrirModal('Artes - 1º Ano')">
-                        <div class="card-header"><i class="fa-solid fa-palette c-pink"></i><h3>Artes</h3></div>
-                        <ul>
-                            <li>Cores Primárias e Desenho Livre</li>
-                            <li>Pintura com Tintas e Lápis</li>
-                            <li>Modelagem com Massinha</li>
-                            <li>Músicas e Canções de Roda</li>
-                        </ul>
-                    </div>
+                <div class="card" onclick="abrirModal('Ciências da Natureza', 'cien1')">
+                    <div class="card-header"><i class="fa-solid fa-seedling c-green"></i><h3>Ciências da Natureza</h3></div>
+                    <ul>
+                        <li>Estudo do Corpo Humano</li>
+                        <li>Preservação do Meio Ambiente</li>
+                        <li>Hábitos de Saúde e Higiene</li>
+                        <li>Fenômenos da Natureza</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('História', 'hist1')">
+                    <div class="card-header"><i class="fa-solid fa-hourglass-half c-orange"></i><h3>História</h3></div>
+                    <ul>
+                        <li>Noções de Identidade e Tempo</li>
+                        <li>História da Família e Escola</li>
+                        <li>Convivência na Comunidade</li>
+                        <li>Cidadania e Transformações</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Geografia', 'geo1')">
+                    <div class="card-header"><i class="fa-solid fa-map c-teal"></i><h3>Geografia</h3></div>
+                    <ul>
+                        <li>Compreensão do Espaço Vivenciado</li>
+                        <li>Estudo de Bairros e Cidades</li>
+                        <li>Mapas Simples e Orientação</li>
+                        <li>Paisagens Naturais e Modificadas</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Artes', 'art1')">
+                    <div class="card-header"><i class="fa-solid fa-palette c-pink"></i><h3>Artes</h3></div>
+                    <ul>
+                        <li>Expressão Criativa e Desenho</li>
+                        <li>Pintura e Formas Visuais</li>
+                        <li>Atividades de Teatro</li>
+                        <li>Música e Ritmo</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Educação Física', 'edfis1')">
+                    <div class="card-header"><i class="fa-solid fa-child-reaching c-red"></i><h3>Educação Física</h3></div>
+                    <ul>
+                        <li>Desenvolvimento Motor</li>
+                        <li>Jogos e Brincadeiras</li>
+                        <li>Regras de Convivência</li>
+                        <li>Coordenação Corporal</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Ensino Religioso', 'er1')">
+                    <div class="card-header"><i class="fa-solid fa-hands-praying c-yellow"></i><h3>Ensino Religioso</h3></div>
+                    <ul>
+                        <li>Valores Éticos e Humanos</li>
+                        <li>Respeito à Diversidade</li>
+                        <li>Cultura de Paz e Empatia</li>
+                        <li>Convivência em Sociedade</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Língua Inglesa', 'ing1')">
+                    <div class="card-header"><i class="fa-solid fa-language c-blue"></i><h3>Língua Inglesa</h3></div>
+                    <ul>
+                        <li>Vocabulário Inicial</li>
+                        <li>Saudações e Expressões</li>
+                        <li>Cores, Números e Objetos</li>
+                        <li>Escuta e Pronúncia Básica</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== GUIA 2: FUNDAMENTAL II ==================== -->
+        <div id="fund2" class="tab-content">
+            <div class="grid-cards">
+                <div class="card" onclick="abrirModal('Língua Portuguesa - Fund II')">
+                    <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
+                    <ul>
+                        <li>Gêneros Textuais e Análise Crítica</li>
+                        <li>Sintaxe, Morfologia e Gramática</li>
+                        <li>Produção Textual e Argumentação</li>
+                        <li>Leitura e Literatura Infantojuvenil</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Matemática - Fund II')">
+                    <div class="card-header"><i class="fa-solid fa-calculator c-purple"></i><h3>Matemática</h3></div>
+                    <ul>
+                        <li>Álgebra e Equações de 1º e 2º Grau</li>
+                        <li>Geometria Plana e Espacial</li>
+                        <li>Estatística e Probabilidade</li>
+                        <li>Grandezas, Unidades e Razão/Proporção</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Ciências da Natureza - Fund II')">
+                    <div class="card-header"><i class="fa-solid fa-flask c-green"></i><h3>Ciências da Natureza</h3></div>
+                    <ul>
+                        <li>Nivelamento em Biologia e Ecologia</li>
+                        <li>Noções de Física (Movimento, Energia)</li>
+                        <li>Noções de Química (Matéria e Misturas)</li>
+                        <li>Astronomia, Terra e Universo</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('História - Fund II')">
+                    <div class="card-header"><i class="fa-solid fa-landmark c-orange"></i><h3>História</h3></div>
+                    <ul>
+                        <li>História Antiga e Feudalismo</li>
+                        <li>Brasil Colônia, Império e República</li>
+                        <li>Guerra Mundial e História Contemporânea</li>
+                        <li>Cidadania, Direitos e Movimentos Sociais</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Geografia - Fund II')">
+                    <div class="card-header"><i class="fa-solid fa-earth-americas c-teal"></i><h3>Geografia</h3></div>
+                    <ul>
+                        <li>Cartografia, Clima e Geomorfologia</li>
+                        <li>Geopolítica e Globalização</li>
+                        <li>Domínios Morfoclimáticos do Brasil</li>
+                        <li>Urbanização e Impactos Ambientais</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Língua Inglesa - Fund II')">
+                    <div class="card-header"><i class="fa-solid fa-globe c-blue"></i><h3>Língua Inglesa</h3></div>
+                    <ul>
+                        <li>Gramática e Estruturas Verbais (Tenses)</li>
+                        <li>Interpretação e Leitura (Reading)</li>
+                        <li>Vocabulário Temático e Expressões</li>
+                        <li>Habilidades de Compreensão Auditiva</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Arte - Fund II')">
+                    <div class="card-header"><i class="fa-solid fa-paint-brush c-pink"></i><h3>Arte</h3></div>
+                    <ul>
+                        <li>História da Arte Clássica e Moderna</li>
+                        <li>Artes Visuais, Dança e Teatro</li>
+                        <li>Música e Elementos Sonoros</li>
+                        <li>Patrimônio Cultural e Arte Brasileira</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Educação Física - Fund II')">
+                    <div class="card-header"><i class="fa-solid fa-volleyball c-red"></i><h3>Educação Física</h3></div>
+                    <ul>
+                        <li>Esportes de Redes, Campo e Precisão</li>
+                        <li>Lutas, Ginástica e Práticas Corporais</li>
+                        <li>Saúde, Qualidade de Vida e Corpo</li>
+                        <li>Jogos Eletrônicos e Práticas Urbanas</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Ensino Religioso - Fund II')">
+                    <div class="card-header"><i class="fa-solid fa-hands-holding c-yellow"></i><h3>Ensino Religioso</h3></div>
+                    <ul>
+                        <li>Tradições Religiosas e Filosóficas</li>
+                        <li>Direitos Humanos e Respeito Mútuo</li>
+                        <li>Análise de Textos Sagrados e Mitos</li>
+                        <li>Ética, Alteridade e Sociedade</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== GUIA 3: ENSINO MÉDIO ==================== -->
+        <div id="em" class="tab-content">
+            <div class="grid-cards">
+                <div class="card" onclick="abrirModal('Língua Portuguesa e Literatura')">
+                    <div class="card-header"><i class="fa-solid fa-book-open c-blue"></i><h3>Língua Portuguesa e Literatura</h3></div>
+                    <ul>
+                        <li>Estudo do Idioma</li>
+                        <li>Gramática e Sintaxe</li>
+                        <li>Textos Literários e Escolas</li>
+                        <li>Leitura e Redação</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Língua Inglesa')">
+                    <div class="card-header"><i class="fa-solid fa-language c-blue"></i><h3>Língua Inglesa</h3></div>
+                    <ul>
+                        <li>Aprendizado da Língua Estrangeira</li>
+                        <li>Vocabulário e Gramática</li>
+                        <li>Leitura e Interpretação</li>
+                        <li>Compreensão Auditiva</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Arte')">
+                    <div class="card-header"><i class="fa-solid fa-icons c-pink"></i><h3>Arte</h3></div>
+                    <ul>
+                        <li>Expressão Artística e Cultural</li>
+                        <li>Artes Visuais e Plásticas</li>
+                        <li>Artes Cênicas e Teatro</li>
+                        <li>Música e Patrimônio Artístico</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Educação Física')">
+                    <div class="card-header"><i class="fa-solid fa-person-running c-red"></i><h3>Educação Física</h3></div>
+                    <ul>
+                        <li>Práticas Corporais</li>
+                        <li>Modalidades Esportivas</li>
+                        <li>Saúde e Qualidade de Vida</li>
+                        <li>Cultura do Movimento</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Matemática')">
+                    <div class="card-header"><i class="fa-solid fa-square-root-variable c-purple"></i><h3>Matemática</h3></div>
+                    <ul>
+                        <li>Estudo dos Números e Conjuntos</li>
+                        <li>Álgebra e Funções</li>
+                        <li>Geometria Plana e Espacial</li>
+                        <li>Estatística e Probabilidade</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Biologia')">
+                    <div class="card-header"><i class="fa-solid fa-dna c-green"></i><h3>Biologia</h3></div>
+                    <ul>
+                        <li>Estudo dos Seres Vivos</li>
+                        <li>Ecologia e Meio Ambiente</li>
+                        <li>Anatomia do Corpo Humano</li>
+                        <li>Genética e Citologia</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Física')">
+                    <div class="card-header"><i class="fa-solid fa-bolt c-yellow"></i><h3>Física</h3></div>
+                    <ul>
+                        <li>Leis da Natureza</li>
+                        <li>Mecânica e Movimentos</li>
+                        <li>Termodinâmica e Calor</li>
+                        <li>Eletricidade e Magnetismo</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Química')">
+                    <div class="card-header"><i class="fa-solid fa-vial c-teal"></i><h3>Química</h3></div>
+                    <ul>
+                        <li>Estudo de Átomos e Moléculas</li>
+                        <li>Tabela Periódica dos Elementos</li>
+                        <li>Substâncias e Misturas</li>
+                        <li>Reações Químicas</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('História')">
+                    <div class="card-header"><i class="fa-solid fa-building-columns c-orange"></i><h3>História</h3></div>
+                    <ul>
+                        <li>Fatos Históricos do Brasil</li>
+                        <li>História Geral e Mundial</li>
+                        <li>Evolução das Sociedades</li>
+                        <li>Cidadania e Política</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Geografia')">
+                    <div class="card-header"><i class="fa-solid fa-globe c-teal"></i><h3>Geografia</h3></div>
+                    <ul>
+                        <li>Estudo do Espaço Geográfico</li>
+                        <li>Geopolítica Global</li>
+                        <li>Preservação do Meio Ambiente</li>
+                        <li>Cartografia e Clima</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Sociologia')">
+                    <div class="card-header"><i class="fa-solid fa-users c-pink"></i><h3>Sociologia</h3></div>
+                    <ul>
+                        <li>Estudo da Sociedade</li>
+                        <li>Cultura e Identidade</li>
+                        <li>Relações Humanas e Sociais</li>
+                        <li>Direitos e Cidadania</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Filosofia')">
+                    <div class="card-header"><i class="fa-solid fa-brain c-purple"></i><h3>Filosofia</h3></div>
+                    <ul>
+                        <li>Desenvolvimento do Pensamento Crítico</li>
+                        <li>Ética e Moral</li>
+                        <li>História das Ideias</li>
+                        <li>Lógica e Conhecimento</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== GUIA 4: ENSINO SUPERIOR ==================== -->
+        <div id="superior" class="tab-content">
+            <div class="section-title"><i class="fa-solid fa-graduation-cap"></i> Cursos de Bacharelado (4 a 6 anos)</div>
+            <div class="grid-cards">
+                <div class="card" onclick="abrirModal('Saúde e Biológicas')">
+                    <div class="card-header"><i class="fa-solid fa-heart-pulse c-red"></i><h3>Saúde e Biológicas</h3></div>
+                    <ul>
+                        <li>Medicina, Enfermagem, Odontologia</li>
+                        <li>Farmácia, Fisioterapia, Nutrição</li>
+                        <li>Medicina Veterinária, Biomedicina</li>
+                        <li>Psicologia, Biologia, Biotecnologia</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Engenharias')">
+                    <div class="card-header"><i class="fa-solid fa-gears c-orange"></i><h3>Engenharias</h3></div>
+                    <ul>
+                        <li>Engenharia Civil, Mecânica, Elétrica</li>
+                        <li>Engenharia Química, de Produção</li>
+                        <li>Engenharia de Computação, Mecatrônica</li>
+                        <li>Engenharia Ambiental, Aeroespacial</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Exatas e Tecnologia')">
+                    <div class="card-header"><i class="fa-solid fa-laptop-code c-blue"></i><h3>Exatas e Tecnologia</h3></div>
+                    <ul>
+                        <li>Ciência da Computação, Sistemas de Informação</li>
+                        <li>Ciência de Dados, Inteligência Artificial</li>
+                        <li>Estatística, Física, Matemática, Química</li>
+                        <li>Geologia, Astronomia, Meteorologia</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Sociais Aplicadas e Negócios')">
+                    <div class="card-header"><i class="fa-solid fa-briefcase c-yellow"></i><h3>Sociais Aplicadas e Negócios</h3></div>
+                    <ul>
+                        <li>Direito, Administração, Ciências Contábeis</li>
+                        <li>Ciências Econômicas, Relações Internacionais</li>
+                        <li>Comércio Exterior, Marketing</li>
+                        <li>Hotelaria, Turismo, Gastronomia</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Comunicação e Artes')">
+                    <div class="card-header"><i class="fa-solid fa-clapperboard c-pink"></i><h3>Comunicação e Artes</h3></div>
+                    <ul>
+                        <li>Jornalismo, Publicidade e Propaganda</li>
+                        <li>Cinema e Audiovisual, Rádio e TV</li>
+                        <li>Design Gráfico, Moda e Produto</li>
+                        <li>Arquitetura, Artes Visuais, Música</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Humanas e Sociais')">
+                    <div class="card-header"><i class="fa-solid fa-user-group c-purple"></i><h3>Humanas e Sociais</h3></div>
+                    <ul>
+                        <li>História, Geografia, Filosofia</li>
+                        <li>Ciências Sociais, Antropologia</li>
+                        <li>Pedagogia, Serviço Social, Teologia</li>
+                        <li>Biblioteconomia, Arquivologia</li>
+                    </ul>
                 </div>
             </div>
 
-            <div id="f1-2ano" class="year-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Conteúdo do 2º Ano...</p></div>
-            <div id="f1-3ano" class="year-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Conteúdo do 3º Ano...</p></div>
-            <div id="f1-4ano" class="year-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Conteúdo do 4º Ano...</p></div>
-            <div id="f1-5ano" class="year-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Conteúdo do 5º Ano...</p></div>
+            <div class="section-title"><i class="fa-solid fa-chalkboard-user"></i> Cursos de Licenciatura (4 anos)</div>
+            <div class="grid-cards">
+                <div class="card" onclick="abrirModal('Pedagogia e Humanas')">
+                    <div class="card-header"><i class="fa-solid fa-book-reader c-teal"></i><h3>Pedagogia e Humanas</h3></div>
+                    <ul>
+                        <li>Pedagogia (Ed. Infantil e Iniciais)</li>
+                        <li>Licenciatura em História e Geografia</li>
+                        <li>Licenciatura em Filosofia e Sociologia</li>
+                        <li>Licenciatura em Educação Especial</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Linguagens e Expressão')">
+                    <div class="card-header"><i class="fa-solid fa-language c-blue"></i><h3>Linguagens e Expressão</h3></div>
+                    <ul>
+                        <li>Letras (Português, Inglês, Espanhol, Libras)</li>
+                        <li>Licenciatura em Artes Visuais</li>
+                        <li>Licenciatura em Música</li>
+                        <li>Licenciatura em Teatro e Dança</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Exatas e Natureza')">
+                    <div class="card-header"><i class="fa-solid fa-microscope c-green"></i><h3>Exatas e Natureza</h3></div>
+                    <ul>
+                        <li>Licenciatura em Matemática e Física</li>
+                        <li>Licenciatura em Química e Biologia</li>
+                        <li>Licenciatura em Computação / Informática</li>
+                        <li>Licenciatura em Educação Física</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-title"><i class="fa-solid fa-microchip"></i> Cursos Tecnólogos (2 a 3 anos)</div>
+            <div class="grid-cards">
+                <div class="card" onclick="abrirModal('Informação e Comunicação')">
+                    <div class="card-header"><i class="fa-solid fa-code c-blue"></i><h3>Informação e Comunicação</h3></div>
+                    <ul>
+                        <li>Análise e Desenvolvimento de Sistemas (ADS)</li>
+                        <li>Redes, Banco de Dados, Segurança</li>
+                        <li>Defesa Cibernética e Jogos Digitais</li>
+                        <li>Internet das Coisas e BI</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Gestão e Negócios')">
+                    <div class="card-header"><i class="fa-solid fa-chart-line c-green"></i><h3>Gestão e Negócios</h3></div>
+                    <ul>
+                        <li>Processos Gerenciais e Recursos Humanos</li>
+                        <li>Logística e Gestão Financeira</li>
+                        <li>Gestão Comercial e Marketing Digital</li>
+                        <li>Comércio Exterior e Gestão Pública</li>
+                    </ul>
+                </div>
+
+                <div class="card" onclick="abrirModal('Ambiente, Saúde e Segurança')">
+                    <div class="card-header"><i class="fa-solid fa-user-shield c-red"></i><h3>Ambiente, Saúde e Segurança</h3></div>
+                    <ul>
+                        <li>Gestão Ambiental e Radiologia</li>
+                        <li>Estética, Cosmética e Sistemas Biomédicos</li>
+                        <li>Segurança Pública e Investigação</li>
+                        <li>Serviços Penais e Saneamento</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <div id="fund2" class="tab-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Selecione os módulos do Fundamental II...</p></div>
-        <div id="em" class="tab-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Selecione os módulos do Ensino Médio...</p></div>
-        <div id="superior" class="tab-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Selecione os módulos do Ensino Superior...</p></div>
-        <div id="concurso" class="tab-content"><p style="text-align:center; padding: 20px; color:#8a99ad;">Selecione os módulos de Concursos...</p></div>
-
+        <!-- Botão de Sair -->
         <div class="logout-area">
             <button class="btn-logout">Sair do Sistema</button>
         </div>
     </div>
 
-    <!-- MODAL / POPUP DINÂMICO -->
+    <!-- MODAL / POPUP INTERATIVO -->
     <div class="modal-overlay" id="modalRecursos">
         <div class="modal-box">
             <button class="close-btn" onclick="fecharModal()"><i class="fa-solid fa-xmark"></i></button>
@@ -570,7 +955,7 @@
             <h2 id="modalTitulo">Nome da Matéria</h2>
             <p class="subtitle" id="modalSubtitulo">Selecione o tipo de conteúdo que deseja acessar:</p>
 
-            <!-- MENU DE OPÇÕES (BOTÕES) -->
+            <!-- MENU DE OPÇÕES -->
             <div class="modal-options" id="modalMenuOpcoes">
                 <button class="option-btn" onclick="carregarConteudo('provas')">
                     <i class="fa-solid fa-file-lines"></i>
@@ -590,15 +975,18 @@
                 </button>
             </div>
 
-            <!-- ÁREA ONDE O CONTEÚDO REAL APARECE -->
+            <!-- CONTEÚDO DETALHADO -->
             <div id="modalConteudoDetalhado" class="details-container" style="display: none;"></div>
         </div>
     </div>
 
     <script>
         let materiaAtualId = '';
+        let abaAtual = 'fund1';
 
+        // Lógica para Troca de Guia/Aba Principal
         function trocarGuia(idGuia, elementoBotao) {
+            abaAtual = idGuia;
             const guias = document.querySelectorAll('.tab-content');
             guias.forEach(g => g.classList.remove('active'));
 
@@ -607,23 +995,21 @@
 
             document.getElementById(idGuia).classList.add('active');
             elementoBotao.classList.add('active');
+
+            // Esconde a barra de anos ao mudar de aba
+            document.getElementById('subnavAnos').classList.remove('visible');
         }
 
-        function trocarAno(idAbaPai, idAno, elementoBotao) {
-            const containerAba = document.getElementById(idAbaPai);
-            const anos = containerAba.querySelectorAll('.year-content');
-            anos.forEach(a => a.classList.remove('active'));
-
-            const botoesAno = containerAba.querySelectorAll('.year-btn');
-            botoesAno.forEach(b => b.classList.remove('active'));
-
-            document.getElementById(idAno).classList.add('active');
-            elementoBotao.classList.add('active');
-        }
-
+        // Lógica ao clicar num CARD
         function abrirModal(nomeMateria, idMateria = '') {
             materiaAtualId = idMateria;
             document.getElementById('modalTitulo').innerText = nomeMateria;
+
+            // Se for Fundamental I, mostra os filtros de ano na tela principal
+            if (abaAtual === 'fund1') {
+                document.getElementById('subnavAnos').classList.add('visible');
+            }
+
             exibirMenuModal();
             document.getElementById('modalRecursos').classList.add('active');
         }
@@ -639,7 +1025,12 @@
             document.getElementById('btnVoltarModal').style.display = 'none';
         }
 
-        // Função de checar resposta dos Quizzes/Perguntas/Provas
+        function selecionarAno(numAno, elementoBotao) {
+            const botoes = document.querySelectorAll('.year-btn');
+            botoes.forEach(b => b.classList.remove('active'));
+            elementoBotao.classList.add('active');
+        }
+
         function verificarResposta(btn, eCorreta) {
             const container = btn.parentElement;
             const opcoes = container.querySelectorAll('.quiz-opt');
@@ -655,7 +1046,7 @@
             }
         }
 
-        // Carregar conteúdo interativo e real
+        // Carrega o conteúdo correspondente no modal
         function carregarConteudo(tipo) {
             const container = document.getElementById('modalConteudoDetalhado');
             
@@ -665,12 +1056,10 @@
             container.style.display = 'block';
 
             if (materiaAtualId === 'port1') {
-
-                // 1. PROVAS (Avaliação Prática Pronta)
                 if (tipo === 'provas') {
                     container.innerHTML = `
-                        <h3>Avaliação de Língua Portuguesa - 1º Ano</h3>
-                        <p style="margin-bottom: 15px; color:#8a99ad; font-size:0.85rem;">Responda às questões abaixo para testar o aprendizado do aluno:</p>
+                        <h3>Avaliação de Língua Portuguesa</h3>
+                        <p style="margin-bottom: 15px; color:#8a99ad; font-size:0.85rem;">Responda às questões para testar o aprendizado:</p>
                         
                         <div class="quiz-card">
                             <p>Questão 1: Qual das opções abaixo contém apenas VOGAIS?</p>
@@ -689,75 +1078,35 @@
                                 <button class="quiz-opt" onclick="verificarResposta(this, false)">C) BA</button>
                             </div>
                         </div>
-
-                        <div class="quiz-card">
-                            <p>Questão 3: Qual palavra rima com "GATO"?</p>
-                            <div class="quiz-options">
-                                <button class="quiz-opt" onclick="verificarResposta(this, false)">A) BOLA</button>
-                                <button class="quiz-opt" onclick="verificarResposta(this, false)">B) CASA</button>
-                                <button class="quiz-opt" onclick="verificarResposta(this, true)">C) RATO</button>
-                            </div>
-                        </div>
                     `;
-
-                // 2. EXPLICAÇÕES (Conteúdo Didático Completo)
                 } else if (tipo === 'explicacoes') {
                     container.innerHTML = `
-                        <h3>Explicação do Conteúdo (1º Ano)</h3>
+                        <h3>Explicação do Conteúdo</h3>
                         <div class="explanation-text">
                             <h4>1. O Alfabeto e os Sons</h4>
-                            <p>O alfabeto possui 26 letras. Elas são divididas em <strong>Vogais</strong> (A, E, I, O, U) e <strong>Consoantes</strong> (B, C, D, F, G...). As vogais são os sons principais que dão força às palavras!</p>
-
-                            <h4>2. Como Formar Sílabas?</h4>
-                            <p>Quando juntamos uma consoante com uma vogal, criamos um pedacinho chamado <strong>sílaba</strong>. Por exemplo:</p>
-                            <p>• <strong>B + A</strong> = BA (de BAlinha)</p>
-                            <p>• <strong>P + A</strong> = PA (de PATO)</p>
-
-                            <h4>3. O Que São Rimas?</h4>
-                            <p>Rimas são palavras que terminam com o mesmo som! Exemplo: <i>João</i> rima com <i>Pão</i>, e <i>Janela</i> rima com <i>Panela</i>.</p>
+                            <p>O alfabeto possui 26 letras. Elas são divididas em <strong>Vogais</strong> (A, E, I, O, U) e <strong>Consoantes</strong>.</p>
+                            <h4>2. Formação de Sílabas</h4>
+                            <p>Juntando consoante + vogal formamos a sílaba: <strong>B + A = BA</strong>.</p>
                         </div>
                     `;
-
-                // 3. PERGUNTAS (Exercícios Rápidos e Interativos)
                 } else if (tipo === 'perguntas') {
                     container.innerHTML = `
                         <h3>Exercícios Rápidos de Fixação</h3>
-                        
                         <div class="quiz-card">
-                            <p>1. Quantas sílabas (pedacinhos) tem a palavra "PIPOCA"?</p>
+                            <p>1. Quantas sílabas tem a palavra "PIPOCA"?</p>
                             <div class="quiz-options">
                                 <button class="quiz-opt" onclick="verificarResposta(this, false)">A) 2 sílabas</button>
-                                <button class="quiz-opt" onclick="verificarResposta(this, true)">B) 3 sílabas (PI - PO - CA)</button>
-                                <button class="quiz-opt" onclick="verificarResposta(this, false)">C) 4 sílabas</button>
-                            </div>
-                        </div>
-
-                        <div class="quiz-card">
-                            <p>2. Complete a palavra: _ACO (desenho de um Sapo)</p>
-                            <div class="quiz-options">
-                                <button class="quiz-opt" onclick="verificarResposta(this, true)">A) S</button>
-                                <button class="quiz-opt" onclick="verificarResposta(this, false)">B) M</button>
-                                <button class="quiz-opt" onclick="verificarResposta(this, false)">C) P</button>
+                                <button class="quiz-opt" onclick="verificarResposta(this, true)">B) 3 sílabas (PI-PO-CA)</button>
                             </div>
                         </div>
                     `;
-
-                // 4. VÍDEOS (Player do YouTube Embutido)
                 } else if (tipo === 'videos') {
                     container.innerHTML = `
                         <h3>Vídeo-Aulas Recomendadas</h3>
-                        
                         <div style="margin-bottom: 20px;">
-                            <p class="video-title">📹 1. Músicas das Vogais e do Alfabeto</p>
+                            <p class="video-title">📹 Músicas das Vogais e Alfabeto</p>
                             <div class="video-wrapper">
                                 <iframe src="https://www.youtube.com/embed/v9bV_x8j59k" allowfullscreen></iframe>
-                            </div>
-                        </div>
-
-                        <div style="margin-bottom: 20px;">
-                            <p class="video-title">🎨 2. Aprendendo as Famílias Silábicas (BA BE BI BO BU)</p>
-                            <div class="video-wrapper">
-                                <iframe src="https://www.youtube.com/embed/5a8bO1T_k9Y" allowfullscreen></iframe>
                             </div>
                         </div>
                     `;
@@ -765,7 +1114,7 @@
             } else {
                 container.innerHTML = `
                     <h3>Conteúdo em Desenvolvimento</h3>
-                    <p style="color:#8a99ad; font-size:0.9rem;">O material interativo para este módulo estará disponível em breve!</p>
+                    <p style="color:#8a99ad; font-size:0.9rem;">O material interativo para este tema estará disponível em breve!</p>
                 `;
             }
         }
