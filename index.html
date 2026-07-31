@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gabaritei</title>
-    <!-- Fonte Google Poppins & Ícones FontAwesome (Versão 6.5.2 Atualizada) -->
+    <!-- Fonte Google Poppins & Ícones FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         * {
@@ -588,7 +588,7 @@
                     <div class="card-header"><i class="fa-solid fa-language c-blue"></i><h3>Linguagens e Expressão</h3></div>
                     <ul><li>Letras (Português, Inglês, Espanhol, Libras)</li><li>Licenciatura em Artes Visuais</li><li>Licenciatura em Música</li><li>Licenciatura em Teatro e Dança</li></ul>
                 </div>
-                <div class="card" onclick="abrirModal('Exatas, Natureza e Exatas', 'exatLic')">
+                <div class="card" onclick="abrirModal('Exatas e Natureza', 'exatLic')">
                     <div class="card-header"><i class="fa-solid fa-atom c-green"></i><h3>Exatas e Natureza</h3></div>
                     <ul><li>Licenciatura em Matemática e Física</li><li>Licenciatura em Química e Biologia</li><li>Licenciatura em Computação / Informática</li><li>Licenciatura em Educação Física</li></ul>
                 </div>
@@ -681,14 +681,6 @@
         function fecharModal() {
             document.getElementById('modalOverlay').classList.remove('active');
         }
-
-        /* Fechar modal clicando fora da caixa */
-        window.onclick = function(event) {
-            const modal = document.getElementById('modalOverlay');
-            if (event.target === modal) {
-                fecharModal();
-            }
-        };
 
         function voltarOpcoesModal() {
             document.getElementById('modalMenuOptions').style.display = 'grid';
