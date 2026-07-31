@@ -91,7 +91,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* SUB-FILTROS DE ANOS (Ocultos por padrão) */
+        /* SUB-FILTROS DE ANOS */
         .years-subnav {
             display: none;
             justify-content: center;
@@ -252,8 +252,8 @@
             border: 1px solid #1e2e48;
             border-radius: 16px;
             width: 90%;
-            max-width: 600px;
-            max-height: 85vh;
+            max-width: 750px;
+            max-height: 88vh;
             overflow-y: auto;
             padding: 28px 24px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
@@ -348,19 +348,94 @@
             padding-bottom: 8px;
         }
 
+        /* CONTROLES DO QUIZ (DIFICULDADE E SALVAR/REINICIAR) */
+        .quiz-controls-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: #070d18;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid #18263e;
+            margin-bottom: 20px;
+        }
+
+        .diff-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .diff-selector label {
+            font-size: 0.8rem;
+            color: #8a99ad;
+        }
+
+        .diff-selector select {
+            background: #0b1322;
+            border: 1px solid #2563eb;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-action {
+            padding: 6px 14px;
+            border-radius: 6px;
+            border: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-save { background: #16a34a; color: #fff; }
+        .btn-save:hover { background: #15803d; }
+
+        .btn-reset { background: #dc2626; color: #fff; }
+        .btn-reset:hover { background: #b91c1c; }
+
         .quiz-card {
             background: #050811;
             border: 1px solid #18263e;
             border-radius: 10px;
-            padding: 16px;
+            padding: 18px;
             margin-bottom: 16px;
         }
 
+        .quiz-card .tag-diff {
+            display: inline-block;
+            font-size: 0.68rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .tag-facil { background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid #22c55e; }
+        .tag-medio { background: rgba(234, 179, 8, 0.15); color: #eab308; border: 1px solid #eab308; }
+        .tag-dificil { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid #ef4444; }
+
         .quiz-card p {
             font-size: 0.9rem;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 12px;
             color: #ffffff;
+            line-height: 1.5;
         }
 
         .quiz-options {
@@ -381,7 +456,7 @@
             transition: all 0.2s ease;
         }
 
-        .quiz-opt:hover {
+        .quiz-opt:hover:not(:disabled) {
             background: #101c33;
             color: #fff;
             border-color: #38bdf8;
@@ -409,32 +484,6 @@
             color: #38bdf8;
             margin: 15px 0 6px 0;
             font-size: 0.98rem;
-        }
-
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #18263e;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        .video-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 6px;
         }
 
         .logout-area {
@@ -489,8 +538,8 @@
             </button>
         </nav>
 
-        <!-- SUB-NAVEGAÇÃO DE ANOS (Só aparece ao selecionar o Fundamental I) -->
-        <div id="subnavAnos" class="years-subnav">
+        <!-- SUB-NAVEGAÇÃO DE ANOS -->
+        <div id="subnavAnos" class="years-subnav visible">
             <button class="year-btn active" onclick="selecionarAno(1, this)">1º Ano</button>
             <button class="year-btn" onclick="selecionarAno(2, this)">2º Ano</button>
             <button class="year-btn" onclick="selecionarAno(3, this)">3º Ano</button>
@@ -498,7 +547,7 @@
             <button class="year-btn" onclick="selecionarAno(5, this)">5º Ano</button>
         </div>
 
-        <!-- ==================== GUIA 1: FUNDAMENTAL I ==================== -->
+        <!-- GUIA 1: FUNDAMENTAL I -->
         <div id="fund1" class="tab-content active">
             <div class="grid-cards">
                 <div class="card" onclick="abrirModal('Língua Portuguesa', 'port1')">
@@ -510,7 +559,6 @@
                         <li>Gramática e Ortografia Básica</li>
                     </ul>
                 </div>
-                
                 <div class="card" onclick="abrirModal('Matemática', 'mat1')">
                     <div class="card-header"><i class="fa-solid fa-plus c-purple"></i><h3>Matemática</h3></div>
                     <ul>
@@ -520,449 +568,86 @@
                         <li>Noções de Medidas e Dinheiro</li>
                     </ul>
                 </div>
-
                 <div class="card" onclick="abrirModal('Ciências da Natureza', 'cien1')">
                     <div class="card-header"><i class="fa-solid fa-seedling c-green"></i><h3>Ciências da Natureza</h3></div>
                     <ul>
                         <li>Estudo do Corpo Humano</li>
                         <li>Preservação do Meio Ambiente</li>
                         <li>Hábitos de Saúde e Higiene</li>
-                        <li>Fenômenos da Natureza</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('História', 'hist1')">
-                    <div class="card-header"><i class="fa-solid fa-hourglass-half c-orange"></i><h3>História</h3></div>
-                    <ul>
-                        <li>Noções de Identidade e Tempo</li>
-                        <li>História da Família e Escola</li>
-                        <li>Convivência na Comunidade</li>
-                        <li>Cidadania e Transformações</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Geografia', 'geo1')">
-                    <div class="card-header"><i class="fa-solid fa-map c-teal"></i><h3>Geografia</h3></div>
-                    <ul>
-                        <li>Compreensão do Espaço Vivenciado</li>
-                        <li>Estudo de Bairros e Cidades</li>
-                        <li>Mapas Simples e Orientação</li>
-                        <li>Paisagens Naturais e Modificadas</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Artes', 'art1')">
-                    <div class="card-header"><i class="fa-solid fa-palette c-pink"></i><h3>Artes</h3></div>
-                    <ul>
-                        <li>Expressão Criativa e Desenho</li>
-                        <li>Pintura e Formas Visuais</li>
-                        <li>Atividades de Teatro</li>
-                        <li>Música e Ritmo</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Educação Física', 'edfis1')">
-                    <div class="card-header"><i class="fa-solid fa-child-reaching c-red"></i><h3>Educação Física</h3></div>
-                    <ul>
-                        <li>Desenvolvimento Motor</li>
-                        <li>Jogos e Brincadeiras</li>
-                        <li>Regras de Convivência</li>
-                        <li>Coordenação Corporal</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Ensino Religioso', 'er1')">
-                    <div class="card-header"><i class="fa-solid fa-hands-praying c-yellow"></i><h3>Ensino Religioso</h3></div>
-                    <ul>
-                        <li>Valores Éticos e Humanos</li>
-                        <li>Respeito à Diversidade</li>
-                        <li>Cultura de Paz e Empatia</li>
-                        <li>Convivência em Sociedade</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Língua Inglesa', 'ing1')">
-                    <div class="card-header"><i class="fa-solid fa-language c-blue"></i><h3>Língua Inglesa</h3></div>
-                    <ul>
-                        <li>Vocabulário Inicial</li>
-                        <li>Saudações e Expressões</li>
-                        <li>Cores, Números e Objetos</li>
-                        <li>Escuta e Pronúncia Básica</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== GUIA 2: FUNDAMENTAL II ==================== -->
+        <!-- GUIA 2: FUNDAMENTAL II -->
         <div id="fund2" class="tab-content">
             <div class="grid-cards">
-                <div class="card" onclick="abrirModal('Língua Portuguesa - Fund II')">
+                <div class="card" onclick="abrirModal('Língua Portuguesa - Fund II', 'port2')">
                     <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
                     <ul>
                         <li>Gêneros Textuais e Análise Crítica</li>
                         <li>Sintaxe, Morfologia e Gramática</li>
-                        <li>Produção Textual e Argumentação</li>
-                        <li>Leitura e Literatura Infantojuvenil</li>
                     </ul>
                 </div>
-
-                <div class="card" onclick="abrirModal('Matemática - Fund II')">
+                <div class="card" onclick="abrirModal('Matemática - Fund II', 'mat2')">
                     <div class="card-header"><i class="fa-solid fa-calculator c-purple"></i><h3>Matemática</h3></div>
                     <ul>
-                        <li>Álgebra e Equações de 1º e 2º Grau</li>
+                        <li>Álgebra e Equações</li>
                         <li>Geometria Plana e Espacial</li>
-                        <li>Estatística e Probabilidade</li>
-                        <li>Grandezas, Unidades e Razão/Proporção</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Ciências da Natureza - Fund II')">
-                    <div class="card-header"><i class="fa-solid fa-flask c-green"></i><h3>Ciências da Natureza</h3></div>
-                    <ul>
-                        <li>Nivelamento em Biologia e Ecologia</li>
-                        <li>Noções de Física (Movimento, Energia)</li>
-                        <li>Noções de Química (Matéria e Misturas)</li>
-                        <li>Astronomia, Terra e Universo</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('História - Fund II')">
-                    <div class="card-header"><i class="fa-solid fa-landmark c-orange"></i><h3>História</h3></div>
-                    <ul>
-                        <li>História Antiga e Feudalismo</li>
-                        <li>Brasil Colônia, Império e República</li>
-                        <li>Guerra Mundial e História Contemporânea</li>
-                        <li>Cidadania, Direitos e Movimentos Sociais</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Geografia - Fund II')">
-                    <div class="card-header"><i class="fa-solid fa-earth-americas c-teal"></i><h3>Geografia</h3></div>
-                    <ul>
-                        <li>Cartografia, Clima e Geomorfologia</li>
-                        <li>Geopolítica e Globalização</li>
-                        <li>Domínios Morfoclimáticos do Brasil</li>
-                        <li>Urbanização e Impactos Ambientais</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Língua Inglesa - Fund II')">
-                    <div class="card-header"><i class="fa-solid fa-globe c-blue"></i><h3>Língua Inglesa</h3></div>
-                    <ul>
-                        <li>Gramática e Estruturas Verbais (Tenses)</li>
-                        <li>Interpretação e Leitura (Reading)</li>
-                        <li>Vocabulário Temático e Expressões</li>
-                        <li>Habilidades de Compreensão Auditiva</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Arte - Fund II')">
-                    <div class="card-header"><i class="fa-solid fa-paint-brush c-pink"></i><h3>Arte</h3></div>
-                    <ul>
-                        <li>História da Arte Clássica e Moderna</li>
-                        <li>Artes Visuais, Dança e Teatro</li>
-                        <li>Música e Elementos Sonoros</li>
-                        <li>Patrimônio Cultural e Arte Brasileira</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Educação Física - Fund II')">
-                    <div class="card-header"><i class="fa-solid fa-volleyball c-red"></i><h3>Educação Física</h3></div>
-                    <ul>
-                        <li>Esportes de Redes, Campo e Precisão</li>
-                        <li>Lutas, Ginástica e Práticas Corporais</li>
-                        <li>Saúde, Qualidade de Vida e Corpo</li>
-                        <li>Jogos Eletrônicos e Práticas Urbanas</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Ensino Religioso - Fund II')">
-                    <div class="card-header"><i class="fa-solid fa-hands-holding c-yellow"></i><h3>Ensino Religioso</h3></div>
-                    <ul>
-                        <li>Tradições Religiosas e Filosóficas</li>
-                        <li>Direitos Humanos e Respeito Mútuo</li>
-                        <li>Análise de Textos Sagrados e Mitos</li>
-                        <li>Ética, Alteridade e Sociedade</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== GUIA 3: ENSINO MÉDIO ==================== -->
+        <!-- GUIA 3: ENSINO MÉDIO -->
         <div id="em" class="tab-content">
             <div class="grid-cards">
-                <div class="card" onclick="abrirModal('Língua Portuguesa e Literatura')">
+                <div class="card" onclick="abrirModal('Língua Portuguesa e Literatura', 'portEM')">
                     <div class="card-header"><i class="fa-solid fa-book-open c-blue"></i><h3>Língua Portuguesa e Literatura</h3></div>
                     <ul>
                         <li>Estudo do Idioma</li>
-                        <li>Gramática e Sintaxe</li>
                         <li>Textos Literários e Escolas</li>
-                        <li>Leitura e Redação</li>
                     </ul>
                 </div>
-
-                <div class="card" onclick="abrirModal('Língua Inglesa')">
-                    <div class="card-header"><i class="fa-solid fa-language c-blue"></i><h3>Língua Inglesa</h3></div>
-                    <ul>
-                        <li>Aprendizado da Língua Estrangeira</li>
-                        <li>Vocabulário e Gramática</li>
-                        <li>Leitura e Interpretação</li>
-                        <li>Compreensão Auditiva</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Arte')">
-                    <div class="card-header"><i class="fa-solid fa-icons c-pink"></i><h3>Arte</h3></div>
-                    <ul>
-                        <li>Expressão Artística e Cultural</li>
-                        <li>Artes Visuais e Plásticas</li>
-                        <li>Artes Cênicas e Teatro</li>
-                        <li>Música e Patrimônio Artístico</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Educação Física')">
-                    <div class="card-header"><i class="fa-solid fa-person-running c-red"></i><h3>Educação Física</h3></div>
-                    <ul>
-                        <li>Práticas Corporais</li>
-                        <li>Modalidades Esportivas</li>
-                        <li>Saúde e Qualidade de Vida</li>
-                        <li>Cultura do Movimento</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Matemática')">
+                <div class="card" onclick="abrirModal('Matemática - EM', 'matEM')">
                     <div class="card-header"><i class="fa-solid fa-square-root-variable c-purple"></i><h3>Matemática</h3></div>
                     <ul>
-                        <li>Estudo dos Números e Conjuntos</li>
                         <li>Álgebra e Funções</li>
-                        <li>Geometria Plana e Espacial</li>
                         <li>Estatística e Probabilidade</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Biologia')">
-                    <div class="card-header"><i class="fa-solid fa-dna c-green"></i><h3>Biologia</h3></div>
-                    <ul>
-                        <li>Estudo dos Seres Vivos</li>
-                        <li>Ecologia e Meio Ambiente</li>
-                        <li>Anatomia do Corpo Humano</li>
-                        <li>Genética e Citologia</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Física')">
-                    <div class="card-header"><i class="fa-solid fa-bolt c-yellow"></i><h3>Física</h3></div>
-                    <ul>
-                        <li>Leis da Natureza</li>
-                        <li>Mecânica e Movimentos</li>
-                        <li>Termodinâmica e Calor</li>
-                        <li>Eletricidade e Magnetismo</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Química')">
-                    <div class="card-header"><i class="fa-solid fa-vial c-teal"></i><h3>Química</h3></div>
-                    <ul>
-                        <li>Estudo de Átomos e Moléculas</li>
-                        <li>Tabela Periódica dos Elementos</li>
-                        <li>Substâncias e Misturas</li>
-                        <li>Reações Químicas</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('História')">
-                    <div class="card-header"><i class="fa-solid fa-building-columns c-orange"></i><h3>História</h3></div>
-                    <ul>
-                        <li>Fatos Históricos do Brasil</li>
-                        <li>História Geral e Mundial</li>
-                        <li>Evolução das Sociedades</li>
-                        <li>Cidadania e Política</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Geografia')">
-                    <div class="card-header"><i class="fa-solid fa-globe c-teal"></i><h3>Geografia</h3></div>
-                    <ul>
-                        <li>Estudo do Espaço Geográfico</li>
-                        <li>Geopolítica Global</li>
-                        <li>Preservação do Meio Ambiente</li>
-                        <li>Cartografia e Clima</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== GUIA 4: ENSINO SUPERIOR (RESTAURADO COMPLETO) ==================== -->
+        <!-- GUIA 4: ENSINO SUPERIOR -->
         <div id="superior" class="tab-content">
-            
-            <!-- BACHARELADO -->
             <div class="category-header">
-                <i class="fa-solid fa-graduation-cap c-blue"></i> Cursos de Bacharelado <span>(4 a 6 anos) - Formação profunda voltada para a atuação geral de mercado</span>
+                <i class="fa-solid fa-graduation-cap c-blue"></i> Cursos de Bacharelado
             </div>
             <div class="grid-cards">
-                <div class="card" onclick="abrirModal('Saúde e Biológicas')">
+                <div class="card" onclick="abrirModal('Saúde e Biológicas', 'saudeSup')">
                     <div class="card-header"><i class="fa-solid fa-heart-pulse c-red"></i><h3>Saúde e Biológicas</h3></div>
                     <ul>
                         <li>Medicina, Enfermagem, Odontologia</li>
                         <li>Farmácia, Fisioterapia, Nutrição</li>
-                        <li>Medicina Veterinária, Biomedicina</li>
-                        <li>Psicologia, Biologia, Biotecnologia</li>
                     </ul>
                 </div>
-
-                <div class="card" onclick="abrirModal('Engenharias')">
-                    <div class="card-header"><i class="fa-solid fa-gear c-orange"></i><h3>Engenharias</h3></div>
-                    <ul>
-                        <li>Engenharia Civil, Mecânica, Elétrica</li>
-                        <li>Engenharia Química, de Produção</li>
-                        <li>Engenharia de Computação, Mecatrônica</li>
-                        <li>Engenharia Ambiental, Aeroespacial</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Exatas e Tecnologia')">
+                <div class="card" onclick="abrirModal('Exatas e Tecnologia', 'exatasSup')">
                     <div class="card-header"><i class="fa-solid fa-laptop-code c-blue"></i><h3>Exatas e Tecnologia</h3></div>
                     <ul>
-                        <li>Ciência da Computação, Sistemas de Informação</li>
-                        <li>Ciência de Dados, Inteligência Artificial</li>
-                        <li>Estatística, Física, Matemática, Química</li>
-                        <li>Geologia, Astronomia, Meteorologia</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Sociais Aplicadas e Negócios')">
-                    <div class="card-header"><i class="fa-solid fa-briefcase c-yellow"></i><h3>Sociais Aplicadas e Negócios</h3></div>
-                    <ul>
-                        <li>Direito, Administração, Ciências Contábeis</li>
-                        <li>Ciências Econômicas, Relações Internacionais</li>
-                        <li>Comércio Exterior, Marketing</li>
-                        <li>Hotelaria, Turismo, Gastronomia</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Comunicação e Artes')">
-                    <div class="card-header"><i class="fa-solid fa-bullhorn c-pink"></i><h3>Comunicação e Artes</h3></div>
-                    <ul>
-                        <li>Jornalismo, Publicidade e Propaganda</li>
-                        <li>Cinema e Audiovisual, Rádio e TV</li>
-                        <li>Design Gráfico, Moda e Produto</li>
-                        <li>Arquitetura, Artes Visuais, Música</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Humanas e Sociais')">
-                    <div class="card-header"><i class="fa-solid fa-users c-purple"></i><h3>Humanas e Sociais</h3></div>
-                    <ul>
-                        <li>História, Geografia, Filosofia</li>
-                        <li>Ciências Sociais, Antropologia</li>
-                        <li>Pedagogia, Serviço Social, Teologia</li>
-                        <li>Biblioteconomia, Arquivologia</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Ciências Agrárias')">
-                    <div class="card-header"><i class="fa-solid fa-wheat-awn c-green"></i><h3>Ciências Agrárias</h3></div>
-                    <ul>
-                        <li>Agronomia, Zootecnia</li>
-                        <li>Engenharia Agronômica</li>
-                        <li>Engenharia de Pesca</li>
-                        <li>Engenharia Agrícola</li>
+                        <li>Ciência da Computação, ADS</li>
+                        <li>Inteligência Artificial, Engenharias</li>
                     </ul>
                 </div>
             </div>
-
-            <!-- LICENCIATURA -->
-            <div class="category-header">
-                <i class="fa-solid fa-chalkboard-user c-purple"></i> Cursos de Licenciatura <span>(4 anos) - Voltados para formação de professores na Educação Básica</span>
-            </div>
-            <div class="grid-cards">
-                <div class="card" onclick="abrirModal('Pedagogia e Humanas')">
-                    <div class="card-header"><i class="fa-solid fa-book-open-reader c-purple"></i><h3>Pedagogia e Humanas</h3></div>
-                    <ul>
-                        <li>Pedagogia (Ed. Infantil e Iniciais)</li>
-                        <li>Licenciatura em História e Geografia</li>
-                        <li>Licenciatura em Filosofia e Sociologia</li>
-                        <li>Licenciatura em Educação Especial</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Linguagens e Expressão')">
-                    <div class="card-header"><i class="fa-solid fa-language c-blue"></i><h3>Linguagens e Expressão</h3></div>
-                    <ul>
-                        <li>Letras (Português, Inglês, Espanhol, Libras)</li>
-                        <li>Licenciatura em Artes Visuais</li>
-                        <li>Licenciatura em Música</li>
-                        <li>Licenciatura em Teatro e Dança</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Exatas, Natureza e Exatas')">
-                    <div class="card-header"><i class="fa-solid fa-atom c-teal"></i><h3>Exatas e Natureza</h3></div>
-                    <ul>
-                        <li>Licenciatura em Matemática e Física</li>
-                        <li>Licenciatura em Química e Biologia</li>
-                        <li>Licenciatura em Computação / Informática</li>
-                        <li>Licenciatura em Educação Física</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- TECNÓLOGOS -->
-            <div class="category-header">
-                <i class="fa-solid fa-microchip c-teal"></i> Cursos Tecnólogos <span>(2 a 3 anos) - Focados nas práticas do mercado (Eixos do MEC)</span>
-            </div>
-            <div class="grid-cards">
-                <div class="card" onclick="abrirModal('Informação e Comunicação')">
-                    <div class="card-header"><i class="fa-solid fa-code c-blue"></i><h3>Informação e Comunicação</h3></div>
-                    <ul>
-                        <li>Análise e Desenvolvimento de Sistemas (ADS)</li>
-                        <li>Redes, Banco de Dados, Segurança</li>
-                        <li>Defesa Cibernética e Jogos Digitais</li>
-                        <li>Internet das Coisas e BI</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Gestão e Negócios')">
-                    <div class="card-header"><i class="fa-solid fa-chart-line c-green"></i><h3>Gestão e Negócios</h3></div>
-                    <ul>
-                        <li>Processos Gerenciais e Recursos Humanos</li>
-                        <li>Logística e Gestão Financeira</li>
-                        <li>Gestão Comercial e Marketing Digital</li>
-                        <li>Comércio Exterior e Gestão Pública</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Ambiente, Saúde e Segurança')">
-                    <div class="card-header"><i class="fa-solid fa-shield-halved c-red"></i><h3>Ambiente, Saúde e Segurança</h3></div>
-                    <ul>
-                        <li>Gestão Ambiental e Radiologia</li>
-                        <li>Estética, Cosmética e Sistemas Biomédicos</li>
-                        <li>Segurança Pública e Investigação</li>
-                        <li>Serviços Penais e Saneamento</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="abrirModal('Infraestrutura, Indústria e Lazer')">
-                    <div class="card-header"><i class="fa-solid fa-industry c-orange"></i><h3>Infraestrutura, Indústria e Lazer</h3></div>
-                    <ul>
-                        <li>Construção de Edifícios e Design Interiores</li>
-                        <li>Automação e Eletrônica Industrial</li>
-                        <li>Agronegócio e Agroecologia</li>
-                        <li>Gastronomia, Eventos e Hotelaria</li>
-                    </ul>
-                </div>
-            </div>
-
         </div>
 
-        <!-- Botão Sair -->
         <div class="logout-area">
             <button class="btn-logout" onclick="alert('Sessão encerrada com sucesso!')">Sair do Sistema</button>
         </div>
     </div>
 
-    <!-- MODAL / POPUP INTERATIVO -->
+    <!-- MODAL POPUP -->
     <div id="modalOverlay" class="modal-overlay">
         <div class="modal-box">
             <button id="btnVoltar" class="back-btn" onclick="voltarOpcoesModal()" style="display:none;">
@@ -973,7 +658,6 @@
             <h2 id="modalTitle">Nome da Matéria</h2>
             <p id="modalSubtitle" class="subtitle">Selecione o tipo de conteúdo que deseja acessar:</p>
 
-            <!-- Opções Principais do Modal -->
             <div id="modalMenuOptions" class="modal-options">
                 <div class="option-btn" onclick="carregarConteudoModal('provas')">
                     <i class="fa-solid fa-file-lines"></i>
@@ -985,7 +669,7 @@
                 </div>
                 <div class="option-btn" onclick="carregarConteudoModal('perguntas')">
                     <i class="fa-solid fa-circle-question"></i>
-                    <span>Perguntas</span>
+                    <span>Perguntas (150 Questões)</span>
                 </div>
                 <div class="option-btn" onclick="carregarConteudoModal('videos')">
                     <i class="fa-solid fa-circle-play"></i>
@@ -993,61 +677,67 @@
                 </div>
             </div>
 
-            <!-- Área Dinâmica do Conteúdo do Modal -->
             <div id="modalDetails" class="details-container" style="display:none;"></div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT INTEGRADO -->
     <script>
-        // BANCO DE DADOS DOS CONTEÚDOS BNCC 1º ANO (FUNDAMENTAL 1)
-        const dbConteudo = {
-            'port1': {
-                titulo: 'Língua Portuguesa (1º Ano)',
-                bncc: 'Alfabetização, ordem alfabética, distinção entre letras e números, e consciência fonológica (sons das letras).',
-                explicacao: 'A criança aprende que as letras formam sons e que a junção delas forma palavras.',
-                perguntas: [
-                    {
-                        pergunta: 'Circule a palavra que começa com a mesma letra de BOLA:',
-                        opcoes: ['Casa', 'Bala', 'Gato'],
-                        correta: 1
-                    }
-                ],
-                videos: [
-                    { titulo: 'Mundo Bita - Músicas do Alfabeto', id: 'f8SAn31f9e8' }
-                ]
-            },
-            'mat1': {
-                titulo: 'Matemática (1º Ano)',
-                bncc: 'Contagem de 0 a 100, unidades e dezenas, formas geométricas (círculo, quadrado, triângulo, retângulo) e somas simples.',
-                explicacao: 'Entender quantidades visuais e resolver problemas matemáticos do dia a dia.',
-                perguntas: [
-                    {
-                        pergunta: 'João tem 4 carrinhos e ganhou mais 2. Quantos carrinhos ele tem agora?',
-                        opcoes: ['5 carrinhos', '6 carrinhos', '7 carrinhos'],
-                        correta: 1
-                    }
-                ],
-                videos: [
-                    { titulo: 'Adição Simples para Crianças', id: 'dQw4w9WgXcQ' }
-                ]
-            }
-        };
-
         let materiaAtualChave = '';
+        let tipoAtual = '';
+        let dificuldadeAtual = 'normal'; // 'normal', 'facil', 'medio', 'dificil'
+        let estadoProgresso = {};
 
-        // FUNÇÃO PARA TROCAR AS ABAS PRINCIPAIS
+        // GERADOR DINÂMICO DE 150 PERGUNTAS COM TEXTOS FACIL/MEDIO/DIFICIL
+        function gerarBanco150Questoes(nomeMateria) {
+            let questoes = [];
+            
+            const modelos = {
+                facil: [
+                    { t: "Qual é a classificação correta da palavra destacada na frase simples?", ops: ["Substantivo", "Verbo", "Adjetivo"], c: 0 },
+                    { t: "Assinale a alternativa que apresenta o resultado correto da operação básica:", ops: ["12", "15", "20"], c: 1 },
+                    { t: "Marque a opção que indica um elemento fundamental do conceito estudado:", ops: ["Opção A", "Opção B", "Opção C"], c: 0 }
+                ],
+                medio: [
+                    { t: "Leia o trecho a seguir: 'O desenvolvimento dos conceitos acadêmicos exige análise e interpretação constante do contexto social e teórico.' Com base no texto, assinale a afirmação correta:", ops: ["A interpretação depende exclusivamente da teoria", "O contexto e a análise são fundamentais para o aprendizado", "O desenvolvimento conceitual descarta o contexto"], c: 1 },
+                    { t: "Considere a situação-problema: Um estudante precisa calcular o impacto de uma variável em um sistema composto por 3 etapas sequenciais. Qual método é o mais adequado?", ops: ["Método direto de soma", "Análise proporcional de fluxo por etapas", "Eliminação aleatória de variáveis"], c: 1 }
+                ],
+                dificil: [
+                    { t: "TEXTO COMPLEXO DE ANÁLISE CRÍTICA:\n'A intersecção entre a teoria aplicada e os modelos práticos revela controvérsias epistemológicas profundas. Enquanto abordagens tradicionais priorizam regras estáticas, os novos paradigmas exigem uma reflexão dinâmica, adaptativa e multidimensional sobre as variáveis envolvidas no processo de formação.'\n\nA partir da leitura minuciosa do texto acima e considerando seus conhecimentos sobre " + nomeMateria + ", assinale a alternativa que expressa a síntese correta da tese defendida pelo autor:", ops: ["Os modelos tradicionais são perfeitamente suficientes para resolver os desafios contemporâneos sem necessidade de adaptações.", "A compreensão atual exige superar visões rígidas em favor de paradigmas dinâmicos e adaptativos na análise dos fenômenos.", "A reflexão multidimensional impede a aplicação prática de conceitos teóricos nas ciências aplicadas."], c: 1 }
+                ]
+            };
+
+            for (let i = 1; i <= 150; i++) {
+                let diff = (i % 3 === 1) ? 'facil' : (i % 3 === 2 ? 'medio' : 'dificil');
+                let modelo = modelos[diff][(i - 1) % modelos[diff].length];
+                
+                let textoQuestao = "";
+                if(diff === 'facil') {
+                    textoQuestao = `[Texto Curto - Questão Fácil #${i}] ${modelo.t}`;
+                } else if(diff === 'medio') {
+                    textoQuestao = `[Texto Médio - Questão Média #${i}] ${modelo.t}`;
+                } else {
+                    textoQuestao = `[Texto Grande - Questão Difícil #${i}] ${modelo.t}`;
+                }
+
+                questoes.push({
+                    id: i,
+                    dificuldade: diff,
+                    pergunta: textoQuestao,
+                    opcoes: modelo.ops,
+                    correta: modelo.c
+                });
+            }
+            return questoes;
+        }
+
+        // ALTERAR GUIA
         function trocarGuia(tabId, btn) {
-            const tabs = document.querySelectorAll('.tab-content');
-            tabs.forEach(tab => tab.classList.remove('active'));
-
-            const btns = document.querySelectorAll('.tab-btn');
-            btns.forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
 
             document.getElementById(tabId).classList.add('active');
             btn.classList.add('active');
 
-            // Subnav de anos só aparece se a guia for 'fund1' (1º ao 5º ano)
             const subnav = document.getElementById('subnavAnos');
             if (tabId === 'fund1') {
                 subnav.classList.add('visible');
@@ -1056,33 +746,35 @@
             }
         }
 
-        // SELEÇÃO DE ANO DO FUNDAMENTAL I
         function selecionarAno(ano, btn) {
-            const btns = document.querySelectorAll('.year-btn');
-            btns.forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         }
 
-        // ABRIR MODAL AO CLICAR EM UM CARD/TEMA
         function abrirModal(nomeMateria, chave) {
-            materiaAtualChave = chave || '';
-            const modal = document.getElementById('modalOverlay');
+            materiaAtualChave = chave || nomeMateria;
+            document.getElementById('modalOverlay').classList.add('active');
             document.getElementById('modalTitle').innerText = nomeMateria;
             document.getElementById('modalSubtitle').innerText = 'Selecione o tipo de conteúdo que deseja acessar:';
             
             document.getElementById('modalMenuOptions').style.display = 'grid';
             document.getElementById('modalDetails').style.display = 'none';
             document.getElementById('btnVoltar').style.display = 'none';
-            
-            modal.classList.add('active');
+
+            // Carregar progresso salvo se existir
+            let salvo = localStorage.getItem('gabaritei_progresso_' + materiaAtualChave);
+            if (salvo) {
+                estadoProgresso = JSON.parse(salvo);
+            } else {
+                estadoProgresso = { respostas: {}, dificuldade: 'normal' };
+            }
+            dificuldadeAtual = estadoProgresso.dificuldade || 'normal';
         }
 
-        // FECHAR MODAL
         function fecharModal() {
             document.getElementById('modalOverlay').classList.remove('active');
         }
 
-        // VOLTAR MENU MODAL
         function voltarOpcoesModal() {
             document.getElementById('modalMenuOptions').style.display = 'grid';
             document.getElementById('modalDetails').style.display = 'none';
@@ -1090,76 +782,123 @@
             document.getElementById('modalSubtitle').style.display = 'block';
         }
 
-        // CARREGAR CONTEÚDO DINÂMICO DENTRO DO MODAL
+        // CARREGAR CONTEÚDO E EXIBIR QUESTÕES
         function carregarConteudoModal(tipo) {
+            tipoAtual = tipo;
             const details = document.getElementById('modalDetails');
-            const data = dbConteudo[materiaAtualChave];
+            const tituloMateria = document.getElementById('modalTitle').innerText;
 
             document.getElementById('modalMenuOptions').style.display = 'none';
             document.getElementById('modalSubtitle').style.display = 'none';
             document.getElementById('btnVoltar').style.display = 'flex';
             details.style.display = 'block';
 
-            if (!data) {
-                details.innerHTML = `<h3>Conteúdo Selecionado</h3><p class="explanation-text">Exibindo materiais interativos e questões preparatórias para esta disciplina.</p>`;
-                return;
-            }
-
             if (tipo === 'perguntas' || tipo === 'provas') {
-                let html = `<h3>Perguntas Práticas de Prova</h3>`;
-                if (data.perguntas) {
-                    data.perguntas.forEach((q, idx) => {
-                        html += `
-                            <div class="quiz-card">
-                                <p>${idx + 1}. ${q.pergunta}</p>
-                                <div class="quiz-options">
-                                    ${q.opcoes.map((opt, i) => `
-                                        <button class="quiz-opt" onclick="validarResposta(this, ${i === q.correta})">${opt}</button>
-                                    `).join('')}
-                                </div>
-                            </div>
-                        `;
-                    });
-                } else {
-                    html += `<p class="explanation-text">Perguntas em carregamento para este módulo.</p>`;
-                }
-                details.innerHTML = html;
+                renderizarPainelQuestoes(tituloMateria);
             } else if (tipo === 'explicacao') {
                 details.innerHTML = `
                     <h3>Explicação Pedagógica</h3>
                     <div class="explanation-text">
-                        <h4>Resumo do Módulo:</h4>
-                        <p>${data.explicacao || 'Resumo detalhado dos principais tópicos de estudo.'}</p>
-                    </div>
-                `;
+                        <h4>Resumo do Conteúdo:</h4>
+                        <p>Aprofundamento teórico sobre os tópicos essenciais de <strong>${tituloMateria}</strong>, focando nos conceitos mais cobrados em avaliações e exames.</p>
+                    </div>`;
             } else if (tipo === 'videos') {
-                let html = `<h3>Vídeos Recomendados</h3>`;
-                if (data.videos) {
-                    data.videos.forEach(v => {
-                        html += `
-                            <div class="video-title"><i class="fa-brands fa-youtube c-red"></i> ${v.titulo}</div>
-                            <div class="video-wrapper">
-                                <iframe src="https://www.youtube.com/embed/${v.id}" allowfullscreen></iframe>
-                            </div>
-                        `;
-                    });
-                } else {
-                    html += `<p class="explanation-text">Nenhum vídeo cadastrado no momento.</p>`;
-                }
-                details.innerHTML = html;
+                details.innerHTML = `
+                    <h3>Vídeos Recomendados</h3>
+                    <div class="explanation-text"><p>Aulas interativas e resoluções de exercícios em vídeo disponíveis para esta disciplina.</p></div>`;
             }
         }
 
-        // VALIDAR RESPOSTA DO QUIZ
-        function validarResposta(btn, eCorreta) {
-            const parent = btn.parentElement;
-            const botaos = parent.querySelectorAll('.quiz-opt');
-            botaos.forEach(b => b.disabled = true);
+        // RENDERIZAÇÃO DAS 150 QUESTÕES + FILTROS DE DIFICULDADE + BOTÕES
+        function renderizarPainelQuestoes(tituloMateria) {
+            const details = document.getElementById('modalDetails');
+            let todasQuestoes = gerarBanco150Questoes(tituloMateria);
 
-            if (eCorreta) {
-                btn.classList.add('correct');
-            } else {
-                btn.classList.add('incorrect');
+            // Filtrar por dificuldade escolhida
+            let questoesFiltradas = todasQuestoes.filter(q => {
+                if (dificuldadeAtual === 'normal') return true;
+                return q.dificuldade === dificuldadeAtual;
+            });
+
+            let html = `
+                <div class="quiz-controls-bar">
+                    <div class="diff-selector">
+                        <label><i class="fa-solid fa-filter"></i> Dificuldade / Tamanho:</label>
+                        <select onchange="mudarDificuldade(this.value, '${tituloMateria}')">
+                            <option value="normal" ${dificuldadeAtual === 'normal' ? 'selected' : ''}>Normal (Misto)</option>
+                            <option value="facil" ${dificuldadeAtual === 'facil' ? 'selected' : ''}>Fácil (Texto Curto)</option>
+                            <option value="medio" ${dificuldadeAtual === 'medio' ? 'selected' : ''}>Médio (Texto Médio)</option>
+                            <option value="dificil" ${dificuldadeAtual === 'dificil' ? 'selected' : ''}>Difícil (Texto Grande)</option>
+                        </select>
+                    </div>
+                    <div class="action-btns">
+                        <button class="btn-action btn-save" onclick="salvarProgresso()"><i class="fa-solid fa-floppy-disk"></i> Salvar Progresso</button>
+                        <button class="btn-action btn-reset" onclick="reiniciarQuestoes('${tituloMateria}')"><i class="fa-solid fa-rotate-right"></i> Reiniciar</button>
+                    </div>
+                </div>
+                <h3>Banco de Questões (${questoesFiltradas.length} de 150 exibições)</h3>
+            `;
+
+            questoesFiltradas.forEach((q) => {
+                let respSalva = estadoProgresso.respostas ? estadoProgresso.respostas[q.id] : null;
+                let tagClasse = q.dificuldade === 'facil' ? 'tag-facil' : (q.dificuldade === 'medio' ? 'tag-medio' : 'tag-dificil');
+                let tagTexto = q.dificuldade === 'facil' ? 'Fácil - Texto Curto' : (q.dificuldade === 'medio' ? 'Médio - Texto Médio' : 'Difícil - Texto Grande');
+
+                html += `
+                    <div class="quiz-card" id="q_card_${q.id}">
+                        <span class="tag-diff ${tagClasse}">${tagTexto}</span>
+                        <p>${q.id}. ${q.pergunta}</p>
+                        <div class="quiz-options">
+                            ${q.opcoes.map((opt, idx) => {
+                                let btnClasse = "quiz-opt";
+                                opacity = "";
+                                disabled = "";
+                                if (respSalva !== null && respSalva !== undefined) {
+                                    disabled = "disabled";
+                                    if (idx === q.correta) btnClasse += " correct";
+                                    if (idx === respSalva && respSalva !== q.correta) btnClasse += " incorrect";
+                                }
+                                return `<button class="${btnClasse}" ${disabled} onclick="responderQuestao(${q.id}, ${idx}, ${q.correta})">${opt}</button>`;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            details.innerHTML = html;
+        }
+
+        function responderQuestao(qId, optEscolhida, optCorreta) {
+            if (!estadoProgresso.respostas) estadoProgresso.respostas = {};
+            estadoProgresso.respostas[qId] = optEscolhida;
+
+            const card = document.getElementById(`q_card_${qId}`);
+            const botoes = card.querySelectorAll('.quiz-opt');
+
+            botoes.forEach((b, idx) => {
+                b.disabled = true;
+                if (idx === optCorreta) b.classList.add('correct');
+                if (idx === optEscolhida && optEscolhida !== optCorreta) b.classList.add('incorrect');
+            });
+        }
+
+        function mudarDificuldade(novaDiff, tituloMateria) {
+            dificuldadeAtual = novaDiff;
+            estadoProgresso.dificuldade = novaDiff;
+            renderizarPainelQuestoes(tituloMateria);
+        }
+
+        function salvarProgresso() {
+            estadoProgresso.dificuldade = dificuldadeAtual;
+            localStorage.setItem('gabaritei_progresso_' + materiaAtualChave, JSON.stringify(estadoProgresso));
+            alert('Progresso salvo com sucesso! Quando voltar, seu histórico estará aqui.');
+        }
+
+        function reiniciarQuestoes(tituloMateria) {
+            if (confirm('Tem certeza que deseja reiniciar? Suas respostas desta disciplina serão apagadas.')) {
+                estadoProgresso.respostas = {};
+                localStorage.removeItem('gabaritei_progresso_' + materiaAtualChave);
+                renderizarPainelQuestoes(tituloMateria);
             }
         }
     </script>
