@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabaritei</title>
+    <title>Gabaritei - Sistema de Questões</title>
     <!-- Google Poppins & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -65,11 +65,7 @@
             transition: all 0.2s ease;
         }
 
-        .tab-btn:hover {
-            border-color: #2563eb;
-            color: #fff;
-        }
-
+        .tab-btn:hover { border-color: #2563eb; color: #fff; }
         .tab-btn.active {
             background: #2563eb;
             border-color: #3b82f6;
@@ -131,7 +127,6 @@
         .c-green { color: #22c55e; }
         .c-orange { color: #f97316; }
         .c-yellow { color: #eab308; }
-        .c-teal { color: #14b8a6; }
 
         .tab-content { display: none; }
         .tab-content.active { display: block; }
@@ -158,7 +153,9 @@
             border: 1px solid #1e2e48;
             border-radius: 16px;
             width: 90%;
-            max-width: 480px;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
             padding: 28px 24px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             text-align: center;
@@ -168,7 +165,6 @@
         .modal-box h2 { font-size: 1.35rem; margin-bottom: 4px; font-weight: 700; }
         .modal-box p.subtitle { color: #8a99ad; font-size: 0.82rem; margin-bottom: 20px; }
 
-        /* MENU PRINCIPAL DE 4 OPÇÕES */
         .modal-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -220,7 +216,7 @@
             font-weight: 500;
         }
 
-        /* OPÇÕES DE DIFICULDADE INTERNAS (QUESTÕES E PROVAS) */
+        /* DIFICULDADES */
         .difficulty-options {
             display: flex;
             flex-direction: column;
@@ -241,14 +237,64 @@
             transition: all 0.2s ease;
         }
 
-        .diff-card-btn:hover {
-            border-color: #38bdf8;
-            background: #0e182e;
-        }
-
+        .diff-card-btn:hover { border-color: #38bdf8; background: #0e182e; }
         .diff-info strong { display: block; font-size: 0.9rem; color: #38bdf8; }
         .diff-info span { font-size: 0.75rem; color: #8a99ad; }
         .diff-card-btn i { color: #38bdf8; font-size: 1.1rem; }
+
+        /* ESTILO DA QUESTÃO EXIBIDA */
+        .question-box {
+            text-align: left;
+            background: #050811;
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid #18263e;
+        }
+
+        .question-tag {
+            display: inline-block;
+            background: #1e293b;
+            color: #38bdf8;
+            font-size: 0.72rem;
+            padding: 3px 8px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #e2e8f0;
+            margin-bottom: 15px;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .opt-item {
+            background: #0a1120;
+            border: 1px solid #1e2e48;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.83rem;
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .opt-item:hover { border-color: #38bdf8; color: #fff; }
+        .opt-item.correct { background: #14532d !important; border-color: #22c55e !important; color: #fff; }
+        .opt-item.wrong { background: #7f1d1d !important; border-color: #ef4444 !important; color: #fff; }
+
+        .feedback-msg {
+            margin-top: 12px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
 
         /* BARRA DE AÇÕES (SALVAR E REINICIAR) */
         .action-bar {
@@ -355,7 +401,7 @@
         </div>
     </div>
 
-    <!-- MODAL -->
+    <!-- MODAL PRINCIPAL -->
     <div id="modalOverlay" class="modal-overlay">
         <div class="modal-box">
             <button id="btnVoltar" class="back-btn" onclick="voltarMenuPrincipal()" style="display:none;">
@@ -363,16 +409,16 @@
             </button>
             <button class="close-btn" onclick="fecharModal()"><i class="fa-solid fa-xmark"></i></button>
 
-            <h2 id="modalTitle">Língua Portuguesa</h2>
+            <h2 id="modalTitle">Matéria</h2>
             <p id="modalSubtitle" class="subtitle">Selecione o tipo de conteúdo que deseja acessar:</p>
 
-            <!-- TELA 1: MENU INICIAL (4 OPÇÕES) -->
+            <!-- TELA 1: MENU PRINCIPAL (4 OPÇÕES) -->
             <div id="modalMenuOptions" class="modal-options">
                 <div class="option-btn" onclick="abrirOpcoesDificuldade('Provas')">
                     <i class="fa-solid fa-file-lines"></i>
                     <span>Provas</span>
                 </div>
-                <div class="option-btn" onclick="exibirConteudo('Explicações')">
+                <div class="option-btn" onclick="exibirConteudoEspecial('Explicações')">
                     <i class="fa-solid fa-lightbulb"></i>
                     <span>Explicações</span>
                 </div>
@@ -380,24 +426,24 @@
                     <i class="fa-solid fa-circle-question"></i>
                     <span>Perguntas</span>
                 </div>
-                <div class="option-btn" onclick="exibirConteudo('Vídeos')">
+                <div class="option-btn" onclick="exibirConteudoEspecial('Vídeos')">
                     <i class="fa-solid fa-circle-play"></i>
                     <span>Vídeos</span>
                 </div>
             </div>
 
-            <!-- TELA 2: DENTRO DE PROVAS / PERGUNTAS (OPÇÕES DE DIFICULDADE) -->
+            <!-- TELA 2: OPÇÕES DE DIFICULDADE -->
             <div id="modalDifficultyArea" style="display: none;">
                 <div class="difficulty-options">
-                    <button class="diff-card-btn" onclick="confirmarSelecao('Fácil (Pequenas)')">
+                    <button class="diff-card-btn" onclick="gerarQuestao('facil')">
                         <div class="diff-info">
                             <strong>Fácil</strong>
-                            <span>Questões pequenas e diretas</span>
+                            <span>Questões curtas e diretas</span>
                         </div>
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
 
-                    <button class="diff-card-btn" onclick="confirmarSelecao('Média (Médias)')">
+                    <button class="diff-card-btn" onclick="gerarQuestao('media')">
                         <div class="diff-info">
                             <strong>Média</strong>
                             <span>Questões de tamanho médio</span>
@@ -405,7 +451,7 @@
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
 
-                    <button class="diff-card-btn" onclick="confirmarSelecao('Difícil (Longas)')">
+                    <button class="diff-card-btn" onclick="gerarQuestao('dificil')">
                         <div class="diff-info">
                             <strong>Difícil</strong>
                             <span>Questões longas e complexas</span>
@@ -413,46 +459,117 @@
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
 
-                    <button class="diff-card-btn" onclick="confirmarSelecao('Normal / Aleatório')">
+                    <button class="diff-card-btn" onclick="gerarQuestao('aleatorio')">
                         <div class="diff-info">
                             <strong>Normal / Aleatório</strong>
-                            <span>Mistura de todos os níveis</span>
+                            <span>Sorteia qualquer questão</span>
                         </div>
                         <i class="fa-solid fa-shuffle"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- TELA 3: ÁREA DE RESULTADO/CONTEÚDO -->
-            <div id="modalResultArea" style="display: none; text-align: left; margin-top: 10px;">
-                <div style="background:#050811; padding:15px; border-radius:10px; border:1px solid #18263e;">
-                    <h4 id="resultTitle" style="color:#fff; margin-bottom:6px;"></h4>
-                    <p id="resultText" style="color:#8a99ad; font-size:0.85rem;"></p>
+            <!-- TELA 3: ÁREA EXIBINDO A QUESTÃO GERADA -->
+            <div id="modalQuestionArea" style="display: none;">
+                <div class="question-box">
+                    <span id="qTag" class="question-tag">FÁCIL</span>
+                    <p id="qText" class="question-text">Texto da questão...</p>
+                    <div id="qOptions" class="options-list"></div>
+                    <div id="qFeedback" class="feedback-msg"></div>
                 </div>
             </div>
 
-            <!-- BARRA DE BOTÕES SALVAR E REINICIAR -->
+            <!-- BARRA COM BOTÕES SALVAR E REINICIAR -->
             <div class="action-bar">
                 <button class="btn-act btn-save" onclick="salvarOpcoes()">
                     <i class="fa-solid fa-floppy-disk"></i> Salvar
                 </button>
-                <button class="btn-act btn-reset" onclick="reiniciarOpcoes()">
+                <button class="btn-act btn-reset" onclick="reiniciarQuestoes()">
                     <i class="fa-solid fa-rotate-left"></i> Reiniciar
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT E BANCO DE QUESTÕES -->
     <script>
-        let materiaAtual = "";
+        let materiaAtual = "Língua Portuguesa";
         let tipoAtual = "";
-        let nivelSelecionado = "";
+        let nivelAtual = "";
+
+        // BANCO DE DADOS DE QUESTÕES REAL E DINÂMICO
+        const bancoQuestoes = {
+            "Língua Portuguesa": {
+                facil: [
+                    {
+                        pergunta: "Qual das palavras abaixo é um substantivo próprio?",
+                        opcoes: ["Cadeira", "Brasil", "Felicidade", "Bonito"],
+                        correta: 1
+                    },
+                    {
+                        pergunta: "Assinale a alternativa que contém uma palavra proparoxítona:",
+                        opcoes: ["Café", "Lâmpada", "Caneta", "Papel"],
+                        correta: 1
+                    }
+                ],
+                media: [
+                    {
+                        pergunta: "Leia a frase: 'O aluno estudou muito, porém não passou na prova.' A palavra destacada 'porém' estabelece uma ideia de:",
+                        opcoes: ["Adição", "Conclusão", "Oposição / Adversidade", "Causa"],
+                        correta: 2
+                    },
+                    {
+                        pergunta: "Em qual das orações abaixo a crase foi utilizada corretamente?",
+                        opcoes: ["Fui à feira comprar frutas.", "Ele entregou o presente à ela.", "Fomos à pé para a escola.", "Chegamos à uma hora da tarde."],
+                        correta: 0
+                    }
+                ],
+                dificil: [
+                    {
+                        pergunta: "Analise a frase a seguir: 'Embora houvesse muitos problemas na execução do projeto, os diretores mantiveram-se irredutíveis quanto aos prazos fixados.' A oração subordinada em destaque classifica-se como:",
+                        opcoes: ["Subordinada Adverbial Concessiva", "Subordinada Adverbial Causal", "Subordinada Adjetiva Explicativa", "Subordinada Substantiva Objetiva Direta"],
+                        correta: 0
+                    }
+                ]
+            },
+            "Matemática": {
+                facil: [
+                    {
+                        pergunta: "Quanto é 7 x 8?",
+                        opcoes: ["54", "56", "64", "48"],
+                        correta: 1
+                    },
+                    {
+                        pergunta: "Qual é a raiz quadrada de 81?",
+                        opcoes: ["7", "8", "9", "10"],
+                        correta: 2
+                    }
+                ],
+                media: [
+                    {
+                        pergunta: "Se x + 5 = 18, qual é o valor de x?",
+                        opcoes: ["11", "12", "13", "14"],
+                        correta: 2
+                    },
+                    {
+                        pergunta: "Um produto custa R$ 200,00 e recebeu um desconto de 15%. Qual o novo valor?",
+                        opcoes: ["R$ 160,00", "R$ 170,00", "R$ 180,00", "R$ 185,00"],
+                        correta: 1
+                    }
+                ],
+                dificil: [
+                    {
+                        pergunta: "Dada a equação do segundo grau x² - 5x + 6 = 0, quais são as raízes reais que satisfazem esta equação?",
+                        opcoes: ["x1 = 1 e x2 = 6", "x1 = 2 e x2 = 3", "x1 = -2 e x2 = -3", "x1 = 0 e x2 = 5"],
+                        correta: 1
+                    }
+                ]
+            }
+        };
 
         function trocarGuia(idGuia, elemento) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
             document.getElementById(idGuia).classList.add('active');
             elemento.classList.add('active');
         }
@@ -468,71 +585,102 @@
             document.getElementById('modalOverlay').classList.remove('active');
         }
 
-        // Abre a tela de seleção de dificuldade ao clicar em Provas ou Perguntas
         function abrirOpcoesDificuldade(tipo) {
             tipoAtual = tipo;
             document.getElementById('modalMenuOptions').style.display = 'none';
             document.getElementById('modalDifficultyArea').style.display = 'block';
-            document.getElementById('modalResultArea').style.display = 'none';
+            document.getElementById('modalQuestionArea').style.display = 'none';
             document.getElementById('btnVoltar').style.display = 'flex';
-            document.getElementById('modalSubtitle').innerText = `Escolha o nível de ${tipo.toLowerCase()}:`;
+            document.getElementById('modalSubtitle').innerText = `Escolha a dificuldade para as ${tipo.toLowerCase()}:`;
         }
 
-        // Seleciona a dificuldade e carrega a tela final
-        function confirmarSelecao(nivel) {
-            nivelSelecionado = nivel;
+        // GERADOR DINÂMICO DE QUESTÕES
+        function gerarQuestao(nivel) {
+            nivelAtual = nivel;
             document.getElementById('modalDifficultyArea').style.display = 'none';
-            document.getElementById('modalResultArea').style.display = 'block';
-            document.getElementById('modalSubtitle').innerText = `Modo selecionado: ${nivel}`;
+            document.getElementById('modalQuestionArea').style.display = 'block';
+            document.getElementById('modalSubtitle').innerText = `Responda a questão abaixo:`;
 
-            document.getElementById('resultTitle').innerText = `${tipoAtual} de ${materiaAtual}`;
-            document.getElementById('resultText').innerText = `Carregando banco de ${tipoAtual.toLowerCase()} no nível [${nivel}]...`;
+            let materiaDados = bancoQuestoes[materiaAtual] || bancoQuestoes["Língua Portuguesa"];
+            let lista = [];
+
+            if (nivel === 'facil') lista = materiaDados.facil;
+            else if (nivel === 'media') lista = materiaDados.media;
+            else if (nivel === 'dificil') lista = materiaDados.dificil;
+            else {
+                // Aleatório
+                lista = [...(materiaDados.facil || []), ...(materiaDados.media || []), ...(materiaDados.dificil || [])];
+            }
+
+            // Seleciona uma questão aleatória da lista escolhida
+            let qSorteada = lista[Math.floor(Math.random() * lista.length)];
+
+            document.getElementById('qTag').innerText = nivel.toUpperCase();
+            document.getElementById('qText').innerText = qSorteada.pergunta;
+
+            let containerOpts = document.getElementById('qOptions');
+            containerOpts.innerHTML = '';
+            document.getElementById('qFeedback').innerText = '';
+
+            qSorteada.opcoes.forEach((opt, idx) => {
+                let btnOpt = document.createElement('div');
+                btnOpt.className = 'opt-item';
+                btnOpt.innerText = `${String.fromCharCode(65 + idx)}) ${opt}`;
+                btnOpt.onclick = () => verificarResposta(btnOpt, idx, qSorteada.correta);
+                containerOpts.appendChild(btnOpt);
+            });
         }
 
-        // Para Explicações e Vídeos que não precisam de nível
-        function exibirConteudo(tipo) {
-            tipoAtual = tipo;
-            nivelSelecionado = "Padrão";
+        function verificarResposta(elemento, selecionada, correta) {
+            let todos = document.querySelectorAll('.opt-item');
+            todos.forEach(item => item.onclick = null); // Trava cliques adicionais
+
+            if (selecionada === correta) {
+                elemento.classList.add('correct');
+                document.getElementById('qFeedback').style.color = '#22c55e';
+                document.getElementById('qFeedback').innerText = '✓ Parabéns! Resposta correta.';
+            } else {
+                elemento.classList.add('wrong');
+                todos[correta].classList.add('correct');
+                document.getElementById('qFeedback').style.color = '#ef4444';
+                document.getElementById('qFeedback').innerText = '✕ Resposta incorreta! A opção destacada em verde era a certa.';
+            }
+        }
+
+        function exibirConteudoEspecial(tipo) {
             document.getElementById('modalMenuOptions').style.display = 'none';
-            document.getElementById('modalDifficultyArea').style.display = 'none';
-            document.getElementById('modalResultArea').style.display = 'block';
+            document.getElementById('modalQuestionArea').style.display = 'block';
             document.getElementById('btnVoltar').style.display = 'flex';
-            document.getElementById('modalSubtitle').innerText = `Acessando ${tipo}:`;
+            document.getElementById('modalSubtitle').innerText = `${tipo} de ${materiaAtual}:`;
 
-            document.getElementById('resultTitle').innerText = `${tipo} de ${materiaAtual}`;
-            document.getElementById('resultText').innerText = `Exibindo o conteúdo completo de ${tipo.toLowerCase()} para esta matéria.`;
+            document.getElementById('qTag').innerText = tipo.toUpperCase();
+            document.getElementById('qText').innerText = `Carregando resumos e materiais interativos de ${materiaAtual}...`;
+            document.getElementById('qOptions').innerHTML = '';
+            document.getElementById('qFeedback').innerText = '';
         }
 
         function voltarMenuPrincipal() {
-            tipoAtual = "";
-            nivelSelecionado = "";
             document.getElementById('modalMenuOptions').style.display = 'grid';
             document.getElementById('modalDifficultyArea').style.display = 'none';
-            document.getElementById('modalResultArea').style.display = 'none';
+            document.getElementById('modalQuestionArea').style.display = 'none';
             document.getElementById('btnVoltar').style.display = 'none';
             document.getElementById('modalSubtitle').innerText = "Selecione o tipo de conteúdo que deseja acessar:";
         }
 
-        // Função de Salvar no Navegador
+        // SALVA DADOS NO NAVEGADOR
         function salvarOpcoes() {
-            if (!tipoAtual) {
-                alert("Selecione uma opção antes de salvar!");
-                return;
-            }
-            const dadosSalvos = {
-                materia: materiaAtual,
-                tipo: tipoAtual,
-                nivel: nivelSelecionado
-            };
-            localStorage.setItem('gabaritei_preferencias', JSON.stringify(dadosSalvos));
-            alert(`Configurações salvas com sucesso!\nMatéria: ${materiaAtual}\nOpção: ${tipoAtual}\nNível: ${nivelSelecionado || 'Nenhum'}`);
+            const dados = { materia: materiaAtual, nivel: nivelAtual };
+            localStorage.setItem('gabaritei_save', JSON.stringify(dados));
+            alert('Progresso salvo com sucesso!');
         }
 
-        // Função de Reiniciar Opções
-        function reiniciarOpcoes() {
-            localStorage.removeItem('gabaritei_preferencias');
-            voltarMenuPrincipal();
-            alert("Seleção e dados salvos foram reiniciados!");
+        // BOTÃO REINICIAR: Sorteia uma NOVA questão na hora!
+        function reiniciarQuestoes() {
+            if (document.getElementById('modalQuestionArea').style.display === 'block' && nivelAtual) {
+                gerarQuestao(nivelAtual); // Sorteia uma nova questão do mesmo nível
+            } else {
+                voltarMenuPrincipal();
+            }
         }
     </script>
 </body>
