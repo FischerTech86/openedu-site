@@ -134,24 +134,6 @@
             font-weight: 600;
         }
 
-        /* TITULO DAS CATEGORIAS DO ENSINO SUPERIOR */
-        .category-header {
-            font-size: 1.15rem;
-            color: #38bdf8;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .category-header span {
-            font-size: 0.8rem;
-            color: #8a99ad;
-            font-weight: 400;
-        }
-
         /* GRID DE CARDS */
         .grid-cards {
             display: grid;
@@ -181,19 +163,10 @@
             margin-bottom: 12px;
         }
 
-        .card-header i {
-            font-size: 1.2rem;
-        }
+        .card-header i { font-size: 1.2rem; }
+        .card-header h3 { font-size: 1.05rem; font-weight: 600; }
 
-        .card-header h3 {
-            font-size: 1.05rem;
-            font-weight: 600;
-        }
-
-        .card ul {
-            list-style: none;
-        }
-
+        .card ul { list-style: none; }
         .card ul li {
             color: #8a99ad;
             font-size: 0.85rem;
@@ -201,7 +174,6 @@
             position: relative;
             padding-left: 15px;
         }
-
         .card ul li::before {
             content: "•";
             position: absolute;
@@ -209,24 +181,13 @@
             color: #3b82f6;
         }
 
-        /* CORES DE ÍCONES */
         .c-blue { color: #38bdf8; }
         .c-purple { color: #a855f7; }
         .c-green { color: #22c55e; }
-        .c-orange { color: #f97316; }
-        .c-teal { color: #14b8a6; }
-        .c-pink { color: #ec4899; }
-        .c-yellow { color: #eab308; }
         .c-red { color: #ef4444; }
 
-        /* VISIBILIDADE DAS SEÇÕES */
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
         /* MODAL / POPUP */
         .modal-overlay {
@@ -243,16 +204,14 @@
             z-index: 1000;
         }
 
-        .modal-overlay.active {
-            display: flex;
-        }
+        .modal-overlay.active { display: flex; }
 
         .modal-box {
             background: #0b1322;
             border: 1px solid #1e2e48;
             border-radius: 16px;
             width: 90%;
-            max-width: 750px;
+            max-width: 800px;
             max-height: 88vh;
             overflow-y: auto;
             padding: 28px 24px;
@@ -261,17 +220,8 @@
             position: relative;
         }
 
-        .modal-box h2 {
-            font-size: 1.35rem;
-            margin-bottom: 6px;
-            font-weight: 700;
-        }
-
-        .modal-box p.subtitle {
-            color: #8a99ad;
-            font-size: 0.82rem;
-            margin-bottom: 22px;
-        }
+        .modal-box h2 { font-size: 1.35rem; margin-bottom: 6px; font-weight: 700; }
+        .modal-box p.subtitle { color: #8a99ad; font-size: 0.82rem; margin-bottom: 22px; }
 
         .modal-options {
             display: grid;
@@ -295,15 +245,8 @@
             transition: all 0.2s ease;
         }
 
-        .option-btn i {
-            font-size: 1.3rem;
-            color: #38bdf8;
-        }
-
-        .option-btn:hover {
-            border-color: #2563eb;
-            background: #0e182e;
-        }
+        .option-btn i { font-size: 1.3rem; color: #38bdf8; }
+        .option-btn:hover { border-color: #2563eb; background: #0e182e; }
 
         .close-btn {
             position: absolute;
@@ -315,8 +258,6 @@
             font-size: 1.1rem;
             cursor: pointer;
         }
-
-        .close-btn:hover { color: #ffffff; }
 
         .back-btn {
             position: absolute;
@@ -333,22 +274,9 @@
             font-weight: 500;
         }
 
-        .back-btn:hover { color: #ffffff; }
+        .details-container { text-align: left; margin-top: 15px; }
 
-        .details-container {
-            text-align: left;
-            margin-top: 15px;
-        }
-
-        .details-container h3 {
-            font-size: 1.15rem;
-            color: #38bdf8;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #18263e;
-            padding-bottom: 8px;
-        }
-
-        /* CONTROLES DO QUIZ (DIFICULDADE E SALVAR/REINICIAR) */
+        /* CONTROLES DO QUIZ */
         .quiz-controls-bar {
             display: flex;
             justify-content: space-between;
@@ -362,17 +290,6 @@
             margin-bottom: 20px;
         }
 
-        .diff-selector {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .diff-selector label {
-            font-size: 0.8rem;
-            color: #8a99ad;
-        }
-
         .diff-selector select {
             background: #0b1322;
             border: 1px solid #2563eb;
@@ -384,13 +301,10 @@
             cursor: pointer;
         }
 
-        .action-btns {
-            display: flex;
-            gap: 8px;
-        }
+        .action-btns { display: flex; gap: 8px; }
 
         .btn-action {
-            padding: 6px 14px;
+            padding: 8px 14px;
             border-radius: 6px;
             border: none;
             font-size: 0.8rem;
@@ -416,7 +330,7 @@
             margin-bottom: 16px;
         }
 
-        .quiz-card .tag-diff {
+        .tag-diff {
             display: inline-block;
             font-size: 0.68rem;
             padding: 2px 8px;
@@ -436,6 +350,7 @@
             margin-bottom: 12px;
             color: #ffffff;
             line-height: 1.5;
+            white-space: pre-line;
         }
 
         .quiz-options {
@@ -473,52 +388,16 @@
             border-color: #ef4444 !important;
             color: #ffffff !important;
         }
-
-        .explanation-text {
-            line-height: 1.6;
-            color: #a3b8cc;
-            font-size: 0.88rem;
-        }
-
-        .explanation-text h4 {
-            color: #38bdf8;
-            margin: 15px 0 6px 0;
-            font-size: 0.98rem;
-        }
-
-        .logout-area {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .btn-logout {
-            padding: 10px 32px;
-            border: 1px solid #ffffff;
-            background: transparent;
-            border-radius: 30px;
-            color: #ffffff;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-        }
-
-        .btn-logout:hover {
-            background: #ffffff;
-            color: #060913;
-        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Cabeçalho -->
         <header class="header">
             <h1>Boas-vindas ao Gabaritei!</h1>
             <p>Escolha o seu nível de ensino abaixo para acessar os conteúdos organizados por disciplina</p>
         </header>
 
-        <!-- Menu de Abas Principais -->
         <nav class="tabs-nav">
             <button class="tab-btn active" onclick="trocarGuia('fund1', this)">
                 <strong>1º ao 5º Ano</strong>
@@ -532,122 +411,47 @@
                 <strong>1º ao 3º Ano</strong>
                 <span>ENSINO MÉDIO</span>
             </button>
-            <button class="tab-btn" onclick="trocarGuia('superior', this)">
-                <strong>Ensino Superior</strong>
-                <span>GRADUAÇÃO</span>
-            </button>
         </nav>
 
-        <!-- SUB-NAVEGAÇÃO DE ANOS -->
         <div id="subnavAnos" class="years-subnav visible">
             <button class="year-btn active" onclick="selecionarAno(1, this)">1º Ano</button>
             <button class="year-btn" onclick="selecionarAno(2, this)">2º Ano</button>
             <button class="year-btn" onclick="selecionarAno(3, this)">3º Ano</button>
-            <button class="year-btn" onclick="selecionarAno(4, this)">4º Ano</button>
-            <button class="year-btn" onclick="selecionarAno(5, this)">5º Ano</button>
         </div>
 
-        <!-- GUIA 1: FUNDAMENTAL I -->
         <div id="fund1" class="tab-content active">
             <div class="grid-cards">
                 <div class="card" onclick="abrirModal('Língua Portuguesa', 'port1')">
                     <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
-                    <ul>
-                        <li>Processo de Alfabetização</li>
-                        <li>Prática de Leitura e Escrita</li>
-                        <li>Interpretação de Textos</li>
-                        <li>Gramática e Ortografia Básica</li>
-                    </ul>
+                    <ul><li>Ortografia e Leitura</li><li>Gramática Básica</li></ul>
                 </div>
                 <div class="card" onclick="abrirModal('Matemática', 'mat1')">
                     <div class="card-header"><i class="fa-solid fa-plus c-purple"></i><h3>Matemática</h3></div>
-                    <ul>
-                        <li>Estudo dos Números</li>
-                        <li>Operações Básicas (+, -, ×, ÷)</li>
-                        <li>Geometria Simples</li>
-                        <li>Noções de Medidas e Dinheiro</li>
-                    </ul>
-                </div>
-                <div class="card" onclick="abrirModal('Ciências da Natureza', 'cien1')">
-                    <div class="card-header"><i class="fa-solid fa-seedling c-green"></i><h3>Ciências da Natureza</h3></div>
-                    <ul>
-                        <li>Estudo do Corpo Humano</li>
-                        <li>Preservação do Meio Ambiente</li>
-                        <li>Hábitos de Saúde e Higiene</li>
-                    </ul>
+                    <ul><li>Operações Básicas</li><li>Problemas Numéricos</li></ul>
                 </div>
             </div>
         </div>
 
-        <!-- GUIA 2: FUNDAMENTAL II -->
         <div id="fund2" class="tab-content">
             <div class="grid-cards">
                 <div class="card" onclick="abrirModal('Língua Portuguesa - Fund II', 'port2')">
                     <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
-                    <ul>
-                        <li>Gêneros Textuais e Análise Crítica</li>
-                        <li>Sintaxe, Morfologia e Gramática</li>
-                    </ul>
-                </div>
-                <div class="card" onclick="abrirModal('Matemática - Fund II', 'mat2')">
-                    <div class="card-header"><i class="fa-solid fa-calculator c-purple"></i><h3>Matemática</h3></div>
-                    <ul>
-                        <li>Álgebra e Equações</li>
-                        <li>Geometria Plana e Espacial</li>
-                    </ul>
+                    <ul><li>Sintaxe e Gramática</li></ul>
                 </div>
             </div>
         </div>
 
-        <!-- GUIA 3: ENSINO MÉDIO -->
         <div id="em" class="tab-content">
             <div class="grid-cards">
-                <div class="card" onclick="abrirModal('Língua Portuguesa e Literatura', 'portEM')">
-                    <div class="card-header"><i class="fa-solid fa-book-open c-blue"></i><h3>Língua Portuguesa e Literatura</h3></div>
-                    <ul>
-                        <li>Estudo do Idioma</li>
-                        <li>Textos Literários e Escolas</li>
-                    </ul>
-                </div>
                 <div class="card" onclick="abrirModal('Matemática - EM', 'matEM')">
                     <div class="card-header"><i class="fa-solid fa-square-root-variable c-purple"></i><h3>Matemática</h3></div>
-                    <ul>
-                        <li>Álgebra e Funções</li>
-                        <li>Estatística e Probabilidade</li>
-                    </ul>
+                    <ul><li>Álgebra e Funções</li></ul>
                 </div>
             </div>
-        </div>
-
-        <!-- GUIA 4: ENSINO SUPERIOR -->
-        <div id="superior" class="tab-content">
-            <div class="category-header">
-                <i class="fa-solid fa-graduation-cap c-blue"></i> Cursos de Bacharelado
-            </div>
-            <div class="grid-cards">
-                <div class="card" onclick="abrirModal('Saúde e Biológicas', 'saudeSup')">
-                    <div class="card-header"><i class="fa-solid fa-heart-pulse c-red"></i><h3>Saúde e Biológicas</h3></div>
-                    <ul>
-                        <li>Medicina, Enfermagem, Odontologia</li>
-                        <li>Farmácia, Fisioterapia, Nutrição</li>
-                    </ul>
-                </div>
-                <div class="card" onclick="abrirModal('Exatas e Tecnologia', 'exatasSup')">
-                    <div class="card-header"><i class="fa-solid fa-laptop-code c-blue"></i><h3>Exatas e Tecnologia</h3></div>
-                    <ul>
-                        <li>Ciência da Computação, ADS</li>
-                        <li>Inteligência Artificial, Engenharias</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="logout-area">
-            <button class="btn-logout" onclick="alert('Sessão encerrada com sucesso!')">Sair do Sistema</button>
         </div>
     </div>
 
-    <!-- MODAL POPUP -->
+    <!-- MODAL -->
     <div id="modalOverlay" class="modal-overlay">
         <div class="modal-box">
             <button id="btnVoltar" class="back-btn" onclick="voltarOpcoesModal()" style="display:none;">
@@ -659,21 +463,9 @@
             <p id="modalSubtitle" class="subtitle">Selecione o tipo de conteúdo que deseja acessar:</p>
 
             <div id="modalMenuOptions" class="modal-options">
-                <div class="option-btn" onclick="carregarConteudoModal('provas')">
-                    <i class="fa-solid fa-file-lines"></i>
-                    <span>Provas</span>
-                </div>
-                <div class="option-btn" onclick="carregarConteudoModal('explicacao')">
-                    <i class="fa-solid fa-lightbulb"></i>
-                    <span>Explicações</span>
-                </div>
                 <div class="option-btn" onclick="carregarConteudoModal('perguntas')">
                     <i class="fa-solid fa-circle-question"></i>
-                    <span>Perguntas (150 Questões)</span>
-                </div>
-                <div class="option-btn" onclick="carregarConteudoModal('videos')">
-                    <i class="fa-solid fa-circle-play"></i>
-                    <span>Vídeos</span>
+                    <span>Perguntas (150 Questões Inéditas)</span>
                 </div>
             </div>
 
@@ -683,67 +475,90 @@
 
     <script>
         let materiaAtualChave = '';
-        let tipoAtual = '';
-        let dificuldadeAtual = 'normal'; // 'normal', 'facil', 'medio', 'dificil'
-        let estadoProgresso = {};
+        let dificuldadeAtual = 'normal';
+        let bancoQuestoesAtual = []; // Armazena as questões geradas no momento
+        let respostasUsuario = {};
 
-        // GERADOR DINÂMICO DE 150 PERGUNTAS COM TEXTOS FACIL/MEDIO/DIFICIL
-        function gerarBanco150Questoes(nomeMateria) {
+        // ELEMENTOS PARA GERAR QUESTÕES TOTALMENTE ALEATÓRIAS
+        const sujeitos = ["O aluno", "Um pesquisador", "O professor", "A equipe", "Um cientista", "O estudante"];
+        const verbos = ["analisou", "calculou", "observou", "verificou", "estudou", "identificou"];
+        const objetos = ["os dados do experimento", "as variáveis da equação", "o texto gramatical", "a estrutura da frase", "o problema proposto"];
+        const temasLongos = [
+            "Em um estudo aprofundado sobre o impacto das transformações no conhecimento moderno, percebe-se que a constância e o método são essenciais para a evolução acadêmica. Analisando as nuances do contexto apresentado:",
+            "Ao avaliar os parâmetros teóricos e experimentais em um cenário complexo de aplicação, observa-se que a variação de fatores externos interfere de modo determinante nos resultados obtidos. Considerando tal conjuntura:",
+            "A interpretação crítica de fenômenos requer uma abordagem lógica e estruturada. Durante o processo de análise de múltiplos fatores e hipóteses, conclui-se que:"
+        ];
+
+        // GERADOR QUE CRIA NOVAS PERGUNTAS TODA VEZ QUE É CHAMADO
+        function gerarNovas150Questoes(nomeMateria) {
             let questoes = [];
             
-            const modelos = {
-                facil: [
-                    { t: "Qual é a classificação correta da palavra destacada na frase simples?", ops: ["Substantivo", "Verbo", "Adjetivo"], c: 0 },
-                    { t: "Assinale a alternativa que apresenta o resultado correto da operação básica:", ops: ["12", "15", "20"], c: 1 },
-                    { t: "Marque a opção que indica um elemento fundamental do conceito estudado:", ops: ["Opção A", "Opção B", "Opção C"], c: 0 }
-                ],
-                medio: [
-                    { t: "Leia o trecho a seguir: 'O desenvolvimento dos conceitos acadêmicos exige análise e interpretação constante do contexto social e teórico.' Com base no texto, assinale a afirmação correta:", ops: ["A interpretação depende exclusivamente da teoria", "O contexto e a análise são fundamentais para o aprendizado", "O desenvolvimento conceitual descarta o contexto"], c: 1 },
-                    { t: "Considere a situação-problema: Um estudante precisa calcular o impacto de uma variável em um sistema composto por 3 etapas sequenciais. Qual método é o mais adequado?", ops: ["Método direto de soma", "Análise proporcional de fluxo por etapas", "Eliminação aleatória de variáveis"], c: 1 }
-                ],
-                dificil: [
-                    { t: "TEXTO COMPLEXO DE ANÁLISE CRÍTICA:\n'A intersecção entre a teoria aplicada e os modelos práticos revela controvérsias epistemológicas profundas. Enquanto abordagens tradicionais priorizam regras estáticas, os novos paradigmas exigem uma reflexão dinâmica, adaptativa e multidimensional sobre as variáveis envolvidas no processo de formação.'\n\nA partir da leitura minuciosa do texto acima e considerando seus conhecimentos sobre " + nomeMateria + ", assinale a alternativa que expressa a síntese correta da tese defendida pelo autor:", ops: ["Os modelos tradicionais são perfeitamente suficientes para resolver os desafios contemporâneos sem necessidade de adaptações.", "A compreensão atual exige superar visões rígidas em favor de paradigmas dinâmicos e adaptativos na análise dos fenômenos.", "A reflexão multidimensional impede a aplicação prática de conceitos teóricos nas ciências aplicadas."], c: 1 }
-                ]
-            };
-
             for (let i = 1; i <= 150; i++) {
-                let diff = (i % 3 === 1) ? 'facil' : (i % 3 === 2 ? 'medio' : 'dificil');
-                let modelo = modelos[diff][(i - 1) % modelos[diff].length];
-                
-                let textoQuestao = "";
-                if(diff === 'facil') {
-                    textoQuestao = `[Texto Curto - Questão Fácil #${i}] ${modelo.t}`;
-                } else if(diff === 'medio') {
-                    textoQuestao = `[Texto Médio - Questão Média #${i}] ${modelo.t}`;
+                // Sorteia a dificuldade se for modo normal
+                let diffs = ['facil', 'medio', 'dificil'];
+                let diff = diffs[Math.floor(Math.random() * diffs.length)];
+
+                // Sortear valores e palavras aleatórias
+                let subj = sujeitos[Math.floor(Math.random() * sujeitos.length)];
+                let verb = verbos[Math.floor(Math.random() * verbos.length)];
+                let obj = objetos[Math.floor(Math.random() * objetos.length)];
+                let numA = Math.floor(Math.random() * 50) + 1;
+                let numB = Math.floor(Math.random() * 50) + 1;
+                let codigoAleatorio = Math.floor(Math.random() * 8999) + 1000;
+
+                let textoPergunta = "";
+                let opcoes = [];
+                let correta = Math.floor(Math.random() * 3); // sorteia qual opção (0, 1 ou 2) será a certa
+
+                if (diff === 'facil') {
+                    // TEXTO CURTO
+                    textoPergunta = `${subj} ${verb} ${obj} (Cód: ${codigoAleatorio}). Qual é o valor simples de ${numA} + ${numB}?`;
+                    let soma = numA + numB;
+                    opcoes = [`${soma}`, `${soma + 3}`, `${soma - 2}`];
+                } else if (diff === 'medio') {
+                    // TEXTO MÉDIO
+                    textoPergunta = `Durante a aula de ${nomeMateria}, ${subj.toLowerCase()} ${verb} ${obj}. Sabendo disso, determine a interpretação adequada para a situação com taxa de ${numA}%:`;
+                    opcoes = [
+                        `A taxa de ${numA}% indica uma variação direta no processo.`,
+                        `A taxa de ${numA}% representa uma redução neutra.`,
+                        `O resultado independe da taxa de ${numA}%.`
+                    ];
                 } else {
-                    textoQuestao = `[Texto Grande - Questão Difícil #${i}] ${modelo.t}`;
+                    // TEXTO GRANDE (DIFÍCIL)
+                    let textoLongo = temasLongos[Math.floor(Math.random() * temasLongos.length)];
+                    textoPergunta = `TEXTO DE APOIO (Caso #${codigoAleatorio}):\n"${textoLongo}"\n\nCom base nas premissas de ${nomeMateria} e na situação descrita por ${subj.toLowerCase()} que ${verb} ${obj}, assinale a alternativa correta:`;
+                    opcoes = [
+                        `A hipótese principal confirma que os fatores analisados alteram o resultado final.`,
+                        `O texto nega completamente a necessidade de método estruturado.`,
+                        `A análise demonstra que os dados são irrelevantes para o estudo.`
+                    ];
                 }
+
+                // Ajusta as opções para que a correta fique na posição sorteada
+                let opCorretaTexto = opcoes[0];
+                opcoes[0] = opcoes[correta];
+                opcoes[correta] = opCorretaTexto;
 
                 questoes.push({
                     id: i,
                     dificuldade: diff,
-                    pergunta: textoQuestao,
-                    opcoes: modelo.ops,
-                    correta: modelo.c
+                    pergunta: textoPergunta,
+                    opcoes: opcoes,
+                    correta: correta
                 });
             }
             return questoes;
         }
 
-        // ALTERAR GUIA
         function trocarGuia(tabId, btn) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-
             document.getElementById(tabId).classList.add('active');
             btn.classList.add('active');
 
             const subnav = document.getElementById('subnavAnos');
-            if (tabId === 'fund1') {
-                subnav.classList.add('visible');
-            } else {
-                subnav.classList.remove('visible');
-            }
+            if (tabId === 'fund1') subnav.classList.add('visible');
+            else subnav.classList.remove('visible');
         }
 
         function selecionarAno(ano, btn) {
@@ -755,20 +570,24 @@
             materiaAtualChave = chave || nomeMateria;
             document.getElementById('modalOverlay').classList.add('active');
             document.getElementById('modalTitle').innerText = nomeMateria;
-            document.getElementById('modalSubtitle').innerText = 'Selecione o tipo de conteúdo que deseja acessar:';
             
             document.getElementById('modalMenuOptions').style.display = 'grid';
             document.getElementById('modalDetails').style.display = 'none';
             document.getElementById('btnVoltar').style.display = 'none';
 
-            // Carregar progresso salvo se existir
-            let salvo = localStorage.getItem('gabaritei_progresso_' + materiaAtualChave);
+            // Verificar se há progresso salvo para esta matéria
+            let salvo = localStorage.getItem('gabaritei_salvo_' + materiaAtualChave);
             if (salvo) {
-                estadoProgresso = JSON.parse(salvo);
+                let dados = JSON.parse(salvo);
+                bancoQuestoesAtual = dados.questoes;
+                respostasUsuario = dados.respostas;
+                dificuldadeAtual = dados.dificuldade || 'normal';
             } else {
-                estadoProgresso = { respostas: {}, dificuldade: 'normal' };
+                // Se não tem salvo, gera questões do zero
+                bancoQuestoesAtual = gerarNovas150Questoes(nomeMateria);
+                respostasUsuario = {};
+                dificuldadeAtual = 'normal';
             }
-            dificuldadeAtual = estadoProgresso.dificuldade || 'normal';
         }
 
         function fecharModal() {
@@ -779,43 +598,24 @@
             document.getElementById('modalMenuOptions').style.display = 'grid';
             document.getElementById('modalDetails').style.display = 'none';
             document.getElementById('btnVoltar').style.display = 'none';
-            document.getElementById('modalSubtitle').style.display = 'block';
         }
 
-        // CARREGAR CONTEÚDO E EXIBIR QUESTÕES
         function carregarConteudoModal(tipo) {
-            tipoAtual = tipo;
             const details = document.getElementById('modalDetails');
             const tituloMateria = document.getElementById('modalTitle').innerText;
 
             document.getElementById('modalMenuOptions').style.display = 'none';
-            document.getElementById('modalSubtitle').style.display = 'none';
             document.getElementById('btnVoltar').style.display = 'flex';
             details.style.display = 'block';
 
-            if (tipo === 'perguntas' || tipo === 'provas') {
-                renderizarPainelQuestoes(tituloMateria);
-            } else if (tipo === 'explicacao') {
-                details.innerHTML = `
-                    <h3>Explicação Pedagógica</h3>
-                    <div class="explanation-text">
-                        <h4>Resumo do Conteúdo:</h4>
-                        <p>Aprofundamento teórico sobre os tópicos essenciais de <strong>${tituloMateria}</strong>, focando nos conceitos mais cobrados em avaliações e exames.</p>
-                    </div>`;
-            } else if (tipo === 'videos') {
-                details.innerHTML = `
-                    <h3>Vídeos Recomendados</h3>
-                    <div class="explanation-text"><p>Aulas interativas e resoluções de exercícios em vídeo disponíveis para esta disciplina.</p></div>`;
-            }
+            renderizarPainelQuestoes(tituloMateria);
         }
 
-        // RENDERIZAÇÃO DAS 150 QUESTÕES + FILTROS DE DIFICULDADE + BOTÕES
         function renderizarPainelQuestoes(tituloMateria) {
             const details = document.getElementById('modalDetails');
-            let todasQuestoes = gerarBanco150Questoes(tituloMateria);
 
-            // Filtrar por dificuldade escolhida
-            let questoesFiltradas = todasQuestoes.filter(q => {
+            // Filtrar pela dificuldade selecionada
+            let questoesExibidas = bancoQuestoesAtual.filter(q => {
                 if (dificuldadeAtual === 'normal') return true;
                 return q.dificuldade === dificuldadeAtual;
             });
@@ -825,35 +625,34 @@
                     <div class="diff-selector">
                         <label><i class="fa-solid fa-filter"></i> Dificuldade / Tamanho:</label>
                         <select onchange="mudarDificuldade(this.value, '${tituloMateria}')">
-                            <option value="normal" ${dificuldadeAtual === 'normal' ? 'selected' : ''}>Normal (Misto)</option>
+                            <option value="normal" ${dificuldadeAtual === 'normal' ? 'selected' : ''}>Normal (Todas)</option>
                             <option value="facil" ${dificuldadeAtual === 'facil' ? 'selected' : ''}>Fácil (Texto Curto)</option>
                             <option value="medio" ${dificuldadeAtual === 'medio' ? 'selected' : ''}>Médio (Texto Médio)</option>
                             <option value="dificil" ${dificuldadeAtual === 'dificil' ? 'selected' : ''}>Difícil (Texto Grande)</option>
                         </select>
                     </div>
                     <div class="action-btns">
-                        <button class="btn-action btn-save" onclick="salvarProgresso()"><i class="fa-solid fa-floppy-disk"></i> Salvar Progresso</button>
-                        <button class="btn-action btn-reset" onclick="reiniciarQuestoes('${tituloMateria}')"><i class="fa-solid fa-rotate-right"></i> Reiniciar</button>
+                        <button class="btn-action btn-save" onclick="salvarProgresso()"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
+                        <button class="btn-action btn-reset" onclick="reiniciarQuestoesComNovosTextos('${tituloMateria}')"><i class="fa-solid fa-rotate-right"></i> Reiniciar (Gerar Novas)</button>
                     </div>
                 </div>
-                <h3>Banco de Questões (${questoesFiltradas.length} de 150 exibições)</h3>
+                <h3>Perguntas (${questoesExibidas.length} de 150 exibidas)</h3>
             `;
 
-            questoesFiltradas.forEach((q) => {
-                let respSalva = estadoProgresso.respostas ? estadoProgresso.respostas[q.id] : null;
+            questoesExibidas.forEach((q) => {
+                let respSalva = respostasUsuario[q.id];
                 let tagClasse = q.dificuldade === 'facil' ? 'tag-facil' : (q.dificuldade === 'medio' ? 'tag-medio' : 'tag-dificil');
                 let tagTexto = q.dificuldade === 'facil' ? 'Fácil - Texto Curto' : (q.dificuldade === 'medio' ? 'Médio - Texto Médio' : 'Difícil - Texto Grande');
 
                 html += `
                     <div class="quiz-card" id="q_card_${q.id}">
                         <span class="tag-diff ${tagClasse}">${tagTexto}</span>
-                        <p>${q.id}. ${q.pergunta}</p>
+                        <p><strong>Questão ${q.id}:</strong>\n${q.pergunta}</p>
                         <div class="quiz-options">
                             ${q.opcoes.map((opt, idx) => {
                                 let btnClasse = "quiz-opt";
-                                opacity = "";
-                                disabled = "";
-                                if (respSalva !== null && respSalva !== undefined) {
+                                let disabled = "";
+                                if (respSalva !== undefined && respSalva !== null) {
                                     disabled = "disabled";
                                     if (idx === q.correta) btnClasse += " correct";
                                     if (idx === respSalva && respSalva !== q.correta) btnClasse += " incorrect";
@@ -869,9 +668,7 @@
         }
 
         function responderQuestao(qId, optEscolhida, optCorreta) {
-            if (!estadoProgresso.respostas) estadoProgresso.respostas = {};
-            estadoProgresso.respostas[qId] = optEscolhida;
-
+            respostasUsuario[qId] = optEscolhida;
             const card = document.getElementById(`q_card_${qId}`);
             const botoes = card.querySelectorAll('.quiz-opt');
 
@@ -884,20 +681,27 @@
 
         function mudarDificuldade(novaDiff, tituloMateria) {
             dificuldadeAtual = novaDiff;
-            estadoProgresso.dificuldade = novaDiff;
             renderizarPainelQuestoes(tituloMateria);
         }
 
+        // SALVA AS QUESTÕES ATUAIS E ONDE VOCÊ PAROU
         function salvarProgresso() {
-            estadoProgresso.dificuldade = dificuldadeAtual;
-            localStorage.setItem('gabaritei_progresso_' + materiaAtualChave, JSON.stringify(estadoProgresso));
-            alert('Progresso salvo com sucesso! Quando voltar, seu histórico estará aqui.');
+            let dadosParaSalvar = {
+                questoes: bancoQuestoesAtual,
+                respostas: respostasUsuario,
+                dificuldade: dificuldadeAtual
+            };
+            localStorage.setItem('gabaritei_salvo_' + materiaAtualChave, JSON.stringify(dadosParaSalvar));
+            alert('Progresso salvo com sucesso! Ao abrir novamente, você continuará de onde parou.');
         }
 
-        function reiniciarQuestoes(tituloMateria) {
-            if (confirm('Tem certeza que deseja reiniciar? Suas respostas desta disciplina serão apagadas.')) {
-                estadoProgresso.respostas = {};
-                localStorage.removeItem('gabaritei_progresso_' + materiaAtualChave);
+        // GERAR NOVAS QUESTÕES COMPLETAMENTE DIFERENTES AO REINICIAR
+        function reiniciarQuestoesComNovosTextos(tituloMateria) {
+            if (confirm('Deseja reiniciar? Isso irá APAGAR as questões atuais e GERAR 150 PERGUNTAS NOVAS e inéditas!')) {
+                localStorage.removeItem('gabaritei_salvo_' + materiaAtualChave);
+                respostasUsuario = {};
+                // Gera um novo conjunto aleatório de perguntas
+                bancoQuestoesAtual = gerarNovas150Questoes(tituloMateria);
                 renderizarPainelQuestoes(tituloMateria);
             }
         }
