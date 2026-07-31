@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gabaritei</title>
-    <!-- Fonte Google Poppins & Ícones FontAwesome -->
+    <!-- Fonte Google Poppins & Ícones FontAwesome (Versão 6.5.2 Atualizada) -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
         * {
@@ -238,7 +238,7 @@
 
         .details-container { text-align: left; margin-top: 15px; }
 
-        /* PAINEL DE CONTROLE DO QUIZ */
+        /* PAINEL DO QUIZ */
         .quiz-controls-bar {
             display: flex;
             justify-content: space-between;
@@ -589,7 +589,7 @@
                     <ul><li>Letras (Português, Inglês, Espanhol, Libras)</li><li>Licenciatura em Artes Visuais</li><li>Licenciatura em Música</li><li>Licenciatura em Teatro e Dança</li></ul>
                 </div>
                 <div class="card" onclick="abrirModal('Exatas, Natureza e Exatas', 'exatLic')">
-                    <div class="card-header"><i class="fa-solid fa-atom c-green"></i><h3>Exatas, Natureza e Exatas</h3></div>
+                    <div class="card-header"><i class="fa-solid fa-atom c-green"></i><h3>Exatas e Natureza</h3></div>
                     <ul><li>Licenciatura em Matemática e Física</li><li>Licenciatura em Química e Biologia</li><li>Licenciatura em Computação / Informática</li><li>Licenciatura em Educação Física</li></ul>
                 </div>
             </div>
@@ -644,136 +644,51 @@
                 </div>
                 <div class="option-btn" onclick="carregarConteudoModal('perguntas')">
                     <i class="fa-solid fa-circle-question"></i>
-                    <span>Perguntas (150 Questões)</span>
+                    <span>Perguntas</span>
                 </div>
-                <div class="option-btn" onclick="carregarConteudoModal('videos')">
-                    <i class="fa-solid fa-circle-play"></i>
-                    <span>Vídeos</span>
+                <div class="option-btn" onclick="carregarConteudoModal('resumos')">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Resumos</span>
                 </div>
             </div>
 
-            <div id="modalDetails" class="details-container" style="display:none;"></div>
+            <div id="modalDetails" class="details-container" style="display:none;">
+                <!-- O conteúdo dinâmico do modal será injetado via JS -->
+            </div>
         </div>
     </div>
 
     <script>
-        let materiaAtualChave = '';
-        let dificuldadeAtual = 'normal';
-        let bancoQuestoesAtual = [];
-        let respostasUsuario = {};
+        let materiaAtual = '';
+        let idMateriaAtual = '';
 
-        const sujeitos = ["O aluno", "Um pesquisador", "O professor", "A equipe de análise", "Um cientista", "O estudante"];
-        const verbos = ["analisou", "calculou", "observou", "verificou", "estudou", "identificou"];
-        const objetos = ["os dados do experimento", "as variáveis da equação", "o texto gramatical", "a estrutura da frase", "o problema proposto"];
-        const temasLongos = [
-            "Em um estudo aprofundado sobre o impacto das transformações no conhecimento moderno, percebe-se que a constância e o método são essenciais para a evolução acadêmica. Analisando as nuances do contexto apresentado:",
-            "Ao avaliar os parâmetros teóricos e experimentais em um cenário complexo de aplicação, observa-se que a variação de fatores externos interfere de modo determinante nos resultados obtidos. Considerando tal conjuntura:",
-            "A interpretação crítica de fenômenos requer uma abordagem lógica e estruturada. Durante o processo de análise de múltiplos fatores e hipóteses, conclui-se que:"
-        ];
-
-        // GERADOR COM 5 ALTERNATIVAS (A, B, C, D, E) E CONTEÚDOS INÉDITOS
-        function gerarNovas150Questoes(nomeMateria) {
-            let questoes = [];
-            
-            for (let i = 1; i <= 150; i++) {
-                let diffs = ['facil', 'medio', 'dificil'];
-                let diff = diffs[Math.floor(Math.random() * diffs.length)];
-
-                let subj = sujeitos[Math.floor(Math.random() * sujeitos.length)];
-                let verb = verbos[Math.floor(Math.random() * verbos.length)];
-                let obj = objetos[Math.floor(Math.random() * objetos.length)];
-                let numA = Math.floor(Math.random() * 50) + 1;
-                let numB = Math.floor(Math.random() * 50) + 1;
-                let codigoAleatorio = Math.floor(Math.random() * 8999) + 1000;
-
-                let textoPergunta = "";
-                let opcoes = [];
-                let correta = Math.floor(Math.random() * 5); // Sorteia entre 0 e 4 (A, B, C, D, E)
-
-                if (diff === 'facil') {
-                    textoPergunta = `${subj} ${verb} ${obj} (Cód: ${codigoAleatorio}). Qual é o valor correto referente à operação ${numA} + ${numB}?`;
-                    let soma = numA + numB;
-                    opcoes = [
-                        `A) ${soma}`,
-                        `B) ${soma + 3}`,
-                        `C) ${soma - 2}`,
-                        `D) ${soma + 5}`,
-                        `E) ${soma - 4}`
-                    ];
-                } else if (diff === 'medio') {
-                    textoPergunta = `Durante a aula de ${nomeMateria}, ${subj.toLowerCase()} ${verb} ${obj}. Sabendo disso, determine a interpretação adequada para o caso com taxa de ${numA}%:`;
-                    opcoes = [
-                        `A) A taxa de ${numA}% indica uma variação direta no processo.`,
-                        `B) A taxa de ${numA}% representa uma redução neutra do sistema.`,
-                        `C) O resultado independe da variação de ${numA}%.`,
-                        `D) A taxa de ${numA}% gera uma inversão completa de parâmetros.`,
-                        `E) Nenhuma das alternativas anteriores justifica o evento.`
-                    ];
-                } else {
-                    let textoLongo = temasLongos[Math.floor(Math.random() * temasLongos.length)];
-                    textoPergunta = `TEXTO DE APOIO (Caso #${codigoAleatorio}):\n"${textoLongo}"\n\nCom base nas premissas de ${nomeMateria} e no cenário onde ${subj.toLowerCase()} ${verb} ${obj}, assinale a alternativa correta:`;
-                    opcoes = [
-                        `A) A hipótese principal confirma que os fatores analisados alteram o resultado final.`,
-                        `B) O texto nega completamente a necessidade de método estruturado nas ciências.`,
-                        `C) A análise demonstra que os dados recolhidos são irrelevantes para a conclusão.`,
-                        `D) Os elementos observados mantêm-se constantes sem influência externa.`,
-                        `E) A teoria estudada anula os conceitos práticos apresentados no enunciado.`
-                    ];
-                }
-
-                // Coloca a opção verdadeira na posição sorteada (A, B, C, D ou E)
-                let opCorretaTexto = opcoes[0];
-                opcoes[0] = opcoes[correta];
-                opcoes[correta] = opCorretaTexto;
-
-                // Garante que as letras A, B, C, D, E fiquem sempre na ordem visual correta
-                let letras = ["A) ", "B) ", "C) ", "D) ", "E) "];
-                opcoes = opcoes.map((opt, idx) => letras[idx] + opt.replace(/^[A-E]\)\s*/, ''));
-
-                questoes.push({
-                    id: i,
-                    dificuldade: diff,
-                    pergunta: textoPergunta,
-                    opcoes: opcoes,
-                    correta: correta
-                });
-            }
-            return questoes;
-        }
-
-        function trocarGuia(tabId, btn) {
+        function trocarGuia(tabId, elemento) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
             document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
+            elemento.classList.add('active');
         }
 
-        function abrirModal(nomeMateria, chave) {
-            materiaAtualChave = chave || nomeMateria;
+        function abrirModal(materia, idMateria) {
+            materiaAtual = materia;
+            idMateriaAtual = idMateria;
+            document.getElementById('modalTitle').innerText = materia;
             document.getElementById('modalOverlay').classList.add('active');
-            document.getElementById('modalTitle').innerText = nomeMateria;
-            
-            document.getElementById('modalMenuOptions').style.display = 'grid';
-            document.getElementById('modalDetails').style.display = 'none';
-            document.getElementById('btnVoltar').style.display = 'none';
-            document.getElementById('modalSubtitle').style.display = 'block';
-
-            let salvo = localStorage.getItem('gabaritei_salvo_' + materiaAtualChave);
-            if (salvo) {
-                let dados = JSON.parse(salvo);
-                bancoQuestoesAtual = dados.questoes;
-                respostasUsuario = dados.respostas;
-                dificuldadeAtual = dados.dificuldade || 'normal';
-            } else {
-                bancoQuestoesAtual = gerarNovas150Questoes(nomeMateria);
-                respostasUsuario = {};
-                dificuldadeAtual = 'normal';
-            }
+            voltarOpcoesModal();
         }
 
         function fecharModal() {
             document.getElementById('modalOverlay').classList.remove('active');
         }
+
+        /* Fechar modal clicando fora da caixa */
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalOverlay');
+            if (event.target === modal) {
+                fecharModal();
+            }
+        };
 
         function voltarOpcoesModal() {
             document.getElementById('modalMenuOptions').style.display = 'grid';
@@ -783,121 +698,79 @@
         }
 
         function carregarConteudoModal(tipo) {
-            const details = document.getElementById('modalDetails');
-            const tituloMateria = document.getElementById('modalTitle').innerText;
-
             document.getElementById('modalMenuOptions').style.display = 'none';
             document.getElementById('modalSubtitle').style.display = 'none';
             document.getElementById('btnVoltar').style.display = 'flex';
+            
+            const details = document.getElementById('modalDetails');
             details.style.display = 'block';
 
-            if (tipo === 'perguntas' || tipo === 'provas') {
-                renderizarPainelQuestoes(tituloMateria);
-            } else if (tipo === 'explicacao') {
+            if(tipo === 'perguntas' || tipo === 'provas') {
                 details.innerHTML = `
-                    <h3>Explicação Pedagógica</h3>
-                    <div style="color:#a3b8cc; line-height:1.6; font-size:0.9rem;">
-                        <h4 style="color:#38bdf8; margin:10px 0;">Resumo dos Conteúdos:</h4>
-                        <p>Material completo de apoio contendo conceitos fundamentais, fórmulas e diretrizes de estudo para <strong>${tituloMateria}</strong>.</p>
-                    </div>`;
-            } else if (tipo === 'videos') {
-                details.innerHTML = `
-                    <h3>Vídeos e Aulas</h3>
-                    <div style="color:#a3b8cc; line-height:1.6; font-size:0.9rem;">
-                        <p>Aulas explicativas e resoluções de questões em vídeo para a disciplina de <strong>${tituloMateria}</strong>.</p>
-                    </div>`;
-            }
-        }
-
-        function renderizarPainelQuestoes(tituloMateria) {
-            const details = document.getElementById('modalDetails');
-
-            let questoesExibidas = bancoQuestoesAtual.filter(q => {
-                if (dificuldadeAtual === 'normal') return true;
-                return q.dificuldade === dificuldadeAtual;
-            });
-
-            let html = `
-                <div class="quiz-controls-bar">
-                    <div class="diff-selector">
-                        <label><i class="fa-solid fa-filter"></i> Dificuldade / Tamanho:</label>
-                        <select onchange="mudarDificuldade(this.value, '${tituloMateria}')">
-                            <option value="normal" ${dificuldadeAtual === 'normal' ? 'selected' : ''}>Normal (Misto)</option>
-                            <option value="facil" ${dificuldadeAtual === 'facil' ? 'selected' : ''}>Fácil (Texto Curto)</option>
-                            <option value="medio" ${dificuldadeAtual === 'medio' ? 'selected' : ''}>Médio (Texto Médio)</option>
-                            <option value="dificil" ${dificuldadeAtual === 'dificil' ? 'selected' : ''}>Difícil (Texto Grande)</option>
-                        </select>
+                    <div class="quiz-controls-bar">
+                        <div class="diff-selector">
+                            <label for="filtroDificuldade" style="font-size:0.8rem; margin-right:6px;">Filtrar:</label>
+                            <select id="filtroDificuldade" onchange="filtrarPerguntas(this.value)">
+                                <option value="todas">Todas as Dificuldades</option>
+                                <option value="facil">Fácil</option>
+                                <option value="medio">Médio</option>
+                                <option value="dificil">Difícil</option>
+                            </select>
+                        </div>
+                        <div class="action-btns">
+                            <button class="btn-action btn-save" onclick="salvarProgresso()"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
+                            <button class="btn-action btn-reset" onclick="reiniciarQuiz()"><i class="fa-solid fa-rotate-left"></i> Reiniciar</button>
+                        </div>
                     </div>
-                    <div class="action-btns">
-                        <button class="btn-action btn-save" onclick="salvarProgresso()"><i class="fa-solid fa-floppy-disk"></i> Salvar Progresso</button>
-                        <button class="btn-action btn-reset" onclick="reiniciarQuestoesComNovosTextos('${tituloMateria}')"><i class="fa-solid fa-rotate-right"></i> Reiniciar (Novas Questões)</button>
-                    </div>
-                </div>
-                <h3>Banco de Questões (${questoesExibidas.length} de 150 exibições)</h3>
-            `;
-
-            questoesExibidas.forEach((q) => {
-                let respSalva = respostasUsuario[q.id];
-                let tagClasse = q.dificuldade === 'facil' ? 'tag-facil' : (q.dificuldade === 'medio' ? 'tag-medio' : 'tag-dificil');
-                let tagTexto = q.dificuldade === 'facil' ? 'Fácil - Texto Curto' : (q.dificuldade === 'medio' ? 'Médio - Texto Médio' : 'Difícil - Texto Grande');
-
-                html += `
-                    <div class="quiz-card" id="q_card_${q.id}">
-                        <span class="tag-diff ${tagClasse}">${tagTexto}</span>
-                        <p><strong>Questão ${q.id}:</strong>\n${q.pergunta}</p>
-                        <div class="quiz-options">
-                            ${q.opcoes.map((opt, idx) => {
-                                let btnClasse = "quiz-opt";
-                                let disabled = "";
-                                if (respSalva !== undefined && respSalva !== null) {
-                                    disabled = "disabled";
-                                    if (idx === q.correta) btnClasse += " correct";
-                                    if (idx === respSalva && respSalva !== q.correta) btnClasse += " incorrect";
-                                }
-                                return `<button class="${btnClasse}" ${disabled} onclick="responderQuestao(${q.id}, ${idx}, ${q.correta})">${opt}</button>`;
-                            }).join('')}
+                    <div id="quizContainer">
+                        <div class="quiz-card" data-diff="facil">
+                            <span class="tag-diff tag-facil">Fácil</span>
+                            <p>1. Qual das alternativas apresenta o assunto principal de ${materiaAtual}?</p>
+                            <div class="quiz-options">
+                                <button class="quiz-opt" onclick="responder(this, true)">A) Conceitos fundamentais e aplicações de base</button>
+                                <button class="quiz-opt" onclick="responder(this, false)">B) Análise avançada e teoremas complexos</button>
+                                <button class="quiz-opt" onclick="responder(this, false)">C) Nenhuma das anteriores</button>
+                            </div>
                         </div>
                     </div>
                 `;
-            });
-
-            details.innerHTML = html;
+            } else {
+                details.innerHTML = `<p style="text-align:center; padding: 20px; color: #8a99ad;">Conteúdo de ${tipo} em desenvolvimento para ${materiaAtual}.</p>`;
+            }
         }
 
-        function responderQuestao(qId, optEscolhida, optCorreta) {
-            respostasUsuario[qId] = optEscolhida;
-            const card = document.getElementById(`q_card_${qId}`);
-            const botoes = card.querySelectorAll('.quiz-opt');
-
-            botoes.forEach((b, idx) => {
-                b.disabled = true;
-                if (idx === optCorreta) b.classList.add('correct');
-                if (idx === optEscolhida && optEscolhida !== optCorreta) b.classList.add('incorrect');
-            });
+        function responder(btn, eCorreta) {
+            const opcoes = btn.parentElement.querySelectorAll('.quiz-opt');
+            opcoes.forEach(opt => opt.disabled = true);
+            
+            if (eCorreta) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+            }
         }
 
-        function mudarDificuldade(novaDiff, tituloMateria) {
-            dificuldadeAtual = novaDiff;
-            renderizarPainelQuestoes(tituloMateria);
+        function filtrarPerguntas(dificuldade) {
+            const cards = document.querySelectorAll('.quiz-card');
+            cards.forEach(card => {
+                if (dificuldade === 'todas' || card.getAttribute('data-diff') === dificuldade) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
 
         function salvarProgresso() {
-            let dadosParaSalvar = {
-                questoes: bancoQuestoesAtual,
-                respostas: respostasUsuario,
-                dificuldade: dificuldadeAtual
-            };
-            localStorage.setItem('gabaritei_salvo_' + materiaAtualChave, JSON.stringify(dadosParaSalvar));
-            alert('Progresso salvo com sucesso! Ao retornar, você continuará exatamente de onde parou.');
+            alert('Progresso salvo com sucesso!');
         }
 
-        function reiniciarQuestoesComNovosTextos(tituloMateria) {
-            if (confirm('Deseja reiniciar? Isso irá apagar o progresso atual e gerar 150 PERGUNTAS NOVAS e inéditas!')) {
-                localStorage.removeItem('gabaritei_salvo_' + materiaAtualChave);
-                respostasUsuario = {};
-                bancoQuestoesAtual = gerarNovas150Questoes(tituloMateria);
-                renderizarPainelQuestoes(tituloMateria);
-            }
+        function reiniciarQuiz() {
+            const opcoes = document.querySelectorAll('.quiz-opt');
+            opcoes.forEach(opt => {
+                opt.disabled = false;
+                opt.classList.remove('correct', 'incorrect');
+            });
         }
     </script>
 </body>
