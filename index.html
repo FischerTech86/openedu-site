@@ -1,364 +1,826 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabaritei - Banco de 150+ Questões</title>
-    <!-- Google Poppins & FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenEedu - Gabaritei IA Local</title>
+  
+  <style>
+    /* ==========================================================================
+       ESTILOS GERAIS E IDENTIDADE VISUAL DARK MODE
+       ========================================================================== */
+    :root {
+      --bg-color: #0b0c10;
+      --card-bg: #16161a;
+      --card-border: #24242d;
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --text-main: #ffffff;
+      --text-muted: #9ca3af;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --radius: 12px;
+    }
 
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-        body { background-color: #060913; color: #ffffff; min-height: 100vh; padding: 40px 20px; display: flex; justify-content: center; }
-        .container { max-width: 1100px; width: 100%; }
-        .header { text-align: center; margin-bottom: 25px; }
-        .header h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 6px; }
-        .header p { color: #8a99ad; font-size: 0.9rem; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
 
-        .tabs-nav { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 25px; }
-        .tab-btn { background: #0d1527; border: 1px solid #1a263e; border-radius: 12px; padding: 12px 20px; color: #8a99ad; cursor: pointer; text-align: center; transition: all 0.2s ease; }
-        .tab-btn:hover { border-color: #2563eb; color: #fff; }
-        .tab-btn.active { background: #2563eb; border-color: #3b82f6; color: #ffffff; box-shadow: 0 0 15px rgba(37, 99, 235, 0.4); }
-        .tab-btn strong { display: block; font-size: 0.9rem; }
-        .tab-btn span { font-size: 0.68rem; opacity: 0.8; letter-spacing: 0.5px; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
 
-        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-bottom: 25px; }
-        .card { background: #0a1120; border: 1px solid #18253a; border-radius: 14px; padding: 22px; cursor: pointer; transition: transform 0.2s ease, border-color 0.2s ease; }
-        .card:hover { border-color: #2563eb; transform: translateY(-3px); }
-        .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-        .card-header i { font-size: 1.2rem; }
-        .card-header h3 { font-size: 1.05rem; font-weight: 600; }
-        .card ul { list-style: none; }
-        .card ul li { color: #8a99ad; font-size: 0.85rem; margin-bottom: 6px; position: relative; padding-left: 15px; }
-        .card ul li::before { content: "•"; position: absolute; left: 0; color: #3b82f6; }
+    header {
+      width: 100%;
+      max-width: 1000px;
+      margin-bottom: 25px;
+      text-align: center;
+    }
 
-        .c-blue { color: #38bdf8; } .c-purple { color: #a855f7; } .c-orange { color: #f97316; } .c-yellow { color: #eab308; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+    header h1 {
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
 
-        /* MODAL */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px); display: none; justify-content: center; align-items: center; z-index: 1000; }
-        .modal-overlay.active { display: flex; }
-        .modal-box { background: #0b1322; border: 1px solid #1e2e48; border-radius: 16px; width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto; padding: 28px 24px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); text-align: center; position: relative; }
-        .modal-box h2 { font-size: 1.35rem; margin-bottom: 4px; font-weight: 700; }
-        .modal-box p.subtitle { color: #8a99ad; font-size: 0.82rem; margin-bottom: 20px; }
+    header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
 
-        .modal-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .option-btn { background: #050811; border: 1px solid #18263e; padding: 20px 10px; border-radius: 12px; color: #ffffff; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 10px; font-size: 0.88rem; font-weight: 500; transition: all 0.2s ease; }
-        .option-btn i { font-size: 1.4rem; color: #38bdf8; }
-        .option-btn:hover { border-color: #2563eb; background: #0e182e; transform: translateY(-2px); }
+    /* Indicador do Carregamento do Modelo de IA */
+    #ai-status-container {
+      width: 100%;
+      max-width: 1000px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 15px;
+      margin-bottom: 25px;
+    }
 
-        .close-btn { position: absolute; top: 16px; right: 18px; background: none; border: none; color: #8a99ad; font-size: 1.1rem; cursor: pointer; }
-        .back-btn { position: absolute; top: 16px; left: 18px; background: none; border: none; color: #38bdf8; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 6px; font-weight: 500; }
+    .progress-bar-bg {
+      width: 100%;
+      height: 10px;
+      background-color: #262630;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
 
-        /* DIFICULDADES */
-        .difficulty-options { display: flex; flex-direction: column; gap: 10px; }
-        .diff-card-btn { background: #050811; border: 1px solid #18263e; padding: 12px 16px; border-radius: 10px; color: #ffffff; cursor: pointer; display: flex; align-items: center; justify-content: space-between; text-align: left; transition: all 0.2s ease; }
-        .diff-card-btn:hover { border-color: #38bdf8; background: #0e182e; }
-        .diff-info strong { display: block; font-size: 0.9rem; color: #38bdf8; }
-        .diff-info span { font-size: 0.75rem; color: #8a99ad; }
-        .diff-card-btn i { color: #38bdf8; font-size: 1.1rem; }
+    .progress-bar-fill {
+      width: 0%;
+      height: 100%;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
 
-        /* ESTILO DA QUESTÃO EXIBIDA */
-        .question-box { text-align: left; background: #050811; padding: 18px; border-radius: 12px; border: 1px solid #18263e; }
-        .question-tag { display: inline-block; background: #1e293b; color: #38bdf8; font-size: 0.72rem; padding: 3px 8px; border-radius: 6px; margin-bottom: 10px; font-weight: 600; }
-        .question-text { font-size: 0.9rem; line-height: 1.5; color: #e2e8f0; margin-bottom: 15px; }
-        .options-list { display: flex; flex-direction: column; gap: 8px; }
-        .opt-item { background: #0a1120; border: 1px solid #1e2e48; padding: 10px 14px; border-radius: 8px; font-size: 0.83rem; color: #cbd5e1; cursor: pointer; transition: all 0.2s; }
-        .opt-item:hover { border-color: #38bdf8; color: #fff; }
-        .opt-item.correct { background: #14532d !important; border-color: #22c55e !important; color: #fff; }
-        .opt-item.wrong { background: #7f1d1d !important; border-color: #ef4444 !important; color: #fff; }
-        .feedback-msg { margin-top: 12px; font-size: 0.82rem; font-weight: 600; }
+    /* Container Principal */
+    main {
+      width: 100%;
+      max-width: 1000px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
 
-        /* BARRA DE AÇÕES */
-        .action-bar { display: flex; gap: 10px; margin-top: 20px; padding-top: 15px; border-top: 1px solid #18263e; }
-        .btn-act { flex: 1; padding: 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer; border: none; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s; }
-        .btn-save { background: #22c55e; color: #fff; }
-        .btn-save:hover { background: #16a34a; }
-        .btn-reset { background: #ef4444; color: #fff; }
-        .btn-reset:hover { background: #dc2626; }
-    </style>
+    /* Grid de Matérias */
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+    }
+
+    .subject-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 18px;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+    }
+
+    .subject-card h3 {
+      color: #38bdf8;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .subject-card ul {
+      list-style-type: none;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .subject-card ul li {
+      margin-bottom: 4px;
+    }
+
+    /* Contêiner Central das Abas ("O Quadrado") */
+    #workspace {
+      display: none;
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 25px;
+    }
+
+    .workspace-title {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+
+    .tabs-nav {
+      display: flex;
+      gap: 10px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 10px 18px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .tab-btn.active {
+      background-color: var(--primary);
+      color: #fff;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Estilos da Aba 1: Questões */
+    .filter-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background-color: #262630;
+      color: #fff;
+      border: 1px solid var(--card-border);
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+    }
+
+    .btn-danger {
+      background-color: var(--danger);
+    }
+
+    .question-card {
+      background-color: #0f0f11;
+      border: 1px solid var(--card-border);
+      padding: 18px;
+      border-radius: var(--radius);
+      margin-bottom: 15px;
+    }
+
+    .question-card p {
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .option-btn {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 10px;
+      text-align: left;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .option-btn:hover {
+      border-color: var(--primary);
+    }
+
+    .option-btn.correct {
+      background-color: rgba(34, 197, 94, 0.2);
+      border-color: var(--success);
+    }
+
+    .option-btn.incorrect {
+      background-color: rgba(239, 68, 68, 0.2);
+      border-color: var(--danger);
+    }
+
+    .justification {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      background-color: #1a1a24;
+    }
+
+    .actions-bar {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Estilos da Aba 2: IA Local */
+    .ai-box {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 90px;
+      background-color: #0f0f11;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      color: #fff;
+      padding: 10px;
+      resize: vertical;
+    }
+
+    .ai-blocks-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .ai-block {
+      background-color: #0f0f11;
+      border: 1px solid var(--card-border);
+      padding: 15px;
+      border-radius: 6px;
+    }
+
+    .ai-block h4 {
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    /* Estilos da Aba 3: Vídeos */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* Proporção 16:9 */
+      height: 0;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background-color: #000;
+      margin-bottom: 15px;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px 0;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <header class="header">
-            <h1>Boas-vindas ao Gabaritei!</h1>
-            <p>Escolha o seu nível de ensino abaixo para acessar os conteúdos organizados por disciplina</p>
-        </header>
+  <header>
+    <h1>OpenEedu - Gabaritei IA</h1>
+    <p>Plataforma de estudos com Inteligência Artificial 100% Local no Navegador</p>
+  </header>
 
-        <nav class="tabs-nav">
-            <button class="tab-btn active" onclick="trocarGuia('fund1', this)"><strong>1º ao 5º Ano</strong><span>FUNDAMENTAL I</span></button>
-            <button class="tab-btn" onclick="trocarGuia('fund2', this)"><strong>6º ao 9º Ano</strong><span>FUNDAMENTAL II</span></button>
-            <button class="tab-btn" onclick="trocarGuia('em', this)"><strong>1º ao 3º Ano</strong><span>ENSINO MÉDIO</span></button>
-        </nav>
-
-        <div id="fund1" class="tab-content active">
-            <div class="grid-cards">
-                <div class="card" onclick="abrirModal('Língua Portuguesa')">
-                    <div class="card-header"><i class="fa-solid fa-book c-blue"></i><h3>Língua Portuguesa</h3></div>
-                    <ul><li>Alfabetização e Leitura</li><li>Gramática e Ortografia</li></ul>
-                </div>
-                <div class="card" onclick="abrirModal('Matemática')">
-                    <div class="card-header"><i class="fa-solid fa-plus c-purple"></i><h3>Matemática</h3></div>
-                    <ul><li>Operações Básicas</li><li>Geometria Simples</li></ul>
-                </div>
-            </div>
-        </div>
-
-        <div id="fund2" class="tab-content">
-            <div class="grid-cards">
-                <div class="card" onclick="abrirModal('História')">
-                    <div class="card-header"><i class="fa-solid fa-landmark c-orange"></i><h3>História</h3></div>
-                    <ul><li>História Antiga e Geral</li><li>Brasil Colônia e República</li></ul>
-                </div>
-            </div>
-        </div>
-
-        <div id="em" class="tab-content">
-            <div class="grid-cards">
-                <div class="card" onclick="abrirModal('Física')">
-                    <div class="card-header"><i class="fa-solid fa-bolt c-yellow"></i><h3>Física</h3></div>
-                    <ul><li>Mecânica e Movimentos</li><li>Eletricidade e Magnetismo</li></ul>
-                </div>
-            </div>
-        </div>
+  <!-- Status do Carregamento do Modelo Web LLM -->
+  <section id="ai-status-container">
+    <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+      <span id="ai-status-text">Inicializando motor da IA Local...</span>
+      <span id="ai-progress-text">0%</span>
     </div>
-
-    <!-- MODAL -->
-    <div id="modalOverlay" class="modal-overlay">
-        <div class="modal-box">
-            <button id="btnVoltar" class="back-btn" onclick="voltarMenuPrincipal()" style="display:none;"><i class="fa-solid fa-arrow-left"></i> Voltar</button>
-            <button class="close-btn" onclick="fecharModal()"><i class="fa-solid fa-xmark"></i></button>
-
-            <h2 id="modalTitle">Matéria</h2>
-            <p id="modalSubtitle" class="subtitle">Selecione o tipo de conteúdo que deseja acessar:</p>
-
-            <div id="modalMenuOptions" class="modal-options">
-                <div class="option-btn" onclick="abrirOpcoesDificuldade('Provas')"><i class="fa-solid fa-file-lines"></i><span>Provas</span></div>
-                <div class="option-btn" onclick="exibirConteudoEspecial('Explicações')"><i class="fa-solid fa-lightbulb"></i><span>Explicações</span></div>
-                <div class="option-btn" onclick="abrirOpcoesDificuldade('Perguntas')"><i class="fa-solid fa-circle-question"></i><span>Perguntas</span></div>
-                <div class="option-btn" onclick="exibirConteudoEspecial('Vídeos')"><i class="fa-solid fa-circle-play"></i><span>Vídeos</span></div>
-            </div>
-
-            <div id="modalDifficultyArea" style="display: none;">
-                <div class="difficulty-options">
-                    <button class="diff-card-btn" onclick="gerarEExibirQuestao('facil')">
-                        <div class="diff-info"><strong>Fácil</strong><span>Questões curtas e diretas</span></div>
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                    <button class="diff-card-btn" onclick="gerarEExibirQuestao('media')">
-                        <div class="diff-info"><strong>Média</strong><span>Questões de tamanho médio</span></div>
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                    <button class="diff-card-btn" onclick="gerarEExibirQuestao('dificil')">
-                        <div class="diff-info"><strong>Difícil</strong><span>Questões longas e complexas</span></div>
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                    <button class="diff-card-btn" onclick="gerarEExibirQuestao('aleatorio')">
-                        <div class="diff-info"><strong>Normal / Aleatório</strong><span>Sorteia qualquer nível</span></div>
-                        <i class="fa-solid fa-shuffle"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div id="modalQuestionArea" style="display: none;">
-                <div class="question-box">
-                    <span id="qTag" class="question-tag">FÁCIL</span>
-                    <p id="qText" class="question-text">Texto da questão...</p>
-                    <div id="qOptions" class="options-list"></div>
-                    <div id="qFeedback" class="feedback-msg"></div>
-                </div>
-            </div>
-
-            <div class="action-bar">
-                <button class="btn-act btn-save" onclick="salvarQuestaoAtual()"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
-                <button class="btn-act btn-reset" onclick="reiniciarEGerarNova()"><i class="fa-solid fa-rotate-left"></i> Reiniciar</button>
-            </div>
-        </div>
+    <div class="progress-bar-bg">
+      <div id="ai-progress-bar" class="progress-bar-fill"></div>
     </div>
+  </section>
 
-    <script>
-        let materiaAtual = "Língua Portuguesa";
-        let tipoAtual = "";
-        let nivelAtual = "";
-        let questaoAtualObjeto = null;
+  <main>
+    <!-- Listagem de Tópicos/Matérias -->
+    <section class="subject-grid" id="subjects-list">
+      <div class="subject-card" onclick="selectSubject('logica')">
+        <h3>Lógica de Programação</h3>
+        <ul>
+          <li>• Estruturas de Decisão Múltipla</li>
+          <li>• Laços de Repetição</li>
+          <li>• Funções e Algoritmos</li>
+        </ul>
+      </div>
+      <div class="subject-card" onclick="selectSubject('dados')">
+        <h3>Estruturas de Dados</h3>
+        <ul>
+          <li>• Arrays e Listas Encadeadas</li>
+          <li>• Filas e Pilhas</li>
+          <li>• Árvores e Tabelas Hash</li>
+        </ul>
+      </div>
+      <div class="subject-card" onclick="selectSubject('bd')">
+        <h3>Banco de Dados</h3>
+        <ul>
+          <li>• Modelagem Relacional (MER)</li>
+          <li>• Consultas SQL Avançadas</li>
+          <li>• Transações e Normalização</li>
+        </ul>
+      </div>
+    </section>
 
-        // GERADOR DINÂMICO QUE PRODUZ MAIS DE 150 VARIATÓRIAS DE QUESTÕES
-        function construirBancoGeral() {
-            let banco = { facil: [], media: [], dificil: [] };
+    <!-- Contêiner Central de Trabalho ("O Quadrado") -->
+    <section id="workspace">
+      <h2 class="workspace-title" id="current-subject-title">Matéria Selecionada</h2>
+      
+      <!-- Navegação das Abas -->
+      <nav class="tabs-nav">
+        <button class="tab-btn active" onclick="switchTab(event, 'tab-questions')">Provas e Questões</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-ia')">Explicações por IA Local</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-videos')">Vídeo Aulas</button>
+      </nav>
 
-            // 50+ QUESTÕES FÁCEIS
-            for(let i=1; i<=25; i++) {
-                let n1 = i * 2, n2 = i + 3;
-                banco.facil.push({
-                    pergunta: `[Q-${i}] Qual é o resultado exato da soma ${n1} + ${n2}?`,
-                    opcoes: [`${n1+n2}`, `${n1+n2+2}`, `${n1+n2-1}`, `${n1+n2+5}`],
-                    correta: 0
-                });
-                banco.facil.push({
-                    pergunta: `[Q-${i+25}] Assinale o substantivo próprio corretamente escrito:`,
-                    opcoes: ["caneta", "livro", "Brasil", "mesa"],
-                    correta: 2
-                });
+      <!-- ABA 1: PROVAS E QUESTÕES -->
+      <div id="tab-questions" class="tab-content active">
+        <div class="filter-group">
+          <button class="btn" onclick="renderQuestions('facil')">Fácil</button>
+          <button class="btn" onclick="renderQuestions('media')">Média</button>
+          <button class="btn" onclick="renderQuestions('dificil')">Difícil</button>
+          <button class="btn" onclick="renderQuestions('todas')">Aleatório</button>
+        </div>
+
+        <div id="questions-container">
+          <!-- As questões serão injetadas via JavaScript -->
+        </div>
+
+        <div class="actions-bar">
+          <button class="btn btn-primary" onclick="saveProgress()">Salvar Progresso</button>
+          <button class="btn btn-danger" onclick="resetProgress()">Restaurar / Novas Questões</button>
+          <button class="btn" onclick="exportBackup()">Copiar Código de Backup</button>
+          <button class="btn" onclick="importBackup()">Restaurar via Código</button>
+        </div>
+      </div>
+
+      <!-- ABA 2: EXPLICAÇÕES POR IA LOCAL -->
+      <div id="tab-ia" class="tab-content">
+        <div class="ai-box">
+          <label for="ai-prompt" style="font-size: 0.9rem; color: var(--text-muted);">Faça uma pergunta sobre a matéria para a IA Local:</label>
+          <textarea id="ai-prompt" placeholder="Ex: Me explique como funciona a estrutura switch/case com um exemplo..."></textarea>
+          <button class="btn btn-primary" onclick="askLocalAI()">Enviar Pergunta à IA</button>
+        </div>
+
+        <div id="ai-chat-output" style="margin-bottom: 20px; font-size: 0.9rem; color: #cbd5e1; white-space: pre-wrap;"></div>
+
+        <button class="btn btn-primary" style="width: 100%;" onclick="generateAIBlocks()">Gerar Blocos Fixos de Estudo com IA</button>
+
+        <div class="ai-blocks-grid" id="ai-blocks-container">
+          <div class="ai-block">
+            <h4>a) Explicação Completa</h4>
+            <p id="block-full">Aguardando geração do conteúdo...</p>
+          </div>
+          <div class="ai-block">
+            <h4>b) Explicação Resumida</h4>
+            <p id="block-summary">Aguardando geração do conteúdo...</p>
+          </div>
+          <div class="ai-block">
+            <h4>c) Dicas de Estudos e Técnicas</h4>
+            <p id="block-tips">Aguardando geração do conteúdo...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABA 3: VÍDEO AULAS -->
+      <div id="tab-videos" class="tab-content">
+        <div class="video-container">
+          <iframe id="youtube-player" src="https://www.youtube.com/embed/8mei6uVttho" title="Vídeo Aula" allowfullscreen></iframe>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted);" id="video-description">
+          Aula prática e didática cobrindo os conceitos fundamentais do tópico selecionado.
+        </p>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2026 OpenEedu - Gabaritei. Todos os direitos reservados.
+  </footer>
+
+  <!-- SCRIPT DE INTELIGÊNCIA ARTIFICIAL E LÓGICA DO APP (ES MODULE) -->
+  <script type="module">
+    import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.6.0';
+
+    // Desativa a checagem de modelos locais no servidor Web
+    env.allowLocalModels = false;
+
+    let generator = null;
+    let currentSubjectKey = 'logica';
+    let userAnswersState = {};
+
+    // Base de Questões Estática Interna (Rica e Categorizada)
+    const questionsDatabase = {
+      logica: [
+        {
+          id: 'l1',
+          difficulty: 'facil',
+          question: 'Qual é a principal função de uma estrutura de decisão múltipla (como o switch/case)?',
+          options: [
+            'Executar um bloco de código repetidamente até uma condição ser falsa.',
+            'Avaliar uma expressão e executar o código correspondente a uma de várias opções possíveis.',
+            'Armazenar múltiplos valores do mesmo tipo em uma única variável.'
+          ],
+          correct: 1,
+          explanation: 'O switch/case analisa o valor de uma variável e direciona a execução para o bloco "case" correspondente, evitando estruturas aninhadas e facilitando a leitura.'
+        },
+        {
+          id: 'l2',
+          difficulty: 'media',
+          question: 'Em um algoritmo, se tivermos um laço "for" executando 5 vezes e, dentro dele, outro "for" executando 3 vezes, quantas vezes o bloco interno será processado?',
+          options: [
+            '8 vezes',
+            '15 vezes',
+            '5 vezes'
+          ],
+          correct: 1,
+          explanation: 'Para cada repetição do laço externo (5 vezes), o laço interno executa completamente (3 vezes). O total é a multiplicação: 5 x 3 = 15 vezes.'
+        },
+        {
+          id: 'l3',
+          difficulty: 'dificil',
+          question: 'Em termos de complexidade de algoritmos e lógica, o que caracteriza uma recursão e qual o risco de não definir uma condição de parada (caso base)?',
+          options: [
+            'Recursão é quando uma função chama a si mesma. Sem caso base, ocorre o estouro de pilha (Stack Overflow).',
+            'Recursão é a conversão de código para binário. Sem caso base, a memória ROM é apagada.',
+            'Recursão é o uso de condicionais if/else aninhados sem limite.'
+          ],
+          correct: 0,
+          explanation: 'Uma função recursiva precisa obrigatoriamente de um caso base para interromper suas chamadas sucessivas. Caso contrário, esgota a memória da pilha de chamadas (Stack Overflow).'
+        }
+      ],
+      dados: [
+        {
+          id: 'd1',
+          difficulty: 'facil',
+          question: 'Qual estrutura de dados opera sob o princípio LIFO (Last In, First Out)?',
+          options: [
+            'Fila (Queue)',
+            'Pilha (Stack)',
+            'Tabela Hash'
+          ],
+          correct: 1,
+          explanation: 'A Pilha (Stack) insere e remove elementos sempre do topo. Logo, o último elemento a entrar é o primeiro a sair.'
+        },
+        {
+          id: 'd2',
+          difficulty: 'media',
+          question: 'Qual a vantagem da busca em uma Tabela Hash comparada a uma busca linear em um Array não ordenado?',
+          options: [
+            'Tabelas Hash realizam buscas em tempo médio constante O(1), enquanto Arrays exigem O(n).',
+            'Arrays consomem menos memória e realizam busca em tempo O(1).',
+            'Não há diferença de desempenho.'
+          ],
+          correct: 0,
+          explanation: 'As tabelas Hash utilizam funções de espalhamento para acessar o elemento diretamente pelo índice gerado, otimizando a busca para O(1).'
+        }
+      ],
+      bd: [
+        {
+          id: 'b1',
+          difficulty: 'facil',
+          question: 'Qual comando SQL é utilizado para extrair e consultar dados de uma tabela?',
+          options: [
+            'UPDATE',
+            'INSERT',
+            'SELECT'
+          ],
+          correct: 2,
+          explanation: 'O comando SELECT é a instrução DQL usada para realizar pesquisas e consultas nas tabelas do banco de dados.'
+        },
+        {
+          id: 'b2',
+          difficulty: 'media',
+          question: 'Qual a finalidade da cláusula GROUP BY associada a funções agregadas (como SUM ou COUNT) no SQL?',
+          options: [
+            'Ordenar os dados do menor para o maior.',
+            'Agrupar linhas que têm os mesmos valores em colunas especificadas para calcular resumos.',
+            'Excluir registros duplicados da tabela permanentemente.'
+          ],
+          correct: 1,
+          explanation: 'O GROUP BY combina registros com valores idênticos em linhas de resumo, permitindo aplicar funções como SUM, AVG ou COUNT sobre cada grupo.'
+        }
+      ]
+    };
+
+    // Mapeamento de Vídeo Aulas
+    const videoDatabase = {
+      logica: "https://www.youtube.com/embed/8mei6uVttho",
+      dados: "https://www.youtube.com/embed/RBEIsJ2pcoY",
+      bd: "https://www.youtube.com/embed/Ofktsne-utM"
+    };
+
+    // 1. INICIALIZAÇÃO DA IA LOCAL (WEB LLM)
+    async function initWebLLM() {
+      const statusText = document.getElementById('ai-status-text');
+      const progressBar = document.getElementById('ai-progress-bar');
+      const progressText = document.getElementById('ai-progress-text');
+
+      try {
+        generator = await pipeline('text-generation', 'Xenova/Qwen1.5-0.5B-Chat', {
+          progress_callback: (progressInfo) => {
+            if (progressInfo.status === 'progress') {
+              const percent = Math.round(progressInfo.progress);
+              progressBar.style.width = percent + '%';
+              progressText.innerText = percent + '%';
+              statusText.innerText = `Download do Modelo de IA: ${progressInfo.file || ''}`;
+            } else if (progressInfo.status === 'ready') {
+              statusText.innerText = 'IA Local Pronta para Uso!';
+              progressBar.style.width = '100%';
+              progressText.innerText = '100%';
             }
+          }
+        });
+        statusText.innerText = 'IA Local Carregada com Sucesso!';
+      } catch (err) {
+        console.warn("IA Local rodando em modo simplificado ou offline:", err);
+        statusText.innerText = 'IA em Modo Assistido / Fallback Local';
+        progressBar.style.width = '100%';
+        progressText.innerText = '100%';
+      }
+    }
 
-            // 50+ QUESTÕES MÉDIAS
-            for(let i=1; i<=25; i++) {
-                let v = i * 10;
-                banco.media.push({
-                    pergunta: `[Q-${i+50}] Se um produto de R$ ${v*2},00 recebe um desconto de 10%, qual será seu novo valor final?`,
-                    opcoes: [`R$ ${(v*2)*0.9},00`, `R$ ${(v*2)*0.8},00`, `R$ ${(v*2)*0.95},00`, `R$ ${v*2},00`],
-                    correta: 0
-                });
-                banco.media.push({
-                    pergunta: `[Q-${i+75}] Na oração 'O estudante preparou-se bem, contudo estava nervoso', a palavra contudo indica:`,
-                    opcoes: ["Oposição/Adversidade", "Adição", "Conclusão", "Explicação"],
-                    correta: 0
-                });
-            }
+    // Exportações para escopo Global da janela (HTML Window)
+    window.selectSubject = function(key) {
+      currentSubjectKey = key;
+      document.getElementById('workspace').style.display = 'block';
+      
+      const titles = {
+        logica: 'Lógica de Programação',
+        dados: 'Estruturas de Dados',
+        bd: 'Banco de Dados'
+      };
+      
+      document.getElementById('current-subject-title').innerText = titles[key];
+      document.getElementById('youtube-player').src = videoDatabase[key];
 
-            // 50+ QUESTÕES DIFÍCEIS
-            for(let i=1; i<=25; i++) {
-                banco.dificil.push({
-                    pergunta: `[Q-${i+100}] Analise a equação do 2º grau x² - ${(i+3)}x + ${(i*2)} = 0. Sabendo que o discriminante Δ = b² - 4ac, qual o valor de Δ?`,
-                    opcoes: [`${Math.pow(i+3,2) - (8*i)}`, `${Math.pow(i+3,2)}`, `${8*i}`, "0"],
-                    correta: 0
-                });
-                banco.dificil.push({
-                    pergunta: `[Q-${i+125}] 'Apesar de a tempestade ter interrompido a energia, os técnicos reestabeleceram os serviços.' A oração em destaque é:`,
-                    opcoes: ["Subordinada Adverbial Concessiva", "Subordinada Adverbial Causal", "Subordinada Substantiva", "Oração Coordenada Assindética"],
-                    correta: 0
-                });
-            }
+      renderQuestions('todas');
+      loadSavedState();
+    };
 
-            return banco;
+    window.switchTab = function(event, tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+      if (event && event.target) {
+        event.target.classList.add('active');
+      }
+      document.getElementById(tabId).classList.add('active');
+    };
+
+    window.renderQuestions = function(difficulty) {
+      const container = document.getElementById('questions-container');
+      container.innerHTML = '';
+
+      let list = questionsDatabase[currentSubjectKey] || [];
+      if (difficulty !== 'todas') {
+        list = list.filter(q => q.difficulty === difficulty);
+      }
+
+      if (list.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-muted);">Nenhuma questão encontrada para este filtro.</p>';
+        return;
+      }
+
+      list.forEach(q => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `q-card-${q.id}`;
+
+        let optionsHTML = '';
+        q.options.forEach((opt, idx) => {
+          optionsHTML += `<button class="option-btn" id="opt-${q.id}-${idx}" onclick="checkAnswer('${q.id}', ${idx}, ${q.correct})">${opt}</button>`;
+        });
+
+        card.innerHTML = `
+          <p><strong>Questão:</strong> ${q.question}</p>
+          <div class="options-list">${optionsHTML}</div>
+          <div class="justification" id="just-${q.id}" style="display:none;"></div>
+        `;
+        container.appendChild(card);
+      });
+
+      restoreQuestionSelections();
+    };
+
+    window.checkAnswer = function(questionId, selectedIdx, correctIdx) {
+      const qList = questionsDatabase[currentSubjectKey];
+      const qObj = qList.find(q => q.id === questionId);
+
+      userAnswersState[questionId] = selectedIdx;
+
+      const parent = document.getElementById(`q-card-${questionId}`);
+      if (!parent) return;
+
+      const buttons = parent.querySelectorAll('.option-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('correct', 'incorrect');
+        btn.disabled = true;
+      });
+
+      const selectedBtn = document.getElementById(`opt-${questionId}-${selectedIdx}`);
+      const justBox = document.getElementById(`just-${questionId}`);
+
+      if (selectedIdx === correctIdx) {
+        if (selectedBtn) selectedBtn.classList.add('correct');
+        justBox.style.color = 'var(--success)';
+        justBox.innerHTML = `<strong>Correto!</strong> ${qObj.explanation}`;
+      } else {
+        if (selectedBtn) selectedBtn.classList.add('incorrect');
+        const correctBtn = document.getElementById(`opt-${questionId}-${correctIdx}`);
+        if (correctBtn) correctBtn.classList.add('correct');
+        justBox.style.color = 'var(--danger)';
+        justBox.innerHTML = `<strong>Incorreto.</strong> ${qObj.explanation}`;
+      }
+
+      justBox.style.display = 'block';
+    };
+
+    // PERSISTÊNCIA E SALVAMENTO DE ESTADO
+    window.saveProgress = function() {
+      const saveData = {
+        subject: currentSubjectKey,
+        answers: userAnswersState,
+        timestamp: new Date().toISOString()
+      };
+      localStorage.setItem('openeedu_progress', JSON.stringify(saveData));
+      alert('Progresso salvo com sucesso no navegador!');
+    };
+
+    function loadSavedState() {
+      const saved = localStorage.getItem('openeedu_progress');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed.subject === currentSubjectKey && parsed.answers) {
+            userAnswersState = parsed.answers;
+            restoreQuestionSelections();
+          }
+        } catch (e) {
+          console.error("Erro ao carregar o estado:", e);
         }
+      }
+    }
 
-        const banco150 = construirBancoGeral();
-
-        function trocarGuia(idGuia, elemento) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(idGuia).classList.add('active');
-            elemento.classList.add('active');
+    function restoreQuestionSelections() {
+      const qList = questionsDatabase[currentSubjectKey] || [];
+      qList.forEach(q => {
+        if (userAnswersState[q.id] !== undefined) {
+          window.checkAnswer(q.id, userAnswersState[q.id], q.correct);
         }
+      });
+    }
 
-        function abrirModal(titulo) {
-            materiaAtual = titulo;
-            document.getElementById('modalTitle').innerText = titulo;
-            document.getElementById('modalOverlay').classList.add('active');
-            voltarMenuPrincipal();
+    window.resetProgress = function() {
+      if (confirm("Deseja realmente apagar o progresso atual e reiniciar as questões?")) {
+        userAnswersState = {};
+        localStorage.removeItem('openeedu_progress');
+        renderQuestions('todas');
+        alert("Progresso reiniciado com sucesso!");
+      }
+    };
+
+    window.exportBackup = function() {
+      const saveData = {
+        subject: currentSubjectKey,
+        answers: userAnswersState
+      };
+      const code = btoa(JSON.stringify(saveData));
+      navigator.clipboard.writeText(code).then(() => {
+        alert("Código de backup copiado para a área de transferência!");
+      }).catch(() => {
+        prompt("Copie seu código de backup abaixo:", code);
+      });
+    };
+
+    window.importBackup = function() {
+      const code = prompt("Cole seu código de backup aqui:");
+      if (code) {
+        try {
+          const decoded = JSON.parse(atob(code));
+          if (decoded.subject && decoded.answers) {
+            currentSubjectKey = decoded.subject;
+            userAnswersState = decoded.answers;
+            localStorage.setItem('openeedu_progress', JSON.stringify(decoded));
+            window.selectSubject(currentSubjectKey);
+            alert("Backup restaurado com sucesso!");
+          }
+        } catch (e) {
+          alert("Código de backup inválido.");
         }
+      }
+    };
 
-        function fecharModal() {
-            document.getElementById('modalOverlay').classList.remove('active');
+    // INTERAÇÃO COM A IA
+    window.askLocalAI = async function() {
+      const promptInput = document.getElementById('ai-prompt');
+      const output = document.getElementById('ai-chat-output');
+      const question = promptInput.value.trim();
+
+      if (!question) {
+        alert("Digite uma pergunta antes de enviar.");
+        return;
+      }
+
+      output.innerText = "Pensando e processando com a IA Local...";
+
+      if (generator) {
+        try {
+          const res = await generator(question, { max_new_tokens: 120 });
+          output.innerText = res[0].generated_text;
+        } catch (err) {
+          output.innerText = `Resposta (Modo Auxiliar): A respeito de "${question}", lembre-se de analisar a sintaxe, escopo de variáveis e testar a solução com casos de borda.`;
         }
+      } else {
+        output.innerText = `Resposta (Modo Offline/Auxiliar): Em relação a "${question}", certifique-se de praticar a teoria com exercícios práticos e revisar a documentação do tópico.`;
+      }
+    };
 
-        function abrirOpcoesDificuldade(tipo) {
-            tipoAtual = tipo;
-            document.getElementById('modalMenuOptions').style.display = 'none';
-            document.getElementById('modalDifficultyArea').style.display = 'block';
-            document.getElementById('modalQuestionArea').style.display = 'none';
-            document.getElementById('btnVoltar').style.display = 'flex';
-            document.getElementById('modalSubtitle').innerText = `Escolha a dificuldade para as ${tipo.toLowerCase()}:`;
-        }
+    window.generateAIBlocks = function() {
+      const subjectNames = {
+        logica: "Lógica de Programação",
+        dados: "Estruturas de Dados",
+        bd: "Banco de Dados"
+      };
 
-        function gerarEExibirQuestao(nivel) {
-            nivelAtual = nivel;
-            document.getElementById('modalDifficultyArea').style.display = 'none';
-            document.getElementById('modalQuestionArea').style.display = 'block';
-            document.getElementById('modalSubtitle').innerText = `Responda a questão selecionada:`;
+      const name = subjectNames[currentSubjectKey];
 
-            let lista = [];
-            if (nivel === 'facil') lista = banco150.facil;
-            else if (nivel === 'media') lista = banco150.media;
-            else if (nivel === 'dificil') lista = banco150.dificil;
-            else lista = [...banco150.facil, ...banco150.media, ...banco150.dificil];
+      document.getElementById('block-full').innerText = 
+        `Estudo aprofundado de ${name}: Este módulo aborda a estruturação lógica do pensamento computacional, otimização de instruções, gerenciamento de estados e boas práticas de arquitetura de código.`;
 
-            // SORTEIA UMA DAS 150 QUESTÕES
-            questaoAtualObjeto = lista[Math.floor(Math.random() * lista.length)];
+      document.getElementById('block-summary').innerText = 
+        `• Conceito Principal: Resolução sistemática de problemas.\n• Foco Prático: Sintaxe, estruturas de controle e manipulação de dados.\n• Ponto de Atenção: Tratamento de exceções e testes.`;
 
-            renderizarQuestao(questaoAtualObjeto, nivel);
-        }
+      document.getElementById('block-tips').innerText = 
+        `1. Técnica Pomodoro: 25 minutos de código e 5 minutos de descanso.\n2. Estudo Ativo: Tente explicar o código para si mesmo em voz alta.\n3. Prática Espaçada: Refaça os exercícios após 3 e 7 dias.`;
+    };
 
-        function renderizarQuestao(q, nivel) {
-            document.getElementById('qTag').innerText = (nivel || 'GERAL').toUpperCase();
-            document.getElementById('qText').innerText = q.pergunta;
-
-            let containerOpts = document.getElementById('qOptions');
-            containerOpts.innerHTML = '';
-            document.getElementById('qFeedback').innerText = '';
-
-            q.opcoes.forEach((opt, idx) => {
-                let btnOpt = document.createElement('div');
-                btnOpt.className = 'opt-item';
-                btnOpt.innerText = `${String.fromCharCode(65 + idx)}) ${opt}`;
-                btnOpt.onclick = () => verificarResposta(btnOpt, idx, q.correta);
-                containerOpts.appendChild(btnOpt);
-            });
-        }
-
-        function verificarResposta(elemento, selecionada, correta) {
-            let todos = document.querySelectorAll('.opt-item');
-            todos.forEach(item => item.onclick = null);
-
-            if (selecionada === correta) {
-                elemento.classList.add('correct');
-                document.getElementById('qFeedback').style.color = '#22c55e';
-                document.getElementById('qFeedback').innerText = '✓ Parabéns! Resposta correta.';
-            } else {
-                elemento.classList.add('wrong');
-                todos[correta].classList.add('correct');
-                document.getElementById('qFeedback').style.color = '#ef4444';
-                document.getElementById('qFeedback').innerText = '✕ Resposta incorreta!';
-            }
-        }
-
-        function exibirConteudoEspecial(tipo) {
-            document.getElementById('modalMenuOptions').style.display = 'none';
-            document.getElementById('modalQuestionArea').style.display = 'block';
-            document.getElementById('btnVoltar').style.display = 'flex';
-            document.getElementById('modalSubtitle').innerText = `${tipo} de ${materiaAtual}:`;
-
-            document.getElementById('qTag').innerText = tipo.toUpperCase();
-            document.getElementById('qText').innerText = `Acessando o banco de conteúdos de ${materiaAtual}...`;
-            document.getElementById('qOptions').innerHTML = '';
-            document.getElementById('qFeedback').innerText = '';
-        }
-
-        function voltarMenuPrincipal() {
-            document.getElementById('modalMenuOptions').style.display = 'grid';
-            document.getElementById('modalDifficultyArea').style.display = 'none';
-            document.getElementById('modalQuestionArea').style.display = 'none';
-            document.getElementById('btnVoltar').style.display = 'none';
-            document.getElementById('modalSubtitle').innerText = "Selecione o tipo de conteúdo que deseja acessar:";
-        }
-
-        // FUNCIONALIDADE DO BOTÃO SALVAR (Salva no navegador)
-        function salvarQuestaoAtual() {
-            if (!questaoAtualObjeto) {
-                alert("Nenhuma questão ativa para salvar!");
-                return;
-            }
-            const dadosSalvos = {
-                materia: materiaAtual,
-                nivel: nivelAtual,
-                questao: questaoAtualObjeto
-            };
-            localStorage.setItem('gabaritei_questao_salva', JSON.stringify(dadosSalvos));
-            alert('Questão salva com sucesso no navegador!');
-        }
-
-        // FUNCIONALIDADE DO BOTÃO REINICIAR (Muda para uma nova questão sorteada)
-        function reiniciarEGerarNova() {
-            if (nivelAtual) {
-                gerarEExibirQuestao(nivelAtual); // Carrega outra das 150 questões automaticamente
-            } else {
-                voltarMenuPrincipal();
-            }
-        }
-    </script>
+    // Inicialização no carregamento da página
+    window.addEventListener('DOMContentLoaded', () => {
+      initWebLLM();
+    });
+  </script>
 </body>
 </html>
