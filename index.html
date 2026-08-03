@@ -3,823 +3,878 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OpenEedu - Gabaritei IA Local</title>
-  
+  <title>Gabaritei!</title>
+  <!-- Font Awesome para os ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Fonte Inter (Google Fonts) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
   <style>
-    /* ==========================================================================
-       ESTILOS GERAIS E IDENTIDADE VISUAL DARK MODE
-       ========================================================================== */
     :root {
-      --bg-color: #0b0c10;
-      --card-bg: #16161a;
-      --card-border: #24242d;
-      --primary: #6366f1;
-      --primary-hover: #4f46e5;
-      --text-main: #ffffff;
-      --text-muted: #9ca3af;
-      --success: #22c55e;
-      --danger: #ef4444;
-      --radius: 12px;
+      --bg-dark: #070a12;
+      --card-bg: #0d121f;
+      --card-border: #1a233a;
+      --card-hover: #141b2d;
+      --tab-bg: #111726;
+      --tab-active: #2563eb;
+      --text-white: #ffffff;
+      --text-gray: #94a3b8;
+      --text-sub: #64748b;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      font-family: 'Inter', sans-serif;
     }
 
     body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
+      background-color: var(--bg-dark);
+      color: var(--text-white);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
+      padding: 40px 20px;
     }
 
     header {
-      width: 100%;
-      max-width: 1000px;
-      margin-bottom: 25px;
       text-align: center;
+      margin-bottom: 30px;
     }
 
     header h1 {
       font-size: 2.2rem;
-      color: var(--primary);
-      margin-bottom: 8px;
+      font-weight: 800;
+      margin-bottom: 10px;
     }
 
     header p {
-      color: var(--text-muted);
+      color: var(--text-gray);
       font-size: 0.95rem;
     }
 
-    /* Indicador do Carregamento do Modelo de IA */
-    #ai-status-container {
-      width: 100%;
-      max-width: 1000px;
-      background-color: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 15px;
-      margin-bottom: 25px;
-    }
-
-    .progress-bar-bg {
-      width: 100%;
-      height: 10px;
-      background-color: #262630;
-      border-radius: 5px;
-      overflow: hidden;
-      margin-top: 8px;
-    }
-
-    .progress-bar-fill {
-      width: 0%;
-      height: 100%;
-      background-color: var(--primary);
-      transition: width 0.3s ease;
-    }
-
-    /* Container Principal */
-    main {
-      width: 100%;
-      max-width: 1000px;
+    /* Tabs Level Selection */
+    .level-tabs {
       display: flex;
-      flex-direction: column;
-      gap: 25px;
-    }
-
-    /* Grid de Matérias */
-    .subject-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 15px;
-    }
-
-    .subject-card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 18px;
-      cursor: pointer;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .subject-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--primary);
-    }
-
-    .subject-card h3 {
-      color: #38bdf8;
-      font-size: 1.1rem;
-      margin-bottom: 8px;
-    }
-
-    .subject-card ul {
-      list-style-type: none;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-
-    .subject-card ul li {
-      margin-bottom: 4px;
-    }
-
-    /* Contêiner Central das Abas ("O Quadrado") */
-    #workspace {
-      display: none;
-      background-color: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 25px;
-    }
-
-    .workspace-title {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-      color: var(--primary);
-    }
-
-    .tabs-nav {
-      display: flex;
-      gap: 10px;
-      border-bottom: 1px solid var(--card-border);
-      padding-bottom: 10px;
-      margin-bottom: 20px;
+      gap: 12px;
+      margin-bottom: 40px;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
     .tab-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      padding: 10px 18px;
-      font-size: 0.95rem;
-      font-weight: 600;
+      background-color: var(--tab-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 10px 20px;
+      color: var(--text-gray);
       cursor: pointer;
-      border-radius: 6px;
-      transition: background 0.2s, color 0.2s;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn .title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: block;
+      color: var(--text-white);
+    }
+
+    .tab-btn .subtitle {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+      display: block;
+      color: var(--text-sub);
     }
 
     .tab-btn.active {
-      background-color: var(--primary);
-      color: #fff;
+      background-color: var(--tab-active);
+      border-color: var(--tab-active);
     }
 
+    .tab-btn.active .subtitle {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Container de Conteúdo */
     .tab-content {
       display: none;
+      width: 100%;
+      max-width: 1100px;
     }
 
     .tab-content.active {
       display: block;
     }
 
-    /* Estilos da Aba 1: Questões */
-    .filter-group {
+    /* Section Subheadings (para Ensino Superior) */
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #38bdf8;
+      margin: 30px 0 15px 0;
       display: flex;
-      gap: 8px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
     }
 
-    .btn {
-      background-color: #262630;
-      color: #fff;
-      border: 1px solid var(--card-border);
-      padding: 8px 14px;
-      border-radius: 6px;
-      cursor: pointer;
+    .section-title span {
       font-size: 0.85rem;
+      color: var(--text-sub);
+      font-weight: 400;
+    }
+
+    /* Grid de Matérias */
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .subject-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-3px);
+      border-color: #2b3859;
+      background-color: var(--card-hover);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .card-header i {
+      font-size: 1.2rem;
+    }
+
+    .card-header h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .subject-card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .subject-card li {
+      color: var(--text-gray);
+      font-size: 0.88rem;
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .subject-card li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--text-sub);
+    }
+
+    /* Botão Sair do Sistema */
+    .logout-container {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .logout-btn {
+      background: transparent;
+      border: 1px solid #334155;
+      color: var(--text-white);
+      padding: 10px 30px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
       transition: background 0.2s;
     }
 
-    .btn:hover {
-      background-color: var(--primary-hover);
+    .logout-btn:hover {
+      background-color: #1e293b;
     }
 
-    .btn-primary {
-      background-color: var(--primary);
-    }
-
-    .btn-danger {
-      background-color: var(--danger);
-    }
-
-    .question-card {
-      background-color: #0f0f11;
-      border: 1px solid var(--card-border);
-      padding: 18px;
-      border-radius: var(--radius);
-      margin-bottom: 15px;
-    }
-
-    .question-card p {
-      margin-bottom: 12px;
-      font-size: 0.95rem;
-    }
-
-    .options-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .option-btn {
-      background-color: var(--card-bg);
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
-      padding: 10px;
-      text-align: left;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: border-color 0.2s;
-    }
-
-    .option-btn:hover {
-      border-color: var(--primary);
-    }
-
-    .option-btn.correct {
-      background-color: rgba(34, 197, 94, 0.2);
-      border-color: var(--success);
-    }
-
-    .option-btn.incorrect {
-      background-color: rgba(239, 68, 68, 0.2);
-      border-color: var(--danger);
-    }
-
-    .justification {
-      margin-top: 10px;
-      padding: 10px;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      background-color: #1a1a24;
-    }
-
-    .actions-bar {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
-
-    /* Estilos da Aba 2: IA Local */
-    .ai-box {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 25px;
-    }
-
-    textarea {
-      width: 100%;
-      height: 90px;
-      background-color: #0f0f11;
-      border: 1px solid var(--card-border);
-      border-radius: 6px;
-      color: #fff;
-      padding: 10px;
-      resize: vertical;
-    }
-
-    .ai-blocks-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 15px;
-      margin-top: 15px;
-    }
-
-    .ai-block {
-      background-color: #0f0f11;
-      border: 1px solid var(--card-border);
-      padding: 15px;
-      border-radius: 6px;
-    }
-
-    .ai-block h4 {
-      color: var(--primary);
-      margin-bottom: 8px;
-    }
-
-    /* Estilos da Aba 3: Vídeos */
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%; /* Proporção 16:9 */
-      height: 0;
-      overflow: hidden;
-      border-radius: var(--radius);
-      background-color: #000;
-      margin-bottom: 15px;
-    }
-
-    .video-container iframe {
-      position: absolute;
+    /* Modal Pop-up */
+    .modal-overlay {
+      position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 1000;
     }
 
-    footer {
-      margin-top: auto;
-      padding: 20px 0;
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      text-align: center;
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
     }
+
+    .modal-box {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 450px;
+      padding: 24px;
+      position: relative;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--text-gray);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .modal-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-header h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .modal-header p {
+      font-size: 0.85rem;
+      color: var(--text-gray);
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .modal-option {
+      background-color: #070a12;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 20px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text-white);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .modal-option:hover {
+      background-color: #111726;
+      border-color: #2563eb;
+    }
+
+    .modal-option i {
+      font-size: 1.4rem;
+      color: #38bdf8;
+    }
+
+    .modal-option span {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* Cores dos Ícones */
+    .icon-blue { color: #38bdf8; }
+    .icon-purple { color: #a855f7; }
+    .icon-green { color: #22c55e; }
+    .icon-orange { color: #f97316; }
+    .icon-teal { color: #14b8a6; }
+    .icon-red { color: #ef4444; }
+    .icon-pink { color: #ec4899; }
+    .icon-yellow { color: #eab308; }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>OpenEedu - Gabaritei IA</h1>
-    <p>Plataforma de estudos com Inteligência Artificial 100% Local no Navegador</p>
+    <h1>Boas-vindas ao Gabaritei!</h1>
+    <p>Escolha o seu nível de ensino abaixo para acessar os conteúdos organizados por disciplina</p>
   </header>
 
-  <!-- Status do Carregamento do Modelo Web LLM -->
-  <section id="ai-status-container">
-    <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
-      <span id="ai-status-text">Inicializando motor da IA Local...</span>
-      <span id="ai-progress-text">0%</span>
+  <!-- Botões de Nível de Ensino -->
+  <div class="level-tabs">
+    <button class="tab-btn active" onclick="switchTab('fund1', this)">
+      <span class="title">1º ao 5º Ano</span>
+      <span class="subtitle">FUNDAMENTAL I</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('fund2', this)">
+      <span class="title">6º ao 9º Ano</span>
+      <span class="subtitle">FUNDAMENTAL II</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('medio', this)">
+      <span class="title">1º ao 3º Ano</span>
+      <span class="subtitle">ENSINO MÉDIO</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('superior', this)">
+      <span class="title">Ensino Superior</span>
+      <span class="subtitle">GRADUAÇÃO</span>
+    </button>
+  </div>
+
+  <!-- ABA 1: FUNDAMENTAL I -->
+  <div id="fund1" class="tab-content active">
+    <div class="subjects-grid">
+      <div class="subject-card" onclick="openModal('Língua Portuguesa')">
+        <div class="card-header"><i class="fa-solid fa-book icon-blue"></i><h3>Língua Portuguesa</h3></div>
+        <ul>
+          <li>Processo de Alfabetização</li>
+          <li>Prática de Leitura e Escrita</li>
+          <li>Interpretação de Textos</li>
+          <li>Gramática e Ortografia Básica</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Matemática')">
+        <div class="card-header"><i class="fa-solid fa-plus icon-purple"></i><h3>Matemática</h3></div>
+        <ul>
+          <li>Estudo dos Números</li>
+          <li>Operações Básicas (+, -, ×, ÷)</li>
+          <li>Geometria Simples</li>
+          <li>Noções de Medidas e Dinheiro</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Ciências da Natureza')">
+        <div class="card-header"><i class="fa-solid fa-flask icon-green"></i><h3>Ciências da Natureza</h3></div>
+        <ul>
+          <li>Estudo do Corpo Humano</li>
+          <li>Preservação do Meio Ambiente</li>
+          <li>Hábitos de Saúde e Higiene</li>
+          <li>Fenômenos da Natureza</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('História')">
+        <div class="card-header"><i class="fa-solid fa-hourglass-half icon-orange"></i><h3>História</h3></div>
+        <ul>
+          <li>Noções de Identidade e Tempo</li>
+          <li>História da Família e Escola</li>
+          <li>Convivência na Comunidade</li>
+          <li>Cidadania e Transformações</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Geografia')">
+        <div class="card-header"><i class="fa-solid fa-map icon-teal"></i><h3>Geografia</h3></div>
+        <ul>
+          <li>Compreensão do Espaço Vivenciado</li>
+          <li>Estudo de Bairros e Cidades</li>
+          <li>Mapas Simples e Orientação</li>
+          <li>Paisagens Naturais e Modificadas</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Artes')">
+        <div class="card-header"><i class="fa-solid fa-palette icon-pink"></i><h3>Artes</h3></div>
+        <ul>
+          <li>Expressão Criativa e Desenho</li>
+          <li>Pintura e Formas Visuais</li>
+          <li>Atividades de Teatro</li>
+          <li>Música e Ritmo</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Educação Física')">
+        <div class="card-header"><i class="fa-solid fa-person-running icon-red"></i><h3>Educação Física</h3></div>
+        <ul>
+          <li>Desenvolvimento Motor</li>
+          <li>Jogos e Brincadeiras</li>
+          <li>Regras de Convivência</li>
+          <li>Coordenação Corporal</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Ensino Religioso')">
+        <div class="card-header"><i class="fa-solid fa-hands-praying icon-yellow"></i><h3>Ensino Religioso</h3></div>
+        <ul>
+          <li>Valores Éticos e Humanos</li>
+          <li>Respeito à Diversidade</li>
+          <li>Cultura de Paz e Empatia</li>
+          <li>Convivência em Sociedade</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Língua Inglesa')">
+        <div class="card-header"><i class="fa-solid fa-language icon-blue"></i><h3>Língua Inglesa</h3></div>
+        <ul>
+          <li>Vocabulário Inicial</li>
+          <li>Saudações e Expressões</li>
+          <li>Cores, Números e Objetos</li>
+          <li>Escuta e Pronúncia Básica</li>
+        </ul>
+      </div>
     </div>
-    <div class="progress-bar-bg">
-      <div id="ai-progress-bar" class="progress-bar-fill"></div>
+  </div>
+
+  <!-- ABA 2: FUNDAMENTAL II -->
+  <div id="fund2" class="tab-content">
+    <div class="subjects-grid">
+      <div class="subject-card" onclick="openModal('Língua Portuguesa')">
+        <div class="card-header"><i class="fa-solid fa-book icon-blue"></i><h3>Língua Portuguesa</h3></div>
+        <ul>
+          <li>Gêneros Textuais e Análise Crítica</li>
+          <li>Sintaxe, Morfologia e Gramática</li>
+          <li>Produção Textual e Argumentação</li>
+          <li>Leitura e Literatura Infantojuvenil</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Matemática')">
+        <div class="card-header"><i class="fa-solid fa-calculator icon-purple"></i><h3>Matemática</h3></div>
+        <ul>
+          <li>Álgebra e Equações de 1º e 2º Grau</li>
+          <li>Geometria Plana e Espacial</li>
+          <li>Estatística e Probabilidade</li>
+          <li>Grandezas, Unidades e Razão/Proporção</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Ciências da Natureza')">
+        <div class="card-header"><i class="fa-solid fa-flask icon-green"></i><h3>Ciências da Natureza</h3></div>
+        <ul>
+          <li>Nivelamento em Biologia e Ecologia</li>
+          <li>Noções de Física (Movimento, Energia e Som)</li>
+          <li>Noções de Química (Matéria e Misturas)</li>
+          <li>Astronomia, Terra e Universo</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('História')">
+        <div class="card-header"><i class="fa-solid fa-landmark icon-orange"></i><h3>História</h3></div>
+        <ul>
+          <li>História Antiga e Feudalismo</li>
+          <li>Brasil Colônia, Império e República</li>
+          <li>Guerra Mundial e História Contemporânea</li>
+          <li>Cidadania, Direitos e Movimentos Sociais</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Geografia')">
+        <div class="card-header"><i class="fa-solid fa-globe icon-teal"></i><h3>Geografia</h3></div>
+        <ul>
+          <li>Cartografia, Clima e Geomorfologia</li>
+          <li>Geopolítica e Globalização</li>
+          <li>Domínios Morfoclimáticos do Brasil</li>
+          <li>Urbanização e Impactos Ambientais</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Língua Inglesa')">
+        <div class="card-header"><i class="fa-solid fa-language icon-blue"></i><h3>Língua Inglesa</h3></div>
+        <ul>
+          <li>Gramática e Estruturas Verbais (Tenses)</li>
+          <li>Interpretação e Leitura (Reading)</li>
+          <li>Vocabulário Temático e Expressões</li>
+          <li>Habilidades de Compreensão Auditiva</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Arte')">
+        <div class="card-header"><i class="fa-solid fa-icons icon-pink"></i><h3>Arte</h3></div>
+        <ul>
+          <li>História da Arte Clássica e Moderna</li>
+          <li>Artes Visuais, Dança e Teatro</li>
+          <li>Música e Elementos Sonoros</li>
+          <li>Patrimônio Cultural e Arte Brasileira</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Educação Física')">
+        <div class="card-header"><i class="fa-solid fa-futbol icon-red"></i><h3>Educação Física</h3></div>
+        <ul>
+          <li>Esportes de Redes, Campo e Precisão</li>
+          <li>Lutas, Ginástica e Práticas Corporais</li>
+          <li>Saúde, Qualidade de Vida e Corpo</li>
+          <li>Jogos Eletrônicos e Práticas Urbanas</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Ensino Religioso')">
+        <div class="card-header"><i class="fa-solid fa-compass icon-yellow"></i><h3>Ensino Religioso</h3></div>
+        <ul>
+          <li>Tradições Religiosas e Filosóficas</li>
+          <li>Direitos Humanos e Respeito Mútuo</li>
+          <li>Análise de Textos Sagrados e Mitos</li>
+          <li>Ética, Alteridade e Sociedade</li>
+        </ul>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <main>
-    <!-- Listagem de Tópicos/Matérias -->
-    <section class="subject-grid" id="subjects-list">
-      <div class="subject-card" onclick="selectSubject('logica')">
-        <h3>Lógica de Programação</h3>
+  <!-- ABA 3: ENSINO MÉDIO -->
+  <div id="medio" class="tab-content">
+    <div class="subjects-grid">
+      <div class="subject-card" onclick="openModal('Língua Portuguesa e Literatura')">
+        <div class="card-header"><i class="fa-solid fa-book icon-blue"></i><h3>Língua Portuguesa e Literatura</h3></div>
         <ul>
-          <li>• Estruturas de Decisão Múltipla</li>
-          <li>• Laços de Repetição</li>
-          <li>• Funções e Algoritmos</li>
+          <li>Estudo do Idioma</li>
+          <li>Gramática e Sintaxe</li>
+          <li>Textos Literários e Escolas</li>
+          <li>Leitura e Redação</li>
         </ul>
       </div>
-      <div class="subject-card" onclick="selectSubject('dados')">
-        <h3>Estruturas de Dados</h3>
+
+      <div class="subject-card" onclick="openModal('Língua Inglesa')">
+        <div class="card-header"><i class="fa-solid fa-language icon-blue"></i><h3>Língua Inglesa</h3></div>
         <ul>
-          <li>• Arrays e Listas Encadeadas</li>
-          <li>• Filas e Pilhas</li>
-          <li>• Árvores e Tabelas Hash</li>
+          <li>Aprendizado da Língua Estrangeira</li>
+          <li>Vocabulário e Gramática</li>
+          <li>Leitura e Interpretação</li>
+          <li>Compreensão Auditiva</li>
         </ul>
       </div>
-      <div class="subject-card" onclick="selectSubject('bd')">
-        <h3>Banco de Dados</h3>
+
+      <div class="subject-card" onclick="openModal('Arte')">
+        <div class="card-header"><i class="fa-solid fa-palette icon-pink"></i><h3>Arte</h3></div>
         <ul>
-          <li>• Modelagem Relacional (MER)</li>
-          <li>• Consultas SQL Avançadas</li>
-          <li>• Transações e Normalização</li>
+          <li>Expressão Artística e Cultural</li>
+          <li>Artes Visuais e Plásticas</li>
+          <li>Artes Cênicas e Teatro</li>
+          <li>Música e Patrimônio Artístico</li>
         </ul>
       </div>
-    </section>
 
-    <!-- Contêiner Central de Trabalho ("O Quadrado") -->
-    <section id="workspace">
-      <h2 class="workspace-title" id="current-subject-title">Matéria Selecionada</h2>
-      
-      <!-- Navegação das Abas -->
-      <nav class="tabs-nav">
-        <button class="tab-btn active" onclick="switchTab(event, 'tab-questions')">Provas e Questões</button>
-        <button class="tab-btn" onclick="switchTab(event, 'tab-ia')">Explicações por IA Local</button>
-        <button class="tab-btn" onclick="switchTab(event, 'tab-videos')">Vídeo Aulas</button>
-      </nav>
-
-      <!-- ABA 1: PROVAS E QUESTÕES -->
-      <div id="tab-questions" class="tab-content active">
-        <div class="filter-group">
-          <button class="btn" onclick="renderQuestions('facil')">Fácil</button>
-          <button class="btn" onclick="renderQuestions('media')">Média</button>
-          <button class="btn" onclick="renderQuestions('dificil')">Difícil</button>
-          <button class="btn" onclick="renderQuestions('todas')">Aleatório</button>
-        </div>
-
-        <div id="questions-container">
-          <!-- As questões serão injetadas via JavaScript -->
-        </div>
-
-        <div class="actions-bar">
-          <button class="btn btn-primary" onclick="saveProgress()">Salvar Progresso</button>
-          <button class="btn btn-danger" onclick="resetProgress()">Restaurar / Novas Questões</button>
-          <button class="btn" onclick="exportBackup()">Copiar Código de Backup</button>
-          <button class="btn" onclick="importBackup()">Restaurar via Código</button>
-        </div>
+      <div class="subject-card" onclick="openModal('Educação Física')">
+        <div class="card-header"><i class="fa-solid fa-person-running icon-red"></i><h3>Educação Física</h3></div>
+        <ul>
+          <li>Práticas Corporais</li>
+          <li>Modalidades Esportivas</li>
+          <li>Saúde e Qualidade de Vida</li>
+          <li>Cultura do Movimento</li>
+        </ul>
       </div>
 
-      <!-- ABA 2: EXPLICAÇÕES POR IA LOCAL -->
-      <div id="tab-ia" class="tab-content">
-        <div class="ai-box">
-          <label for="ai-prompt" style="font-size: 0.9rem; color: var(--text-muted);">Faça uma pergunta sobre a matéria para a IA Local:</label>
-          <textarea id="ai-prompt" placeholder="Ex: Me explique como funciona a estrutura switch/case com um exemplo..."></textarea>
-          <button class="btn btn-primary" onclick="askLocalAI()">Enviar Pergunta à IA</button>
-        </div>
-
-        <div id="ai-chat-output" style="margin-bottom: 20px; font-size: 0.9rem; color: #cbd5e1; white-space: pre-wrap;"></div>
-
-        <button class="btn btn-primary" style="width: 100%;" onclick="generateAIBlocks()">Gerar Blocos Fixos de Estudo com IA</button>
-
-        <div class="ai-blocks-grid" id="ai-blocks-container">
-          <div class="ai-block">
-            <h4>a) Explicação Completa</h4>
-            <p id="block-full">Aguardando geração do conteúdo...</p>
-          </div>
-          <div class="ai-block">
-            <h4>b) Explicação Resumida</h4>
-            <p id="block-summary">Aguardando geração do conteúdo...</p>
-          </div>
-          <div class="ai-block">
-            <h4>c) Dicas de Estudos e Técnicas</h4>
-            <p id="block-tips">Aguardando geração do conteúdo...</p>
-          </div>
-        </div>
+      <div class="subject-card" onclick="openModal('Matemática')">
+        <div class="card-header"><i class="fa-solid fa-calculator icon-purple"></i><h3>Matemática</h3></div>
+        <ul>
+          <li>Estudo dos Números e Conjuntos</li>
+          <li>Álgebra e Funções</li>
+          <li>Geometria Plana e Espacial</li>
+          <li>Estatística e Probabilidade</li>
+        </ul>
       </div>
 
-      <!-- ABA 3: VÍDEO AULAS -->
-      <div id="tab-videos" class="tab-content">
-        <div class="video-container">
-          <iframe id="youtube-player" src="https://www.youtube.com/embed/8mei6uVttho" title="Vídeo Aula" allowfullscreen></iframe>
-        </div>
-        <p style="font-size: 0.85rem; color: var(--text-muted);" id="video-description">
-          Aula prática e didática cobrindo os conceitos fundamentais do tópico selecionado.
-        </p>
+      <div class="subject-card" onclick="openModal('Biologia')">
+        <div class="card-header"><i class="fa-solid fa-dna icon-green"></i><h3>Biologia</h3></div>
+        <ul>
+          <li>Estudo dos Seres Vivos</li>
+          <li>Ecologia e Meio Ambiente</li>
+          <li>Anatomia do Corpo Humano</li>
+          <li>Genética e Citologia</li>
+        </ul>
       </div>
 
-    </section>
-  </main>
+      <div class="subject-card" onclick="openModal('Física')">
+        <div class="card-header"><i class="fa-solid fa-bolt icon-yellow"></i><h3>Física</h3></div>
+        <ul>
+          <li>Leis da Natureza</li>
+          <li>Mecânica e Movimentos</li>
+          <li>Termodinâmica e Calor</li>
+          <li>Eletricidade e Magnetismo</li>
+        </ul>
+      </div>
 
-  <footer>
-    &copy; 2026 OpenEedu - Gabaritei. Todos os direitos reservados.
-  </footer>
+      <div class="subject-card" onclick="openModal('Química')">
+        <div class="card-header"><i class="fa-solid fa-flask icon-teal"></i><h3>Química</h3></div>
+        <ul>
+          <li>Estudo de Átomos e Moléculas</li>
+          <li>Tabela Periódica dos Elementos</li>
+          <li>Substâncias e Misturas</li>
+          <li>Reações Químicas</li>
+        </ul>
+      </div>
 
-  <!-- SCRIPT DE INTELIGÊNCIA ARTIFICIAL E LÓGICA DO APP (ES MODULE) -->
-  <script type="module">
-    import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.6.0';
+      <div class="subject-card" onclick="openModal('História')">
+        <div class="card-header"><i class="fa-solid fa-landmark icon-orange"></i><h3>História</h3></div>
+        <ul>
+          <li>Fatos Históricos do Brasil</li>
+          <li>História Geral e Mundial</li>
+          <li>Evolução das Sociedades</li>
+          <li>Cidadania e Política</li>
+        </ul>
+      </div>
 
-    // Desativa a checagem de modelos locais no servidor Web
-    env.allowLocalModels = false;
+      <div class="subject-card" onclick="openModal('Geografia')">
+        <div class="card-header"><i class="fa-solid fa-globe icon-teal"></i><h3>Geografia</h3></div>
+        <ul>
+          <li>Estudo do Espaço Geográfico</li>
+          <li>Geopolítica Global</li>
+          <li>Preservação do Meio Ambiente</li>
+          <li>Cartografia e Clima</li>
+        </ul>
+      </div>
 
-    let generator = null;
-    let currentSubjectKey = 'logica';
-    let userAnswersState = {};
+      <div class="subject-card" onclick="openModal('Sociologia')">
+        <div class="card-header"><i class="fa-solid fa-users icon-pink"></i><h3>Sociologia</h3></div>
+        <ul>
+          <li>Estudo da Sociedade</li>
+          <li>Cultura e Identidade</li>
+          <li>Relações Humanas e Sociais</li>
+          <li>Direitos e Cidadania</li>
+        </ul>
+      </div>
 
-    // Base de Questões Estática Interna (Rica e Categorizada)
-    const questionsDatabase = {
-      logica: [
-        {
-          id: 'l1',
-          difficulty: 'facil',
-          question: 'Qual é a principal função de uma estrutura de decisão múltipla (como o switch/case)?',
-          options: [
-            'Executar um bloco de código repetidamente até uma condição ser falsa.',
-            'Avaliar uma expressão e executar o código correspondente a uma de várias opções possíveis.',
-            'Armazenar múltiplos valores do mesmo tipo em uma única variável.'
-          ],
-          correct: 1,
-          explanation: 'O switch/case analisa o valor de uma variável e direciona a execução para o bloco "case" correspondente, evitando estruturas aninhadas e facilitando a leitura.'
-        },
-        {
-          id: 'l2',
-          difficulty: 'media',
-          question: 'Em um algoritmo, se tivermos um laço "for" executando 5 vezes e, dentro dele, outro "for" executando 3 vezes, quantas vezes o bloco interno será processado?',
-          options: [
-            '8 vezes',
-            '15 vezes',
-            '5 vezes'
-          ],
-          correct: 1,
-          explanation: 'Para cada repetição do laço externo (5 vezes), o laço interno executa completamente (3 vezes). O total é a multiplicação: 5 x 3 = 15 vezes.'
-        },
-        {
-          id: 'l3',
-          difficulty: 'dificil',
-          question: 'Em termos de complexidade de algoritmos e lógica, o que caracteriza uma recursão e qual o risco de não definir uma condição de parada (caso base)?',
-          options: [
-            'Recursão é quando uma função chama a si mesma. Sem caso base, ocorre o estouro de pilha (Stack Overflow).',
-            'Recursão é a conversão de código para binário. Sem caso base, a memória ROM é apagada.',
-            'Recursão é o uso de condicionais if/else aninhados sem limite.'
-          ],
-          correct: 0,
-          explanation: 'Uma função recursiva precisa obrigatoriamente de um caso base para interromper suas chamadas sucessivas. Caso contrário, esgota a memória da pilha de chamadas (Stack Overflow).'
-        }
-      ],
-      dados: [
-        {
-          id: 'd1',
-          difficulty: 'facil',
-          question: 'Qual estrutura de dados opera sob o princípio LIFO (Last In, First Out)?',
-          options: [
-            'Fila (Queue)',
-            'Pilha (Stack)',
-            'Tabela Hash'
-          ],
-          correct: 1,
-          explanation: 'A Pilha (Stack) insere e remove elementos sempre do topo. Logo, o último elemento a entrar é o primeiro a sair.'
-        },
-        {
-          id: 'd2',
-          difficulty: 'media',
-          question: 'Qual a vantagem da busca em uma Tabela Hash comparada a uma busca linear em um Array não ordenado?',
-          options: [
-            'Tabelas Hash realizam buscas em tempo médio constante O(1), enquanto Arrays exigem O(n).',
-            'Arrays consomem menos memória e realizam busca em tempo O(1).',
-            'Não há diferença de desempenho.'
-          ],
-          correct: 0,
-          explanation: 'As tabelas Hash utilizam funções de espalhamento para acessar o elemento diretamente pelo índice gerado, otimizando a busca para O(1).'
-        }
-      ],
-      bd: [
-        {
-          id: 'b1',
-          difficulty: 'facil',
-          question: 'Qual comando SQL é utilizado para extrair e consultar dados de uma tabela?',
-          options: [
-            'UPDATE',
-            'INSERT',
-            'SELECT'
-          ],
-          correct: 2,
-          explanation: 'O comando SELECT é a instrução DQL usada para realizar pesquisas e consultas nas tabelas do banco de dados.'
-        },
-        {
-          id: 'b2',
-          difficulty: 'media',
-          question: 'Qual a finalidade da cláusula GROUP BY associada a funções agregadas (como SUM ou COUNT) no SQL?',
-          options: [
-            'Ordenar os dados do menor para o maior.',
-            'Agrupar linhas que têm os mesmos valores em colunas especificadas para calcular resumos.',
-            'Excluir registros duplicados da tabela permanentemente.'
-          ],
-          correct: 1,
-          explanation: 'O GROUP BY combina registros com valores idênticos em linhas de resumo, permitindo aplicar funções como SUM, AVG ou COUNT sobre cada grupo.'
-        }
-      ]
-    };
+      <div class="subject-card" onclick="openModal('Filosofia')">
+        <div class="card-header"><i class="fa-solid fa-brain icon-blue"></i><h3>Filosofia</h3></div>
+        <ul>
+          <li>Desenvolvimento do Pensamento Crítico</li>
+          <li>Ética e Moral</li>
+          <li>História das Ideias</li>
+          <li>Lógica e Conhecimento</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-    // Mapeamento de Vídeo Aulas
-    const videoDatabase = {
-      logica: "https://www.youtube.com/embed/8mei6uVttho",
-      dados: "https://www.youtube.com/embed/RBEIsJ2pcoY",
-      bd: "https://www.youtube.com/embed/Ofktsne-utM"
-    };
+  <!-- ABA 4: ENSINO SUPERIOR -->
+  <div id="superior" class="tab-content">
+    <div class="section-title"><i class="fa-solid fa-graduation-cap"></i> Cursos de Bacharelado <span>(4 a 6 anos) - Formação profunda voltada para a atuação geral de mercado</span></div>
+    <div class="subjects-grid">
+      <div class="subject-card" onclick="openModal('Saúde e Biológicas')">
+        <div class="card-header"><i class="fa-solid fa-heart-pulse icon-red"></i><h3>Saúde e Biológicas</h3></div>
+        <ul>
+          <li>Medicina, Enfermagem, Odontologia</li>
+          <li>Farmácia, Fisioterapia, Nutrição</li>
+          <li>Medicina Veterinária, Biomedicina</li>
+          <li>Psicologia, Biologia, Biotecnologia</li>
+        </ul>
+      </div>
 
-    // 1. INICIALIZAÇÃO DA IA LOCAL (WEB LLM)
-    async function initWebLLM() {
-      const statusText = document.getElementById('ai-status-text');
-      const progressBar = document.getElementById('ai-progress-bar');
-      const progressText = document.getElementById('ai-progress-text');
+      <div class="subject-card" onclick="openModal('Engenharias')">
+        <div class="card-header"><i class="fa-solid fa-gear icon-orange"></i><h3>Engenharias</h3></div>
+        <ul>
+          <li>Engenharia Civil, Mecânica, Elétrica</li>
+          <li>Engenharia Química, de Produção</li>
+          <li>Engenharia de Computação, Mecatrônica</li>
+          <li>Engenharia Ambiental, Aeroespacial</li>
+        </ul>
+      </div>
 
-      try {
-        generator = await pipeline('text-generation', 'Xenova/Qwen1.5-0.5B-Chat', {
-          progress_callback: (progressInfo) => {
-            if (progressInfo.status === 'progress') {
-              const percent = Math.round(progressInfo.progress);
-              progressBar.style.width = percent + '%';
-              progressText.innerText = percent + '%';
-              statusText.innerText = `Download do Modelo de IA: ${progressInfo.file || ''}`;
-            } else if (progressInfo.status === 'ready') {
-              statusText.innerText = 'IA Local Pronta para Uso!';
-              progressBar.style.width = '100%';
-              progressText.innerText = '100%';
-            }
-          }
-        });
-        statusText.innerText = 'IA Local Carregada com Sucesso!';
-      } catch (err) {
-        console.warn("IA Local rodando em modo simplificado ou offline:", err);
-        statusText.innerText = 'IA em Modo Assistido / Fallback Local';
-        progressBar.style.width = '100%';
-        progressText.innerText = '100%';
-      }
-    }
+      <div class="subject-card" onclick="openModal('Exatas e Tecnologia')">
+        <div class="card-header"><i class="fa-solid fa-laptop-code icon-blue"></i><h3>Exatas e Tecnologia</h3></div>
+        <ul>
+          <li>Ciência da Computação, Sistemas de Informação</li>
+          <li>Ciência de Dados, Inteligência Artificial</li>
+          <li>Estatística, Física, Matemática, Química</li>
+          <li>Geologia, Astronomia, Meteorologia</li>
+        </ul>
+      </div>
 
-    // Exportações para escopo Global da janela (HTML Window)
-    window.selectSubject = function(key) {
-      currentSubjectKey = key;
-      document.getElementById('workspace').style.display = 'block';
-      
-      const titles = {
-        logica: 'Lógica de Programação',
-        dados: 'Estruturas de Dados',
-        bd: 'Banco de Dados'
-      };
-      
-      document.getElementById('current-subject-title').innerText = titles[key];
-      document.getElementById('youtube-player').src = videoDatabase[key];
+      <div class="subject-card" onclick="openModal('Sociais Aplicadas e Negócios')">
+        <div class="card-header"><i class="fa-solid fa-briefcase icon-yellow"></i><h3>Sociais Aplicadas e Negócios</h3></div>
+        <ul>
+          <li>Direito, Administração, Ciências Contábeis</li>
+          <li>Ciências Econômicas, Relações Internacionais</li>
+          <li>Comércio Exterior, Marketing</li>
+          <li>Hotelaria, Turismo, Gastronomia</li>
+        </ul>
+      </div>
 
-      renderQuestions('todas');
-      loadSavedState();
-    };
+      <div class="subject-card" onclick="openModal('Comunicação e Artes')">
+        <div class="card-header"><i class="fa-solid fa-bullhorn icon-pink"></i><h3>Comunicação e Artes</h3></div>
+        <ul>
+          <li>Jornalismo, Publicidade e Propaganda</li>
+          <li>Cinema e Audiovisual, Rádio e TV</li>
+          <li>Design Gráfico, Moda e Produto</li>
+          <li>Arquitetura, Artes Visuais, Música</li>
+        </ul>
+      </div>
 
-    window.switchTab = function(event, tabId) {
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      <div class="subject-card" onclick="openModal('Humanas e Sociais')">
+        <div class="card-header"><i class="fa-solid fa-users icon-purple"></i><h3>Humanas e Sociais</h3></div>
+        <ul>
+          <li>História, Geografia, Filosofia</li>
+          <li>Ciências Sociais, Antropologia</li>
+          <li>Pedagogia, Serviço Social, Teologia</li>
+          <li>Biblioteconomia, Arquivologia</li>
+        </ul>
+      </div>
 
-      if (event && event.target) {
-        event.target.classList.add('active');
-      }
+      <div class="subject-card" onclick="openModal('Ciências Agrárias')">
+        <div class="card-header"><i class="fa-solid fa-seedling icon-green"></i><h3>Ciências Agrárias</h3></div>
+        <ul>
+          <li>Agronomia, Zootecnia</li>
+          <li>Engenharia Agronômica</li>
+          <li>Engenharia de Pesca</li>
+          <li>Engenharia Agrícola</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-title"><i class="fa-solid fa-chalkboard-user"></i> Cursos de Licenciatura <span>(4 anos) - Voltados para formação de professores na Educação Básica</span></div>
+    <div class="subjects-grid">
+      <div class="subject-card" onclick="openModal('Pedagogia e Humanas')">
+        <div class="card-header"><i class="fa-solid fa-user-graduate icon-purple"></i><h3>Pedagogia e Humanas</h3></div>
+        <ul>
+          <li>Pedagogia (Ed. Infantil e Iniciais)</li>
+          <li>Licenciatura em História e Geografia</li>
+          <li>Licenciatura em Filosofia e Sociologia</li>
+          <li>Licenciatura em Educação Especial</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Linguagens e Expressão')">
+        <div class="card-header"><i class="fa-solid fa-language icon-blue"></i><h3>Linguagens e Expressão</h3></div>
+        <ul>
+          <li>Letras (Português, Inglês, Espanhol, Libras)</li>
+          <li>Licenciatura em Artes Visuais</li>
+          <li>Licenciatura em Música</li>
+          <li>Licenciatura em Teatro e Dança</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Exatas, Natureza e Exatas')">
+        <div class="card-header"><i class="fa-solid fa-atom icon-teal"></i><h3>Exatas, Natureza e Exatas</h3></div>
+        <ul>
+          <li>Licenciatura em Matemática e Física</li>
+          <li>Licenciatura em Química e Biologia</li>
+          <li>Licenciatura em Computação / Informática</li>
+          <li>Licenciatura em Educação Física</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-title"><i class="fa-solid fa-microchip"></i> Cursos Tecnólogos <span>(2 a 3 anos) - Focados nas práticas do mercado (Eixos do MEC)</span></div>
+    <div class="subjects-grid">
+      <div class="subject-card" onclick="openModal('Informação e Comunicação')">
+        <div class="card-header"><i class="fa-solid fa-code icon-blue"></i><h3>Informação e Comunicação</h3></div>
+        <ul>
+          <li>Análise e Desenvolvimento de Sistemas (ADS)</li>
+          <li>Redes, Banco de Dados, Segurança</li>
+          <li>Defesa Cibernética e Jogos Digitais</li>
+          <li>Internet das Coisas e BI</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Gestão e Negócios')">
+        <div class="card-header"><i class="fa-solid fa-chart-line icon-green"></i><h3>Gestão e Negócios</h3></div>
+        <ul>
+          <li>Processos Gerenciais e Recursos Humanos</li>
+          <li>Logística e Gestão Financeira</li>
+          <li>Gestão Comercial e Marketing Digital</li>
+          <li>Comércio Exterior e Gestão Pública</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Ambiente, Saúde e Segurança')">
+        <div class="card-header"><i class="fa-solid fa-user-shield icon-red"></i><h3>Ambiente, Saúde e Segurança</h3></div>
+        <ul>
+          <li>Gestão Ambiental e Radiologia</li>
+          <li>Estética, Cosmética e Sistemas Biomédicos</li>
+          <li>Segurança Pública e Investigação</li>
+          <li>Serviços Penais e Saneamento</li>
+        </ul>
+      </div>
+
+      <div class="subject-card" onclick="openModal('Infraestrutura, Indústria e Lazer')">
+        <div class="card-header"><i class="fa-solid fa-industry icon-orange"></i><h3>Infraestrutura, Indústria e Lazer</h3></div>
+        <ul>
+          <li>Construção de Edifícios e Design Interiores</li>
+          <li>Automação e Eletrônica Industrial</li>
+          <li>Agronegócio e Agroecologia</li>
+          <li>Gastronomia, Eventos e Hotelaria</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="logout-container">
+    <button class="logout-btn">Sair do Sistema</button>
+  </div>
+
+  <!-- POP-UP MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-header">
+        <h2 id="modalTitle">Língua Portuguesa</h2>
+        <p>Selecione o tipo de conteúdo que deseja acessar:</p>
+      </div>
+      <div class="modal-grid">
+        <a href="#" class="modal-option">
+          <i class="fa-solid fa-file-lines"></i>
+          <span>Provas</span>
+        </a>
+        <a href="#" class="modal-option">
+          <i class="fa-solid fa-lightbulb"></i>
+          <span>Explicações</span>
+        </a>
+        <a href="#" class="modal-option">
+          <i class="fa-solid fa-circle-question"></i>
+          <span>Perguntas</span>
+        </a>
+        <a href="#" class="modal-option">
+          <i class="fa-solid fa-circle-play"></i>
+          <span>Vídeos</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Função para alternar as abas
+    function switchTab(tabId, btn) {
+      // Ocultar todos os conteúdos
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+
+      // Desativar todos os botões
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(b => b.classList.remove('active'));
+
+      // Mostrar o conteúdo e botão selecionados
       document.getElementById(tabId).classList.add('active');
-    };
-
-    window.renderQuestions = function(difficulty) {
-      const container = document.getElementById('questions-container');
-      container.innerHTML = '';
-
-      let list = questionsDatabase[currentSubjectKey] || [];
-      if (difficulty !== 'todas') {
-        list = list.filter(q => q.difficulty === difficulty);
-      }
-
-      if (list.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-muted);">Nenhuma questão encontrada para este filtro.</p>';
-        return;
-      }
-
-      list.forEach(q => {
-        const card = document.createElement('div');
-        card.className = 'question-card';
-        card.id = `q-card-${q.id}`;
-
-        let optionsHTML = '';
-        q.options.forEach((opt, idx) => {
-          optionsHTML += `<button class="option-btn" id="opt-${q.id}-${idx}" onclick="checkAnswer('${q.id}', ${idx}, ${q.correct})">${opt}</button>`;
-        });
-
-        card.innerHTML = `
-          <p><strong>Questão:</strong> ${q.question}</p>
-          <div class="options-list">${optionsHTML}</div>
-          <div class="justification" id="just-${q.id}" style="display:none;"></div>
-        `;
-        container.appendChild(card);
-      });
-
-      restoreQuestionSelections();
-    };
-
-    window.checkAnswer = function(questionId, selectedIdx, correctIdx) {
-      const qList = questionsDatabase[currentSubjectKey];
-      const qObj = qList.find(q => q.id === questionId);
-
-      userAnswersState[questionId] = selectedIdx;
-
-      const parent = document.getElementById(`q-card-${questionId}`);
-      if (!parent) return;
-
-      const buttons = parent.querySelectorAll('.option-btn');
-      buttons.forEach(btn => {
-        btn.classList.remove('correct', 'incorrect');
-        btn.disabled = true;
-      });
-
-      const selectedBtn = document.getElementById(`opt-${questionId}-${selectedIdx}`);
-      const justBox = document.getElementById(`just-${questionId}`);
-
-      if (selectedIdx === correctIdx) {
-        if (selectedBtn) selectedBtn.classList.add('correct');
-        justBox.style.color = 'var(--success)';
-        justBox.innerHTML = `<strong>Correto!</strong> ${qObj.explanation}`;
-      } else {
-        if (selectedBtn) selectedBtn.classList.add('incorrect');
-        const correctBtn = document.getElementById(`opt-${questionId}-${correctIdx}`);
-        if (correctBtn) correctBtn.classList.add('correct');
-        justBox.style.color = 'var(--danger)';
-        justBox.innerHTML = `<strong>Incorreto.</strong> ${qObj.explanation}`;
-      }
-
-      justBox.style.display = 'block';
-    };
-
-    // PERSISTÊNCIA E SALVAMENTO DE ESTADO
-    window.saveProgress = function() {
-      const saveData = {
-        subject: currentSubjectKey,
-        answers: userAnswersState,
-        timestamp: new Date().toISOString()
-      };
-      localStorage.setItem('openeedu_progress', JSON.stringify(saveData));
-      alert('Progresso salvo com sucesso no navegador!');
-    };
-
-    function loadSavedState() {
-      const saved = localStorage.getItem('openeedu_progress');
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          if (parsed.subject === currentSubjectKey && parsed.answers) {
-            userAnswersState = parsed.answers;
-            restoreQuestionSelections();
-          }
-        } catch (e) {
-          console.error("Erro ao carregar o estado:", e);
-        }
-      }
+      btn.classList.add('active');
     }
 
-    function restoreQuestionSelections() {
-      const qList = questionsDatabase[currentSubjectKey] || [];
-      qList.forEach(q => {
-        if (userAnswersState[q.id] !== undefined) {
-          window.checkAnswer(q.id, userAnswersState[q.id], q.correct);
-        }
-      });
+    // Funções para controlar o Modal
+    function openModal(title) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalOverlay').classList.add('active');
     }
 
-    window.resetProgress = function() {
-      if (confirm("Deseja realmente apagar o progresso atual e reiniciar as questões?")) {
-        userAnswersState = {};
-        localStorage.removeItem('openeedu_progress');
-        renderQuestions('todas');
-        alert("Progresso reiniciado com sucesso!");
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+    }
+
+    // Fechar modal ao clicar fora da caixa
+    document.getElementById('modalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
       }
-    };
-
-    window.exportBackup = function() {
-      const saveData = {
-        subject: currentSubjectKey,
-        answers: userAnswersState
-      };
-      const code = btoa(JSON.stringify(saveData));
-      navigator.clipboard.writeText(code).then(() => {
-        alert("Código de backup copiado para a área de transferência!");
-      }).catch(() => {
-        prompt("Copie seu código de backup abaixo:", code);
-      });
-    };
-
-    window.importBackup = function() {
-      const code = prompt("Cole seu código de backup aqui:");
-      if (code) {
-        try {
-          const decoded = JSON.parse(atob(code));
-          if (decoded.subject && decoded.answers) {
-            currentSubjectKey = decoded.subject;
-            userAnswersState = decoded.answers;
-            localStorage.setItem('openeedu_progress', JSON.stringify(decoded));
-            window.selectSubject(currentSubjectKey);
-            alert("Backup restaurado com sucesso!");
-          }
-        } catch (e) {
-          alert("Código de backup inválido.");
-        }
-      }
-    };
-
-    // INTERAÇÃO COM A IA
-    window.askLocalAI = async function() {
-      const promptInput = document.getElementById('ai-prompt');
-      const output = document.getElementById('ai-chat-output');
-      const question = promptInput.value.trim();
-
-      if (!question) {
-        alert("Digite uma pergunta antes de enviar.");
-        return;
-      }
-
-      output.innerText = "Pensando e processando com a IA Local...";
-
-      if (generator) {
-        try {
-          const res = await generator(question, { max_new_tokens: 120 });
-          output.innerText = res[0].generated_text;
-        } catch (err) {
-          output.innerText = `Resposta (Modo Auxiliar): A respeito de "${question}", lembre-se de analisar a sintaxe, escopo de variáveis e testar a solução com casos de borda.`;
-        }
-      } else {
-        output.innerText = `Resposta (Modo Offline/Auxiliar): Em relação a "${question}", certifique-se de praticar a teoria com exercícios práticos e revisar a documentação do tópico.`;
-      }
-    };
-
-    window.generateAIBlocks = function() {
-      const subjectNames = {
-        logica: "Lógica de Programação",
-        dados: "Estruturas de Dados",
-        bd: "Banco de Dados"
-      };
-
-      const name = subjectNames[currentSubjectKey];
-
-      document.getElementById('block-full').innerText = 
-        `Estudo aprofundado de ${name}: Este módulo aborda a estruturação lógica do pensamento computacional, otimização de instruções, gerenciamento de estados e boas práticas de arquitetura de código.`;
-
-      document.getElementById('block-summary').innerText = 
-        `• Conceito Principal: Resolução sistemática de problemas.\n• Foco Prático: Sintaxe, estruturas de controle e manipulação de dados.\n• Ponto de Atenção: Tratamento de exceções e testes.`;
-
-      document.getElementById('block-tips').innerText = 
-        `1. Técnica Pomodoro: 25 minutos de código e 5 minutos de descanso.\n2. Estudo Ativo: Tente explicar o código para si mesmo em voz alta.\n3. Prática Espaçada: Refaça os exercícios após 3 e 7 dias.`;
-    };
-
-    // Inicialização no carregamento da página
-    window.addEventListener('DOMContentLoaded', () => {
-      initWebLLM();
     });
   </script>
 </body>
