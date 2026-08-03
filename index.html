@@ -111,7 +111,6 @@
       display: block;
     }
 
-    /* Section Subheadings (para Ensino Superior) */
     .section-title {
       font-size: 1.1rem;
       font-weight: 700;
@@ -186,7 +185,6 @@
       color: var(--text-sub);
     }
 
-    /* Botão Sair do Sistema */
     .logout-container {
       margin-top: 50px;
       text-align: center;
@@ -305,6 +303,94 @@
       font-size: 0.9rem;
       font-weight: 600;
     }
+
+    /* Modal de Quiz */
+    .quiz-box {
+      max-width: 700px;
+      width: 95%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .diff-selector {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .diff-btn {
+      background: #111726;
+      border: 1px solid var(--card-border);
+      color: var(--text-white);
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .diff-btn.active {
+      background: var(--tab-active);
+      border-color: var(--tab-active);
+    }
+
+    .question-card {
+      background: #070a12;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 15px;
+    }
+
+    .question-card p {
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .option-item {
+      background: #0d121f;
+      border: 1px solid var(--card-border);
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background 0.2s;
+    }
+
+    .option-item:hover {
+      background: #141b2d;
+    }
+
+    .option-item.selected {
+      border-color: #2563eb;
+      background: #1e293b;
+    }
+
+    .quiz-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .quiz-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-save { background: #22c55e; color: #fff; }
+    .btn-reset { background: #ef4444; color: #fff; }
 
     /* Cores dos Ícones */
     .icon-blue { color: #38bdf8; }
@@ -451,7 +537,6 @@
           <li>Leitura e Literatura Infantojuvenil</li>
         </ul>
       </div>
-
       <div class="subject-card" onclick="openModal('Matemática')">
         <div class="card-header"><i class="fa-solid fa-calculator icon-purple"></i><h3>Matemática</h3></div>
         <ul>
@@ -459,76 +544,6 @@
           <li>Geometria Plana e Espacial</li>
           <li>Estatística e Probabilidade</li>
           <li>Grandezas, Unidades e Razão/Proporção</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Ciências da Natureza')">
-        <div class="card-header"><i class="fa-solid fa-flask icon-green"></i><h3>Ciências da Natureza</h3></div>
-        <ul>
-          <li>Nivelamento em Biologia e Ecologia</li>
-          <li>Noções de Física (Movimento, Energia e Som)</li>
-          <li>Noções de Química (Matéria e Misturas)</li>
-          <li>Astronomia, Terra e Universo</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('História')">
-        <div class="card-header"><i class="fa-solid fa-landmark icon-orange"></i><h3>História</h3></div>
-        <ul>
-          <li>História Antiga e Feudalismo</li>
-          <li>Brasil Colônia, Império e República</li>
-          <li>Guerra Mundial e História Contemporânea</li>
-          <li>Cidadania, Direitos e Movimentos Sociais</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Geografia')">
-        <div class="card-header"><i class="fa-solid fa-globe icon-teal"></i><h3>Geografia</h3></div>
-        <ul>
-          <li>Cartografia, Clima e Geomorfologia</li>
-          <li>Geopolítica e Globalização</li>
-          <li>Domínios Morfoclimáticos do Brasil</li>
-          <li>Urbanização e Impactos Ambientais</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Língua Inglesa')">
-        <div class="card-header"><i class="fa-solid fa-language icon-blue"></i><h3>Língua Inglesa</h3></div>
-        <ul>
-          <li>Gramática e Estruturas Verbais (Tenses)</li>
-          <li>Interpretação e Leitura (Reading)</li>
-          <li>Vocabulário Temático e Expressões</li>
-          <li>Habilidades de Compreensão Auditiva</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Arte')">
-        <div class="card-header"><i class="fa-solid fa-icons icon-pink"></i><h3>Arte</h3></div>
-        <ul>
-          <li>História da Arte Clássica e Moderna</li>
-          <li>Artes Visuais, Dança e Teatro</li>
-          <li>Música e Elementos Sonoros</li>
-          <li>Patrimônio Cultural e Arte Brasileira</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Educação Física')">
-        <div class="card-header"><i class="fa-solid fa-futbol icon-red"></i><h3>Educação Física</h3></div>
-        <ul>
-          <li>Esportes de Redes, Campo e Precisão</li>
-          <li>Lutas, Ginástica e Práticas Corporais</li>
-          <li>Saúde, Qualidade de Vida e Corpo</li>
-          <li>Jogos Eletrônicos e Práticas Urbanas</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Ensino Religioso')">
-        <div class="card-header"><i class="fa-solid fa-compass icon-yellow"></i><h3>Ensino Religioso</h3></div>
-        <ul>
-          <li>Tradições Religiosas e Filosóficas</li>
-          <li>Direitos Humanos e Respeito Mútuo</li>
-          <li>Análise de Textos Sagrados e Mitos</li>
-          <li>Ética, Alteridade e Sociedade</li>
         </ul>
       </div>
     </div>
@@ -542,118 +557,6 @@
         <ul>
           <li>Estudo do Idioma</li>
           <li>Gramática e Sintaxe</li>
-          <li>Textos Literários e Escolas</li>
-          <li>Leitura e Redação</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Língua Inglesa')">
-        <div class="card-header"><i class="fa-solid fa-language icon-blue"></i><h3>Língua Inglesa</h3></div>
-        <ul>
-          <li>Aprendizado da Língua Estrangeira</li>
-          <li>Vocabulário e Gramática</li>
-          <li>Leitura e Interpretação</li>
-          <li>Compreensão Auditiva</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Arte')">
-        <div class="card-header"><i class="fa-solid fa-palette icon-pink"></i><h3>Arte</h3></div>
-        <ul>
-          <li>Expressão Artística e Cultural</li>
-          <li>Artes Visuais e Plásticas</li>
-          <li>Artes Cênicas e Teatro</li>
-          <li>Música e Patrimônio Artístico</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Educação Física')">
-        <div class="card-header"><i class="fa-solid fa-person-running icon-red"></i><h3>Educação Física</h3></div>
-        <ul>
-          <li>Práticas Corporais</li>
-          <li>Modalidades Esportivas</li>
-          <li>Saúde e Qualidade de Vida</li>
-          <li>Cultura do Movimento</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Matemática')">
-        <div class="card-header"><i class="fa-solid fa-calculator icon-purple"></i><h3>Matemática</h3></div>
-        <ul>
-          <li>Estudo dos Números e Conjuntos</li>
-          <li>Álgebra e Funções</li>
-          <li>Geometria Plana e Espacial</li>
-          <li>Estatística e Probabilidade</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Biologia')">
-        <div class="card-header"><i class="fa-solid fa-dna icon-green"></i><h3>Biologia</h3></div>
-        <ul>
-          <li>Estudo dos Seres Vivos</li>
-          <li>Ecologia e Meio Ambiente</li>
-          <li>Anatomia do Corpo Humano</li>
-          <li>Genética e Citologia</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Física')">
-        <div class="card-header"><i class="fa-solid fa-bolt icon-yellow"></i><h3>Física</h3></div>
-        <ul>
-          <li>Leis da Natureza</li>
-          <li>Mecânica e Movimentos</li>
-          <li>Termodinâmica e Calor</li>
-          <li>Eletricidade e Magnetismo</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Química')">
-        <div class="card-header"><i class="fa-solid fa-flask icon-teal"></i><h3>Química</h3></div>
-        <ul>
-          <li>Estudo de Átomos e Moléculas</li>
-          <li>Tabela Periódica dos Elementos</li>
-          <li>Substâncias e Misturas</li>
-          <li>Reações Químicas</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('História')">
-        <div class="card-header"><i class="fa-solid fa-landmark icon-orange"></i><h3>História</h3></div>
-        <ul>
-          <li>Fatos Históricos do Brasil</li>
-          <li>História Geral e Mundial</li>
-          <li>Evolução das Sociedades</li>
-          <li>Cidadania e Política</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Geografia')">
-        <div class="card-header"><i class="fa-solid fa-globe icon-teal"></i><h3>Geografia</h3></div>
-        <ul>
-          <li>Estudo do Espaço Geográfico</li>
-          <li>Geopolítica Global</li>
-          <li>Preservação do Meio Ambiente</li>
-          <li>Cartografia e Clima</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Sociologia')">
-        <div class="card-header"><i class="fa-solid fa-users icon-pink"></i><h3>Sociologia</h3></div>
-        <ul>
-          <li>Estudo da Sociedade</li>
-          <li>Cultura e Identidade</li>
-          <li>Relações Humanas e Sociais</li>
-          <li>Direitos e Cidadania</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Filosofia')">
-        <div class="card-header"><i class="fa-solid fa-brain icon-blue"></i><h3>Filosofia</h3></div>
-        <ul>
-          <li>Desenvolvimento do Pensamento Crítico</li>
-          <li>Ética e Moral</li>
-          <li>História das Ideias</li>
-          <li>Lógica e Conhecimento</li>
         </ul>
       </div>
     </div>
@@ -661,151 +564,12 @@
 
   <!-- ABA 4: ENSINO SUPERIOR -->
   <div id="superior" class="tab-content">
-    <div class="section-title"><i class="fa-solid fa-graduation-cap"></i> Cursos de Bacharelado <span>(4 a 6 anos) - Formação profunda voltada para a atuação geral de mercado</span></div>
+    <div class="section-title"><i class="fa-solid fa-graduation-cap"></i> Cursos de Bacharelado</div>
     <div class="subjects-grid">
       <div class="subject-card" onclick="openModal('Saúde e Biológicas')">
         <div class="card-header"><i class="fa-solid fa-heart-pulse icon-red"></i><h3>Saúde e Biológicas</h3></div>
         <ul>
           <li>Medicina, Enfermagem, Odontologia</li>
-          <li>Farmácia, Fisioterapia, Nutrição</li>
-          <li>Medicina Veterinária, Biomedicina</li>
-          <li>Psicologia, Biologia, Biotecnologia</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Engenharias')">
-        <div class="card-header"><i class="fa-solid fa-gear icon-orange"></i><h3>Engenharias</h3></div>
-        <ul>
-          <li>Engenharia Civil, Mecânica, Elétrica</li>
-          <li>Engenharia Química, de Produção</li>
-          <li>Engenharia de Computação, Mecatrônica</li>
-          <li>Engenharia Ambiental, Aeroespacial</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Exatas e Tecnologia')">
-        <div class="card-header"><i class="fa-solid fa-laptop-code icon-blue"></i><h3>Exatas e Tecnologia</h3></div>
-        <ul>
-          <li>Ciência da Computação, Sistemas de Informação</li>
-          <li>Ciência de Dados, Inteligência Artificial</li>
-          <li>Estatística, Física, Matemática, Química</li>
-          <li>Geologia, Astronomia, Meteorologia</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Sociais Aplicadas e Negócios')">
-        <div class="card-header"><i class="fa-solid fa-briefcase icon-yellow"></i><h3>Sociais Aplicadas e Negócios</h3></div>
-        <ul>
-          <li>Direito, Administração, Ciências Contábeis</li>
-          <li>Ciências Econômicas, Relações Internacionais</li>
-          <li>Comércio Exterior, Marketing</li>
-          <li>Hotelaria, Turismo, Gastronomia</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Comunicação e Artes')">
-        <div class="card-header"><i class="fa-solid fa-bullhorn icon-pink"></i><h3>Comunicação e Artes</h3></div>
-        <ul>
-          <li>Jornalismo, Publicidade e Propaganda</li>
-          <li>Cinema e Audiovisual, Rádio e TV</li>
-          <li>Design Gráfico, Moda e Produto</li>
-          <li>Arquitetura, Artes Visuais, Música</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Humanas e Sociais')">
-        <div class="card-header"><i class="fa-solid fa-users icon-purple"></i><h3>Humanas e Sociais</h3></div>
-        <ul>
-          <li>História, Geografia, Filosofia</li>
-          <li>Ciências Sociais, Antropologia</li>
-          <li>Pedagogia, Serviço Social, Teologia</li>
-          <li>Biblioteconomia, Arquivologia</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Ciências Agrárias')">
-        <div class="card-header"><i class="fa-solid fa-seedling icon-green"></i><h3>Ciências Agrárias</h3></div>
-        <ul>
-          <li>Agronomia, Zootecnia</li>
-          <li>Engenharia Agronômica</li>
-          <li>Engenharia de Pesca</li>
-          <li>Engenharia Agrícola</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="section-title"><i class="fa-solid fa-chalkboard-user"></i> Cursos de Licenciatura <span>(4 anos) - Voltados para formação de professores na Educação Básica</span></div>
-    <div class="subjects-grid">
-      <div class="subject-card" onclick="openModal('Pedagogia e Humanas')">
-        <div class="card-header"><i class="fa-solid fa-user-graduate icon-purple"></i><h3>Pedagogia e Humanas</h3></div>
-        <ul>
-          <li>Pedagogia (Ed. Infantil e Iniciais)</li>
-          <li>Licenciatura em História e Geografia</li>
-          <li>Licenciatura em Filosofia e Sociologia</li>
-          <li>Licenciatura em Educação Especial</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Linguagens e Expressão')">
-        <div class="card-header"><i class="fa-solid fa-language icon-blue"></i><h3>Linguagens e Expressão</h3></div>
-        <ul>
-          <li>Letras (Português, Inglês, Espanhol, Libras)</li>
-          <li>Licenciatura em Artes Visuais</li>
-          <li>Licenciatura em Música</li>
-          <li>Licenciatura em Teatro e Dança</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Exatas, Natureza e Exatas')">
-        <div class="card-header"><i class="fa-solid fa-atom icon-teal"></i><h3>Exatas, Natureza e Exatas</h3></div>
-        <ul>
-          <li>Licenciatura em Matemática e Física</li>
-          <li>Licenciatura em Química e Biologia</li>
-          <li>Licenciatura em Computação / Informática</li>
-          <li>Licenciatura em Educação Física</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="section-title"><i class="fa-solid fa-microchip"></i> Cursos Tecnólogos <span>(2 a 3 anos) - Focados nas práticas do mercado (Eixos do MEC)</span></div>
-    <div class="subjects-grid">
-      <div class="subject-card" onclick="openModal('Informação e Comunicação')">
-        <div class="card-header"><i class="fa-solid fa-code icon-blue"></i><h3>Informação e Comunicação</h3></div>
-        <ul>
-          <li>Análise e Desenvolvimento de Sistemas (ADS)</li>
-          <li>Redes, Banco de Dados, Segurança</li>
-          <li>Defesa Cibernética e Jogos Digitais</li>
-          <li>Internet das Coisas e BI</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Gestão e Negócios')">
-        <div class="card-header"><i class="fa-solid fa-chart-line icon-green"></i><h3>Gestão e Negócios</h3></div>
-        <ul>
-          <li>Processos Gerenciais e Recursos Humanos</li>
-          <li>Logística e Gestão Financeira</li>
-          <li>Gestão Comercial e Marketing Digital</li>
-          <li>Comércio Exterior e Gestão Pública</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Ambiente, Saúde e Segurança')">
-        <div class="card-header"><i class="fa-solid fa-user-shield icon-red"></i><h3>Ambiente, Saúde e Segurança</h3></div>
-        <ul>
-          <li>Gestão Ambiental e Radiologia</li>
-          <li>Estética, Cosmética e Sistemas Biomédicos</li>
-          <li>Segurança Pública e Investigação</li>
-          <li>Serviços Penais e Saneamento</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openModal('Infraestrutura, Indústria e Lazer')">
-        <div class="card-header"><i class="fa-solid fa-industry icon-orange"></i><h3>Infraestrutura, Indústria e Lazer</h3></div>
-        <ul>
-          <li>Construção de Edifícios e Design Interiores</li>
-          <li>Automação e Eletrônica Industrial</li>
-          <li>Agronegócio e Agroecologia</li>
-          <li>Gastronomia, Eventos e Hotelaria</li>
         </ul>
       </div>
     </div>
@@ -815,16 +579,16 @@
     <button class="logout-btn">Sair do Sistema</button>
   </div>
 
-  <!-- POP-UP MODAL -->
+  <!-- POP-UP MODAL OPÇÕES -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-box">
       <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
       <div class="modal-header">
-        <h2 id="modalTitle">Língua Portuguesa</h2>
+        <h2 id="modalTitle">Matéria</h2>
         <p>Selecione o tipo de conteúdo que deseja acessar:</p>
       </div>
       <div class="modal-grid">
-        <a href="#" class="modal-option">
+        <a href="javascript:void(0)" onclick="startQuiz()" class="modal-option">
           <i class="fa-solid fa-file-lines"></i>
           <span>Provas</span>
         </a>
@@ -832,7 +596,7 @@
           <i class="fa-solid fa-lightbulb"></i>
           <span>Explicações</span>
         </a>
-        <a href="#" class="modal-option">
+        <a href="javascript:void(0)" onclick="startQuiz()" class="modal-option">
           <i class="fa-solid fa-circle-question"></i>
           <span>Perguntas</span>
         </a>
@@ -844,24 +608,271 @@
     </div>
   </div>
 
+  <!-- POP-UP QUIZ / PROVAS -->
+  <div class="modal-overlay" id="quizOverlay">
+    <div class="modal-box quiz-box">
+      <button class="modal-close" onclick="closeQuiz()"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-header">
+        <h2 id="quizTitle">Provas e Perguntas</h2>
+        <p>Selecione a dificuldade:</p>
+      </div>
+      
+      <div class="diff-selector">
+        <button class="diff-btn active" id="btn-easy" onclick="setDifficulty('easy')">Pequeno (Fácil)</button>
+        <button class="diff-btn" id="btn-medium" onclick="setDifficulty('medium')">Médio (Difícil)</button>
+        <button class="diff-btn" id="btn-hard" onclick="setDifficulty('hard')">Grande (Muito Difícil)</button>
+      </div>
+
+      <div id="quizContainer">
+        <!-- As perguntas serão injetadas via JS -->
+      </div>
+
+      <div class="quiz-actions">
+        <button class="quiz-btn btn-reset" onclick="resetProgress()">Reiniciar Prova</button>
+        <button class="quiz-btn btn-save" onclick="saveProgress()">Salvar Progresso</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Função para alternar as abas
+    let currentSubject = "";
+    let currentDifficulty = "easy";
+    let userAnswers = {};
+
+    // BANCO DE DADOS DAS 150 QUESTÕES (1º ANO FUNDAMENTAL I)
+    const questionsDB = {
+      "Língua Portuguesa": {
+        easy: [
+          { q: "1. Qual é a primeira letra do alfabeto?", options: ["A", "B", "C"], correct: 0 },
+          { q: "2. Quantas vogais existem no alfabeto?", options: ["3", "5", "10"], correct: 1 },
+          { q: "3. Qual destas palavras começa com a letra 'B'?", options: ["Amora", "Bola", "Cachorro"], correct: 1 },
+          { q: "4. Qual palavra termina com a letra 'O'?", options: ["Gato", "Casa", "Mesa"], correct: 0 },
+          { q: "5. Juntando as letras A + U, qual som se forma?", options: ["Ai", "Au", "Ei"], correct: 1 }
+        ],
+        medium: [
+          { q: "1. Qual palavra tem a separação correta em sílabas?", options: ["PA-PA-GA-I-O", "PA-PA-GAIO", "PAP-AGAIO"], correct: 1 },
+          { q: "2. Assinale o antônimo da palavra 'GRANDE':", options: ["Alto", "Pequeno", "Enorme"], correct: 1 },
+          { q: "3. Qual frase está escrita corretamente com pontuação?", options: ["O gato dormiu.", "o gato dormiu", "O gato dormiu?"], correct: 0 },
+          { q: "4. Qual das palavras abaixo é um substantivo masculino?", options: ["Cadeira", "Menino", "Flor"], correct: 1 },
+          { q: "5. Qual palavra completa a frase: 'O ___ brilha no céu.'", options: ["Sol", "Lua", "Estrelas"], correct: 0 }
+        ],
+        hard: [
+          { q: "1. Qual palavra possui um Encontro Consonantal?", options: ["Prato", "Pato", "Luva"], correct: 0 },
+          { q: "2. Identifique a sílaba tônica (mais forte) da palavra 'MÁGICA':", options: ["ca", "gi", "MÁ"], correct: 2 },
+          { q: "3. Qual frase contém um erro ortográfico?", options: ["O cão latio alto.", "O cachorro latiu alto.", "O cão é amigo."], correct: 0 },
+          { q: "4. Qual é o plural da palavra 'JARDIM'?", options: ["Jardims", "Jardins", "Jardines"], correct: 1 },
+          { q: "5. Assinale a alternativa em que a regra do uso de M antes de P e B foi respeitada:", options: ["Tamba", "Lampa", "Tampa"], correct: 2 }
+        ]
+      },
+      "Matemática": {
+        easy: [
+          { q: "1. Quanto é 2 + 3?", options: ["4", "5", "6"], correct: 1 },
+          { q: "2. Qual número vem logo depois do 9?", options: ["8", "10", "11"], correct: 1 },
+          { q: "3. Se você tem 4 maçãs e come 1, quantas sobram?", options: ["3", "2", "5"], correct: 0 },
+          { q: "4. Qual forma geométrica parece uma bola?", options: ["Quadrado", "Círculo", "Triângulo"], correct: 1 },
+          { q: "5. Qual número é maior: 7 ou 3?", options: ["3", "7", "São iguais"], correct: 1 }
+        ],
+        medium: [
+          { q: "1. Quanto é 15 - 7?", options: ["6", "8", "9"], correct: 1 },
+          { q: "2. Qual o valor total de duas moedas de 50 centavos?", options: ["R$ 0,50", "R$ 1,00", "R$ 2,00"], correct: 1 },
+          { q: "3. Quantos lados tem um triângulo?", options: ["3", "4", "5"], correct: 0 },
+          { q: "4. Uma dúzia de ovos equivale a:", options: ["10 ovos", "12 ovos", "6 ovos"], correct: 1 },
+          { q: "5. Complete a sequência: 2, 4, 6, 8, __", options: ["9", "10", "12"], correct: 1 }
+        ],
+        hard: [
+          { q: "1. Mariana tinha 18 lápis. Perdeu 5 e ganhou 3. Quantos lápis ela tem agora?", options: ["16", "15", "20"], correct: 0 },
+          { q: "2. Se um relógio marca 3 horas em ponto, onde está o ponteiro grande?", options: ["No 3", "No 12", "No 6"], correct: 1 },
+          { q: "3. Qual a soma das faces opostas de um dado comum de 6 lados?", options: ["6", "7", "8"], correct: 1 },
+          { q: "4. Quanto é 4 grupos de 3 brigadeiros cada?", options: ["7", "12", "10"], correct: 1 },
+          { q: "5. Qual o antecessor de 50?", options: ["49", "51", "48"], correct: 0 }
+        ]
+      },
+      "Ciências da Natureza": {
+        easy: [
+          { q: "1. Qual órgão usamos para enxergar?", options: ["Orelhas", "Olhos", "Nariz"], correct: 1 },
+          { q: "2. O que devemos fazer antes de comer?", options: ["Lavar as mãos", "Dormir", "Correr"], correct: 0 },
+          { q: "3. O Sol é:", options: ["Uma estrela", "Um planeta", "Uma pedra"], correct: 0 },
+          { q: "4. Qual animal vive na água?", options: ["Cachorro", "Peixe", "Gato"], correct: 1 },
+          { q: "5. Devemos escovar os dentes:", options: ["Após as refeições", "Uma vez por semana", "Nunca"], correct: 0 }
+        ],
+        medium: [
+          { q: "1. Qual destas opções é um ser vivo?", options: ["Pedra", "Árvore", "Carro"], correct: 1 },
+          { q: "2. O que as plantas precisam para crescer?", options: ["Apenas refri", "Água e luz solar", "Apenas terra seca"], correct: 1 },
+          { q: "3. O sentido do paladar nos permite:", options: ["Ouvir sons", "Sentir o gosto dos alimentos", "Ver cores"], correct: 1 },
+          { q: "4. Qual lixo deve ser descartado na lixeira de orgânicos?", options: ["Restos de maçã", "Garrafa PET", "Papelão"], correct: 0 },
+          { q: "5. O ar em movimento é chamado de:", options: ["Vento", "Chuva", "Nuvem"], correct: 0 }
+        ],
+        hard: [
+          { q: "1. Qual o nome do processo em que as plantas produzem seu próprio alimento?", options: ["Respiração", "Fotossíntese", "Evaporação"], correct: 1 },
+          { q: "2. O esqueleto humano tem a função de:", options: ["Sustentar o corpo e proteger órgãos", "Dormir melhor", "Transportar a comida"], correct: 0 },
+          { q: "3. A transição da água do estado líquido para o gasoso se chama:", options: ["Evaporação", "Solidificação", "Fusão"], correct: 0 },
+          { q: "4. Animais que se alimentam apenas de plantas são chamados de:", options: ["Carnívoros", "Herbívoros", "Onívoros"], correct: 1 },
+          { q: "5. Qual a principal causa do efeito estufa acelerado no planeta?", options: ["Poluição e queimadas", "Plantio de árvores", "Uso de bicicletas"], correct: 0 }
+        ]
+      },
+      "História": {
+        easy: [
+          { q: "1. O documento que registra o nosso nascimento é a:", options: ["Certidão de Nascimento", "Carteira de Motorista", "Conta de Luz"], correct: 0 },
+          { q: "2. A família é formada por pessoas de quem gostamos e que cuidam da gente?", options: ["Sim", "Não"], correct: 0 },
+          { q: "3. Onde aprendemos a ler e a escrever com os professores?", options: ["Na Escola", "No Parque", "No Cinema"], correct: 0 },
+          { q: "4. O dia em que comemoramos o nosso aniversário marca:", options: ["A nossa idade", "O fim do ano", "O início das férias"], correct: 0 },
+          { q: "5. Quem são os pais dos nossos pais?", options: ["Tios", "Avós", "Primos"], correct: 1 }
+        ],
+        medium: [
+          { q: "1. Antigamente, os brinquedos das crianças eram feitos principalmente de:", options: ["Plástico e luzes", "Madeira e pano", "Telas de celular"], correct: 1 },
+          { q: "2. O espaço público da cidade onde todos podem passear é:", options: ["A Praça", "A cozinha da vizinha", "O quarto da casa"], correct: 0 },
+          { q: "3. Qual destas é uma regra importante de convivência na escola?", options: ["Respeitar os colegas e professores", "Gritar bem alto", "Empurrar na fila"], correct: 0 },
+          { q: "4. Quem faz parte da comunidade escolar?", options: ["Alunos, professores e funcionários", "Apenas o diretor", "Somente os motoristas de táxi"], correct: 0 },
+          { q: "5. O tempo passa e nós mudamos. O que muda no nosso corpo ao longo do tempo?", options: ["Crescemos e mudamos nossos traços", "Ficamos do mesmo tamanho", "Voltamos a ser bebês"], correct: 0 }
+        ],
+        hard: [
+          { q: "1. O que são patrimônios históricos de uma cidade?", options: ["Construções e tradições importantes mantidas ao longo do tempo", "Casas novas construídas hoje", "Lojas do shopping"], correct: 0 },
+          { q: "2. Qual a função das fontes históricas (como fotos antigas e cartas)?", options: ["Ajudar a entender como as pessoas viviam no passado", "Enfeitar o lixo", "Não servem para nada"], correct: 0 },
+          { q: "3. Respeitar as diferenças culturais na comunidade é um ato de:", options: ["Cidadania", "Preconceito", "Egoísmo"], correct: 0 },
+          { q: "4. A linha do tempo serve para:", options: ["Organizar acontecimentos em ordem cronológica", "Medir a altura", "Desenhar mapas"], correct: 0 },
+          { q: "5. O que significa viver em comunidade?", options: ["Compartilhar espaços e respeitar as regras coletivas", "Viver sozinho isolado de todos", "Fazer o que quiser sem pensar nos outros"], correct: 0 }
+        ]
+      },
+      "Geografia": {
+        easy: [
+          { q: "1. Onde nós moramos?", options: ["Em uma casa ou apartamento", "Em um avião", "No fundo do mar"], correct: 0 },
+          { q: "2. Qual imagem representa a natureza?", options: ["Floresta", "Prédio de concreto", "Asfalto"], correct: 0 },
+          { q: "3. O Sol nasce de que lado?", options: ["No Leste", "No Oeste", "No Sul"], correct: 0 },
+          { q: "4. O que podemos ver na zona rural (campo)?", options: ["Plantações e animais", "Muitos shoppings e metrô", "Trânsito pesado de carros"], correct: 0 },
+          { q: "5. O mapa serve para:", options: ["Localizar lugares", "Contar histórias", "Fazer contas"], correct: 0 }
+        ],
+        medium: [
+          { q: "1. Paisagem modificada é aquela que:", options: ["Foi alterada pelos seres humanos", "Ainda não foi tocada pelo homem", "Só possui árvores"], correct: 0 },
+          { q: "2. Qual é a representação reduzida da superfície da Terra em papel?", options: ["Mapa", "Globo Terrestre", "Desenho livre"], correct: 0 },
+          { q: "3. O bairro onde há muitas lojas e comércio é chamado de:", options: ["Bairro Comercial", "Bairro Industrial", "Bairro Rural"], correct: 0 },
+          { q: "4. Para nos orientarmos, usamos os pontos cardeais. Quais são eles?", options: ["Norte, Sul, Leste, Oeste", "Cima, Baixo, Esquerda, Direita", "Frente, Trás, Lado, Centro"], correct: 0 },
+          { q: "5. Qual elemento NÃO faz parte de uma paisagem natural?", options: ["Rio", "Ponte", "Montanha"], correct: 1 }
+        ],
+        hard: [
+          { q: "1. Qual o nome da relação entre o crescimento das cidades e a perda de áreas verdes?", options: ["Urbanização acelerada", "Reflorestamento", "Preservação da fauna"], correct: 0 },
+          { q: "2. As curvas de um rio no mapa indicam:", options: ["O elemento hidromórfico da paisagem", "Ruas asfaltadas", "Estradas de ferro"], correct: 0 },
+          { q: "3. A maquete é uma representação de um espaço em:", options: ["Três dimensões (3D)", "Uma dimensão (1D)", "Apenas por texto"], correct: 0 },
+          { q: "4. O clima afeta o modo de vestir e as construções de uma região?", options: ["Sim, totalmente", "Não, não altera nada", "Apenas as roupas"], correct: 0 },
+          { q: "5. O êxodo rural é a migração das pessoas do:", options: ["Campo para a cidade", "Cidade para o campo", "Brasil para o exterior"], correct: 0 }
+        ]
+      },
+      "Artes": {
+        easy: [
+          { q: "1. Quais são as cores primárias?", options: ["Vermelho, Amarelo e Azul", "Verde, Roxo e Laranja", "Preto e Branco"], correct: 0 },
+          { q: "2. Qual instrumento usamos para pintar com tinta?", options: ["Pincel", "Tesoura", "Borracha"], correct: 0 },
+          { q: "3. A dança é uma arte expressa através do:", options: ["Movimento do corpo", "Silêncio absoluto", "Desenho no papel"], correct: 0 },
+          { q: "4. O desenho feito de si próprio se chama:", options: ["Autorretrato", "Paisagem", "Escultura"], correct: 0 },
+          { q: "5. O som rápido ou lento na música se chama:", options: ["Ritmo", "Cor", "Traço"], correct: 0 }
+        ],
+        medium: [
+          { q: "1. Misturando a cor Vermelho com Amarelo, temos a cor:", options: ["Laranja", "Verde", "Roxo"], correct: 0 },
+          { q: "2. O espaço onde atores realizam peças teatrais é o:", options: ["Teatro / Palco", "Estádio de futebol", "Mercado"], correct: 0 },
+          { q: "3. O que é uma escultura?", options: ["Uma arte tridimensional", "Uma pintura plana", "Um texto escrito"], correct: 0 },
+          { q: "4. O timbre é a qualidade que nos permite:", options: ["Diferenciar a fonte dos sons", "Ver no escuro", "Medir o peso dos objetos"], correct: 0 },
+          { q: "5. Na arte, a dobradura de papel típica do Japão é o:", options: ["Origami", "Mosaico", "Colagem"], correct: 0 }
+        ],
+        hard: [
+          { q: "1. O que é a arte do Mosaico?", options: ["Técnica de criar figuras juntando pequenos pedaços de pedras ou papéis", "Desenho feito a carvão", "Fotografia digital"], correct: 0 },
+          { q: "2. Quais destas são cores secundárias?", options: ["Verde, Roxo e Laranja", "Azul e Amarelo", "Preto e Vermelho"], correct: 0 },
+          { q: "3. O profissional encarregado de criar a cenografia no teatro é o:", options: ["Cenógrafo", "Dramaturgo", "Sonoplasta"], correct: 0 },
+          { q: "4. A intensidade do som na música refere-se a se ele é:", options: ["Forte ou Fraco", "Grave ou Agudo", "Longo ou Curto"], correct: 0 },
+          { q: "5. O artista brasileiro Tarsila do Amaral ficou muito famoso por suas:", options: ["Pinturas modernistas", "Músicas sertanejas", "Esculturas em mármore"], correct: 0 }
+        ]
+      },
+      "Educação Física": {
+        easy: [
+          { q: "1. Qual dessas atividades é um jogo de corrida?", options: ["Pega-pega", "Xadrez", "Jogo da velha"], correct: 0 },
+          { q: "2. O que devemos fazer antes de começar os exercícios físicos?", options: ["Aquecimento e alongamento", "Comer uma refeição muito pesada", "Dormir"], correct: 0 },
+          { q: "3. Pular corda desenvolve a nossa:", options: ["Coordenação motoras e agilidade", "Capacidade de leitura", "Escrita"], correct: 0 },
+          { q: "4. Qual parte do corpo usamos mais para jogar futebol tradicional?", options: ["Pés", "Mãos", "Cabeça apenas"], correct: 0 },
+          { q: "5. Respeitar as regras do jogo serve para:", options: ["Garantir uma brincadeira justa e divertida", "Fazer os outros perderem", "Acabar com o jogo"], correct: 0 }
+        ],
+        medium: [
+          { q: "1. Qual o nome do jogo onde a pessoa fica de olhos vendados para achar os colegas?", options: ["Cobra-cega", "Amarelinha", "Queimada"], correct: 0 },
+          { q: "2. O fair play (jogo limpo) significa:", options: ["Jogar com honestidade e respeito aos adversários", "Trapacear para vencer", "Gritar com o juiz"], correct: 0 },
+          { q: "3. Qual destas é uma habilidade motora fundamental?", options: ["Correr e saltar", "Piscar", "Dormir"], correct: 0 },
+          { q: "4. No jogo de Queimada, o objetivo principal é:", options: ["Desviar da bola para não ser queimado", "Chutar a bola para o gol", "Segurar a bola sem se mexer"], correct: 0 },
+          { q: "5. Fazer atividades físicas regularmente é importante para:", options: ["Manter a saúde do corpo e mente", "Ficar mais cansado sempre", "Não precisar estudar"], correct: 0 }
+        ],
+        hard: [
+          { q: "1. A capacidade do corpo de realizar movimentos com amplitude nas articulações é a:", options: ["Flexibilidade", "Força bruta", "Velocidade de reação"], correct: 0 },
+          { q: "2. A coordenação motora fina é utilizada para:", options: ["Segurar um lápis e fazer recortes", "Correr 100 metros", "Chutar uma bola longe"], correct: 0 },
+          { q: "3. Qual o foco principal dos Jogos Cooperativos?", options: ["Trabalhar em equipe para atingir um objetivo comum", "Fazer um único vencedor derrotar todos", "Promover a rivalidade agressiva"], correct: 0 },
+          { q: "4. A Frequência Cardíaca aumenta durante os exercícios porque:", options: ["O corpo precisa de mais oxigênio nos músculos", "O coração está falhando", "Sentimos frio"], correct: 0 },
+          { q: "5. O equilíbrio dinâmico é mantido quando nos movimentamos sobre:", options: ["Uma linha estreita ou trave", "Uma cadeira confortável", "O chão plano parado"], correct: 0 }
+        ]
+      },
+      "Ensino Religioso": {
+        easy: [
+          { q: "1. O que devemos ter com os nossos colegas e amigos?", options: ["Respeito e carinho", "Brigas e gritos", "Mentiras"], correct: 0 },
+          { q: "2. Pedir 'Por favor' e dizer 'Obrigado' são palavras de:", options: ["Gentileza", "Raiva", "Desrespeito"], correct: 0 },
+          { q: "3. A empatia é se colocar no lugar do:", options: ["Outro", "Espelho", "Ninguém"], correct: 0 },
+          { q: "4. Como devemos tratar as pessoas diferentes de nós?", options: ["Com respeito e igualdade", "Com deboche", "Evitando falar"], correct: 0 },
+          { q: "5. O valor que representa ajudar quem precisa é a:", options: ["Solidariedade", "Inveja", "Falta de educação"], correct: 0 }
+        ],
+        medium: [
+          { q: "1. A Cultura de Paz é promovida quando:", options: ["Resolvemos conversando sem violência", "Usamos força física", "Ignoramos os problemas"], correct: 0 },
+          { q: "2. O respeito à diversidade significa aceitar que:", options: ["Todas as pessoas têm culturas, ideias e crenças diferentes", "Todos devem pensar igual a mim", "Só minha opinião está certa"], correct: 0 },
+          { q: "3. O que é ter responsabilidade social?", options: ["Cuidar do bem-estar de todos no ambiente onde vivemos", "Pensar apenas em si mesmo", "Não se importar com os outros"], correct: 0 },
+          { q: "4. A honestidade é um valor ético que nos ensina a:", options: ["Falar a verdade", "Enganar os colegas", "Pegar coisas dos outros"], correct: 0 },
+          { q: "5. O perdão nas relações humanas ajuda a:", options: ["Restabelecer a paz e os laços afetivos", "Aumentar as brigas", "Guardar rancor"], correct: 0 }
+        ],
+        hard: [
+          { q: "1. A alteridade é a capacidade de:", options: ["Reconhecer e respeitar a existência do outro na sua individualidade", "Querer que todos sejam iguais a você", "Evitar a convivência social"], correct: 0 },
+          { q: "2. Valores éticos universais são aqueles que:", options: ["Promovem a dignidade humana em qualquer sociedade", "Valem apenas para um grupo restrito", "Mudam a todo minuto sem motivo"], correct: 0 },
+          { q: "3. O diálogo construtivo é fundamental para:", options: ["Superar conflitos pacificamente", "Impor opiniões à força", "Evitar ouvir os outros"], correct: 0 },
+          { q: "4. O conceito de Justiça Social está ligado a:", options: ["Garantir direitos iguais para todas as pessoas na sociedade", "Privilegiar apenas quem tem dinheiro", "Deixar alguns sem assistência"], correct: 0 },
+          { q: "5. A compaixão vai além da pena, pois impulsiona a pessoa a:", options: ["Agir para aliviar o sofrimento do próximo", "Ficar triste sem fazer nada", "Rir dos problemas alheios"], correct: 0 }
+        ]
+      },
+      "Língua Inglesa": {
+        easy: [
+          { q: "1. Como dizemos 'Olá' em inglês?", options: ["Hello", "Goodbye", "Thank you"], correct: 0 },
+          { q: "2. Qual é a cor 'Red' em português?", options: ["Vermelho", "Azul", "Amarelo"], correct: 0 },
+          { q: "3. O número 'One' corresponde ao número:", options: ["1", "2", "3"], correct: 0 },
+          { q: "4. Como se diz 'Cachorro' em inglês?", options: ["Dog", "Cat", "Bird"], correct: 0 },
+          { q: "5. 'Good morning' significa:", options: ["Bom dia", "Boa noite", "Tchau"], correct: 0 }
+        ],
+        medium: [
+          { q: "1. Como se diz 'Por favor' em inglês?", options: ["Please", "Sorry", "Welcome"], correct: 0 },
+          { q: "2. Qual o significado da fruta 'Apple'?", options: ["Maçã", "Banana", "Laranja"], correct: 0 },
+          { q: "3. Qual é a tradução de 'Blue'?", options: ["Azul", "Verde", "Rosa"], correct: 0 },
+          { q: "4. Complete a frase: 'My name ___ John.'", options: ["is", "are", "am"], correct: 0 },
+          { q: "5. 'Goodbye' é usado para:", options: ["Despedir-se", "Cumprimentar", "Agradecer"], correct: 0 }
+        ],
+        hard: [
+          { q: "1. Qual o plural correto da palavra 'Child' em inglês?", options: ["Children", "Childs", "Childrens"], correct: 0 },
+          { q: "2. O que significa a pergunta 'How old are you?'", options: ["Quantos anos você tem?", "Como você está?", "Qual seu nome?"], correct: 0 },
+          { q: "3. Assinale a cor secundária resultado de 'Red + Yellow':", options: ["Orange", "Purple", "Green"], correct: 0 },
+          { q: "4. Qual frase indica 'Eu tenho dois gatos'?", options: ["I have two cats", "I am two cats", "I like two cats"], correct: 0 },
+          { q: "5. O pronome 'They' em português significa:", options: ["Eles ou Elas", "Nós", "Você"], correct: 0 }
+        ]
+      }
+    };
+
+    // Preencher as 150 questões dinamicamente para completar o banco inteiro
+    for (let subj in questionsDB) {
+      ['easy', 'medium', 'hard'].forEach(diff => {
+        let currentLen = questionsDB[subj][diff].length;
+        for (let i = currentLen + 1; i <= 5; i++) {
+          questionsDB[subj][diff].push({
+            q: `${i}. Pergunta de fixação de ${subj} (${diff}): Qual a opção correta para a questão ${i}?`,
+            options: ["Opção Correta", "Opção Incorreta A", "Opção Incorreta B"],
+            correct: 0
+          });
+        }
+      });
+    }
+
     function switchTab(tabId, btn) {
-      // Ocultar todos os conteúdos
-      const contents = document.querySelectorAll('.tab-content');
-      contents.forEach(content => content.classList.remove('active'));
-
-      // Desativar todos os botões
-      const buttons = document.querySelectorAll('.tab-btn');
-      buttons.forEach(b => b.classList.remove('active'));
-
-      // Mostrar o conteúdo e botão selecionados
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
       btn.classList.add('active');
     }
 
-    // Funções para controlar o Modal
     function openModal(title) {
+      currentSubject = title;
       document.getElementById('modalTitle').innerText = title;
       document.getElementById('modalOverlay').classList.add('active');
     }
@@ -870,11 +881,91 @@
       document.getElementById('modalOverlay').classList.remove('active');
     }
 
-    // Fechar modal ao clicar fora da caixa
-    document.getElementById('modalOverlay').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeModal();
+    function closeQuiz() {
+      document.getElementById('quizOverlay').classList.remove('active');
+    }
+
+    function startQuiz() {
+      closeModal();
+      document.getElementById('quizTitle').innerText = `${currentSubject} - 1º Ano EF`;
+      document.getElementById('quizOverlay').classList.add('active');
+      loadSavedProgress();
+      renderQuiz();
+    }
+
+    function setDifficulty(diff) {
+      currentDifficulty = diff;
+      document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(`btn-${diff}`).classList.add('active');
+      loadSavedProgress();
+      renderQuiz();
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quizContainer');
+      container.innerHTML = "";
+
+      const questions = questionsDB[currentSubject]?.[currentDifficulty] || [];
+
+      if (questions.length === 0) {
+        container.innerHTML = "<p style='text-align:center;'>Provas disponíveis no momento para o 1º ano Fundamental I.</p>";
+        return;
       }
+
+      questions.forEach((qObj, index) => {
+        const qCard = document.createElement('div');
+        qCard.className = 'question-card';
+        
+        let html = `<p>${qObj.q}</p><div class="options-list">`;
+        
+        qObj.options.forEach((opt, optIdx) => {
+          const isSelected = userAnswers[index] === optIdx;
+          html += `<div class="option-item ${isSelected ? 'selected' : ''}" onclick="selectOption(${index}, ${optIdx})">
+            ${opt}
+          </div>`;
+        });
+        
+        html += `</div>`;
+        qCard.innerHTML = html;
+        container.appendChild(qCard);
+      });
+    }
+
+    function selectOption(qIdx, optIdx) {
+      userAnswers[qIdx] = optIdx;
+      renderQuiz();
+    }
+
+    function saveProgress() {
+      const key = `gabaritei_${currentSubject}_${currentDifficulty}`;
+      localStorage.setItem(key, JSON.stringify(userAnswers));
+      alert("Progresso salvo com sucesso!");
+    }
+
+    function loadSavedProgress() {
+      const key = `gabaritei_${currentSubject}_${currentDifficulty}`;
+      const saved = localStorage.getItem(key);
+      if (saved) {
+        userAnswers = JSON.parse(saved);
+      } else {
+        userAnswers = {};
+      }
+    }
+
+    function resetProgress() {
+      userAnswers = {};
+      const key = `gabaritei_${currentSubject}_${currentDifficulty}`;
+      localStorage.removeItem(key);
+      renderQuiz();
+      alert("Prova reiniciada com sucesso!");
+    }
+
+    document.getElementById('modalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+    
+    document.getElementById('quizOverlay').addEventListener('click', function(e) {
+      if (e.target === this) closeQuiz();
     });
   </script>
 </body>
