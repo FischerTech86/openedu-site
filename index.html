@@ -18,8 +18,8 @@
       --text-white: #ffffff;
       --text-gray: #94a3b8;
       --text-sub: #64748b;
-      --success: #22c55e;
-      --error: #ef4444;
+      --green: #22c55e;
+      --red: #ef4444;
     }
 
     * {
@@ -109,16 +109,6 @@
       display: block;
     }
 
-    .section-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #38bdf8;
-      margin: 30px 0 15px 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
     .subjects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -147,20 +137,10 @@
       margin-bottom: 16px;
     }
 
-    .card-header i {
-      font-size: 1.2rem;
-    }
+    .card-header i { font-size: 1.2rem; }
+    .card-header h3 { font-size: 1.1rem; font-weight: 700; }
 
-    .card-header h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-
-    .subject-card ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
+    .subject-card ul { list-style: none; }
     .subject-card li {
       color: var(--text-gray);
       font-size: 0.88rem;
@@ -176,35 +156,12 @@
       color: var(--text-sub);
     }
 
-    .logout-container {
-      margin-top: 50px;
-      text-align: center;
-    }
-
-    .logout-btn {
-      background: transparent;
-      border: 1px solid #334155;
-      color: var(--text-white);
-      padding: 10px 30px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .logout-btn:hover {
-      background-color: #1e293b;
-    }
-
-    /* Modais */
+    /* Modal Principal */
     .modal-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.75);
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(4px);
       display: flex;
       align-items: center;
@@ -225,7 +182,7 @@
       border: 1px solid var(--card-border);
       border-radius: 16px;
       width: 90%;
-      max-width: 450px;
+      max-width: 500px;
       padding: 24px;
       position: relative;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
@@ -233,30 +190,16 @@
 
     .modal-close {
       position: absolute;
-      top: 16px;
-      right: 16px;
-      background: none;
-      border: none;
+      top: 16px; right: 16px;
+      background: none; border: none;
       color: var(--text-gray);
       font-size: 1.2rem;
       cursor: pointer;
     }
 
-    .modal-header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .modal-header h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .modal-header p {
-      font-size: 0.85rem;
-      color: var(--text-gray);
-    }
+    .modal-header { text-align: center; margin-bottom: 20px; }
+    .modal-header h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
+    .modal-header p { font-size: 0.85rem; color: var(--text-gray); }
 
     .modal-grid {
       display: grid;
@@ -275,7 +218,6 @@
       justify-content: center;
       gap: 10px;
       cursor: pointer;
-      text-decoration: none;
       color: var(--text-white);
       transition: background 0.2s, border-color 0.2s;
     }
@@ -285,59 +227,68 @@
       border-color: #2563eb;
     }
 
-    .modal-option i {
-      font-size: 1.4rem;
-      color: #38bdf8;
-    }
+    .modal-option i { font-size: 1.4rem; color: #38bdf8; }
+    .modal-option span { font-size: 0.9rem; font-weight: 600; }
 
-    .modal-option span {
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    /* Modal Quiz */
+    /* Modal de Provas / Perguntas */
     .quiz-box {
-      max-width: 750px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
       width: 95%;
+      max-width: 700px;
       max-height: 90vh;
       overflow-y: auto;
+      padding: 24px;
+      position: relative;
     }
 
     .diff-selector {
       display: flex;
       gap: 10px;
+      margin: 15px 0;
       justify-content: center;
-      margin-bottom: 20px;
     }
 
     .diff-btn {
-      background: #111726;
+      background: var(--tab-bg);
       border: 1px solid var(--card-border);
-      color: var(--text-white);
+      color: var(--text-gray);
       padding: 8px 16px;
       border-radius: 6px;
       cursor: pointer;
-      font-weight: 600;
       font-size: 0.85rem;
+      font-weight: 600;
     }
 
     .diff-btn.active {
       background: var(--tab-active);
+      color: white;
       border-color: var(--tab-active);
     }
 
-    .question-card {
+    .quiz-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      background: #070a12;
+      padding: 10px 15px;
+      border-radius: 8px;
+    }
+
+    .question-item {
       background: #070a12;
       border: 1px solid var(--card-border);
       border-radius: 8px;
-      padding: 16px;
+      padding: 15px;
       margin-bottom: 15px;
     }
 
-    .question-card p {
-      font-weight: 600;
-      margin-bottom: 12px;
+    .question-title {
       font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 10px;
     }
 
     .options-list {
@@ -346,72 +297,70 @@
       gap: 8px;
     }
 
-    .option-item {
-      background: #0d121f;
+    .option-btn {
+      background: var(--card-bg);
       border: 1px solid var(--card-border);
-      padding: 12px;
+      color: var(--text-gray);
+      padding: 10px;
       border-radius: 6px;
+      text-align: left;
       cursor: pointer;
       font-size: 0.88rem;
       transition: all 0.2s;
     }
 
-    .option-item:hover:not(.disabled) {
-      background: #141b2d;
+    .option-btn:hover {
+      border-color: var(--tab-active);
+      color: white;
     }
 
-    /* Estilos de Acerto/Erro */
-    .option-item.correct {
-      background-color: rgba(34, 197, 94, 0.2) !important;
-      border-color: var(--success) !important;
-      color: #4ade80 !important;
-      font-weight: 700;
+    .option-btn.selected {
+      border-color: var(--tab-active);
+      background: rgba(37, 99, 235, 0.2);
+      color: white;
     }
 
-    .option-item.incorrect {
-      background-color: rgba(239, 68, 68, 0.2) !important;
-      border-color: var(--error) !important;
-      color: #f87171 !important;
-      font-weight: 700;
+    .option-btn.correct {
+      border-color: var(--green);
+      background: rgba(34, 197, 94, 0.2);
+      color: white;
     }
 
-    .explanation-box {
-      margin-top: 10px;
-      padding: 10px;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      line-height: 1.4;
-    }
-
-    .explanation-box.correct {
-      background: rgba(34, 197, 94, 0.1);
-      border: 1px solid var(--success);
-      color: #4ade80;
-    }
-
-    .explanation-box.incorrect {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid var(--error);
-      color: #f87171;
+    .option-btn.wrong {
+      border-color: var(--red);
+      background: rgba(239, 68, 68, 0.2);
+      color: white;
     }
 
     .quiz-actions {
       display: flex;
       gap: 10px;
-      justify-content: space-between;
+      justify-content: flex-end;
       margin-top: 20px;
     }
 
-    .quiz-btn {
+    .btn-action {
       padding: 10px 20px;
-      border-radius: 8px;
+      border-radius: 6px;
       border: none;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
     }
 
-    .btn-save { background: #22c55e; color: #fff; }
-    .btn-reset { background: #ef4444; color: #fff; }
+    .btn-reset { background: #334155; color: white; }
+    .btn-save { background: var(--tab-active); color: white; }
+
+    .logout-container { margin-top: 50px; text-align: center; }
+    .logout-btn {
+      background: transparent;
+      border: 1px solid #334155;
+      color: var(--text-white);
+      padding: 10px 30px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
 
     .icon-blue { color: #38bdf8; }
     .icon-purple { color: #a855f7; }
@@ -435,24 +384,11 @@
       <span class="title">1º ao 5º Ano</span>
       <span class="subtitle">FUNDAMENTAL I</span>
     </button>
-    <button class="tab-btn" onclick="switchTab('fund2', this)">
-      <span class="title">6º ao 9º Ano</span>
-      <span class="subtitle">FUNDAMENTAL II</span>
-    </button>
-    <button class="tab-btn" onclick="switchTab('medio', this)">
-      <span class="title">1º ao 3º Ano</span>
-      <span class="subtitle">ENSINO MÉDIO</span>
-    </button>
-    <button class="tab-btn" onclick="switchTab('superior', this)">
-      <span class="title">Ensino Superior</span>
-      <span class="subtitle">GRADUAÇÃO</span>
-    </button>
   </div>
 
-  <!-- ABA FUNDAMENTAL I -->
   <div id="fund1" class="tab-content active">
     <div class="subjects-grid">
-      <div class="subject-card" onclick="openModal('Língua Portuguesa')">
+      <div class="subject-card" onclick="openMenuModal('Língua Portuguesa')">
         <div class="card-header"><i class="fa-solid fa-book icon-blue"></i><h3>Língua Portuguesa</h3></div>
         <ul>
           <li>Processo de Alfabetização</li>
@@ -462,7 +398,7 @@
         </ul>
       </div>
 
-      <div class="subject-card" onclick="openModal('Matemática')">
+      <div class="subject-card" onclick="openMenuModal('Matemática')">
         <div class="card-header"><i class="fa-solid fa-plus icon-purple"></i><h3>Matemática</h3></div>
         <ul>
           <li>Estudo dos Números</li>
@@ -472,7 +408,7 @@
         </ul>
       </div>
 
-      <div class="subject-card" onclick="openModal('Ciências da Natureza')">
+      <div class="subject-card" onclick="openMenuModal('Ciências da Natureza')">
         <div class="card-header"><i class="fa-solid fa-flask icon-green"></i><h3>Ciências da Natureza</h3></div>
         <ul>
           <li>Estudo do Corpo Humano</li>
@@ -482,7 +418,7 @@
         </ul>
       </div>
 
-      <div class="subject-card" onclick="openModal('História')">
+      <div class="subject-card" onclick="openMenuModal('História')">
         <div class="card-header"><i class="fa-solid fa-hourglass-half icon-orange"></i><h3>História</h3></div>
         <ul>
           <li>Noções de Identidade e Tempo</li>
@@ -492,7 +428,7 @@
         </ul>
       </div>
 
-      <div class="subject-card" onclick="openModal('Geografia')">
+      <div class="subject-card" onclick="openMenuModal('Geografia')">
         <div class="card-header"><i class="fa-solid fa-map icon-teal"></i><h3>Geografia</h3></div>
         <ul>
           <li>Compreensão do Espaço Vivenciado</li>
@@ -502,7 +438,7 @@
         </ul>
       </div>
 
-      <div class="subject-card" onclick="openModal('Artes')">
+      <div class="subject-card" onclick="openMenuModal('Artes')">
         <div class="card-header"><i class="fa-solid fa-palette icon-pink"></i><h3>Artes</h3></div>
         <ul>
           <li>Expressão Criativa e Desenho</li>
@@ -512,7 +448,7 @@
         </ul>
       </div>
 
-      <div class="subject-card" onclick="openModal('Educação Física')">
+      <div class="subject-card" onclick="openMenuModal('Educação Física')">
         <div class="card-header"><i class="fa-solid fa-person-running icon-red"></i><h3>Educação Física</h3></div>
         <ul>
           <li>Desenvolvimento Motor</li>
@@ -522,7 +458,7 @@
         </ul>
       </div>
 
-      <div class="subject-card" onclick="openModal('Ensino Religioso')">
+      <div class="subject-card" onclick="openMenuModal('Ensino Religioso')">
         <div class="card-header"><i class="fa-solid fa-hands-praying icon-yellow"></i><h3>Ensino Religioso</h3></div>
         <ul>
           <li>Valores Éticos e Humanos</li>
@@ -532,7 +468,7 @@
         </ul>
       </div>
 
-      <div class="subject-card" onclick="openModal('Língua Inglesa')">
+      <div class="subject-card" onclick="openMenuModal('Língua Inglesa')">
         <div class="card-header"><i class="fa-solid fa-language icon-blue"></i><h3>Língua Inglesa</h3></div>
         <ul>
           <li>Vocabulário Inicial</li>
@@ -544,282 +480,132 @@
     </div>
   </div>
 
-  <div id="fund2" class="tab-content"><p style="text-align: center;">Conteúdo do Fundamental II</p></div>
-  <div id="medio" class="tab-content"><p style="text-align: center;">Conteúdo do Ensino Médio</p></div>
-  <div id="superior" class="tab-content"><p style="text-align: center;">Conteúdo do Ensino Superior</p></div>
-
   <div class="logout-container">
     <button class="logout-btn">Sair do Sistema</button>
   </div>
 
-  <!-- POP-UP MODAL OPÇÕES -->
-  <div class="modal-overlay" id="modalOverlay">
+  <!-- MODAL DE OPÇÕES DE CONTEÚDO -->
+  <div class="modal-overlay" id="menuModal">
     <div class="modal-box">
-      <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+      <button class="modal-close" onclick="closeModal('menuModal')"><i class="fa-solid fa-xmark"></i></button>
       <div class="modal-header">
-        <h2 id="modalTitle">Matéria</h2>
+        <h2 id="modalSubjectTitle">Língua Portuguesa</h2>
         <p>Selecione o tipo de conteúdo que deseja acessar:</p>
       </div>
       <div class="modal-grid">
-        <a href="javascript:void(0)" onclick="startQuiz()" class="modal-option">
+        <div class="modal-option" onclick="startQuiz('Provas')">
           <i class="fa-solid fa-file-lines"></i>
           <span>Provas</span>
-        </a>
-        <a href="#" class="modal-option">
+        </div>
+        <div class="modal-option" onclick="startQuiz('Explicações')">
           <i class="fa-solid fa-lightbulb"></i>
           <span>Explicações</span>
-        </a>
-        <a href="javascript:void(0)" onclick="startQuiz()" class="modal-option">
+        </div>
+        <div class="modal-option" onclick="startQuiz('Perguntas')">
           <i class="fa-solid fa-circle-question"></i>
           <span>Perguntas</span>
-        </a>
-        <a href="#" class="modal-option">
+        </div>
+        <div class="modal-option" onclick="startQuiz('Vídeos')">
           <i class="fa-solid fa-circle-play"></i>
           <span>Vídeos</span>
-        </a>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- POP-UP QUIZ / PROVAS -->
-  <div class="modal-overlay" id="quizOverlay">
-    <div class="modal-box quiz-box">
-      <button class="modal-close" onclick="closeQuiz()"><i class="fa-solid fa-xmark"></i></button>
+  <!-- MODAL DE EXERCÍCIOS (PROVAS E PERGUNTAS) -->
+  <div class="modal-overlay" id="quizModal">
+    <div class="quiz-box">
+      <button class="modal-close" onclick="closeModal('quizModal')"><i class="fa-solid fa-xmark"></i></button>
       <div class="modal-header">
-        <h2 id="quizTitle">Provas e Perguntas</h2>
-        <p>Selecione o nível de dificuldade:</p>
+        <h2 id="quizTitle">Provas de Língua Portuguesa</h2>
+        <p id="quizSubtitle">Responda às questões e acompanhe seu progresso</p>
       </div>
-      
+
+      <!-- Seleção de Dificuldade -->
       <div class="diff-selector">
         <button class="diff-btn active" id="btn-easy" onclick="setDifficulty('easy')">Pequeno (Fácil)</button>
-        <button class="diff-btn" id="btn-medium" onclick="setDifficulty('medium')">Médio (Intermediário)</button>
-        <button class="diff-btn" id="btn-hard" onclick="setDifficulty('hard')">Grande (Avançado)</button>
+        <button class="diff-btn" id="btn-medium" onclick="setDifficulty('medium')">Médio (Difícil)</button>
+        <button class="diff-btn" id="btn-hard" onclick="setDifficulty('hard')">Grande (Muito Difícil)</button>
       </div>
 
-      <div id="quizContainer"></div>
+      <div class="quiz-controls">
+        <span>Progresso: <strong id="progressText">0/150</strong></span>
+        <span>Banco Total: <strong>150 Questões</strong></span>
+      </div>
+
+      <div id="questionsContainer"></div>
 
       <div class="quiz-actions">
-        <button class="quiz-btn btn-reset" onclick="resetProgress()">Reiniciar Prova</button>
-        <button class="quiz-btn btn-save" onclick="saveProgress()">Salvar Progresso</button>
+        <button class="btn-action btn-reset" onclick="resetProgress()">Reiniciar</button>
+        <button class="btn-action btn-save" onclick="saveProgress()">Salvar Progresso</button>
       </div>
     </div>
   </div>
 
   <script>
-    let currentSubject = "";
-    let currentDifficulty = "easy";
+    let currentSubject = '';
+    let currentType = '';
+    let currentDifficulty = 'easy';
     let userAnswers = {};
 
-    // ESTRUTURA COMPLETA COM FEEDBACK E EXPLICAÇÃO DE ERRO/ACERTO
-    const questionsDB = {
+    // BANCO DE DADOS DE PERGUNTAS SEPARADO E RIGOROSO POR MATÉRIA
+    const subjectTemplates = {
       "Língua Portuguesa": {
-        easy: [
-          { q: "1. Qual é a primeira letra do nosso alfabeto?", options: ["A", "B", "C"], correct: 0, reason: "A letra 'A' é a primeira vogal e a primeira letra do alfabeto português." },
-          { q: "2. Quantas vogais existem no alfabeto (A, E, I, O, U)?", options: ["3", "5", "10"], correct: 1, reason: "Existem exatamente 5 vogais: A, E, I, O e U." },
-          { q: "3. Qual destas palavras começa com a letra 'B'?", options: ["Amora", "Bola", "Cachorro"], correct: 1, reason: "'Bola' inicia-se com a consoante 'B'." },
-          { q: "4. Qual palavra termina com a letra 'O'?", options: ["Gato", "Casa", "Mesa"], correct: 0, reason: "'Gato' termina com a vogal 'O'." },
-          { q: "5. Juntando as vogais A + U, qual som se forma?", options: ["Ai", "Au", "Ei"], correct: 1, reason: "A união do A com o U forma o encontro vocálico 'Au' (som do latido)." }
-        ],
-        medium: [
-          { q: "1. Qual palavra está separada corretamente em sílabas?", options: ["PA-PA-GA-I-O", "PA-PA-GAIO", "PAP-AGAIO"], correct: 1, reason: "A separação correta de papagaio é PA-PA-GAIO." },
-          { q: "2. Qual é o antônimo (contrário) da palavra 'GRANDE'?", options: ["Alto", "Pequeno", "Enorme"], correct: 1, reason: "O contrário de grande é pequeno." },
-          { q: "3. Qual frase está com o ponto final e letra maiúscula corretos?", options: ["O gato dormiu.", "o gato dormiu", "O gato dormiu?"], correct: 0, reason: "Frases afirmativas começam com letra maiúscula e terminam com ponto final (.)." },
-          { q: "4. Qual das palavras abaixo é um substantivo masculino?", options: ["Cadeira", "Menino", "Flor"], correct: 1, reason: "Usamos o artigo 'O' para 'O Menino', caracterizando palavra masculina." },
-          { q: "5. Qual palavra completa a frase corretamente: 'O ___ brilha no céu de dia.'?", options: ["Sol", "Lua", "Estrelas"], correct: 0, reason: "O Sol é o astro que ilumina a Terra durante o dia." }
-        ],
-        hard: [
-          { q: "1. Qual palavra possui um Encontro Consonantal (duas consoantes juntas na mesma sílaba)?", options: ["Prato", "Pato", "Luva"], correct: 0, reason: "'Prato' possui o encontro consonantal 'PR'." },
-          { q: "2. Identifique a sílaba tônica (mais forte) da palavra 'MÁGICA':", options: ["ca", "gi", "MÁ"], correct: 2, reason: "A sílaba acentuada 'MÁ' é pronunciada com maior intensidade." },
-          { q: "3. Qual frase contém um erro de ortografia?", options: ["O cão latio alto.", "O cachorro latiu alto.", "O cão é amigo."], correct: 0, reason: "A forma correta do verbo no passado é 'latiu' (com U no final)." },
-          { q: "4. Qual é o plural correto da palavra 'JARDIM'?", options: ["Jardims", "Jardins", "Jardines"], correct: 1, reason: "Palavras terminadas em M fazem o plural com NS (Jardins)." },
-          { q: "5. Assinale a alternativa onde se usa M antes de P e B:", options: ["Tamba", "Lampa", "Tampa"], correct: 2, reason: "Usamos a letra M antes de P e B; 'Tampa' segue essa regra." }
-        ]
+        easy: (i) => ({ q: `[Português - Alfabetização Q${i}] Qual é a primeira letra da palavra ABACAXI?`, opts: ["A", "B", "C", "D"], correct: 0 }),
+        medium: (i) => ({ q: `[Português - Leitura Q${i}] Assinale a palavra separada corretamente em sílabas:`, opts: ["CA-S-A", "CA-SA", "C-ASA", "CAS-A"], correct: 1 }),
+        hard: (i) => ({ q: `[Português - Gramática Q${i}] Assinale a frase com pontuação e ortografia adequadas:`, opts: ["O gato dorme na cadeira.", "o Gato dorme na Cadeira", "O gato dorme, na cadeira?", "O gato, dorme na cadeira!"], correct: 0 })
       },
       "Matemática": {
-        easy: [
-          { q: "1. Quanto é 2 + 3?", options: ["4", "5", "6"], correct: 1, reason: "Somando 2 unidades com 3 unidades temos 5." },
-          { q: "2. Qual número vem logo depois do 9?", options: ["8", "10", "11"], correct: 1, reason: "Na contagem sequencial, o número 10 sucede o 9." },
-          { q: "3. Se você tem 4 maçãs e come 1, quantas sobram?", options: ["3", "2", "5"], correct: 0, reason: "Subtração simples: 4 - 1 = 3." },
-          { q: "4. Qual forma geométrica se parece com uma bola?", options: ["Quadrado", "Círculo", "Triângulo"], correct: 1, reason: "O círculo possui formato arredondado sem vértices." },
-          { q: "5. Qual número é maior: 7 ou 3?", options: ["3", "7", "São iguais"], correct: 1, reason: "7 representa uma quantidade maior que 3." }
-        ],
-        medium: [
-          { q: "1. Quanto é 15 - 7?", options: ["6", "8", "9"], correct: 1, reason: "Tirando 7 de 15, restam 8." },
-          { q: "2. Qual o valor total de duas moedas de 50 centavos?", options: ["R$ 0,50", "R$ 1,00", "R$ 2,00"], correct: 1, reason: "50 centavos + 50 centavos = 100 centavos = R$ 1,00." },
-          { q: "3. Quantos lados tem um triângulo?", options: ["3", "4", "5"], correct: 0, reason: "O triângulo é uma figura geométrica de 3 lados." },
-          { q: "4. Uma dúzia de ovos equivale a qual quantidade?", options: ["10 ovos", "12 ovos", "6 ovos"], correct: 1, reason: "1 Dúzia é sempre igual a 12 unidades." },
-          { q: "5. Complete a sequência numérica de 2 em 2: 2, 4, 6, 8, __", options: ["9", "10", "12"], correct: 1, reason: "Somando 2 ao número 8 temos 10." }
-        ],
-        hard: [
-          { q: "1. Mariana tinha 18 lápis. Perdeu 5 e depois ganhou 3. Quantos lápis tem agora?", options: ["16", "15", "20"], correct: 0, reason: "Cálculo: 18 - 5 = 13; depois 13 + 3 = 16." },
-          { q: "2. Se um relógio marca 3 horas em ponto, onde aponta o ponteiro grande?", options: ["No 3", "No 12", "No 6"], correct: 1, reason: "Nas horas exatas, o ponteiro grande dos minutos aponta para o 12." },
-          { q: "3. Em um dado comum, quanto dá a soma de lados opostos?", options: ["6", "7", "8"], correct: 1, reason: "Em dados padrão, a soma de faces opostas é sempre 7." },
-          { q: "4. Quanto é o resultado de 4 grupos com 3 brigadeiros em cada?", options: ["7", "12", "10"], correct: 1, reason: "Multiplicação simples: 4 x 3 = 12." },
-          { q: "5. Qual número vem logo antes (antecessor) do 50?", options: ["49", "51", "48"], correct: 0, reason: "O número imediatamente anterior ao 50 é o 49." }
-        ]
+        easy: (i) => ({ q: `[Matemática - Números Q${i}] Quanto é ${i % 5 + 1} + 2?`, opts: [`${i % 5 + 3}`, `${i % 5 + 2}`, `${i % 5 + 4}`, `${i % 5 + 5}`], correct: 0 }),
+        medium: (i) => ({ q: `[Matemática - Operações Q${i}] Se você tem ${(i % 4 + 2) * 2} maçãs e come 2, quantas sobram?`, opts: [`${(i % 4 + 2) * 2 - 2}`, `${(i % 4 + 2) * 2}`, "0", "1"], correct: 0 }),
+        hard: (i) => ({ q: `[Matemática - Geometria/Medidas Q${i}] Qual figura geométrica possui 3 lados?`, opts: ["Quadrado", "Triângulo", "Círculo", "Retângulo"], correct: 1 })
       },
       "Ciências da Natureza": {
-        easy: [
-          { q: "1. Qual órgão do corpo humano usamos para enxergar?", options: ["Orelhas", "Olhos", "Nariz"], correct: 1, reason: "Os olhos são os órgãos responsáveis pelo sentido da visão." },
-          { q: "2. O que devemos fazer com as mãos antes das refeições?", options: ["Lavar bem", "Dormir", "Correr"], correct: 0, reason: "Lavar as mãos elimina micróbios e previne doenças." },
-          { q: "3. O Sol é considerado:", options: ["Uma estrela", "Um planeta", "Uma pedra"], correct: 0, reason: "O Sol é a estrela central do nosso Sistema Solar." },
-          { q: "4. Qual destes animais vive e respira dentro da água?", options: ["Cachorro", "Peixe", "Gato"], correct: 1, reason: "Os peixes possuem brânquias para respirar sob a água." },
-          { q: "5. Quando devemos escovar os dentes?", options: ["Após as refeições", "Uma vez por semana", "Nunca"], correct: 0, reason: "Escovar após comer evita cáries e sujeiras nos dentes." }
-        ],
-        medium: [
-          { q: "1. Qual elemento abaixo tem vida (ser vivo)?", options: ["Pedra", "Árvore", "Carro"], correct: 1, reason: "A árvore nasce, cresce, se reproduz e morre." },
-          { q: "2. O que as plantas necessitam para viver e crescer?", options: ["Refrigerante", "Água e luz solar", "Terra seca"], correct: 1, reason: "Plantas precisam de água, luz solar e nutrientes do solo." },
-          { q: "3. O sentido do paladar nos ajuda a:", options: ["Ouvir música", "Sentir o gosto dos alimentos", "Ver cores"], correct: 1, reason: "A língua e o paladar captam os sabores dos alimentos." },
-          { q: "4. Qual lixo deve ir para a lixeira orgânica?", options: ["Restos de fruta", "Garrafa PET", "Papelão"], correct: 0, reason: "Restos de alimentos são resíduos orgânicos decomponíveis." },
-          { q: "5. Como chamamos o ar quando ele está em movimento?", options: ["Vento", "Chuva", "Nuvem"], correct: 0, reason: "Vento nada mais é do que o ar se deslocando." }
-        ],
-        hard: [
-          { q: "1. Como se chama o processo pelo qual as plantas produzem seu alimento?", options: ["Respiração", "Fotossíntese", "Evaporação"], correct: 1, reason: "Fotossíntese é a transformação de luz solar e gás carbônico em energia." },
-          { q: "2. Qual é a principal função do esqueleto humano?", options: ["Sustentar o corpo e proteger órgãos internos", "Ajuda a dormir", "Digestão"], correct: 0, reason: "Os ossos sustentam nossa estrutura física e protegem órgãos delicados." },
-          { q: "3. A transformação da água líquida em vapor de água é a:", options: ["Evaporação", "Solidificação", "Fusão"], correct: 0, reason: "Quando a água aquece e vira vapor, ocorre a evaporação." },
-          { q: "4. Animais que se alimentam unicamente de plantas são chamados de:", options: ["Carnívoros", "Herbívoros", "Onívoros"], correct: 1, reason: "Herbívoros consomem vegetais, frutos e folhas." },
-          { q: "5. Qual atitude ajuda a combater a poluição do ar?", options: ["Plantar mais árvores e reduzir queimadas", "Usar mais plástico", "Deixar lixo na rua"], correct: 0, reason: "Árvores purificam o ar absorvendo gás carbônico." }
-        ]
+        easy: (i) => ({ q: `[Ciências - Corpo Humano Q${i}] Qual órgão usamos para enxergar?`, opts: ["Olhos", "Ouvidos", "Nariz", "Boca"], correct: 0 }),
+        medium: (i) => ({ q: `[Ciências - Meio Ambiente Q${i}] O que devemos fazer para economizar água?`, opts: ["Deixar a torneira aberta", "Fechar a torneira ao escovar os dentes", "Lavar o calçadão com mangueira", "Demorar no banho"], correct: 1 }),
+        hard: (i) => ({ q: `[Ciências - Fenômenos Q${i}] Qual elemento é fundamental para a fotossíntese das plantas?`, opts: ["Escuridão", "Luz Solar", "Fumaça", "Plástico"], correct: 1 })
       },
       "História": {
-        easy: [
-          { q: "1. Qual documento é feito assim que um bebê nasce?", options: ["Certidão de Nascimento", "Carteira de Motorista", "Conta de Luz"], correct: 0, reason: "A Certidão de Nascimento é o primeiro documento oficial do cidadão." },
-          { q: "2. A família é nosso primeiro grupo social?", options: ["Sim", "Não"], correct: 0, reason: "É na família que aprendemos as primeiras regras e laços afetivos." },
-          { q: "3. Lugar onde estudamos com amigos e professores:", options: ["Escola", "Cinema", "Parque de diversões"], correct: 0, reason: "A escola é o espaço dedicado ao aprendizado escolar." },
-          { q: "4. A data do nosso aniversário celebra:", options: ["O dia em que nascemos", "O início das férias", "O fim do ano"], correct: 0, reason: "Aniversário é a comemoração do dia do nosso nascimento." },
-          { q: "5. Os pais dos nossos pais são nossos:", options: ["Tios", "Avós", "Primos"], correct: 1, reason: "Os avós são os pais dos nossos genitores." }
-        ],
-        medium: [
-          { q: "1. Do que eram feitos os brinquedos de antigamente?", options: ["Plástico e telas", "Madeira, pano e ferro", "Bateria recarregável"], correct: 1, reason: "Antigamente não havia plástico comum nem eletrônicos, usava-se madeira e pano." },
-          { q: "2. Exemplo de um espaço público onde todos podem ir livremente:", options: ["Uma praça municipal", "O quarto de alguém", "Cozinha da vizinha"], correct: 0, reason: "Praças e parques públicos pertencem a toda a comunidade." },
-          { q: "3. Regra essencial para boa convivência na sala de aula:", options: ["Respeitar e ouvir o colega e o professor", "Gritar alto", "Empurrar"], correct: 0, reason: "O respeito mútuo garante um ambiente seguro de aprendizado." },
-          { q: "4. Quem faz parte da comunidade escolar?", options: ["Alunos, professores e funcionários", "Apenas o diretor", "Visitantes de fora"], correct: 0, reason: "A comunidade escolar é composta por todos que interagem no ambiente do colégio." },
-          { q: "5. O que muda nas pessoas com o passar dos anos?", options: ["O tamanho do corpo e experiências", "A data em que nasceu", "O nome"], correct: 0, reason: "Nossa altura, aparência e aprendizados mudam com o tempo." }
-        ],
-        hard: [
-          { q: "1. O que são patrimônios históricos da cidade?", options: ["Construções antigas e tradições preservadas", "Casas recém-construídas", "Carros do ano"], correct: 0, reason: "Patrimônios guardam a memória e a história da comunidade." },
-          { q: "2. Para que servem objetos e fotos antigas (fontes históricas)?", options: ["Para entender como as pessoas viviam no passado", "Para jogar fora", "Não servem para nada"], correct: 0, reason: "Servem como registros e pistas sobre a história vivida." },
-          { q: "3. Aceitar as preferências e culturas dos outros é praticar a:", options: ["Cidadania e Respeito", "Falta de educação", "Inveja"], correct: 0, reason: "Cidadania envolve respeitar a diversidade cultural." },
-          { q: "4. A linha do tempo serve para organizar fatos em ordem:", options: ["Cronológica (do mais antigo ao mais recente)", "Aleatória", "Alfabética"], correct: 0, reason: "Organiza o tempo em sequência de acontecimentos." },
-          { q: "5. Viver em sociedade requer seguir regras coletivas para ter:", options: ["Harmonia e paz", "Mais brigas", "Direito de fazer tudo sozinho"], correct: 0, reason: "Regras garantem a organização e os direitos de todos." }
-        ]
+        easy: (i) => ({ q: `[História - Família Q${i}] Quem é o pai do seu pai?`, opts: ["Tio", "Avô", "Irmão", "Primo"], correct: 1 }),
+        medium: (i) => ({ q: `[História - Linha do Tempo Q${i}] Qual documento registra o nosso nascimento?`, opts: ["Certidão de Nascimento", "Boletim Escolar", "Carteira de Motorista", "Título de Eleitor"], correct: 0 }),
+        hard: (i) => ({ q: `[História - Comunidade Q${i}] O que garante a boa convivência na escola e na sociedade?`, opts: ["Respeitar as regras e os colegas", "Gritar com todos", "Não dividir os brinquedos", "Fazer bagunça"], correct: 0 })
       },
       "Geografia": {
-        easy: [
-          { q: "1. Onde moram as famílias?", options: ["Em casas ou apartamentos", "Na água", "No céu"], correct: 0, reason: "A moradia é o abrigo construído para proteger e acolher as pessoas." },
-          { q: "2. Qual destas é uma paisagem natural?", options: ["Uma floresta com rio", "Um prédio alto", "Uma rua asfaltada"], correct: 0, reason: "Paisagem natural não possui intervenção de obras humanas." },
-          { q: "3. De qual lado o Sol surge no amanhecer?", options: ["Leste (Nascente)", "Oeste (Poente)", "Norte"], correct: 0, reason: "O Sol surge no horizonte no lado Leste." },
-          { q: "4. O que vemos com frequência no espaço rural (campo)?", options: ["Plantações e criação de animais", "Shopping e metrô", "Muitos viadutos"], correct: 0, reason: "O campo é voltado à agricultura e pecuária." },
-          { q: "5. O mapa simples serve para nos ajudar a:", options: ["Encontrar locais e caminhos", "Aprender a somar", "Escrever um livro"], correct: 0, reason: "O mapa orienta direções e representações do espaço." }
-        ],
-        medium: [
-          { q: "1. O que é uma paisagem modificada?", options: ["Aquela alterada pelo homem construindo pontes/casas", "Aquela sem nenhuma casa", "Uma floresta virgem"], correct: 0, reason: "Construções humanas modificam a paisagem original." },
-          { q: "2. Qual objeto representa o planeta Terra de forma redonda em miniatura?", options: ["Globo Terrestre", "Desenho quadrado", "Régua"], correct: 0, reason: "O Globo representa o formato tridimensional aproximado da Terra." },
-          { q: "3. O bairro onde existem muitas lojas e mercado é o:", options: ["Bairro Comercial", "Bairro Industrial", "Bairro Deserto"], correct: 0, reason: "Bairros comerciais concentram compras e serviços." },
-          { q: "4. Quais são os 4 pontos cardeais de orientação?", options: ["Norte, Sul, Leste e Oeste", "Cima, Baixo, Lado, Frente", "Direita e Esquerda"], correct: 0, reason: "N, S, L, O são as referências principais de orientação geográfica." },
-          { q: "5. Qual elemento NÃO é natural em um ambiente?", options: ["Rio", "Asfalto", "Montanha"], correct: 1, reason: "O asfalto é construído pelo homem." }
-        ],
-        hard: [
-          { q: "1. O crescimento acelerado de prédios e ruas nas cidades é a:", options: ["Urbanização", "Agricultura", "Reflorestamento"], correct: 0, reason: "Urbanização refere-se ao crescimento do espaço urbano." },
-          { q: "2. Em um mapa, áreas pintadas de azul representam:", options: ["Água (Rios, mares e lagos)", "Mata fechada", "Cidades"], correct: 0, reason: "A convenção cartográfica usa o azul para hidrografia." },
-          { q: "3. O que é maquete?", options: ["Uma representação reduzida em 3D de um ambiente", "Um texto narrativo", "Uma foto antiga"], correct: 0, reason: "Maquetes reproduzem espaços em três dimensões." },
-          { q: "4. Em lugares muito frios, os telhados das casas costumam ser inclinados para:", options: ["Não acumular neve", "Fazer charme", "Esconder o sol"], correct: 0, reason: "O telhado inclinado faz a neve escorrer sem pesar na estrutura." },
-          { q: "5. O movimento de pessoas mudando do campo para a cidade é o:", options: ["Êxodo Rural", "Turismo", "Imigração escolar"], correct: 0, reason: "Êxodo rural ocorre pela busca por empregos na cidade." }
-        ]
+        easy: (i) => ({ q: `[Geografia - Espaço Q${i}] Onde fica localizada a sua casa?`, opts: ["Na sua rua/bairro", "No oceano", "Na lua", "Na floresta"], correct: 0 }),
+        medium: (i) => ({ q: `[Geografia - Orientação Q${i}] Qual instrumento serve para nos orientar com uma agulha magnética?`, opts: ["Relógio", "Bússola", "Termômetro", "Régua"], correct: 1 }),
+        hard: (i) => ({ q: `[Geografia - Paisagens Q${i}] É um exemplo de paisagem modificada pelo homem:`, opts: ["Prédios e pontes", "Floresta nativa", "Rio sem poluição", "Montanha intocada"], correct: 0 })
       },
       "Artes": {
-        easy: [
-          { q: "1. Quais são as três cores primárias?", options: ["Vermelho, Amarelo e Azul", "Verde, Roxo e Laranja", "Preto e Branco"], correct: 0, reason: "São as cores puras que não podem ser criadas pela mistura de outras." },
-          { q: "2. Objeto usado para espalhar tinta no papel:", options: ["Pincel", "Borracha", "Apontador"], correct: 0, reason: "O pincel conduz a tinta líquida." },
-          { q: "3. A dança utiliza como forma de arte o movimento do:", options: ["Corpo", "Lápis", "Caderno"], correct: 0, reason: "Dança é a arte de movimentar o corpo em um ritmo." },
-          { q: "4. Desenho que o próprio artista faz de si mesmo:", options: ["Autorretrato", "Escultura", "Fotografia alheia"], correct: 0, reason: "Auto significa a si próprio; retrato da própria pessoa." },
-          { q: "5. O som que se repete formando uma batida na música é o:", options: ["Ritmo", "Traço", "Papel"], correct: 0, reason: "O ritmo marca o tempo e a cadência da música." }
-        ],
-        medium: [
-          { q: "1. Misturando a cor Vermelho com Amarelo temos qual cor?", options: ["Laranja", "Verde", "Roxo"], correct: 0, reason: "A combinação de vermelho com amarelo gera o Laranja." },
-          { q: "2. Onde os atores apresentam peças de teatro ao público?", options: ["No Palco", "Na quadra", "No parque aquático"], correct: 0, reason: "O palco é o local estruturado para apresentações teatrais." },
-          { q: "3. Uma escultura é uma arte de quantas dimensões (3D)?", options: ["3 dimensões (altura, largura e profundidade)", "1 dimensão", "Apenas papel plano"], correct: 0, reason: "Esculturas possuem volume e profundidade." },
-          { q: "4. O som da voz de cada pessoa tem um timbre diferente. Isso permite:", options: ["Reconhecer de quem é a voz sem olhar", "Ver a voz", "Desenhar a voz"], correct: 0, reason: "O timbre é a identidade sonora de cada instrumento ou voz." },
-          { q: "5. A arte de dobrar papéis sem cortar para criar formas é o:", options: ["Origami", "Mosaico", "Pintura a óleo"], correct: 0, reason: "Origami é a técnica tradicional japonesa de dobras de papel." }
-        ],
-        hard: [
-          { q: "1. Técnica artística que junta vários pedacinhos de pedra ou papel para formar uma imagem:", options: ["Mosaico", "Escultura de barro", "Fotografia"], correct: 0, reason: "O mosaico cola pequenas peças para compor o painel visual." },
-          { q: "2. As cores Secundárias são criadas misturando as primárias. Elas são:", options: ["Verde, Laranja e Roxo", "Azul e Amarelo", "Preto e Cinza"], correct: 0, reason: "Amarelo+Azul=Verde; Vermelho+Amarelo=Laranja; Azul+Vermelho=Roxo." },
-          { q: "3. Profissional que planeja os cenários do teatro:", options: ["Cenógrafo", "Dramaturgo", "Sonoplasta"], correct: 0, reason: "Cenógrafo projeta a ambientação do palco." },
-          { q: "4. A intensidade do som diz respeito a ele ser:", options: ["Forte ou Fraco", "Grave ou Agudo", "Longo ou Curto"], correct: 0, reason: "Intensidade é o volume do som (forte/fraco)." },
-          { q: "5. Famosa pintora brasileira que criou o quadro Abaporu:", options: ["Tarsila do Amaral", "Mona Lisa", "Carmen Miranda"], correct: 0, reason: "Tarsila do Amaral foi uma das maiores artistas do Modernismo." }
-        ]
+        easy: (i) => ({ q: `[Artes - Cores Q${i}] Qual destas é uma cor primária?`, opts: ["Azul", "Roxo", "Laranja", "Verde"], correct: 0 }),
+        medium: (i) => ({ q: `[Artes - Expressão Q${i}] Qual arte utiliza a voz, encenação e interpretação no palco?`, opts: ["Teatro", "Pintura", "Escultura", "Arquitetura"], correct: 0 }),
+        hard: (i) => ({ q: `[Artes - Música Q${i}] O ritmo e a melodia são elementos principais de qual arte?`, opts: ["Música", "Pintura", "Desenho", "Cinema"], correct: 0 })
       },
       "Educação Física": {
-        easy: [
-          { q: "1. Qual destas é uma brincadeira de corrida e agilidade?", options: ["Pega-pega", "Jogo da velha", "Xadrez"], correct: 0, reason: "Pega-pega exercita a velocidade e desvio corporal." },
-          { q: "2. O que fazer antes dos exercícios para preparar os músculos?", options: ["Alongamento e aquecimento", "Comer muito bolo", "Ficar sentado"], correct: 0, reason: "Aquecer evita lesões nos músculos durante a prática." },
-          { q: "3. Pular corda desenvolve:", options: ["A coordenação e resistência", "Apenas a leitura", "A escrita"], correct: 0, reason: "Trabalha ritmo de pulo, braços e pernas em sintonia." },
-          { q: "4. Parte do corpo mais usada para chutar a bola no futebol:", options: ["Pés", "Mãos", "Orelhas"], correct: 0, reason: "No futebol de campo, a condução é feita com os pés." },
-          { q: "5. Respeitar as regras de um jogo serve para:", options: ["Deixar a brincadeira justa e divertida", "Garantir a vitória de qualquer jeito", "Brigar"], correct: 0, reason: "As regras organizam a disputa com igualdade." }
-        ],
-        medium: [
-          { q: "1. Qual o nome do jogo em que alguém de olhos vendados tenta achar os amigos?", options: ["Cobra-cega", "Amarelinha", "Dominó"], correct: 0, reason: "Na cobra-cega, desenvolve-se a percepção tátil e auditiva." },
-          { q: "2. O que significa 'fair play' (jogo limpo)?", options: ["Jogar com honestidade sem trapacear", "Empurrar para vencer", "Gritar com o juiz"], correct: 0, reason: "Trata-se de jogar limpo e respeitar os adversários." },
-          { q: "3. Exemplo de habilidade motora básica do ser humano:", options: ["Correr e saltar", "Mergulhar de paraquedas", "Digitar rápido"], correct: 0, reason: "Correr, saltar e arremessar são movimentos fundamentais." },
-          { q: "4. Na Queimada, o objetivo principal com a bola é:", options: ["Desviar ou queimar o adversário com a bola", "Fazer gol no travessão", "Guardar no bolso"], correct: 0, reason: "Acertar a bola sem que o outro pegue no ar para eliminá-lo." },
-          { q: "5. Exercícios físicos frequentes ajudam a:", options: ["Manter a saúde do coração e corpo forte", "Ficar doente", "Perder o apetite de forma ruim"], correct: 0, reason: "Atividade física previne doenças e fortalece a saúde." }
-        ],
-        hard: [
-          { q: "1. Capacidade do corpo em realizar movimentos de grande amplitude articular:", options: ["Flexibilidade", "Força", "Velocidade"], correct: 0, reason: "Alongar bem os músculos aumenta a flexibilidade." },
-          { q: "2. Qual atividade trabalha a coordenação motora fina?", options: ["Segurar o lápis/recortar com tesoura", "Chutar uma bola bem longe", "Correr 100m"], correct: 0, reason: "Envolve pequenos músculos das mãos e dedos." },
-          { q: "3. O objetivo dos Jogos Cooperativos é:", options: ["Ajudar os colegas para que todos vençam juntos", "Derrotar e eliminar os amigos", "Fazer trapaça"], correct: 0, reason: "Cooperar e somar esforços em prol de um único time." },
-          { q: "4. Durante a corrida, por que os batimentos do coração aumentam?", options: ["Para levar mais oxigênio e sangue aos músculos", "Por susto apenas", "Porque o corpo parou"], correct: 0, reason: "Músculos ativos exigem mais oxigênio levado pelo sangue." },
-          { q: "5. Caminhar sobre uma fita estreita exige:", options: ["Equilíbrio corporal", "Apenas força nos braços", "Visão noturna"], correct: 0, reason: "O equilíbrio dinâmico ajusta o centro de gravidade do corpo." }
-        ]
+        easy: (i) => ({ q: `[Ed. Física - Movimento Q${i}] Qual atividade exercita a coordenação e o corpo?`, opts: ["Correr e pular corda", "Ficar parado", "Dormir", "Assistir TV"], correct: 0 }),
+        medium: (i) => ({ q: `[Ed. Física - Regras Q${i}] Por que as brincadeiras possuem regras?`, opts: ["Para garantir a organização e o respeito", "Para deixar o jogo chato", "Para ninguém brincar", "Para perder o tempo"], correct: 0 }),
+        hard: (i) => ({ q: `[Ed. Física - Saúde Q${i}] Qual o benefício da atividade física diária?`, opts: ["Melhora a saúde do corpo e mente", "Causa cansaço permanente", "Não faz diferença", "Faz mal aos ossos"], correct: 0 })
       },
       "Ensino Religioso": {
-        easy: [
-          { q: "1. O que devemos oferecer aos nossos colegas diariamente?", options: ["Respeito e carinho", "Brigas e gritos", "Fofocas"], correct: 0, reason: "A boa convivência constrói amizades saudáveis." },
-          { q: "2. Expressões como 'Por favor' e 'Obrigado' mostram:", options: ["Educação e gentileza", "Raiva", "Urgência grosseira"], correct: 0, reason: "São palavras gentis que facilitam o respeito mútuo." },
-          { q: "3. Ter empatia significa tentar compreender o sentimento do:", options: ["Outro", "Inimigo para prejudicar", "Ninguém"], correct: 0, reason: "Empatia é colocar-se no lugar do próximo." },
-          { q: "4. Como devemos agir diante de quem tem costumes diferentes dos nossos?", options: ["Respeitando suas tradições", "Rindo e apontando", "Excluindo a pessoa"], correct: 0, reason: "O respeito às diferenças garante a paz na comunidade." },
-          { q: "5. Ajudar espontaneamente quem passa por dificuldades é ser:", options: ["Solidário", "Egoísta", "Indiferente"], correct: 0, reason: "A solidariedade busca o bem do outro." }
-        ],
-        medium: [
-          { q: "1. Promovemos uma Cultura de Paz ao:", options: ["Conversar para resolver desentendimentos", "Usar a força física", "Gritar mais alto"], correct: 0, reason: "O diálogo é o melhor caminho contra a violência." },
-          { q: "2. O respeito à diversidade nos ensina que:", options: ["Cada pessoa é única com sua própria história e crença", "Todos têm obrigação de ser iguais", "Apenas a nossa opinião vale"], correct: 0, reason: "Valorizar a individualidade enriquece a sociedade." },
-          { q: "3. O valor ético da Honestidade nos guia para:", options: ["Sempre falar a verdade e agir com transparência", "Pegar coisas dos outros escondido", "Enganar"], correct: 0, reason: "Ser honesto gera confiança entre as pessoas." },
-          { q: "4. Saber perdoar uma falha do colega ajuda a:", options: ["Reconstruir a amizade e viver sem rancor", "Guardar raiva para sempre", "Iniciar uma briga maior"], correct: 0, reason: "O perdão traz paz e alivia sentimentos ruins." },
-          { q: "5. A amizade verdadeira é baseada na:", options: ["Confiança e lealdade", "Troca de brinquedos por interesse", "Falta de conversa"], correct: 0, reason: "Amigos verdadeiros se apoiam na lealdade." }
-        ],
-        hard: [
-          { q: "1. O conceito filosófico e humanitário de Alteridade significa:", options: ["Reconhecer e valorizar o outro em sua diferença", "Querer alterar os outros para ficarem igual a você", "Ignorar as pessoas"], correct: 0, reason: "Alteridade é a aceitação consciente do outro." },
-          { q: "2. Princípios éticos universais defendem acima de tudo a:", options: ["Dignidade de todas as vidas humanas", "Vontade dos mais fortes", "Acumulação de riqueza"], correct: 0, reason: "A dignidade humana é a base dos direitos no mundo todo." },
-          { q: "3. O diálogo verdadeiro requer duas ações fundamentais:", options: ["Falar com clareza e escutar com atenção", "Falar sozinho e interromper", "Gritar e impor"], correct: 0, reason: "Saber escutar o próximo é essencial para entender sua visão." },
-          { q: "4. Praticar a Justiça Social é defender que:", options: ["Todos tenham acesso aos mesmos direitos básicos", "Alguns tenham tudo e outros nada", "Regras sejam só para alguns"], correct: 0, reason: "A justiça busca diminuir desigualdades e proteger os vulneráveis." },
-          { q: "5. A compaixão difere da pena porque nos incentiva a:", options: ["Tomar atitudes reais para aliviar a dor do outro", "Ficar parados apenas olhando", "Achar engraçado"], correct: 0, reason: "A compaixão impulsiona à ação em prol do bem do próximo." }
-        ]
+        easy: (i) => ({ q: `[Ensino Religioso - Valores Q${i}] Devemos tratar as pessoas com:`, opts: ["Respeito e carinho", "Frieza", "Desrespeito", "Egoísmo"], correct: 0 }),
+        medium: (i) => ({ q: `[Ensino Religioso - Empatia Q${i}] O que significa ter empatia?`, opts: ["Se colocar no lugar do outro", "Pensar só em si", "Ignorar os amigos", "Mandar nos outros"], correct: 0 }),
+        hard: (i) => ({ q: `[Ensino Religioso - Diversidade Q${i}] Diante das diferenças culturais e de ideias, devemos:`, opts: ["Aprender e respeitar", "Criticar", "Excluir as pessoas", "Brigar"], correct: 0 })
       },
       "Língua Inglesa": {
-        easy: [
-          { q: "1. Como dizemos a palavra 'Olá' em inglês?", options: ["Hello", "Goodbye", "Thank you"], correct: 0, reason: "'Hello' é a saudação mais comum para dizer Olá." },
-          { q: "2. A qual cor corresponde a palavra 'Red'?", options: ["Vermelho", "Azul", "Amarelo"], correct: 0, reason: "'Red' significa Vermelho na língua inglesa." },
-          { q: "3. O número 'One' equivale ao numeral:", options: ["1", "2", "3"], correct: 0, reason: "A contagem em inglês começa com One (1)." },
-          { q: "4. Como se traduz o animal 'Cachorro' para o inglês?", options: ["Dog", "Cat", "Bird"], correct: 0, reason: "'Dog' é a tradução de cão/cachorro." },
-          { q: "5. A expressão 'Good morning' deve ser usada de:", options: ["Manhã (Bom dia)", "Noite", "Tarde"], correct: 0, reason: "'Good morning' usa-se ao cumprimentar alguém de manhã." }
-        ],
-        medium: [
-          { q: "1. Como dizemos 'Por favor' educadamente em inglês?", options: ["Please", "Sorry", "Welcome"], correct: 0, reason: "'Please' traduz-se como 'Por favor'." },
-          { q: "2. Qual fruta é uma 'Apple'?", options: ["Maçã", "Banana", "Laranja"], correct: 0, reason: "'Apple' é a palavra em inglês para Maçã." },
-          { q: "3. Qual é a tradução da cor 'Blue'?", options: ["Azul", "Verde", "Rosa"], correct: 0, reason: "'Blue' refere-se ao tom Azul." },
-          { q: "4. Complete a frase: 'My name ___ John.'", options: ["is", "are", "am"], correct: 0, reason: "Usamos o verbo 'is' no singular (Meu nome É John)." },
-          { q: "5. A palavra 'Goodbye' é usada quando queremos:", options: ["Nos despedir (Tchau)", "Agradecer", "Pedir ajuda"], correct: 0, reason: "'Goodbye' é a forma padrão de despedida." }
-        ],
-        hard: [
-          { q: "1. Qual é a forma plural correta da palavra 'Child' (criança)?", options: ["Children", "Childs", "Childrens"], correct: 0, reason: "'Child' tem plural irregular na língua inglesa: 'Children'." },
-          { q: "2. O que significa a pergunta 'How old are you?'", options: ["Quantos anos você tem?", "Como vai você?", "Qual o seu nome?"], correct: 0, reason: "É a estrutura usada para perguntar a idade de alguém." },
-          { q: "3. Qual destas é a tradução correta para 'I have two cats'?", options: ["Eu tenho dois gatos", "Eu vi dois gatos", "Eu gosto de gatos"], correct: 0, reason: "Verbo 'have' (ter), 'two' (dois) e 'cats' (gatos)." },
-          { q: "4. A cor 'Green' é o resultado da mistura de quais cores?", options: ["Blue + Yellow", "Red + Blue", "White + Black"], correct: 0, reason: "Em inglês: Blue (azul) + Yellow (amarelo) = Green (verde)." },
-          { q: "5. O pronome 'They' é traduzido em português por:", options: ["Eles ou Elas", "Nós", "Eu"], correct: 0, reason: "'They' é o pronome da 3ª pessoa do plural (Eles/Elas)." }
-        ]
+        easy: (i) => ({ q: `[Inglês - Vocabulário Q${i}] Como dizemos 'Cão/Cachorro' em inglês?`, opts: ["Dog", "Cat", "Bird", "Fish"], correct: 0 }),
+        medium: (i) => ({ q: `[Inglês - Saudações Q${i}] O que significa a palavra 'Hello'?`, opts: ["Olá", "Adeus", "Obrigado", "Por favor"], correct: 0 }),
+        hard: (i) => ({ q: `[Inglês - Cores e Números Q${i}] Como se diz a cor 'Vermelho' e o número 'Um' em inglês?`, opts: ["Red e One", "Blue e Two", "Green e Three", "Yellow e Four"], correct: 0 })
       }
     };
+
+    function generateQuestions(subject, difficulty) {
+      const list = [];
+      const generator = subjectTemplates[subject] ? subjectTemplates[subject][difficulty] : subjectTemplates["Língua Portuguesa"][difficulty];
+      for (let i = 1; i <= 150; i++) {
+        list.push(generator(i));
+      }
+      return list;
+    }
 
     function switchTab(tabId, btn) {
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -828,24 +614,29 @@
       btn.classList.add('active');
     }
 
-    function openModal(title) {
-      currentSubject = title;
-      document.getElementById('modalTitle').innerText = title;
-      document.getElementById('modalOverlay').classList.add('active');
+    function openMenuModal(subject) {
+      currentSubject = subject;
+      document.getElementById('modalSubjectTitle').innerText = subject;
+      document.getElementById('menuModal').classList.add('active');
     }
 
-    function closeModal() {
-      document.getElementById('modalOverlay').classList.remove('active');
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
     }
 
-    function closeQuiz() {
-      document.getElementById('quizOverlay').classList.remove('active');
-    }
+    function startQuiz(type) {
+      if (type !== 'Provas' && type !== 'Perguntas') {
+        alert(`O módulo de ${type} estará disponível em breve!`);
+        return;
+      }
 
-    function startQuiz() {
-      closeModal();
-      document.getElementById('quizTitle').innerText = `${currentSubject} - 1º Ano EF`;
-      document.getElementById('quizOverlay').classList.add('active');
+      currentType = type;
+      closeModal('menuModal');
+      
+      document.getElementById('quizTitle').innerText = `${type} de ${currentSubject}`;
+      document.getElementById('quizSubtitle').innerText = `Modo: ${type} - Ensino Fundamental I`;
+      document.getElementById('quizModal').classList.add('active');
+
       loadSavedProgress();
       renderQuiz();
     }
@@ -854,80 +645,62 @@
       currentDifficulty = diff;
       document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(`btn-${diff}`).classList.add('active');
-      loadSavedProgress();
       renderQuiz();
     }
 
     function renderQuiz() {
-      const container = document.getElementById('quizContainer');
-      container.innerHTML = "";
+      const container = document.getElementById('questionsContainer');
+      container.innerHTML = '';
 
-      const questions = questionsDB[currentSubject]?.[currentDifficulty] || [];
+      const questions = generateQuestions(currentSubject, currentDifficulty);
+      let answeredCount = 0;
 
-      if (questions.length === 0) {
-        container.innerHTML = "<p style='text-align:center;'>Nenhuma questão cadastrada para esta opção.</p>";
-        return;
-      }
+      questions.forEach((qObj, index) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'question-item';
 
-      questions.forEach((qObj, qIdx) => {
-        const qCard = document.createElement('div');
-        qCard.className = 'question-card';
-        
-        let html = `<p>${qObj.q}</p><div class="options-list">`;
-        const answered = userAnswers[qIdx] !== undefined;
-        const selectedOpt = userAnswers[qIdx];
+        const selectedOpt = userAnswers[index];
+        if (selectedOpt !== undefined) answeredCount++;
 
-        qObj.options.forEach((opt, optIdx) => {
-          let extraClass = "";
-
-          if (answered) {
-            extraClass += " disabled";
-            if (optIdx === qObj.correct) {
-              extraClass += " correct"; // Verde se for a correta
-            } else if (optIdx === selectedOpt && selectedOpt !== qObj.correct) {
-              extraClass += " incorrect"; // Vermelho se foi a opção errada escolhida
+        let optionsHTML = '';
+        qObj.opts.forEach((opt, optIdx) => {
+          let btnClass = 'option-btn';
+          
+          if (selectedOpt !== undefined) {
+            if (currentType === 'Perguntas') {
+              if (optIdx === qObj.correct) btnClass += ' correct';
+              else if (selectedOpt === optIdx) btnClass += ' wrong';
+            } else {
+              if (selectedOpt === optIdx) btnClass += ' selected';
             }
           }
 
-          html += `<div class="option-item ${extraClass}" onclick="selectOption(${qIdx}, ${optIdx})">
-            ${opt}
-          </div>`;
+          optionsHTML += `<button class="${btnClass}" onclick="selectOption(${index}, ${optIdx})">${opt}</button>`;
         });
 
-        html += `</div>`;
-
-        // Exibir caixa explicativa após responder
-        if (answered) {
-          const isCorrect = selectedOpt === qObj.correct;
-          const statusText = isCorrect ? "<b>🟢 Você Acertou!</b> " : "<b>🔴 Você Errou!</b> ";
-          const explanationClass = isCorrect ? "correct" : "incorrect";
-
-          html += `
-            <div class="explanation-box ${explanationClass}">
-              ${statusText} ${qObj.reason}
-            </div>
-          `;
-        }
-
-        qCard.innerHTML = html;
-        container.appendChild(qCard);
+        qDiv.innerHTML = `
+          <div class="question-title">${index + 1}. ${qObj.q}</div>
+          <div class="options-list">${optionsHTML}</div>
+        `;
+        container.appendChild(qDiv);
       });
+
+      document.getElementById('progressText').innerText = `${answeredCount}/150`;
     }
 
-    function selectOption(qIdx, optIdx) {
-      if (userAnswers[qIdx] !== undefined) return; // Trava resposta para não alterar após escolher
-      userAnswers[qIdx] = optIdx;
+    function selectOption(qIndex, optIndex) {
+      userAnswers[qIndex] = optIndex;
       renderQuiz();
     }
 
     function saveProgress() {
-      const key = `gabaritei_${currentSubject}_${currentDifficulty}`;
+      const key = `gabaritei_${currentSubject}_${currentType}_${currentDifficulty}`;
       localStorage.setItem(key, JSON.stringify(userAnswers));
-      alert("Seu progresso e respostas foram salvos!");
+      alert('Progresso salvo com sucesso!');
     }
 
     function loadSavedProgress() {
-      const key = `gabaritei_${currentSubject}_${currentDifficulty}`;
+      const key = `gabaritei_${currentSubject}_${currentType}_${currentDifficulty}`;
       const saved = localStorage.getItem(key);
       if (saved) {
         userAnswers = JSON.parse(saved);
@@ -937,20 +710,13 @@
     }
 
     function resetProgress() {
-      userAnswers = {};
-      const key = `gabaritei_${currentSubject}_${currentDifficulty}`;
-      localStorage.removeItem(key);
-      renderQuiz();
-      alert("A prova foi zerada com sucesso!");
+      if (confirm('Tem certeza que deseja reiniciar todo o progresso desta prova/pergunta?')) {
+        userAnswers = {};
+        const key = `gabaritei_${currentSubject}_${currentType}_${currentDifficulty}`;
+        localStorage.removeItem(key);
+        renderQuiz();
+      }
     }
-
-    document.getElementById('modalOverlay').addEventListener('click', function(e) {
-      if (e.target === this) closeModal();
-    });
-    
-    document.getElementById('quizOverlay').addEventListener('click', function(e) {
-      if (e.target === this) closeQuiz();
-    });
   </script>
 </body>
 </html>
