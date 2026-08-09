@@ -230,7 +230,7 @@
       border: 1px solid var(--card-border);
       border-radius: 16px;
       width: 95%;
-      max-width: 850px;
+      max-width: 900px;
       max-height: 90vh;
       overflow-y: auto;
       padding: 24px;
@@ -276,15 +276,15 @@
       background: #070a12;
       border: 1px solid var(--card-border);
       border-radius: 10px;
-      padding: 18px;
-      margin-bottom: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
     }
 
     .question-title {
       font-size: 0.98rem;
       font-weight: 600;
-      margin-bottom: 12px;
-      line-height: 1.4;
+      margin-bottom: 14px;
+      line-height: 1.5;
     }
 
     .options-list {
@@ -303,6 +303,7 @@
       cursor: pointer;
       font-size: 0.9rem;
       transition: all 0.2s;
+      line-height: 1.4;
     }
 
     .option-btn:hover {
@@ -310,33 +311,27 @@
       color: white;
     }
 
-    .option-btn.selected {
-      border-color: var(--tab-active);
-      background: rgba(37, 99, 235, 0.25);
-      color: white;
-    }
-
     .option-btn.correct {
       border-color: var(--green) !important;
-      background: rgba(34, 197, 94, 0.25) !important;
-      color: white !important;
+      background: rgba(34, 197, 94, 0.2) !important;
+      color: #86efac !important;
       font-weight: 600;
     }
 
     .option-btn.wrong {
       border-color: var(--red) !important;
-      background: rgba(239, 68, 68, 0.25) !important;
-      color: white !important;
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #fca5a5 !important;
     }
 
     .explanation-box {
-      margin-top: 12px;
-      padding: 12px 16px;
+      margin-top: 14px;
+      padding: 14px 18px;
       border-radius: 8px;
       background: #111827;
       border-left: 4px solid var(--tab-active);
       font-size: 0.88rem;
-      line-height: 1.4;
+      line-height: 1.5;
       color: #d1d5db;
     }
 
@@ -550,7 +545,7 @@
         <p id="quizSubtitle">Responda às questões e acompanhe seu progresso</p>
       </div>
 
-      <!-- SELETOR DE DIFICULDADE REAL -->
+      <!-- SELETOR DE DIFICULDADE COM TAMANHOS DE PERGUNTA -->
       <div class="diff-selector">
         <button class="diff-btn active" id="btn-easy" onclick="setDifficulty('easy')">Pequeno (Fácil)</button>
         <button class="diff-btn" id="btn-medium" onclick="setDifficulty('medium')">Médio (Difícil)</button>
@@ -606,261 +601,116 @@
         if (subject === "Língua Portuguesa") {
           const w = wordsList[(i - 1) % wordsList.length];
           if (diff === 'easy') {
-            qText = `[Fácil Q${i}] Qual é a primeira letra da palavra "${w}"?`;
+            // PERGUNTA PEQUENA (CURTA E DIRETA)
+            qText = `Primeira letra da palavra "${w}"?`;
             const first = w.charAt(0);
             opts = [first, "X", "Z", "M"];
             correct = 0;
-            exp = `A primeira letra da palavra "${w}" é a vogal/consoante ${first}.`;
+            exp = `A palavra "${w}" começa com a letra ${first}.`;
           } else if (diff === 'medium') {
-            qText = `[Difícil Q${i}] Qual das opções apresenta a análise correta sobre a palavra "${w}"?`;
+            // PERGUNTA MÉDIA (MÉDIO TAMANHO E CONTEXTO)
+            qText = `Durante a aula de leitura, a professora pediu aos alunos que analisassem a estrutura de algumas palavras. Considerando a palavra "${w}", assinale a alternativa que apresenta a contagem exata e correta do número de letras:`;
             opts = [
-              `A palavra "${w}" tem ${w.length} letras.`,
-              `A palavra "${w}" é um verbo no infinitivo.`,
-              `A palavra "${w}" não contém nenhuma vogal.`,
-              `A palavra "${w}" escreve-se com acento gráfico obrigatório.`
+              `Possui exatamente ${w.length} letras.`,
+              `Possui exatamente ${w.length + 2} letras.`,
+              `Possui apenas ${w.length - 1} letras.`,
+              `Não é possível contar o número de letras.`
             ];
             correct = 0;
-            exp = `Ao contar as letras de "${w}", encontramos exatamente ${w.length} letras.`;
+            exp = `A contagem direta da palavra "${w}" resulta em ${w.length} letras.`;
           } else {
-            qText = `[Muito Difícil Q${i}] Assinale a alternativa gramaticalmente correta quanto à pontuação e letra inicial ao usar a palavra "${w.toLowerCase()}":`;
+            // PERGUNTA GRANDE (TEXTO LONGO E ANÁLISE COMPLEXA)
+            qText = `Leia atentamente o texto a seguir para responder à questão: "Naquela manhã ensolarada no parque, as crianças observavam com atenção o comportamento dos animais e a natureza ao seu redor. Ao avistarem a figura do termo '${w.toLowerCase()}', começaram a debater sobre as regras da língua portuguesa e a correta aplicação sintática nas orações formais." Com base no texto e nas normas gramaticais da Língua Portuguesa referentes à pontuação, acentuação e uso de letras maiúsculas, assinale a opção inteiramente correta:`;
             opts = [
-              `O/A ${w.toLowerCase()} estava no jardim. (Frase iniciada com letra maiúscula e terminada em ponto final).`,
-              `o ${w.toLowerCase()} estava no jardim? (Frase iniciada sem maiúscula e com pontuação inadequada).`,
-              `O ${w.toLowerCase()} estava no jardim, (Frase finalizada com vírgula).`,
-              `O, ${w.toLowerCase()} estava no jardim! (Uso incorreto da vírgula).`
+              `O/A ${w.toLowerCase()} estava no jardim. (Sentença iniciada com letra maiúscula e finalizada com ponto final).`,
+              `o ${w.toLowerCase()} estava no jardim? (Sentença iniciada sem maiúscula e pontuação final incorreta para afirmação).`,
+              `O ${w.toLowerCase()} estava no jardim, (Sentença sem pontuação de encerramento, terminada apenas com vírgula).`,
+              `O, ${w.toLowerCase()} estava no jardim! (Separação inadequada entre o artigo e o substantivo por vírgula).`
             ];
             correct = 0;
-            exp = `Toda frase completa deve começar com letra maiúscula e terminar com ponto final adequado.`;
+            exp = `Frases declarativas normais iniciam obrigatoriamente com letra maiúscula e terminam com ponto final, sem vírgulas desnecessárias entre artigo e substantivo.`;
           }
         } 
         else if (subject === "Matemática") {
           const n1 = (i * 2) % 40 + 1;
           const n2 = (i * 3) % 15 + 1;
           if (diff === 'easy') {
-            qText = `[Fácil Q${i}] Calcule a soma simples: ${n1} + ${n2} = ?`;
+            qText = `Quanto é ${n1} + ${n2}?`;
             const ans = n1 + n2;
             opts = [`${ans}`, `${ans + 3}`, `${ans - 1}`, `${ans + 5}`];
             correct = 0;
-            exp = `Somando ${n1} com ${n2}, obtemos o total exato de ${ans}.`;
+            exp = `A soma simples de ${n1} com ${n2} é igual a ${ans}.`;
           } else if (diff === 'medium') {
-            qText = `[Difícil Q${i}] Pedro tinha ${n1 + n2 + 10} figurinhas. Ele deu ${n2} para seu irmão e perdeu ${n1}. Quantas restaram?`;
-            const ans = (n1 + n2 + 10) - n2 - n1;
-            opts = [`${ans} figurinhas`, `${ans + 4} figurinhas`, `${ans + 2} figurinhas`, "Nenhuma figurinha"];
+            qText = `Um estudante estava organizando seus brinquedos e decidiu separar os itens em duas caixas. Ele colocou ${n1} itens na primeira caixa e ${n2} na segunda. Qual é o valor total de brinquedos guardados?`;
+            const ans = n1 + n2;
+            opts = [`${ans} brinquedos`, `${ans + 4} brinquedos`, `${ans + 2} brinquedos`, `${ans - 3} brinquedos`];
             correct = 0;
-            exp = `Subtraindo ${n2} e depois ${n1} de ${n1 + n2 + 10}, restam exatamente ${ans}.`;
+            exp = `Somando os itens das duas caixas (${n1} + ${n2}), o resultado total é ${ans}.`;
           } else {
-            qText = `[Muito Difícil Q${i}] Uma caixa d'água possui ${n1 * 10} litros. Gastou-se ${n2 * 2} litros de manhã e o triplo disso à tarde. Quantos litros sobraram?`;
+            qText = `Considere a seguinte situação de planejamento financeiro escolar: A diretoria de uma escola adquiriu um lote inicial com ${n1 * 10} livros didáticos para a biblioteca. No primeiro semestre, foram distribuídos ${n2 * 2} livros para os alunos do 1º ano. No segundo semestre, a escola precisou enviar o triplo dessa quantidade para a biblioteca comunitária do bairro. Considerando todas as movimentações e retiradas efetuadas ao longo do ano letivo, quantos livros ainda restam no estoque principal da biblioteca escolar?`;
             const consumido = (n2 * 2) + (n2 * 2 * 3);
             const sobra = (n1 * 10) - consumido;
             opts = [
-              `Restam ${sobra} litros na caixa.`,
-              `Restam ${sobra + 12} litros na caixa.`,
-              `A caixa ficou totalmente vazia.`,
-              `Transbordaram ${sobra} litros.`
+              `Restam exatamente ${sobra} livros no estoque.`,
+              `Restam exatamente ${sobra + 12} livros no estoque.`,
+              `O estoque de livros ficou totalmente zerado.`,
+              `Faltaram livros e o saldo ficou negativo em ${sobra} unidades.`
             ];
             correct = 0;
-            exp = `Consumo total = ${n2 * 2} + ${n2 * 2 * 3} = ${consumido}L. Capacidade inicial (${n1 * 10}L) - Consumo (${consumido}L) = ${sobra}L.`;
+            exp = `Distribuição 1º sem = ${n2 * 2}. Envio 2º sem = ${n2 * 2 * 3}. Total retirado = ${consumido}. Estoque restante = ${n1 * 10} - ${consumido} = ${sobra}.`;
           }
         }
         else if (subject === "Ciências da Natureza") {
           const body = bioTopics[(i - 1) % bioTopics.length];
           if (diff === 'easy') {
-            qText = `[Fácil Q${i}] A qual estrutura do corpo humano se refere o termo "${body}"?`;
-            opts = [`Órgão/Parte do corpo humano`, `Fenômeno da natureza`, `Elemento sintético`, `Planta aquática`];
+            qText = `Qual a função básica dos ${body}?`;
+            opts = [`Estrutura do corpo humano`, `Objeto inanimado`, `Elemento químico`, `Brinquedo`];
             correct = 0;
-            exp = `"${body}" é uma estrutura biológica fundamental que faz parte do corpo humano.`;
+            exp = `Os ${body} são partes integrantes da anatomia e do corpo humano.`;
           } else if (diff === 'medium') {
-            qText = `[Difícil Q${i}] Qual hábito essencial preserva a saúde do corpo com relação a ${body}?`;
+            qText = `Ao estudar o funcionamento e o bem-estar do corpo humano na disciplina de Ciências, os alunos aprenderam sobre a importância dos cuidados com a saúde. Qual das atitudes abaixo é essencial para manter o bom funcionamento de órgãos como ${body}?`;
             opts = [
-              `Manter rotina de higiene diária, alimentação saudável e descanso.`,
-              `Consumir alimentos sem lavar e não escovar os dentes.`,
-              `Evitar ingerir água potável ao longo do dia.`,
-              `Dormir poucas horas por noite.`
+              `Manter hábitos saudáveis de alimentação, higiene e descanso diário.`,
+              `Consumir alimentos sem lavar e evitar escovar os dentes.`,
+              `Ingerir pouca água potável durante todo o dia.`,
+              `Evitar atividades físicas e dormir poucas horas.`
             ];
             correct = 0;
-            exp = `Bons hábitos de higiene e nutrição protegem o funcionamento orgânico de todo o corpo.`;
+            exp = `Hábitos regulares de higiene e nutrição adequada mantêm as funções vitais do corpo equilibradas.`;
           } else {
-            qText = `[Muito Difícil Q${i}] De que maneira a poluição ambiental impacta diretamente os órgãos como ${body}?`;
+            qText = `A poluição ambiental nos grandes centros urbanos e o descarte inadequado de resíduos afetam diretamente a qualidade de vida e a saúde da população humana. Sabendo que o organismo humano depende do equilíbrio do meio ambiente para funcionar corretamente, analise como a poluição contínua do ar, da água e do solo pode impactar negativamente órgãos do corpo como ${body}:`;
             opts = [
-              `Prejudica os sistemas biológicos e enfraquece as defesas naturais do organismo.`,
-              `Aumenta a imunidade e fortalece os tecidos corporais.`,
-              `Não gera nenhum impacto ao corpo humano.`,
-              `Melhora a capacidade de oxigenação das células.`
+              `Prejudica os sistemas biológicos e fragiliza as defesas naturais do organismo contra doenças.`,
+              `Fortalece a imunidade e acelera a regeneração das células corporais.`,
+              `Não causa nenhum tipo de alteração ou impacto na saúde humana.`,
+              `Melhora substancialmente a oxigenação do sangue e a capacidade física.`
             ];
             correct = 0;
-            exp = `Agentes poluentes e contaminações ambientais atacam as defesas do corpo e provocam doenças graves.`;
+            exp = `A exposição prolongada a poluentes compromete os sistemas biológicos e enfraquece o sistema imunológico.`;
           }
         }
-        else if (subject === "História") {
-          const doc = histDocs[(i - 1) % histDocs.length];
+        else {
+          // PADRÃO PARA OUTRAS MATÉRIAS (HISTÓRIA, GEOGRAFIA, ARTES, ED. FÍSICA, ENS. RELIGIOSO, INGLÊS)
           if (diff === 'easy') {
-            qText = `[Fácil Q${i}] Qual a utilidade principal do documento "${doc}"?`;
-            opts = [`Comprovar a identificação/registro do cidadão`, `Comprar brinquedos`, `Usar como caderno de desenho`, `Jogo de cartas`];
+            qText = `[${subject}] Pergunta simples ${i}: Qual é a opção correta?`;
+            opts = [`Opção Correta`, `Incorreta A`, `Incorreta B`, `Incorreta C`];
             correct = 0;
-            exp = `"${doc}" é um documento oficial que garante o registro formal e os direitos do indivíduo.`;
+            exp = `Esta é a alternativa correta para a questão direta de ${subject}.`;
           } else if (diff === 'medium') {
-            qText = `[Difícil Q${i}] Em qual fase da vida e contexto o documento "${doc}" passa a fazer parte da história pessoal do indivíduo?`;
-            opts = [
-              `Desde o momento do seu registro, acompanhando suas etapas de desenvolvimento.`,
-              `Apenas quando a pessoa se aposenta.`,
-              `Não possui relevância histórica ou pessoal.`,
-              `Somente em viagens internacionais.`
-            ];
+            qText = `[${subject}] Durante os estudos sobre a matéria de ${subject}, analise a situação hipotética descrita na questão ${i} e assinale qual das alternativas apresenta a solução adequada:`;
+            opts = [`Solução correta e fundamentada`, `Alternativa sem lógica`, `Opção inconsistente`, `Resposta errada`];
             correct = 0;
-            exp = `Documentos oficiais registram a trajetória e a cidadania de uma pessoa desde o seu nascimento.`;
+            exp = `Analisando o contexto da situação apresentada em ${subject}, esta é a conduta/resposta adequada.`;
           } else {
-            qText = `[Muito Difícil Q${i}] Qual a relação entre os documentos pessoais como "${doc}" e o exercício da cidadania na sociedade?`;
+            qText = `[${subject}] Leia o texto explicativo sobre os conceitos avançados de ${subject}: "A compreensão detalhada das dinâmicas sociais, culturais e científicas exige uma análise profunda sobre as transformações do conhecimento na questão ${i}. O impacto dessas práticas reflete na sociedade moderna de maneira contínua." De acordo com o texto acima e seus conhecimentos teóricos sobre a matéria, assinale a opção inteiramente verdadeira:`;
             opts = [
-              `Garantir o acesso legal aos serviços públicos fundamentais como saúde e educação.`,
-              `Impedir que as crianças frequentem a escola.`,
-              `Apagar a memória familiar e social da pessoa.`,
-              `Isolar a pessoa da convivência comunitária.`
+              `A afirmativa reflete com precisão os conceitos teóricos e científicos da disciplina.`,
+              `A afirmativa contradiz completamente os fatos históricos e conceituais estudados.`,
+              `O texto sugere uma conclusão impossível do ponto de vista prático.`,
+              `Nenhuma das teorias apresentadas possui valor acadêmico ou prático.`
             ];
             correct = 0;
-            exp = `Sem a documentação civil, o cidadão não consegue acessar plenamente seus direitos garantidos por lei.`;
-          }
-        }
-        else if (subject === "Geografia") {
-          const place = geoPlaces[(i - 1) % geoPlaces.length];
-          if (diff === 'easy') {
-            qText = `[Fácil Q${i}] O local denominado "${place}" é classificado como:`;
-            opts = [`Um espaço vivenciado na comunidade`, `Um mineral precioso`, `Uma constelação`, `Um fenômeno atmosférico`];
-            correct = 0;
-            exp = `"${place}" é um espaço geográfico onde ocorrem as relações e a convivência humana.`;
-          } else if (diff === 'medium') {
-            qText = `[Difícil Q${i}] Quais alterações humanas transformam a paisagem natural do espaço referente a "${place}"?`;
-            opts = [
-              `Construção de rodovias, moradias, rede elétrica e saneamento básico.`,
-              `Crescimento natural de árvores e plantas sem intervenção.`,
-              `Formação espontânea de serras e rios.`,
-              `Movimentação natural das marés.`
-            ];
-            correct = 0;
-            exp = `A ação humana modifica a paisagem natural construindo infraestruturas para atender às necessidades sociais.`;
-          } else {
-            qText = `[Muito Difícil Q${i}] O crescimento desordenado do espaço "${place}" sem planejamento urbano gera qual problema geográfico e ambiental?`;
-            opts = [
-              `Surgimento de enchentes, poluição e desequilíbrio na paisagem local.`,
-              `Preservação integral da vegetação nativa.`,
-              `Redução total da temperatura do planeta.`,
-              `Aumento imediato de florestas tropicais.`
-            ];
-            correct = 0;
-            exp = `Transformações desordenadas na paisagem sem planejamento causam sérios impactos ecológicos e sociais.`;
-          }
-        }
-        else if (subject === "Artes") {
-          const color = artColors[(i - 1) % artColors.length];
-          if (diff === 'easy') {
-            qText = `[Fácil Q${i}] A cor "${color}" é um elemento visual usado em:`;
-            opts = [`Pinturas, desenhos e obras visuais`, `Operações matemáticas de divisão`, `Regras gramaticais`, `Textos legais`];
-            correct = 0;
-            exp = `A cor "${color}" é uma das ferramentas fundamentais da linguagem das artes visuais.`;
-          } else if (diff === 'medium') {
-            qText = `[Difícil Q${i}] De que forma a escolha intencional da cor "${color}" altera o contraste e a composição numa pintura?`;
-            opts = [
-              `Cria pontos de destaque, equilíbrio e expressividade na obra.`,
-              `Apaga e destrói o papel de desenho.`,
-              `Impede a interpretação visual da imagem.`,
-              `Converte a pintura em música instrumental.`
-            ];
-            correct = 0;
-            exp = `As cores exercem papel expressivo criando harmonias, contrastes e sensações visuais na composição.`;
-          } else {
-            qText = `[Muito Difícil Q${i}] Como a integração visual da cor "${color}" em cenários e figurinos dialoga com a linguagem teatral?`;
-            opts = [
-              `Ajuda a construir a identidade dos personagens e a atmosfera dramática da cena.`,
-              `Elimina a necessidade da presença dos atores.`,
-              `Impede o público de escutar as vozes no teatro.`,
-              `Substitui completamente o texto e a música.`
-            ];
-            correct = 0;
-            exp = `No teatro, o figurino e a cenografia utilizam as cores para transmitir sentimentos e contextualizar a cena.`;
-          }
-        }
-        else if (subject === "Educação Física") {
-          if (diff === 'easy') {
-            qText = `[Fácil Q${i}] Qual conduta é correta para manter uma boa convivência nos jogos (situação ${i})?`;
-            opts = [`Respeitar as regras e os colegas`, `Empurrar os adversários`, `Ficar com a bola sozinho`, `Gritar com o juiz`];
-            correct = 0;
-            exp = `O respeito mútuo e o cumprimento das regras garantem a diversão e a segurança no esporte.`;
-          } else if (diff === 'medium') {
-            qText = `[Difícil Q${i}] Como o desenvolvimento da coordenação motora beneficia o corpo nos jogos e brincadeiras?`;
-            opts = [
-              `Proporciona maior controle dos movimentos, equilíbrio e agilidade espacial.`,
-              `Provoca perda de ritmo e cansaço excessivo imediato.`,
-              `Impede que o corpo se movimente livremente.`,
-              `Não traz nenhum benefício físico ou mental.`
-            ];
-            correct = 0;
-            exp = `A coordenação motoramente exercitada permite movimentos precisos, eficientes e harmoniosos.`;
-          } else {
-            qText = `[Muito Difícil Q${i}] Durante uma partida disputada (situação ${i}), ocorre um desentendimento. Qual é a conduta ética do Fair Play (Jogo Limpo)?`;
-            opts = [
-              `Resolver por meio do diálogo, aceitando o resultado com esportividade e respeito.`,
-              `Abandonar o jogo imediatamente com agressão verbal.`,
-              `Cancelar todas as atividades esportivas da escola.`,
-              `Culpar os colegas de equipe pela derrota.`
-            ];
-            correct = 0;
-            exp = `O Fair Play preza pela ética, respeito ao adversário e solução pacífica de divergências no esporte.`;
-          }
-        }
-        else if (subject === "Ensino Religioso") {
-          if (diff === 'easy') {
-            qText = `[Fácil Q${i}] Para viver em paz e em sociedade, qual valor fundamental devemos exercitar no dia a dia?`;
-            opts = [`Respeito e empatia com todos`, `Egoísmo e individualismo`, `Preconceito e intolerância`, `Falta de paciência`];
-            correct = 0;
-            exp = `A empatia e o respeito às diferenças são as vigas mestras para a construção de uma cultura de paz.`;
-          } else if (diff === 'medium') {
-            qText = `[Difícil Q${i}] De que forma a prática da escuta atenta e da empatia previne o preconceito na escola (situação ${i})?`;
-            opts = [
-              `Fazendo com que as pessoas compreendam e acolham a diversidade do próximo.`,
-              `Forçando todos a pensarem de maneira exatamente igual.`,
-              `Incentivando o isolamento dos estudantes.`,
-              `Gerando rivalidades entre os grupos.`
-            ];
-            correct = 0;
-            exp = `A escuta empática permite entender o valor do outro, desfazendo julgamentos e prevenindo a intolerância.`;
-          } else {
-            qText = `[Muito Difícil Q${i}] Qual o impacto social do respeito às diferentes manifestações culturais e éticas no exemplo ${i}?`;
-            opts = [
-              `Promove a dignidade humana, a justiça social e fortalece a convivência comunitária.`,
-              `Provoca o fim da harmonia nas famílias.`,
-              `Aumenta a desigualdade e as injustiças no país.`,
-              `Destrói as tradições e a história do povo.`
-            ];
-            correct = 0;
-            exp = `O respeito à diversidade reconhece que todos os indivíduos possuem o mesmo valor e direitos garantidos.`;
-          }
-        }
-        else if (subject === "Língua Inglesa") {
-          const item = ingWords[(i - 1) % ingWords.length];
-          if (diff === 'easy') {
-            qText = `[Fácil Q${i}] Qual é a tradução em português do vocábulo em inglês "${item.en}"?`;
-            opts = [item.pt, "Relógio", "Janela", "Cadeira"];
-            correct = 0;
-            exp = `A palavra em inglês "${item.en}" corresponde a "${item.pt}" em língua portuguesa.`;
-          } else if (diff === 'medium') {
-            qText = `[Difícil Q${i}] Assinale a frase em que o termo em inglês "${item.en}" está empregado corretamente no contexto:`;
-            opts = [
-              `"This is my ${item.en.toLowerCase()}." (Tradução: Este é o meu / esta é a minha ${item.pt.toLowerCase()}).`,
-              `"${item.en} goodbye yes no yellow." (Sequência sem lógica sintática).`,
-              `"No ${item.en.toLowerCase()} stop where." (Estrutura incorreta).`,
-              `"Tomorrow ${item.en.toLowerCase()} yesterday." (Sem sentido gramatical).`
-            ];
-            correct = 0;
-            exp = `A frase "This is my ${item.en.toLowerCase()}" estrutura corretamente o pronome, verbo e substantivo.`;
-          } else {
-            qText = `[Muito Difícil Q${i}] Analise a oração em inglês: "Look, I can see a ${item.en.toLowerCase()} in the room!" Qual a tradução exata do enunciado?`;
-            opts = [
-              `"Olhe, eu consigo ver um(a) ${item.pt.toLowerCase()} na sala!"`,
-              `"Eu não gosto de estudar vocabulário em inglês."`,
-              `"A sala de aula está completamente trancada."`,
-              `"Aquele objeto sumiu ontem pela manhã."`
-            ];
-            correct = 0;
-            exp = `Tradução por partes: Look (Olhe), I can see (eu consigo ver), a ${item.en.toLowerCase()} (um/uma ${item.pt.toLowerCase()}), in the room (na sala).`;
+            exp = `Compreender o contexto amplo do texto permite identificar que esta opção é a única teoricamente correta.`;
           }
         }
 
@@ -948,23 +798,25 @@
         qObj.opts.forEach((opt, optIdx) => {
           let btnClass = 'option-btn';
           
+          // FEEDBACK VISUAL DE ERRO/ACERTO PARA PROVAS E PERGUNTAS
           if (selectedOpt !== undefined) {
-            if (currentType === 'Perguntas') {
-              if (optIdx === qObj.correct) btnClass += ' correct';
-              else if (selectedOpt === optIdx) btnClass += ' wrong';
-            } else {
-              if (selectedOpt === optIdx) btnClass += ' selected';
+            if (optIdx === qObj.correct) {
+              btnClass += ' correct';
+            } else if (selectedOpt === optIdx) {
+              btnClass += ' wrong';
             }
           }
 
           optionsHTML += `<button class="${btnClass}" onclick="selectOption(${index}, ${optIdx})">${opt}</button>`;
         });
 
-        // EXPLICAÇÃO MOSTRADA CASO TENHA RESPONDIDO NO MODO PERGUNTAS OU FINALIZADO
-        if (selectedOpt !== undefined && currentType === 'Perguntas') {
+        // EXIBIÇÃO DA EXPLICAÇÃO E STATUS DE ACERTO/ERRO
+        if (selectedOpt !== undefined) {
           const isCorrect = selectedOpt === qObj.correct;
           const bgClass = isCorrect ? 'correct-bg' : 'wrong-bg';
-          const statusText = isCorrect ? '<strong><i class="fa-solid fa-circle-check" style="color: var(--green)"></i> Parabéns, você acertou!</strong>' : '<strong><i class="fa-solid fa-circle-xmark" style="color: var(--red)"></i> Resposta Incorreta!</strong>';
+          const statusText = isCorrect 
+            ? '<strong><i class="fa-solid fa-circle-check" style="color: var(--green)"></i> Você acertou!</strong>' 
+            : '<strong><i class="fa-solid fa-circle-xmark" style="color: var(--red)"></i> Você errou!</strong>';
           
           explanationHTML = `
             <div class="explanation-box ${bgClass}">
@@ -992,13 +844,13 @@
     }
 
     function saveProgress(showAlert = true) {
-      const key = `gabaritei_v3_${currentSubject}_${currentType}_${currentDifficulty}`;
+      const key = `gabaritei_v4_${currentSubject}_${currentType}_${currentDifficulty}`;
       localStorage.setItem(key, JSON.stringify(userAnswers));
       if (showAlert) alert('Progresso salvo com sucesso!');
     }
 
     function loadSavedProgress() {
-      const key = `gabaritei_v3_${currentSubject}_${currentType}_${currentDifficulty}`;
+      const key = `gabaritei_v4_${currentSubject}_${currentType}_${currentDifficulty}`;
       const saved = localStorage.getItem(key);
       if (saved) {
         userAnswers = JSON.parse(saved);
@@ -1010,22 +862,8 @@
     function resetProgress() {
       if (confirm('Tem certeza que deseja reiniciar todo o progresso desta prova/pergunta?')) {
         userAnswers = {};
-        const key = `gabaritei_v3_${currentSubject}_${currentType}_${currentDifficulty}`;
+        const key = `gabaritei_v4_${currentSubject}_${currentType}_${currentDifficulty}`;
         localStorage.removeItem(key);
-        
-        // RE-EMBARALHAMENTO ANTI-REPETIÇÃO
-        const qKey = `${currentSubject}_${currentDifficulty}`;
-        if (cachedQuestions[qKey]) {
-          cachedQuestions[qKey].forEach(q => {
-            for (let i = q.opts.length - 1; i > 0; i--) {
-              const j = Math.floor(Math.random() * (i + 1));
-              [q.opts[i], q.opts[j]] = [q.opts[j], q.opts[i]];
-              if (q.correct === i) q.correct = j;
-              else if (q.correct === j) q.correct = i;
-            }
-          });
-        }
-        
         renderQuiz();
       }
     }
