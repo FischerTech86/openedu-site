@@ -559,7 +559,6 @@
 
       <div id="questionsContainer"></div>
 
-      <!-- BOTÕES DE CONTROLE ATIVOS E VISÍVEIS -->
       <div class="quiz-actions">
         <button class="btn-action btn-reset" onclick="resetProgress()">
           <i class="fa-solid fa-rotate-left"></i> Reiniciar
@@ -577,158 +576,290 @@
     let currentDifficulty = 'easy';
     let userAnswers = {};
     let cachedQuestions = {};
+    let currentSeed = 1;
 
-    const wordsList = ["Gato", "Cachorro", "Pássaro", "Borboleta", "Elefante", "Azeitona", "Girafa", "Tartaruga", "Hipopótamo", "Jacaré"];
-    const bioTopics = ["olhos", "ouvidos", "pulmões", "coração", "estômago", "ossos", "dentes", "mãos", "pés", "pele"];
-    const geoPlaces = ["rua", "bairro", "cidade", "estado", "país", "praça", "escola", "parque", "mercado", "hospital"];
-    const histDocs = ["Certidão de Nascimento", "RG", "CPF", "Carteira de Vacinação", "Boletim", "Passaporte"];
-    const artColors = ["Vermelho", "Azul", "Amarelo", "Verde", "Roxo", "Laranja", "Preto", "Branco"];
-    const ingWords = [
-      {en: "Dog", pt: "Cachorro"}, {en: "Cat", pt: "Gato"}, {en: "Apple", pt: "Maçã"}, 
-      {en: "Red", pt: "Vermelho"}, {en: "Blue", pt: "Azul"}, {en: "One", pt: "Um"}, 
-      {en: "Book", pt: "Livro"}, {en: "School", pt: "Escola"}, {en: "Sun", pt: "Sol"}, {en: "Water", pt: "Água"}
-    ];
+    // BANCOS DE DADOS ESPECÍFICOS E REAIS POR MATÉRIA
+    const subjectData = {
+      "Educação Física": {
+        topics: ["Alongamento", "Corrida de Estafeta", "Futebol de Salão", "Basquetebol", "Queimada", "Amarelinha", "Pula Corda", "Ginástica Geral", "Capoeira", "Ritmos e Danças"],
+        easy: (t, i) => ({
+          q: `Para que serve a prática do ${t} na Educação Física?`,
+          opts: ["Para exercitar o corpo e promover a saúde", "Para causar cansaço excessivo sem benefício", "Para substituir as refeições diárias", "Para jogar videogame no celular"],
+          correct: 0,
+          exp: `A prática de ${t} desenvolve capacidades físicas e estimula hábitos saudáveis.`
+        }),
+        medium: (t, i) => ({
+          q: `Durante uma aula prática de Educação Física, o professor organizou uma atividade focada em ${t}. Considerando as regras de boa convivência e saúde física, qual conduta é a mais adequada?`,
+          opts: ["Respeitar as regras do jogo, colaborar com os colegas e manter a hidratação", "Ignorar o trabalho em equipe e tentar vencer de forma individualista", "Parar a atividade e recusar-se a participar do aquecimento", "Utilizar calçados inadequados que possam provocar lesões"],
+          correct: 0,
+          exp: `Em atividades como ${t}, o trabalho em equipe e a segurança corporal são fundamentais.`
+        }),
+        hard: (t, i) => ({
+          q: `Leia o texto explicativo sobre esportes e jogos motores: "O desenvolvimento motor na infância envolve habilidades fundamentais como correr, saltar e arremessar. Ao praticar ${t}, os alunos aprimoram o equilíbrio, a agilidade e a coordenação motora grossa, além de aprenderem sobre cooperação interpessoal." Com base no texto e nos conhecimentos sobre fisiologia do exercício escolar, assinale a afirmativa correta:`,
+          opts: [
+            `A prática constante de ${t} estimula o sistema cardiorrespiratório e fortalece a musculatura corporal.`,
+            `O exercício físico reduz a capacidade respiratória dos praticantes em longo prazo.`,
+            `A atividade motora deve ser praticada sem aquecimento prévio para evitar fadiga imediata.`,
+            `Jogos coletivos impedem o desenvolvimento da autonomia e da inteligência social dos alunos.`
+          ],
+          correct: 0,
+          exp: `Atividades físicas bem orientadas como ${t} promovem ganhos cardiorrespiratórios e sociais.`
+        })
+      },
 
-    function buildUniqueQuestions(subject, diff) {
+      "História": {
+        topics: ["Certidão de Nascimento", "Linha do Tempo", "Patrimônio Cultural", "Tradições de Família", "Fundação das Cidades", "Povos Indígenas", "Monumentos Históricos", "Museus", "Abolição da Escravidão", "Independência do Brasil"],
+        easy: (t, i) => ({
+          q: `O que é a ${t}?`,
+          opts: ["Um documento ou registro importante sobre a história", "Um brinquedo eletrônico moderno", "Uma comida típica do almoço", "Um esporte praticado no estádio"],
+          correct: 0,
+          exp: `O termo ${t} refere-se a um elemento essencial para a memória e história.`
+        }),
+        medium: (t, i) => ({
+          q: `Ao analisar a história de uma comunidade, os historiadores pesquisam fontes antigas. Qual é a importância de preservar elementos como ${t}?`,
+          opts: ["Permite compreender a identidade e a evolução cultural da sociedade ao longo do tempo", "Serve apenas para ocupar espaço em armários e bibliotecas velhas", "Não possui qualquer utilidade para o estudo dos dias atuais", "Substitui a necessidade de estudar os livros didáticos"],
+          correct: 0,
+          exp: `A preservação de fontes como ${t} garante o resgate histórico e a valorização cultural.`
+        }),
+        hard: (t, i) => ({
+          q: `A história é construída a partir da análise rigorosa de vestígios e registros deixados pelas gerações passadas. Ao estudar o tema ${t}, pesquisadores utilizam cartas, relatos orais, fotografias e documentos oficiais para reconstruir o modo de vida do passado. Com base nos métodos de investigação histórica, assinale a opção correta:`,
+          opts: [
+            `O estudo do tema ${t} ajuda a compreender as transformações sociais e o papel dos sujeitos históricos.`,
+            `As fontes históricas devem ser ignoradas, pois apenas relatos atuais possuem validade científica.`,
+            `A história da sociedade é estática e não sofreu alterações nos últimos dois séculos.`,
+            `Documentos do passado servem unicamente como elementos decorativos em acervos museológicos.`
+          ],
+          correct: 0,
+          exp: `Estudar ${t} permite interpretar criticamente as mudanças e continuidades na sociedade.`
+        })
+      },
+
+      "Geografia": {
+        topics: ["Bairro Residencial", "Zona Urbana e Rural", "Mapas e Legendas", "Rosa dos Ventos", "Preservação dos Rios", "Relevo e Vegetação", "Clima e Tempo", "Transporte Público", "Ponto de Referência", "Reciclagem de Lixo"],
+        easy: (t, i) => ({
+          q: `O que caracteriza o conceito de ${t}?`,
+          opts: ["Uma forma de organizar e compreender o espaço geográfico", "Um tipo de animal marinho", "Uma operação matemática de divisão", "Um instrumento musical de sopro"],
+          correct: 0,
+          exp: `${t} é um conceito fundamental no estudo da Geografia e do espaço.`
+        }),
+        medium: (t, i) => ({
+          q: `Em uma aula de Geografia sobre organização espacial, a turma observou o funcionamento de ${t}. Qual alternativa representa uma característica direta desse elemento?`,
+          opts: ["A influência direta nas atividades diárias e na circulação das pessoas pela cidade", "A ausência total de interação com o meio ambiente e a sociedade", "Ser um elemento exclusivo de regiões desérticas sem população", "Não necessitar de nenhum tipo de planejamento ou infraestrutura"],
+          correct: 0,
+          exp: `${t} desempenha papel essencial na organização do território e da comunidade.`
+        }),
+        hard: (t, i) => ({
+          q: `O espaço geográfico é continuamente modificado pela ação humana e pelos fenômenos naturais. Ao analisar a presença de ${t} nas paisagens contemporâneas, percebe-se a necessidade de um desenvolvimento sustentável que equilibre o progresso econômico com a proteção ambiental. Com base na análise geográfica da paisagem, assinale a opção correta:`,
+          opts: [
+            `A transformação responsável de ${t} garante a preservação dos recursos naturais para as futuras gerações.`,
+            `O meio ambiente pode ser explorado sem limites, pois os recursos naturais são infinitos.`,
+            `As paisagens modificadas pelo homem não influenciam no clima nem na qualidade de vida da população.`,
+            `A cartografia e o estudo do espaço não têm relevância na gestão das cidades modernas.`
+          ],
+          correct: 0,
+          exp: `O estudo sobre ${t} reforça a importância da sustentabilidade e do planejamento territorial.`
+        })
+      },
+
+      "Artes": {
+        topics: ["Cores Primárias", "Desenho de Observação", "Pintura em Tela", "Escultura em Argila", "Teatro de Sombras", "Ritmo Musical", "Instrumentos de Percussão", "Dança Folclórica", "Mosaico", "Arte Urbana"],
+        easy: (t, i) => ({
+          q: `A técnica de ${t} é utilizada para quê?`,
+          opts: ["Expressar ideias, sentimentos e formas de arte visual/sonora", "Calcular a velocidade de um automóvel", "Medir a temperatura da água", "Analisar reações químicas"],
+          correct: 0,
+          exp: `${t} é uma linguagem artística voltada para a expressão criativa.`
+        }),
+        medium: (t, i) => ({
+          q: `Na aula de Artes, a professora convidou os alunos a explorarem o conceito de ${t}. De que maneira essa expressão artística contribui para a formação dos estudantes?`,
+          opts: ["Estimula a criatividade, a coordenação motora e a sensibilidade estética", "Impede o desenvolvimento da imaginação e do pensamento crítico", "Serve apenas para decorar cadernos sem reflexão artística", "Exige o uso de ferramentas digitais avançadas obrigatoriamente"],
+          correct: 0,
+          exp: `A prática de ${t} desperta a percepção estética e o potencial criativo.`
+        }),
+        hard: (t, i) => ({
+          q: `A História da Arte demonstra como as diferentes culturas utilizaram linguagens visuais, sonoras e corporais para registrar sua visão de mundo. Ao estudar ${t}, é possível identificar elementos como composição, textura, ritmo e harmonia nas produções culturais. Diante da relevância da educação artística nas escolas, assinale a afirmativa correta:`,
+          opts: [
+            `A experimentação com ${t} amplia o repertório cultural e a capacidade de expressão dos alunos.`,
+            `A arte deve seguir regras rígidas e sem espaço para a subjetividade ou inovação dos artistas.`,
+            `As manifestações culturais tradicionais não possuem valor histórico no cenário artístico atual.`,
+            `O estudo da música e das artes visuais limita o raciocínio abstrato das crianças.`
+          ],
+          correct: 0,
+          exp: `Trabalhar com ${t} enriquece o repertório cultural e valoriza a diversidade artística.`
+        })
+      },
+
+      "Ensino Religioso": {
+        topics: ["Respeito Mútuo", "Cultura de Paz", "Empatia", "Valores Familiares", "Diálogo Inter-religioso", "Solidariedade", "Diversidade Cultural", "Amizade e Fraternidade", "Honestidade", "Cooperação"],
+        easy: (t, i) => ({
+          q: `O princípio da ${t} nos ensina a:`,
+          opts: ["Conviver em harmonia e respeitar todas as pessoas", "Discutir sem ouvir a opinião do colega", "Ignorar as regras de boa convivência", "Guardar brinquedos só para si"],
+          correct: 0,
+          exp: `${t} é fundamental para a construção de relações humanas saudáveis.`
+        }),
+        medium: (t, i) => ({
+          q: `A convivência em sociedade exige o exercício constante da cidadania e da ética. Ao praticar a ${t} na escola e na família, qual resultado positivo é alcançado?`,
+          opts: ["Fortalecimento dos laços comunitários e respeito às diferenças individuais", "Aumento dos conflitos e desentendimentos entre as pessoas", "Isolamento social e recusa ao trabalho em equipe", "Preconceito em relação às tradições culturais dos outros"],
+          correct: 0,
+          exp: `A prática da ${t} desenvolve a empatia e o respeito à diversidade.`
+        }),
+        hard: (t, i) => ({
+          q: `O Ensino Religioso na escola pública busca promover os direitos humanos, o respeito à diversidade cultural e os valores éticos universais. O tema ${t} estimula o acolhimento, a tolerância e o combate a qualquer forma de discriminação nas relações sociais. Com base nos valores éticos da vida comunitária, assinale a opção correta:`,
+          opts: [
+            `O exercício constante da ${t} contribui para uma sociedade mais justa, pacífica e solidária.`,
+            `A diversidade de crenças e culturas deve ser desencorajada no ambiente escolar.`,
+            `A empatia é uma característica nata que não pode ser desenvolvida por meio da educação.`,
+            `Valores éticos não possuem relevância para a formação de cidadãos conscientes.`
+          ],
+          correct: 0,
+          exp: `Vivenciar a ${t} constrói uma cultura de paz e respeito mútuo na sociedade.`
+        })
+      },
+
+      "Língua Inglesa": {
+        topics: ["Greetings (Saudações)", "Colors (Cores)", "Numbers (Números)", "Family Members", "Animals (Animais)", "School Supplies", "Days of the Week", "Fruits (Frutas)", "Parts of the Body", "Weather (Clima)"],
+        easy: (t, i) => ({
+          q: `Na língua inglesa, a palavra associada ao tema "${t}" refere-se a qual conceito?`,
+          opts: ["Um vocabulário básico do cotidiano em inglês", "Um sinal de pontuação em português", "Um cálculo matemático", "Uma regra de jogo de futebol"],
+          correct: 0,
+          exp: `O estudo de ${t} faz parte das primeiras etapas de aprendizagem de inglês.`
+        }),
+        medium: (t, i) => ({
+          q: `In English class, students learned vocabulary about ${t}. Which of the following options represents a correct usage or word related to this vocabulary group?`,
+          opts: ["Learning words related to daily interactions and English communication", "Writing sentences only in Portuguese during English class", "Translating words with completely wrong meanings", "Ignoring the correct pronunciation of new words"],
+          correct: 0,
+          exp: `Understanding ${t} helps build a solid foundation for simple English dialogues.`
+        }),
+        hard: (t, i) => ({
+          q: `Read the short contextual passage: "When learning a foreign language like English in elementary school, students practice vocabulary related to ${t}. Recognizing words in contexts such as reading short texts and listening to stories enhances linguistic skills and intercultural competence." Based on English language learning strategies, choose the correct sentence:`,
+          opts: [
+            `Practicing English terms about ${t} helps students expand vocabulary and comprehension.`,
+            `Vocabulary study is useless because english words are never used in real life.`,
+            `Pronunciation practice should be avoided when learning new foreign vocabulary.`,
+            `English grammar and vocabulary cannot be taught through interactive activities.`
+          ],
+          correct: 0,
+          exp: `Studying topics like ${t} improves vocabulary acquisition and language confidence.`
+        })
+      },
+
+      "Língua Portuguesa": {
+        topics: ["Substantivos e Adjetivos", "Sinais de Pontuação", "Uso da Maiúscula", "Separação Silábica", "Sinônimos e Antônimos", "Rimas e Poesia", "Interpretação de Texto", "Encontro Vocálico", "Ortografia (CH, X, S, Z)", "Tipos de Frases"],
+        easy: (t, i) => ({
+          q: `A regra gramatical sobre ${t} serve para:`,
+          opts: ["Escrever frases e textos de forma clara e correta", "Contar o número de metros de uma quadra", "Identificar a cor dos objetos", "Calcular a soma de dois números"],
+          correct: 0,
+          exp: `A aplicação de ${t} garante a precisão e a clareza da comunicação escrita.`
+        }),
+        medium: (t, i) => ({
+          q: `Durante a aula de Português, a professora pediu aos alunos que revisassem um texto sobre ${t}. Qual alternativa apresenta uma atitude correta quanto ao uso da língua portuguesa?`,
+          opts: ["Aplicar as regras ortográficas e pontuação para tornar a leitura compreensível", "Escrever sem usar pontos ou vírgulas em nenhum parágrafo", "Iniciar frases declarativas sempre com letras minúsculas", "Usar palavras desconhecidas sem verificar o significado no dicionário"],
+          correct: 0,
+          exp: `Revisar aspectos como ${t} melhora a coesão e a coerência textual.`
+        }),
+        hard: (t, i) => ({
+          q: `Leia o trecho do texto a seguir para responder à questão: "A leitura atenta e a escrita correta são ferramentas fundamentais para a expressão do pensamento. Ao estudar o conteúdo de ${t}, o leitor desenvolve habilidades analíticas necessárias para interpretar textos literários e informativos com autonomia." Com base nas normas cultas da Língua Portuguesa, assinale a alternativa inteiramente correta:`,
+          opts: [
+            `A correta aplicação de ${t} enriquece o texto e facilita a compreensão do leitor.`,
+            `A pontuação e a ortografia não alteram o sentido original de uma mensagem escrita.`,
+            `Textos informativos não necessitam seguir as regras gramaticais da língua padrão.`,
+            `O uso de dicionários deve ser evitado durante o processo de produção textual.`
+          ],
+          correct: 0,
+          exp: `Dominar tópicos como ${t} é essencial para a norma-padrão e para a escrita eficiente.`
+        })
+      },
+
+      "Matemática": {
+        topics: ["Adição e Subtração", "Multiplicação Simples", "Divisão de Itens", "Formas Geométricas", "Medidas de Tempo (Horas)", "Sistema Monetário (R$)", "Frações Visuais", "Gráficos de Barras", "Pares e Ímpares", "Problemas de Raciocínio"],
+        easy: (t, i) => ({
+          q: `Em Matemática, ao resolver um problema de ${t}, o estudante deve:`,
+          opts: ["Calcular os valores com atenção para encontrar a resposta exata", "Chutar um número qualquer sem ler o problema", "Desenhar uma figura sem relação com os números", "Mudar o enunciado da questão"],
+          correct: 0,
+          exp: `O estudo de ${t} desenvolve o raciocínio lógico e numérico.`
+        }),
+        medium: (t, i) => ({
+          q: `Um aluno estava resolvendo uma tarefa sobre ${t}. Ele reuniu as informações, organizou os dados e realizou as operações necessárias. Qual é a importância de conferir o resultado final?`,
+          opts: ["Garantir a exatidão do cálculo e evitar erros de atenção", "Aumentar o tempo gasto na lição sem necessidade", "Modificar os dados do problema original", "Eliminar os números da folha de resposta"],
+          correct: 0,
+          exp: `A verificação do resultado em ${t} assegura a precisão do raciocínio matemático.`
+        }),
+        hard: (t, i) => ({
+          q: `A Resolução de Problemas é um pilar essencial do aprendizado matemático. Ao deparar-se com uma situação prática envolvendo ${t}, o estudante precisa interpretar os dados fornecidos, selecionar a operação adequada e validar sua resposta através de testes lógicos. Considerando os conceitos matemáticos estudados, assinale a opção correta:`,
+          opts: [
+            `A estruturação lógica dos dados no tema de ${t} permite chegar à solução correta com precisão.`,
+            `A ordem das operações matemáticas não altera o resultado final da equação.`,
+            `Problemas matemáticos do cotidiano não exigem raciocínio nem conferência de dados.`,
+            `O uso de gráficos e tabelas dificulta o entendimento de problemas numéricos.`
+          ],
+          correct: 0,
+          exp: `Resolver problemas de ${t} estimula o pensamento analítico e a precisão técnica.`
+        })
+      },
+
+      "Ciências da Natureza": {
+        topics: ["Ciclo da Água", "Plantas e Fotossíntese", "Anatomia Humana", "Animais Vertebrados", "Reciclagem e Lixo", "Alimentação Saudável", "Estados da Matéria", "Sistema Solar", "Hábitos de Higiene", "Cadeia Alimentar"],
+        easy: (t, i) => ({
+          q: `O estudo sobre ${t} nos ajuda a compreender:`,
+          opts: ["Como a natureza e o corpo humano funcionam em equilíbrio", "Regras do trânsito na cidade", "Construção de prédios de concreto", "Nomes de países em outros idiomas"],
+          correct: 0,
+          exp: `${t} é um tema vital das Ciências para entender o mundo vivo.`
+        }),
+        medium: (t, i) => ({
+          q: `Na aula de Ciências da Natureza, a turma realizou uma experiência sobre ${t}. Qual das alternativas representa uma observação científica válida sobre o tema?`,
+          opts: ["A preservação e o respeito aos recursos naturais mantêm o equilíbrio ambiental", "Os seres vivos não dependem da água ou da luz solar para sobreviver", "A poluição não afeta a saúde dos animais e vegetais", "O ecossistema não sofre alterações com o descarte de resíduos"],
+          correct: 0,
+          exp: `Compreender ${t} revela a interconexão entre os seres vivos e o ambiente.`
+        }),
+        hard: (t, i) => ({
+          q: `A investigação científica no Ensino Fundamental visa desenvolver a atitude reflexiva sobre os fenômenos naturais. Ao estudar a fundo o tema ${t}, observam-se as relações ecológicas, as transformações da matéria e o impacto da intervenção humana nos ecossistemas. Diante dos princípios das Ciências Biológicas e Ambientais, assinale a afirmativa correta:`,
+          opts: [
+            `A preservação do equilíbrio ecológico no tema de ${t} é essencial para a sustentabilidade da vida.`,
+            `Os ecossistemas renovam-se instantaneamente, ignorando agressões ambientais graves.`,
+            `O método científico baseia-se em achismos sem a necessidade de observação rigorosa.`,
+            `A biodiversidade não possui relação com a estabilidade dos ecossistemas terrestres.`
+          ],
+          correct: 0,
+          exp: `O conhecimento sobre ${t} fundamenta práticas de conscientização e sustentabilidade.`
+        })
+      }
+    };
+
+    function generateQuestions(subject, diff, seed) {
       const questions = [];
+      const sData = subjectData[subject] || subjectData["Língua Portuguesa"];
+      const topics = sData.topics;
 
       for (let i = 1; i <= 150; i++) {
-        let qText = "";
-        let opts = [];
-        let correct = 0;
-        let exp = "";
-
-        if (subject === "Língua Portuguesa") {
-          const w = wordsList[(i - 1) % wordsList.length];
-          if (diff === 'easy') {
-            // PERGUNTA PEQUENA (CURTA E DIRETA)
-            qText = `Primeira letra da palavra "${w}"?`;
-            const first = w.charAt(0);
-            opts = [first, "X", "Z", "M"];
-            correct = 0;
-            exp = `A palavra "${w}" começa com a letra ${first}.`;
-          } else if (diff === 'medium') {
-            // PERGUNTA MÉDIA (MÉDIO TAMANHO E CONTEXTO)
-            qText = `Durante a aula de leitura, a professora pediu aos alunos que analisassem a estrutura de algumas palavras. Considerando a palavra "${w}", assinale a alternativa que apresenta a contagem exata e correta do número de letras:`;
-            opts = [
-              `Possui exatamente ${w.length} letras.`,
-              `Possui exatamente ${w.length + 2} letras.`,
-              `Possui apenas ${w.length - 1} letras.`,
-              `Não é possível contar o número de letras.`
-            ];
-            correct = 0;
-            exp = `A contagem direta da palavra "${w}" resulta em ${w.length} letras.`;
-          } else {
-            // PERGUNTA GRANDE (TEXTO LONGO E ANÁLISE COMPLEXA)
-            qText = `Leia atentamente o texto a seguir para responder à questão: "Naquela manhã ensolarada no parque, as crianças observavam com atenção o comportamento dos animais e a natureza ao seu redor. Ao avistarem a figura do termo '${w.toLowerCase()}', começaram a debater sobre as regras da língua portuguesa e a correta aplicação sintática nas orações formais." Com base no texto e nas normas gramaticais da Língua Portuguesa referentes à pontuação, acentuação e uso de letras maiúsculas, assinale a opção inteiramente correta:`;
-            opts = [
-              `O/A ${w.toLowerCase()} estava no jardim. (Sentença iniciada com letra maiúscula e finalizada com ponto final).`,
-              `o ${w.toLowerCase()} estava no jardim? (Sentença iniciada sem maiúscula e pontuação final incorreta para afirmação).`,
-              `O ${w.toLowerCase()} estava no jardim, (Sentença sem pontuação de encerramento, terminada apenas com vírgula).`,
-              `O, ${w.toLowerCase()} estava no jardim! (Separação inadequada entre o artigo e o substantivo por vírgula).`
-            ];
-            correct = 0;
-            exp = `Frases declarativas normais iniciam obrigatoriamente com letra maiúscula e terminam com ponto final, sem vírgulas desnecessárias entre artigo e substantivo.`;
-          }
-        } 
-        else if (subject === "Matemática") {
-          const n1 = (i * 2) % 40 + 1;
-          const n2 = (i * 3) % 15 + 1;
-          if (diff === 'easy') {
-            qText = `Quanto é ${n1} + ${n2}?`;
-            const ans = n1 + n2;
-            opts = [`${ans}`, `${ans + 3}`, `${ans - 1}`, `${ans + 5}`];
-            correct = 0;
-            exp = `A soma simples de ${n1} com ${n2} é igual a ${ans}.`;
-          } else if (diff === 'medium') {
-            qText = `Um estudante estava organizando seus brinquedos e decidiu separar os itens em duas caixas. Ele colocou ${n1} itens na primeira caixa e ${n2} na segunda. Qual é o valor total de brinquedos guardados?`;
-            const ans = n1 + n2;
-            opts = [`${ans} brinquedos`, `${ans + 4} brinquedos`, `${ans + 2} brinquedos`, `${ans - 3} brinquedos`];
-            correct = 0;
-            exp = `Somando os itens das duas caixas (${n1} + ${n2}), o resultado total é ${ans}.`;
-          } else {
-            qText = `Considere a seguinte situação de planejamento financeiro escolar: A diretoria de uma escola adquiriu um lote inicial com ${n1 * 10} livros didáticos para a biblioteca. No primeiro semestre, foram distribuídos ${n2 * 2} livros para os alunos do 1º ano. No segundo semestre, a escola precisou enviar o triplo dessa quantidade para a biblioteca comunitária do bairro. Considerando todas as movimentações e retiradas efetuadas ao longo do ano letivo, quantos livros ainda restam no estoque principal da biblioteca escolar?`;
-            const consumido = (n2 * 2) + (n2 * 2 * 3);
-            const sobra = (n1 * 10) - consumido;
-            opts = [
-              `Restam exatamente ${sobra} livros no estoque.`,
-              `Restam exatamente ${sobra + 12} livros no estoque.`,
-              `O estoque de livros ficou totalmente zerado.`,
-              `Faltaram livros e o saldo ficou negativo em ${sobra} unidades.`
-            ];
-            correct = 0;
-            exp = `Distribuição 1º sem = ${n2 * 2}. Envio 2º sem = ${n2 * 2 * 3}. Total retirado = ${consumido}. Estoque restante = ${n1 * 10} - ${consumido} = ${sobra}.`;
-          }
-        }
-        else if (subject === "Ciências da Natureza") {
-          const body = bioTopics[(i - 1) % bioTopics.length];
-          if (diff === 'easy') {
-            qText = `Qual a função básica dos ${body}?`;
-            opts = [`Estrutura do corpo humano`, `Objeto inanimado`, `Elemento químico`, `Brinquedo`];
-            correct = 0;
-            exp = `Os ${body} são partes integrantes da anatomia e do corpo humano.`;
-          } else if (diff === 'medium') {
-            qText = `Ao estudar o funcionamento e o bem-estar do corpo humano na disciplina de Ciências, os alunos aprenderam sobre a importância dos cuidados com a saúde. Qual das atitudes abaixo é essencial para manter o bom funcionamento de órgãos como ${body}?`;
-            opts = [
-              `Manter hábitos saudáveis de alimentação, higiene e descanso diário.`,
-              `Consumir alimentos sem lavar e evitar escovar os dentes.`,
-              `Ingerir pouca água potável durante todo o dia.`,
-              `Evitar atividades físicas e dormir poucas horas.`
-            ];
-            correct = 0;
-            exp = `Hábitos regulares de higiene e nutrição adequada mantêm as funções vitais do corpo equilibradas.`;
-          } else {
-            qText = `A poluição ambiental nos grandes centros urbanos e o descarte inadequado de resíduos afetam diretamente a qualidade de vida e a saúde da população humana. Sabendo que o organismo humano depende do equilíbrio do meio ambiente para funcionar corretamente, analise como a poluição contínua do ar, da água e do solo pode impactar negativamente órgãos do corpo como ${body}:`;
-            opts = [
-              `Prejudica os sistemas biológicos e fragiliza as defesas naturais do organismo contra doenças.`,
-              `Fortalece a imunidade e acelera a regeneração das células corporais.`,
-              `Não causa nenhum tipo de alteração ou impacto na saúde humana.`,
-              `Melhora substancialmente a oxigenação do sangue e a capacidade física.`
-            ];
-            correct = 0;
-            exp = `A exposição prolongada a poluentes compromete os sistemas biológicos e enfraquece o sistema imunológico.`;
-          }
-        }
-        else {
-          // PADRÃO PARA OUTRAS MATÉRIAS (HISTÓRIA, GEOGRAFIA, ARTES, ED. FÍSICA, ENS. RELIGIOSO, INGLÊS)
-          if (diff === 'easy') {
-            qText = `[${subject}] Pergunta simples ${i}: Qual é a opção correta?`;
-            opts = [`Opção Correta`, `Incorreta A`, `Incorreta B`, `Incorreta C`];
-            correct = 0;
-            exp = `Esta é a alternativa correta para a questão direta de ${subject}.`;
-          } else if (diff === 'medium') {
-            qText = `[${subject}] Durante os estudos sobre a matéria de ${subject}, analise a situação hipotética descrita na questão ${i} e assinale qual das alternativas apresenta a solução adequada:`;
-            opts = [`Solução correta e fundamentada`, `Alternativa sem lógica`, `Opção inconsistente`, `Resposta errada`];
-            correct = 0;
-            exp = `Analisando o contexto da situação apresentada em ${subject}, esta é a conduta/resposta adequada.`;
-          } else {
-            qText = `[${subject}] Leia o texto explicativo sobre os conceitos avançados de ${subject}: "A compreensão detalhada das dinâmicas sociais, culturais e científicas exige uma análise profunda sobre as transformações do conhecimento na questão ${i}. O impacto dessas práticas reflete na sociedade moderna de maneira contínua." De acordo com o texto acima e seus conhecimentos teóricos sobre a matéria, assinale a opção inteiramente verdadeira:`;
-            opts = [
-              `A afirmativa reflete com precisão os conceitos teóricos e científicos da disciplina.`,
-              `A afirmativa contradiz completamente os fatos históricos e conceituais estudados.`,
-              `O texto sugere uma conclusão impossível do ponto de vista prático.`,
-              `Nenhuma das teorias apresentadas possui valor acadêmico ou prático.`
-            ];
-            correct = 0;
-            exp = `Compreender o contexto amplo do texto permite identificar que esta opção é a única teoricamente correta.`;
-          }
-        }
-
-        // EMBARALHAMENTO CONTROLADO DAS OPÇÕES
-        const seed = (i * 7) % 4;
-        const shuffledOpts = [...opts];
-        const temp = shuffledOpts[0];
-        shuffledOpts[0] = shuffledOpts[seed];
-        shuffledOpts[seed] = temp;
+        // Usa o seed e o índice para garantir variação completa ao reiniciar
+        const topicIndex = (i + seed * 3) % topics.length;
+        const topic = topics[topicIndex];
         
-        const finalCorrectIndex = seed;
+        let qRaw;
+        if (diff === 'easy') {
+          qRaw = sData.easy(topic, i);
+        } else if (diff === 'medium') {
+          qRaw = sData.medium(topic, i);
+        } else {
+          qRaw = sData.hard(topic, i);
+        }
+
+        // Embaralhamento de opções com base na semente
+        const opts = [...qRaw.opts];
+        const correctText = opts[qRaw.correct];
+
+        const shuffleShift = (i + seed) % 4;
+        const temp = opts[0];
+        opts[0] = opts[shuffleShift];
+        opts[shuffleShift] = temp;
+
+        const finalCorrectIndex = opts.indexOf(correctText);
 
         questions.push({
           id: i,
-          q: qText,
-          opts: shuffledOpts,
+          q: `${qRaw.q}`,
+          opts: opts,
           correct: finalCorrectIndex,
-          exp: exp
+          exp: qRaw.exp
         });
       }
 
@@ -771,9 +902,9 @@
     }
 
     function getQuestions() {
-      const key = `${currentSubject}_${currentDifficulty}`;
+      const key = `${currentSubject}_${currentDifficulty}_seed_${currentSeed}`;
       if (!cachedQuestions[key]) {
-        cachedQuestions[key] = buildUniqueQuestions(currentSubject, currentDifficulty);
+        cachedQuestions[key] = generateQuestions(currentSubject, currentDifficulty, currentSeed);
       }
       return cachedQuestions[key];
     }
@@ -798,7 +929,6 @@
         qObj.opts.forEach((opt, optIdx) => {
           let btnClass = 'option-btn';
           
-          // FEEDBACK VISUAL DE ERRO/ACERTO PARA PROVAS E PERGUNTAS
           if (selectedOpt !== undefined) {
             if (optIdx === qObj.correct) {
               btnClass += ' correct';
@@ -810,7 +940,6 @@
           optionsHTML += `<button class="${btnClass}" onclick="selectOption(${index}, ${optIdx})">${opt}</button>`;
         });
 
-        // EXIBIÇÃO DA EXPLICAÇÃO E STATUS DE ACERTO/ERRO
         if (selectedOpt !== undefined) {
           const isCorrect = selectedOpt === qObj.correct;
           const bgClass = isCorrect ? 'correct-bg' : 'wrong-bg';
@@ -844,26 +973,29 @@
     }
 
     function saveProgress(showAlert = true) {
-      const key = `gabaritei_v4_${currentSubject}_${currentType}_${currentDifficulty}`;
-      localStorage.setItem(key, JSON.stringify(userAnswers));
+      const key = `gabaritei_v5_${currentSubject}_${currentType}_${currentDifficulty}`;
+      localStorage.setItem(key, JSON.stringify({ answers: userAnswers, seed: currentSeed }));
       if (showAlert) alert('Progresso salvo com sucesso!');
     }
 
     function loadSavedProgress() {
-      const key = `gabaritei_v4_${currentSubject}_${currentType}_${currentDifficulty}`;
+      const key = `gabaritei_v5_${currentSubject}_${currentType}_${currentDifficulty}`;
       const saved = localStorage.getItem(key);
       if (saved) {
-        userAnswers = JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        userAnswers = parsed.answers || {};
+        currentSeed = parsed.seed || 1;
       } else {
         userAnswers = {};
+        currentSeed = 1;
       }
     }
 
     function resetProgress() {
-      if (confirm('Tem certeza que deseja reiniciar todo o progresso desta prova/pergunta?')) {
+      if (confirm('Ao reiniciar, um novo conjunto de perguntas exclusivas será gerado para esta matéria e o progresso atual será zerado. Deseja continuar?')) {
         userAnswers = {};
-        const key = `gabaritei_v4_${currentSubject}_${currentType}_${currentDifficulty}`;
-        localStorage.removeItem(key);
+        currentSeed += 1; // Muda totalmente a geração de questões sem repetições
+        saveProgress(false);
         renderQuiz();
       }
     }
