@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gabaritei! - Plataforma de Estudos Completa</title>
+  <title>Gabaritei! - Plataforma de Estudos</title>
   <style>
     :root {
-      --bg-dark: #0b0f19;
-      --card-bg: #111827;
-      --card-border: #1f2937;
-      --card-hover: #1e293b;
+      --bg-dark: #070a12;
+      --card-bg: #0d1322;
+      --card-border: #1e293b;
+      --card-hover: #162032;
       --accent-blue: #2563eb;
       --accent-light: #3b82f6;
       --text-main: #f3f4f6;
@@ -22,340 +22,93 @@
       --wrong-text: #f87171;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
 
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+    header { text-align: center; padding: 2.5rem 1rem 1.5rem; }
+    header h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    header p { color: var(--text-muted); font-size: 0.95rem; }
 
-    header {
-      text-align: center;
-      padding: 2.5rem 1rem 1.5rem;
-    }
-
-    header h1 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    header p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    .level-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      padding: 0 1rem;
-    }
-
+    /* Abas dos Níveis */
+    .level-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; padding: 0 1rem; }
     .tab-btn {
-      background: #1e293b;
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.85rem;
-      transition: all 0.2s ease;
-      text-align: center;
+      background: #111827; border: 1px solid var(--card-border); color: var(--text-muted);
+      padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.85rem;
+      transition: all 0.2s; text-align: center;
     }
+    .tab-btn span { display: block; font-size: 0.7rem; font-weight: 400; text-transform: uppercase; opacity: 0.8; margin-top: 2px; }
+    .tab-btn.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-light); box-shadow: 0 0 15px rgba(37, 99, 235, 0.4); }
 
-    .tab-btn span {
-      display: block;
-      font-size: 0.7rem;
-      font-weight: 400;
-      text-transform: uppercase;
-      opacity: 0.8;
-      margin-top: 2px;
-    }
-
-    .tab-btn.active {
-      background: var(--accent-blue);
-      color: #fff;
-      border-color: var(--accent-light);
-      box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem 3rem;
-      width: 100%;
-      flex: 1;
-    }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.25rem;
-    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 3rem; width: 100%; flex: 1; }
+    .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem; }
 
     .subject-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 1.25rem;
-      cursor: pointer;
-      transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
+      background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px;
+      padding: 1.25rem; cursor: pointer; transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
     }
+    .subject-card:hover { transform: translateY(-3px); border-color: var(--accent-blue); background-color: var(--card-hover); }
+    .card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
+    
+    .topic-list { list-style: none; }
+    .topic-list li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem; position: relative; padding-left: 12px; }
+    .topic-list li::before { content: "•"; position: absolute; left: 0; color: var(--accent-blue); }
 
-    .subject-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--accent-blue);
-      background-color: var(--card-hover);
-    }
-
-    .card-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .topic-list {
-      list-style: none;
-    }
-
-    .topic-list li {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 0.4rem;
-      position: relative;
-      padding-left: 12px;
-    }
-
-    .topic-list li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--accent-blue);
-    }
-
+    /* Modais */
     .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      padding: 1rem;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85);
+      display: none; justify-content: center; align-items: center; z-index: 1000; padding: 1rem;
     }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
+    .modal-overlay.active { display: flex; }
     .modal-content {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      width: 100%;
-      max-width: 850px;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 2rem;
-      position: relative;
+      background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px;
+      width: 100%; max-width: 500px; padding: 2rem; position: relative;
     }
+    .modal-content.large { max-width: 850px; max-height: 90vh; overflow-y: auto; }
+    .close-modal { position: absolute; top: 1rem; right: 1.2rem; background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; }
 
-    .close-modal {
-      position: absolute;
-      top: 1.2rem;
-      right: 1.2rem;
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 1.5rem;
-      cursor: pointer;
+    /* Modal do Tipo de Conteúdo (3ª Imagem) */
+    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+    .menu-option {
+      background: #090d16; border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem 1rem;
+      display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; transition: all 0.2s;
     }
+    .menu-option:hover { border-color: var(--accent-blue); background: var(--card-hover); transform: translateY(-2px); }
+    .menu-option .icon { font-size: 1.8rem; }
+    .menu-option span { font-weight: 600; font-size: 0.95rem; }
 
-    .modal-title {
-      font-size: 1.6rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 0.2rem;
-    }
-
-    .modal-subtitle {
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Estilos baseados nas capturas enviadas */
-    .filter-group {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 1.25rem;
-    }
-
+    /* Interface do Simulado */
+    .filter-group { display: flex; justify-content: center; gap: 10px; margin-bottom: 1.25rem; }
     .filter-btn {
-      background: transparent;
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
+      background: transparent; border: 1px solid var(--card-border); color: var(--text-muted);
+      padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
     }
-
-    .filter-btn.active {
-      background: var(--accent-blue);
-      color: #fff;
-      border-color: var(--accent-light);
-    }
+    .filter-btn.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-light); }
 
     .stats-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #0d1322;
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      padding: 12px 18px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
+      display: flex; justify-content: space-between; align-items: center; background: #070a12;
+      border: 1px solid var(--card-border); border-radius: 8px; padding: 12px 18px; font-size: 0.9rem; font-weight: 600; margin-bottom: 1.5rem;
     }
 
-    .question-box {
-      background: #0d1322;
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 1.5rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .question-stem {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 1.25rem;
-      font-weight: 500;
-    }
-
-    .options-container {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
+    .question-box { background: #070a12; border: 1px solid var(--card-border); border-radius: 10px; padding: 1.5rem; margin-bottom: 1.25rem; }
+    .question-stem { font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.25rem; font-weight: 500; }
+    .options-container { display: flex; flex-direction: column; gap: 10px; }
+    
     .opt-btn {
-      background: #111827;
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
-      padding: 12px 16px;
-      border-radius: 8px;
-      text-align: left;
-      cursor: pointer;
-      font-size: 0.88rem;
-      transition: all 0.2s;
+      background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main);
+      padding: 12px 16px; border-radius: 8px; text-align: left; cursor: pointer; font-size: 0.88rem; transition: all 0.2s;
     }
+    .opt-btn:hover:not(:disabled) { border-color: var(--accent-light); background: var(--card-hover); }
+    .opt-btn.selected { border-color: var(--accent-blue); background: rgba(37, 99, 235, 0.15); }
 
-    .opt-btn:hover:not(:disabled) {
-      border-color: var(--accent-light);
-      background: #1e293b;
-    }
+    .feedback-box { margin-top: 1.25rem; padding: 1rem 1.25rem; border-radius: 8px; border-left: 4px solid; font-size: 0.88rem; line-height: 1.5; }
+    .feedback-box.correct { background: var(--correct-bg); border-color: var(--correct-border); color: var(--correct-text); }
+    .feedback-box.wrong { background: var(--wrong-bg); border-color: var(--wrong-border); color: var(--wrong-text); }
 
-    .opt-btn.selected {
-      border-color: var(--accent-blue);
-      background: rgba(37, 99, 235, 0.15);
-    }
+    .modal-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 1.5rem; }
+    .btn-secondary { background: #1e293b; border: 1px solid var(--card-border); color: #fff; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+    .btn-primary { background: var(--accent-blue); border: none; color: #fff; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; }
 
-    /* Feedback Estilizado */
-    .feedback-box {
-      margin-top: 1.25rem;
-      padding: 1rem 1.25rem;
-      border-radius: 8px;
-      border-left: 4px solid;
-      font-size: 0.88rem;
-      line-height: 1.5;
-    }
-
-    .feedback-box.correct {
-      background: var(--correct-bg);
-      border-color: var(--correct-border);
-      color: var(--correct-text);
-    }
-
-    .feedback-box.wrong {
-      background: var(--wrong-bg);
-      border-color: var(--wrong-border);
-      color: var(--wrong-text);
-    }
-
-    .feedback-header {
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 6px;
-
-    }
-
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 12px;
-      margin-top: 1.5rem;
-    }
-
-    .btn-secondary {
-      background: #1e293b;
-      border: 1px solid var(--card-border);
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .btn-primary {
-      background: var(--accent-blue);
-      border: none;
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      border-top: 1px solid var(--card-border);
-    }
+    footer { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--card-border); }
   </style>
 </head>
 <body>
@@ -366,139 +119,192 @@
   </header>
 
   <div class="level-tabs">
-    <button class="tab-btn active" onclick="switchLevel('fund1')">1º ao 5º Ano<span>Fundamental I</span></button>
-    <button class="tab-btn" onclick="switchLevel('fund2')">6º ao 9º Ano<span>Fundamental II</span></button>
-    <button class="tab-btn" onclick="switchLevel('medio')">1º ao 3º Ano<span>Ensino Médio</span></button>
-    <button class="tab-btn" onclick="switchLevel('concursos')">Concursos Públicos<span>Carreiras</span></button>
+    <button class="tab-btn active" id="tab-fund1" onclick="switchLevel('fund1')">1º ao 5º Ano<span>Fundamental I</span></button>
+    <button class="tab-btn" id="tab-fund2" onclick="switchLevel('fund2')">6º ao 9º Ano<span>Fundamental II</span></button>
+    <button class="tab-btn" id="tab-medio" onclick="switchLevel('medio')">1º ao 3º Ano<span>Ensino Médio</span></button>
+    <button class="tab-btn" id="tab-concursos" onclick="switchLevel('concursos')">Concursos Públicos<span>Carreiras</span></button>
   </div>
 
   <div class="container" id="contentArea"></div>
 
-  <!-- Modal Interativo do Banco de Questões -->
-  <div class="modal-overlay" id="quizModal">
+  <!-- Modal 1: Seleção de Tipo de Conteúdo (Réplica da 3ª Imagem) -->
+  <div class="modal-overlay" id="contentTypeModal">
     <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('contentTypeModal')">&times;</button>
+      <h3 style="text-align: center; font-size: 1.4rem;" id="typeModalTitle">Língua Portuguesa</h3>
+      <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">Selecione o tipo de conteúdo que deseja acessar:</p>
+      
+      <div class="menu-grid">
+        <div class="menu-option" onclick="selectContentType('Provas')">
+          <span class="icon">📄</span>
+          <span>Provas</span>
+        </div>
+        <div class="menu-option" onclick="selectContentType('Explicações')">
+          <span class="icon">💡</span>
+          <span>Explicações</span>
+        </div>
+        <div class="menu-option" onclick="selectContentType('Perguntas')">
+          <span class="icon">❓</span>
+          <span>Perguntas</span>
+        </div>
+        <div class="menu-option" onclick="selectContentType('Vídeos')">
+          <span class="icon">▶️</span>
+          <span>Vídeos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Áreas do Simulado / Banco de Questões -->
+  <div class="modal-overlay" id="quizModal">
+    <div class="modal-content large">
       <button class="close-modal" onclick="closeModal('quizModal')">&times;</button>
       
-      <h3 class="modal-title" id="mTitle">Provas de Língua Portuguesa</h3>
-      <p class="modal-subtitle" id="mSubtitle">Modo: Provas - Ensino Fundamental I</p>
+      <h3 style="text-align: center; font-size: 1.5rem;" id="mTitle">Provas de Língua Portuguesa</h3>
+      <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.2rem;" id="mSubtitle">Modo: Provas - Ensino Fundamental I</p>
 
-      <!-- Seleção de Dificuldade/Tamanho -->
       <div class="filter-group">
         <button class="filter-btn active" id="f-easy" onclick="setDiff('easy')">Pequeno (Fácil)</button>
         <button class="filter-btn" id="f-medium" onclick="setDiff('medium')">Médio (Difícil)</button>
         <button class="filter-btn" id="f-hard" onclick="setDiff('hard')">Grande (Muito Difícil)</button>
       </div>
 
-      <!-- Barra de Estatísticas -->
       <div class="stats-bar">
         <span>Respondidas: <span id="answeredCount">0</span>/150</span>
         <span>Banco Exclusivo: 150 Questões</span>
       </div>
 
-      <!-- Questão Atual -->
       <div id="questionWrapper"></div>
 
-      <!-- Rodapé de Ações -->
       <div class="modal-actions">
         <button class="btn-secondary" onclick="restartQuiz()">🔄 Reiniciar</button>
-        <button class="btn-primary" onclick="saveProgress()">💾 Salvar Progresso</button>
+        <button class="btn-primary" onclick="alert('Progresso salvo!')">💾 Salvar Progresso</button>
       </div>
     </div>
   </div>
 
   <footer>
-    &copy; 2026 FichTeck. Todos os direitos reservados. Gabaritei é uma marca registrada.
+    &copy; 2026 Gabaritei!. Todos os direitos reservados.
   </footer>
 
   <script>
-    // Banco Real de Questões
-    const realDatabase = {
-      "Artes": [
-        {
-          difficulty: "hard",
-          stem: "1. A História da Arte demonstra como as diferentes culturas utilizaram linguagens visuais, sonoras e corporais para registrar sua visão de mundo. Ao estudar Teatro de Sombras, é possível identificar elementos como composição, textura, ritmo e harmonia nas produções culturais. Diante da relevância da educação artística nas escolas, assinale a afirmativa correta:",
-          options: [
-            "As manifestações culturais tradicionais não possuem valor histórico no cenário artístico atual.",
-            "A arte deve seguir regras rígidas, e sem espaço para a subjetividade ou inovação dos artistas.",
-            "A experimentação com Teatro de Sombras amplia o repertório cultural e a capacidade de expressão dos alunos.",
-            "O estudo da música e das artes visuais limita o raciocínio abstrato das crianças."
-          ],
-          correct: 2,
-          explanation: "A experimentação prática em linguagens como o Teatro de Sombras estimula a criatividade, a expressão subjetiva e a ampliação do repertório cultural no processo educativo."
-        }
-      ],
-      "Língua Portuguesa": [
-        {
-          difficulty: "easy",
-          stem: "1. No trecho 'O aluno dedicou-se aos estudos para alcançar seus objetivos', a palavra em destaque exerce a função de conectar ideias de finalidade. Assinale a alternativa em que a palavra 'para' possui a mesma relação de sentido:",
-          options: [
-            "Ele viajou para o interior de Minas Gerais.",
-            "Estudamos bastante para passar na avaliação.",
-            "Olhou para o lado antes de atravessar a rua.",
-            "Entregou o presente para o seu melhor amigo."
-          ],
-          correct: 1,
-          explanation: "Dominar tópicos como Interpretação de Texto e Conjunções de Finalidade é essencial para a norma-padrão e para a escrita eficiente."
-        },
-        {
-          difficulty: "easy",
-          stem: "2. Considere a relação de sentido entre as palavras no vocabulário. Assinale a opção em que o par de termos apresenta uma relação de antonímia perfeita:",
-          options: [
-            "Rápido e Veloz",
-            "Claro e Transparente",
-            "Corajoso e Covarde",
-            "Grande e Enorme"
-          ],
-          correct: 2,
-          explanation: "Dominar tópicos como Sinônimos e Antônimos é essencial para a norma-padrão e para a escrita eficiente."
-        }
-      ],
-      "Ensino Religioso": [
-        {
-          difficulty: "hard",
-          stem: "1. A diversidade cultural e religiosa reflete a pluralidade da sociedade humana. O respeito às diferentes tradições e valores éticos fundamenta a convivência harmoniosa. Com base nos princípios da alteridade e dos direitos humanos, assinale a opção correta:",
-          options: [
-            "A liberdade de crença e de expressão deve ser garantida a todos os indivíduos sem distinção.",
-            "Apenas uma tradição cultural pode ser considerada válida na estruturação social.",
-            "O diálogo inter-religioso prejudica a preservação das identidades culturais regionais.",
-            "As tradições filosóficas antigas deixaram de influenciar a ética contemporânea."
-          ],
-          correct: 0,
-          explanation: "O respeito à diversidade e o reconhecimento da liberdade de crença asseguram o exercício pleno da cidadania e a cultura de paz."
-        }
-      ]
-    };
-
-    const academyData = {
+    // Banco Completo de Matérias por Nível Escolar
+    const platformData = {
       fund1: {
         title: "Ensino Fundamental I",
-        items: [
-          { name: "Língua Portuguesa", topics: ["Interpretação de Textos", "Sinônimos e Antônimos", "Gramática Básica"] },
-          { name: "Artes", topics: ["Teatro de Sombras", "Linguagens Visuais", "História da Arte"] },
-          { name: "Ensino Religioso", topics: ["Diversidade Cultural", "Valores Éticos", "Alteridade"] }
+        subjects: [
+          { name: "Língua Portuguesa", icon: "📘", topics: ["Processo de Alfabetização", "Prática de Leitura e Escrita", "Interpretação de Textos", "Gramática e Ortografia Básica"] },
+          { name: "Matemática", icon: "➕", topics: ["Estudo dos Números", "Operações Básicas (+, -, ×, ÷)", "Geometria Simples", "Noções de Medidas e Dinheiro"] },
+          { name: "Ciências da Natureza", icon: "🌱", topics: ["Estudo do Corpo Humano", "Preservação do Meio Ambiente", "Hábitos de Saúde e Higiene", "Fenômenos da Natureza"] },
+          { name: "História", icon: "⏳", topics: ["Noções de Identidade e Tempo", "História da Família e Escola", "Convivência na Comunidade", "Cidadania e Transformações"] },
+          { name: "Geografia", icon: "🗺️", topics: ["Compreensão do Espaço Vivenciado", "Estudo de Bairros e Cidades", "Mapas Simples e Orientação", "Paisagens Naturais e Modificadas"] },
+          { name: "Artes", icon: "🎨", topics: ["Expressão Criativa e Desenho", "Pintura e Formas Visuais", "Atividades de Teatro", "Música e Ritmo"] },
+          { name: "Educação Física", icon: "🏃", topics: ["Desenvolvimento Motor", "Jogos e Brincadeiras", "Regras de Convivência", "Coordenação Corporal"] },
+          { name: "Ensino Religioso", icon: "🕊️", topics: ["Valores Éticos e Humanos", "Respeito à Diversidade", "Cultura de Paz e Empatia", "Convivência em Sociedade"] },
+          { name: "Língua Inglesa", icon: "🔤", topics: ["Vocabulário Inicial", "Saudações e Expressões", "Cores, Números e Objetos", "Escuta e Pronúncia Básica"] }
+        ]
+      },
+      fund2: {
+        title: "Ensino Fundamental II",
+        subjects: [
+          { name: "Língua Portuguesa", icon: "📘", topics: ["Análise Sintática", "Gêneros Textuais", "Ortografia e Acentuação", "Literatura Infanto-Juvenil"] },
+          { name: "Matemática", icon: "📐", topics: ["Álgebra e Equações", "Geometria Plana", "Frações e Porcentagem", "Estatística Básica"] },
+          { name: "História", icon: "🏛️", topics: ["História Antiga e Medieval", "Brasil Colônia e Império", "Revolução Industrial", "História Contemporânea"] },
+          { name: "Geografia", icon: "🌍", topics: ["Geopolítica Mundial", "Cartografia e Relevo", "Climas e Biomas", "Urbanização e População"] },
+          { name: "Ciências", icon: "🔬", topics: ["Física e Química Introdução", "Células e Genética", "Ecossistemas", "Tabela Periódica Básica"] },
+          { name: "Língua Inglesa", icon: "🇬🇧", topics: ["Gramática Intermediária", "Interpretação de Textos", "Verbos Irregulares", "Conversação"] }
+        ]
+      },
+      medio: {
+        title: "Ensino Médio",
+        subjects: [
+          { name: "Língua Portuguesa", icon: "📚", topics: ["Gramática Profunda", "Interpretação ENEM", "Redação Dissertativa", "Estilística"] },
+          { name: "Literatura", icon: "📖", topics: ["Escolas Literárias", "Barroco e Romantismo", "Modernismo no Brasil", "Obras Literárias Obrigatórias"] },
+          { name: "Matemática", icon: "📊", topics: ["Funções e Trigonometria", "Geometria Espacial", "Análise Combinatória", "Matrizes e Determinantes"] },
+          { name: "Física", icon: "⚡", topics: ["Mecânica Clássica", "Termodinâmica", "Óptica e Ondas", "Eletromagnetismo"] },
+          { name: "Química", icon: "🧪", topics: ["Química Geral", "Físico-Química", "Química Orgânica", "Estequiometria"] },
+          { name: "Biologia", icon: "🧬", topics: ["Citologia e Genética", "Ecologia e Biomas", "Evolução e Biotecnologia", "Anatomia Humana"] },
+          { name: "História", icon: "📜", topics: ["História do Brasil", "História Geral", "Guerramundiais e Fria", "Brasil República"] },
+          { name: "Geografia", icon: "🌐", topics: ["Geografia do Brasil", "Globalização e Economia", "Impactos Ambientais", "Geopolítica Global"] },
+          { name: "Filosofia e Sociologia", icon: "🧠", topics: ["Pensadores Clássicos", "Direitos e Cidadania", "Sociologia Contemporânea", "Ética e Política"] }
+        ]
+      },
+      concursos: {
+        title: "Concursos Públicos",
+        subjects: [
+          { name: "Língua Portuguesa", icon: "📝", topics: ["Interpretação de Bancas", "Sintaxe da Oração e Período", "Crases e Regência", "Pontuação e Concordância"] },
+          { name: "Raciocínio Lógico", icon: "💡", topics: ["Lógica Proposicional", "Tabelas Verdade", "Diagramas Lógicos", "Análise Combinatória"] },
+          { name: "Direito Constitucional", icon: "⚖️", topics: ["Direitos Fundamentais", "Organização do Estado", "Poder Executivo e Legislativo", "Controle de Constitucionalidade"] },
+          { name: "Direito Administrativo", icon: "🏛️", topics: ["Atos Administrativos", "Licitações (Lei 14.133)", "Servidores Públicos", "Improbidade Administrativa"] },
+          { name: "Informática", icon: "💻", topics: ["Segurança da Informação", "Redes e Internet", "Sistemas Operacionais", "Suíte Office / LibreOffice"] }
         ]
       }
     };
 
-    let selectedSubject = "Língua Portuguesa";
-    let selectedDiff = "easy";
+    // Banco de Perguntas Específicas
+    const questionBank = {
+      "Língua Portuguesa": [
+        {
+          difficulty: "easy",
+          stem: "1. No trecho 'O aluno dedicou-se aos estudos para alcançar seus objetivos', a palavra em destaque exerce a função de conectar ideias de finalidade. Assinale a opção correspondente:",
+          options: ["Ele viajou para o interior.", "Estudamos bastante para passar na avaliação.", "Olhou para o lado.", "Entregou o presente para o amigo."],
+          correct: 1,
+          explanation: "A preposição 'para' estabelece sentido de finalidade na frase."
+        },
+        {
+          difficulty: "easy",
+          stem: "2. Assinale o par de palavras que apresenta uma relação de antonímia perfeita:",
+          options: ["Rápido e Veloz", "Claro e Transparente", "Corajoso e Covarde", "Grande e Enorme"],
+          correct: 2,
+          explanation: "'Corajoso' e 'Covarde' possuem significados opostos (antônimos)."
+        }
+      ],
+      "Artes": [
+        {
+          difficulty: "hard",
+          stem: "1. Ao estudar Teatro de Sombras, identifica-se elementos como composição, ritmo e harmonia. Assinale a afirmativa correta sobre a educação artística:",
+          options: [
+            "As manifestações culturais não possuem valor histórico no cenário atual.",
+            "A arte deve seguir regras rígidas sem espaço para a subjetividade.",
+            "A experimentação com Teatro de Sombras amplia o repertório cultural do aluno.",
+            "O estudo da música limita o raciocínio abstrato."
+          ],
+          correct: 2,
+          explanation: "O Teatro de Sombras desenvolve a criatividade e amplia o repertório cultural na escola."
+        }
+      ]
+    };
+
+    // Variáveis Globais de Estado
+    let currentLevelKey = "fund1";
+    let selectedSubject = "";
+    let selectedContentType = "";
+    let currentDiff = "easy";
     let activeQuestions = [];
     let userAnswers = {};
 
     window.onload = function() {
-      renderDashboard();
+      renderSubjects();
     };
 
-    function renderDashboard() {
+    function switchLevel(levelKey) {
+      currentLevelKey = levelKey;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`tab-${levelKey}`).classList.add('active');
+      renderSubjects();
+    }
+
+    function renderSubjects() {
       const area = document.getElementById('contentArea');
+      const data = platformData[currentLevelKey];
       let html = '<div class="grid-container">';
-      
-      academyData.fund1.items.forEach(item => {
-        const topicsHtml = item.topics.map(t => `<li>${t}</li>`).join('');
+
+      data.subjects.forEach(sub => {
+        const topics = sub.topics.map(t => `<li>${t}</li>`).join('');
         html += `
-          <div class="subject-card" onclick="openQuiz('${item.name}')">
-            <div class="card-title">📚 ${item.name}</div>
-            <ul class="topic-list">${topicsHtml}</ul>
+          <div class="subject-card" onclick="openContentTypeModal('${sub.name}')">
+            <div class="card-title">${sub.icon} ${sub.name}</div>
+            <ul class="topic-list">${topics}</ul>
           </div>
         `;
       });
@@ -507,42 +313,56 @@
       area.innerHTML = html;
     }
 
-    function openQuiz(subjectName) {
+    // Modal 1: Abre a seleção da 3ª imagem
+    function openContentTypeModal(subjectName) {
       selectedSubject = subjectName;
-      document.getElementById('mTitle').innerText = `Provas de ${subjectName}`;
-      document.getElementById('mSubtitle').innerText = `Modo: Provas - Ensino Fundamental I`;
+      document.getElementById('typeModalTitle').innerText = subjectName;
+      document.getElementById('contentTypeModal').classList.add('active');
+    }
+
+    // Ao escolher Provas, Perguntas, etc.
+    function selectContentType(type) {
+      selectedContentType = type;
+      closeModal('contentTypeModal');
+      openQuizModal();
+    }
+
+    // Modal 2: Abre a interface do simulado
+    function openQuizModal() {
+      const levelTitle = platformData[currentLevelKey].title;
+      document.getElementById('mTitle').innerText = `${selectedContentType} de ${selectedSubject}`;
+      document.getElementById('mSubtitle').innerText = `Modo: ${selectedContentType} - ${levelTitle}`;
       
       setDiff('easy');
       document.getElementById('quizModal').classList.add('active');
     }
 
-    function closeModal(id) {
-      document.getElementById(id).classList.remove('active');
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
     }
 
     function setDiff(diff) {
-      selectedDiff = diff;
+      currentDiff = diff;
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(`f-${diff}`).classList.add('active');
 
-      // Busca questões reais ou gera estrutura com dados do tema
-      const bank = realDatabase[selectedSubject] || [];
-      activeQuestions = bank.filter(q => q.difficulty === diff);
+      const questions = questionBank[selectedSubject] || [];
+      activeQuestions = questions.filter(q => q.difficulty === diff);
 
       if (activeQuestions.length === 0) {
-        // Fallback realista usando dados reais
+        // Fallback dinâmico para matérias sem questões cadastradas
         activeQuestions = [
           {
             difficulty: diff,
-            stem: `1. Ao analisar os conceitos essenciais da matéria de ${selectedSubject}, assinale a alternativa que apresenta a interpretação correta das diretrizes de ensino:`,
+            stem: `1. Assinale a alternativa que apresenta o conceito fundamental para o módulo de ${selectedSubject}:`,
             options: [
-              `A aplicação prática dos fundamentos de ${selectedSubject} favorece o aprendizado analítico.`,
-              `As regras de estudo desta disciplina impedem a interpretação crítica.`,
-              `Os temas tratados no módulo não possuem relação com o contexto social.`,
-              `A memorização mecânica é o único método para a fixação dos conteúdos.`
+              `O domínio prático dos tópicos de ${selectedSubject} desenvolve o raciocínio crítico.`,
+              `Os exercícios desta matéria não possuem aplicação no dia a dia.`,
+              `Apenas a memorização sem interpretação é recomendada neste nível.`,
+              `Nenhuma das alternativas anteriores está correta.`
             ],
             correct: 0,
-            explanation: `Dominar os fundamentos e a aplicação prática de ${selectedSubject} é essencial para o desenvolvimento acadêmico do aluno.`
+            explanation: `Compreender a aplicação prática de ${selectedSubject} é indispensável para a consolidação do aprendizado.`
           }
         ];
       }
@@ -576,7 +396,7 @@
           const isCorrect = userAnswers[qIndex] === q.correct;
           feedbackHtml = `
             <div class="feedback-box ${isCorrect ? 'correct' : 'wrong'}">
-              <div class="feedback-header">
+              <div style="font-weight: 700; margin-bottom: 4px;">
                 ${isCorrect ? '✔ Você acertou!' : '✖ Você errou!'}
               </div>
               <div><strong>Explicação:</strong> ${q.explanation}</div>
@@ -604,10 +424,6 @@
     function restartQuiz() {
       userAnswers = {};
       renderQuestions();
-    }
-
-    function saveProgress() {
-      alert("Progresso salvo com sucesso!");
     }
   </script>
 </body>
