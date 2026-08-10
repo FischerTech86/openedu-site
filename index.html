@@ -1,398 +1,478 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gabaritei!</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gabaritei! - Plataforma de Estudos Completa</title>
   <style>
     :root {
-      --bg-dark: #070a12;
-      --card-bg: #0d121f;
-      --card-border: #1a233a;
-      --card-hover: #141b2d;
-      --tab-bg: #111726;
-      --tab-active: #2563eb;
-      --text-white: #ffffff;
-      --text-gray: #94a3b8;
-      --text-sub: #64748b;
-      --green: #22c55e;
-      --red: #ef4444;
-      --yellow: #eab308;
+      --bg-dark: #0b0f19;
+      --card-bg: #111827;
+      --card-border: #1f2937;
+      --card-hover: #1e293b;
+      --accent-blue: #2563eb;
+      --accent-light: #3b82f6;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --correct: #10b981;
+      --wrong: #ef4444;
+      --warning: #f59e0b;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
       background-color: var(--bg-dark);
-      color: var(--text-white);
+      color: var(--text-main);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
     }
 
     header {
       text-align: center;
-      margin-bottom: 30px;
+      padding: 2.5rem 1rem 1.5rem;
     }
 
     header h1 {
       font-size: 2.2rem;
-      font-weight: 800;
-      margin-bottom: 10px;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
     }
 
     header p {
-      color: var(--text-gray);
+      color: var(--text-muted);
       font-size: 0.95rem;
     }
 
     .level-tabs {
       display: flex;
-      gap: 12px;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
       justify-content: center;
+      gap: 10px;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      padding: 0 1rem;
     }
 
     .tab-btn {
-      background-color: var(--tab-bg);
+      background: #1e293b;
       border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 10px 18px;
       border-radius: 8px;
-      padding: 10px 20px;
-      color: var(--text-gray);
       cursor: pointer;
-      text-align: center;
+      font-weight: 600;
+      font-size: 0.85rem;
       transition: all 0.2s ease;
+      text-align: center;
     }
 
-    .tab-btn .title {
-      font-size: 0.95rem;
-      font-weight: 700;
+    .tab-btn span {
       display: block;
-      color: var(--text-white);
-    }
-
-    .tab-btn .subtitle {
       font-size: 0.7rem;
+      font-weight: 400;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      opacity: 0.8;
       margin-top: 2px;
-      display: block;
-      color: var(--text-sub);
     }
 
     .tab-btn.active {
-      background-color: var(--tab-active);
-      border-color: var(--tab-active);
+      background: var(--accent-blue);
+      color: #fff;
+      border-color: var(--accent-light);
+      box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
     }
 
-    .tab-content {
-      display: none;
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem 3rem;
       width: 100%;
-      max-width: 1100px;
+      flex: 1;
     }
 
-    .tab-content.active {
-      display: block;
+    .section-title {
+      color: #60a5fa;
+      font-size: 1.2rem;
+      margin: 1.5rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .subjects-grid {
+    .grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
+      gap: 1.25rem;
     }
 
     .subject-card {
-      background-color: var(--card-bg);
+      background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 12px;
-      padding: 24px;
+      padding: 1.25rem;
       cursor: pointer;
       transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
     }
 
     .subject-card:hover {
       transform: translateY(-3px);
-      border-color: #2b3859;
+      border-color: var(--accent-blue);
       background-color: var(--card-hover);
     }
 
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .card-header i { font-size: 1.2rem; }
-    .card-header h3 { font-size: 1.1rem; font-weight: 700; }
-
-    .subject-card ul { list-style: none; }
-    .subject-card li {
-      color: var(--text-gray);
-      font-size: 0.88rem;
-      margin-bottom: 8px;
-      position: relative;
-      padding-left: 14px;
-    }
-
-    .subject-card li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--text-sub);
-    }
-
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease;
-      z-index: 1000;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .modal-box {
-      background-color: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      width: 90%;
-      max-width: 500px;
-      padding: 24px;
-      position: relative;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 16px; right: 16px;
-      background: none; border: none;
-      color: var(--text-gray);
-      font-size: 1.2rem;
-      cursor: pointer;
-    }
-
-    .modal-header { text-align: center; margin-bottom: 20px; }
-    .modal-header h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
-    .modal-header p { font-size: 0.85rem; color: var(--text-gray); }
-
-    .modal-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .modal-option {
-      background-color: #070a12;
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 20px 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      cursor: pointer;
-      color: var(--text-white);
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .modal-option:hover {
-      background-color: #111726;
-      border-color: #2563eb;
-    }
-
-    .modal-option i { font-size: 1.4rem; color: #38bdf8; }
-    .modal-option span { font-size: 0.9rem; font-weight: 600; }
-
-    .quiz-box {
-      background-color: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      width: 95%;
-      max-width: 900px;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 24px;
-      position: relative;
-    }
-
-    .diff-selector {
-      display: flex;
-      gap: 10px;
-      margin: 15px 0;
-      justify-content: center;
-    }
-
-    .diff-btn {
-      background: var(--tab-bg);
-      border: 1px solid var(--card-border);
-      color: var(--text-gray);
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.85rem;
+    .card-title {
+      font-size: 1.1rem;
       font-weight: 600;
-    }
-
-    .diff-btn.active {
-      background: var(--tab-active);
-      color: white;
-      border-color: var(--tab-active);
-    }
-
-    .quiz-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      background: #070a12;
-      padding: 12px 18px;
-      border-radius: 8px;
-      border: 1px solid var(--card-border);
-    }
-
-    .question-item {
-      background: #070a12;
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .question-title {
-      font-size: 0.98rem;
-      font-weight: 600;
-      margin-bottom: 14px;
-      line-height: 1.5;
-    }
-
-    .options-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .option-btn {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      color: var(--text-gray);
-      padding: 12px;
-      border-radius: 6px;
-      text-align: left;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.2s;
-      line-height: 1.4;
-    }
-
-    .option-btn:hover {
-      border-color: var(--tab-active);
-      color: white;
-    }
-
-    .option-btn.correct {
-      border-color: var(--green) !important;
-      background: rgba(34, 197, 94, 0.2) !important;
-      color: #86efac !important;
-      font-weight: 600;
-    }
-
-    .option-btn.wrong {
-      border-color: var(--red) !important;
-      background: rgba(239, 68, 68, 0.2) !important;
-      color: #fca5a5 !important;
-    }
-
-    .explanation-box {
-      margin-top: 14px;
-      padding: 14px 18px;
-      border-radius: 8px;
-      background: #111827;
-      border-left: 4px solid var(--tab-active);
-      font-size: 0.88rem;
-      line-height: 1.5;
-      color: #d1d5db;
-    }
-
-    .explanation-box.correct-bg {
-      border-left-color: var(--green);
-    }
-
-    .explanation-box.wrong-bg {
-      border-left-color: var(--red);
-    }
-
-    .quiz-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: flex-end;
-      margin-top: 24px;
-      padding-top: 15px;
-      border-top: 1px solid var(--card-border);
-      position: sticky;
-      bottom: 0;
-      background: var(--card-bg);
-    }
-
-    .btn-action {
-      padding: 12px 24px;
-      border-radius: 8px;
-      border: none;
-      font-weight: 700;
-      cursor: pointer;
-      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .btn-reset { background: #334155; color: white; }
-    .btn-reset:hover { background: #475569; }
+    .topic-list {
+      list-style: none;
+    }
 
-    .btn-save { background: var(--tab-active); color: white; }
-    .btn-save:hover { background: #1d4ed8; }
+    .topic-list li {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      position: relative;
+      padding-left: 12px;
+    }
 
-    .logout-container { margin-top: 50px; text-align: center; }
-    .logout-btn {
-      background: transparent;
-      border: 1px solid #334155;
-      color: var(--text-white);
-      padding: 10px 30px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 600;
+    .topic-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
       cursor: pointer;
     }
 
-    .icon-blue { color: #38bdf8; }
-    .icon-purple { color: #a855f7; }
-    .icon-green { color: #22c55e; }
-    .icon-orange { color: #f97316; }
-    .icon-teal { color: #14b8a6; }
-    .icon-red { color: #ef4444; }
-    .icon-pink { color: #ec4899; }
-    .icon-yellow { color: #eab308; }
+    .modal-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.2rem;
+      text-align: center;
+    }
+
+    .modal-subtitle {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .type-btn {
+      background: #1e293b;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .type-btn:hover {
+      background: var(--accent-blue);
+      border-color: var(--accent-light);
+    }
+
+    /* Estilos das Explicações e Aulas */
+    .lesson-block {
+      background: #172033;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .lesson-title {
+      color: #60a5fa;
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .lesson-text {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-main);
+      margin-bottom: 1rem;
+    }
+
+    .key-points {
+      background: rgba(37, 99, 235, 0.1);
+      border-left: 3px solid var(--accent-blue);
+      padding: 10px 14px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    .key-points strong {
+      color: #93c5fd;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* Estilos dos Vídeos */
+    .video-card {
+      background: #172033;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-info {
+      padding: 1rem;
+    }
+
+    .video-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .video-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Estilos das Provas e Simulados */
+    .exam-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e293b;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .timer-badge {
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid var(--warning);
+      color: var(--warning);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .result-box {
+      background: #1e293b;
+      border: 1px solid var(--accent-blue);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .result-score {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #60a5fa;
+      margin: 0.5rem 0;
+    }
+
+    /* Estilos do Quiz / Perguntas */
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .difficulty-selector {
+      display: flex;
+      gap: 6px;
+    }
+
+    .diff-btn {
+      background: #1e293b;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    .diff-btn.active {
+      background: var(--accent-blue);
+      color: #fff;
+    }
+
+    .question-item {
+      background: #172033;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .question-title {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .option-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 10px 14px;
+      border-radius: 8px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 0.88rem;
+      transition: background 0.2s;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      background: #2d3748;
+    }
+
+    .option-btn.selected {
+      border-color: var(--accent-light);
+      background: rgba(59, 130, 246, 0.2);
+    }
+
+    .option-btn.correct {
+      background: rgba(16, 185, 129, 0.2) !important;
+      border-color: var(--correct) !important;
+      color: #6ee7b7 !important;
+    }
+
+    .option-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      border-color: var(--wrong) !important;
+      color: #fca5a5 !important;
+    }
+
+    .explanation-box {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(37, 99, 235, 0.1);
+      border-left: 3px solid var(--accent-blue);
+      border-radius: 4px;
+      font-size: 0.82rem;
+      color: #93c5fd;
+      line-height: 1.4;
+    }
+
+    .actions-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+    }
+
+    .action-btn {
+      background: var(--card-border);
+      color: var(--text-main);
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .action-btn.primary {
+      background: var(--accent-blue);
+      color: #fff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--card-border);
+    }
   </style>
 </head>
 <body>
@@ -403,467 +483,247 @@
   </header>
 
   <div class="level-tabs">
-    <button class="tab-btn active">
-      <span class="title">1º ao 5º Ano</span>
-      <span class="subtitle">FUNDAMENTAL I</span>
-    </button>
+    <button class="tab-btn active" onclick="switchLevel('fund1')">1º ao 5º Ano<span>Fundamental I</span></button>
+    <button class="tab-btn" onclick="switchLevel('fund2')">6º ao 9º Ano<span>Fundamental II</span></button>
+    <button class="tab-btn" onclick="switchLevel('medio')">1º ao 3º Ano<span>Ensino Médio</span></button>
+    <button class="tab-btn" onclick="switchLevel('superior')">Ensino Superior<span>Graduação</span></button>
+    <button class="tab-btn" onclick="switchLevel('concursos')">Concursos Públicos<span>Carreiras</span></button>
   </div>
 
-  <div id="fund1" class="tab-content active">
-    <div class="subjects-grid">
-      <div class="subject-card" onclick="openMenuModal('Língua Portuguesa')">
-        <div class="card-header"><i class="fa-solid fa-book icon-blue"></i><h3>Língua Portuguesa</h3></div>
-        <ul>
-          <li>Processo de Alfabetização</li>
-          <li>Prática de Leitura e Escrita</li>
-          <li>Interpretação de Textos</li>
-          <li>Gramática e Ortografia Básica</li>
-        </ul>
-      </div>
+  <div class="container" id="contentArea"></div>
 
-      <div class="subject-card" onclick="openMenuModal('Matemática')">
-        <div class="card-header"><i class="fa-solid fa-plus icon-purple"></i><h3>Matemática</h3></div>
-        <ul>
-          <li>Estudo dos Números</li>
-          <li>Operações Básicas (+, -, ×, ÷)</li>
-          <li>Geometria Simples</li>
-          <li>Noções de Medidas e Dinheiro</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openMenuModal('Ciências da Natureza')">
-        <div class="card-header"><i class="fa-solid fa-flask icon-green"></i><h3>Ciências da Natureza</h3></div>
-        <ul>
-          <li>Estudo do Corpo Humano</li>
-          <li>Preservação do Meio Ambiente</li>
-          <li>Hábitos de Saúde e Higiene</li>
-          <li>Fenômenos da Natureza</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openMenuModal('História')">
-        <div class="card-header"><i class="fa-solid fa-hourglass-half icon-orange"></i><h3>História</h3></div>
-        <ul>
-          <li>Noções de Identidade e Tempo</li>
-          <li>História da Família e Escola</li>
-          <li>Convivência na Comunidade</li>
-          <li>Cidadania e Transformações</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openMenuModal('Geografia')">
-        <div class="card-header"><i class="fa-solid fa-map icon-teal"></i><h3>Geografia</h3></div>
-        <ul>
-          <li>Compreensão do Espaço Vivenciado</li>
-          <li>Estudo de Bairros e Cidades</li>
-          <li>Mapas Simples e Orientação</li>
-          <li>Paisagens Naturais e Modificadas</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openMenuModal('Artes')">
-        <div class="card-header"><i class="fa-solid fa-palette icon-pink"></i><h3>Artes</h3></div>
-        <ul>
-          <li>Expressão Criativa e Desenho</li>
-          <li>Pintura e Formas Visuais</li>
-          <li>Atividades de Teatro</li>
-          <li>Música e Ritmo</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openMenuModal('Educação Física')">
-        <div class="card-header"><i class="fa-solid fa-person-running icon-red"></i><h3>Educação Física</h3></div>
-        <ul>
-          <li>Desenvolvimento Motor</li>
-          <li>Jogos e Brincadeiras</li>
-          <li>Regras de Convivência</li>
-          <li>Coordenação Corporal</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openMenuModal('Ensino Religioso')">
-        <div class="card-header"><i class="fa-solid fa-hands-praying icon-yellow"></i><h3>Ensino Religioso</h3></div>
-        <ul>
-          <li>Valores Éticos e Humanos</li>
-          <li>Respeito à Diversidade</li>
-          <li>Cultura de Paz e Empatia</li>
-          <li>Convivência em Sociedade</li>
-        </ul>
-      </div>
-
-      <div class="subject-card" onclick="openMenuModal('Língua Inglesa')">
-        <div class="card-header"><i class="fa-solid fa-language icon-blue"></i><h3>Língua Inglesa</h3></div>
-        <ul>
-          <li>Vocabulário Inicial</li>
-          <li>Saudações e Expressões</li>
-          <li>Cores, Números e Objetos</li>
-          <li>Escuta e Pronúncia Básica</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="logout-container">
-    <button class="logout-btn">Sair do Sistema</button>
-  </div>
-
-  <!-- MODAL DE OPÇÕES DE CONTEÚDO -->
+  <!-- Modal do Menu de Opções -->
   <div class="modal-overlay" id="menuModal">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal('menuModal')"><i class="fa-solid fa-xmark"></i></button>
-      <div class="modal-header">
-        <h2 id="modalSubjectTitle">Língua Portuguesa</h2>
-        <p>Selecione o tipo de conteúdo que deseja acessar:</p>
-      </div>
-      <div class="modal-grid">
-        <div class="modal-option" onclick="startQuiz('Provas')">
-          <i class="fa-solid fa-file-lines"></i>
-          <span>Provas</span>
-        </div>
-        <div class="modal-option" onclick="startQuiz('Explicações')">
-          <i class="fa-solid fa-lightbulb"></i>
-          <span>Explicações</span>
-        </div>
-        <div class="modal-option" onclick="startQuiz('Perguntas')">
-          <i class="fa-solid fa-circle-question"></i>
-          <span>Perguntas</span>
-        </div>
-        <div class="modal-option" onclick="startQuiz('Vídeos')">
-          <i class="fa-solid fa-circle-play"></i>
-          <span>Vídeos</span>
-        </div>
+    <div class="modal-content" style="max-width: 480px;">
+      <button class="close-modal" onclick="closeModal('menuModal')">&times;</button>
+      <h3 class="modal-title" id="modalSubjectTitle">Língua Portuguesa</h3>
+      <p class="modal-subtitle">Selecione o tipo de conteúdo que deseja acessar:</p>
+      <div class="option-grid">
+        <button class="type-btn" onclick="openModule('Provas')">📄 Provas</button>
+        <button class="type-btn" onclick="openModule('Explicações')">💡 Explicações</button>
+        <button class="type-btn" onclick="openModule('Perguntas')">❓ Perguntas</button>
+        <button class="type-btn" onclick="openModule('Vídeos')">▶️ Vídeos</button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL DE PROVAS E PERGUNTAS -->
+  <!-- Modal de Explicações -->
+  <div class="modal-overlay" id="explanationsModal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('explanationsModal')">&times;</button>
+      <h3 class="modal-title" id="expTitle">Resumo Teórico</h3>
+      <p class="modal-subtitle" id="expSubtitle">Conteúdo Teórico da Disciplina</p>
+      <div id="explanationsContainer"></div>
+    </div>
+  </div>
+
+  <!-- Modal de Vídeos -->
+  <div class="modal-overlay" id="videosModal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('videosModal')">&times;</button>
+      <h3 class="modal-title" id="vidTitle">Videoaulas Recomendadas</h3>
+      <p class="modal-subtitle" id="vidSubtitle">Assista às explicações em vídeo para reforçar o aprendizado</p>
+      <div id="videosContainer"></div>
+    </div>
+  </div>
+
+  <!-- Modal de Provas e Simulados -->
+  <div class="modal-overlay" id="examModal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('examModal')">&times;</button>
+      <div class="exam-header">
+        <div>
+          <h3 id="examTitle" style="font-size: 1.1rem;">Simulado Oficial</h3>
+          <span id="examSubtitle" style="font-size: 0.8rem; color: var(--text-muted);">Avaliação Geral</span>
+        </div>
+        <div class="timer-badge" id="examTimer">⏱️ 15:00</div>
+      </div>
+      <div id="examContainer"></div>
+      <div class="actions-footer">
+        <button class="action-btn" onclick="closeModal('examModal')">Cancelar</button>
+        <button class="action-btn primary" id="btnFinishExam" onclick="finishExam()">Entregar Prova</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Perguntas (Quiz Interativo) -->
   <div class="modal-overlay" id="quizModal">
-    <div class="quiz-box">
-      <button class="modal-close" onclick="closeModal('quizModal')"><i class="fa-solid fa-xmark"></i></button>
-      <div class="modal-header">
-        <h2 id="quizTitle">Provas de Língua Portuguesa</h2>
-        <p id="quizSubtitle">Responda às questões e acompanhe seu progresso</p>
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('quizModal')">&times;</button>
+      <div class="quiz-header">
+        <div>
+          <h3 id="quizTitle" style="font-size: 1.2rem;">Quiz de Matéria</h3>
+          <span id="quizSubtitle" style="font-size: 0.8rem; color: var(--text-muted);">Módulo de Questões</span>
+        </div>
+        <div class="difficulty-selector">
+          <button class="diff-btn active" id="btn-easy" onclick="setDifficulty('easy')">Fácil</button>
+          <button class="diff-btn" id="btn-medium" onclick="setDifficulty('medium')">Médio</button>
+          <button class="diff-btn" id="btn-hard" onclick="setDifficulty('hard')">Difícil</button>
+        </div>
       </div>
 
-      <!-- SELETOR DE DIFICULDADE COM TAMANHOS DE PERGUNTA -->
-      <div class="diff-selector">
-        <button class="diff-btn active" id="btn-easy" onclick="setDifficulty('easy')">Pequeno (Fácil)</button>
-        <button class="diff-btn" id="btn-medium" onclick="setDifficulty('medium')">Médio (Difícil)</button>
-        <button class="diff-btn" id="btn-hard" onclick="setDifficulty('hard')">Grande (Muito Difícil)</button>
-      </div>
-
-      <div class="quiz-controls">
-        <span>Respondidas: <strong id="progressText">0/150</strong></span>
-        <span>Banco Exclusivo: <strong>150 Questões</strong></span>
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+        <span>Progresso: <strong id="progressText" style="color: #fff;">0/0</strong></span>
+        <span id="totalQuestionsText">0 Questões</span>
       </div>
 
       <div id="questionsContainer"></div>
 
-      <div class="quiz-actions">
-        <button class="btn-action btn-reset" onclick="resetProgress()">
-          <i class="fa-solid fa-rotate-left"></i> Reiniciar
-        </button>
-        <button class="btn-action btn-save" onclick="saveProgress(true)">
-          <i class="fa-solid fa-floppy-disk"></i> Salvar Progresso
-        </button>
+      <div class="actions-footer">
+        <button class="action-btn" onclick="resetProgress()">Reiniciar</button>
+        <button class="action-btn primary" onclick="closeModal('quizModal')">Concluir</button>
       </div>
     </div>
   </div>
 
+  <footer>
+    &copy; 2026 FichTeck. Todos os direitos reservados. Gabaritei é uma marca registrada.
+  </footer>
+
   <script>
-    let currentSubject = '';
-    let currentType = '';
-    let currentDifficulty = 'easy';
-    let userAnswers = {};
-    let cachedQuestions = {};
-    let currentSeed = 1;
-
-    // BANCOS DE DADOS ESPECÍFICOS E REAIS POR MATÉRIA
-    const subjectData = {
-      "Educação Física": {
-        topics: ["Alongamento", "Corrida de Estafeta", "Futebol de Salão", "Basquetebol", "Queimada", "Amarelinha", "Pula Corda", "Ginástica Geral", "Capoeira", "Ritmos e Danças"],
-        easy: (t, i) => ({
-          q: `Para que serve a prática do ${t} na Educação Física?`,
-          opts: ["Para exercitar o corpo e promover a saúde", "Para causar cansaço excessivo sem benefício", "Para substituir as refeições diárias", "Para jogar videogame no celular"],
-          correct: 0,
-          exp: `A prática de ${t} desenvolve capacidades físicas e estimula hábitos saudáveis.`
-        }),
-        medium: (t, i) => ({
-          q: `Durante uma aula prática de Educação Física, o professor organizou uma atividade focada em ${t}. Considerando as regras de boa convivência e saúde física, qual conduta é a mais adequada?`,
-          opts: ["Respeitar as regras do jogo, colaborar com os colegas e manter a hidratação", "Ignorar o trabalho em equipe e tentar vencer de forma individualista", "Parar a atividade e recusar-se a participar do aquecimento", "Utilizar calçados inadequados que possam provocar lesões"],
-          correct: 0,
-          exp: `Em atividades como ${t}, o trabalho em equipe e a segurança corporal são fundamentais.`
-        }),
-        hard: (t, i) => ({
-          q: `Leia o texto explicativo sobre esportes e jogos motores: "O desenvolvimento motor na infância envolve habilidades fundamentais como correr, saltar e arremessar. Ao praticar ${t}, os alunos aprimoram o equilíbrio, a agilidade e a coordenação motora grossa, além de aprenderem sobre cooperação interpessoal." Com base no texto e nos conhecimentos sobre fisiologia do exercício escolar, assinale a afirmativa correta:`,
-          opts: [
-            `A prática constante de ${t} estimula o sistema cardiorrespiratório e fortalece a musculatura corporal.`,
-            `O exercício físico reduz a capacidade respiratória dos praticantes em longo prazo.`,
-            `A atividade motora deve ser praticada sem aquecimento prévio para evitar fadiga imediata.`,
-            `Jogos coletivos impedem o desenvolvimento da autonomia e da inteligência social dos alunos.`
-          ],
-          correct: 0,
-          exp: `Atividades físicas bem orientadas como ${t} promovem ganhos cardiorrespiratórios e sociais.`
-        })
+    const academyData = {
+      fund1: {
+        title: "Ensino Fundamental I (1º ao 5º Ano)",
+        sections: [{
+          items: [
+            { name: "Língua Portuguesa", topics: ["Processo de Alfabetização", "Prática de Leitura e Escrita", "Interpretação de Textos", "Gramática e Ortografia Básica"] },
+            { name: "Matemática", topics: ["Estudo dos Números", "Operações Básicas (+, -, *, /)", "Geometria Simples", "Noções de Medidas e Dinheiro"] },
+            { name: "Ciências da Natureza", topics: ["Estudo do Corpo Humano", "Preservação do Meio Ambiente", "Hábitos de Saúde e Higiene", "Fenômenos da Natureza"] },
+            { name: "História", topics: ["Noções de Identidade e Tempo", "História da Família e Escola", "Convivência na Comunidade", "Cidadania e Transformações"] },
+            { name: "Geografia", topics: ["Compreensão do Espaço Vivenciado", "Estudo de Bairros e Cidades", "Mapas Simples e Orientação", "Paisagens Naturais e Modificadas"] },
+            { name: "Artes", topics: ["Expressão Criativa e Desenho", "Pintura e Formas Visuais", "Atividades de Teatro", "Música e Ritmo"] },
+            { name: "Educação Física", topics: ["Desenvolvimento Motor", "Jogos e Brincadeiras", "Regras de Convivência", "Coordenação Corporal"] },
+            { name: "Ensino Religioso", topics: ["Valores Éticos e Humanos", "Respeito à Diversidade", "Cultura de Paz e Empatia", "Convivência em Sociedade"] },
+            { name: "Língua Inglesa", topics: ["Vocabulário Inicial", "Saudações e Expressões", "Cores, Números e Objetos", "Escuta e Pronúncia Básica"] }
+          ]
+        }]
       },
-
-      "História": {
-        topics: ["Certidão de Nascimento", "Linha do Tempo", "Patrimônio Cultural", "Tradições de Família", "Fundação das Cidades", "Povos Indígenas", "Monumentos Históricos", "Museus", "Abolição da Escravidão", "Independência do Brasil"],
-        easy: (t, i) => ({
-          q: `O que é a ${t}?`,
-          opts: ["Um documento ou registro importante sobre a história", "Um brinquedo eletrônico moderno", "Uma comida típica do almoço", "Um esporte praticado no estádio"],
-          correct: 0,
-          exp: `O termo ${t} refere-se a um elemento essencial para a memória e história.`
-        }),
-        medium: (t, i) => ({
-          q: `Ao analisar a história de uma comunidade, os historiadores pesquisam fontes antigas. Qual é a importância de preservar elementos como ${t}?`,
-          opts: ["Permite compreender a identidade e a evolução cultural da sociedade ao longo do tempo", "Serve apenas para ocupar espaço em armários e bibliotecas velhas", "Não possui qualquer utilidade para o estudo dos dias atuais", "Substitui a necessidade de estudar os livros didáticos"],
-          correct: 0,
-          exp: `A preservação de fontes como ${t} garante o resgate histórico e a valorização cultural.`
-        }),
-        hard: (t, i) => ({
-          q: `A história é construída a partir da análise rigorosa de vestígios e registros deixados pelas gerações passadas. Ao estudar o tema ${t}, pesquisadores utilizam cartas, relatos orais, fotografias e documentos oficiais para reconstruir o modo de vida do passado. Com base nos métodos de investigação histórica, assinale a opção correta:`,
-          opts: [
-            `O estudo do tema ${t} ajuda a compreender as transformações sociais e o papel dos sujeitos históricos.`,
-            `As fontes históricas devem ser ignoradas, pois apenas relatos atuais possuem validade científica.`,
-            `A história da sociedade é estática e não sofreu alterações nos últimos dois séculos.`,
-            `Documentos do passado servem unicamente como elementos decorativos em acervos museológicos.`
-          ],
-          correct: 0,
-          exp: `Estudar ${t} permite interpretar criticamente as mudanças e continuidades na sociedade.`
-        })
+      fund2: {
+        title: "Ensino Fundamental II (6º ao 9º Ano)",
+        sections: [{
+          items: [
+            { name: "Língua Portuguesa", topics: ["Gêneros Textuais e Análise Crítica", "Sintaxe, Morfologia e Gramática", "Produção Textual e Argumentação", "Leitura e Literatura Infantojuvenil"] },
+            { name: "Matemática", topics: ["Álgebra e Equações de 1º e 2º Grau", "Geometria Plana e Espacial", "Estatística e Probabilidade", "Grandezas, Unidades e Razão/Proporção"] },
+            { name: "Ciências da Natureza", topics: ["Nivelamento em Biologia e Ecologia", "Noções de Física (Movimento, Energia e Som)", "Noções de Química (Matéria e Misturas)", "Astronomia, Terra e Universo"] },
+            { name: "História", topics: ["História Antiga e Feudalismo", "Brasil Colônia, Império e República", "Guerra Mundial e História Contemporânea", "Cidadania, Direitos e Movimentos Sociais"] },
+            { name: "Geografia", topics: ["Cartografia, Clima e Geomorfologia", "Geopolítica e Globalização", "Domínios Morfoclimáticos do Brasil", "Urbanização e Impactos Ambientais"] },
+            { name: "Língua Inglesa", topics: ["Gramática e Estruturas Verbais (Tenses)", "Interpretação e Leitura (Reading)", "Vocabulário Temático e Expressões", "Habilidades de Compreensão Auditiva"] },
+            { name: "Arte", topics: ["História da Arte Clássica e Moderna", "Artes Visuais, Dança e Teatro", "Música e Elementos Sonoros", "Patrimônio Cultural e Arte Brasileira"] },
+            { name: "Educação Física", topics: ["Esportes de Redes, Campo e Precisão", "Lutas, Ginástica e Práticas Corporais", "Saúde, Qualidade de Vida e Corpo", "Jogos Eletrônicos e Práticas Urbanas"] },
+            { name: "Ensino Religioso", topics: ["Tradições Religiosas e Filosóficas", "Direitos Humanos e Respeito Mútuo", "Análise de Textos Sagrados e Mitos", "Ética, Alteridade e Sociedade"] }
+          ]
+        }]
       },
-
-      "Geografia": {
-        topics: ["Bairro Residencial", "Zona Urbana e Rural", "Mapas e Legendas", "Rosa dos Ventos", "Preservação dos Rios", "Relevo e Vegetação", "Clima e Tempo", "Transporte Público", "Ponto de Referência", "Reciclagem de Lixo"],
-        easy: (t, i) => ({
-          q: `O que caracteriza o conceito de ${t}?`,
-          opts: ["Uma forma de organizar e compreender o espaço geográfico", "Um tipo de animal marinho", "Uma operação matemática de divisão", "Um instrumento musical de sopro"],
-          correct: 0,
-          exp: `${t} é um conceito fundamental no estudo da Geografia e do espaço.`
-        }),
-        medium: (t, i) => ({
-          q: `Em uma aula de Geografia sobre organização espacial, a turma observou o funcionamento de ${t}. Qual alternativa representa uma característica direta desse elemento?`,
-          opts: ["A influência direta nas atividades diárias e na circulação das pessoas pela cidade", "A ausência total de interação com o meio ambiente e a sociedade", "Ser um elemento exclusivo de regiões desérticas sem população", "Não necessitar de nenhum tipo de planejamento ou infraestrutura"],
-          correct: 0,
-          exp: `${t} desempenha papel essencial na organização do território e da comunidade.`
-        }),
-        hard: (t, i) => ({
-          q: `O espaço geográfico é continuamente modificado pela ação humana e pelos fenômenos naturais. Ao analisar a presença de ${t} nas paisagens contemporâneas, percebe-se a necessidade de um desenvolvimento sustentável que equilibre o progresso econômico com a proteção ambiental. Com base na análise geográfica da paisagem, assinale a opção correta:`,
-          opts: [
-            `A transformação responsável de ${t} garante a preservação dos recursos naturais para as futuras gerações.`,
-            `O meio ambiente pode ser explorado sem limites, pois os recursos naturais são infinitos.`,
-            `As paisagens modificadas pelo homem não influenciam no clima nem na qualidade de vida da população.`,
-            `A cartografia e o estudo do espaço não têm relevância na gestão das cidades modernas.`
-          ],
-          correct: 0,
-          exp: `O estudo sobre ${t} reforça a importância da sustentabilidade e do planejamento territorial.`
-        })
+      medio: {
+        title: "Ensino Médio (1º ao 3º Ano)",
+        sections: [{
+          items: [
+            { name: "Língua Portuguesa e Literatura", topics: ["Estudo do Idioma", "Gramática e Sintaxe", "Textos Literários e Escolas", "Leitura e Redação"] },
+            { name: "Língua Inglesa", topics: ["Aprendizado da Língua Estrangeira", "Vocabulário e Gramática", "Leitura e Interpretação", "Compreensão Auditiva"] },
+            { name: "Arte", topics: ["Expressão Artística e Cultural", "Artes Visuais e Plásticas", "Artes Cênicas e Teatro", "Música e Patrimônio Artístico"] },
+            { name: "Educação Física", topics: ["Práticas Corporais", "Modalidades Esportivas", "Saúde e Qualidade de Vida", "Cultura do Movimento"] },
+            { name: "Matemática", topics: ["Estudo dos Números e Conjuntos", "Álgebra e Funções", "Geometria Plana e Espacial", "Estatística e Probabilidade"] },
+            { name: "Biologia", topics: ["Estudo dos Seres Vivos", "Ecologia e Meio Ambiente", "Anatomia do Corpo Humano", "Genética e Citologia"] },
+            { name: "Física", topics: ["Leis da Natureza", "Mecânica e Movimentos", "Termodinâmica e Calor", "Eletricidade e Magnetismo"] },
+            { name: "Química", topics: ["Estudo de Átomos e Moléculas", "Tabela Periódica dos Elementos", "Substâncias e Misturas", "Reações Químicas"] },
+            { name: "História", topics: ["Fatos Históricos do Brasil", "História Geral e Mundial", "Evolução das Sociedades", "Cidadania e Política"] },
+            { name: "Geografia", topics: ["Estudo do Espaço Geográfico", "Geopolítica Global", "Preservação do Meio Ambiente", "Cartografia e Clima"] },
+            { name: "Sociologia", topics: ["Estudo da Sociedade", "Cultura e Identidade", "Relações Humanas e Sociais", "Direitos e Cidadania"] },
+            { name: "Filosofia", topics: ["Desenvolvimento do Pensamento Crítico", "Ética e Moral", "História das Ideias", "Lógica e Conhecimento"] }
+          ]
+        }]
       },
-
-      "Artes": {
-        topics: ["Cores Primárias", "Desenho de Observação", "Pintura em Tela", "Escultura em Argila", "Teatro de Sombras", "Ritmo Musical", "Instrumentos de Percussão", "Dança Folclórica", "Mosaico", "Arte Urbana"],
-        easy: (t, i) => ({
-          q: `A técnica de ${t} é utilizada para quê?`,
-          opts: ["Expressar ideias, sentimentos e formas de arte visual/sonora", "Calcular a velocidade de um automóvel", "Medir a temperatura da água", "Analisar reações químicas"],
-          correct: 0,
-          exp: `${t} é uma linguagem artística voltada para a expressão criativa.`
-        }),
-        medium: (t, i) => ({
-          q: `Na aula de Artes, a professora convidou os alunos a explorarem o conceito de ${t}. De que maneira essa expressão artística contribui para a formação dos estudantes?`,
-          opts: ["Estimula a criatividade, a coordenação motora e a sensibilidade estética", "Impede o desenvolvimento da imaginação e do pensamento crítico", "Serve apenas para decorar cadernos sem reflexão artística", "Exige o uso de ferramentas digitais avançadas obrigatoriamente"],
-          correct: 0,
-          exp: `A prática de ${t} desperta a percepção estética e o potencial criativo.`
-        }),
-        hard: (t, i) => ({
-          q: `A História da Arte demonstra como as diferentes culturas utilizaram linguagens visuais, sonoras e corporais para registrar sua visão de mundo. Ao estudar ${t}, é possível identificar elementos como composição, textura, ritmo e harmonia nas produções culturais. Diante da relevância da educação artística nas escolas, assinale a afirmativa correta:`,
-          opts: [
-            `A experimentação com ${t} amplia o repertório cultural e a capacidade de expressão dos alunos.`,
-            `A arte deve seguir regras rígidas e sem espaço para a subjetividade ou inovação dos artistas.`,
-            `As manifestações culturais tradicionais não possuem valor histórico no cenário artístico atual.`,
-            `O estudo da música e das artes visuais limita o raciocínio abstrato das crianças.`
-          ],
-          correct: 0,
-          exp: `Trabalhar com ${t} enriquece o repertório cultural e valoriza a diversidade artística.`
-        })
+      superior: {
+        title: "Ensino Superior (Graduação)",
+        sections: [
+          {
+            header: "🎓 Cursos de Bacharelado (4 a 6 anos)",
+            items: [
+              { name: "Saúde e Biológicas", topics: ["Medicina, Enfermagem, Odontologia", "Farmácia, Fisioterapia, Nutrição", "Medicina Veterinária, Biomedicina", "Psicologia, Biologia, Biotecnologia"] },
+              { name: "Engenharias", topics: ["Engenharia Civil, Mecânica, Elétrica", "Engenharia Química, de Produção", "Engenharia de Computação, Mecatrônica", "Engenharia Ambiental, Aeroespacial"] },
+              { name: "Exatas e Tecnologia", topics: ["Ciência da Computação, Sistemas de Informação", "Ciência de Dados, Inteligência Artificial", "Estatística, Física, Matemática, Química", "Geologia, Astronomia, Meteorologia"] },
+              { name: "Sociais Aplicadas e Negócios", topics: ["Direito, Administração, Ciências Contábeis", "Ciências Econômicas, Relações Internacionais", "Comércio Exterior, Marketing", "Hotelaria, Turismo, Gastronomia"] },
+              { name: "Comunicação e Artes", topics: ["Jornalismo, Publicidade e Propaganda", "Cinema e Audiovisual, Rádio e TV", "Design Gráfico, Moda e Produto", "Arquitetura, Artes Visuais, Música"] },
+              { name: "Humanas e Sociais", topics: ["História, Geografia, Filosofia", "Ciências Sociais, Antropologia", "Pedagogia, Serviço Social, Teologia", "Biblioteconomia, Arquivologia"] },
+              { name: "Ciências Agrárias", topics: ["Agronomia, Zootecnia", "Engenharia Agronômica", "Engenharia de Pesca", "Engenharia Agrícola"] }
+            ]
+          },
+          {
+            header: "🎥 Cursos de Licenciatura (4 anos)",
+            items: [
+              { name: "Pedagogia e Humanas", topics: ["Pedagogia (Ed. Infantil e Iniciais)", "Licenciatura em História, Geografia", "Licenciatura em Filosofia, Sociologia", "Licenciatura em Educação Física"] },
+              { name: "Linguagens e Expressão", topics: ["Letras (Português, Inglês, Espanhol, Libras)", "Licenciatura em Artes Visuais", "Licenciatura em Música", "Licenciatura em Teatro"] },
+              { name: "Exatas e Natureza", topics: ["Licenciatura em Matemática e Física", "Licenciatura em Química e Biologia", "Licenciatura em Ciências Naturais", "Licenciatura em Computação"] }
+            ]
+          }
+        ]
       },
-
-      "Ensino Religioso": {
-        topics: ["Respeito Mútuo", "Cultura de Paz", "Empatia", "Valores Familiares", "Diálogo Inter-religioso", "Solidariedade", "Diversidade Cultural", "Amizade e Fraternidade", "Honestidade", "Cooperação"],
-        easy: (t, i) => ({
-          q: `O princípio da ${t} nos ensina a:`,
-          opts: ["Conviver em harmonia e respeitar todas as pessoas", "Discutir sem ouvir a opinião do colega", "Ignorar as regras de boa convivência", "Guardar brinquedos só para si"],
-          correct: 0,
-          exp: `${t} é fundamental para a construção de relações humanas saudáveis.`
-        }),
-        medium: (t, i) => ({
-          q: `A convivência em sociedade exige o exercício constante da cidadania e da ética. Ao praticar a ${t} na escola e na família, qual resultado positivo é alcançado?`,
-          opts: ["Fortalecimento dos laços comunitários e respeito às diferenças individuais", "Aumento dos conflitos e desentendimentos entre as pessoas", "Isolamento social e recusa ao trabalho em equipe", "Preconceito em relação às tradições culturais dos outros"],
-          correct: 0,
-          exp: `A prática da ${t} desenvolve a empatia e o respeito à diversidade.`
-        }),
-        hard: (t, i) => ({
-          q: `O Ensino Religioso na escola pública busca promover os direitos humanos, o respeito à diversidade cultural e os valores éticos universais. O tema ${t} estimula o acolhimento, a tolerância e o combate a qualquer forma de discriminação nas relações sociais. Com base nos valores éticos da vida comunitária, assinale a opção correta:`,
-          opts: [
-            `O exercício constante da ${t} contribui para uma sociedade mais justa, pacífica e solidária.`,
-            `A diversidade de crenças e culturas deve ser desencorajada no ambiente escolar.`,
-            `A empatia é uma característica nata que não pode ser desenvolvida por meio da educação.`,
-            `Valores éticos não possuem relevância para a formação de cidadãos conscientes.`
-          ],
-          correct: 0,
-          exp: `Vivenciar a ${t} constrói uma cultura de paz e respeito mútuo na sociedade.`
-        })
-      },
-
-      "Língua Inglesa": {
-        topics: ["Greetings (Saudações)", "Colors (Cores)", "Numbers (Números)", "Family Members", "Animals (Animais)", "School Supplies", "Days of the Week", "Fruits (Frutas)", "Parts of the Body", "Weather (Clima)"],
-        easy: (t, i) => ({
-          q: `Na língua inglesa, a palavra associada ao tema "${t}" refere-se a qual conceito?`,
-          opts: ["Um vocabulário básico do cotidiano em inglês", "Um sinal de pontuação em português", "Um cálculo matemático", "Uma regra de jogo de futebol"],
-          correct: 0,
-          exp: `O estudo de ${t} faz parte das primeiras etapas de aprendizagem de inglês.`
-        }),
-        medium: (t, i) => ({
-          q: `In English class, students learned vocabulary about ${t}. Which of the following options represents a correct usage or word related to this vocabulary group?`,
-          opts: ["Learning words related to daily interactions and English communication", "Writing sentences only in Portuguese during English class", "Translating words with completely wrong meanings", "Ignoring the correct pronunciation of new words"],
-          correct: 0,
-          exp: `Understanding ${t} helps build a solid foundation for simple English dialogues.`
-        }),
-        hard: (t, i) => ({
-          q: `Read the short contextual passage: "When learning a foreign language like English in elementary school, students practice vocabulary related to ${t}. Recognizing words in contexts such as reading short texts and listening to stories enhances linguistic skills and intercultural competence." Based on English language learning strategies, choose the correct sentence:`,
-          opts: [
-            `Practicing English terms about ${t} helps students expand vocabulary and comprehension.`,
-            `Vocabulary study is useless because english words are never used in real life.`,
-            `Pronunciation practice should be avoided when learning new foreign vocabulary.`,
-            `English grammar and vocabulary cannot be taught through interactive activities.`
-          ],
-          correct: 0,
-          exp: `Studying topics like ${t} improves vocabulary acquisition and language confidence.`
-        })
-      },
-
-      "Língua Portuguesa": {
-        topics: ["Substantivos e Adjetivos", "Sinais de Pontuação", "Uso da Maiúscula", "Separação Silábica", "Sinônimos e Antônimos", "Rimas e Poesia", "Interpretação de Texto", "Encontro Vocálico", "Ortografia (CH, X, S, Z)", "Tipos de Frases"],
-        easy: (t, i) => ({
-          q: `A regra gramatical sobre ${t} serve para:`,
-          opts: ["Escrever frases e textos de forma clara e correta", "Contar o número de metros de uma quadra", "Identificar a cor dos objetos", "Calcular a soma de dois números"],
-          correct: 0,
-          exp: `A aplicação de ${t} garante a precisão e a clareza da comunicação escrita.`
-        }),
-        medium: (t, i) => ({
-          q: `Durante a aula de Português, a professora pediu aos alunos que revisassem um texto sobre ${t}. Qual alternativa apresenta uma atitude correta quanto ao uso da língua portuguesa?`,
-          opts: ["Aplicar as regras ortográficas e pontuação para tornar a leitura compreensível", "Escrever sem usar pontos ou vírgulas em nenhum parágrafo", "Iniciar frases declarativas sempre com letras minúsculas", "Usar palavras desconhecidas sem verificar o significado no dicionário"],
-          correct: 0,
-          exp: `Revisar aspectos como ${t} melhora a coesão e a coerência textual.`
-        }),
-        hard: (t, i) => ({
-          q: `Leia o trecho do texto a seguir para responder à questão: "A leitura atenta e a escrita correta são ferramentas fundamentais para a expressão do pensamento. Ao estudar o conteúdo de ${t}, o leitor desenvolve habilidades analíticas necessárias para interpretar textos literários e informativos com autonomia." Com base nas normas cultas da Língua Portuguesa, assinale a alternativa inteiramente correta:`,
-          opts: [
-            `A correta aplicação de ${t} enriquece o texto e facilita a compreensão do leitor.`,
-            `A pontuação e a ortografia não alteram o sentido original de uma mensagem escrita.`,
-            `Textos informativos não necessitam seguir as regras gramaticais da língua padrão.`,
-            `O uso de dicionários deve ser evitado durante o processo de produção textual.`
-          ],
-          correct: 0,
-          exp: `Dominar tópicos como ${t} é essencial para a norma-padrão e para a escrita eficiente.`
-        })
-      },
-
-      "Matemática": {
-        topics: ["Adição e Subtração", "Multiplicação Simples", "Divisão de Itens", "Formas Geométricas", "Medidas de Tempo (Horas)", "Sistema Monetário (R$)", "Frações Visuais", "Gráficos de Barras", "Pares e Ímpares", "Problemas de Raciocínio"],
-        easy: (t, i) => ({
-          q: `Em Matemática, ao resolver um problema de ${t}, o estudante deve:`,
-          opts: ["Calcular os valores com atenção para encontrar a resposta exata", "Chutar um número qualquer sem ler o problema", "Desenhar uma figura sem relação com os números", "Mudar o enunciado da questão"],
-          correct: 0,
-          exp: `O estudo de ${t} desenvolve o raciocínio lógico e numérico.`
-        }),
-        medium: (t, i) => ({
-          q: `Um aluno estava resolvendo uma tarefa sobre ${t}. Ele reuniu as informações, organizou os dados e realizou as operações necessárias. Qual é a importância de conferir o resultado final?`,
-          opts: ["Garantir a exatidão do cálculo e evitar erros de atenção", "Aumentar o tempo gasto na lição sem necessidade", "Modificar os dados do problema original", "Eliminar os números da folha de resposta"],
-          correct: 0,
-          exp: `A verificação do resultado em ${t} assegura a precisão do raciocínio matemático.`
-        }),
-        hard: (t, i) => ({
-          q: `A Resolução de Problemas é um pilar essencial do aprendizado matemático. Ao deparar-se com uma situação prática envolvendo ${t}, o estudante precisa interpretar os dados fornecidos, selecionar a operação adequada e validar sua resposta através de testes lógicos. Considerando os conceitos matemáticos estudados, assinale a opção correta:`,
-          opts: [
-            `A estruturação lógica dos dados no tema de ${t} permite chegar à solução correta com precisão.`,
-            `A ordem das operações matemáticas não altera o resultado final da equação.`,
-            `Problemas matemáticos do cotidiano não exigem raciocínio nem conferência de dados.`,
-            `O uso de gráficos e tabelas dificulta o entendimento de problemas numéricos.`
-          ],
-          correct: 0,
-          exp: `Resolver problemas de ${t} estimula o pensamento analítico e a precisão técnica.`
-        })
-      },
-
-      "Ciências da Natureza": {
-        topics: ["Ciclo da Água", "Plantas e Fotossíntese", "Anatomia Humana", "Animais Vertebrados", "Reciclagem e Lixo", "Alimentação Saudável", "Estados da Matéria", "Sistema Solar", "Hábitos de Higiene", "Cadeia Alimentar"],
-        easy: (t, i) => ({
-          q: `O estudo sobre ${t} nos ajuda a compreender:`,
-          opts: ["Como a natureza e o corpo humano funcionam em equilíbrio", "Regras do trânsito na cidade", "Construção de prédios de concreto", "Nomes de países em outros idiomas"],
-          correct: 0,
-          exp: `${t} é um tema vital das Ciências para entender o mundo vivo.`
-        }),
-        medium: (t, i) => ({
-          q: `Na aula de Ciências da Natureza, a turma realizou uma experiência sobre ${t}. Qual das alternativas representa uma observação científica válida sobre o tema?`,
-          opts: ["A preservação e o respeito aos recursos naturais mantêm o equilíbrio ambiental", "Os seres vivos não dependem da água ou da luz solar para sobreviver", "A poluição não afeta a saúde dos animais e vegetais", "O ecossistema não sofre alterações com o descarte de resíduos"],
-          correct: 0,
-          exp: `Compreender ${t} revela a interconexão entre os seres vivos e o ambiente.`
-        }),
-        hard: (t, i) => ({
-          q: `A investigação científica no Ensino Fundamental visa desenvolver a atitude reflexiva sobre os fenômenos naturais. Ao estudar a fundo o tema ${t}, observam-se as relações ecológicas, as transformações da matéria e o impacto da intervenção humana nos ecossistemas. Diante dos princípios das Ciências Biológicas e Ambientais, assinale a afirmativa correta:`,
-          opts: [
-            `A preservação do equilíbrio ecológico no tema de ${t} é essencial para a sustentabilidade da vida.`,
-            `Os ecossistemas renovam-se instantaneamente, ignorando agressões ambientais graves.`,
-            `O método científico baseia-se em achismos sem a necessidade de observação rigorosa.`,
-            `A biodiversidade não possui relação com a estabilidade dos ecossistemas terrestres.`
-          ],
-          correct: 0,
-          exp: `O conhecimento sobre ${t} fundamenta práticas de conscientização e sustentabilidade.`
-        })
+      concursos: {
+        title: "Concursos Públicos",
+        sections: [{
+          items: [
+            { name: "Língua Portuguesa para Concursos", topics: ["Interpretação e Compreensão de Textos", "Ortografia Oficial e Acentuação", "Sintaxe da Oração e do Período", "Regência, Crase e Concordância"] },
+            { name: "Raciocínio Lógico-Matemático", topics: ["Lógica Proposicional e Tabelas-Verdade", "Estruturas Lógicas e Argumentação", "Porcentagem e Razão/Proporção", "Análise Combinatória e Probabilidade"] },
+            { name: "Direito Constitucional", topics: ["Direitos e Garantias Fundamentais", "Organização do Estado e dos Poderes", "Administração Pública (Art. 37 a 41)", "Defesa do Estado e das Instituições"] },
+            { name: "Direito Administrativo", topics: ["Princípios da Administração Pública", "Atos Administrativos e Licitações", "Agentes Públicos e Improbidade", "Poderes Administrativos"] },
+            { name: "Informática Básica e Avançada", topics: ["Sistemas Operacionais (Windows/Linux)", "Pacote Office e LibreOffice", "Redes de Computadores e Segurança", "Navegadores e Correio Eletrônico"] },
+            { name: "Conhecimentos Bancários", topics: ["Sistema Financeiro Nacional (SFN)", "Mercado Financeiro e de Câmbio", "Produtos e Serviços Bancários", "Garantias do SFN e Crimes Financeiros"] }
+          ]
+        }]
       }
     };
 
-    function generateQuestions(subject, diff, seed) {
-      const questions = [];
-      const sData = subjectData[subject] || subjectData["Língua Portuguesa"];
-      const topics = sData.topics;
+    let currentLevel = 'fund1';
+    let currentSubject = '';
+    let currentDifficulty = 'easy';
+    let userAnswers = {};
+    let examAnswers = {};
+    let currentExamQuestions = [];
+    let currentQuizQuestions = [];
+    let timerInterval = null;
 
-      for (let i = 1; i <= 150; i++) {
-        // Usa o seed e o índice para garantir variação completa ao reiniciar
-        const topicIndex = (i + seed * 3) % topics.length;
-        const topic = topics[topicIndex];
-        
-        let qRaw;
-        if (diff === 'easy') {
-          qRaw = sData.easy(topic, i);
-        } else if (diff === 'medium') {
-          qRaw = sData.medium(topic, i);
-        } else {
-          qRaw = sData.hard(topic, i);
-        }
+    window.onload = function() {
+      init();
+    };
 
-        // Embaralhamento de opções com base na semente
-        const opts = [...qRaw.opts];
-        const correctText = opts[qRaw.correct];
+    function init() {
+      switchLevel('fund1');
+    }
 
-        const shuffleShift = (i + seed) % 4;
-        const temp = opts[0];
-        opts[0] = opts[shuffleShift];
-        opts[shuffleShift] = temp;
-
-        const finalCorrectIndex = opts.indexOf(correctText);
-
-        questions.push({
-          id: i,
-          q: `${qRaw.q}`,
-          opts: opts,
-          correct: finalCorrectIndex,
-          exp: qRaw.exp
-        });
+    function switchLevel(levelKey) {
+      currentLevel = levelKey;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      const buttons = document.querySelectorAll('.tab-btn');
+      const levelMap = { fund1: 0, fund2: 1, medio: 2, superior: 3, concursos: 4 };
+      if (buttons[levelMap[levelKey]]) {
+        buttons[levelMap[levelKey]].classList.add('active');
       }
+      renderContent();
+    }
 
-      return questions;
+    function renderContent() {
+      const area = document.getElementById('contentArea');
+      const data = academyData[currentLevel];
+      let html = '';
+
+      data.sections.forEach(sec => {
+        if (sec.header) {
+          html += `<div class="section-title">${sec.header}</div>`;
+        }
+        html += `<div class="grid-container">`;
+        sec.items.forEach(item => {
+          const topicsHtml = item.topics.map(t => `<li>${t}</li>`).join('');
+          html += `
+            <div class="subject-card" onclick="openMenuModal('${item.name}')">
+              <div class="card-title">📚 ${item.name}</div>
+              <ul class="topic-list">${topicsHtml}</ul>
+            </div>
+          `;
+        });
+        html += `</div>`;
+      });
+
+      area.innerHTML = html;
     }
 
     function openMenuModal(subject) {
@@ -874,130 +734,334 @@
 
     function closeModal(id) {
       document.getElementById(id).classList.remove('active');
+      if (id === 'examModal' && timerInterval) {
+        clearInterval(timerInterval);
+      }
     }
 
-    function startQuiz(type) {
-      if (type !== 'Provas' && type !== 'Perguntas') {
-        alert(`O módulo de ${type} estará disponível em breve!`);
-        return;
+    function getTopicsForCurrentSubject() {
+      const data = academyData[currentLevel];
+      for (const sec of data.sections) {
+        const found = sec.items.find(i => i.name === currentSubject);
+        if (found) return found.topics;
       }
+      return ["Tópico Principal 1", "Tópico Principal 2", "Tópico Principal 3"];
+    }
 
-      currentType = type;
+    function openModule(type) {
       closeModal('menuModal');
       
-      document.getElementById('quizTitle').innerText = `${type} de ${currentSubject}`;
-      document.getElementById('quizSubtitle').innerText = `Modo: ${type} - Ensino Fundamental I`;
-      document.getElementById('quizModal').classList.add('active');
+      if (type === 'Explicações') {
+        renderExplanations();
+      } else if (type === 'Vídeos') {
+        renderVideos();
+      } else if (type === 'Provas') {
+        startExam();
+      } else if (type === 'Perguntas') {
+        startQuiz();
+      }
+    }
 
-      loadSavedProgress();
-      renderQuiz();
+    /* --- LÓGICA DE EXPLICAÇÕES --- */
+    function renderExplanations() {
+      document.getElementById('expTitle').innerText = `💡 Explicações: ${currentSubject}`;
+      document.getElementById('expSubtitle').innerText = `Nível: ${academyData[currentLevel].title}`;
+      
+      const container = document.getElementById('explanationsContainer');
+      container.innerHTML = '';
+      const topics = getTopicsForCurrentSubject();
+
+      topics.forEach((topic, idx) => {
+        const block = document.createElement('div');
+        block.className = 'lesson-block';
+        block.innerHTML = `
+          <div class="lesson-title">Módulo ${idx + 1}: ${topic}</div>
+          <div class="lesson-text">
+            O estudo de <strong>${topic}</strong> é fundamental na disciplina de <strong>${currentSubject}</strong>. 
+            Nesta etapa, compreende-se a aplicação prática das regras, conceitos estruturais e análises críticas necessárias para dominar o assunto.
+          </div>
+          <div class="key-points">
+            <strong>📌 Pontos de Atenção & Conceitos Chave:</strong>
+            • Aplicação direta e definição essencial de ${topic}.<br>
+            • Resolução de dúvidas frequentes em provas e avaliações.<br>
+            • Relação do tópico com as demais áreas do conhecimento.
+          </div>
+        `;
+        container.appendChild(block);
+      });
+
+      document.getElementById('explanationsModal').classList.add('active');
+    }
+
+    /* --- LÓGICA DE VÍDEOS --- */
+    function renderVideos() {
+      document.getElementById('vidTitle').innerText = `▶️ Videoaulas: ${currentSubject}`;
+      document.getElementById('vidSubtitle').innerText = `Aulas dinâmicas sobre os tópicos de ${currentSubject}`;
+      
+      const container = document.getElementById('videosContainer');
+      container.innerHTML = '';
+      const topics = getTopicsForCurrentSubject();
+
+      const sampleVideoIds = ['dQw4w9WgXcQ', 'L_LUpnjgPso', '3JZ_D3ELwOQ', 'fJ9rUzIMcZQ'];
+
+      topics.forEach((topic, idx) => {
+        const videoId = sampleVideoIds[idx % sampleVideoIds.length];
+        const card = document.createElement('div');
+        card.className = 'video-card';
+        card.innerHTML = `
+          <div class="video-container">
+            <iframe src="https://www.youtube-nocookie.com/embed/${videoId}" title="${topic}" allowfullscreen></iframe>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Aula ${idx + 1}: Domine ${topic}</div>
+            <div class="video-meta">⏱️ Duração recomendada: 12 min • ${currentSubject}</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      document.getElementById('videosModal').classList.add('active');
+    }
+
+    /* --- GERADOR DINÂMICO DE QUESTÕES --- */
+    function generateQuestion(level, subject, topic, diff) {
+      const questionsByDiff = {
+        easy: {
+          stem: `Qual é o conceito fundamental referente ao tema **${topic}** na matéria de ${subject}?`,
+          options: [
+            `A definição basilar e correta aplicada ao tema ${topic}.`,
+            `Uma interpretação genérica que desconsidera as regras de ${subject}.`,
+            `Um conceito secundário que não possui relação direta com ${topic}.`,
+            `Uma afirmação incorreta sobre a estrutura de ${topic}.`
+          ],
+          correct: 0,
+          explanation: `A alternativa A apresenta o conceito basilar correto para ${topic}, essencial para o nível introdutório.`
+        },
+        medium: {
+          stem: `Considerando o contexto de **${topic}** no nível ${academyData[level].title}, assinale a alternativa analítica correta:`,
+          options: [
+            `Uma afirmação plausível, porém incorreta devido a uma exceção técnica de ${subject}.`,
+            `A aplicação correta e estruturada das regras inerentes a ${topic}.`,
+            `Um equívoco comum cometido ao aplicar ${topic} na prática.`,
+            `Uma teoria ultrapassada que não se aplica mais ao estudo de ${subject}.`
+          ],
+          correct: 1,
+          explanation: `A alternativa B demonstra a aplicação prática exata dos conceitos de ${topic}.`
+        },
+        hard: {
+          stem: `A respeito de casos avançados e exceções em **${topic}**, analise a proposição correta para ${subject}:`,
+          options: [
+            `Uma afirmação incorreta que confunde o conceito com outros tópicos.`,
+            `Uma generalização apressada que falha em contexts complexos.`,
+            `A regra de exceção avançada perfeitamente ajustada ao tópico ${topic}.`,
+            `Nenhuma das opções acima reflete as diretrizes do assunto.`
+          ],
+          correct: 2,
+          explanation: `A alternativa C abrange as particularidades e exceções avançadas exigidas no tópico ${topic}.`
+        }
+      };
+      return questionsByDiff[diff] || questionsByDiff.easy;
+    }
+
+    /* --- LÓGICA DE PROVAS (SIMULADO) --- */
+    function startExam() {
+      document.getElementById('examTitle').innerText = `📄 Prova Oficial: ${currentSubject}`;
+      document.getElementById('examSubtitle').innerText = `${academyData[currentLevel].title} - Avaliação Geral`;
+      
+      const topics = getTopicsForCurrentSubject();
+      currentExamQuestions = topics.map((t, i) => {
+        const q = generateQuestion(currentLevel, currentSubject, t, 'medium');
+        return { ...q, id: i, topic: t };
+      });
+
+      examAnswers = {};
+      renderExamQuestions();
+      startExamTimer(15 * 60);
+
+      document.getElementById('btnFinishExam').style.display = 'block';
+      document.getElementById('examModal').classList.add('active');
+    }
+
+    function startExamTimer(durationSeconds) {
+      if (timerInterval) clearInterval(timerInterval);
+      let timer = durationSeconds;
+      const display = document.getElementById('examTimer');
+
+      timerInterval = setInterval(() => {
+        const minutes = Math.floor(timer / 60);
+        const seconds = timer % 60;
+        display.innerText = `⏱️ ${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+        if (--timer < 0) {
+          clearInterval(timerInterval);
+          alert('O tempo da prova acabou! Entregando automaticamente...');
+          finishExam();
+        }
+      }, 1000);
+    }
+
+    function renderExamQuestions() {
+      const container = document.getElementById('examContainer');
+      container.innerHTML = '';
+
+      currentExamQuestions.forEach((q, qIndex) => {
+        const div = document.createElement('div');
+        div.className = 'question-item';
+
+        let optionsHtml = '';
+        q.options.forEach((opt, oIndex) => {
+          const isSelected = examAnswers[qIndex] === oIndex;
+          optionsHtml += `
+            <button class="option-btn ${isSelected ? 'selected' : ''}" 
+                    onclick="selectExamOption(${qIndex}, ${oIndex})">
+              ${String.fromCharCode(65 + oIndex)}) ${opt}
+            </button>
+          `;
+        });
+
+        div.innerHTML = `
+          <div class="question-title"><strong>Questão ${qIndex + 1}:</strong> ${q.stem}</div>
+          <div class="options-list">${optionsHtml}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function selectExamOption(qIndex, oIndex) {
+      examAnswers[qIndex] = oIndex;
+      renderExamQuestions();
+    }
+
+    function finishExam() {
+      if (timerInterval) clearInterval(timerInterval);
+
+      let score = 0;
+      currentExamQuestions.forEach((q, idx) => {
+        if (examAnswers[idx] === q.correct) {
+          score++;
+        }
+      });
+
+      const percentage = Math.round((score / currentExamQuestions.length) * 100);
+      const container = document.getElementById('examContainer');
+
+      let reviewHtml = `
+        <div class="result-box">
+          <h3>Resultado Final</h3>
+          <div class="result-score">${score} / ${currentExamQuestions.length}</div>
+          <p>Aproveitamento: <strong>${percentage}%</strong></p>
+        </div>
+      `;
+
+      currentExamQuestions.forEach((q, qIndex) => {
+        const userAns = examAnswers[qIndex];
+        reviewHtml += `
+          <div class="question-item">
+            <div class="question-title"><strong>Questão ${qIndex + 1}:</strong> ${q.stem}</div>
+            <div class="options-list">
+        `;
+
+        q.options.forEach((opt, oIndex) => {
+          let extraClass = '';
+          if (oIndex === q.correct) extraClass = 'correct';
+          else if (userAns === oIndex && userAns !== q.correct) extraClass = 'wrong';
+
+          reviewHtml += `
+            <button class="option-btn ${extraClass}" disabled>
+              ${String.fromCharCode(65 + oIndex)}) ${opt}
+            </button>
+          `;
+        });
+
+        reviewHtml += `
+            </div>
+            <div class="explanation-box">
+              <strong>Gabarito Comentado:</strong> ${q.explanation}
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = reviewHtml;
+      document.getElementById('btnFinishExam').style.display = 'none';
+    }
+
+    /* --- LÓGICA DO QUIZ INTERATIVO (PERGUNTAS) --- */
+    function startQuiz() {
+      document.getElementById('quizTitle').innerText = `❓ Quiz: ${currentSubject}`;
+      document.getElementById('quizSubtitle').innerText = `${academyData[currentLevel].title}`;
+      userAnswers = {};
+      setDifficulty('easy');
+      document.getElementById('quizModal').classList.add('active');
     }
 
     function setDifficulty(diff) {
       currentDifficulty = diff;
-      document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
       document.getElementById(`btn-${diff}`).classList.add('active');
-      loadSavedProgress();
-      renderQuiz();
+
+      const topics = getTopicsForCurrentSubject();
+      currentQuizQuestions = topics.map((t, i) => {
+        const q = generateQuestion(currentLevel, currentSubject, t, diff);
+        return { ...q, id: i, topic: t };
+      });
+
+      userAnswers = {};
+      renderQuizQuestions();
     }
 
-    function getQuestions() {
-      const key = `${currentSubject}_${currentDifficulty}_seed_${currentSeed}`;
-      if (!cachedQuestions[key]) {
-        cachedQuestions[key] = generateQuestions(currentSubject, currentDifficulty, currentSeed);
-      }
-      return cachedQuestions[key];
-    }
-
-    function renderQuiz() {
+    function renderQuizQuestions() {
       const container = document.getElementById('questionsContainer');
       container.innerHTML = '';
 
-      const questions = getQuestions();
-      let answeredCount = 0;
+      const answeredCount = Object.keys(userAnswers).length;
+      const total = currentQuizQuestions.length;
 
-      questions.forEach((qObj, index) => {
-        const qDiv = document.createElement('div');
-        qDiv.className = 'question-item';
+      document.getElementById('progressText').innerText = `${answeredCount}/${total}`;
+      document.getElementById('totalQuestionsText').innerText = `${total} Questões (${currentDifficulty.toUpperCase()})`;
 
-        const selectedOpt = userAnswers[index];
-        if (selectedOpt !== undefined) answeredCount++;
+      currentQuizQuestions.forEach((q, qIndex) => {
+        const div = document.createElement('div');
+        div.className = 'question-item';
 
-        let optionsHTML = '';
-        let explanationHTML = '';
+        const userSelected = userAnswers[qIndex];
+        const isAnswered = userSelected !== undefined;
 
-        qObj.opts.forEach((opt, optIdx) => {
-          let btnClass = 'option-btn';
-          
-          if (selectedOpt !== undefined) {
-            if (optIdx === qObj.correct) {
-              btnClass += ' correct';
-            } else if (selectedOpt === optIdx) {
-              btnClass += ' wrong';
-            }
+        let optionsHtml = '';
+        q.options.forEach((opt, oIndex) => {
+          let extraClass = '';
+          if (isAnswered) {
+            if (oIndex === q.correct) extraClass = 'correct';
+            else if (userSelected === oIndex) extraClass = 'wrong';
           }
 
-          optionsHTML += `<button class="${btnClass}" onclick="selectOption(${index}, ${optIdx})">${opt}</button>`;
+          optionsHtml += `
+            <button class="option-btn ${extraClass}" 
+                    ${isAnswered ? 'disabled' : ''} 
+                    onclick="answerQuizQuestion(${qIndex}, ${oIndex})">
+              ${String.fromCharCode(65 + oIndex)}) ${opt}
+            </button>
+          `;
         });
 
-        if (selectedOpt !== undefined) {
-          const isCorrect = selectedOpt === qObj.correct;
-          const bgClass = isCorrect ? 'correct-bg' : 'wrong-bg';
-          const statusText = isCorrect 
-            ? '<strong><i class="fa-solid fa-circle-check" style="color: var(--green)"></i> Você acertou!</strong>' 
-            : '<strong><i class="fa-solid fa-circle-xmark" style="color: var(--red)"></i> Você errou!</strong>';
-          
-          explanationHTML = `
-            <div class="explanation-box ${bgClass}">
-              ${statusText}<br/>
-              <strong>Explicação:</strong> ${qObj.exp}
-            </div>
-          `;
-        }
-
-        qDiv.innerHTML = `
-          <div class="question-title">${index + 1}. ${qObj.q}</div>
-          <div class="options-list">${optionsHTML}</div>
-          ${explanationHTML}
+        div.innerHTML = `
+          <div class="question-title"><strong>Questão ${qIndex + 1}:</strong> ${q.stem}</div>
+          <div class="options-list">${optionsHtml}</div>
+          ${isAnswered ? `<div class="explanation-box"><strong>Explicação:</strong> ${q.explanation}</div>` : ''}
         `;
-        container.appendChild(qDiv);
+
+        container.appendChild(div);
       });
-
-      document.getElementById('progressText').innerText = `${answeredCount}/150`;
     }
 
-    function selectOption(qIndex, optIndex) {
-      userAnswers[qIndex] = optIndex;
-      saveProgress(false); 
-      renderQuiz();
-    }
-
-    function saveProgress(showAlert = true) {
-      const key = `gabaritei_v5_${currentSubject}_${currentType}_${currentDifficulty}`;
-      localStorage.setItem(key, JSON.stringify({ answers: userAnswers, seed: currentSeed }));
-      if (showAlert) alert('Progresso salvo com sucesso!');
-    }
-
-    function loadSavedProgress() {
-      const key = `gabaritei_v5_${currentSubject}_${currentType}_${currentDifficulty}`;
-      const saved = localStorage.getItem(key);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        userAnswers = parsed.answers || {};
-        currentSeed = parsed.seed || 1;
-      } else {
-        userAnswers = {};
-        currentSeed = 1;
-      }
+    function answerQuizQuestion(qIndex, oIndex) {
+      userAnswers[qIndex] = oIndex;
+      renderQuizQuestions();
     }
 
     function resetProgress() {
-      if (confirm('Ao reiniciar, um novo conjunto de perguntas exclusivas será gerado para esta matéria e o progresso atual será zerado. Deseja continuar?')) {
-        userAnswers = {};
-        currentSeed += 1; // Muda totalmente a geração de questões sem repetições
-        saveProgress(false);
-        renderQuiz();
-      }
+      userAnswers = {};
+      renderQuizQuestions();
     }
   </script>
 </body>
