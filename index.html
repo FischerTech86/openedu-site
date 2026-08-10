@@ -235,7 +235,6 @@
       border-color: var(--accent-light);
     }
 
-    /* Estilos das Explicações e Aulas */
     .lesson-block {
       background: #172033;
       border: 1px solid var(--card-border);
@@ -272,7 +271,6 @@
       margin-bottom: 4px;
     }
 
-    /* Estilos dos Vídeos */
     .video-card {
       background: #172033;
       border: 1px solid var(--card-border);
@@ -313,7 +311,6 @@
       color: var(--text-muted);
     }
 
-    /* Estilos das Provas e Simulados */
     .exam-header {
       display: flex;
       justify-content: space-between;
@@ -350,7 +347,6 @@
       margin: 0.5rem 0;
     }
 
-    /* Estilos do Quiz / Perguntas */
     .quiz-header {
       display: flex;
       justify-content: space-between;
@@ -449,6 +445,7 @@
       display: flex;
       justify-content: space-between;
       margin-top: 1.5rem;
+      gap: 10px;
     }
 
     .action-btn {
@@ -459,6 +456,11 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
+    }
+
+    .action-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
     }
 
     .action-btn.primary {
@@ -492,7 +494,7 @@
 
   <div class="container" id="contentArea"></div>
 
-  <!-- Modal do Menu de Opções -->
+  <!-- Modal Menu de Seleção -->
   <div class="modal-overlay" id="menuModal">
     <div class="modal-content" style="max-width: 480px;">
       <button class="close-modal" onclick="closeModal('menuModal')">&times;</button>
@@ -507,7 +509,7 @@
     </div>
   </div>
 
-  <!-- Modal de Explicações -->
+  <!-- Modal Explicações -->
   <div class="modal-overlay" id="explanationsModal">
     <div class="modal-content">
       <button class="close-modal" onclick="closeModal('explanationsModal')">&times;</button>
@@ -517,7 +519,7 @@
     </div>
   </div>
 
-  <!-- Modal de Vídeos -->
+  <!-- Modal Vídeos -->
   <div class="modal-overlay" id="videosModal">
     <div class="modal-content">
       <button class="close-modal" onclick="closeModal('videosModal')">&times;</button>
@@ -527,7 +529,7 @@
     </div>
   </div>
 
-  <!-- Modal de Provas e Simulados -->
+  <!-- Modal Provas -->
   <div class="modal-overlay" id="examModal">
     <div class="modal-content">
       <button class="close-modal" onclick="closeModal('examModal')">&times;</button>
@@ -539,14 +541,15 @@
         <div class="timer-badge" id="examTimer">⏱️ 15:00</div>
       </div>
       <div id="examContainer"></div>
-      <div class="actions-footer">
-        <button class="action-btn" onclick="closeModal('examModal')">Cancelar</button>
+      <div class="actions-footer" id="examFooter">
+        <button class="action-btn" id="btnExamPrev" onclick="navExam(-1)">Anterior</button>
+        <button class="action-btn" id="btnExamNext" onclick="navExam(1)">Próxima</button>
         <button class="action-btn primary" id="btnFinishExam" onclick="finishExam()">Entregar Prova</button>
       </div>
     </div>
   </div>
 
-  <!-- Modal de Perguntas (Quiz Interativo) -->
+  <!-- Modal Quiz (Perguntas) -->
   <div class="modal-overlay" id="quizModal">
     <div class="modal-content">
       <button class="close-modal" onclick="closeModal('quizModal')">&times;</button>
@@ -570,7 +573,8 @@
       <div id="questionsContainer"></div>
 
       <div class="actions-footer">
-        <button class="action-btn" onclick="resetProgress()">Reiniciar</button>
+        <button class="action-btn" id="btnQuizPrev" onclick="navQuiz(-1)">Anterior</button>
+        <button class="action-btn" id="btnQuizNext" onclick="navQuiz(1)">Próxima</button>
         <button class="action-btn primary" onclick="closeModal('quizModal')">Concluir</button>
       </div>
     </div>
@@ -676,18 +680,30 @@
     let currentLevel = 'fund1';
     let currentSubject = '';
     let currentDifficulty = 'easy';
-    let userAnswers = {};
+
+    // Estados do Quiz
+    let quizQuestions = [];
+    let quizIndex = 0;
+    let quizAnswers = {};
+
+    // Estados da Prova
+    let examQuestions = [];
+    let examIndex = 0;
     let examAnswers = {};
-    let currentExamQuestions = [];
-    let currentQuizQuestions = [];
     let timerInterval = null;
 
     window.onload = function() {
-      init();
+      switchLevel('fund1');
     };
 
-    function init() {
-      switchLevel('fund1');
+    // Algoritmo de Embaralhamento Sem Repetição (Fisher-Yates)
+    function embaralhar(array) {
+      const copia = [...array];
+      for (let i = copia.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copia[i], copia[j]] = [copia[j], copia[i]];
+      }
+      return copia;
     }
 
     function switchLevel(levelKey) {
@@ -745,24 +761,17 @@
         const found = sec.items.find(i => i.name === currentSubject);
         if (found) return found.topics;
       }
-      return ["Tópico Principal 1", "Tópico Principal 2", "Tópico Principal 3"];
+      return ["Conceito Fundamental 1", "Conceito Fundamental 2", "Conceito Fundamental 3"];
     }
 
     function openModule(type) {
       closeModal('menuModal');
-      
-      if (type === 'Explicações') {
-        renderExplanations();
-      } else if (type === 'Vídeos') {
-        renderVideos();
-      } else if (type === 'Provas') {
-        startExam();
-      } else if (type === 'Perguntas') {
-        startQuiz();
-      }
+      if (type === 'Explicações') renderExplanations();
+      else if (type === 'Vídeos') renderVideos();
+      else if (type === 'Provas') startExam();
+      else if (type === 'Perguntas') startQuiz();
     }
 
-    /* --- LÓGICA DE EXPLICAÇÕES --- */
     function renderExplanations() {
       document.getElementById('expTitle').innerText = `💡 Explicações: ${currentSubject}`;
       document.getElementById('expSubtitle').innerText = `Nível: ${academyData[currentLevel].title}`;
@@ -777,14 +786,12 @@
         block.innerHTML = `
           <div class="lesson-title">Módulo ${idx + 1}: ${topic}</div>
           <div class="lesson-text">
-            O estudo de <strong>${topic}</strong> é fundamental na disciplina de <strong>${currentSubject}</strong>. 
-            Nesta etapa, compreende-se a aplicação prática das regras, conceitos estruturais e análises críticas necessárias para dominar o assunto.
+            O estudo de <strong>${topic}</strong> é fundamental na disciplina de <strong>${currentSubject}</strong>.
           </div>
           <div class="key-points">
             <strong>📌 Pontos de Atenção & Conceitos Chave:</strong>
             • Aplicação direta e definição essencial de ${topic}.<br>
-            • Resolução de dúvidas frequentes em provas e avaliações.<br>
-            • Relação do tópico com as demais áreas do conhecimento.
+            • Resolução de dúvidas frequentes em avaliações.
           </div>
         `;
         container.appendChild(block);
@@ -793,7 +800,6 @@
       document.getElementById('explanationsModal').classList.add('active');
     }
 
-    /* --- LÓGICA DE VÍDEOS --- */
     function renderVideos() {
       document.getElementById('vidTitle').innerText = `▶️ Videoaulas: ${currentSubject}`;
       document.getElementById('vidSubtitle').innerText = `Aulas dinâmicas sobre os tópicos de ${currentSubject}`;
@@ -801,7 +807,6 @@
       const container = document.getElementById('videosContainer');
       container.innerHTML = '';
       const topics = getTopicsForCurrentSubject();
-
       const sampleVideoIds = ['dQw4w9WgXcQ', 'L_LUpnjgPso', '3JZ_D3ELwOQ', 'fJ9rUzIMcZQ'];
 
       topics.forEach((topic, idx) => {
@@ -823,7 +828,7 @@
       document.getElementById('videosModal').classList.add('active');
     }
 
-    /* --- GERADOR DINÂMICO DE QUESTÕES --- */
+    // Gerador de questões
     function generateQuestion(level, subject, topic, diff) {
       const questionsByDiff = {
         easy: {
@@ -835,7 +840,7 @@
             `Uma afirmação incorreta sobre a estrutura de ${topic}.`
           ],
           correct: 0,
-          explanation: `A alternativa A apresenta o conceito basilar correto para ${topic}, essencial para o nível introdutório.`
+          explanation: `A alternativa A apresenta o conceito basilar correto para ${topic}.`
         },
         medium: {
           stem: `Considerando o contexto de **${topic}** no nível ${academyData[level].title}, assinale a alternativa analítica correta:`,
@@ -852,33 +857,36 @@
           stem: `A respeito de casos avançados e exceções em **${topic}**, analise a proposição correta para ${subject}:`,
           options: [
             `Uma afirmação incorreta que confunde o conceito com outros tópicos.`,
-            `Uma generalização apressada que falha em contexts complexos.`,
+            `Uma generalização apressada que falha em contextos complexos.`,
             `A regra de exceção avançada perfeitamente ajustada ao tópico ${topic}.`,
             `Nenhuma das opções acima reflete as diretrizes do assunto.`
           ],
           correct: 2,
-          explanation: `A alternativa C abrange as particularidades e exceções avançadas exigidas no tópico ${topic}.`
+          explanation: `A alternativa C abrange as particularidades avançadas do tópico ${topic}.`
         }
       };
       return questionsByDiff[diff] || questionsByDiff.easy;
     }
 
-    /* --- LÓGICA DE PROVAS (SIMULADO) --- */
+    /* --- PROVAS COM NAVEGAÇÃO E EMBARALHAMENTO --- */
     function startExam() {
       document.getElementById('examTitle').innerText = `📄 Prova Oficial: ${currentSubject}`;
       document.getElementById('examSubtitle').innerText = `${academyData[currentLevel].title} - Avaliação Geral`;
-      
+
       const topics = getTopicsForCurrentSubject();
-      currentExamQuestions = topics.map((t, i) => {
+      const rawQuestions = topics.map((t, i) => {
         const q = generateQuestion(currentLevel, currentSubject, t, 'medium');
         return { ...q, id: i, topic: t };
       });
 
+      // Embaralha uma vez no início
+      examQuestions = embaralhar(rawQuestions);
+      examIndex = 0;
       examAnswers = {};
-      renderExamQuestions();
-      startExamTimer(15 * 60);
 
-      document.getElementById('btnFinishExam').style.display = 'block';
+      document.getElementById('examFooter').style.display = 'flex';
+      startExamTimer(15 * 60);
+      renderCurrentExamQuestion();
       document.getElementById('examModal').classList.add('active');
     }
 
@@ -900,64 +908,69 @@
       }, 1000);
     }
 
-    function renderExamQuestions() {
+    function renderCurrentExamQuestion() {
       const container = document.getElementById('examContainer');
-      container.innerHTML = '';
+      const q = examQuestions[examIndex];
+      const selectedOpt = examAnswers[examIndex];
 
-      currentExamQuestions.forEach((q, qIndex) => {
-        const div = document.createElement('div');
-        div.className = 'question-item';
-
-        let optionsHtml = '';
-        q.options.forEach((opt, oIndex) => {
-          const isSelected = examAnswers[qIndex] === oIndex;
-          optionsHtml += `
-            <button class="option-btn ${isSelected ? 'selected' : ''}" 
-                    onclick="selectExamOption(${qIndex}, ${oIndex})">
-              ${String.fromCharCode(65 + oIndex)}) ${opt}
-            </button>
-          `;
-        });
-
-        div.innerHTML = `
-          <div class="question-title"><strong>Questão ${qIndex + 1}:</strong> ${q.stem}</div>
-          <div class="options-list">${optionsHtml}</div>
+      let optionsHtml = '';
+      q.options.forEach((opt, oIndex) => {
+        const isSelected = selectedOpt === oIndex;
+        optionsHtml += `
+          <button class="option-btn ${isSelected ? 'selected' : ''}" onclick="selectExamOption(${oIndex})">
+            ${String.fromCharCode(65 + oIndex)}) ${opt}
+          </button>
         `;
-        container.appendChild(div);
       });
+
+      container.innerHTML = `
+        <div class="question-item">
+          <div class="question-title"><strong>Questão ${examIndex + 1} de ${examQuestions.length}:</strong> ${q.stem}</div>
+          <div class="options-list">${optionsHtml}</div>
+        </div>
+      `;
+
+      document.getElementById('btnExamPrev').disabled = (examIndex === 0);
+      document.getElementById('btnExamNext').disabled = (examIndex === examQuestions.length - 1);
     }
 
-    function selectExamOption(qIndex, oIndex) {
-      examAnswers[qIndex] = oIndex;
-      renderExamQuestions();
+    function selectExamOption(oIndex) {
+      examAnswers[examIndex] = oIndex;
+      renderCurrentExamQuestion();
+    }
+
+    function navExam(delta) {
+      const newIndex = examIndex + delta;
+      if (newIndex >= 0 && newIndex < examQuestions.length) {
+        examIndex = newIndex;
+        renderCurrentExamQuestion();
+      }
     }
 
     function finishExam() {
       if (timerInterval) clearInterval(timerInterval);
 
       let score = 0;
-      currentExamQuestions.forEach((q, idx) => {
-        if (examAnswers[idx] === q.correct) {
-          score++;
-        }
+      examQuestions.forEach((q, idx) => {
+        if (examAnswers[idx] === q.correct) score++;
       });
 
-      const percentage = Math.round((score / currentExamQuestions.length) * 100);
+      const percentage = Math.round((score / examQuestions.length) * 100);
       const container = document.getElementById('examContainer');
 
       let reviewHtml = `
         <div class="result-box">
           <h3>Resultado Final</h3>
-          <div class="result-score">${score} / ${currentExamQuestions.length}</div>
+          <div class="result-score">${score} / ${examQuestions.length}</div>
           <p>Aproveitamento: <strong>${percentage}%</strong></p>
         </div>
       `;
 
-      currentExamQuestions.forEach((q, qIndex) => {
-        const userAns = examAnswers[qIndex];
+      examQuestions.forEach((q, idx) => {
+        const userAns = examAnswers[idx];
         reviewHtml += `
           <div class="question-item">
-            <div class="question-title"><strong>Questão ${qIndex + 1}:</strong> ${q.stem}</div>
+            <div class="question-title"><strong>Questão ${idx + 1}:</strong> ${q.stem}</div>
             <div class="options-list">
         `;
 
@@ -983,14 +996,13 @@
       });
 
       container.innerHTML = reviewHtml;
-      document.getElementById('btnFinishExam').style.display = 'none';
+      document.getElementById('examFooter').style.display = 'none';
     }
 
-    /* --- LÓGICA DO QUIZ INTERATIVO (PERGUNTAS) --- */
+    /* --- QUIZ COM NAVEGAÇÃO E EMBARALHAMENTO --- */
     function startQuiz() {
       document.getElementById('quizTitle').innerText = `❓ Quiz: ${currentSubject}`;
       document.getElementById('quizSubtitle').innerText = `${academyData[currentLevel].title}`;
-      userAnswers = {};
       setDifficulty('easy');
       document.getElementById('quizModal').classList.add('active');
     }
@@ -1001,67 +1013,70 @@
       document.getElementById(`btn-${diff}`).classList.add('active');
 
       const topics = getTopicsForCurrentSubject();
-      currentQuizQuestions = topics.map((t, i) => {
+      const rawQuestions = topics.map((t, i) => {
         const q = generateQuestion(currentLevel, currentSubject, t, diff);
         return { ...q, id: i, topic: t };
       });
 
-      userAnswers = {};
-      renderQuizQuestions();
+      // Embaralha no início de cada nova escolha de dificuldade
+      quizQuestions = embaralhar(rawQuestions);
+      quizIndex = 0;
+      quizAnswers = {};
+      renderCurrentQuizQuestion();
     }
 
-    function renderQuizQuestions() {
+    function renderCurrentQuizQuestion() {
       const container = document.getElementById('questionsContainer');
-      container.innerHTML = '';
-
-      const answeredCount = Object.keys(userAnswers).length;
-      const total = currentQuizQuestions.length;
+      const q = quizQuestions[quizIndex];
+      const answeredCount = Object.keys(quizAnswers).length;
+      const total = quizQuestions.length;
 
       document.getElementById('progressText').innerText = `${answeredCount}/${total}`;
       document.getElementById('totalQuestionsText').innerText = `${total} Questões (${currentDifficulty.toUpperCase()})`;
 
-      currentQuizQuestions.forEach((q, qIndex) => {
-        const div = document.createElement('div');
-        div.className = 'question-item';
+      const userSelected = quizAnswers[quizIndex];
+      const isAnswered = userSelected !== undefined;
 
-        const userSelected = userAnswers[qIndex];
-        const isAnswered = userSelected !== undefined;
+      let optionsHtml = '';
+      q.options.forEach((opt, oIndex) => {
+        let extraClass = '';
+        if (isAnswered) {
+          if (oIndex === q.correct) extraClass = 'correct';
+          else if (userSelected === oIndex) extraClass = 'wrong';
+        }
 
-        let optionsHtml = '';
-        q.options.forEach((opt, oIndex) => {
-          let extraClass = '';
-          if (isAnswered) {
-            if (oIndex === q.correct) extraClass = 'correct';
-            else if (userSelected === oIndex) extraClass = 'wrong';
-          }
+        optionsHtml += `
+          <button class="option-btn ${extraClass}" 
+                  ${isAnswered ? 'disabled' : ''} 
+                  onclick="answerQuizQuestion(${oIndex})">
+            ${String.fromCharCode(65 + oIndex)}) ${opt}
+          </button>
+        `;
+      });
 
-          optionsHtml += `
-            <button class="option-btn ${extraClass}" 
-                    ${isAnswered ? 'disabled' : ''} 
-                    onclick="answerQuizQuestion(${qIndex}, ${oIndex})">
-              ${String.fromCharCode(65 + oIndex)}) ${opt}
-            </button>
-          `;
-        });
-
-        div.innerHTML = `
-          <div class="question-title"><strong>Questão ${qIndex + 1}:</strong> ${q.stem}</div>
+      container.innerHTML = `
+        <div class="question-item">
+          <div class="question-title"><strong>Questão ${quizIndex + 1} de ${total}:</strong> ${q.stem}</div>
           <div class="options-list">${optionsHtml}</div>
           ${isAnswered ? `<div class="explanation-box"><strong>Explicação:</strong> ${q.explanation}</div>` : ''}
-        `;
+        </div>
+      `;
 
-        container.appendChild(div);
-      });
+      document.getElementById('btnQuizPrev').disabled = (quizIndex === 0);
+      document.getElementById('btnQuizNext').disabled = (quizIndex === quizQuestions.length - 1);
     }
 
-    function answerQuizQuestion(qIndex, oIndex) {
-      userAnswers[qIndex] = oIndex;
-      renderQuizQuestions();
+    function answerQuizQuestion(oIndex) {
+      quizAnswers[quizIndex] = oIndex;
+      renderCurrentQuizQuestion();
     }
 
-    function resetProgress() {
-      userAnswers = {};
-      renderQuizQuestions();
+    function navQuiz(delta) {
+      const newIndex = quizIndex + delta;
+      if (newIndex >= 0 && newIndex < quizQuestions.length) {
+        quizIndex = newIndex;
+        renderCurrentQuizQuestion();
+      }
     }
   </script>
 </body>
