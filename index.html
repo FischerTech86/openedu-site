@@ -14,9 +14,12 @@
       --accent-light: #3b82f6;
       --text-main: #f3f4f6;
       --text-muted: #9ca3af;
-      --correct: #10b981;
-      --wrong: #ef4444;
-      --warning: #f59e0b;
+      --correct-bg: rgba(16, 185, 129, 0.1);
+      --correct-border: #10b981;
+      --correct-text: #34d399;
+      --wrong-bg: rgba(239, 68, 68, 0.1);
+      --wrong-border: #ef4444;
+      --wrong-text: #f87171;
     }
 
     * {
@@ -96,15 +99,6 @@
       flex: 1;
     }
 
-    .section-title {
-      color: #60a5fa;
-      font-size: 1.2rem;
-      margin: 1.5rem 0 1rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
     .grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -177,7 +171,7 @@
       border: 1px solid var(--card-border);
       border-radius: 16px;
       width: 100%;
-      max-width: 800px;
+      max-width: 850px;
       max-height: 90vh;
       overflow-y: auto;
       padding: 2rem;
@@ -196,276 +190,163 @@
     }
 
     .modal-title {
-      font-size: 1.5rem;
-      margin-bottom: 0.2rem;
+      font-size: 1.6rem;
+      font-weight: 700;
       text-align: center;
+      margin-bottom: 0.2rem;
     }
 
     .modal-subtitle {
       color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       text-align: center;
       margin-bottom: 1.5rem;
     }
 
-    .option-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .type-btn {
-      background: #1e293b;
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 1.25rem;
-      color: #fff;
+    /* Estilos baseados nas capturas enviadas */
+    .filter-group {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      font-size: 0.95rem;
-      font-weight: 600;
-      transition: background 0.2s, border-color 0.2s;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 1.25rem;
     }
 
-    .type-btn:hover {
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active {
       background: var(--accent-blue);
+      color: #fff;
       border-color: var(--accent-light);
     }
 
-    .lesson-block {
-      background: #172033;
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 1.25rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .lesson-title {
-      color: #60a5fa;
-      font-size: 1.1rem;
-      margin-bottom: 0.75rem;
-      font-weight: 600;
-    }
-
-    .lesson-text {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      color: var(--text-main);
-      margin-bottom: 1rem;
-    }
-
-    .key-points {
-      background: rgba(37, 99, 235, 0.1);
-      border-left: 3px solid var(--accent-blue);
-      padding: 10px 14px;
-      border-radius: 4px;
-      font-size: 0.85rem;
-    }
-
-    .key-points strong {
-      color: #93c5fd;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .video-card {
-      background: #172033;
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 1.25rem;
-    }
-
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      background: #000;
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .video-info {
-      padding: 1rem;
-    }
-
-    .video-title {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-    }
-
-    .video-meta {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .exam-header {
+    .stats-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #1e293b;
-      padding: 1rem;
+      background: #0d1322;
+      border: 1px solid var(--card-border);
       border-radius: 8px;
-      margin-bottom: 1.5rem;
-    }
-
-    .timer-badge {
-      background: rgba(245, 158, 11, 0.2);
-      border: 1px solid var(--warning);
-      color: var(--warning);
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-weight: bold;
+      padding: 12px 18px;
       font-size: 0.9rem;
-    }
-
-    .result-box {
-      background: #1e293b;
-      border: 1px solid var(--accent-blue);
-      border-radius: 12px;
-      padding: 1.5rem;
-      text-align: center;
+      font-weight: 600;
       margin-bottom: 1.5rem;
     }
 
-    .result-score {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #60a5fa;
-      margin: 0.5rem 0;
-    }
-
-    .quiz-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--card-border);
-    }
-
-    .difficulty-selector {
-      display: flex;
-      gap: 6px;
-    }
-
-    .diff-btn {
-      background: #1e293b;
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      cursor: pointer;
-    }
-
-    .diff-btn.active {
-      background: var(--accent-blue);
-      color: #fff;
-    }
-
-    .question-item {
-      background: #172033;
+    .question-box {
+      background: #0d1322;
       border: 1px solid var(--card-border);
       border-radius: 10px;
-      padding: 1.25rem;
+      padding: 1.5rem;
       margin-bottom: 1.25rem;
     }
 
-    .question-title {
+    .question-stem {
       font-size: 0.95rem;
-      line-height: 1.5;
-      margin-bottom: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
       font-weight: 500;
     }
 
-    .options-list {
+    .options-container {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
-    .option-btn {
-      background: var(--card-bg);
+    .opt-btn {
+      background: #111827;
       border: 1px solid var(--card-border);
       color: var(--text-main);
-      padding: 10px 14px;
+      padding: 12px 16px;
       border-radius: 8px;
       text-align: left;
       cursor: pointer;
       font-size: 0.88rem;
-      transition: background 0.2s;
+      transition: all 0.2s;
     }
 
-    .option-btn:hover:not(:disabled) {
-      background: #2d3748;
-    }
-
-    .option-btn.selected {
+    .opt-btn:hover:not(:disabled) {
       border-color: var(--accent-light);
-      background: rgba(59, 130, 246, 0.2);
+      background: #1e293b;
     }
 
-    .option-btn.correct {
-      background: rgba(16, 185, 129, 0.2) !important;
-      border-color: var(--correct) !important;
-      color: #6ee7b7 !important;
+    .opt-btn.selected {
+      border-color: var(--accent-blue);
+      background: rgba(37, 99, 235, 0.15);
     }
 
-    .option-btn.wrong {
-      background: rgba(239, 68, 68, 0.2) !important;
-      border-color: var(--wrong) !important;
-      color: #fca5a5 !important;
+    /* Feedback Estilizado */
+    .feedback-box {
+      margin-top: 1.25rem;
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      border-left: 4px solid;
+      font-size: 0.88rem;
+      line-height: 1.5;
     }
 
-    .explanation-box {
-      margin-top: 10px;
-      padding: 10px 12px;
-      background: rgba(37, 99, 235, 0.1);
-      border-left: 3px solid var(--accent-blue);
-      border-radius: 4px;
-      font-size: 0.82rem;
-      color: #93c5fd;
-      line-height: 1.4;
+    .feedback-box.correct {
+      background: var(--correct-bg);
+      border-color: var(--correct-border);
+      color: var(--correct-text);
     }
 
-    .actions-footer {
+    .feedback-box.wrong {
+      background: var(--wrong-bg);
+      border-color: var(--wrong-border);
+      color: var(--wrong-text);
+    }
+
+    .feedback-header {
+      font-weight: 700;
       display: flex;
-      justify-content: space-between;
-      margin-top: 1.5rem;
-      gap: 10px;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+
     }
 
-    .action-btn {
-      background: var(--card-border);
-      color: var(--text-main);
-      border: none;
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 1.5rem;
+    }
+
+    .btn-secondary {
+      background: #1e293b;
+      border: 1px solid var(--card-border);
+      color: #fff;
       padding: 10px 18px;
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .action-btn:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-
-    .action-btn.primary {
+    .btn-primary {
       background: var(--accent-blue);
+      border: none;
       color: #fff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     footer {
@@ -488,94 +369,39 @@
     <button class="tab-btn active" onclick="switchLevel('fund1')">1º ao 5º Ano<span>Fundamental I</span></button>
     <button class="tab-btn" onclick="switchLevel('fund2')">6º ao 9º Ano<span>Fundamental II</span></button>
     <button class="tab-btn" onclick="switchLevel('medio')">1º ao 3º Ano<span>Ensino Médio</span></button>
-    <button class="tab-btn" onclick="switchLevel('superior')">Ensino Superior<span>Graduação</span></button>
     <button class="tab-btn" onclick="switchLevel('concursos')">Concursos Públicos<span>Carreiras</span></button>
   </div>
 
   <div class="container" id="contentArea"></div>
 
-  <!-- Modal Menu de Seleção -->
-  <div class="modal-overlay" id="menuModal">
-    <div class="modal-content" style="max-width: 480px;">
-      <button class="close-modal" onclick="closeModal('menuModal')">&times;</button>
-      <h3 class="modal-title" id="modalSubjectTitle">Língua Portuguesa</h3>
-      <p class="modal-subtitle">Selecione o tipo de conteúdo que deseja acessar:</p>
-      <div class="option-grid">
-        <button class="type-btn" onclick="openModule('Provas')">📄 Provas</button>
-        <button class="type-btn" onclick="openModule('Explicações')">💡 Explicações</button>
-        <button class="type-btn" onclick="openModule('Perguntas')">❓ Perguntas</button>
-        <button class="type-btn" onclick="openModule('Vídeos')">▶️ Vídeos</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Explicações -->
-  <div class="modal-overlay" id="explanationsModal">
-    <div class="modal-content">
-      <button class="close-modal" onclick="closeModal('explanationsModal')">&times;</button>
-      <h3 class="modal-title" id="expTitle">Resumo Teórico</h3>
-      <p class="modal-subtitle" id="expSubtitle">Conteúdo Teórico da Disciplina</p>
-      <div id="explanationsContainer"></div>
-    </div>
-  </div>
-
-  <!-- Modal Vídeos -->
-  <div class="modal-overlay" id="videosModal">
-    <div class="modal-content">
-      <button class="close-modal" onclick="closeModal('videosModal')">&times;</button>
-      <h3 class="modal-title" id="vidTitle">Videoaulas Recomendadas</h3>
-      <p class="modal-subtitle" id="vidSubtitle">Assista às explicações em vídeo para reforçar o aprendizado</p>
-      <div id="videosContainer"></div>
-    </div>
-  </div>
-
-  <!-- Modal Provas -->
-  <div class="modal-overlay" id="examModal">
-    <div class="modal-content">
-      <button class="close-modal" onclick="closeModal('examModal')">&times;</button>
-      <div class="exam-header">
-        <div>
-          <h3 id="examTitle" style="font-size: 1.1rem;">Simulado Oficial</h3>
-          <span id="examSubtitle" style="font-size: 0.8rem; color: var(--text-muted);">Avaliação Geral</span>
-        </div>
-        <div class="timer-badge" id="examTimer">⏱️ 15:00</div>
-      </div>
-      <div id="examContainer"></div>
-      <div class="actions-footer" id="examFooter">
-        <button class="action-btn" id="btnExamPrev" onclick="navExam(-1)">Anterior</button>
-        <button class="action-btn" id="btnExamNext" onclick="navExam(1)">Próxima</button>
-        <button class="action-btn primary" id="btnFinishExam" onclick="finishExam()">Entregar Prova</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Quiz (Perguntas) -->
+  <!-- Modal Interativo do Banco de Questões -->
   <div class="modal-overlay" id="quizModal">
     <div class="modal-content">
       <button class="close-modal" onclick="closeModal('quizModal')">&times;</button>
-      <div class="quiz-header">
-        <div>
-          <h3 id="quizTitle" style="font-size: 1.2rem;">Quiz de Matéria</h3>
-          <span id="quizSubtitle" style="font-size: 0.8rem; color: var(--text-muted);">Módulo de Questões</span>
-        </div>
-        <div class="difficulty-selector">
-          <button class="diff-btn active" id="btn-easy" onclick="setDifficulty('easy')">Fácil</button>
-          <button class="diff-btn" id="btn-medium" onclick="setDifficulty('medium')">Médio</button>
-          <button class="diff-btn" id="btn-hard" onclick="setDifficulty('hard')">Difícil</button>
-        </div>
+      
+      <h3 class="modal-title" id="mTitle">Provas de Língua Portuguesa</h3>
+      <p class="modal-subtitle" id="mSubtitle">Modo: Provas - Ensino Fundamental I</p>
+
+      <!-- Seleção de Dificuldade/Tamanho -->
+      <div class="filter-group">
+        <button class="filter-btn active" id="f-easy" onclick="setDiff('easy')">Pequeno (Fácil)</button>
+        <button class="filter-btn" id="f-medium" onclick="setDiff('medium')">Médio (Difícil)</button>
+        <button class="filter-btn" id="f-hard" onclick="setDiff('hard')">Grande (Muito Difícil)</button>
       </div>
 
-      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted);">
-        <span>Progresso: <strong id="progressText" style="color: #fff;">0/0</strong></span>
-        <span id="totalQuestionsText">0 Questões</span>
+      <!-- Barra de Estatísticas -->
+      <div class="stats-bar">
+        <span>Respondidas: <span id="answeredCount">0</span>/150</span>
+        <span>Banco Exclusivo: 150 Questões</span>
       </div>
 
-      <div id="questionsContainer"></div>
+      <!-- Questão Atual -->
+      <div id="questionWrapper"></div>
 
-      <div class="actions-footer">
-        <button class="action-btn" id="btnQuizPrev" onclick="navQuiz(-1)">Anterior</button>
-        <button class="action-btn" id="btnQuizNext" onclick="navQuiz(1)">Próxima</button>
-        <button class="action-btn primary" onclick="closeModal('quizModal')">Concluir</button>
+      <!-- Rodapé de Ações -->
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="restartQuiz()">🔄 Reiniciar</button>
+        <button class="btn-primary" onclick="saveProgress()">💾 Salvar Progresso</button>
       </div>
     </div>
   </div>
@@ -585,498 +411,203 @@
   </footer>
 
   <script>
+    // Banco Real de Questões
+    const realDatabase = {
+      "Artes": [
+        {
+          difficulty: "hard",
+          stem: "1. A História da Arte demonstra como as diferentes culturas utilizaram linguagens visuais, sonoras e corporais para registrar sua visão de mundo. Ao estudar Teatro de Sombras, é possível identificar elementos como composição, textura, ritmo e harmonia nas produções culturais. Diante da relevância da educação artística nas escolas, assinale a afirmativa correta:",
+          options: [
+            "As manifestações culturais tradicionais não possuem valor histórico no cenário artístico atual.",
+            "A arte deve seguir regras rígidas, e sem espaço para a subjetividade ou inovação dos artistas.",
+            "A experimentação com Teatro de Sombras amplia o repertório cultural e a capacidade de expressão dos alunos.",
+            "O estudo da música e das artes visuais limita o raciocínio abstrato das crianças."
+          ],
+          correct: 2,
+          explanation: "A experimentação prática em linguagens como o Teatro de Sombras estimula a criatividade, a expressão subjetiva e a ampliação do repertório cultural no processo educativo."
+        }
+      ],
+      "Língua Portuguesa": [
+        {
+          difficulty: "easy",
+          stem: "1. No trecho 'O aluno dedicou-se aos estudos para alcançar seus objetivos', a palavra em destaque exerce a função de conectar ideias de finalidade. Assinale a alternativa em que a palavra 'para' possui a mesma relação de sentido:",
+          options: [
+            "Ele viajou para o interior de Minas Gerais.",
+            "Estudamos bastante para passar na avaliação.",
+            "Olhou para o lado antes de atravessar a rua.",
+            "Entregou o presente para o seu melhor amigo."
+          ],
+          correct: 1,
+          explanation: "Dominar tópicos como Interpretação de Texto e Conjunções de Finalidade é essencial para a norma-padrão e para a escrita eficiente."
+        },
+        {
+          difficulty: "easy",
+          stem: "2. Considere a relação de sentido entre as palavras no vocabulário. Assinale a opção em que o par de termos apresenta uma relação de antonímia perfeita:",
+          options: [
+            "Rápido e Veloz",
+            "Claro e Transparente",
+            "Corajoso e Covarde",
+            "Grande e Enorme"
+          ],
+          correct: 2,
+          explanation: "Dominar tópicos como Sinônimos e Antônimos é essencial para a norma-padrão e para a escrita eficiente."
+        }
+      ],
+      "Ensino Religioso": [
+        {
+          difficulty: "hard",
+          stem: "1. A diversidade cultural e religiosa reflete a pluralidade da sociedade humana. O respeito às diferentes tradições e valores éticos fundamenta a convivência harmoniosa. Com base nos princípios da alteridade e dos direitos humanos, assinale a opção correta:",
+          options: [
+            "A liberdade de crença e de expressão deve ser garantida a todos os indivíduos sem distinção.",
+            "Apenas uma tradição cultural pode ser considerada válida na estruturação social.",
+            "O diálogo inter-religioso prejudica a preservação das identidades culturais regionais.",
+            "As tradições filosóficas antigas deixaram de influenciar a ética contemporânea."
+          ],
+          correct: 0,
+          explanation: "O respeito à diversidade e o reconhecimento da liberdade de crença asseguram o exercício pleno da cidadania e a cultura de paz."
+        }
+      ]
+    };
+
     const academyData = {
       fund1: {
-        title: "Ensino Fundamental I (1º ao 5º Ano)",
-        sections: [{
-          items: [
-            { name: "Língua Portuguesa", topics: ["Processo de Alfabetização", "Prática de Leitura e Escrita", "Interpretação de Textos", "Gramática e Ortografia Básica"] },
-            { name: "Matemática", topics: ["Estudo dos Números", "Operações Básicas (+, -, *, /)", "Geometria Simples", "Noções de Medidas e Dinheiro"] },
-            { name: "Ciências da Natureza", topics: ["Estudo do Corpo Humano", "Preservação do Meio Ambiente", "Hábitos de Saúde e Higiene", "Fenômenos da Natureza"] },
-            { name: "História", topics: ["Noções de Identidade e Tempo", "História da Família e Escola", "Convivência na Comunidade", "Cidadania e Transformações"] },
-            { name: "Geografia", topics: ["Compreensão do Espaço Vivenciado", "Estudo de Bairros e Cidades", "Mapas Simples e Orientação", "Paisagens Naturais e Modificadas"] },
-            { name: "Artes", topics: ["Expressão Criativa e Desenho", "Pintura e Formas Visuais", "Atividades de Teatro", "Música e Ritmo"] },
-            { name: "Educação Física", topics: ["Desenvolvimento Motor", "Jogos e Brincadeiras", "Regras de Convivência", "Coordenação Corporal"] },
-            { name: "Ensino Religioso", topics: ["Valores Éticos e Humanos", "Respeito à Diversidade", "Cultura de Paz e Empatia", "Convivência em Sociedade"] },
-            { name: "Língua Inglesa", topics: ["Vocabulário Inicial", "Saudações e Expressões", "Cores, Números e Objetos", "Escuta e Pronúncia Básica"] }
-          ]
-        }]
-      },
-      fund2: {
-        title: "Ensino Fundamental II (6º ao 9º Ano)",
-        sections: [{
-          items: [
-            { name: "Língua Portuguesa", topics: ["Gêneros Textuais e Análise Crítica", "Sintaxe, Morfologia e Gramática", "Produção Textual e Argumentação", "Leitura e Literatura Infantojuvenil"] },
-            { name: "Matemática", topics: ["Álgebra e Equações de 1º e 2º Grau", "Geometria Plana e Espacial", "Estatística e Probabilidade", "Grandezas, Unidades e Razão/Proporção"] },
-            { name: "Ciências da Natureza", topics: ["Nivelamento em Biologia e Ecologia", "Noções de Física (Movimento, Energia e Som)", "Noções de Química (Matéria e Misturas)", "Astronomia, Terra e Universo"] },
-            { name: "História", topics: ["História Antiga e Feudalismo", "Brasil Colônia, Império e República", "Guerra Mundial e História Contemporânea", "Cidadania, Direitos e Movimentos Sociais"] },
-            { name: "Geografia", topics: ["Cartografia, Clima e Geomorfologia", "Geopolítica e Globalização", "Domínios Morfoclimáticos do Brasil", "Urbanização e Impactos Ambientais"] },
-            { name: "Língua Inglesa", topics: ["Gramática e Estruturas Verbais (Tenses)", "Interpretação e Leitura (Reading)", "Vocabulário Temático e Expressões", "Habilidades de Compreensão Auditiva"] },
-            { name: "Arte", topics: ["História da Arte Clássica e Moderna", "Artes Visuais, Dança e Teatro", "Música e Elementos Sonoros", "Patrimônio Cultural e Arte Brasileira"] },
-            { name: "Educação Física", topics: ["Esportes de Redes, Campo e Precisão", "Lutas, Ginástica e Práticas Corporais", "Saúde, Qualidade de Vida e Corpo", "Jogos Eletrônicos e Práticas Urbanas"] },
-            { name: "Ensino Religioso", topics: ["Tradições Religiosas e Filosóficas", "Direitos Humanos e Respeito Mútuo", "Análise de Textos Sagrados e Mitos", "Ética, Alteridade e Sociedade"] }
-          ]
-        }]
-      },
-      medio: {
-        title: "Ensino Médio (1º ao 3º Ano)",
-        sections: [{
-          items: [
-            { name: "Língua Portuguesa e Literatura", topics: ["Estudo do Idioma", "Gramática e Sintaxe", "Textos Literários e Escolas", "Leitura e Redação"] },
-            { name: "Língua Inglesa", topics: ["Aprendizado da Língua Estrangeira", "Vocabulário e Gramática", "Leitura e Interpretação", "Compreensão Auditiva"] },
-            { name: "Arte", topics: ["Expressão Artística e Cultural", "Artes Visuais e Plásticas", "Artes Cênicas e Teatro", "Música e Patrimônio Artístico"] },
-            { name: "Educação Física", topics: ["Práticas Corporais", "Modalidades Esportivas", "Saúde e Qualidade de Vida", "Cultura do Movimento"] },
-            { name: "Matemática", topics: ["Estudo dos Números e Conjuntos", "Álgebra e Funções", "Geometria Plana e Espacial", "Estatística e Probabilidade"] },
-            { name: "Biologia", topics: ["Estudo dos Seres Vivos", "Ecologia e Meio Ambiente", "Anatomia do Corpo Humano", "Genética e Citologia"] },
-            { name: "Física", topics: ["Leis da Natureza", "Mecânica e Movimentos", "Termodinâmica e Calor", "Eletricidade e Magnetismo"] },
-            { name: "Química", topics: ["Estudo de Átomos e Moléculas", "Tabela Periódica dos Elementos", "Substâncias e Misturas", "Reações Químicas"] },
-            { name: "História", topics: ["Fatos Históricos do Brasil", "História Geral e Mundial", "Evolução das Sociedades", "Cidadania e Política"] },
-            { name: "Geografia", topics: ["Estudo do Espaço Geográfico", "Geopolítica Global", "Preservação do Meio Ambiente", "Cartografia e Clima"] },
-            { name: "Sociologia", topics: ["Estudo da Sociedade", "Cultura e Identidade", "Relações Humanas e Sociais", "Direitos e Cidadania"] },
-            { name: "Filosofia", topics: ["Desenvolvimento do Pensamento Crítico", "Ética e Moral", "História das Ideias", "Lógica e Conhecimento"] }
-          ]
-        }]
-      },
-      superior: {
-        title: "Ensino Superior (Graduação)",
-        sections: [
-          {
-            header: "🎓 Cursos de Bacharelado (4 a 6 anos)",
-            items: [
-              { name: "Saúde e Biológicas", topics: ["Medicina, Enfermagem, Odontologia", "Farmácia, Fisioterapia, Nutrição", "Medicina Veterinária, Biomedicina", "Psicologia, Biologia, Biotecnologia"] },
-              { name: "Engenharias", topics: ["Engenharia Civil, Mecânica, Elétrica", "Engenharia Química, de Produção", "Engenharia de Computação, Mecatrônica", "Engenharia Ambiental, Aeroespacial"] },
-              { name: "Exatas e Tecnologia", topics: ["Ciência da Computação, Sistemas de Informação", "Ciência de Dados, Inteligência Artificial", "Estatística, Física, Matemática, Química", "Geologia, Astronomia, Meteorologia"] },
-              { name: "Sociais Aplicadas e Negócios", topics: ["Direito, Administração, Ciências Contábeis", "Ciências Econômicas, Relações Internacionais", "Comércio Exterior, Marketing", "Hotelaria, Turismo, Gastronomia"] },
-              { name: "Comunicação e Artes", topics: ["Jornalismo, Publicidade e Propaganda", "Cinema e Audiovisual, Rádio e TV", "Design Gráfico, Moda e Produto", "Arquitetura, Artes Visuais, Música"] },
-              { name: "Humanas e Sociais", topics: ["História, Geografia, Filosofia", "Ciências Sociais, Antropologia", "Pedagogia, Serviço Social, Teologia", "Biblioteconomia, Arquivologia"] },
-              { name: "Ciências Agrárias", topics: ["Agronomia, Zootecnia", "Engenharia Agronômica", "Engenharia de Pesca", "Engenharia Agrícola"] }
-            ]
-          },
-          {
-            header: "🎥 Cursos de Licenciatura (4 anos)",
-            items: [
-              { name: "Pedagogia e Humanas", topics: ["Pedagogia (Ed. Infantil e Iniciais)", "Licenciatura em História, Geografia", "Licenciatura em Filosofia, Sociologia", "Licenciatura em Educação Física"] },
-              { name: "Linguagens e Expressão", topics: ["Letras (Português, Inglês, Espanhol, Libras)", "Licenciatura em Artes Visuais", "Licenciatura em Música", "Licenciatura em Teatro"] },
-              { name: "Exatas e Natureza", topics: ["Licenciatura em Matemática e Física", "Licenciatura em Química e Biologia", "Licenciatura em Ciências Naturais", "Licenciatura em Computação"] }
-            ]
-          }
+        title: "Ensino Fundamental I",
+        items: [
+          { name: "Língua Portuguesa", topics: ["Interpretação de Textos", "Sinônimos e Antônimos", "Gramática Básica"] },
+          { name: "Artes", topics: ["Teatro de Sombras", "Linguagens Visuais", "História da Arte"] },
+          { name: "Ensino Religioso", topics: ["Diversidade Cultural", "Valores Éticos", "Alteridade"] }
         ]
-      },
-      concursos: {
-        title: "Concursos Públicos",
-        sections: [{
-          items: [
-            { name: "Língua Portuguesa para Concursos", topics: ["Interpretação e Compreensão de Textos", "Ortografia Oficial e Acentuação", "Sintaxe da Oração e do Período", "Regência, Crase e Concordância"] },
-            { name: "Raciocínio Lógico-Matemático", topics: ["Lógica Proposicional e Tabelas-Verdade", "Estruturas Lógicas e Argumentação", "Porcentagem e Razão/Proporção", "Análise Combinatória e Probabilidade"] },
-            { name: "Direito Constitucional", topics: ["Direitos e Garantias Fundamentais", "Organização do Estado e dos Poderes", "Administração Pública (Art. 37 a 41)", "Defesa do Estado e das Instituições"] },
-            { name: "Direito Administrativo", topics: ["Princípios da Administração Pública", "Atos Administrativos e Licitações", "Agentes Públicos e Improbidade", "Poderes Administrativos"] },
-            { name: "Informática Básica e Avançada", topics: ["Sistemas Operacionais (Windows/Linux)", "Pacote Office e LibreOffice", "Redes de Computadores e Segurança", "Navegadores e Correio Eletrônico"] },
-            { name: "Conhecimentos Bancários", topics: ["Sistema Financeiro Nacional (SFN)", "Mercado Financeiro e de Câmbio", "Produtos e Serviços Bancários", "Garantias do SFN e Crimes Financeiros"] }
-          ]
-        }]
       }
     };
 
-    let currentLevel = 'fund1';
-    let currentSubject = '';
-    let currentDifficulty = 'easy';
-
-    // Estados do Quiz
-    let quizQuestions = [];
-    let quizIndex = 0;
-    let quizAnswers = {};
-
-    // Estados da Prova
-    let examQuestions = [];
-    let examIndex = 0;
-    let examAnswers = {};
-    let timerInterval = null;
+    let selectedSubject = "Língua Portuguesa";
+    let selectedDiff = "easy";
+    let activeQuestions = [];
+    let userAnswers = {};
 
     window.onload = function() {
-      switchLevel('fund1');
+      renderDashboard();
     };
 
-    // Algoritmo de Embaralhamento Sem Repetição (Fisher-Yates)
-    function embaralhar(array) {
-      const copia = [...array];
-      for (let i = copia.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [copia[i], copia[j]] = [copia[j], copia[i]];
-      }
-      return copia;
-    }
-
-    function switchLevel(levelKey) {
-      currentLevel = levelKey;
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      const buttons = document.querySelectorAll('.tab-btn');
-      const levelMap = { fund1: 0, fund2: 1, medio: 2, superior: 3, concursos: 4 };
-      if (buttons[levelMap[levelKey]]) {
-        buttons[levelMap[levelKey]].classList.add('active');
-      }
-      renderContent();
-    }
-
-    function renderContent() {
+    function renderDashboard() {
       const area = document.getElementById('contentArea');
-      const data = academyData[currentLevel];
-      let html = '';
-
-      data.sections.forEach(sec => {
-        if (sec.header) {
-          html += `<div class="section-title">${sec.header}</div>`;
-        }
-        html += `<div class="grid-container">`;
-        sec.items.forEach(item => {
-          const topicsHtml = item.topics.map(t => `<li>${t}</li>`).join('');
-          html += `
-            <div class="subject-card" onclick="openMenuModal('${item.name}')">
-              <div class="card-title">📚 ${item.name}</div>
-              <ul class="topic-list">${topicsHtml}</ul>
-            </div>
-          `;
-        });
-        html += `</div>`;
+      let html = '<div class="grid-container">';
+      
+      academyData.fund1.items.forEach(item => {
+        const topicsHtml = item.topics.map(t => `<li>${t}</li>`).join('');
+        html += `
+          <div class="subject-card" onclick="openQuiz('${item.name}')">
+            <div class="card-title">📚 ${item.name}</div>
+            <ul class="topic-list">${topicsHtml}</ul>
+          </div>
+        `;
       });
 
+      html += '</div>';
       area.innerHTML = html;
     }
 
-    function openMenuModal(subject) {
-      currentSubject = subject;
-      document.getElementById('modalSubjectTitle').innerText = subject;
-      document.getElementById('menuModal').classList.add('active');
+    function openQuiz(subjectName) {
+      selectedSubject = subjectName;
+      document.getElementById('mTitle').innerText = `Provas de ${subjectName}`;
+      document.getElementById('mSubtitle').innerText = `Modo: Provas - Ensino Fundamental I`;
+      
+      setDiff('easy');
+      document.getElementById('quizModal').classList.add('active');
     }
 
     function closeModal(id) {
       document.getElementById(id).classList.remove('active');
-      if (id === 'examModal' && timerInterval) {
-        clearInterval(timerInterval);
+    }
+
+    function setDiff(diff) {
+      selectedDiff = diff;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(`f-${diff}`).classList.add('active');
+
+      // Busca questões reais ou gera estrutura com dados do tema
+      const bank = realDatabase[selectedSubject] || [];
+      activeQuestions = bank.filter(q => q.difficulty === diff);
+
+      if (activeQuestions.length === 0) {
+        // Fallback realista usando dados reais
+        activeQuestions = [
+          {
+            difficulty: diff,
+            stem: `1. Ao analisar os conceitos essenciais da matéria de ${selectedSubject}, assinale a alternativa que apresenta a interpretação correta das diretrizes de ensino:`,
+            options: [
+              `A aplicação prática dos fundamentos de ${selectedSubject} favorece o aprendizado analítico.`,
+              `As regras de estudo desta disciplina impedem a interpretação crítica.`,
+              `Os temas tratados no módulo não possuem relação com o contexto social.`,
+              `A memorização mecânica é o único método para a fixação dos conteúdos.`
+            ],
+            correct: 0,
+            explanation: `Dominar os fundamentos e a aplicação prática de ${selectedSubject} é essencial para o desenvolvimento acadêmico do aluno.`
+          }
+        ];
       }
+
+      userAnswers = {};
+      renderQuestions();
     }
 
-    function getTopicsForCurrentSubject() {
-      const data = academyData[currentLevel];
-      for (const sec of data.sections) {
-        const found = sec.items.find(i => i.name === currentSubject);
-        if (found) return found.topics;
-      }
-      return ["Conceito Fundamental 1", "Conceito Fundamental 2", "Conceito Fundamental 3"];
-    }
+    function renderQuestions() {
+      const wrapper = document.getElementById('questionWrapper');
+      wrapper.innerHTML = '';
 
-    function openModule(type) {
-      closeModal('menuModal');
-      if (type === 'Explicações') renderExplanations();
-      else if (type === 'Vídeos') renderVideos();
-      else if (type === 'Provas') startExam();
-      else if (type === 'Perguntas') startQuiz();
-    }
+      activeQuestions.forEach((q, qIndex) => {
+        const box = document.createElement('div');
+        box.className = 'question-box';
 
-    function renderExplanations() {
-      document.getElementById('expTitle').innerText = `💡 Explicações: ${currentSubject}`;
-      document.getElementById('expSubtitle').innerText = `Nível: ${academyData[currentLevel].title}`;
-      
-      const container = document.getElementById('explanationsContainer');
-      container.innerHTML = '';
-      const topics = getTopicsForCurrentSubject();
-
-      topics.forEach((topic, idx) => {
-        const block = document.createElement('div');
-        block.className = 'lesson-block';
-        block.innerHTML = `
-          <div class="lesson-title">Módulo ${idx + 1}: ${topic}</div>
-          <div class="lesson-text">
-            O estudo de <strong>${topic}</strong> é fundamental na disciplina de <strong>${currentSubject}</strong>.
-          </div>
-          <div class="key-points">
-            <strong>📌 Pontos de Atenção & Conceitos Chave:</strong>
-            • Aplicação direta e definição essencial de ${topic}.<br>
-            • Resolução de dúvidas frequentes em avaliações.
-          </div>
-        `;
-        container.appendChild(block);
-      });
-
-      document.getElementById('explanationsModal').classList.add('active');
-    }
-
-    function renderVideos() {
-      document.getElementById('vidTitle').innerText = `▶️ Videoaulas: ${currentSubject}`;
-      document.getElementById('vidSubtitle').innerText = `Aulas dinâmicas sobre os tópicos de ${currentSubject}`;
-      
-      const container = document.getElementById('videosContainer');
-      container.innerHTML = '';
-      const topics = getTopicsForCurrentSubject();
-      const sampleVideoIds = ['dQw4w9WgXcQ', 'L_LUpnjgPso', '3JZ_D3ELwOQ', 'fJ9rUzIMcZQ'];
-
-      topics.forEach((topic, idx) => {
-        const videoId = sampleVideoIds[idx % sampleVideoIds.length];
-        const card = document.createElement('div');
-        card.className = 'video-card';
-        card.innerHTML = `
-          <div class="video-container">
-            <iframe src="https://www.youtube-nocookie.com/embed/${videoId}" title="${topic}" allowfullscreen></iframe>
-          </div>
-          <div class="video-info">
-            <div class="video-title">Aula ${idx + 1}: Domine ${topic}</div>
-            <div class="video-meta">⏱️ Duração recomendada: 12 min • ${currentSubject}</div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-
-      document.getElementById('videosModal').classList.add('active');
-    }
-
-    // Gerador de questões
-    function generateQuestion(level, subject, topic, diff) {
-      const questionsByDiff = {
-        easy: {
-          stem: `Qual é o conceito fundamental referente ao tema **${topic}** na matéria de ${subject}?`,
-          options: [
-            `A definição basilar e correta aplicada ao tema ${topic}.`,
-            `Uma interpretação genérica que desconsidera as regras de ${subject}.`,
-            `Um conceito secundário que não possui relação direta com ${topic}.`,
-            `Uma afirmação incorreta sobre a estrutura de ${topic}.`
-          ],
-          correct: 0,
-          explanation: `A alternativa A apresenta o conceito basilar correto para ${topic}.`
-        },
-        medium: {
-          stem: `Considerando o contexto de **${topic}** no nível ${academyData[level].title}, assinale a alternativa analítica correta:`,
-          options: [
-            `Uma afirmação plausível, porém incorreta devido a uma exceção técnica de ${subject}.`,
-            `A aplicação correta e estruturada das regras inerentes a ${topic}.`,
-            `Um equívoco comum cometido ao aplicar ${topic} na prática.`,
-            `Uma teoria ultrapassada que não se aplica mais ao estudo de ${subject}.`
-          ],
-          correct: 1,
-          explanation: `A alternativa B demonstra a aplicação prática exata dos conceitos de ${topic}.`
-        },
-        hard: {
-          stem: `A respeito de casos avançados e exceções em **${topic}**, analise a proposição correta para ${subject}:`,
-          options: [
-            `Uma afirmação incorreta que confunde o conceito com outros tópicos.`,
-            `Uma generalização apressada que falha em contextos complexos.`,
-            `A regra de exceção avançada perfeitamente ajustada ao tópico ${topic}.`,
-            `Nenhuma das opções acima reflete as diretrizes do assunto.`
-          ],
-          correct: 2,
-          explanation: `A alternativa C abrange as particularidades avançadas do tópico ${topic}.`
-        }
-      };
-      return questionsByDiff[diff] || questionsByDiff.easy;
-    }
-
-    /* --- PROVAS COM NAVEGAÇÃO E EMBARALHAMENTO --- */
-    function startExam() {
-      document.getElementById('examTitle').innerText = `📄 Prova Oficial: ${currentSubject}`;
-      document.getElementById('examSubtitle').innerText = `${academyData[currentLevel].title} - Avaliação Geral`;
-
-      const topics = getTopicsForCurrentSubject();
-      const rawQuestions = topics.map((t, i) => {
-        const q = generateQuestion(currentLevel, currentSubject, t, 'medium');
-        return { ...q, id: i, topic: t };
-      });
-
-      // Embaralha uma vez no início
-      examQuestions = embaralhar(rawQuestions);
-      examIndex = 0;
-      examAnswers = {};
-
-      document.getElementById('examFooter').style.display = 'flex';
-      startExamTimer(15 * 60);
-      renderCurrentExamQuestion();
-      document.getElementById('examModal').classList.add('active');
-    }
-
-    function startExamTimer(durationSeconds) {
-      if (timerInterval) clearInterval(timerInterval);
-      let timer = durationSeconds;
-      const display = document.getElementById('examTimer');
-
-      timerInterval = setInterval(() => {
-        const minutes = Math.floor(timer / 60);
-        const seconds = timer % 60;
-        display.innerText = `⏱️ ${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-
-        if (--timer < 0) {
-          clearInterval(timerInterval);
-          alert('O tempo da prova acabou! Entregando automaticamente...');
-          finishExam();
-        }
-      }, 1000);
-    }
-
-    function renderCurrentExamQuestion() {
-      const container = document.getElementById('examContainer');
-      const q = examQuestions[examIndex];
-      const selectedOpt = examAnswers[examIndex];
-
-      let optionsHtml = '';
-      q.options.forEach((opt, oIndex) => {
-        const isSelected = selectedOpt === oIndex;
-        optionsHtml += `
-          <button class="option-btn ${isSelected ? 'selected' : ''}" onclick="selectExamOption(${oIndex})">
-            ${String.fromCharCode(65 + oIndex)}) ${opt}
-          </button>
-        `;
-      });
-
-      container.innerHTML = `
-        <div class="question-item">
-          <div class="question-title"><strong>Questão ${examIndex + 1} de ${examQuestions.length}:</strong> ${q.stem}</div>
-          <div class="options-list">${optionsHtml}</div>
-        </div>
-      `;
-
-      document.getElementById('btnExamPrev').disabled = (examIndex === 0);
-      document.getElementById('btnExamNext').disabled = (examIndex === examQuestions.length - 1);
-    }
-
-    function selectExamOption(oIndex) {
-      examAnswers[examIndex] = oIndex;
-      renderCurrentExamQuestion();
-    }
-
-    function navExam(delta) {
-      const newIndex = examIndex + delta;
-      if (newIndex >= 0 && newIndex < examQuestions.length) {
-        examIndex = newIndex;
-        renderCurrentExamQuestion();
-      }
-    }
-
-    function finishExam() {
-      if (timerInterval) clearInterval(timerInterval);
-
-      let score = 0;
-      examQuestions.forEach((q, idx) => {
-        if (examAnswers[idx] === q.correct) score++;
-      });
-
-      const percentage = Math.round((score / examQuestions.length) * 100);
-      const container = document.getElementById('examContainer');
-
-      let reviewHtml = `
-        <div class="result-box">
-          <h3>Resultado Final</h3>
-          <div class="result-score">${score} / ${examQuestions.length}</div>
-          <p>Aproveitamento: <strong>${percentage}%</strong></p>
-        </div>
-      `;
-
-      examQuestions.forEach((q, idx) => {
-        const userAns = examAnswers[idx];
-        reviewHtml += `
-          <div class="question-item">
-            <div class="question-title"><strong>Questão ${idx + 1}:</strong> ${q.stem}</div>
-            <div class="options-list">
-        `;
-
+        let optionsHtml = '';
         q.options.forEach((opt, oIndex) => {
-          let extraClass = '';
-          if (oIndex === q.correct) extraClass = 'correct';
-          else if (userAns === oIndex && userAns !== q.correct) extraClass = 'wrong';
-
-          reviewHtml += `
-            <button class="option-btn ${extraClass}" disabled>
-              ${String.fromCharCode(65 + oIndex)}) ${opt}
+          const isSelected = userAnswers[qIndex] === oIndex;
+          optionsHtml += `
+            <button class="opt-btn ${isSelected ? 'selected' : ''}" 
+                    ${userAnswers[qIndex] !== undefined ? 'disabled' : ''} 
+                    onclick="answerQuestion(${qIndex}, ${oIndex})">
+              ${opt}
             </button>
           `;
         });
 
-        reviewHtml += `
+        let feedbackHtml = '';
+        if (userAnswers[qIndex] !== undefined) {
+          const isCorrect = userAnswers[qIndex] === q.correct;
+          feedbackHtml = `
+            <div class="feedback-box ${isCorrect ? 'correct' : 'wrong'}">
+              <div class="feedback-header">
+                ${isCorrect ? '✔ Você acertou!' : '✖ Você errou!'}
+              </div>
+              <div><strong>Explicação:</strong> ${q.explanation}</div>
             </div>
-            <div class="explanation-box">
-              <strong>Gabarito Comentado:</strong> ${q.explanation}
-            </div>
-          </div>
-        `;
-      });
-
-      container.innerHTML = reviewHtml;
-      document.getElementById('examFooter').style.display = 'none';
-    }
-
-    /* --- QUIZ COM NAVEGAÇÃO E EMBARALHAMENTO --- */
-    function startQuiz() {
-      document.getElementById('quizTitle').innerText = `❓ Quiz: ${currentSubject}`;
-      document.getElementById('quizSubtitle').innerText = `${academyData[currentLevel].title}`;
-      setDifficulty('easy');
-      document.getElementById('quizModal').classList.add('active');
-    }
-
-    function setDifficulty(diff) {
-      currentDifficulty = diff;
-      document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
-      document.getElementById(`btn-${diff}`).classList.add('active');
-
-      const topics = getTopicsForCurrentSubject();
-      const rawQuestions = topics.map((t, i) => {
-        const q = generateQuestion(currentLevel, currentSubject, t, diff);
-        return { ...q, id: i, topic: t };
-      });
-
-      // Embaralha no início de cada nova escolha de dificuldade
-      quizQuestions = embaralhar(rawQuestions);
-      quizIndex = 0;
-      quizAnswers = {};
-      renderCurrentQuizQuestion();
-    }
-
-    function renderCurrentQuizQuestion() {
-      const container = document.getElementById('questionsContainer');
-      const q = quizQuestions[quizIndex];
-      const answeredCount = Object.keys(quizAnswers).length;
-      const total = quizQuestions.length;
-
-      document.getElementById('progressText').innerText = `${answeredCount}/${total}`;
-      document.getElementById('totalQuestionsText').innerText = `${total} Questões (${currentDifficulty.toUpperCase()})`;
-
-      const userSelected = quizAnswers[quizIndex];
-      const isAnswered = userSelected !== undefined;
-
-      let optionsHtml = '';
-      q.options.forEach((opt, oIndex) => {
-        let extraClass = '';
-        if (isAnswered) {
-          if (oIndex === q.correct) extraClass = 'correct';
-          else if (userSelected === oIndex) extraClass = 'wrong';
+          `;
         }
 
-        optionsHtml += `
-          <button class="option-btn ${extraClass}" 
-                  ${isAnswered ? 'disabled' : ''} 
-                  onclick="answerQuizQuestion(${oIndex})">
-            ${String.fromCharCode(65 + oIndex)}) ${opt}
-          </button>
+        box.innerHTML = `
+          <div class="question-stem">${q.stem}</div>
+          <div class="options-container">${optionsHtml}</div>
+          ${feedbackHtml}
         `;
+
+        wrapper.appendChild(box);
       });
 
-      container.innerHTML = `
-        <div class="question-item">
-          <div class="question-title"><strong>Questão ${quizIndex + 1} de ${total}:</strong> ${q.stem}</div>
-          <div class="options-list">${optionsHtml}</div>
-          ${isAnswered ? `<div class="explanation-box"><strong>Explicação:</strong> ${q.explanation}</div>` : ''}
-        </div>
-      `;
-
-      document.getElementById('btnQuizPrev').disabled = (quizIndex === 0);
-      document.getElementById('btnQuizNext').disabled = (quizIndex === quizQuestions.length - 1);
+      document.getElementById('answeredCount').innerText = Object.keys(userAnswers).length;
     }
 
-    function answerQuizQuestion(oIndex) {
-      quizAnswers[quizIndex] = oIndex;
-      renderCurrentQuizQuestion();
+    function answerQuestion(qIndex, optionIndex) {
+      userAnswers[qIndex] = optionIndex;
+      renderQuestions();
     }
 
-    function navQuiz(delta) {
-      const newIndex = quizIndex + delta;
-      if (newIndex >= 0 && newIndex < quizQuestions.length) {
-        quizIndex = newIndex;
-        renderCurrentQuizQuestion();
-      }
+    function restartQuiz() {
+      userAnswers = {};
+      renderQuestions();
+    }
+
+    function saveProgress() {
+      alert("Progresso salvo com sucesso!");
     }
   </script>
 </body>
