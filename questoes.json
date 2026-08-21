@@ -1,0 +1,50 @@
+{
+  "artes": [
+    {
+      "question": "1. Quais são as três cores consideradas primárias na teoria das cores?",
+      "options": ["Verde, Laranja e Roxo", "Vermelho, Amarelo e Azul", "Preto, Branco e Cinza", "Rosa, Marrom e Ciano"],
+      "correct": 1,
+      "explanation": "Cores primárias não podem ser criadas a partir da mistura de outras cores."
+    },
+    {
+      "question": "2. Como são chamadas as pinturas feitas em rochas e paredes de cavernas na Pré-História?",
+      "options": ["Pinturas Abstratas", "Pinturas Rupestres", "Aquarelas Modernas", "Grafites Urbanos"],
+      "correct": 1,
+      "explanation": "Pinturas rupestres eram feitas sobre rochas usando pigmentos minerais e vegetais."
+    },
+    {
+      "question": "3. Na música, qual elemento define a organização da duração dos sons e pausas no tempo?",
+      "options": ["Timbre", "Ritmo", "Volume", "Altura"],
+      "correct": 1,
+      "explanation": "O ritmo organiza a sucessão de sons e silêncios ao longo do tempo."
+    }
+  ],
+  "religioso": [
+    {
+      "question": "1. Qual deve ser a postura cidadã em relação às diferentes culturas e tradições religiosas?",
+      "options": ["Impor seus costumes", "Respeitar e valorizar a diversidade", "Proibir manifestações alheias", "Ignorar a história do outro"],
+      "correct": 1,
+      "explanation": "O respeito mútuo e a empatia são a base para a convivência em uma sociedade plural."
+    },
+    {
+      "question": "2. A transmissão de histórias e saberes que passa de geração em geração através da fala é a:",
+      "options": ["Tradição Escrita", "Tradição Oral", "Comunicação Digital", "Impressão Gráfica"],
+      "correct": 1,
+      "explanation": "A tradição oral é responsável por preservar memórias ancestrais em diversas culturas."
+    }
+  ],
+  "portugues": [
+    {
+      "question": "1. Assinale a alternativa que apresenta apenas substantivos femininos:",
+      "options": ["O problema, o mapa", "A mesa, a árvore, a borboleta", "O sol, o dia", "O relógio, o livro"],
+      "correct": 1,
+      "explanation": "Substantivos femininos aceitam a anteposição do artigo 'a'."
+    },
+    {
+      "question": "2. Palavras que possuem significados semelhantes no mesmo contexto são chamadas de:",
+      "options": ["Antônimos", "Sinônimos", "Verbos", "Adjetivos"],
+      "correct": 1,
+      "explanation": "Sinônimos são palavras com sentidos equivalentes (ex: Feliz e Contente)."
+    }
+  ]
+}
